@@ -10,4 +10,4 @@ Graduation Project for year 2023/2024 at Faculty of Engineering, Ain Shams Unive
 5. [Nabil Youssef Basta Boules](https://www.linkedin.com/in/nabil-youssef-557884219/)
 6. Mina Isaac Sabet Isaac
 7. [Mennat Allah Ayman AbuKhalil](https://www.linkedin.com/in/menna-ayman-24395a247/)
-8. Amal Mohamed Mohammed Hussein
+8. [Amal Mohamed Mohammed Hussein](https://www.linkedin.com/in/amal-mohamed2001/)
