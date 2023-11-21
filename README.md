@@ -1,4 +1,4 @@
-# Electronic Systems for Spectrophotometer
+# Electronic System for Spectrophotometer
 ## About
 Graduation Project for year 2023/2024 at Faculty of Engineering, Ain Shams University. This Project is sponsored by MIAC Company and under the supervision of Dr.Diaa Khalil and Eng. Bassem Ali "Representing MIAC Company".
 
