@@ -1,0 +1,3 @@
+RCC_Program.c:30:16:MRCC_u8InitClock	4	static
+RCC_Program.c:154:16:MRCC_u8EnablePeripheralClock	24	static
+RCC_Program.c:196:16:MRCC_u8DisablePeripheralClock	24	static
