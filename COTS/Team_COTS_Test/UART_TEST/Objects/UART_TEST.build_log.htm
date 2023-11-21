@@ -1,0 +1,554 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Ahmed Atia, HP Inc., LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.32.0.0
+Toolchain Path:  D:\KEIL_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14.1
+Assembler:       Armasm.exe V6.14.1
+Linker/Locator:  ArmLink.exe V6.14.1
+Library Manager: ArmAr.exe V6.14.1
+Hex Converter:   FromElf.exe V6.14.1
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      UL2CM3.DLL V1.163.9.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+D:\Senior_2\Graduation_Project\COTS\STM32F103C8T6\DRIVERS_TEST\UART_TEST\UART_TEST.uvprojx
+Project File Date:  11/19/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14.1', folder: 'D:\KEIL_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+GPIO_Program.c(12): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+GPIO_Program.c(12): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+GPIO_Program.c(14): warning: In file included from...
+./GPIO_Private.h(138): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_PRIVATE_H_*/
+                           ^
+GPIO_Program.c(15): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+GPIO_Program.c(16): warning: In file included from...
+./GPIO_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_CONFIG_H_*/
+                          ^
+GPIO_Program.c(38): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(38): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(39): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(44): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(44): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(45): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(54): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(54): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(55): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(60): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(60): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(70): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(71): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(77): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(77): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(78): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(270): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+24 warnings generated.
+compiling GPIO_Program.c...
+NVIC_Program.c(12): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+NVIC_Program.c(12): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+NVIC_Program.c(14): warning: In file included from...
+./NVIC_Private.h(211): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_NVIC_PRIVATE_H_*/
+                           ^
+NVIC_Program.c(15): warning: In file included from...
+./NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_NVIC_INTERFACE_H_*/
+                             ^
+NVIC_Program.c(16): warning: In file included from...
+./NVIC_Config.h(16): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_NVIC_CONFIG_H_*/
+                          ^
+NVIC_Program.c(202): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                Loc_uint8PriorityValue = (Copy_uint8GroupPriority << 4);
+                                       ~  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+NVIC_Program.c(210): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                Loc_uint8PriorityValue = ((Copy_uint8SubGroupPriority) | (Copy_uint8GroupPriority << ((Loc_uint16AIRCRPriorityGroupVal - (uint16)MNVIC_PRIORITY_GROUP_4_SUB_0) / 0x100)));
+                                       ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NVIC_Program.c(211): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
+                                                        ~ ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+NVIC_Program.c(216): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                Loc_uint8PriorityValue = (Copy_uint8SubGroupPriority << 4);
+                                       ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+9 warnings generated.
+compiling NVIC_Program.c...
+main.c(2): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+main.c(2): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+main.c(5): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+main.c(7): warning: In file included from...
+./NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_NVIC_INTERFACE_H_*/
+                             ^
+main.c(9): warning: In file included from...
+./UART_Interface.h(128): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_UART_INTERFACE_H_*/
+                             ^
+main.c(11): warning: no previous prototype for function 'ISR' [-Wmissing-prototypes]
+void ISR(void)
+     ^
+main.c(11): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void ISR(void)
+^
+static 
+main.c(40): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(MUART2_TX_PORT_ID, MUART2_TX_PIN_ID, MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ);
+                                                          ^
+./GPIO_Interface.h(57): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ              (uint32)0b1010     /* GPIO Output Alternate Function Push-Pull Mode, 2MHz */
+                                                            ^
+main.c(41): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(MUART2_RX_PORT_ID, MUART2_RX_PIN_ID, MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ);
+                                                          ^
+./GPIO_Interface.h(57): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ              (uint32)0b1010     /* GPIO Output Alternate Function Push-Pull Mode, 2MHz */
+                                                            ^
+main.c(42): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN0, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                              ^
+./GPIO_Interface.h(55): note: expanded from macro 'MGPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_PUSH_PULL_2MHZ                 (uint32)0b0010     /* GPIO Output Push-Pull Mode, 2MHz */
+                                                            ^
+main.c(43): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN1, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                              ^
+./GPIO_Interface.h(55): note: expanded from macro 'MGPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_PUSH_PULL_2MHZ                 (uint32)0b0010     /* GPIO Output Push-Pull Mode, 2MHz */
+                                                            ^
+main.c(47): warning: passing 'char [15]' to parameter of type 'uint8 *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+    MUART_TxString(UART2, "Hello! Welcome");
+                          ^~~~~~~~~~~~~~~~
+./UART_Interface.h(107): note: passing argument to parameter 'P_uint8TxString' here
+Std_ReturnType MUART_TxString(MUART_Select_t Copy_UARTChoice, uint8* P_uint8TxString);
+                                                                     ^
+main.c(48): warning: passing 'char [33]' to parameter of type 'uint8 *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+    MUART_TxString(UART2, "Please Choose One of the options");
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./UART_Interface.h(107): note: passing argument to parameter 'P_uint8TxString' here
+Std_ReturnType MUART_TxString(MUART_Select_t Copy_UARTChoice, uint8* P_uint8TxString);
+                                                                     ^
+main.c(49): warning: passing 'char [11]' to parameter of type 'uint8 *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+                MUART_TxString(UART2, "1. Red LED");
+                                      ^~~~~~~~~~~~
+./UART_Interface.h(107): note: passing argument to parameter 'P_uint8TxString' here
+Std_ReturnType MUART_TxString(MUART_Select_t Copy_UARTChoice, uint8* P_uint8TxString);
+                                                                     ^
+main.c(50): warning: passing 'char [14]' to parameter of type 'uint8 *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        MUART_TxString(UART2, "2. Yellow LED");
+                              ^~~~~~~~~~~~~~~
+./UART_Interface.h(107): note: passing argument to parameter 'P_uint8TxString' here
+Std_ReturnType MUART_TxString(MUART_Select_t Copy_UARTChoice, uint8* P_uint8TxString);
+                                                                     ^
+main.c(55): warning: 'return' will never be executed [-Wunreachable-code-return]
+    return 0;
+           ^
+15 warnings generated.
+compiling main.c...
+RCC_Program.c(13): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+RCC_Program.c(13): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+RCC_Program.c(15): warning: In file included from...
+./RCC_Private.h(129): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_RCC_PRIVATE_H_*/
+                          ^
+RCC_Program.c(16): warning: In file included from...
+./RCC_Config.h(86): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_RCC_CONFIG_H_*/
+                         ^
+RCC_Program.c(47): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                CLR_BIT(RCC_CR, RCC_CR_HSEBYP);
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+RCC_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+            CLR_BIT(RCC_CFGR, (RCC_CFGR_SW_START + 1));
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+RCC_Program.c(123): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR &= ~(((uint32)0b1111) << (RCC_CFGR_HPRE_START));
+                           ^
+RCC_Program.c(124): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_HPRE_START));
+                           ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(126): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR &= ~(((uint32)0b111) << (RCC_CFGR_PPRE1_START));
+                           ^
+RCC_Program.c(127): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_PPRE1_START));
+                           ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(129): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR &= ~(((uint32)0b111) << (RCC_CFGR_PPRE2_START));
+                           ^
+RCC_Program.c(130): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_PPRE2_START));
+                           ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(217): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+13 warnings generated.
+compiling RCC_Program.c...
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+            ^
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+    ^
+1 warning generated.
+compiling system_stm32f10x.c...
+assembling startup_stm32f10x_md.s...
+SCB_Program.c(1): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+SCB_Program.c(1): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+SCB_Program.c(4): warning: In file included from...
+./SCB_Private.h(294): warning: 'SCB_SHCSR_MEMFAULTACT' macro redefined [-Wmacro-redefined]
+#define SCB_SHCSR_MEMFAULTACT                               7
+        ^
+./SCB_Private.h(288): note: previous definition is here
+#define SCB_SHCSR_MEMFAULTACT                               0
+        ^
+./SCB_Private.h(315): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_SCB_PRIVATE_H_*/
+                          ^
+SCB_Program.c(5): warning: In file included from...
+./SCB_Interface.h(142): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_SCB_INTERFACE_H_*/
+                            ^
+SCB_Program.c(6): warning: In file included from...
+./SCB_Config.h(4): warning: no newline at end of file [-Wnewline-eof]
+#endif
+      ^
+SCB_Program.c(13): warning: function 'MSCB_voidSystemReset' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+{
+^
+SCB_Program.c(65): warning: signed shift result (0x80000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
+    SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+#define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+                                                         ~ ^  ~~~
+SCB_Program.c(65): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+#define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+                                                     ~~  ~~^~~~~~
+SCB_Program.c(139): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        uint16 Loc_uint16ExceptionNum = (SCB -> ICSR) & ((0b111111111) << SCB_ICSR_VECTACTIVE_START);
+                                                          ^
+SCB_Program.c(179): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+                SCB -> SHPR[Copy_uint8SystemHandler] = (Copy_uint8SysHandlerPriority << 4);
+                                                     ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+SCB_Program.c(243): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+12 warnings generated.
+compiling SCB_Program.c...
+UART_Program.c(12): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+UART_Program.c(12): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+UART_Program.c(14): warning: In file included from...
+./UART_Private.h(299): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_UART_PRIVATE_H_*/
+                           ^
+UART_Program.c(15): warning: In file included from...
+./UART_Interface.h(128): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_UART_INTERFACE_H_*/
+                             ^
+UART_Program.c(16): warning: In file included from...
+./UART_Config.h(53): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_UART_CONFIG_H_*/
+                          ^
+UART_Program.c(17): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+UART_Program.c(35): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_M_BIT);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+UART_Program.c(43): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_PCE_BIT);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+UART_Program.c(54): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    ((UART[Copy_UARTChoice]) -> CR2) &= ~(((uint32) 0b11) << MUART_CR2_STOP_START_BIT);
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+          ^
+./UART_Config.h(34): note: expanded from macro 'MUART_NO_OF_STOP_BITS'
+#define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
+                                        ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                   ^
+./UART_Private.h(283): note: expanded from macro 'MUART_HALF_STOP_BIT'
+#define MUART_HALF_STOP_BIT                         0b01
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                            ^
+./UART_Config.h(34): note: expanded from macro 'MUART_NO_OF_STOP_BITS'
+#define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
+                                        ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                                                     ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                                                                             ^
+./UART_Config.h(34): note: expanded from macro 'MUART_NO_OF_STOP_BITS'
+#define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
+                                        ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                                                                                                      ^
+./UART_Private.h(285): note: expanded from macro 'MUART_ONE_HALF_STOP_BIT'
+#define MUART_ONE_HALF_STOP_BIT                     0b11
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                                                                                                                                   ^
+./UART_Config.h(34): note: expanded from macro 'MUART_NO_OF_STOP_BITS'
+#define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
+                                        ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(56): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    #if ((MUART_NO_OF_STOP_BITS == MUART_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_ONE_HALF_STOP_BIT) || (MUART_NO_OF_STOP_BITS == MUART_TWO_STOP_BIT))
+                                                                                                                                                                                            ^
+./UART_Private.h(284): note: expanded from macro 'MUART_TWO_STOP_BIT'
+#define MUART_TWO_STOP_BIT                          0b10
+                                                    ^
+UART_Program.c(57): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        ((UART[Copy_UARTChoice]) -> CR2) |= (((uint32) MUART_NO_OF_STOP_BITS) << MUART_CR2_STOP_START_BIT);
+                                                       ^
+./UART_Config.h(34): note: expanded from macro 'MUART_NO_OF_STOP_BITS'
+#define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
+                                        ^
+./UART_Private.h(282): note: expanded from macro 'MUART_ONE_STOP_BIT'
+#define MUART_ONE_STOP_BIT                          0b00
+                                                    ^
+UART_Program.c(65): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_TCIE_BIT);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+UART_Program.c(82): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
+    uint16 Loc_uint16Fraction = (uint16)(((Loc_float32UARTDIV - Loc_uint16Mantissa) * 16) + 0.5);
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~  ~
+UART_Program.c(89): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+    ((UART[Copy_UARTChoice]) -> BRR) = (Loc_uint16Fraction << MUART_BRR_FRACTION_START_BIT) | (Loc_uint16Mantissa << MUART_BRR_MANTISSA_START_BIT);
+                                     ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+UART_Program.c(112): warning: while loop has empty body [-Wempty-body]
+    while(!(GET_BIT(((UART[Copy_UARTChoice]) -> SR), MUART_SR_TXE_BIT)));
+                                                                        ^
+UART_Program.c(112): note: put the semicolon on a separate line to silence this warning
+UART_Program.c(141): warning: while loop has empty body [-Wempty-body]
+    while(!(GET_BIT(((UART[Copy_UARTChoice]) -> SR), MUART_SR_TXE_BIT)));
+                                                                        ^
+UART_Program.c(141): note: put the semicolon on a separate line to silence this warning
+UART_Program.c(170): warning: while loop has empty body [-Wempty-body]
+        while(!(GET_BIT(((UART[Copy_UARTChoice]) -> SR), MUART_SR_RXNE_BIT)));
+                                                                             ^
+UART_Program.c(170): note: put the semicolon on a separate line to silence this warning
+UART_Program.c(318): warning: no previous prototype for function 'USART1_IRQHandler' [-Wmissing-prototypes]
+void USART1_IRQHandler(void)
+     ^
+UART_Program.c(318): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void USART1_IRQHandler(void)
+^
+static 
+UART_Program.c(347): warning: no previous prototype for function 'USART2_IRQHandler' [-Wmissing-prototypes]
+void USART2_IRQHandler(void)
+     ^
+UART_Program.c(347): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void USART2_IRQHandler(void)
+^
+static 
+UART_Program.c(405): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+UART_Program.c(377): warning: no previous prototype for function 'USART3_IRQHandler' [-Wmissing-prototypes]
+void USART3_IRQHandler(void)
+     ^
+UART_Program.c(377): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void USART3_IRQHandler(void)
+^
+static 
+28 warnings generated.
+compiling UART_Program.c...
+linking...
+Program Size: Code=2108 RO-data=264 RW-data=0 ZI-data=1656  
+FromELF: creating hex file...
+".\Objects\UART_TEST.axf" - 0 Error(s), 102 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\Device\STM32F103C8
+  .\RTE\_Target_1
+  C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+  C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\system_stm32f10x.c
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
