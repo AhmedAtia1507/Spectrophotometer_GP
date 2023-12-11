@@ -42,7 +42,7 @@ Std_ReturnType MGPIO_SetPinMode(uint8 Copy_uint8PortID, uint8 Copy_uint8PinID, u
             else if(Copy_uint8PinID <= MGPIO_PIN15)
             {
                 MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-                MGPIOA_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                MGPIOA_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
                 Loc_uint8FuncStatus = E_OK;
             }
             break;
@@ -58,7 +58,7 @@ Std_ReturnType MGPIO_SetPinMode(uint8 Copy_uint8PortID, uint8 Copy_uint8PinID, u
             else if(Copy_uint8PinID <= MGPIO_PIN15)
             {
                 MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-                MGPIOB_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                MGPIOB_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
                 Loc_uint8FuncStatus = E_OK;
             }
             break;
@@ -75,7 +75,7 @@ Std_ReturnType MGPIO_SetPinMode(uint8 Copy_uint8PortID, uint8 Copy_uint8PinID, u
             {
 
                 MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-                MGPIOC_CRH |= ((Copy_uint8PinMode) << (Copy_uint8PinID - 8));
+                MGPIOC_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
                 Loc_uint8FuncStatus = E_OK;
             }
             break;
@@ -221,6 +221,55 @@ Std_ReturnType MGPIO_GetPinValue(uint8 Copy_uint8PortID, uint8 Copy_uint8PinID, 
     }
     return Loc_uint8FuncStatus;
 }
+/**
+ * @brief: Function to toggle the value of the output GPIO Pin
+ * 
+ * @param Copy_uint8PortID: ID of the port containing the pin (A, B, C)
+ * @param Copy_uint8PinID: ID of the pin (0 --> 15)
+ *  
+ * @return Std_ReturnType
+ * @retval E_OK: Pin Value has been toggled successfully
+ * @retval E_NOT_OK: Pin Value has not been toggled
+ */
+Std_ReturnType MGPIO_TogglePinValue    (uint8 Copy_uint8PortID, uint8 Copy_uint8PinID)
+{
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if((Copy_uint8PortID <= MGPIO_PORTC) && (Copy_uint8PinID <= MGPIO_PIN15))
+    {
+        switch (Copy_uint8PortID)
+        {
+            case MGPIO_PORTA:
+            {
+                TOGGLE_BIT(MGPIOA_ODR, Copy_uint8PinID);
+                Loc_uint8FuncStatus = E_OK;
+                break;
+            }
+            case MGPIO_PORTB:
+            {
+                TOGGLE_BIT(MGPIOB_ODR, Copy_uint8PinID);
+                Loc_uint8FuncStatus = E_OK;
+                break;
+            }
+            case MGPIO_PORTC:
+            {
+                TOGGLE_BIT(MGPIOC_ODR, Copy_uint8PinID);
+                Loc_uint8FuncStatus = E_OK;
+                break;
+            }
+            default:
+            {
+                Loc_uint8FuncStatus = E_NOT_OK;
+                break;
+            }
+        }
+    }
+    else
+    {
+        Loc_uint8FuncStatus = E_NOT_OK;
+    }
+    return Loc_uint8FuncStatus;
+}
+
 /**
  * @brief: Function to activate the internal pull-up resistor
  * 

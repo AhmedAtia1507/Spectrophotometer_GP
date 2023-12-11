@@ -18,11 +18,11 @@
 /*************************************RCC Registers' Memory Mapping*************************************/
 
 /*Clock control register*/
-#define RCC_CR                                          (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x00))
+#define MRCC_CR                                          (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x00))
 /*Clock configuration register*/
-#define RCC_CFGR                                        (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x04))
+#define MRCC_CFGR                                        (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x04))
 /*Clock interrupt register*/
-#define RCC_CIR                                         (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x08))
+#define MRCC_CIR                                         (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x08))
 /*APB2 peripheral reset register*/
 #define MRCC_APB2RSTR                                    (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x0C))
 /*APB1 peripheral reset register*/
@@ -34,57 +34,57 @@
 /*APB1 peripheral clock enable register*/
 #define MRCC_APB1ENR                                     (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x1C))
 /*Backup domain control register*/
-#define RCC_BDCR                                        (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x20))
+#define MRCC_BDCR                                        (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x20))
 /*Control/status register*/
-#define RCC_CSR                                         (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x24))
+#define MRCC_CSR                                         (*(volatile uint32*)(RCC_REGISTERS_BASE_ADDRESS + 0x24))
 
 /****************************Clock control register bits*************************/
 
 /*Internal high-speed clock enable*/
-#define RCC_CR_HSION                                    0
+#define MRCC_CR_HSION                                    0
 /*Internal high-speed clock ready flag*/
-#define RCC_CR_HSIRDY                                   1
+#define MRCC_CR_HSIRDY                                   1
 /*Internal high-speed clock trimming "4 Bits"*/
-#define RCC_CR_HSITRIM_START                            3
+#define MRCC_CR_HSITRIM_START                            3
 /*Internal high-speed clock enable "8 Bits"*/
-#define RCC_CR_HSICAL_START                             8
+#define MRCC_CR_HSICAL_START                             8
 /*External high-speed clock enable*/
-#define RCC_CR_HSEON                                    16
+#define MRCC_CR_HSEON                                    16
 /*External high-speed clock ready flag*/
-#define RCC_CR_HSERDY                                   17
+#define MRCC_CR_HSERDY                                   17
 /*External high-speed clock bypass*/
-#define RCC_CR_HSEBYP                                   18
+#define MRCC_CR_HSEBYP                                   18
 /*Clock security system enable*/
-#define RCC_CR_CSSON                                    19
+#define MRCC_CR_CSSON                                    19
 /*Phase locked loop clock enable*/
-#define RCC_CR_PLLON                                    24
+#define MRCC_CR_PLLON                                    24
 /*Phase locked loop clock ready flag*/
-#define RCC_CR_PLLRDY                                   25
+#define MRCC_CR_PLLRDY                                   25
 
 /****************************Clock configuration register bits*************************/
 
 /*System Clock Switch "2 Bits"*/
-#define RCC_CFGR_SW_START                               0
+#define MRCC_CFGR_SW_START                               0
 /*System clock switch status "2 bits"*/
-#define RCC_CFGR_SWS_START                              2
+#define MRCC_CFGR_SWS_START                              2
 /*AHB prescaler "4 bits"*/
-#define RCC_CFGR_HPRE_START                             4
+#define MRCC_CFGR_HPRE_START                             4
 /*APB low-speed prescaler (APB1) "3 bits"*/
-#define RCC_CFGR_PPRE1_START                            8
+#define MRCC_CFGR_PPRE1_START                            8
 /*APB high-speed prescaler (APB2) "3 bits"*/
-#define RCC_CFGR_PPRE2_START                            11
+#define MRCC_CFGR_PPRE2_START                            11
 /*ADC prescaler "2 bits"*/
-#define RCC_CFGR_ADCPRE_START                           14
+#define MRCC_CFGR_ADCPRE_START                           14
 /*PLL entry clock source*/
-#define RCC_CFGR_PLLSRC                                 16
+#define MRCC_CFGR_PLLSRC                                 16
 /*HSE divider for PLL entry*/
-#define RCC_CFGR_PLLXTPRE                               17
+#define MRCC_CFGR_PLLXTPRE                               17
 /*PLL multiplication factor "3 bits"*/
-#define RCC_CFGR_PLLMUL_START                           18
+#define MRCC_CFGR_PLLMUL_START                           18
 /*USB prescaler*/
-#define RCC_CFGR_USBPRE                                 22
+#define MRCC_CFGR_USBPRE                                 22
 /*Microcontroller clock output "3 bits"*/
-#define RCC_CFGR_MCO_START                              24
+#define MRCC_CFGR_MCO_START                              24
 
 /****************************Macros for Configurations*************************/
 

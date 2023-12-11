@@ -14,10 +14,12 @@
 #include "UART_Private.h"
 #include "UART_Interface.h"
 #include "UART_Config.h"
+#include "GPIO_Interface.h"
 
 static volatile MUART_Typedef* (UART[3]) = {MUART1, MUART2, MUART3};
 static volatile ptr_to_Callback Glbl_PTxCompleteFunc[3] = {NULL_PTR};
 static volatile ptr_to_Callback Glbl_PRxCompleteFunc[3] = {NULL_PTR};
+
 /**
  * @brief: Function to initialize the UART Peripheral
  * 
@@ -91,7 +93,9 @@ Std_ReturnType MUART_Init(MUART_Select_t Copy_UARTChoice)
     SET_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_TE_BIT);
     SET_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_RE_BIT);
     SET_BIT(((UART[Copy_UARTChoice]) -> CR1), MUART_CR1_UE_BIT);
-
+		
+	CLR_BIT(((UART[Copy_UARTChoice]) -> SR) , MUART_SR_TC_BIT);
+    CLR_BIT(((UART[Copy_UARTChoice]) -> SR) , MUART_SR_RXNE_BIT);
     Loc_uint8FuncStatus = E_OK;
     return Loc_uint8FuncStatus;
 }
@@ -149,7 +153,6 @@ Std_ReturnType MUART_TxCharAsynchronous(MUART_Select_t Copy_UARTChoice, uint16 C
     #else
         #error "UART Number of Data Bits not Specified"
     #endif /*MUART_NO_OF_DATA_BITS*/
-
     Loc_uint8FuncStatus = E_OK;
     return Loc_uint8FuncStatus;
 }
@@ -233,7 +236,8 @@ Std_ReturnType MUART_RxCharAsynchronous(MUART_Select_t Copy_UARTChoice, uint16* 
         #else
             #error "UART Number of Data Bits not Specified"
         #endif /*MUART_NO_OF_DATA_BITS*/
-        Loc_uint8FuncStatus = E_OK;
+        CLR_BIT(((UART[Copy_UARTChoice]) -> SR) , MUART_SR_RXNE_BIT);
+		Loc_uint8FuncStatus = E_OK;
     }
     else
     {
@@ -262,7 +266,6 @@ Std_ReturnType MUART_TxString(MUART_Select_t Copy_UARTChoice, uint8* P_uint8TxSt
             MUART_TxChar(Copy_UARTChoice, P_uint8TxString[Loc_uint8Index]);
             Loc_uint8Index++;
         }
-        MUART_TxChar(Copy_UARTChoice, 13);
         Loc_uint8FuncStatus = E_OK;
     }
     else
@@ -320,27 +323,39 @@ Std_ReturnType MUART_SetRxCompleteCallback(MUART_Select_t Copy_UARTChoice, ptr_t
 
 void USART1_IRQHandler(void)
 {
-    if(GET_BIT(((UART[0]) -> SR), MUART_SR_TC_BIT) != 0)
+    //if(GET_BIT(((UART[0]) -> SR), MUART_SR_TC_BIT) != 0)
+    //{
+	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_TC_BIT);
+	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_RXNE_BIT);
+    //    if(Glbl_PTxCompleteFunc[0] != NULL_PTR)
+    //    {
+    //        (Glbl_PTxCompleteFunc[0])();
+    //    }
+    //    else
+    //    {
+    //        /*Do nothing*/
+    //    }
+    //}
+    //else if(GET_BIT(((UART[0]) -> SR), MUART_SR_RXNE_BIT) != 0)
+    //{
+	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_TC_BIT);
+	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_RXNE_BIT);
+    //    if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
+    //    {
+    //        (Glbl_PRxCompleteFunc[0])();
+    //    }
+    //    else
+    //    {
+    //        /*Do nothing*/
+    //    }
+    //}
+    //else
+    //{
+    //    /*Do nothing*/
+    //}
+    if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
     {
-        if(Glbl_PTxCompleteFunc[0] != NULL_PTR)
-        {
-            (Glbl_PTxCompleteFunc[0])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
-    }
-    else if(GET_BIT(((UART[0]) -> SR), MUART_SR_RXNE_BIT) != 0)
-    {
-        if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
-        {
-            (Glbl_PRxCompleteFunc[0])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
+        (Glbl_PRxCompleteFunc[0])();
     }
     else
     {
@@ -351,27 +366,39 @@ void USART1_IRQHandler(void)
 }
 void USART2_IRQHandler(void)
 {
-    if(GET_BIT(((UART[1]) -> SR), MUART_SR_TC_BIT) != 0)
+//    if(GET_BIT(((UART[1]) -> SR), MUART_SR_TC_BIT) != 0)
+//    {
+//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_TC_BIT);
+//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_RXNE_BIT);
+//        if(Glbl_PTxCompleteFunc[1] != NULL_PTR)
+//        {
+//            (Glbl_PTxCompleteFunc[1])();
+//        }
+//        else
+//        {
+//            /*Do nothing*/
+//        }
+//    }
+//    else if(GET_BIT(((UART[1]) -> SR), MUART_SR_RXNE_BIT) != 0)
+//    {
+//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_TC_BIT);
+//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_RXNE_BIT);
+//        if(Glbl_PRxCompleteFunc[1] != NULL_PTR)
+//        {
+//            (Glbl_PRxCompleteFunc[1])();
+//        }
+//        else
+//        {
+//            /*Do nothing*/
+//        }
+//    }
+//    else
+//    {
+//        /*Do nothing*/
+//    }
+	if(Glbl_PRxCompleteFunc[1] != NULL_PTR)
     {
-        if(Glbl_PTxCompleteFunc[1] != NULL_PTR)
-        {
-            (Glbl_PTxCompleteFunc[1])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
-    }
-    else if(GET_BIT(((UART[1]) -> SR), MUART_SR_RXNE_BIT) != 0)
-    {
-        if(Glbl_PRxCompleteFunc[1] != NULL_PTR)
-        {
-            (Glbl_PRxCompleteFunc[1])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
+        (Glbl_PRxCompleteFunc[1])();
     }
     else
     {
@@ -379,30 +406,43 @@ void USART2_IRQHandler(void)
     }
     CLR_BIT(((UART[1]) -> SR) , MUART_SR_TC_BIT);
     CLR_BIT(((UART[1]) -> SR) , MUART_SR_RXNE_BIT);
+
 }
 void USART3_IRQHandler(void)
 {
-    if(GET_BIT(((UART[2]) -> SR), MUART_SR_TC_BIT) != 0)
+    //if(GET_BIT(((UART[2]) -> SR), MUART_SR_TC_BIT) != 0)
+    //{
+	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_TC_BIT);
+	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_RXNE_BIT);
+    //    if(Glbl_PTxCompleteFunc[2] != NULL_PTR)
+    //    {
+    //        (Glbl_PTxCompleteFunc[2])();
+    //    }
+    //    else
+    //    {
+    //        /*Do nothing*/
+    //    }
+    //}
+    //else if(GET_BIT(((UART[2]) -> SR), MUART_SR_RXNE_BIT) != 0)
+    //{
+	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_TC_BIT);
+	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_RXNE_BIT);
+    //    if(Glbl_PRxCompleteFunc[2] != NULL_PTR)
+    //    {
+    //        (Glbl_PRxCompleteFunc[2])();
+    //    }
+    //    else
+    //    {
+    //        /*Do nothing*/
+    //    }
+    //}
+    //else
+    //{
+    //    /*Do nothing*/
+    //}
+    if(Glbl_PRxCompleteFunc[2] != NULL_PTR)
     {
-        if(Glbl_PTxCompleteFunc[2] != NULL_PTR)
-        {
-            (Glbl_PTxCompleteFunc[2])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
-    }
-    else if(GET_BIT(((UART[2]) -> SR), MUART_SR_RXNE_BIT) != 0)
-    {
-        if(Glbl_PRxCompleteFunc[2] != NULL_PTR)
-        {
-            (Glbl_PRxCompleteFunc[2])();
-        }
-        else
-        {
-            /*Do nothing*/
-        }
+        (Glbl_PRxCompleteFunc[2])();
     }
     else
     {

@@ -32,33 +32,33 @@ Std_ReturnType MRCC_InitClock(void)
 {
     #if MRCC_CLOCK_SOURCE == MRCC_HSI_CLOCK
         //Enable High-Speed Internal Clock
-        SET_BIT(RCC_CR, RCC_CR_HSION);
+        SET_BIT(MRCC_CR, MRCC_CR_HSION);
         //Wait until HSI Clock is ready
-        while(GET_BIT(RCC_CR, RCC_CR_HSIRDY) == 0);
+        while(GET_BIT(MRCC_CR, MRCC_CR_HSIRDY) == 0);
 
         //Set System Clock Source to be HSI Clock
-        CLR_BIT(RCC_CFGR, RCC_CFGR_SW_START);
-        CLR_BIT(RCC_CFGR, (RCC_CFGR_SW_START + 1));
+        CLR_BIT(MRCC_CFGR, MRCC_CFGR_SW_START);
+        CLR_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
 
     #elif MRCC_CLOCK_SOURCE == MRCC_HSE_CLOCK
         #if (MRCC_HSE_CLOCK_FREQ <= 16000000)
             #if MRCC_HSE_CLOCK_SOURCE == MRCC_HSE_CRYSTAL_CLOCK
                 /*Bypass is not enabled*/
-                CLR_BIT(RCC_CR, RCC_CR_HSEBYP);
+                CLR_BIT(MRCC_CR, MRCC_CR_HSEBYP);
             #elif MRCC_HSE_CLOCK_SOURCE == MRCC_HSE_RC_CLOCK
-                SET_BIT(RCC_CR, RCC_CR_HSEBYP);
+                SET_BIT(MRCC_CR, MRCC_CR_HSEBYP);
             #else
                 #error "External Clock Source is not specified correctly"
             #endif
 
             //Enable High-Speed External Clock
-            SET_BIT(RCC_CR, RCC_CR_HSEON);
+            SET_BIT(MRCC_CR, MRCC_CR_HSEON);
             //Wait until HSE Clock is ready
-            while(GET_BIT(RCC_CR, RCC_CR_HSERDY) == 0);
+            while(GET_BIT(MRCC_CR, MRCC_CR_HSERDY) == 0);
 
             //Set System Clock Source to be HSE Clock
-            SET_BIT(RCC_CFGR, RCC_CFGR_SW_START);
-            CLR_BIT(RCC_CFGR, (RCC_CFGR_SW_START + 1));
+            SET_BIT(MRCC_CFGR, MRCC_CFGR_SW_START);
+            CLR_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
 
         #else
             #error "HSE Clock Frequency Exceeded Max. Frequency"
@@ -67,67 +67,67 @@ Std_ReturnType MRCC_InitClock(void)
     #elif MRCC_CLOCK_SOURCE == MRCC_PLL_CLOCK
         #if MRCC_PLL_CLOCK_INPUT == MRCC_HSE_CLOCK
             /*Set PLL Input Clock Source to be HSE Clock*/
-            SET_BIT(RCC_CFGR, RCC_CFGR_PLLSRC);
+            SET_BIT(MRCC_CFGR, MRCC_CFGR_PLLSRC);
             /*HSE Clock is not divided by 2*/
-            CLR_BIT(RCC_CFGR, RCC_CFGR_PLLXTPRE);
+            CLR_BIT(MRCC_CFGR, MRCC_CFGR_PLLXTPRE);
 
             #if (RCC_PLL_MULTIPLIER <= 16) && (RCC_PLL_MULTIPLIER >= 0)
                 if((RCC_PLL_HSE_CLOCK_FREQ * RCC_PLL_MULTIPLIER) <= MRCC_MAX_CLOCK_FREQ)
                 {
-                    RCC_CFGR &= ~((0b1111) << RCC_CFGR_PLLMUL_START);
-                    RCC_CFGR |=  (((uint32)(RCC_PLL_MULTIPLIER - 2)) << RCC_CFGR_PLLMUL_START);
+                    MRCC_CFGR &= ~((0b1111) << MRCC_CFGR_PLLMUL_START);
+                    MRCC_CFGR |=  (((uint32)(RCC_PLL_MULTIPLIER - 2)) << MRCC_CFGR_PLLMUL_START);
 
                     //Enable Phase-locked loop Clock
-                    SET_BIT(RCC_CR, RCC_CR_PLLON);
+                    SET_BIT(MRCC_CR, MRCC_CR_PLLON);
                     //Wait until PLL Clock is ready
-                    while(GET_BIT(RCC_CR, RCC_CR_PLLRDY) == 0);
+                    while(GET_BIT(MRCC_CR, MRCC_CR_PLLRDY) == 0);
                 }
             #else
                 #error "The multiplier value for PLL is not valid"
             #endif
         #elif MRCC_PLL_CLOCK_INPUT == MRCC_HSE_CLOCK_DIV_2
             /*Set PLL Input Clock Source to be HSE Clock*/
-            SET_BIT(RCC_CFGR, RCC_CFGR_PLLSRC);
+            SET_BIT(MRCC_CFGR, MRCC_CFGR_PLLSRC);
             /*HSE Clock is divided by 2*/
-            SET_BIT(RCC_CFGR, RCC_CFGR_PLLXTPRE);
+            SET_BIT(MRCC_CFGR, MRCC_CFGR_PLLXTPRE);
 
             #if (RCC_PLL_MULTIPLIER <= 16) && (RCC_PLL_MULTIPLIER >= 0)
                 if(((RCC_PLL_HSE_CLOCK_FREQ / 2) * RCC_PLL_MULTIPLIER) <= MRCC_MAX_CLOCK_FREQ)
                 {
-                    RCC_CFGR &= ~((0b1111) << RCC_CFGR_PLLMUL_START);
-                    RCC_CFGR |=  (((uint32)(RCC_PLL_MULTIPLIER - 2)) << RCC_CFGR_PLLMUL_START);
+                    MRCC_CFGR &= ~((0b1111) << MRCC_CFGR_PLLMUL_START);
+                    MRCC_CFGR |=  (((uint32)(RCC_PLL_MULTIPLIER - 2)) << MRCC_CFGR_PLLMUL_START);
 
                     //Enable Phase-locked loop Clock
-                    SET_BIT(RCC_CR, RCC_CR_PLLON);
+                    SET_BIT(MRCC_CR, MRCC_CR_PLLON);
                     //Wait until PLL Clock is ready
-                    while(GET_BIT(RCC_CR, RCC_CR_PLLRDY) == 0);
+                    while(GET_BIT(MRCC_CR, MRCC_CR_PLLRDY) == 0);
                 }
             #else
                 #error "The multiplier value for PLL is not valid"
             #endif
         #elif MRCC_PLL_CLOCK_INPUT == MRCC_HSI_CLOCK_DIV_2
             /*Set PLL Input Clock Source to be HSI Clock Divided by 2*/
-            CLR_BIT(RCC_CFGR, RCC_CFGR_PLLSRC);
+            CLR_BIT(MRCC_CFGR, MRCC_CFGR_PLLSRC);
         #else
             #error "PLL input clock is not specified correctly"
         #endif
 
         //Set System Clock Source to be PLL Clock
-        CLR_BIT(RCC_CFGR, RCC_CFGR_SW_START);
-        SET_BIT(RCC_CFGR, (RCC_CFGR_SW_START + 1));
+        CLR_BIT(MRCC_CFGR, MRCC_CFGR_SW_START);
+        SET_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
 
     #else
         #error "Clock Source is not Specified Correctly"
     #endif
     //Set Prescalars for AHB, APB1 and APB2 Clocks
-    RCC_CFGR &= ~(((uint32)0b1111) << (RCC_CFGR_HPRE_START));
-    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_HPRE_START));
+    MRCC_CFGR &= ~(((uint32)0b1111) << (MRCC_CFGR_HPRE_START));
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_HPRE_START));
     
-    RCC_CFGR &= ~(((uint32)0b111) << (RCC_CFGR_PPRE1_START));
-    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_PPRE1_START));
+    MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE1_START));
+    MRCC_CFGR |= (((uint32)(MRCC_APB1_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
     
-    RCC_CFGR &= ~(((uint32)0b111) << (RCC_CFGR_PPRE2_START));
-    RCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (RCC_CFGR_PPRE2_START));
+    MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE2_START));
+    MRCC_CFGR |= (((uint32)(MRCC_APB2_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
 
     return E_OK;
 }

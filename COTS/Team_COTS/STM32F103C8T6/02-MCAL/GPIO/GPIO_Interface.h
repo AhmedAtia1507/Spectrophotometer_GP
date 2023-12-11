@@ -85,6 +85,17 @@ Std_ReturnType MGPIO_SetPinMode     (uint8 Copy_uint8PortID, uint8 Copy_uint8Pin
  */
 Std_ReturnType MGPIO_SetPinValue    (uint8 Copy_uint8PortID, uint8 Copy_uint8PinID, uint8 Copy_uint8PinValue);
 /**
+ * @brief: Function to toggle the value of the output GPIO Pin
+ * 
+ * @param Copy_uint8PortID: ID of the port containing the pin (A, B, C)
+ * @param Copy_uint8PinID: ID of the pin (0 --> 15)
+ *  
+ * @return Std_ReturnType
+ * @retval E_OK: Pin Value has been toggled successfully
+ * @retval E_NOT_OK: Pin Value has not been toggled
+ */
+Std_ReturnType MGPIO_TogglePinValue    (uint8 Copy_uint8PortID, uint8 Copy_uint8PinID);
+/**
  * @brief: Function to get the value of the input GPIO Pin
  * 
  * @param Copy_uint8PortID: ID of the port containing the pin (A, B, C)
