@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+ 
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav__container">
+                <a href="index.html">
+                    <h1>SPECTROPHOTOMETER</h1>
+                </a>
+                <ul class="nav_menu">
+                    <li class="show"><a href="">Home</a></li>
+                    <li class="show"><a href="">About</a></li>
+                    <li class="show"><a href="v6.html">Dashboard</a></li>
+                    <li class="show"><a href="">Management</a></li>
+                </ul>
+                <button id="open_menu_btn">Menu</button>
+                <button id="close_menu_btn">X</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+
+        <section>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
+                <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
+                <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
+                <button class="tablinks" onclick="openTab(event, 'file')">Files test</button>
+            </div>
+
+            <div id="scan" class="tabcontent" style="display: block;">
+                <div class="row">
+                    <div class="col">
+                        <canvas id="chartScan" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <label for="start">Start:</label>
+                                <input type="number" id="start" name="start" value="100">
+
+                            </div>
+                            <div class="col">
+                                <label for="stop">Stop:</label>
+                                <input type="number" id="stop" name="stop" value="900">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="step">Step:</label>
+                                <input type="number" id="step" name="step" value="20">
+                            </div>
+                            <div class="col">
+                                <label for="speed">Speed:</label>
+                                <input type="number" id="speed" name="speed" value="1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="initTime">Init Time:</label>
+                                <input type="number" id="initTime" name="initTime" value="0">
+                            </div>
+                            <div class="col">
+                                <label for="mode">Mode:</label>
+                                <select id="mode" name="mode">
+                                    <option value="absorption">Absorption</option>
+                                    <option value="transmission">Transmission</option>
+                                    <!-- <option value="transmission">Eneregy</option> -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="lampchangepoint">lampchangepoint</label>
+                            </div>
+                            <div class="TwoBtn">
+                                <button onclick="startScan()">Start</button>
+                                <button onclick="pauseScan()">Pause</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div id="ADC" class="tabcontent" style="align-items: center; text-align: center;">
+                    <div class="row">
+                        <div class="col">    <h1>sd file Data:</h1>
+                            <div id="i2cValue">Waiting for data...</div>
+                        </div>
+                        <div class="col">
+                            <div class="TwoBtn">
+                                <button onclick="readADC()">Start Reading</button>
+                                <button onclick="pauseReading()">Pause Reading</button>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+            <div id="FLC" class="tabcontent">
+             
+                <div class="row">
+                    <div class="col">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col" >
+                       <div class="row"> 
+                        <div class="col">
+                            <label for="absorption">Absorption:</label>
+                            <input type="text" id="absorption" placeholder="Enter absorption">
+            
+                        </div>
+                        <div class="col">
+                            <label for="concentration">Concentration:</label>
+                            <input type="text" id="concentration" placeholder="Enter concentration">
+                        </div>
+                        <div class="row">
+                            <div class=" TwoBtn">
+                                <button onclick="addPoint()">Add Point</button>
+                                <button onclick="clearAll()">Clear All</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                                <div id="messageBox">
+                                    <!-- Messages will be displayed here -->
+                                  </div>
+                                
+
+        
+                            </div>
+                        </div>
+                    </div>
+     
+                   
+               
+                 
+                </div>
+
+
+            
+
+            </div>
+            
+            <div id="file" class="tabcontent" style="align-items: center; text-align: center;">
+                <h1>File Upload to ESP32</h1>
+  <form action="/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+  </form>
+    <div  style="align-items: center; text-align: center;">
+    <iframe id="content">  </iframe>
+    </div>
+                </div>
+        
+
+        </section>
+
+
+        <div class="status-bar">
+            <div class="row">
+                <div class="col barCard">
+                    <label for="">UV Lamp Status: <span id="UVstateBar"></span></label>
+                </div>
+                <div class="col barCard">
+                    <label for="">Visible Lamp Status: <span id="VIstateBar"></span></label>
+                </div>
+                <div class="col barCard">
+                    <label for="">Current Wavelength: <span id="WLstateBar"></span> </label>
+                </div>
+                <div class="col barCard">
+                    <button class="sBarBtn" id="sBarBtn">Update!</button>
+                </div>
+                <div class="col barCard">
+                    <label for="" class="DateTime" style="position: absolute; right: 0;margin-right: 30px;"> <span
+                            id="DateTime"></span></label>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+    <script src="chart.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
