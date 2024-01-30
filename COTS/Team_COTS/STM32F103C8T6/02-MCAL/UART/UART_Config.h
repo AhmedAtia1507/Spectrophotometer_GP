@@ -33,7 +33,7 @@ UART Number of Stop Bits Choice:
 */
 #define MUART_NO_OF_STOP_BITS           MUART_ONE_STOP_BIT
 
-#define MUART_BAUD_RATE                 9600
+#define MUART_BAUD_RATE                 115200
 
 /*
 UART Transmit Complete Interrupt Status:

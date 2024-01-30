@@ -147,20 +147,20 @@ Std_ReturnType MSCB_GetActiveIRQ(uint8* P_uint8ActiveIRQNum)
     return Loc_uint8FuncStatus;
 }
 /**
- * @brief: Function to set the priority of system handlers
- *          -Memory Management Fault
- *          -Bus Fault
- *          -Usage Fault
- *          -SV Call
- *          -PendSV
- *          -SysTick
+ * @brief:  Function to set the priority of system handlers
+ *              -Memory Management Fault
+ *              -Bus Fault
+ *              -Usage Fault
+ *              -SV Call
+ *              -PendSV
+ *              -SysTick
  * 
- * @param Copy_uint8SystemHandler: Exception number of System Handler
- * @param Copy_uint8SysHandlerPriority: Priority of System Handler to be set
+ * @param   Copy_uint8SystemHandler:        Exception number of System Handler
+ * @param   Copy_uint8SysHandlerPriority:   Priority of System Handler to be set
  * 
- * @return Std_ReturnType
- * @retval E_OK: System Handler Priority has been set
- * @retval E_NOT_OK: System Handler Priority has not been set   
+ * @return  Std_ReturnType
+ * @retval  E_OK:                           System Handler Priority has been set
+ * @retval  E_NOT_OK:                       System Handler Priority has not been set   
  */
 Std_ReturnType MSCB_SetSystemHandlerPriority(uint8 Copy_uint8SystemHandler, uint8 Copy_uint8SysHandlerPriority)
 {

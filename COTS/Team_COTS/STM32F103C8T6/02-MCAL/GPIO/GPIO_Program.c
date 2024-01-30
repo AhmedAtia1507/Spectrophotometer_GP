@@ -317,3 +317,42 @@ Std_ReturnType MGPIO_ActivatePullUp(uint8 Copy_uint8PortID, uint8 Copy_uint8PinI
     }
     return Loc_uint8FuncStatus;
 }
+
+/**
+ * @brief: Function to set the value of a range of output GPIO pins 
+ * 
+ * @param Copy_uint8PortID: ID of the port containing the pins 
+ * @param Copy_uint8StartPinID: ID of the start pin in the range 
+ * @param Copy_uint8EndPinID: ID of the end pin in the range
+ * @param Copy_uint16NibbleValue: Value to be set
+ * @return Std_ReturnType
+ * @retval E_OK: Value has been set successfully
+ * @retval E_NOT_OK: Value has not been set  
+ */
+Std_ReturnType MGPIO_SetNibbleValue (uint8 Copy_uint8PortID, uint8 Copy_uint8StartPinID, uint8 Copy_uint8EndPinID, uint16 Copy_uint16NibbleValue)
+{
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if((Copy_uint8PortID <= MGPIO_PORTC) && (Copy_uint8StartPinID <= MGPIO_PIN15) &&\
+        (Copy_uint8EndPinID <= MGPIO_PIN15) && (Copy_uint8EndPinID >= Copy_uint8StartPinID))
+    {
+        uint8 Loc_uint8NoOfPins = Copy_uint8EndPinID - Copy_uint8StartPinID + 1;
+        uint8 Loc_uint8Index = 0;
+        for(Loc_uint8Index = 0; Loc_uint8Index < Loc_uint8NoOfPins; Loc_uint8Index++)
+        {
+            if(GET_BIT(Copy_uint16NibbleValue, Loc_uint8Index) == MGPIO_HIGH)
+            {
+                MGPIO_SetPinValue(Copy_uint8PortID, (Copy_uint8StartPinID + Loc_uint8Index), MGPIO_HIGH);
+            }
+            else
+            {
+                MGPIO_SetPinValue(Copy_uint8PortID, (Copy_uint8StartPinID + Loc_uint8Index), MGPIO_LOW);
+            }
+        }
+        Loc_uint8FuncStatus = E_OK;
+    }
+    else
+    {
+        Loc_uint8FuncStatus = E_NOT_OK;
+    }
+    return Loc_uint8FuncStatus;
+}

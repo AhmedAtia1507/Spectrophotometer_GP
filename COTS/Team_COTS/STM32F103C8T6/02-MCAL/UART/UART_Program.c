@@ -323,36 +323,6 @@ Std_ReturnType MUART_SetRxCompleteCallback(MUART_Select_t Copy_UARTChoice, ptr_t
 
 void USART1_IRQHandler(void)
 {
-    //if(GET_BIT(((UART[0]) -> SR), MUART_SR_TC_BIT) != 0)
-    //{
-	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_TC_BIT);
-	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_RXNE_BIT);
-    //    if(Glbl_PTxCompleteFunc[0] != NULL_PTR)
-    //    {
-    //        (Glbl_PTxCompleteFunc[0])();
-    //    }
-    //    else
-    //    {
-    //        /*Do nothing*/
-    //    }
-    //}
-    //else if(GET_BIT(((UART[0]) -> SR), MUART_SR_RXNE_BIT) != 0)
-    //{
-	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_TC_BIT);
-	//	CLR_BIT(((UART[0]) -> SR) , MUART_SR_RXNE_BIT);
-    //    if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
-    //    {
-    //        (Glbl_PRxCompleteFunc[0])();
-    //    }
-    //    else
-    //    {
-    //        /*Do nothing*/
-    //    }
-    //}
-    //else
-    //{
-    //    /*Do nothing*/
-    //}
     if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
     {
         (Glbl_PRxCompleteFunc[0])();
@@ -366,36 +336,6 @@ void USART1_IRQHandler(void)
 }
 void USART2_IRQHandler(void)
 {
-//    if(GET_BIT(((UART[1]) -> SR), MUART_SR_TC_BIT) != 0)
-//    {
-//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_TC_BIT);
-//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_RXNE_BIT);
-//        if(Glbl_PTxCompleteFunc[1] != NULL_PTR)
-//        {
-//            (Glbl_PTxCompleteFunc[1])();
-//        }
-//        else
-//        {
-//            /*Do nothing*/
-//        }
-//    }
-//    else if(GET_BIT(((UART[1]) -> SR), MUART_SR_RXNE_BIT) != 0)
-//    {
-//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_TC_BIT);
-//				CLR_BIT(((UART[1]) -> SR) , MUART_SR_RXNE_BIT);
-//        if(Glbl_PRxCompleteFunc[1] != NULL_PTR)
-//        {
-//            (Glbl_PRxCompleteFunc[1])();
-//        }
-//        else
-//        {
-//            /*Do nothing*/
-//        }
-//    }
-//    else
-//    {
-//        /*Do nothing*/
-//    }
 	if(Glbl_PRxCompleteFunc[1] != NULL_PTR)
     {
         (Glbl_PRxCompleteFunc[1])();
@@ -410,36 +350,6 @@ void USART2_IRQHandler(void)
 }
 void USART3_IRQHandler(void)
 {
-    //if(GET_BIT(((UART[2]) -> SR), MUART_SR_TC_BIT) != 0)
-    //{
-	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_TC_BIT);
-	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_RXNE_BIT);
-    //    if(Glbl_PTxCompleteFunc[2] != NULL_PTR)
-    //    {
-    //        (Glbl_PTxCompleteFunc[2])();
-    //    }
-    //    else
-    //    {
-    //        /*Do nothing*/
-    //    }
-    //}
-    //else if(GET_BIT(((UART[2]) -> SR), MUART_SR_RXNE_BIT) != 0)
-    //{
-	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_TC_BIT);
-	//	CLR_BIT(((UART[2]) -> SR) , MUART_SR_RXNE_BIT);
-    //    if(Glbl_PRxCompleteFunc[2] != NULL_PTR)
-    //    {
-    //        (Glbl_PRxCompleteFunc[2])();
-    //    }
-    //    else
-    //    {
-    //        /*Do nothing*/
-    //    }
-    //}
-    //else
-    //{
-    //    /*Do nothing*/
-    //}
     if(Glbl_PRxCompleteFunc[2] != NULL_PTR)
     {
         (Glbl_PRxCompleteFunc[2])();

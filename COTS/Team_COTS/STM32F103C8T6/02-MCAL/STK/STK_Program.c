@@ -18,6 +18,7 @@ static ptr_to_callback_func STK_PCallbackFunc = NULL_PTR;
  * @retval E_OK: Reload value is successfully calculated
  * @retval E_NOT_OK: Reload value can not be calculated 
  */
+
 Std_ReturnType STK_uint8CalculateReloadValue(uint32 Copy_uint32msTime, uint32* P_uint32ReloadValue)
 {
     Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;

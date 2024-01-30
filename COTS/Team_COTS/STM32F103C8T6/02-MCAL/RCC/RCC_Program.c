@@ -124,10 +124,10 @@ Std_ReturnType MRCC_InitClock(void)
     MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_HPRE_START));
     
     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE1_START));
-    MRCC_CFGR |= (((uint32)(MRCC_APB1_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
     
     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE2_START));
-    MRCC_CFGR |= (((uint32)(MRCC_APB2_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
 
     return E_OK;
 }

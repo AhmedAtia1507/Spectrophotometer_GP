@@ -116,4 +116,16 @@ Std_ReturnType MGPIO_GetPinValue    (uint8 Copy_uint8PortID, uint8 Copy_uint8Pin
  * @retval E_NOT_OK: Pull-up has not been activated 
  */
 Std_ReturnType MGPIO_ActivatePullUp (uint8 Copy_uint8PortID, uint8 Copy_uint8PinID);
+/**
+ * @brief: Function to set the value of a range of output GPIO pins 
+ * 
+ * @param Copy_uint8PortID: ID of the port containing the pins 
+ * @param Copy_uint8StartPinID: ID of the start pin in the range 
+ * @param Copy_uint8EndPinID: ID of the end pin in the range
+ * @param Copy_uint16NibbleValue: Value to be set
+ * @return Std_ReturnType
+ * @retval E_OK: Value has been set successfully
+ * @retval E_NOT_OK: Value has not been set  
+ */
+Std_ReturnType MGPIO_SetNibbleValue (uint8 Copy_uint8PortID, uint8 Copy_uint8StartPinID, uint8 Copy_uint8EndPinID, uint16 Copy_uint16NibbleValue);
 #endif /*_GPIO_INTERFACE_H_*/
