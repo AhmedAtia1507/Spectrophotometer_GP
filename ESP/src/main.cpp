@@ -322,12 +322,29 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
       notifyClients(getOutputStates());
       Serial.print("WS sent");
     }
+   //password and username check
     else if (doc.containsKey("username"))
     {
-      if (doc["username"].as<String>()=="nabil" && doc["password"].as<String>()=="123"){
-        notifyClients("rightpass");
-        Serial.println("Success");
-      }else{notifyClients("wrongpass");}
+      
+      if (doc["username"].as<String>()=="esp32" && doc["password"].as<String>()=="123"){  
+        DynamicJsonDocument doc(200);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        object["username"] = true;
+        object["password"] = true;
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+
+        Serial.println(jsonString);
+      }else{
+        DynamicJsonDocument doc(200);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        object["username"] = false;
+        object["password"] = false;
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+        }
     }
     else if (strcmp((char*)data, "command1\n") == 0 ||
              strcmp((char*)data, "command2\n") == 0 ||
