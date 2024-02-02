@@ -1,0 +1,66 @@
+body {
+    background-color: rgb(34, 34, 56);
+}
+.container{
+display: flex;
+justify-content: center;
+align-content: center;
+align-items: center;
+margin-top: 10%;
+
+}
+.login_form_box{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    background-color: rgb(19, 59, 59);
+    padding: 20px 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 128px 0 ;
+    flex-direction: column;
+
+}
+.login_form_box header {
+    color: aliceblue;
+    font-size: larger;
+    font-weight: 600;
+    padding: 10px 10px 20px 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.login_form_box input{
+background-color: rgb(16, 32, 59);
+padding: 5px 5px;    
+border-radius: 10px;
+color: aliceblue;
+
+
+}
+.login_form_box label{
+    padding: 10px 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: aliceblue;
+
+}
+
+.login_form_box button{
+    color: aliceblue;
+    background-color: rgb(5, 117, 46);
+    border-radius: 25px;
+    padding: 10px 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+
+}
+.button :hover{
+    transform: scale(1.1);
+    background-color: darkgreen;
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.login_form_box .login {
+    color: red;
+
+
+
+}

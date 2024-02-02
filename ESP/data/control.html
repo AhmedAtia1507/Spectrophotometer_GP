@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control</title>
+    <link rel="stylesheet" href="control.css">
+</head>
+<body>
+    <header>
+        <h1>SpectoPhotoMeter test mode</h1>
+    </header>
+
+    <main>
+        <nav>
+            <ul>
+                <li class="list" id="li1" onclick="showTab('tab1','li1')">Lamps test</li>
+                <li class="list" id="li2" onclick="showTab('tab2','li2')">Motors</li>
+                <li class="list" id="li3" onclick="showTab('tab3','li3')">Photodetector</li>
+                <li class="list" id="li4" onclick="showTab('tab4','li4')">Calibration</li>
+                <li class="list" id="li5" onclick="showTab('tab5','li5')">Date and Time</li>
+                <li class="list" id="li6" onclick="showTab('tab6','li6')">Reset</li>
+            </ul>
+        </nav>
+
+        <div id="tab1" class="tab-content active">
+            <h2>uv lamp test</h2>
+            <p>This is the content for Choice 1.</p>
+            <h2>visible lamp test</h2>
+        </div>
+        <div id="tab2" class="tab-content">
+            <h2>Tab 2 Content</h2>
+            <p>This is the content for Choice 2.</p>
+        </div>
+        <div id="tab3" class="tab-content">
+            <h2>Tab 3 Content</h2>
+            <p>This is the content for Choice 3.</p>
+        </div>
+        <div id="tab4" class="tab-content">
+            <h2>Tab 4 Content</h2>
+            <p>This is the content for Choice 4.</p>
+        </div>
+        <div id="tab5" class="tab-content">
+            <h2>Tab 5 Content</h2>
+            <p>This is the content for Choice 5.</p>
+        </div>
+        <div id="tab6" class="tab-content">
+            <h2>Tab 6 Content</h2>
+            <p>This is the content for Choice 6.</p>
+        </div>
+    </main>
+
+<script src="control.js"></script>
+</body>
+</html>
