@@ -304,11 +304,11 @@ void notifyClients(String state)
 {
   ws.textAll(state); // send data to the connected webpage
 }
-// Flag to indicate when to perform the scan
+bool loginflag= false;  //to check if the user loged in before accessing control page
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 {
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
-
+  
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
   {
     data[len] = 0;
@@ -322,30 +322,120 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
       notifyClients(getOutputStates());
       Serial.print("WS sent");
     }
-   //password and username check
-    else if (doc.containsKey("username"))
+   //to handle login
+    else if (doc.containsKey("username")) 
     {
-      
+      Serial.print("rescived car");
       if (doc["username"].as<String>()=="esp32" && doc["password"].as<String>()=="123"){  
         DynamicJsonDocument doc(200);
         String jsonString="";
         JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
         object["username"] = true;
         object["password"] = true;
+        loginflag=true;
         serializeJson(object, jsonString);
         notifyClients(jsonString);
-
+         
         Serial.println(jsonString);
-      }else{
+      }
+      else{
         DynamicJsonDocument doc(200);
         String jsonString="";
         JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
         object["username"] = false;
         object["password"] = false;
         serializeJson(object, jsonString);
         notifyClients(jsonString);
         }
     }
+    else if(doc.containsKey("flag"))
+    {
+       DynamicJsonDocument doc(100);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        object["flag"] = loginflag;
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+        loginflag=false;
+    }
+    
+    //lamps check
+    else if (doc.containsKey("uvlampstutus")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"snduv");
+        String stutus ="on";
+        object["uvlampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+    else if (doc.containsKey("vilampstutus")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"sndvi");
+        String stutus ="on";
+        object["vilampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+    else if (doc.containsKey("turnuvon")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"uvon");
+        String stutus ="on";
+        object["uvlampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+    else if (doc.containsKey("turnuvoff")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"vioff");
+        String stutus ="off";
+        object["uvlampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+     else if (doc.containsKey("turnvion")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"vion");
+        String stutus ="on";
+        object["vilampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+    else if (doc.containsKey("turnvioff")){
+        DynamicJsonDocument doc(50);
+        String jsonString="";
+        JsonObject object = doc.to<JsonObject>();
+        // Adding two fields to the JSON object
+        //String stutus;
+        //stutus=sendCMD((char*)"vioff");
+        String stutus ="off";
+        object["vilampstutus"] = stutus; //for testing
+        serializeJson(object, jsonString);
+        notifyClients(jsonString);
+    }
+       
     else if (strcmp((char*)data, "command1\n") == 0 ||
              strcmp((char*)data, "command2\n") == 0 ||
              strcmp((char*)data, "command3\n") == 0 ||
@@ -353,7 +443,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
              strcmp((char*)data, "command5\n") == 0 ||
              strcmp((char*)data, "command6\n") == 0) {
       sendCMD((char*)data);
-      readSTM();
+      
       
     }
     else if (doc.containsKey("command"))
@@ -366,7 +456,6 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
         {
           Serial2.println("wavelength");
           float wavelengthValue = doc["wavelength"].as<float>();
-          sendSTM(String(wavelengthValue));
           delay(100);
           String scanData = String("{\"wavelength\":") + String(wavelengthValue);
           delay(100);
@@ -399,7 +488,6 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     }
   }
 }
-
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
              void *arg, uint8_t *data, size_t len)
 {
