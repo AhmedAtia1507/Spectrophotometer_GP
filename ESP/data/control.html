@@ -9,23 +9,42 @@
     <header>
         <h1>SpectoPhotoMeter test mode</h1>
     </header>
-
     <main>
-        <nav>
-            <ul>
+        <nav >
+            <ul onmouseover="showNav()" onmouseout="hideNav()">
+                <li class="list" id="li0"  title="Click to toggle menu visibility"></li>
                 <li class="list" id="li1" onclick="showTab('tab1','li1')">Lamps test</li>
-                <li class="list" id="li2" onclick="showTab('tab2','li2')">Motors</li>
-                <li class="list" id="li3" onclick="showTab('tab3','li3')">Photodetector</li>
-                <li class="list" id="li4" onclick="showTab('tab4','li4')">Calibration</li>
+                <li class="list" id="li2" onclick="showTab('tab2','li2')">Supplies</li>
+                <li class="list" id="li3" onclick="showTab('tab3','li3')">Motors</li>
+                <li class="list" id="li4" onclick="showTab('tab4','li4')">Detector</li>
                 <li class="list" id="li5" onclick="showTab('tab5','li5')">Date and Time</li>
-                <li class="list" id="li6" onclick="showTab('tab6','li6')">Reset</li>
+                <li class="list" id="li6" onclick="showTab('tab6','li6')">Test tab</li>
             </ul>
         </nav>
 
+
         <div id="tab1" class="tab-content active">
-            <h2>uv lamp test</h2>
-            <p>This is the content for Choice 1.</p>
-            <h2>visible lamp test</h2>
+            <h2 class="underlined-heading">uv lamp test</h2>
+            <label for="uvstate">current state:</label>
+            <p class="state" id="uvstate"></p>
+            <label for="checkbox"> tap to turn uv lamp on/off </label>
+            <label class="toggle-container">
+                <input type="checkbox" id="uvin">
+                <div class="toggle-track"  id="uvcheck">
+                    <div class="toggle-thumb" id="uvthumb"></div>
+                </div>
+            </label>
+            <h2 class="underlined-heading">visible lamp test</h2>
+            <label for="vistate">current state:</label>
+            <p class="state" id="vistate"></p>
+            <label for="checkbox"> tap to turn visible lamp on/off </label>
+            <label class="toggle-container">
+                <input type="checkbox" id="viin">
+                <div class="toggle-track" id="vicheck">
+                    <div class="toggle-thumb" id="vithumb"></div>
+                </div>
+            </label>
+            
         </div>
         <div id="tab2" class="tab-content">
             <h2>Tab 2 Content</h2>

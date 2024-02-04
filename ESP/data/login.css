@@ -11,8 +11,12 @@ margin-top: 10%;
 }
 .login_form_box{
     display: flex;
-    align-content: center;
-    align-items: center;
+    color: rgba(47, 34, 164, 0.52);
+    align-content:flex-start;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 350px;
+    min-height: 300px;
     background-color: rgb(19, 59, 59);
     padding: 20px 20px;
     border-radius: 25px;
@@ -48,19 +52,20 @@ color: aliceblue;
     border-radius: 25px;
     padding: 10px 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-
+    margin-bottom: 20px;
+    margin-left: 300px;
 
 }
-.button :hover{
+.login_form_box .button :hover{
     transform: scale(1.1);
     background-color: darkgreen;
     color: aliceblue;
     cursor: pointer;
     transition: all 0.5s;
+   
 }
-.login_form_box .login {
+.login_form_box  label[for="wrongpass"] {
+    text-align: center;
     color: red;
-
-
-
-}
+    text-decoration: underline;
+ }

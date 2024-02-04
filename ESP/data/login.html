@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    
+
 
     <div class="container">
         <div class="login_form_box">
@@ -18,20 +20,23 @@
                 <p><header>login</header></p>
                 <div class="input">
                 <p><label for="username" >username:</label>
-                <input type="text"  placeholder="for example: imina" id="username"> 
+                <input type="text"  placeholder="for example: imina" id="username" required> 
                 </p>
                 
+                
                 <p><label for="password" >password:</label>
-                <input type="password" placeholder="your password" id="password">
+                <input type="password" placeholder="your password" id="password" required>
                 </p>
+                </div>
+
                 <div class="button">
                 <button id="submit">Login</button>
                 </div>
-                <p><a id="wrongpass"></a></p>
-            </div>
-    
-        </div> 
-    </div>  
+                <div class="wrongpass">
+                <label id="wrongpass" for="wrongpass"></label>
+                </div></div></div>
+         
+     
     <script src="login.js"></script>    
 
 </body>

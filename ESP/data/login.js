@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', onLoad);
 
 function onLoad(event) {
     initWebSocket();
+
 }
 
 function initWebSocket() {
@@ -61,6 +62,7 @@ function sendCredentials(user, pass) {
     }
 }
 
+
 function handleMessage(event) {
     var myObj = JSON.parse(event.data);
     console.log(myObj);
@@ -69,18 +71,19 @@ function handleMessage(event) {
         // Check if the username and password are true
         if (myObj.username === true && myObj.password === true) {
             console.log("Login successful. Redirecting to control.html");
-            // Redirect to control.html
+            // request control page
             window.location.href = "control.html";
         } else {
-            
-            console.log("Wrong username or password. Please try again.");
-            document.getElementById("wrongpass").innerHTML = "Wrong username or password. Please try again.";
+            localStorage.setItem('username', 'false');
+            console.log("Wrong username or password.");
+            document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
         }
     } 
      else {
         // Handle other error conditions, such as 404 (Not Found)
         console.log("Error: " + event.data);
         document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
+        
     }
 }
 
