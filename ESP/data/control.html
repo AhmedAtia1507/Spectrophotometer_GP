@@ -7,18 +7,21 @@
 </head>
 <body>
     <header>
-        <h1>SpectoPhotoMeter test mode</h1>
+        <h1 >SpectoPhotoMeter test mode</h1>
     </header>
+    <li  id="li0"  title="Click to lock/unlock menu visibility">___<br>___<br>___<br> <br></li>
+    <a href="index.html" class="logout-button">Home 🏠</a>
     <main>
-        <nav >
-            <ul onmouseover="showNav()" onmouseout="hideNav()">
-                <li class="list" id="li0"  title="Click to toggle menu visibility"></li>
-                <li class="list" id="li1" onclick="showTab('tab1','li1')">Lamps test</li>
-                <li class="list" id="li2" onclick="showTab('tab2','li2')">Supplies</li>
-                <li class="list" id="li3" onclick="showTab('tab3','li3')">Motors</li>
-                <li class="list" id="li4" onclick="showTab('tab4','li4')">Detector</li>
-                <li class="list" id="li5" onclick="showTab('tab5','li5')">Date and Time</li>
-                <li class="list" id="li6" onclick="showTab('tab6','li6')">Test tab</li>
+        <nav>
+            <ul >
+                <div class="container">
+                <li class="list" id="li1" onclick="showTab('tab1','li1')"><span id="li1-text">Lamps test</span></li>
+                <li class="list" id="li2" onclick="showTab('tab2','li2')"><span id="li2-text">Supplies</span></li>
+                <li class="list" id="li3" onclick="showTab('tab3','li3')"><span id="li3-text">Motors</span></li>
+                <li class="list" id="li4" onclick="showTab('tab4','li4')"><span id="li4-text">Detector</span></li>
+                <li class="list" id="li5" onclick="showTab('tab5','li5')"><span id="li5-text">Date and Time</span></li>
+                <li class="list" id="li6" onclick="showTab('tab6','li6')"><span id="li6-text">Test tab</span></li>
+                </div>
             </ul>
         </nav>
 
@@ -48,7 +51,8 @@
         </div>
         
         <div id="tab2" class="tab-content">
-            <h2>Tab 2 Content</h2>
+            
+            <h2>Tab 2 Content </h2>
             <p>This is the content for Choice 2.</p>
         </div>
         
