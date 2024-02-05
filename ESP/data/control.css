@@ -1,4 +1,5 @@
 body {
+    user-select: none;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -14,48 +15,66 @@ header {
     text-align: center;
     width: 100%;
 }
+.logout-button {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #0400ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    width: fit-content;
+    cursor: pointer;
+}
 
 main {
     display: flex;
     flex: 1;
 }
+.container {
+    transition: opacity 0.1s 300ms;
+    opacity: 0;
+}
 
 nav {
+    opacity: 0;
     background-color: #33324e;
     color: #ddd;
-    padding: 10px 10px;
-    width: 6%;
+    width: 0;
     max-width: 250px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s;
-    transition-delay: 200ms;
+    transition: width 0.4s ease-out;
 }
 
 
-.togglelist {
-    cursor: pointer;
-    background-color: #33324e;
-    color: #ddd;
-    padding: 10px 10px;
-    width: 100%;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-}
 nav ul {
-    margin-left: -30PX;
     list-style:none;
 }
 
 nav ul li { 
-    text-align: center;
     margin-bottom: 20px;
-    padding: 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+    max-width: 200px;
+    text-align: center;
     cursor: pointer;
     border-radius: 10px;
-    transition: background-color 0.5s, transform 0.5s;
+    transition: all 0.5s ;
+}
+#li0{
+    transition: width 0.5s 200ms ease-out;
+    max-width: 230px;
+    padding: 10px 10px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    line-height: 0.3;
 }
 
 
 nav ul li:hover {
+    margin-right: 20px;
     background-color: #ddd;
     color: black;
     transform: scale(1.05);
@@ -63,6 +82,7 @@ nav ul li:hover {
 
 .tab-content {
     display: none;
+    margin-left: 20px;
     flex: 1;
     padding: 20px;
 }
