@@ -5,13 +5,12 @@ section 3 : handles user messages (ongoing)
 */
 
 
-
-
 var gateway = `ws://${window.location.hostname}/ws`;
 var websocket;
 document.getElementById('li1').classList.add('active');
 // Init web socket when the page loads
 window.addEventListener('load', onLoad);
+
 
 function onLoad(event) {
     initWebSocket();
@@ -36,9 +35,6 @@ function initWebSocket() {
     websocket.onmessage = function (event) {
         handleMessage(event);
     };
-
-
-
 }
 
 function onOpen(event) {
@@ -58,6 +54,38 @@ function onClose(event) {
     setTimeout(initWebSocket, 2000);
 }
 
+document.querySelector('nav').addEventListener('mouseover', delayedShowNav);
+document.getElementById('li0').addEventListener('mouseover', delayedShowNav2);
+document.getElementById('li0').addEventListener('mouseout', delayedhideNav);
+document.querySelector('nav').addEventListener('mouseout', delayedhideNav);
+let hoverTimeout;
+let outTimeout;
+function delayedShowNav() {
+    
+    // Set a new timeout
+    if(document.querySelector('nav').style.opacity==1){
+        clearTimeout(outTimeout);
+        hoverTimeout = setTimeout(function () {
+        showNav();
+    
+    }, 300);
+ } // 300 milliseconds delay
+}
+function delayedShowNav2() {
+    
+    // Set a new timeout
+        clearTimeout(outTimeout);
+        hoverTimeout = setTimeout(function () {
+        showNav();
+    
+    }, 300); // 300 milliseconds delay
+}
+function delayedhideNav() {
+    clearTimeout(hoverTimeout);
+    outTimeout = setTimeout(() => {
+        hideNav(); // Execute hideNav() after 200ms when mouse leaves
+    }, 300);
+}
 //function to ask the server to send the lamps stutus  
 //future stustus like supplies stutus can be placed her
 function sendStatus() {
@@ -71,7 +99,6 @@ function sendStatus() {
     };
     websocket.send(JSON.stringify(uvlampstutus));
 }
-
 // Set interval to run every 5 seconds (5000 milliseconds)
 setInterval(sendStatus, 5000);
 //open a session for 10 minutes after this period user need to login again
@@ -143,22 +170,37 @@ var curruntstate="none";
 
 //ui function
 hidelabel(); //intially shrink the sidebar 
-document.getElementById('li0').addEventListener('click',togglemenu)
+let menu= document.getElementById('li0');
+menu.addEventListener('click',togglemenu)
+
 function showNav() {
     const navElement = document.querySelector('nav');
+
     navElement.style.width="30%";
+    navElement.style.opacity="1";
+    menu.style.backgroundColor="#33324e";
+    menu.style.textAlign="center";
+    menu.style.width="calc(30% - 20px)";
     showlabel();
 }
 //ui function
 function hideNav() {
+    clearTimeout(hoverTimeout);
     const navElement = document.querySelector('nav');
-    
     if(curruntstate==="none"){
-        navElement.style.width="6%";
+        navElement.style.width="0%";
+        navElement.style.opacity="0";
+        menu.style.backgroundColor="#ccc9c9";
+        menu.style.textAlign="left";
+        menu.style.width="fit-content"
         hidelabel();
     }
     else{
         navElement.style.width="30%";
+        navElement.style.opacity="1";
+        menu.style.backgroundColor="#33324e";
+        menu.style.textAlign="center";
+        menu.style.width="calc(30% - 20px)";
         showlabel();
         }
     }
@@ -167,31 +209,44 @@ function togglemenu() {
     const navElement = document.querySelector('nav');
     if (curruntstate==="block") {
         
-        navElement.style.width="6%";
+        navElement.style.width="0%";
+        menu.style.backgroundColor="#ccc9c9";
+        menu.style.textAlign="left";
+        menu.style.width="fit-content"
+        navElement.style.opacity="0";
         hidelabel();
 
         
     } else {
         navElement.style.width="30%";
+        navElement.style.opacity="1";
         showlabel();
+        menu.style.backgroundColor="#33324e";
+        menu.style.textAlign="center";
+        menu.style.width="calc(30% - 20px)";
         curruntstate="block";
     }
 }
 //ui function
 function hidelabel() {
+    document.querySelector(".container").style.opacity='0';
     curruntstate="none";
-    document.getElementById("li0").innerHTML="=";
-    document.getElementById("li0").style.fontSize="40px";
     for(let i = 1; i <= 6; i++){
-    document.getElementById("li"+i).innerHTML=i;
+    document.getElementById("li"+i).innerHTML="";
 }
 }
+
+
+
+
+
 //ui function
 function showlabel(){
     
+    
     for(let J = 1; J <= 6; J++){
         switch(J){
-            
+                    
             case 1:
                 document.getElementById("li"+J).innerHTML="Lamps test";
                 break;
@@ -213,8 +268,9 @@ function showlabel(){
         }
         
     }
-
-    function handleMessage(event) {    
+    document.querySelector(".container").style.opacity='1';
+}
+function handleMessage(event) {    
     var myObj = JSON.parse(event.data);
     console.log(myObj);
     if(myObj.hasOwnProperty('flag')){
@@ -291,4 +347,3 @@ function showlabel(){
     }
 
 
-}
