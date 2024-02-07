@@ -16,38 +16,37 @@
 
 #define LED_PORT                    MGPIO_PORTA
 #define LED_PIN                     MGPIO_PIN2
+#define SW_PORT                     MGPIO_PORTB
+#define SW_PIN                      MGPIO_PIN11
 
 int main(void)
 {
-    Std_ReturnType Loc_uint8FuncStatus = MRCC_InitClock();
+    //Here, We Intitalize the clock by selecting the clock source as HSE clock "High Speed External"
+    MRCC_InitClock();
 
-    if(Loc_uint8FuncStatus == E_OK)
-    {
-        Loc_uint8FuncStatus = MRCC_EnablePeripheralClock(MRCC_APB2, MRCC_APB2_IOPA_EN);
-        if(Loc_uint8FuncStatus == E_OK)
-        {
-            Loc_uint8FuncStatus = MGPIO_SetPinMode(LED_PORT, LED_PIN, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
-            if(Loc_uint8FuncStatus == E_OK)
-            {
-                Loc_uint8FuncStatus = MGPIO_SetPinValue(LED_PORT, LED_PIN, MGPIO_HIGH);
-            }
-            else
-            {
+    //And We enable clock for peripherals GPIO Port A & B
+    MRCC_EnablePeripheralClock(MRCC_APB2, MRCC_APB2_IOPA_EN);
+    MRCC_EnablePeripheralClock(MRCC_APB2, MRCC_APB2_IOPB_EN);
 
-            }
-        }
-        else
-        {
+    //We set the mode of the LED Pin as output and the Switch Pin as Input Pull up    
+    MGPIO_SetPinMode(LED_PORT, LED_PIN, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
+    MGPIO_SetPinMode(SW_PORT, SW_PIN, MGPIO_INPUT_PULL_UP_OR_DOWN_MODE);
+    MGPIO_ActivatePullUp(SW_PORT, SW_PIN);
 
-        }
-    }
-    else
-    {
-        /*Do nothing*/
-    }
+    uint8 Loc_uint8SWValue = 0;
+
     while(1)
     {
-
+        //If the switch is pressed, toggle the value of the LED pin
+        MGPIO_GetPinValue(SW_PORT, SW_PIN, &Loc_uint8SWValue);
+        if(Loc_uint8SWValue == MGPIO_LOW)
+        {
+          MGPIO_TogglePinValue(LED_PORT, LED_PIN);
+          while(Loc_uint8SWValue == MGPIO_LOW)
+          {
+            MGPIO_GetPinValue(SW_PORT, SW_PIN, &Loc_uint8SWValue);
+          }
+        }
     }
     return 0;
 }

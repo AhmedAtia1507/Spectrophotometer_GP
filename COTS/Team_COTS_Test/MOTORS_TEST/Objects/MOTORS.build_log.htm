@@ -1,0 +1,358 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Ahmed Atia, HP Inc., LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.32.0.0
+Toolchain Path:  D:\KEIL_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14.1
+Assembler:       Armasm.exe V6.14.1
+Linker/Locator:  ArmLink.exe V6.14.1
+Library Manager: ArmAr.exe V6.14.1
+Hex Converter:   FromElf.exe V6.14.1
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.8.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+D:\Senior_2\Graduation_Project\COTS\STM32F103C8T6\DRIVERS_TEST\MOTORS_TEST\MOTORS.uvprojx
+Project File Date:  01/21/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14.1', folder: 'D:\KEIL_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+main.c(2): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+main.c(2): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+main.c(5): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+main.c(6): warning: In file included from...
+./STK_Interface.h(69): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STK_INTERFACE_H_*/
+                            ^
+main.c(8): warning: In file included from...
+./MOTORS_Interface.h(22): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_MOTORS_INTERFACE_H_*/
+                               ^
+main.c(23): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+6 warnings generated.
+compiling main.c...
+GPIO_Program.c(12): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+GPIO_Program.c(12): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+GPIO_Program.c(14): warning: In file included from...
+./GPIO_Private.h(138): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_PRIVATE_H_*/
+                           ^
+GPIO_Program.c(15): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+GPIO_Program.c(16): warning: In file included from...
+./GPIO_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_CONFIG_H_*/
+                          ^
+GPIO_Program.c(38): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(38): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(39): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(44): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(44): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(45): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOA_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(54): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(54): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(55): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(60): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(60): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOB_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(70): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                                 ^
+GPIO_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(71): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(77): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                                 ^
+GPIO_Program.c(77): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(78): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                MGPIOC_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+                           ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GPIO_Program.c(270): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+24 warnings generated.
+compiling GPIO_Program.c...
+RCC_Program.c(13): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+RCC_Program.c(13): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+RCC_Program.c(15): warning: In file included from...
+./RCC_Private.h(129): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_RCC_PRIVATE_H_*/
+                          ^
+RCC_Program.c(16): warning: In file included from...
+./RCC_Config.h(86): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_RCC_CONFIG_H_*/
+                         ^
+RCC_Program.c(47): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+                CLR_BIT(MRCC_CR, MRCC_CR_HSEBYP);
+                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+RCC_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+            CLR_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+RCC_Program.c(123): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR &= ~(((uint32)0b1111) << (MRCC_CFGR_HPRE_START));
+                            ^
+RCC_Program.c(124): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_HPRE_START));
+                            ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(126): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE1_START));
+                            ^
+RCC_Program.c(127): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
+                            ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(129): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE2_START));
+                            ^
+RCC_Program.c(130): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
+                            ^
+./RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+#define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+                                                    ^
+./RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+#define MRCC_AHB_CLK_DIV_1                               0b0000
+                                                         ^
+RCC_Program.c(217): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+13 warnings generated.
+compiling RCC_Program.c...
+MOTORS_Program.c(2): warning: In file included from...
+./Std_Types.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+MOTORS_Program.c(2): warning: In file included from...
+./Std_Types.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+MOTORS_Program.c(4): warning: In file included from...
+./MOTORS_Private.h(15): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_MOTORS_PRIVATE_H_*/
+                             ^
+MOTORS_Program.c(5): warning: In file included from...
+./MOTORS_Interface.h(22): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_MOTORS_INTERFACE_H_*/
+                               ^
+MOTORS_Program.c(6): warning: In file included from...
+./MOTORS_Config.h(20): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_MOTORS_CONFIG_H_*/
+                            ^
+MOTORS_Program.c(9): warning: In file included from...
+./GPIO_Interface.h(108): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_GPIO_INTERFACE_H_*/
+                             ^
+MOTORS_Program.c(10): warning: In file included from...
+./STK_Interface.h(69): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STK_INTERFACE_H_*/
+                            ^
+MOTORS_Program.c(34): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(HMOTORS_STEP_PORT_ID, HMOTORS_STEP_PIN_ID, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                                ^
+./GPIO_Interface.h(55): note: expanded from macro 'MGPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_PUSH_PULL_2MHZ                 (uint32)0b0010     /* GPIO Output Push-Pull Mode, 2MHz */
+                                                            ^
+MOTORS_Program.c(35): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+    MGPIO_SetPinMode(HMOTORS_DIR_PORT_ID, HMOTORS_DIR_PIN_ID, MGPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                              ^
+./GPIO_Interface.h(55): note: expanded from macro 'MGPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define MGPIO_OUTPUT_PUSH_PULL_2MHZ                 (uint32)0b0010     /* GPIO Output Push-Pull Mode, 2MHz */
+                                                            ^
+MOTORS_Program.c(61): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+10 warnings generated.
+compiling MOTORS_Program.c...
+assembling startup_stm32f10x_md.s...
+STK_Program.c(2): warning: non-portable path to file '"Std_Types.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include "STD_TYPES.h"
+         ^~~~~~~~~~~~~
+         "Std_Types.h"
+STK_Program.c(2): warning: In file included from...
+./STD_TYPES.h(14): warning: In file included from...
+./Platform_Types.h(73): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_PLATFORM_TYPES_H_*/
+                             ^
+STK_Program.c(2): warning: In file included from...
+./STD_TYPES.h(31): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STD_TYPES_H_*/
+                        ^
+STK_Program.c(4): warning: In file included from...
+./STK_Private.h(88): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STK_PRIVATE_H_*/
+                          ^
+STK_Program.c(5): warning: In file included from...
+./STK_Interface.h(69): warning: no newline at end of file [-Wnewline-eof]
+#endif /*_STK_INTERFACE_H_*/
+                            ^
+STK_Program.c(79): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT((STK -> CTRL), STK_CTRL_TICKINT);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+STK_Program.c(135): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    CLR_BIT((STK -> CTRL), STK_CTRL_ENABLE);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+STK_Program.c(149): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    CLR_BIT((STK -> CTRL), STK_CTRL_ENABLE);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+STK_Program.c(170): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT((STK -> CTRL), STK_CTRL_ENABLE);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+STK_Program.c(185): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+        CLR_BIT((STK -> CTRL), STK_CTRL_ENABLE);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+#define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+                                                     ~~ ^~~~~~~~~~~
+STK_Program.c(222): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
+void SysTick_Handler(void)
+     ^
+STK_Program.c(222): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void SysTick_Handler(void)
+^
+static 
+11 warnings generated.
+compiling STK_Program.c...
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+            ^
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+    ^
+1 warning generated.
+compiling system_stm32f10x.c...
+linking...
+Program Size: Code=1584 RO-data=252 RW-data=0 ZI-data=1640  
+FromELF: creating hex file...
+".\Objects\MOTORS.axf" - 0 Error(s), 65 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\Device\STM32F103C8
+  .\RTE\_Target_1
+  C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+  C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+      Source file:   Device\Source\system_stm32f10x.c
+      Include file:  RTE_Driver\Config\RTE_Device.h
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

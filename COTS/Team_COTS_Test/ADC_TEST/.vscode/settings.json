@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "std_types.h": "c",
+        "stk_interface.h": "c"
+    }
+}

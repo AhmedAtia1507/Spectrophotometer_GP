@@ -1,0 +1,87 @@
+Dependencies for Project 'EXTI_TEST', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 6140001::V6.14.1::ARMCLANG
+F (.\AFIO_Config.h)(0x65665111)()
+F (.\AFIO_Interface.h)(0x657797BD)()
+F (.\AFIO_Private.h)(0x657797F3)()
+F (.\AFIO_Program.c)(0x657797FF)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/afio_program.o -MD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (STD_TYPES.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (AFIO_Private.h)(0x657797F3)
+I (AFIO_Interface.h)(0x657797BD)
+I (AFIO_Config.h)(0x65665111)
+F (.\BIT_MATH.h)(0x64EF4FD8)()
+F (.\Compiler.h)(0x653D7F13)()
+F (.\EXTI_Config.h)(0x64F615BB)()
+F (.\EXTI_Interface.h)(0x65779572)()
+F (.\EXTI_Private.h)(0x6577959C)()
+F (.\EXTI_Program.c)(0x657C842D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/exti_program.o -MD)
+I (STD_TYPES.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (EXTI_Private.h)(0x6577959C)
+I (EXTI_Interface.h)(0x65779572)
+I (EXTI_Config.h)(0x64F615BB)
+F (.\GPIO_Config.h)(0x64F4AE92)()
+F (.\GPIO_Interface.h)(0x656E2194)()
+F (.\GPIO_Private.h)(0x655A0D52)()
+F (.\GPIO_Program.c)(0x656E2200)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/gpio_program.o -MD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (Std_Types.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (GPIO_Private.h)(0x655A0D52)
+I (GPIO_Interface.h)(0x656E2194)
+I (GPIO_Config.h)(0x64F4AE92)
+F (.\NVIC_Config.h)(0x65021228)()
+F (.\NVIC_Interface.h)(0x65B1247B)()
+F (.\NVIC_Private.h)(0x65B11E72)()
+F (.\NVIC_Program.c)(0x65B1245D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/nvic_program.o -MD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (Std_Types.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (NVIC_Private.h)(0x65B11E72)
+I (NVIC_Interface.h)(0x65B1247B)
+I (NVIC_Config.h)(0x65021228)
+F (.\Platform_Types.h)(0x655A03BD)()
+F (.\RCC_Config.h)(0x655A0A7C)()
+F (.\RCC_Interface.h)(0x655A098A)()
+F (.\RCC_Private.h)(0x657794BD)()
+F (.\RCC_Program.c)(0x657793C4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/rcc_program.o -MD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (Std_Types.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (RCC_Private.h)(0x657794BD)
+I (RCC_Config.h)(0x655A0A7C)
+I (RCC_Interface.h)(0x655A098A)
+F (.\Std_Types.h)(0x6536E7CB)()
+F (.\main.c)(0x65B4E2C1)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/main.o -MD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (Std_Types.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (RCC_Interface.h)(0x655A098A)
+I (GPIO_Interface.h)(0x656E2194)
+I (AFIO_Interface.h)(0x657797BD)
+I (EXTI_Interface.h)(0x65779572)
+I (NVIC_Interface.h)(0x65B1247B)
+I (SCB_Interface.h)(0x65B12332)
+F (.\SCB_Config.h)(0x655A561E)()
+F (.\SCB_Interface.h)(0x65B12332)()
+F (.\SCB_Private.h)(0x655A563C)()
+F (.\SCB_Program.c)(0x65B12349)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/scb_program.o -MD)
+I (Std_Types.h)(0x6536E7CB)
+I (Platform_Types.h)(0x655A03BD)
+I (BIT_MATH.h)(0x64EF4FD8)
+I (SCB_Private.h)(0x655A563C)
+I (SCB_Interface.h)(0x65B12332)
+I (SCB_Config.h)(0x655A561E)
+F (RTE\Device\STM32F103C8\RTE_Device.h)(0x5FC0963A)()
+F (RTE\Device\STM32F103C8\startup_stm32f10x_md.s)(0x61ADBFAE)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 532" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32F10X_MD SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_stm32f10x_md.o)
+F (RTE\Device\STM32F103C8\system_stm32f10x.c)(0x61ADBFAE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/system_stm32f10x.o -MD)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h)(0x61ADBFAE)
+I (RTE\_Target_1\RTE_Components.h)(0x657C7324)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm3.h)(0x626F831E)
+I (D:\KEIL_v5\ARM\ARMCLANG\include\stdint.h)(0x5F514ACE)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h)(0x626F831E)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x626F831E)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h)(0x626F831E)
+I (C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h)(0x61ADBFAE)
