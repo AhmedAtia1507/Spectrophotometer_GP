@@ -26,9 +26,9 @@ Std_ReturnType STK_uint8CalculateReloadValue(uint32 Copy_uint32msTime, uint32* P
     {
         uint32 Loc_uint32ReloadValue = 0;
         #if STK_CLOCK_SOURCE == STK_CLOCK_SOURCE_AHB_DIV_8
-            Loc_uint32ReloadValue = ((Copy_uint32msTime * (STK_AHB_CLOCK_FREQUENCY / 8)) / 1000);
+            Loc_uint32ReloadValue = ((Copy_uint32msTime * (STK_AHB_CLOCK_FREQUENCY / 8000)));
         #elif STK_CLOCK_SOURCE == STK_CLOCK_SOURCE_AHB
-            Loc_uint32ReloadValue = ((Copy_uint32msTime* STK_AHB_CLOCK_FREQUENCY) / 1000);
+            Loc_uint32ReloadValue = (Copy_uint32msTime* (STK_AHB_CLOCK_FREQUENCY / 1000));
         #else
             #error "SysTick Timer Clock Source is not Identified"
         #endif /*STK_CLOCK_SOURCE*/
@@ -39,6 +39,7 @@ Std_ReturnType STK_uint8CalculateReloadValue(uint32 Copy_uint32msTime, uint32* P
         }
         else
         {
+            *P_uint32ReloadValue = 0xFFFFFF;
             Loc_uint8FuncStatus = E_NOT_OK;
         }
     }

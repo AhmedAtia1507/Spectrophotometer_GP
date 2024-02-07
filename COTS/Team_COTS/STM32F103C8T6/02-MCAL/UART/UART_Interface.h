@@ -125,4 +125,6 @@ Std_ReturnType MUART_SetTxCompleteCallback(MUART_Select_t Copy_UARTChoice, ptr_t
  * @retval E_NOT_OK:    Callback function not set  
  */
 Std_ReturnType MUART_SetRxCompleteCallback(MUART_Select_t Copy_UARTChoice, ptr_to_Callback P_RxCompleteCallbackFunc);
+
+Std_ReturnType MUART_SendIntegerValue(MUART_Select_t Copy_UARTChoice, uint32 Copy_uint32Value);
 #endif /*_UART_INTERFACE_H_*/

@@ -321,6 +321,36 @@ Std_ReturnType MUART_SetRxCompleteCallback(MUART_Select_t Copy_UARTChoice, ptr_t
     return Loc_uint8FuncStatus;
 }
 
+Std_ReturnType MUART_SendIntegerValue(MUART_Select_t Copy_UARTChoice, uint32 Copy_uint32Value)
+{
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+
+    if(Copy_uint32Value == 0)
+    {
+        MUART_TxChar(Copy_UARTChoice, (Copy_uint32Value + 48));
+    }
+    else
+    {
+        uint32 Loc_uint8TempValue = Copy_uint32Value;
+        uint8 Loc_uint8CharArray[20] = {0},Loc_uint8Count = 0, Loc_uint8Index = 0;
+        while(Loc_uint8TempValue != 0)
+        {
+            Loc_uint8CharArray[Loc_uint8Count] = ((Loc_uint8TempValue % 10) + 48);
+            Loc_uint8TempValue /= 10;
+            Loc_uint8Count++;
+        }
+        
+        for(Loc_uint8Index = 0; Loc_uint8Index < Loc_uint8Count; Loc_uint8Index++)
+        {
+            MUART_TxChar(Copy_UARTChoice, Loc_uint8CharArray[Loc_uint8Count - Loc_uint8Index - 1]);
+        }
+    }
+
+    Loc_uint8FuncStatus = E_OK;
+    return Loc_uint8FuncStatus;
+}
+
+
 void USART1_IRQHandler(void)
 {
     if(Glbl_PRxCompleteFunc[0] != NULL_PTR)
