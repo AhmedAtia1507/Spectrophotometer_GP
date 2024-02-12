@@ -8,9 +8,92 @@
 #ifndef INC_STM32_F103C6_SPI_DRIVER_H_
 #define INC_STM32_F103C6_SPI_DRIVER_H_
 
+#include "stdlib.h"
+#include <stdint.h>
 
-#include "stm32f103x6.h"
 #include "Stm32_F103C6_GPIO_Driver.h"
+//GPIO
+//A,B fully included in LQFP48 Package
+#define GPIOA_BASE						0X40010800UL
+#define GPIOB_BASE						0X40010C00UL
+
+
+//C,D Partial included in LQFP48 Package
+#define GPIOC_BASE						0X40011000UL
+#define GPIOD_BASE						0X40011400UL
+
+//E not included in LQFP48 Package
+#define GPIOE_BASE						0X40011800UL
+///////////
+//SPI
+#define SPI1_BASE                       0x40013000UL
+//-*-*-*-*-*-*-*-*-*-*-*-
+//Peripheral register: GPIO
+//-*-*-*-*-*-*-*-*-*-*-*
+
+typedef struct
+{
+	volatile uint32_t CRL;
+	volatile uint32_t CRH;
+	volatile uint32_t IDR;
+	volatile uint32_t ODR;
+	volatile uint32_t BSRR;
+	volatile uint32_t BRR;
+	volatile uint32_t LCKR;
+}GPIO_TypeDef;
+
+
+//-*-*-*-*-*-*-*-*-*-*-*-
+//Peripheral register: SPI
+//-*-*-*-*-*-*-*-*-*-*-*
+
+typedef struct
+{
+	volatile uint32_t SPI_CR1;
+	volatile uint32_t SPI_CR2;
+	volatile uint32_t SPI_SR;
+	volatile uint32_t SPI_DR;
+	volatile uint32_t SPI_CRCPR;
+	volatile uint32_t SPI_RXCRCR;
+	volatile uint32_t SPI_TXCRCR;
+	volatile uint32_t SPI_I2SCFGR;
+	volatile uint32_t SPI_I2SPR;
+}SPI_TypeDef;
+
+//-*-*-*-*-*-*-*-*-*-*-*-
+//Peripheral Instants:
+//-*-*-*-*-*-*-*-*-*-*-*
+
+#define GPIOA			((GPIO_TypeDef *)GPIOA_BASE)
+#define GPIOB			((GPIO_TypeDef *)GPIOB_BASE)
+#define GPIOC			((GPIO_TypeDef *)GPIOC_BASE)
+#define GPIOD			((GPIO_TypeDef *)GPIOD_BASE)
+#define GPIOE			((GPIO_TypeDef *)GPIOE_BASE)
+
+#define SPI1			((SPI_TypeDef *)SPI1_BASE)
+#define SPI2			((SPI_TypeDef *)SPI2_BASE)
+//EXTI
+
+#define SPI1_IQR			35
+#define SPI2_IQR			36
+
+//Clock enable
+#define RCC_GPIOA_CLK_EN()	(RCC->APB2ENR |= 1<<2)
+#define RCC_GPIOB_CLK_EN()	(RCC->APB2ENR |= 1<<3)
+#define RCC_GPIOC_CLK_EN()	(RCC->APB2ENR |= 1<<4)
+#define RCC_GPIOD_CLK_EN()	(RCC->APB2ENR |= 1<<5)
+#define RCC_GPIOE_CLK_EN()	(RCC->APB2ENR |= 1<<6)
+
+#define AFIO_GPIOE_CLK_EN()	(RCC->APB2ENR |= 1<<0)
+
+#define RCC_SPI1_CLK_EN()	(RCC->APB2ENR |= 1<<12)
+#define RCC_SPI2_CLK_EN()	(RCC->APB1ENR |= 1<<14)
+
+//Clock reset mechamism
+#define RCC_SPI1_Reset()	(RCC->APB2RSTR |= 1<<12)
+#define RCC_SPI2_Reset()	(RCC->APB1RSTR |= 1<<14)
+
+//============================================================
 
 struct S_IRQ_SRC
 {
