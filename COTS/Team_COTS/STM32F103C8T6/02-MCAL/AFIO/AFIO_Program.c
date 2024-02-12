@@ -1,4 +1,12 @@
-
+/**
+ * @file AFIO_Program.c
+ * @author Ahmed Atia Said (atiaa6501@gmail.com)
+ * @brief 
+ * @version 1.0
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "BIT_MATH.h"
 #include "STD_TYPES.h"
 

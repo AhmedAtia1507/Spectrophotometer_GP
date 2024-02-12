@@ -4,7 +4,6 @@
  * @brief: C file to implement functions used to configure RCC Peripheral
  *  
  * @version 1.0
- * @date 2023-08-30
  * 
  * @copyright Copyright (c) 2023
  * 

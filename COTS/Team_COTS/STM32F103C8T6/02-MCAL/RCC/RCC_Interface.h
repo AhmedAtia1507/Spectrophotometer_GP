@@ -5,7 +5,6 @@
  *         1) Declare functions used to configure Reset & Clock Controller Peripheral.
  *         2) Define Macros used in multiple files 
  * @version 1.0
- * @date 2023-08-30
  * 
  * @copyright Copyright (c) 2023
  * 

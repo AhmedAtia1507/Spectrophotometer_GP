@@ -6,7 +6,6 @@
  *                  Universal Asynchronous Receiver/Transmitter peripheral
  *          2) Define Macros to be used in other files for UART Peripheral 
  * @version 1.0
- * @date 2023-11-19
  * 
  * @copyright Copyright (c) 2023
  * 

@@ -3,7 +3,6 @@
  * @author Ahmed Atia Said (atiaa6501@gmail.com)
  * @brief 
  * @version 1.0
- * @date 2023-09-12
  * 
  * @copyright Copyright (c) 2023
  * 
@@ -11,20 +10,20 @@
 #ifndef _SCB_INTERFACE_H_
 #define _SCB_INTERFACE_H_
 
-#define SCB_PRIORITY_GROUP_4_SUB_0             0x05FA0300
-#define SCB_PRIORITY_GROUP_3_SUB_1             0x05FA0400
-#define SCB_PRIORITY_GROUP_2_SUB_2             0x05FA0500
-#define SCB_PRIORITY_GROUP_1_SUB_3             0x05FA0600
-#define SCB_PRIORITY_GROUP_0_SUB_4             0x05FA0700
+#define MSCB_PRIORITY_GROUP_4_SUB_0                     0x05FA0300
+#define MSCB_PRIORITY_GROUP_3_SUB_1                     0x05FA0400
+#define MSCB_PRIORITY_GROUP_2_SUB_2                     0x05FA0500
+#define MSCB_PRIORITY_GROUP_1_SUB_3                     0x05FA0600
+#define MSCB_PRIORITY_GROUP_0_SUB_4                     0x05FA0700
 
 /************************System Handler Priority Registers (SCB_SHPRx) register numbers******************************/
 
-#define SCB_SHPR_MEM_MANAGEMENT_FAULT                   0
-#define SCB_SHPR_BUS_FAULT                              1
-#define SCB_SHPR_USAGE_FAULT                            2
-#define SCB_SHPR_SVCALL                                 7
-#define SCB_SHPR_PENDSV                                 10
-#define SCB_SHPR_SYSTICK                                11
+#define MSCB_SHPR_MEM_MANAGEMENT_FAULT                  0
+#define MSCB_SHPR_BUS_FAULT                             1
+#define MSCB_SHPR_USAGE_FAULT                           2
+#define MSCB_SHPR_SVCALL                                7
+#define MSCB_SHPR_PENDSV                                10
+#define MSCB_SHPR_SYSTICK                               11
 /**
  * @brief: Function to Force a large system reset of all major components except for debug
  * 

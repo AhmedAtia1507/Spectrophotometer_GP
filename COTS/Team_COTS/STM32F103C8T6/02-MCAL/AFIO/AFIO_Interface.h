@@ -1,4 +1,12 @@
-
+/**
+ * @file AFIO_Interface.h
+ * @author Ahmed Atia Said (atiaa6501@gmail.com)
+ * @brief 
+ * @version 1.0
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef _AFIO_INTERFACE_H_
 #define _AFIO_INTERFACE_H_
 

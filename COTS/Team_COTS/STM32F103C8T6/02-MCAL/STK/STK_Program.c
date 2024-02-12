@@ -1,3 +1,12 @@
+/**
+ * @file STK_Program.c
+ * @author Ahmed Atia Said (atiaa6501@gmail.com)
+ * @brief 
+ * @version 1.0
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "BIT_MATH.h"
 #include "STD_TYPES.h"
 
@@ -226,6 +235,7 @@ void SysTick_Handler(void)
 	if(STK_PCallbackFunc != NULL_PTR)
 	{
 		STK_PCallbackFunc();
+        CLR_BIT((STK -> CTRL), STK_CTRL_COUNTFLAG);
 	}
 	else
 	{

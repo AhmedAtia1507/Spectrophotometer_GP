@@ -4,7 +4,6 @@
  * @brief: C header file to define memory mapping for UART Peripheral
  *              "Universal Asynchronous Receiver/Transmitter"  
  * @version 1.0
- * @date 2023-11-19
  * 
  * @copyright Copyright (c) 2023
  * 

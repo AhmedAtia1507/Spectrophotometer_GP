@@ -3,7 +3,6 @@
  * @author Ahmed Atia Said (atiaa6501@gmail.com)
  * @brief: C header file to define pre-build configurations for RCC Peripheral
  * @version 1.0
- * @date 2023-08-30
  * 
  * @copyright Copyright (c) 2023
  * 

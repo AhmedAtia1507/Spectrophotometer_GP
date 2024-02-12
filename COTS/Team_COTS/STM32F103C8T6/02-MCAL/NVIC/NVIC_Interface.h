@@ -5,7 +5,6 @@
  *          1) Define function prototypes used to control Nested Vectored Interrupt Controller peripheral
  *          2) Define Macros to be used in other files for NVIC Peripheral
  * @version 1.0
- * @date 2023-09-03
  * 
  * @copyright Copyright (c) 2023
  * 

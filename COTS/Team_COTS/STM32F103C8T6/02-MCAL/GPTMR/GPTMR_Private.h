@@ -3,7 +3,6 @@
  * @author Ahmed Atia Said (atiaa6501@gmail.com)
  * @brief 
  * @version 1.0
- * @date 2024-02-05
  * 
  * @copyright Copyright (c) 2024
  * 
@@ -195,4 +194,15 @@ Update Interrupt Flag:
 #define MGPTMR_UPDATE_INTERRUPT_ENABLED                         1
 #define MGPTMR_UPDATE_INTERRUPT_DISABLED                        2
 
+/**
+ * @brief: Function to calculate the preload value from a given period in ms
+ * 
+ * @param Copy_uint32PeriodInMs:                        Period in ms 
+ * @param P_uint16PreloadValue:                         Preload value to be set
+ *  
+ * @return Std_ReturnType
+ * @retval E_OK:                                        Preload value successfully calculated
+ * @retval E_NOT_OK:                                    Preload value not calculated 
+ */
+Std_ReturnType MGPTMR_GetPreloadValue                   (uint32 Copy_uint32PeriodInMs, uint16* P_uint16PreloadValue);
 #endif /*_GPTMR_PRIVATE_H_*/

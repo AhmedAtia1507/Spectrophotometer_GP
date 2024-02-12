@@ -3,7 +3,6 @@
  * @author Ahmed Atia Said (atiaa6501@gmail.com)
  * @brief: C file to Implement functions used to control NVIC Peripheral
  * @version 1.0
- * @date 2023-09-03
  * 
  * @copyright Copyright (c) 2023
  * 

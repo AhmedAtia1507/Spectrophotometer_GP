@@ -5,7 +5,6 @@
  *          1) define memory mapping for Nested Vectored Interrupt Controller Registers
  *          2) Define Macros for choices of pre-build configurations for NVIC Peripheral
  * @version 1.0
- * @date 2023-09-03
  * 
  * @copyright Copyright (c) 2023
  * 

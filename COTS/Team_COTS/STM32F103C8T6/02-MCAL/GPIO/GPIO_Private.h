@@ -5,7 +5,6 @@
  *          1) Define Memory Mapping of General Purpose Input/Output
  *          2) Define macros used as choices for pre-build configurations of GPIO Peripheral
  * @version 1.0
- * @date 2023-08-30
  * 
  * @copyright Copyright (c) 2023
  * 
