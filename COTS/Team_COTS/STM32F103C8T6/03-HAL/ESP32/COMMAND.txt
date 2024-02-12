@@ -1,0 +1,45 @@
+get uv status
+
+set uv on
+
+set uv off
+
+get vis status
+
+set vis on
+
+set vis off
+
+get voltages
+
+get step
+
+get wavelength
+
+go home
+
+(save calibration
+"Current step value")
+
+step right
+
+step left
+
+get date time
+
+(set date time
+"Year"
+"Month"
+"Day"
+"Hour"
+"Minutes"
+"Seconds")
+
+get all status
+
+(get intensity
+"start wavelength"
+"end wavelength"
+"step"
+"speed"
+"Init time")
