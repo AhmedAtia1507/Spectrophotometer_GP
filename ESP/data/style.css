@@ -616,13 +616,6 @@ td input{
 tbody tr:nth-child(odd) {
 background-color: #e7e4e4;
 }
-#remove{
-  background-color: transparent;
-  width: 70%;
-}
-#colorselect,#fnselect,#samplename{
-  width: fit-content;
-}
 
 
 .t_r_c{
