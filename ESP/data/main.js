@@ -725,18 +725,21 @@ function handelrow() {
 for (var i = 0; i < rowNumber; i++) {
     var newRow = sampleRow.cloneNode(true);
     newRow.id = 'trow' + (i + 1);
-    newRow.querySelector('#curveIndex').innerText = (i + 2);
+    newRow.querySelector('#element12').innerText = (i + 2);
     tableBody.appendChild(newRow);
     document.getElementById(newRow.id).addEventListener('click',handelny);
     // Update indices for each cell in the row
     var cells = newRow.querySelectorAll('td');
     for (var j = 0; j < cells.length; j++) {
       cells[j].id = 'data-index' + (i + 1) + (j + 1);
-      // Add event listener to input element inside the cell
-      var inputElement = cells[j].querySelector('button');
-      if (inputElement) {
-          inputElement.addEventListener('click', handecell);
-      }
+     // Set individual elements inside the td with unique IDs
+     var inputElement = cells[j].querySelector('input, select, label, button');
+     if (inputElement) {
+         inputElement.id = 'element' + (i + 2) + (j + 1);
+
+         // Add an event listener to the element
+         document.getElementById(inputElement.id).addEventListener('click', handecell);
+     }
   }
   
 }
