@@ -177,13 +177,10 @@ text-align: center;
 cursor: pointer;
 transition: all 0.2s;
 }
-.tab button:hover {
-background-color: #929696;
-}
+
 
 .tab button.active {
 background-color: #234f68;
-transform: scaleX(1.2);
 }
 .tablinks.inactive{
   background-color: transparent;
@@ -534,10 +531,8 @@ ul li label {
   width: 100%;
 }
 .foot_btn{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 7px;
+  display: block;
+  margin: 10px;
   color: white;
   background-color: #27c0ac;
   padding: 2px 5px;
@@ -546,6 +541,10 @@ ul li label {
   font-weight: 500;
   text-transform: capitalize;
   cursor: pointer;
+}
+#hidefoot{
+  width: 50px;
+  height: 30px;
 }
 .DateTime{
   display: flex;
