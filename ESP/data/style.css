@@ -34,15 +34,18 @@ section h2 {
 
 
 .col {
-  width: 45%;
+  width: 30%;
   float: left;
+  padding: 10px;
   margin: 2.5%;
   justify-content: space-between;
-  text-align: center;
-  align-items: center;
+  text-align: left;
+  align-items: left;
   background: rgb(156, 221, 173);
 }
-
+.col div{
+  margin-bottom: 10px;
+}
 @media screen and (max-width: 962px) {
   .col {
       width: 95%;
@@ -225,20 +228,6 @@ height: auto;
 *                           SCAN Tab
 *========================================================================**/
 
-
-
-/* Style for the input fields */
-#start, #end {
-  width: 70px;
-  padding: 5px;
-  margin: 0 ;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-}
-
-
-
-
 .tabcontent {
   background-color: #fff;
   border-radius: 8px;
@@ -249,22 +238,23 @@ height: auto;
   margin: 0 auto; /* Center the #scan div */
   margin-bottom: 100px;
 }
-
 .tabcontent label{
   color: black;
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
 }
-
+.tabcontent .col strong{
+  padding-right: 20px;
+}
 .tabcontent input, .tabcontent select {
-  width: 120px;
+  width: auto;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-left: 5;
   box-sizing: border-box;
   border: 1px solid #000000;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .tabcontent button {
