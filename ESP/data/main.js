@@ -2,40 +2,15 @@
 /**========================================================================
  *                           Navbar
  *========================================================================**/
-const menu = document.querySelector('.nav_menu');
-const menubtn = document.querySelector('#open_menu_btn');
-const closebtn = document.querySelector('#close_menu_btn');
-
-menubtn.addEventListener('click', () => {
-    menu.classList.add('show');
-    closebtn.style.display = 'inline-block';
-    menubtn.style.display = 'none';
-});
-
-const closeNav = () => {
-    menu.classList.remove('show');
-    closebtn.style.display = 'none';
-    menubtn.style.display = 'inline-block';
-};
-
-closebtn.addEventListener('click', closeNav);
-
-// Check screen size on page load and resize
-window.addEventListener('load', handleScreenSize);
-window.addEventListener('resize', handleScreenSize);
-
-function handleScreenSize() {
-    if (window.innerWidth > 962) {
-        menubtn.style.display = 'none';
-        closebtn.style.display = 'none';
-    } else {
-        menubtn.style.display = 'inline-block';
-        closebtn.style.display = 'none';
-    }
+function showSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'flex';
 }
-
+function hideSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'none';
+}
 /*============================ END OF Nabbar ============================*/
-
 
 /**========================================================================
  *                           WebSocket
@@ -97,42 +72,6 @@ function onMessage(event) {
     }
     console.log(event.data); // for debugging 
 }
-
-/**========================================================================
- *                           Bottombar Clock
- *========================================================================**/
-function formatWithLeadingZero(number) {
-    return number < 10 ? `0${number}` : number;
-}
-
-// Function to update date and time
-function updateDateTime() {
-    // Get the current date and time
-    const now = new Date();
-
-    // Extract hours, minutes, and seconds
-    let hours = now.getHours();
-    const minutes = formatWithLeadingZero(now.getMinutes());
-    const seconds = formatWithLeadingZero(now.getSeconds());
-    const amPm = hours >= 12 ? 'PM' : 'AM';
-
-    // Convert to 12-hour format
-    hours = hours % 12 || 12;
-
-    // Display the date and time with seconds
-    const dateTimeString = `${now.toDateString()} ${hours}:${minutes}:${seconds} ${amPm}`;
-    document.getElementById('DateTime').textContent = dateTimeString;
-}
-
-// Update the date and time every second
-setInterval(updateDateTime, 1000);
-
-// Initial update
-updateDateTime();
-
-/*============================ END OF Clock ============================*/
-
- 
 
 
 
@@ -340,6 +279,24 @@ function openTab(evt, Control) {
       }
     }
   });
+  function addCurve(xData, yData, color, curveName) {
+    var curveData = xData.map((x, index) => ({ x: x, y: yData[index] }));
+    chartScan.data.datasets.push({
+      label: curveName,
+      data: curveData,
+      borderColor: color,
+      borderWidth: 2,
+      fill: false,
+      lineTension: 0.4
+    });
+    chartScan.update();
+  }
+  // Function to remove a curve from the chart
+function removeCurve(index) {
+  chartScan.data.datasets.splice(index, 1);
+  chartScan.update();
+}
+
   function isValidDecimalDigits(value, maxDigits) {
     const decimalDigits = (value.toString().split('.')[1] || '').length;
     return decimalDigits <= maxDigits;
@@ -466,6 +423,382 @@ function openTab(evt, Control) {
     // Start the scanning process
     continueScanning(startInput);
   }
+  /*================preset section==============*/
+  
+function selectAbsorption() {
+  var selectElement = document.getElementById("mySelect");
+  // Find the index of the "absorption" option and set it as the selected index
+  var absorptionIndex = Array.from(selectElement.options).findIndex(option => option.value === "absorption");
+  selectElement.selectedIndex = absorptionIndex;
+}
+function selectTransmission() {
+  var selectElement = document.getElementById("mySelect");
+  
+  // Find the index of the "transmission" option and set it as the selected index
+  var transmissionIndex = Array.from(selectElement.options).findIndex(option => option.value === "transmission");
+  selectElement.selectedIndex = transmissionIndex;
+}
+
+var myList = document.getElementById("presetlist");
+function showpreset(){
+
+  var message={
+    showpreset:'showpreset'
+  };
+  const flyoutMenu = document.getElementById('presets');
+  const computedStyle = window.getComputedStyle(flyoutMenu);
+  if (computedStyle.display === 'none') {
+  websocket.send(JSON.stringify(message));
+  }  
+websocket.onmessage = function (event) {
+ 
+    var myObj = JSON.parse(event.data);
+    console.log(myObj);
+  if (myObj.hasOwnProperty('presetsno')){
+        
+        let i= myObj.presetsno;
+        if(i==0){
+          console.log('iiiii b =0');
+          var nopresetsDiv = document.getElementById('nopresets');
+          nopresetsDiv.innerHTML = 'No presets available';
+         }
+           
+       
+         else{
+          console.log('iiiii mesh b =0');
+          var nopresetsDiv = document.getElementById('nopresets');
+          nopresetsDiv.innerHTML = '';
+          for (var j = myList.children.length - 1; j >= 0; j--) {
+            var child = myList.children[j];
+            console.log(child.id);
+            // Check if the element has an id and it is not "nopresets"
+            if (child.id !== 'nopresets'&&child.id!=='search') {
+            
+              
+              myList.removeChild(child);
+              console.log('i deletet the child');
+            }
+          }
+          
+          for ( i ; i >0; i--) {
+          (function (i) {
+            let file = 'file' + i;
+            console.log(myObj[file] + ": ");
+            var newItem = document.createElement("li");
+            var itemName = myObj[file];
+            var textSpan = document.createElement("span");
+            var textNode = document.createTextNode(itemName);
+           
+            textSpan.appendChild(textNode);
+            newItem.appendChild(textSpan);
+            myList.insertBefore(newItem, myList.lastChild);
+            deletepreset(myList, itemName, newItem);
+
+        
+            newItem.addEventListener("click", function () {
+              console.log("Clicked on item: " + itemName);
+              var message = {
+                loadthis: itemName
+                        };
+              websocket.send(JSON.stringify(message));
+              
+websocket.onmessage = function (event) {
+  var myObj = JSON.parse(event.data);
+  console.log(myObj);
+var myreadings = document.getElementById("scanReadings");
+var newItem = document.createElement("p");
+var itemName = event.data;
+var textNode = document.createTextNode(itemName);
+newItem.appendChild(textNode);
+
+myreadings.insertBefore(newItem, myreadings.lastChild);
+  if(myObj.hasOwnProperty('loaded')){
+  var startValue = parseInt(myObj.start, 10);
+  var stopValue = parseInt(myObj.stop, 10);
+  var stepValue = parseInt(myObj.step, 10);
+  var speedValue = parseInt(myObj.speed, 10);
+  var initTimeValue = parseInt(myObj.inittime, 10);
+  document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
+  document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
+  document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
+  document.getElementById('speed').value = isNaN(speedValue) ? '' : speedValue;
+  document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
+
+  if((myObj.mode.trim() === 'transmission')){
+      selectTransmission();
+    }
+    else{
+      selectAbsorption();
+    }
+
+  }
+  
+
+}
+
+            });
+          })(i);
+        }
+      }
+        
+      
+    
+  }
+}
+  openlist();
+    
+}
+
+
+
+function deletepreset(myList,names,newItem){
+  var deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "delete";
+            deleteButton.classList.add("delete-button");
+            deleteButton.addEventListener("click", function () {
+            myList.removeChild(newItem);
+            var message={
+              deletepreset:'deletepreset',
+              name:names,
+            };
+            websocket.send(JSON.stringify(message));
+            showpreset();
+           });
+            
+            // Append the delete button to the new list item
+            newItem.appendChild(deleteButton);
+            
+}
+  function savepreset(){
+    document.getElementById('nameexist').innerHTML=''; 
+    openname();  
+    showpreset();
+    openlist(); 
+}
+
+function addtolist() {
+  var itemName = document.getElementById("prestinput").value;
+  var myList = document.getElementById("presetlist");
+  if (itemName.trim() !== "") {
+    if (!nameExists(itemName, myList)) {
+      let startInput = parseFloat(document.getElementById('start').value);
+      let stopInput = parseFloat(document.getElementById('stop').value);
+      let stepInput = parseFloat(document.getElementById('step').value);
+      let speedInput = parseFloat(document.getElementById('speed').value);
+      let initTimeInput = parseFloat(document.getElementById('initTime').value);
+      let modeInput = document.getElementById('mySelect').value;
+      var message = {
+          savepreset: 'savepreset',
+          id: '1',
+          name: itemName,
+          start: startInput,
+          stop: stopInput,
+          step: stepInput,
+          speed: speedInput,
+          inittime: initTimeInput,
+          mode: modeInput,
+                  };
+        websocket.send(JSON.stringify(message));
+        cancelpreset();
+    } else {
+      document.getElementById('nameexist').innerHTML='name exist try another name';
+    }
+  }
+}
+
+function nameExists(name, list) {
+  // Check if the name already exists in the list
+  var items = list.getElementsByTagName("li");
+
+  for (var i = 0; i < items.length; i++) {
+    var spans = items[i].getElementsByTagName("span");
+    if (spans.length > 0) {
+      var text = spans[0].textContent;
+      if (text === name) {
+        return true; // Name already exists
+      }
+    }
+  }
+  return false; // Name does not exist
+}
+
+function cancelpreset(){
+  const flyoutMenu = document.getElementById('presetname');
+  flyoutMenu.classList.remove('active');
+}
+
+document.addEventListener('click', function (event) {
+  const flyoutBtn = document.getElementById('loadpreset');
+  const flyoutMenu = document.getElementById('presets');
+
+  if (event.target !== flyoutBtn && event.target !== flyoutMenu && !flyoutMenu.contains(event.target)) {
+    // Click outside the button and the flyout menu, close the flyout menu
+    flyoutMenu.classList.remove('active');
+  }
+});
+
+
+function openname() {
+  const flyoutMenu = document.getElementById('presetname');
+  flyoutMenu.classList.toggle('active');
+}
+
+function openlist() {
+  const flyoutMenu = document.getElementById('presets');
+  flyoutMenu.classList.toggle('active');
+
+}
+
+var input = document.getElementById("search");
+
+input.addEventListener('input', filter);
+function filter() {
+  var search = input.value.toLowerCase();
+  var myListArray= myList.querySelectorAll('li');
+  myListArray.forEach(function (li) {
+    var span = li.querySelector('span'); // Get the span element inside the list item
+    var textNode = span.firstChild; // Get the text node inside the span
+    var text = textNode.nodeValue.toLowerCase(); // Get the text content of the text node
+
+    var found = text.indexOf(search);
+    
+    if (search === '' || found !== -1) {
+     
+      li.style.display='block';
+    } else {
+      li.style.display='none';
+      
+    
+    }
+  });
+}
+/*============table================*/
+document.getElementById('hidefoot').addEventListener('click',showfoot)
+function showfoot() {
+  var but= document.getElementById('hidefoot');
+  var foot =document.getElementById('hidethis'); 
+  if (but.innerHTML === 'hide') {
+    but.innerHTML = 'show';
+  } 
+  else {
+    but.innerHTML = 'hide';
+  }
+  foot.classList.toggle('inactive'); 
+}
+
+function validateInput(input, max) {
+  if (parseInt(input.value) > max) {
+      input.value = max;
+  }
+}
+function handletable(){
+  handelrow();
+  handleColumn();
+}
+
+  
+
+function handelrow() {
+  document.getElementById('hidethis').style.display = 'none';
+  document.getElementById('hidefoot').style.display = 'block';
+  var i = document.getElementById('rowno').value;
+  console.log(i);
+  // Remove existing rows except the first one
+  var table = document.getElementById('t_body');
+  var first = table.firstElementChild;
+  console.log(table);
+  while (table.children.length > 0) {
+    table.removeChild(table.lastChild);
+  }
+  let indexTable = 1;
+  for (indexTable; i >= indexTable; indexTable++) {
+    var rowClone = first.cloneNode(true);
+    rowClone.querySelector('#curveIndex').innerHTML = indexTable; 
+    const xData = Array.from({ length: 10 }, () => Math.random());
+    const yData = Array.from({ length: 10 }, () => Math.random());
+    addCurve(xData, yData, 'red',indexTable);
+    table.append(rowClone);
+  }
+  removeCurve(0);
+}
+function handleColumn() {
+  var table = document.getElementById('samplestable');
+  var rowCount = table.rows.length;
+ 
+  for (var i = table.rows[0].cells.length - 1; i >= 5; i--) {
+    table.rows[0].deleteCell(i);
+    for (var j = 1; j < table.rows.length; j++) {
+      table.rows[j].deleteCell(i);
+    }
+  }
+var j=document.getElementById('colno').value;
+j=j-1;
+for(j;j>0;j--){
+  // Add header cell
+  var headerCell = document.createElement('th');
+  headerCell.textContent = 'Function ';
+  table.rows[0].appendChild(headerCell);
+
+  // Add data cells for each row
+  for (var i = 1; i < rowCount; i++) {
+
+    var cellClone = table.rows[i].lastElementChild.cloneNode(true);
+    table.rows[i].appendChild(cellClone);
+    
+  }
+}
+}
+
+function updateClock(initialDateTimeString) {
+  let currentDate = new Date(initialDateTimeString);  
+  setInterval(function () {
+    currentDate.setSeconds(currentDate.getSeconds() + 1);
+    let formattedDate = currentDate.toLocaleString('en-GD', { 
+      day: 'numeric', 
+      month: 'numeric', 
+      year: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric', 
+      second: 'numeric', 
+      hour12: true
+    });
+    document.getElementById('DateTime').innerText = formattedDate;
+  }, 1);
+}
+updateClock("1/13/2021 13:32:12");
+
+
+
+document.getElementById('li0').addEventListener('mouseover', delayedShowNav);
+document.getElementById('li0').addEventListener('mouseout', delayedhideNav);
+document.getElementById('tab').addEventListener('mouseover',delayedShowNav);
+document.getElementById('tab').addEventListener('mouseout',delayedhideNav);
+
+let hoverTimeout;
+let outTimeout;
+function delayedShowNav() {
+    clearTimeout(outTimeout);
+        hoverTimeout = setTimeout(function () {
+        var tab=document.getElementById('tab');
+        console.log(tab);
+        console.log('ana fe show');
+          tab.classList.add('active');
+    
+    }, 300);
+ 
+}
+
+function delayedhideNav() {
+    clearTimeout(hoverTimeout);
+    outTimeout = setTimeout(() => {
+      var tab=document.getElementById('tab');
+      console.log('ana fe hide');
+        tab.classList.remove('active');
+  }, 300);
+}
+
+
+
   
 /**========================================================================
  *                           ADC
@@ -482,7 +815,7 @@ function readADC() {
   startReadADC = 1;
   function sendADCRequest() {
     const message = {
-      command: 'sd',
+      command: 'ADC',
     };
     websocket.send(JSON.stringify(message));
   }
@@ -516,5 +849,3 @@ function readADC() {
 
   continueReadADC();
 }
-
-  

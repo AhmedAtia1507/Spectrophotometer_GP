@@ -10,34 +10,39 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="nav__container">
-                <a href="index.html">
-                    <h1>SPECTROPHOTOMETER</h1>
-                </a>
-                <ul class="nav_menu">
-                    <li class="show"><a href="">Home</a></li>
-                    <li class="show"><a href="">About</a></li>
-                    <li class="show"><a href="login.html">Dashboard</a></li>
-                    <li class="show"><a href="">Management</a></li>
-                </ul>
-                <button id="open_menu_btn">Menu</button>
-                <button id="close_menu_btn">X</button>
-            </div>
-        </nav>
-    </header>
-    <main>
 
+    <!---------------------------- Start of Nabber ---------------------------->
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Page #1</a></li>
+            <li><a href="#">Page #2</a></li>
+            <li><a href="#">Page #3</a></li>
+            <li><a href="#">Page #4</a></li>
+        </ul>
+        <ul>
+            <li class="logo"><a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z"/></svg> <span>SpectroPhotometer</span></a></li>
+            <li class="hideOnMobile" ><a href="home.html">Home</a></li>
+            <li class="hideOnMobile"><a href="login.html">direct control</a></li>
+            <li class="hideOnMobile"><a href="#">Page #2</a></li>
+            <li class="hideOnMobile"><a href="#">Page #3</a></li>
+            <li class="hideOnMobile"><a href="#">Page #4</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+    </nav>
+<!---------------------------- END OF Navbar ---------------------------->
+    <main>
+        <li  id="li0"  title="Click to lock/unlock menu visibility">___<br>___<br>___<br> <br></li>
         <section>
-            <div class="tab">
+            <div id="tab" class="tab">
                 <button class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
                 <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
                 <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
-                <button class="tablinks" onclick="openTab(event, 'file')">Files test</button>
             </div>
 
-            <div id="scan" class="tabcontent" style="display: block;">
+            <div id="scan" class="tabcontent">
+                
                 <div class="row">
                     <div class="col">
                         <canvas id="chartScan" width="400" height="400"></canvas>
@@ -73,7 +78,7 @@
                             </div>
                             <div class="col">
                                 <label for="mode">Mode:</label>
-                                <select id="mode" name="mode">
+                                <select id="mySelect" name="mode">
                                     <option value="absorption">Absorption</option>
                                     <option value="transmission">Transmission</option>
                                     <!-- <option value="transmission">Eneregy</option> -->
@@ -87,19 +92,105 @@
                             <div class="TwoBtn">
                                 <button onclick="startScan()">Start</button>
                                 <button onclick="pauseScan()">Pause</button>
+                                <button id="savepreset" onclick="savepreset()">save preset</button>
+                                <button id="loadpreset" onclick="showpreset()">load preset</button>
+                            
                             </div>
 
                         </div>
                     </div>
                 </div>
+                <div class="row TableContent">
+                    <h4 class="headfont">Readings</h4> <br>
+                    <div id="scanReadings">
+                        <p> Readings will be displayed here... </p>
+                      </div>
+                
+                </div>
+                <hr>
+                <br>
+                
+                
+                <div class="mytable">
+                    <div class="t_r_c" id="t_r_c">
+                        <label for="colmnno">Enter columns number</label><input type="number" min="1" max="3" id="colno" value="1" oninput="validateInput(this, 3)">
+                        <label for="rowno">Enter Rows number</label><input type="number" min="1" id="rowno" max="30" value="1" oninput="validateInput(this, 30)">
+                        <button id="updatet" onclick="handletable()">update</button>
+                    </div>
+                    
+                    <table id="samplestable">
+                        <thead id="t_haeder">
+                            <th id="rowstutus">iscomplete</th>
+                            <th>Name</th>
+                            <th>describtion</th>
+                            <th>color</th>
+                            <th id="func">function</th>
+                        </thead>
+                    <tbody id="t_body">
+                        <tr id="trow">
+                            <td>
+                                <label id="curveIndex">1</label>
+                                <div id="tablestutus"></div>
+                            </td>
+                            <td>
+                            <input id="samplename" type="text" placeholder="sample name">
+                            </td>
+                            <td>
+                                <input id="samplename" type="text" placeholder="sample name">
+                            </td>
+                            <td>
+                                <select name="color" id="colorselect">
+                                    <option value="red">red</option>
+                                    <option value="blue">blue</option>
+                                    <option value="green">green</option>
+                                    <option value="yellow">yellow</option>
+                                    <option value="purple">purple</option>
+                                    <option value="orange">orange</option>
+                                    <option value="black">black</option>
+                                    <option value="pink">pink</option>
+                                    <option value="brown">brown</option>
+                                    <option value="grey">grey</option>
+                                
+                            </select>
+                            </td>
+                            <td>
+                                <select name="function" id="fnselect">
+                                    <option value="none">none</option>
+                                    <option value="red">Area</option>
+                                    <option value="red">height</option>
+                                    <option value="red">Peak</option>
+                                </select>
+                            </td>
+                            <td id="removeCurve">
+                                <button onclick="removeCurve(this)">remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
 
-
-
+                </div>
+                
             </div>
-
+            
+            <div id="presets" class="presets">
+            
+                <ul class="blurred-list" id="presetlist">
+                <input type="text" id="search" placeholder="search &#128269;">
+                <div id="nopresets"></div>  
+                </ul></div>
+                <div class="presetname" id="presetname">
+                    <div class="blurred-name">
+                    <label class="presetlabel" for="name">Enter preset name:</label><br><br>
+                    <input id="prestinput" class="presetinput" type="text"><br><br>
+                    <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
+                    <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+                    <div id="nameexist"></div>
+                </div>
+                </div>
+    
             <div id="ADC" class="tabcontent" style="align-items: center; text-align: center;">
                     <div class="row">
-                        <div class="col">    <h1>sd file Data:</h1>
+                        <div class="col">    <h1>I2C Data:</h1>
                             <div id="i2cValue">Waiting for data...</div>
                         </div>
                         <div class="col">
@@ -155,43 +246,26 @@
             
 
             </div>
-            
-            <div id="file" class="tabcontent" style="align-items: center; text-align: center;">
-                <h1>File Upload to ESP32</h1>
-  <form action="/" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <input type="submit" value="Upload">
-  </form>
-    <div  style="align-items: center; text-align: center;">
-    <iframe id="content">  </iframe>
-    </div>
-                </div>
-        
 
         </section>
+<!---------------------------- START OF Footer ---------------------------->
+<footer class="sticky" id="sticky">
+    <button class="foot_btn" id="hidefoot">hide</button>
+    <div class="footer-col" id="hidethis">
+        
+        <h4>States</h4>
+        <ul>
+            <li><label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label></li>
+            <li><label for="">Visible Lamp Status: <span id="VIstateBar">"loading"</span></label></li>
+            <li><label for="">Current Wavelength: <span id="WLstateBar">"loading"</span> </label></li>
+            <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+            <li><label for="" class="DateTime" style="position: absolute; right: 0;margin-right: 30px;"> <span id="DateTime"></span></label></li>
+            
+        </ul>
+    </div>
 
-
-        <div class="status-bar">
-            <div class="row">
-                <div class="col barCard">
-                    <label for="">UV Lamp Status: <span id="UVstateBar"></span></label>
-                </div>
-                <div class="col barCard">
-                    <label for="">Visible Lamp Status: <span id="VIstateBar"></span></label>
-                </div>
-                <div class="col barCard">
-                    <label for="">Current Wavelength: <span id="WLstateBar"></span> </label>
-                </div>
-                <div class="col barCard">
-                    <button class="sBarBtn" id="sBarBtn">Update!</button>
-                </div>
-                <div class="col barCard">
-                    <label for="" class="DateTime" style="position: absolute; right: 0;margin-right: 30px;"> <span
-                            id="DateTime"></span></label>
-                </div>
-
-            </div>
-        </div>
+</footer>
+<!---------------------------- END OF Footer ---------------------------->
 
     </main>
     <script src="chart.js"></script>

@@ -16,10 +16,7 @@ function onLoad(event) {
     initWebSocket();
 }
 
-   // Function to redirect to the login page
-   function redirectToLoginPage() {
-    window.location.href = 'login.html'; 
-}
+ 
 
 
 function initWebSocket() {
@@ -39,11 +36,8 @@ function initWebSocket() {
 
 function onOpen(event) {
     console.log('Connection opened');
-    var login = {
-        flag: "islogin?",
-    }
-    websocket.send(JSON.stringify(login));  // asks the server if the user have logged in or not 
-    
+      // asks the server if the user have logged in or not 
+    redirectToLoginPage();
     sendStatus();  //send lamp stutus upon open
 }
 
@@ -99,10 +93,6 @@ function sendStatus() {
     };
     websocket.send(JSON.stringify(uvlampstutus));
 }
-// Set interval to run every 5 seconds (5000 milliseconds)
-setInterval(sendStatus, 5000);
-//open a session for 10 minutes after this period user need to login again
-setInterval(redirectToLoginPage,600000);
 
 
 //ui function
@@ -270,20 +260,39 @@ function showlabel(){
     }
     document.querySelector(".container").style.opacity='1';
 }
+
+
+function redirectToLoginPage() {
+    var login = {
+        flag: "islogin?",
+    }
+    websocket.send(JSON.stringify(login));
+     
+}
+
+// Set interval to run every 5 seconds (5000 milliseconds)
+setInterval(sendStatus, 5000);
+function login(){
+    window.location.href = 'login.html';
+}
+
+//open a session for 20 minutes after this period user need to login again
+setInterval(redirectToLoginPage,1200000);
+
+
 function handleMessage(event) {    
     var myObj = JSON.parse(event.data);
     console.log(myObj);
     if(myObj.hasOwnProperty('flag')){
         console.log("flag is sent");
         if(myObj.flag===true)
-        {
+        {  
             console.log("flag is true");
         }
         else{
             console.log("flag is false");
-            redirectToLoginPage()};
-
-
+            login();
+        }
     }
     else if (myObj.hasOwnProperty('uvlampstutus') ) {
         

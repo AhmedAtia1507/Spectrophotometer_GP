@@ -15,6 +15,26 @@ header {
     text-align: center;
     width: 100%;
 }
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 40px;
+    
+}
+.col {
+    width: 40%;
+    min-width: max-content;
+    float: left;
+    
+    margin-left: 20px;
+    margin-top: 20px;
+    background:#33324e69;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 0 29px 0 black;
+    border-radius:  20px;
+}
 .logout-button {
     position: absolute;
     top: 90px;
@@ -26,6 +46,7 @@ header {
     border-radius: 20px;
     width: fit-content;
     cursor: pointer;
+    
 }
 
 main {
@@ -81,6 +102,7 @@ nav ul li:hover {
 }
 
 .tab-content {
+    font-weight: 600;
     display: none;
     margin-left: 20px;
     flex: 1;
@@ -139,7 +161,22 @@ nav ul li.active {
 }
 
 .underlined-heading {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 5px 20px;
+    margin-top: -20px;
+    margin-left: -20px;
+    color: white;
+    background-color: #0a0e24;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
     text-decoration-line: underline;
-}
 
+}
+.alert{
+    color: yellow;
+
+}
+.good{
+    color: blue;
+
+}
