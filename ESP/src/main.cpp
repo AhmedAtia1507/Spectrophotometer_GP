@@ -11,6 +11,7 @@
 #include "FS.h"
 #include "SD.h"
 #include "SPI.h"
+
 // Define your I2C settings
 #define I2C_ADDRESS 0x48  // Replace with your I2C device address
 #define DATA_SIZE 4       // 4 bytes float
@@ -46,181 +47,61 @@ void initSPIFFS()
     Serial.println("SPIFFS mounted successfully");
   }
 }
-// Variable to store I2C data
 
-void listDir(fs::FS &fs, const char * dirname, uint8_t levels){
-  Serial.printf("Listing directory: %s\n", dirname);
 
-  File root = fs.open(dirname);
-  if(!root){
-    Serial.println("Failed to open directory");
-    return;
-  }
-  if(!root.isDirectory()){
-    Serial.println("Not a directory");
-    return;
-  }
 
-  File file = root.openNextFile();
-  while(file){
-    if(file.isDirectory()){
-      Serial.print("  DIR : ");
-      Serial.println(file.name());
-      if(levels){
-        listDir(fs, file.name(), levels -1);
-      }
+bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
+    // Create a new file with the name from the 'name' field
+    String filename = String(basePath) + "/" + doc["name"].as<String>() + ".txt";
+    File file = SD.open(filename, FILE_APPEND);
+    if (file) {
+        // Convert JSON to txt format
+        serializeJson(doc, file);
+        file.println(); // Add a newline for better separation between entries
+        file.close();
+        return true;
     } else {
-      Serial.print("  FILE: ");
-      Serial.print(file.name());
-      Serial.print("  SIZE: ");
-      Serial.println(file.size());
+        Serial.println("Error opening file");
+        return false;
     }
-    file = root.openNextFile();
-  }
 }
 
-void createDir(fs::FS &fs, const char * path){
-  Serial.printf("Creating Dir: %s\n", path);
-  if(fs.mkdir(path)){
-    Serial.println("Dir created");
-  } else {
-    Serial.println("mkdir failed");
-  }
-}
-
-void removeDir(fs::FS &fs, const char * path){
-  Serial.printf("Removing Dir: %s\n", path);
-  if(fs.rmdir(path)){
-    Serial.println("Dir removed");
-  } else {
-    Serial.println("rmdir failed");
-  }
-}
-
-String readFile(fs::FS &fs, const char *path) {
-  Serial.printf("Reading file: %s\n", path);
-
-  File file = fs.open(path);
-  if (!file) {
-    Serial.println("Failed to open file for reading");
-    return "";
-  }
-
-  String fileContent = "";
-  while (file.available()) {
-    fileContent += (char)file.read();
-  }
-  file.close();
-
-  return fileContent;
-}
-
-void writeFile(fs::FS &fs, const char * path, const char * message){
-  Serial.printf("Writing file: %s\n", path);
-
-  File file = fs.open(path, FILE_WRITE);
-  if(!file){
-    Serial.println("Failed to open file for writing");
-    return;
-  }
-  if(file.print(message)){
-    Serial.println("File written");
-  } else {
-    Serial.println("Write failed");
-  }
-  file.close();
-}
-
-void appendFile(fs::FS &fs, const char * path, const char * message){
-  Serial.printf("Appending to file: %s\n", path);
-
-  File file = fs.open(path, FILE_APPEND);
-  if(!file){
-    Serial.println("Failed to open file for appending");
-    return;
-  }
-  if(file.print(message)){
-      Serial.println("Message appended");
-  } else {
-    Serial.println("Append failed");
-  }
-  file.close();
-}
-
-void renameFile(fs::FS &fs, const char * path1, const char * path2){
-  Serial.printf("Renaming file %s to %s\n", path1, path2);
-  if (fs.rename(path1, path2)) {
-    Serial.println("File renamed");
-  } else {
-    Serial.println("Rename failed");
-  }
-}
-
-void deleteFile(fs::FS &fs, const char * path){
-  Serial.printf("Deleting file: %s\n", path);
-  if(fs.remove(path)){
-    Serial.println("File deleted");
-  } else {
-    Serial.println("Delete failed");
-  }
-}
-
-void testFileIO(fs::FS &fs, const char * path){
-  File file = fs.open(path);
-  static uint8_t buf[512];
-  size_t len = 0;
-  uint32_t start = millis();
-  uint32_t end = start;
-  if(file){
-    len = file.size();
-    size_t flen = len;
-    start = millis();
-    while(len){
-      size_t toRead = len;
-      if(toRead > 512){
-        toRead = 512;
-      }
-      file.read(buf, toRead);
-      len -= toRead;
+DynamicJsonDocument readFromDatabase(const char *filename) {
+    DynamicJsonDocument doc(1024);
+    File file = SD.open(filename);
+    if (file) {
+        // Parse txt to JSON
+        if (deserializeJson(doc, file)) {
+            // Assuming the txt structure matches the expected fields
+        } else {
+            Serial.println("Failed to parse JSON from txt");
+        }
+        file.close();
+    } else {
+        Serial.println("Error opening file");
     }
-    end = millis() - start;
-    Serial.printf("%u bytes read for %u ms\n", flen, end);
-    file.close();
-  } else {
-    Serial.println("Failed to open file for reading");
-  }
 
-
-  file = fs.open(path, FILE_WRITE);
-  if(!file){
-    Serial.println("Failed to open file for writing");
-    return;
-  }
-
-  size_t i;
-  start = millis();
-  for(i=0; i<2048; i++){
-    file.write(buf, 512);
-  }
-  end = millis() - start;
-  Serial.printf("%u bytes written for %u ms\n", 2048 * 512, end);
-  file.close();
+    // Return the parsed JSON document
+    return doc;
 }
 
-// Function to read data from I2C
-void readI2CData() {
-    Wire.requestFrom(I2C_ADDRESS, DATA_SIZE);
-    if (Wire.available()>=4)
-    {
-      int16_t i2cData = Wire.read();
-       String i2cDataString = String(i2cData);
-      ws.textAll(i2cDataString);
-      Serial.println(i2cDataString);
-    }   
-    
-    delay(100);
-}
+DynamicJsonDocument doc(2048);
+JsonObject getFilesJson(const char *directory) {
+  File dir = SD.open(directory);
+ int count = 1;
+  while (File file = dir.openNextFile()) {
+    if (!file.isDirectory()) {
+      String fileName = file.name();
+      fileName.replace(".txt", ""); // Remove ".txt" extension
+      doc["presets"]="presets";
+      doc["file" + String(count++)] = fileName;
+      
+    }}
+    doc["presetsno"]=count-1;
+  dir.close();
 
+ return doc.as<JsonObject>();
+}
 void sendSTM(const String &input)
 {
   Serial2.println(input);
@@ -304,7 +185,29 @@ void notifyClients(String state)
 {
   ws.textAll(state); // send data to the connected webpage
 }
+
+
+
+
+const unsigned long interval = 600000;  // 10 minutes in milliseconds
+unsigned long previousMillis;
 bool loginflag= false;  //to check if the user loged in before accessing control page
+
+void startCountdown() {
+  // Call this function to start the countdown
+  previousMillis = millis();  // Initialize the timer when starting to count
+}
+
+void checkCountdown() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis >= interval) {
+    // Time has passed, reset the timer and update loginFlag
+    previousMillis = currentMillis;
+    loginflag = false;
+  }
+}
+
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 {
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
@@ -327,125 +230,129 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     {
       Serial.print("rescived car");
       if (doc["username"].as<String>()=="esp32" && doc["password"].as<String>()=="123"){  
-        DynamicJsonDocument doc(200);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
-        // Adding two fields to the JSON object
-        object["username"] = true;
-        object["password"] = true;
+        DynamicJsonDocument pass(1024);
+        pass["username"] = true;
+        pass["password"] = true;
+        serializeJson(pass,Serial);
         loginflag=true;
-        serializeJson(object, jsonString);
+        startCountdown();
+        serializeJson(pass, jsonString);
         notifyClients(jsonString);
-         
         Serial.println(jsonString);
       }
       else{
-        DynamicJsonDocument doc(200);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
-        // Adding two fields to the JSON object
-        object["username"] = false;
-        object["password"] = false;
-        serializeJson(object, jsonString);
+        DynamicJsonDocument pass(1024);
+        pass["username"] = false;
+        pass["password"] = false;
+        serializeJson(pass,Serial);
+        serializeJson(pass, jsonString);
         notifyClients(jsonString);
         }
     }
     else if(doc.containsKey("flag"))
     {
-       DynamicJsonDocument doc(100);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
-        // Adding two fields to the JSON object
+        DynamicJsonDocument object(29);
         object["flag"] = loginflag;
+        checkCountdown();
         serializeJson(object, jsonString);
         notifyClients(jsonString);
-        loginflag=false;
     }
-    
     //lamps check
     else if (doc.containsKey("uvlampstutus")){
-        DynamicJsonDocument doc(50);
+      
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+        DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"snduv");
+        //stutus=sendCMD((char*)"snduv\n");
         String stutus ="on";
         object["uvlampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
     else if (doc.containsKey("vilampstutus")){
-        DynamicJsonDocument doc(50);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+       DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"sndvi");
+        //stutus=sendCMD((char*)"sndvi\n");
         String stutus ="on";
         object["vilampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
     else if (doc.containsKey("turnuvon")){
-        DynamicJsonDocument doc(50);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+       DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"uvon");
+        //stutus=sendCMD((char*)"uvon\n");
         String stutus ="on";
         object["uvlampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
     else if (doc.containsKey("turnuvoff")){
-        DynamicJsonDocument doc(50);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+        DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"vioff");
+        //stutus=sendCMD((char*)"vioff\n");
         String stutus ="off";
         object["uvlampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
      else if (doc.containsKey("turnvion")){
-        DynamicJsonDocument doc(50);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+       DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"vion");
+        //stutus=sendCMD((char*)"vion\n");
         String stutus ="on";
         object["vilampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
     else if (doc.containsKey("turnvioff")){
-        DynamicJsonDocument doc(50);
         String jsonString="";
-        JsonObject object = doc.to<JsonObject>();
+        DynamicJsonDocument object(20) ;
         // Adding two fields to the JSON object
         //String stutus;
-        //stutus=sendCMD((char*)"vioff");
+        //stutus=sendCMD((char*)"vioff\n");
         String stutus ="off";
         object["vilampstutus"] = stutus; //for testing
         serializeJson(object, jsonString);
         notifyClients(jsonString);
     }
-       
-    else if (strcmp((char*)data, "command1\n") == 0 ||
-             strcmp((char*)data, "command2\n") == 0 ||
-             strcmp((char*)data, "command3\n") == 0 ||
-             strcmp((char*)data, "command4\n") == 0 ||
-             strcmp((char*)data, "command5\n") == 0 ||
-             strcmp((char*)data, "command6\n") == 0) {
-      sendCMD((char*)data);
-      
+    else if (doc.containsKey("savepreset")) {
+    writeToDatabase("/presets", doc);
+    }
+    else if (doc.containsKey("deletepreset")){
+            SD.remove("/presets/"+doc["name"].as<String>()+".txt");
+    }
+    else if (doc.containsKey("showpreset")){            
+            const char *directory = "/presets"; 
+            JsonObject result = getFilesJson(directory);
+             String jsonString="";
+            serializeJson(result, jsonString);
+            notifyClients(jsonString);
+    }
+    else if (doc.containsKey("loadthis")){
+      String selectthis= doc["loadthis"].as<String>();
+      String path="/presets/"+selectthis+".txt";
+      Serial.print(path);
+      String jsonString="";
+      DynamicJsonDocument preset = readFromDatabase(path.c_str());
+        serializeJson(preset, jsonString);
+        notifyClients(jsonString);
+        Serial.print("ana ba3tet malesh feh");
       
     }
+    
     else if (doc.containsKey("command"))
     {
       String command = doc["command"].as<String>();
@@ -473,12 +380,6 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
         {
           ws.textAll("Invalid Scan command: Wavelength value is missing.");
         }
-      }
-      else if (command == "sd")
-      {
-         content=readFile(SD, "/foo.txt");
-         notifyClients(content);
-
       }
       
       else
@@ -518,24 +419,6 @@ void sdinit(){
     Serial.println("Card Mount Failed");
     return;
   }
-  uint8_t cardType = SD.cardType();
-
-  if(cardType == CARD_NONE){
-    Serial.println("No SD card attached");
-    return;
-  }
-
-  Serial.print("SD Card Type: ");
-  if(cardType == CARD_MMC){
-    Serial.println("MMC");
-  } else if(cardType == CARD_SD){
-    Serial.println("SDSC");
-  } else if(cardType == CARD_SDHC){
-    Serial.println("SDHC");
-  } else {
-    Serial.println("UNKNOWN");
-  }
-
   uint64_t cardSize = SD.cardSize() / (1024 * 1024);
   Serial.printf("SD Card Size: %lluMB\n", cardSize);
 
@@ -561,7 +444,6 @@ void sendFileToClient(AsyncWebSocketClient *client) {
   // Notify the client that the file transfer is complete
   client->text("fileSent");
 }
-
 void setup()
 {
     Wire.begin(); // GPIO21 for SDA and GPIO22 for SCL
@@ -569,25 +451,12 @@ void setup()
   // Serial port for debugging purposes
   Serial.begin(115200);
   Serial2.begin(115200);
-  // Initialize access point and SPIFFS
   initSPIFFS();
   initAP();
   initWebSocket();
   sdinit();
-  /*
- listDir(SD, "/", 0);
-  createDir(SD, "/mydir");
-  listDir(SD, "/", 0);
-  removeDir(SD, "/mydir");
-  listDir(SD, "/", 2);
-  writeFile(SD, "/hello.txt", "Hello ");
-  appendFile(SD, "/hello.txt", "World!\n");
-  readFile(SD, "/hello.txt");
-  deleteFile(SD, "/foo.txt");
-  renameFile(SD, "/hello.txt", "/foo.txt");
-  readFile(SD, "/foo.txt");
-  testFileIO(SD, "/test.txt");
-  */
+
+  
 Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
 Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
    
@@ -610,6 +479,7 @@ Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
      
     }
   });
+  
 
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -625,12 +495,13 @@ Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
   AsyncElegantOTA.begin(&server);    // Start ElegantOTA
   // Start the server
   server.begin();
+   
 }
-
 void loop()
 {
   // Check for new WebSocket messages
   ws.cleanupClients();
 
   delay(1000); // Delay before sending the next command
+        
 }
