@@ -47,7 +47,14 @@
                         <canvas id="chartScan" width="400" height="400"></canvas>
                     </div>
                     <div class="col">
-                   
+                                <div>
+                                    <Strong>Sample Name: </Strong>
+                                    <input type="text" name="SampleID" id="SampleID" value="Sample Name">
+                                </div>
+                                <div>
+                                    <Strong>Describtion: </Strong>
+                                    <input type="text" name="SampleDecribe" id="SampleDecribe" value="Describtion">
+                                </div>
                                 <div>
                                     <strong>Start: </strong> <input type="number" id="start" name="start" value="100">
                                 </div>
@@ -75,18 +82,14 @@
                                     <button onclick="pauseScan()">Pause</button>
                                     <button id="savepreset" onclick="savepreset()">save preset</button>
                                     <button id="loadpreset" onclick="showpreset()">load preset</button>
+                                    <button id="test" onclick="addCurve([1,2,3,4],[1,2,3,5],'orange','Nabil')">TEST</button> 
+                                    <button id="removetest" onclick="removeCurve(1)">remove</button>
                                 
                                 </div>
 
                     </div>
                 </div>
-                <div class="row TableContent">
-                    <h4 class="headfont">Readings</h4> <br>
-                    <div id="scanReadings">
-                        <p> Readings will be displayed here... </p>
-                      </div>
-                
-                </div>
+
                 <hr>
                 <br>
                 

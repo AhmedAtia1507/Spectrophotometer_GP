@@ -364,7 +364,7 @@ function removeCurve(index) {
     const speedInput = parseFloat(document.getElementById('speed').value);
     const initTimeInput = parseFloat(document.getElementById('initTime').value);
     const modeInput = document.getElementById('mode').value;
-  
+  // add curve to chart 
    
   
     chartData.labels = []; // wavelength
@@ -853,3 +853,18 @@ function readADC() {
 
   continueReadADC();
 }
+
+
+/**------------------------------------------------------------------------
+ *                           COLOR CHange
+ *------------------------------------------------------------------------**/
+// Function to change the color of a curve
+function changeCurveColor(index, color) {
+  testChart.data.datasets[index].borderColor = color;
+  testChart.update(); // test name of chart scanChart
+}
+document.getElementById('selectColor').addEventListener('click', function () {
+  var curveIndex = document.getElementById('selectColor').value; // Select the curve index
+  var color = document.getElementById('color').value;// not needed
+  changeCurveColor(curveIndex, color);
+});
