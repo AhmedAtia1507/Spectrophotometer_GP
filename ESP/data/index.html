@@ -33,10 +33,9 @@
     </nav>
 <!---------------------------- END OF Navbar ---------------------------->
     <main>
-        <li  id="li0"  title="Click to lock/unlock menu visibility">___<br>___<br>___<br> <br></li>
         <section>
             <div id="tab" class="tab">
-                <button class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
+                <button id="first" class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
                 <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
                 <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
             </div>
@@ -120,6 +119,7 @@
                     
                     <table id="samplestable">
                         <thead id="t_haeder">
+                            <th>remove</th>
                             <th id="rowstutus">iscomplete</th>
                             <th>Name</th>
                             <th>describtion</th>
@@ -127,16 +127,20 @@
                             <th id="func">function</th>
                         </thead>
                     <tbody id="t_body">
-                        <tr id="trow">
+                        <tr id="trow0">
+                            
+                            <td id="removeCurve">
+                                <button id="remove" onclick="removeCurve(this)">❌</button>
+                            </td>
                             <td>
                                 <label id="curveIndex">1</label>
                                 <div id="tablestutus"></div>
                             </td>
                             <td>
-                            <input id="samplename" type="text" placeholder="sample name">
+                            <input id="samplename" type="text"  placeholder="sample name">
                             </td>
                             <td>
-                                <input id="samplename" type="text" placeholder="sample name">
+                                <input id="samplename" type="text" placeholder="describtion">
                             </td>
                             <td>
                                 <select name="color" id="colorselect">
@@ -150,8 +154,7 @@
                                     <option value="pink">pink</option>
                                     <option value="brown">brown</option>
                                     <option value="grey">grey</option>
-                                
-                            </select>
+                                    </select>
                             </td>
                             <td>
                                 <select name="function" id="fnselect">
@@ -161,9 +164,7 @@
                                     <option value="red">Peak</option>
                                 </select>
                             </td>
-                            <td id="removeCurve">
-                                <button onclick="removeCurve(this)">remove</button>
-                            </td>
+                            
                         </tr>
                     </tbody>
                     </table>

@@ -79,7 +79,7 @@ function onMessage(event) {
 /**========================================================================
  *                           Tabs control
  *========================================================================**/
-
+openTab(onLoad, 'scan');
 function openTab(evt, Control) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -91,7 +91,15 @@ function openTab(evt, Control) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(Control).style.display = "block";
-    evt.currentTarget.className += " active";
+    if(evt==onLoad){
+      document.getElementById('first').classList.add('active');}
+    else{evt.currentTarget.className += " active";
+    if(Control!=='scan'){ document.getElementById('first').classList.add('inactive')
+                        }
+    else{document.getElementById('first').classList.add('active');
+        console.log("inactive");}
+  }
+    
   }
 /*============================ END OF Tabs ============================*/
 
@@ -672,7 +680,10 @@ function filter() {
     }
   });
 }
+
+
 /*============table================*/
+setTimeout( showfoot,1000);
 document.getElementById('hidefoot').addEventListener('click',showfoot)
 function showfoot() {
   var but= document.getElementById('hidefoot');
@@ -697,35 +708,55 @@ function handletable(){
 }
 
   
-
+document.getElementById('trow0').addEventListener('click',handelny);
+   
 function handelrow() {
-  document.getElementById('hidethis').style.display = 'none';
-  document.getElementById('hidefoot').style.display = 'block';
-  var i = document.getElementById('rowno').value;
-  console.log(i);
-  // Remove existing rows except the first one
-  var table = document.getElementById('t_body');
-  var first = table.firstElementChild;
-  console.log(table);
-  while (table.children.length > 0) {
-    table.removeChild(table.lastChild);
+  
+  var rowNumber = document.getElementById('rowno').value;
+  rowNumber--;
+  var sampleRow = document.getElementById('trow0');
+  var tableBody = document.getElementById('t_body');
+ //remove first
+  while (tableBody.children.length > 1) {
+    tableBody.removeChild(tableBody.lastChild);
   }
-  let indexTable = 1;
-  for (indexTable; i >= indexTable; indexTable++) {
-    var rowClone = first.cloneNode(true);
-    rowClone.querySelector('#curveIndex').innerHTML = indexTable; 
-    const xData = Array.from({ length: 10 }, () => Math.random());
-    const yData = Array.from({ length: 10 }, () => Math.random());
-    addCurve(xData, yData, 'red',indexTable);
-    table.append(rowClone);
+
+// Add new rows
+for (var i = 0; i < rowNumber; i++) {
+    var newRow = sampleRow.cloneNode(true);
+    newRow.id = 'trow' + (i + 1);
+    newRow.querySelector('#curveIndex').innerText = (i + 2);
+    tableBody.appendChild(newRow);
+    document.getElementById(newRow.id).addEventListener('click',handelny);
+    // Update indices for each cell in the row
+    var cells = newRow.querySelectorAll('td');
+    for (var j = 0; j < cells.length; j++) {
+      cells[j].id = 'data-index' + (i + 1) + (j + 1);
+      // Add event listener to input element inside the cell
+      var inputElement = cells[j].querySelector('button');
+      if (inputElement) {
+          inputElement.addEventListener('click', handecell);
+      }
   }
-  removeCurve(0);
+  
+}
+}
+
+function handelny(event){
+  var rowclicked=event.target.id;
+  console.log("Clicked Row ID: " + rowclicked);
+  
+}
+
+function handecell(event) {
+  var clickedCellId = event.target.id;
+  console.log("Clicked cell ID: " + clickedCellId);
 }
 function handleColumn() {
   var table = document.getElementById('samplestable');
   var rowCount = table.rows.length;
  
-  for (var i = table.rows[0].cells.length - 1; i >= 5; i--) {
+  for (var i = table.rows[0].cells.length - 1; i >= 6; i--) {
     table.rows[0].deleteCell(i);
     for (var j = 1; j < table.rows.length; j++) {
       table.rows[j].deleteCell(i);
@@ -766,36 +797,6 @@ function updateClock(initialDateTimeString) {
   }, 1);
 }
 updateClock("1/13/2021 13:32:12");
-
-
-
-document.getElementById('li0').addEventListener('mouseover', delayedShowNav);
-document.getElementById('li0').addEventListener('mouseout', delayedhideNav);
-document.getElementById('tab').addEventListener('mouseover',delayedShowNav);
-document.getElementById('tab').addEventListener('mouseout',delayedhideNav);
-
-let hoverTimeout;
-let outTimeout;
-function delayedShowNav() {
-    clearTimeout(outTimeout);
-        hoverTimeout = setTimeout(function () {
-        var tab=document.getElementById('tab');
-        console.log(tab);
-        console.log('ana fe show');
-          tab.classList.add('active');
-    
-    }, 300);
- 
-}
-
-function delayedhideNav() {
-    clearTimeout(hoverTimeout);
-    outTimeout = setTimeout(() => {
-      var tab=document.getElementById('tab');
-      console.log('ana fe hide');
-        tab.classList.remove('active');
-  }, 300);
-}
 
 
 
