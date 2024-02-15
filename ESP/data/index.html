@@ -40,63 +40,44 @@
                 <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
             </div>
 
-            <div id="scan" class="tabcontent">
+            <div id="scan" class="tabcontent" style="display: block;">
                 
                 <div class="row">
                     <div class="col">
                         <canvas id="chartScan" width="400" height="400"></canvas>
                     </div>
                     <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <label for="start">Start:</label>
-                                <input type="number" id="start" name="start" value="100">
+                   
+                                <div>
+                                    <strong>Start: </strong> <input type="number" id="start" name="start" value="100">
+                                </div>
+                                <div>
+                                    <strong>Stop: </strong> <input type="number" id="stop" name="stop" value="900">
+                                </div>
+                                <div>
+                                    <strong>Step: </strong> <input type="number" id="step" name="step" value="20">
+                                </div>
+                                <div>
+                                    <strong>Integration Time: </strong><input type="number" id="initTime" name="initTime" value="0">
+                                </div>
+                                <div>
+                                    <strong>Select Mode: </strong><select id="mySelect" name="mode">
+                                        <option value="absorption">Absorption</option>
+                                        <option value="transmission">Transmission</option>
+                                        <!-- <option value="transmission">Eneregy</option> -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <Strong>lamp Change Point: </Strong>
+                                </div>
+                                <div class="TwoBtn">
+                                    <button onclick="startScan()">Start</button>
+                                    <button onclick="pauseScan()">Pause</button>
+                                    <button id="savepreset" onclick="savepreset()">save preset</button>
+                                    <button id="loadpreset" onclick="showpreset()">load preset</button>
+                                
+                                </div>
 
-                            </div>
-                            <div class="col">
-                                <label for="stop">Stop:</label>
-                                <input type="number" id="stop" name="stop" value="900">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="step">Step:</label>
-                                <input type="number" id="step" name="step" value="20">
-                            </div>
-                            <div class="col">
-                                <label for="speed">Speed:</label>
-                                <input type="number" id="speed" name="speed" value="1">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label for="initTime">Init Time:</label>
-                                <input type="number" id="initTime" name="initTime" value="0">
-                            </div>
-                            <div class="col">
-                                <label for="mode">Mode:</label>
-                                <select id="mySelect" name="mode">
-                                    <option value="absorption">Absorption</option>
-                                    <option value="transmission">Transmission</option>
-                                    <!-- <option value="transmission">Eneregy</option> -->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="lampchangepoint">lampchangepoint</label>
-                            </div>
-                            <div class="TwoBtn">
-                                <button onclick="startScan()">Start</button>
-                                <button onclick="pauseScan()">Pause</button>
-                                <button id="savepreset" onclick="savepreset()">save preset</button>
-                                <button id="loadpreset" onclick="showpreset()">load preset</button>
-                            
-                            </div>
-
-                        </div>
                     </div>
                 </div>
                 <div class="row TableContent">
