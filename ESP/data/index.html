@@ -78,7 +78,7 @@
                                     <Strong>lamp Change Point: </Strong>
                                 </div>
                                 <div class="TwoBtn">
-                                    <button onclick="startScan()">Start</button>
+                                    <button onclick="startScan()" >Start</button>
                                     <button onclick="pauseScan()">Pause</button>
                                     <button id="savepreset" onclick="savepreset()">save preset</button>
                                     <button id="loadpreset" onclick="showpreset()">load preset</button>
@@ -96,9 +96,7 @@
                 
                 <div class="mytable">
                     <div class="t_r_c" id="t_r_c">
-                        <label for="colmnno">Enter columns number</label><input type="number" min="1" max="3" id="colno" value="1" oninput="validateInput(this, 3)">
-                        <label for="rowno">Enter Rows number</label><input type="number" min="1" id="rowno" max="30" value="1" oninput="validateInput(this, 30)">
-                        <button id="updatet" onclick="handletable()">update</button>
+                       <button id="updatet" onclick=" handleColumn()" >add column</button>
                     </div>
                     
                     <table id="samplestable">
@@ -113,18 +111,19 @@
                     <tbody id="t_body">
                         <tr id="trow0">
                             
+                            
                             <td id="removeCurve">
                                 <button id="element11" onclick="removeCurve(this)"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
                             </td>
                             <td>
-                                <label id="element12">1</label>
-                                <div id="tablestutus"></div>
+                                <div contenteditable="false" id="element12">done</div>
+                                
                             </td>
                             <td>
-                            <input id="element13" type="text"  placeholder="sample name">
+                            <div contenteditable="false" id="element13" ></div> 
                             </td>
                             <td>
-                                <input id="element14" type="text" placeholder="describtion">
+                                <div contenteditable="false" id="element14" ></div>
                             </td>
                             <td>
                                 <select name="color" id="element15">
@@ -141,11 +140,11 @@
                                     </select>
                             </td>
                             <td>
-                                <select name="function" id="element15">
+                                <select name="function" id="element16">
                                     <option value="none">none</option>
-                                    <option value="red">Area</option>
-                                    <option value="red">height</option>
-                                    <option value="red">Peak</option>
+                                    <option value="area">Area</option>
+                                    <option value="height">height</option>
+                                    <option value="peak">Peak</option>
                                 </select>
                             </td>
                             

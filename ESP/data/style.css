@@ -589,6 +589,9 @@ thead {
 background-color: #ffffff;
 color: #000000;
 }
+#trow0{
+  display: none;
+}
 
 th, td {
 text-align: center;

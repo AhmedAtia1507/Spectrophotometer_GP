@@ -46,7 +46,7 @@ function onClose(event) {
     // in case connection down
     // try again after 2 sec
  console.log('Connection closed');
- setTimeout(initWebSocket, 2000);
+ setTimeout(initWebSocket, 20000);
 }
 function onMessage(event) {
     var myObj = JSON.parse(event.data);
@@ -301,7 +301,7 @@ function openTab(evt, Control) {
   }
   // Function to remove a curve from the chart
 function removeCurve(index) {
-  chartScan.data.datasets.splice(index, 1);
+  chartScan.data.datasets.splice(index, 2);
   chartScan.update();
 }
 
@@ -335,9 +335,11 @@ function removeCurve(index) {
     if (!isScanning) {
       if (!validateInputs()) return;
   
-      isScanning = true;
-      disableInputs();
-      scan();
+      //isScanning = true;
+      //disableInputs();
+      handelrow();
+      //scan();
+      
     }
   }
   function toggleInputs(disabled) {
@@ -681,10 +683,17 @@ function filter() {
   });
 }
 
+/**
+ *========================================================================
+ *                           table                          
+ *========================================================================
+ */
 
-/*============table================*/
-setTimeout( showfoot,1000);
+setTimeout( showfoot,1000); //autohide foot in 1sec
+
 document.getElementById('hidefoot').addEventListener('click',showfoot)
+
+
 function showfoot() {
   var but= document.getElementById('hidefoot');
   var foot =document.getElementById('hidethis'); 
@@ -697,91 +706,128 @@ function showfoot() {
   foot.classList.toggle('inactive'); 
 }
 
+
 function validateInput(input, max) {
   if (parseInt(input.value) > max) {
       input.value = max;
   }
 }
-function handletable(){
-  handelrow();
-  handleColumn();
-}
 
-  
-document.getElementById('trow0').addEventListener('click',handelny);
-   
+
+var i=1;  // represent row index that i increase each time i make row
+
+
 function handelrow() {
-  
-  var rowNumber = document.getElementById('rowno').value;
-  rowNumber--;
-  var sampleRow = document.getElementById('trow0');
+//add curve as a simulation
+addCurve([1,2,3,4],[1,2,3,5],'orange','Nabil');
   var tableBody = document.getElementById('t_body');
- //remove first
-  while (tableBody.children.length > 1) {
-    tableBody.removeChild(tableBody.lastChild);
-  }
+  var sampleRow = tableBody.querySelector('tr:nth-child(1)'); //to avoid error if i deleted all rows 
+  var samplename= document.getElementById('SampleID').value;
+  var sampledisk=document.getElementById('SampleDecribe').value;
+  var newRow = sampleRow.cloneNode(true); 
+  newRow.id = 'trow'+i;    //each row have unique id now
+  tableBody.appendChild(newRow);
+    
+  document.getElementById(newRow.id).querySelector('button').addEventListener('click',deleterow); //add event listerner to the remove button
+  //update the row name and discription 
+  newRow.querySelector('#element13').innerText = samplename;
+  newRow.querySelector('#element14').innerText=sampledisk;
 
-// Add new rows
-for (var i = 0; i < rowNumber; i++) {
-    var newRow = sampleRow.cloneNode(true);
-    newRow.id = 'trow' + (i + 1);
-    newRow.querySelector('#element12').innerText = (i + 2);
-    tableBody.appendChild(newRow);
-    document.getElementById(newRow.id).addEventListener('click',handelny);
-    // Update indices for each cell in the row
+  // Update ids of each cell
     var cells = newRow.querySelectorAll('td');
     for (var j = 0; j < cells.length; j++) {
-      cells[j].id = 'data-index' + (i + 1) + (j + 1);
-     // Set individual elements inside the td with unique IDs
-     var inputElement = cells[j].querySelector('input, select, label, button');
-     if (inputElement) {
-         inputElement.id = 'element' + (i + 2) + (j + 1);
+      cells[j].id = 'data-index' + (i) + (j + 1); //data-index"rowno"columnno"
+      var inputElement = cells[j].querySelector('div'); //the element inside the td not the td itself
+      if (inputElement) {
+          inputElement.id = 'element' + (i + 1) + (j + 1);
+          // Add an event listener to the element
+          document.getElementById(inputElement.id).addEventListener('click', handecell);//still in develop
+          document.getElementById(inputElement.id).addEventListener('dblclick', edit); //double click to edit name feature 
+          document.getElementById(inputElement.id).addEventListener('blur', save);  //when focus away it save
+        
+        }
 
-         // Add an event listener to the element
-         document.getElementById(inputElement.id).addEventListener('click', handecell);
-     }
+        var selectElement = cells[j].querySelector('select');
+        if (selectElement) {
+            selectElement.id = 'element' + (i + 1) + (j + 1);
+           document.getElementById(selectElement.id).addEventListener('change', selectfn);
+           }
+           //in the same way you can add as much as eventlisterif you want using the same way    
+        
+     
   }
-  
+i++; //increase index
+console.log(i);
 }
+//handle what happen when i select one of my functions 
+function selectfn(event){
+  var id=event.target.id;
+  var value=document.getElementById(id).value;
+  console.log(value); 
 }
 
-function handelny(event){
-  var rowclicked=event.target.id;
-  console.log("Clicked Row ID: " + rowclicked);
+//edit name and disc
+function edit(event)
+{
+  var id=event.target.id;
+  event.target.contentEditable = true;
+  console.log(id);
   
 }
+//save them
+function save(event){
+  var id=event.target.id;
+  event.target.contentEditable = false;
+  console.log(id);
+}
+//delete row 
+function deleterow(event){
+  var target1 =event.target;
+  var tableBody = document.getElementById('t_body');
+  var rowCount = tableBody.rows.length;
+  var row = target1.closest('tr'); //fetch the button clicked row
+  var remove =document.getElementById(row.id);
+  if(row&&rowCount>>1){
+    remove.parentNode.removeChild(remove); //go to parent and remove itself
+    i--;
+    console.log('bmooooooot');  
+  }
 
+}
+
+//still for test purpose
 function handecell(event) {
   var clickedCellId = event.target.id;
-  console.log("Clicked cell ID: " + clickedCellId);
+  console.log(clickedCellId);
 }
+
+
+var m = 7;  //column index start from 7
 function handleColumn() {
   var table = document.getElementById('samplestable');
   var rowCount = table.rows.length;
- 
-  for (var i = table.rows[0].cells.length - 1; i >= 6; i--) {
-    table.rows[0].deleteCell(i);
-    for (var j = 1; j < table.rows.length; j++) {
-      table.rows[j].deleteCell(i);
-    }
-  }
-var j=document.getElementById('colno').value;
-j=j-1;
-for(j;j>0;j--){
-  // Add header cell
   var headerCell = document.createElement('th');
-  headerCell.textContent = 'Function ';
+  headerCell.textContent = 'Function';
   table.rows[0].appendChild(headerCell);
 
-  // Add data cells for each row
-  for (var i = 1; i < rowCount; i++) {
+// Add data cells for each row
+  for (var k = 1; k < rowCount; k++) {
+    var cellClone = table.rows[k].lastElementChild.cloneNode(true);
+    cellClone.id = 'data-index' + k + m;
+    table.rows[k].appendChild(cellClone);
 
-    var cellClone = table.rows[i].lastElementChild.cloneNode(true);
-    table.rows[i].appendChild(cellClone);
-    
+// Find the first child element inside the td 
+var childElement = cellClone.firstElementChild;
+if (childElement) {
+  childElement.id = 'innerElement' + k + m;  // Unique id for the inner element
+    // Add event listener to the newly created cell
+    childElement.addEventListener('change',selectfn )
   }
 }
+
+  m++;
 }
+
 
 function updateClock(initialDateTimeString) {
   let currentDate = new Date(initialDateTimeString);  
@@ -807,7 +853,6 @@ updateClock("1/13/2021 13:32:12");
 /**========================================================================
  *                           ADC
  *========================================================================**/
-
 
 function pauseReading() {
   startReadADC = 0;
@@ -863,8 +908,3 @@ function changeCurveColor(index, color) {
   testChart.data.datasets[index].borderColor = color;
   testChart.update(); // test name of chart scanChart
 }
-document.getElementById('selectColor').addEventListener('click', function () {
-  var curveIndex = document.getElementById('selectColor').value; // Select the curve index
-  var color = document.getElementById('color').value;// not needed
-  changeCurveColor(curveIndex, color);
-});
