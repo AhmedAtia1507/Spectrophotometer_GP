@@ -53,92 +53,35 @@
 
             <div id="scan" class="tabcontent" style="display: block;">
 
-                <div class="row">
+                <div class="container">
                     <div class="col chartScan">
                         <div class="row">
                             <canvas id="chartScan" width="800" height="200"></canvas>
                         </div>
                         <div class="row">
-                            <div class="row tab-1">
-                                <table id="table" border="1">
-                                    <tr>
-                                        <th>State</th>
-                                        <th>Sample Name</th>
-                                        <th>Describtion</th>
-                                        <th>Range</th>
-                                        <th>Peak</th>
-                                        <th>Color</th>
-                                        <th>Function</th>
-                                        <th>Select</th>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <button id="Save" onclick="addHtmlTableRow()">Save</button>
-                                <button id="DeleteRows">Delete Selected</button>
-                            </div>
-
-
-
-                            <div class="mytable">
-                                <div class="t_r_c" id="t_r_c">
-                                    <!-- <button id="updatet" onclick=" handleColumn()">add column</button> -->
-                                </div>
-            
-                                <table id="samplestable">
-                                    <thead id="t_haeder">
-                                        <th>remove</th>
-                                        <th id="rowstutus">iscomplete</th>
-                                        <th>Name</th>
-                                        <th>describtion</th>
-                                        <th>color</th>
-                                        <th id="func">function</th>
-                                    </thead>
-                                    <tbody id="t_body">
-                                        <tr id="trow0">
-            
-            
-                                            <td id="removeCurve">
-                                                <button id="element11" onclick="removeCurve(this)"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                                        width="24">
-                                                        <path
-                                                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                                                    </svg></button>
-                                            </td>
-                                            <td>
-                                                <div contenteditable="false" id="element12">done</div>
-            
-                                            </td>
-                                            <td>
-                                                <div contenteditable="false" id="element13"></div>
-                                            </td>
-                                            <td>
-                                                <div contenteditable="false" id="element14"></div>
-                                            </td>
-                                            <td>
-                                                <select name="color" id="element15">
-                                                    <option value="red">red</option>
-                                                    <option value="blue">blue</option>
-                                                    <option value="green">green</option>
-                                                    <option value="yellow">yellow</option>
-                                                    <option value="purple">purple</option>
-                                                    <option value="orange">orange</option>
-                                                    <option value="black">black</option>
-                                                    <option value="pink">pink</option>
-                                                    <option value="brown">brown</option>
-                                                    <option value="grey">grey</option>
-                                                </select>
-                                            </td>
-                                            <td>
-
-                                            </td>
-            
+                            <div class="tab-1">
+                                <div class="row">
+                                    <table id="table" border="1">
+                                        <tr>
+                                            <th>State</th>
+                                            <th>Sample Name</th>
+                                            <th>Describtion</th>
+                                            <th>Range</th>
+                                            <th>Mode</th>
+                                            <th>Peak</th>
+                                            <th>Color</th>
+                                            <th>Function</th>
+                                            <th>Select</th>
                                         </tr>
-                                    </tbody>
-                                </table>
-            
+                                    </table>
+                                </div>
+                                <div class="TwoBtn">
+                                    <button id="Save" onclick="addHtmlTableRow()">Save</button>
+                                    <button id="DeleteRows" onclick="deleteHtmlTableRow()">Delete Selected</button>
+                                </div>
                             </div>
+
+
                         </div>
                     </div>
                     <div class="col setup">
@@ -179,7 +122,7 @@
                             <button id="savepreset" onclick="savepreset()">save preset</button>
                             <button id="loadpreset" onclick="showpreset()">load preset</button>
                             <button id="test" onclick="addCurve([1,2,3,4],[1,2,3,5],'orange','Nabil')">TEST</button>
-                            <button id="removetest" onclick="removeCurve(1)">remove</button>
+                            <button id="removetest" onclick="">remove</button>
 
                         </div>
 

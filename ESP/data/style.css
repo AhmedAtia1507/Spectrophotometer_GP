@@ -10,11 +10,10 @@ body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .container {
-  margin-top: 10%;
-  width: 76%;
-  margin: 0 auto;
-  background: red;
-}
+    display: flex;
+ /* Set container height to 100% of the viewport height */
+ }
+
 
 section {
   padding: 0.5rem 0;
@@ -22,9 +21,7 @@ section {
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  flex: 1; /* Takes up remaining space (100% - 50% = 50%) */
 }
 
 section h2 {
@@ -34,12 +31,16 @@ section h2 {
 
 
 .col {
-  padding: 10px;
-  margin: 2.5%;
-  justify-content: space-between;
-  text-align: left;
-  align-items: left;
-  background: rgb(156, 221, 173);
+  padding: 1%;
+  margin: 1%;
+  flex: 0 0 30%; /* Takes up 50% of the container height */
+  background-color: lightgreen;
+
+}
+
+.setup{
+  height: 70vh;
+  border: #000000 1px solid;
 }
 .col div{
   margin-bottom: 10px;
@@ -563,62 +564,32 @@ ul li label {
   text-transform: capitalize;
   cursor: pointer;
 }
+.footer-col.inactive{
+  display: none;
+  }
 /*---------------------------- END OF Footer ----------------------------*/
 
 
-/*============table===========*/
-
+/**------------------------------------------------------------------------
+ *                           TABLE CONTENT
+ *------------------------------------------------------------------------**/
 
 table {
 border-collapse: collapse;
 padding-bottom: 80px;
 }
-.mytable{
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-/* Style table header */
-thead {
-color: #000000;
-}
-#trow0{
-  display: none;
-}
 
 th, td {
+width: auto;
 text-align: center;
-border: 1px solid #000406;
 padding: 3px 3px;
-height: 37px;
-
 }
-td input{
-  width: 70%;
-}
-
-/* Style alternating rows for better readability */
-tbody tr:nth-child(odd) {
-background-color: #e7e4e4;
+.tab-1{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 
-.t_r_c{
-align-content: center;
-align-self:center;
-align-items: center;
-position:relative;
-left: 50%;
-transform: translateX(-50%);
 
-}
-#t_r_c label, #t_r_c input {
-display: inline-block;
-margin-right: 10px; 
-}
-
-.footer-col.inactive{
-display: none;
-}
