@@ -34,8 +34,6 @@ section h2 {
 
 
 .col {
-  width: 30%;
-  float: left;
   padding: 10px;
   margin: 2.5%;
   justify-content: space-between;
@@ -269,6 +267,11 @@ height: auto;
 
 .tabcontent canvas {
   margin: 20px 20px;
+}
+.setup{
+  display: flex;
+  flex-direction: column;
+  width: 28%;
 }
 .TwoBtn {
   display: flex;
@@ -565,28 +568,20 @@ ul li label {
 
 /*============table===========*/
 
-#updatet{
-margin-left: 85%;
-
-}
 
 table {
-
-width: 100%;
-background: white;
 border-collapse: collapse;
-display: block;
-position:absolute;
-left: 0;
-padding-left: 10px;
 padding-bottom: 80px;
-
 }
-
+.mytable{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 /* Style table header */
 thead {
-
-background-color: #ffffff;
 color: #000000;
 }
 #trow0{
@@ -626,18 +621,4 @@ margin-right: 10px;
 
 .footer-col.inactive{
 display: none;
-}
-
-
-.samplestable{
-  display: flex;
-  position: absolute;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  display: none;
 }
