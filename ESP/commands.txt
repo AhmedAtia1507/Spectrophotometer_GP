@@ -1,0 +1,57 @@
+commands:
+ 
+1-lamps commands
+2-Supply commands
+3-time commands
+4-
+
+//add new commands titles here to make it easy to find
+===============================================================================================================
+
+1-lamps commands
+
+uv:
+snduv  //send uv lamp stutus ==> on/off
+uvon   //turn uv lamp on ==> reply with current stutus after toggle on/off 
+uvoff  //turn uv lamp off ==> reply with current stutus after toggle on/off
+
+vi:
+sndvi  //send visible lamp stutus ==> on/off
+vion   //turn visible lamp on ==> reply with current stutus after toggle on/off
+vioff  ////turn visible lamp off ==> reply with current stutus after toggle on/off
+
+===============================================================================================================
+
+2-Supply commands
+
+note: +12 -12 are dc dc converter and 12 is the lamp supply
+
+p12	//read supply +12==>its value (only number and sign like +11.9)
+n12 	//read supply -12==>its value (only number and sign like -11.9)
+p5      //read supply 5==>its value (only number like 4.9)
+p33    	//read supply 3.3==>its value (only number like 2.9)
+twelve  //read supply 12==>its value (only number 11.9)
+=================================================================================================================
+
+3-time commands
+//send time
+
+sndtime  //send the time ==> send day/month/year hour:minutes:seconds in 24 format like( 1/13/2024 13:32:12 )
+
+//update your time
+
+rday  	//update your day
+rmonth  //update your month
+ryear	//updat your year
+rhour   //update your hour in 24 format
+rminute	//update minuts
+rsecond //update seconds==> responde when done with "time update success" or "time update failed"
+=================================================================================================================
+
+
+
+
+
+
+
+

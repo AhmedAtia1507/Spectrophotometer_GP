@@ -352,6 +352,23 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
         Serial.print("ana ba3tet malesh feh");
       
     }
+    else if(doc.containsKey("supplystutus")){
+      //String stutusp12=sendCMD((char*)"p12\n");
+      //String stutusn12=sendCMD((char*)"n12ff\n");
+      //String stutusp5=sendCMD((char*)"p5\n");
+      //String stutusp33=sendCMD((char*)"p33\n");
+      //String stutustwelve=sendCMD((char*)"twelve\n");
+      DynamicJsonDocument object(1024);
+      object["supplystutus"]="good";
+      object["p12"]="+11.9"; //for test
+      object["n12"]="-11.8";
+      object["p5"]="4.9";
+      object["p33"]="2.7";
+      object["twelve"]="11";
+      String jsonString="";
+      serializeJson(object, jsonString);
+      notifyClients(jsonString);
+    }
     
     else if (doc.containsKey("command"))
     {

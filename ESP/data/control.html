@@ -9,16 +9,14 @@
     <header>
         <h1 >SpectoPhotoMeter test mode</h1>
     </header>
-    <li  id="li0"  title="Click to lock/unlock menu visibility">___<br>___<br>___<br> <br></li>
+    <li id="li0" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
     <a href="index.html" class="logout-button">Home 🏠</a>
     <main>
-        
         <nav>
-            
             <ul >
             
                 <div class="container">
-                <li class="list" id="li1" onclick="showTab('tab1','li1')"><span id="li1-text">Lamps test</span></li>
+                <li class="list" id="li1" onclick="showTab('tab1','li1')"><span id="li1-text">Lamp and supplies</span></li>
                 <li class="list" id="li2" onclick="showTab('tab2','li2')"><span id="li2-text">Supplies</span></li>
                 <li class="list" id="li3" onclick="showTab('tab3','li3')"><span id="li3-text">Motors</span></li>
                 <li class="list" id="li4" onclick="showTab('tab4','li4')"><span id="li4-text">Detector</span></li>
@@ -30,6 +28,7 @@
 
 
         <div id="tab1" class="tab-content active">
+            <h2 style="text-decoration: underline;">Lamps test </h2>
             <div class="row">
                 <div class="col">
             <h2 class="underlined-heading">uv lamp test</h2>
@@ -56,79 +55,40 @@
             </label>
             </div>
         </div>
+        <br>
+        <br>
+        <hr>
+        <hr>
+        <hr>
+        <br>
+       
+        <h2 style="text-decoration: underline;">power supplies test </h2>
+            <table>
+                <thead>
+                    <th></th>
+                    <th>+12v supply </th>
+                    <th>-12v supply </th>
+                    <th>5V supply</th>
+                    <th>3.3v supply</th>
+                    <th>12v supply</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>values</td>
+                        <td id="p12"></td>
+                        <td id="n12"></td>
+                        <td id="p5"></td>
+                        <td id="p33"></td>
+                        <td id="twelve"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+    
         </div>
-        
+            
         <div id="tab2" class="tab-content">
-            <div class="row">
-                <div class="col">
-            <h2 class="underlined-heading">+12 V supply test</h2>
-                <div class="current-state">
-                <label for="+12vstate">current state:</label>
-                <p class="state" id="+12state"></p><br>
-                <label for="+12value">current value in (V):</label>
-                <label id="+12value">5v</label> <div for="otalert" class="alert">need to be replaced !!</div><br>
-                </div>
-            <label for="checkbox"> turn power supply on/off </label>
-            <label class="toggle-container">
-            <input type="checkbox" id="+12vin">
-            <div class="toggle-track"  id="+12check">
-            <div class="toggle-thumb" id="+12thumb"></div>
-            </div>
-            </label>
         </div>
-            
-            
-            <div class="col">
-            <h2 class="underlined-heading">-12 V supply test</h2>
-            <label for="-12vstate">current state:</label>
-            <p class="state" id="-12state"></p>
-            
-            <label for="-12value">current value in (V):</label>
-            <label id="-12value">-5v</label><div for="otalert" class="alert">need to be replaced !!</div><br><br>
-            
-            <label for="checkbox">turn power supply on/off </label>
-            <label class="toggle-container">
-            <input type="checkbox" id="-12vin">
-            <div class="toggle-track"  id="-12check">
-            <div class="toggle-thumb" id="-12thumb"></div>
-            </div>
-            </label>
-        </div>
-        </div>
-        <div class="row">
-            <div class="col">
-            <h2 class="underlined-heading">5 V supply test</h2>
-            <label for="5vstate">current state:</label>
-            <p class="state" id="5vstate"></p>
-            <label for="5vvalue">current value in (V):</label>
-            <label id="5vvalue">4.9v</label><div for="otalert" class="good">Good</div><br>
-            
-            <label for="checkbox">turn power supply on/off </label>
-            <label class="toggle-container">
-            <input type="checkbox" id="5vin">
-            <div class="toggle-track" id="5vcheck">
-            <div class="toggle-thumb" id="5vthumb"></div>
-            </div>
-            </label>
-            </div>
-            <div class="col">
-            <h2 class="underlined-heading">3.3 V supply test</h2>
-            <label for="3.3vstate">current state:</label>
-            <p class="state" id="3.3vstate"></p>
-            
-            <label for="3.3vvalue">current value in (V):</label>
-            <label id="3.3value">3v</label><div for="otalert" class="good">Good</div><br>
-            
-            <label for="checkbox"> turn power supply on/off </label>
-            <label class="toggle-container">
-            <input type="checkbox" id="3.3vin">
-            <div class="toggle-track" id="3.3vcheck">
-            <div class="toggle-thumb" id="3.3thumb"></div>
-            </div>
-            </label>
-        </div>
-        </div>
-        
         <div id="tab3" class="tab-content">
             <h2>Tab 3 Content</h2>
             <p>This is the content for Choice 3.</p>

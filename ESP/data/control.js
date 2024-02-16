@@ -92,6 +92,11 @@ function sendStatus() {
         uvlampstutus: "send"
     };
     websocket.send(JSON.stringify(uvlampstutus));
+    var supplystutus = {
+        supplystutus: "send"
+    };
+    websocket.send(JSON.stringify(supplystutus));
+    
 }
 
 
@@ -353,6 +358,16 @@ function handleMessage(event) {
             document.getElementById("vistate").innerHTML = "error occured reload page";
         }
     } 
+    else if(myObj.hasOwnProperty('supplystutus')){
+        console.log("supplies recieved");
+        document.getElementById("p12").textContent=myObj.p12;
+        document.getElementById("n12").textContent=myObj.n12;
+        document.getElementById("p5").textContent=myObj.p5;
+        document.getElementById("p33").textContent=myObj.p33;
+        document.getElementById("twelve").textContent=myObj.twelve;
+        
     }
+    }
+    
 
 

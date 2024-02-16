@@ -18,23 +18,52 @@ header {
 .row {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    padding-left: 40px;
+    width: 90%;
+
     
 }
 .col {
     width: 40%;
-    min-width: max-content;
-    float: left;
-    
-    margin-left: 20px;
+    min-width: 200px;
+    margin-left: 10px;
     margin-top: 20px;
     background:#33324e69;
     color: white;
     padding: 20px;
     box-shadow: 0 0 29px 0 black;
-    border-radius:  20px;
+    border-radius:  5px;
 }
+table {
+    padding: 20px;
+    width: calc(80% + 20px);
+    border-collapse: collapse;
+    position: relative;
+    box-shadow: 0 0 29px 0 black;
+}
+
+thead {
+    background-color: #0a0e24;
+    color: #fffafa;
+}
+
+td, th {
+    text-align: center;
+    border: 1px solid #000406;
+    padding: 3px;  /* Adjust padding for better mobile display */
+}
+
+@media only screen and (max-width: 600px) {
+    td, th {
+        font-size: 12px;  
+        padding: 1px;
+    }
+    .col{
+        width: 80%;
+    }
+}
+
+
+
 .logout-button {
     position: absolute;
     top: 90px;
@@ -84,7 +113,7 @@ nav ul li {
     transition: all 0.5s ;
 }
 #li0{
-    transition: width 0.5s 200ms ease-out;
+    transition: width 0.3s 200ms ease-out;
     max-width: 230px;
     padding: 10px 10px;
     cursor: pointer;
@@ -104,13 +133,14 @@ nav ul li:hover {
 .tab-content {
     font-weight: 600;
     display: none;
-    margin-left: 20px;
+    margin-left: 10px;
     flex: 1;
-    padding: 20px;
+    padding: 10px;
 }
 
 .tab-content.active {
     display: block;
+    
 }
 
 nav ul li.active {
@@ -168,7 +198,6 @@ nav ul li.active {
     color: white;
     background-color: #0a0e24;
     text-align: center;
-    border-radius: 20px 20px 0 0;
     text-decoration-line: underline;
 
 }
