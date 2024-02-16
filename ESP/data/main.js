@@ -271,10 +271,8 @@ function openTab(evt, Control) {
     type: 'line',
     data: chartData,
     options: {
-      responsive: true, // Set responsive to false
-        maintainAspectRatio: true, // Set maintainAspectRatio to false
-        width: 400, // Set the width
-        height: 400, // Set the height
+      responsive: false, // Set responsive to false
+        maintainAspectRatio: false, // Set maintainAspectRatio to false
       scales: {
         x: {
           type: 'linear',
@@ -683,11 +681,81 @@ function filter() {
   });
 }
 
-/**
- *========================================================================
- *                           table                          
- *========================================================================
- */
+
+/**------------------------------------------------------------------------
+ *                           TABLE
+ *------------------------------------------------------------------------**/
+
+function addHtmlTableRow() {
+  var table = document.getElementById('table'),
+  newRow = table.insertRow(table.length),
+  cell1 = newRow.insertCell(0), // state
+  cell2 = newRow.insertCell(1), // Sample ID
+  cell3 = newRow.insertCell(2), // Sample Describe
+  cell4 = newRow.insertCell(3), // Range
+  cell5 = newRow.insertCell(4), // Peak
+  cell6 = newRow.insertCell(5), // color
+  cell7 = newRow.insertCell(6), // Function
+  cell8 = newRow.insertCell(7), // Select
+  samplename = document.getElementById('SampleID').value,
+  sampledisk = document.getElementById('SampleDecribe').value,
+  samplestart = document.getElementById('start').value,
+  samplestop = document.getElementById('stop').value;
+  cell1.innerHTML = '0';
+  cell2.innerHTML = samplename;
+  cell3.innerHTML = sampledisk;
+  cell4.innerHTML = `${samplestart} - ${samplestop}`;
+  cell5.innerHTML = '0';
+  cell6.innerHTML = `
+    <div>
+      <select name="color" id="element15">
+        <option value="red">red</option>;
+        <option value="blue">blue</option>;
+        <option value="green">green</option>;
+        <option value="yellow">yellow</option>;
+        <option value="purple">purple</option>;
+        <option value="orange">orange</option>;
+        <option value="black">black</option>;
+        <option value="pink">pink</option>;
+        <option value="brown">brown</option>;
+        <option value="grey">grey</option>;
+      </select>
+    </div>
+  `;
+  cell7.innerHTML = `
+    <div>
+    <select name="function" id="element16">
+    <option value="none">none</option>
+    <option value="area">Area</option>
+    <option value="height">Height</option>
+    <option value="peak">Peak</option>
+</select>
+    </div>`;
+  cell8.innerHTML = '<input type="checkbox" value="Delete" onclick="deleteHtmlTableRow(this)">';
+  changeColor();
+}
+/**------------------------------------------------------------------------
+ *                           COLOR CHange
+ *------------------------------------------------------------------------**/
+// Function to change the color of a curve
+function changeCurveColor(index, color) {
+  chartScan.data.datasets[index].borderColor = color;
+  chartScan.update(); // test name of chart scanChart
+}
+
+function changeColor() {
+  var rIndex,table = document.getElementById('table');
+  for (var i = 1; i < table.rows.length; i++) {
+    table.rows[i].onclick = function () {
+      rIndex = this.rowIndex;
+      console.log(rIndex);
+      var color = this.cells[5].querySelector('select').value;
+      changeCurveColor(rIndex, color);
+    }
+  }
+  
+}
+changeColor();
 
 setTimeout( showfoot,1000); //autohide foot in 1sec
 
@@ -827,25 +895,29 @@ if (childElement) {
 
   m++;
 }
+/**------------------------------------------------------------------------
+ *                           TIME AND DATE
+ *------------------------------------------------------------------------**/
 
-
-function updateClock(initialDateTimeString) {
-  let currentDate = new Date(initialDateTimeString);  
-  setInterval(function () {
-    currentDate.setSeconds(currentDate.getSeconds() + 1);
-    let formattedDate = currentDate.toLocaleString('en-GD', { 
-      day: 'numeric', 
-      month: 'numeric', 
-      year: 'numeric', 
-      hour: 'numeric', 
-      minute: 'numeric', 
-      second: 'numeric', 
-      hour12: true
-    });
-    document.getElementById('DateTime').innerText = formattedDate;
-  }, 1);
+function formatWithLeadingZero(number) {
+  return number < 10 ? `0${number}` : number;
 }
-updateClock("1/13/2021 13:32:12");
+function updateDateTime() {
+  const now = new Date(); // Get the current date and time
+  let hours = now.getHours();
+  const minutes = formatWithLeadingZero(now.getMinutes());
+  const seconds = formatWithLeadingZero(now.getSeconds());
+  const amPm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  const dateTimeString = `${now.toDateString()} || ${hours}:${minutes} ${amPm}`;
+  document.getElementById('DateTime').textContent = dateTimeString;
+}
+
+// Update the date and time every second
+setInterval(updateDateTime, 1000);
+
+// Initial update
+updateDateTime();
 
 
 
@@ -900,11 +972,3 @@ function readADC() {
 }
 
 
-/**------------------------------------------------------------------------
- *                           COLOR CHange
- *------------------------------------------------------------------------**/
-// Function to change the color of a curve
-function changeCurveColor(index, color) {
-  testChart.data.datasets[index].borderColor = color;
-  testChart.update(); // test name of chart scanChart
-}
