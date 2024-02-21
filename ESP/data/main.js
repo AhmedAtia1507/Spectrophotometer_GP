@@ -276,6 +276,7 @@ chartScan = new Chart(ctxScan, {
         type: 'linear',
         position: 'left'
       }
+      
     }
   }
 });
