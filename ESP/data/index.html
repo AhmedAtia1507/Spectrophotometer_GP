@@ -56,11 +56,23 @@
                 <div class="container">
                     <div class="col chartScan">
                         <div class="row">
-                            <canvas id="chartScan" width="800" height="200"></canvas>
+                            <canvas id="chartScan" width="" height=""></canvas>
                         </div>
                         <div class="row">
                             <div class="tab-1">
-                                <div class="row">
+                                <div class="TwoBtn">
+                                    <button id="Save" onclick="addHtmlTableRow()">Save <svg xmlns="http://www.w3.org/2000/svg" height="24"
+                                            viewBox="0 -960 960 960" width="24">
+                                            <path
+                                                d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
+                                        </svg></button>
+                                    <button id="DeleteRows" onclick="deleteHtmlTableRow()">Delete Selected <svg xmlns="http://www.w3.org/2000/svg"
+                                            height="24" viewBox="0 -960 960 960" width="24">
+                                            <path
+                                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                                        </svg></button>
+                                </div>
+                                <div class="row" style="overflow-x:auto;">
                                     <table id="table" border="1">
                                         <tr>
                                             <th class="t1">State</th>
@@ -74,18 +86,6 @@
                                             <th class="t1">Select</th>
                                         </tr>
                                     </table>
-                                </div>
-                                <div class="TwoBtn">
-                                    <button id="Save" onclick="addHtmlTableRow()">Save <svg xmlns="http://www.w3.org/2000/svg" height="24"
-                                            viewBox="0 -960 960 960" width="24">
-                                            <path
-                                                d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
-                                        </svg></button>
-                                    <button id="DeleteRows" onclick="deleteHtmlTableRow()">Delete Selected <svg xmlns="http://www.w3.org/2000/svg"
-                                            height="24" viewBox="0 -960 960 960" width="24">
-                                            <path
-                                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-                                        </svg></button>
                                 </div>
                             </div>
 
@@ -129,6 +129,21 @@
                         </div>
                         <div>
                             <Strong>lamp Change Point: </Strong>
+                        </div>
+                        <div>
+                            <strong>Color: </strong>
+                            <select name="" id="curveColor">
+                                <option value="red">red</option>;
+                                <option value="blue">blue</option>;
+                                <option value="green">green</option>;
+                                <option value="yellow">yellow</option>;
+                                <option value="purple">purple</option>;
+                                <option value="orange">orange</option>;
+                                <option value="black">black</option>;
+                                <option value="pink">pink</option>;
+                                <option value="brown">brown</option>;
+                                <option value="grey">grey</option>;
+                              </select>
                         </div>
                         <div class="TwoBtn">
                             <button onclick="startScan()">Scan <svg xmlns="http://www.w3.org/2000/svg" height="24"

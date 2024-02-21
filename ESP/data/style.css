@@ -28,8 +28,13 @@ body {
 
 .container {
   display: flex;
+  margin: 1%;
+  justify-content: center;
   /* Set container height to 100% of the viewport height */
 }
+
+
+  
 
 
 section {
@@ -39,6 +44,7 @@ section {
 
 .row {
   flex: 1;
+  
   /* Takes up remaining space (100% - 50% = 50%) */
 }
 
@@ -49,6 +55,9 @@ section h2 {
 
 
 .col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 1%;
   margin: 1%;
   flex: 0 0 30%;
@@ -70,7 +79,12 @@ section h2 {
   .col {
     width: 95%;
   }
-
+  .row{
+    width: 100%;
+  }
+  .setup {
+    width: 95%;
+  }
   section {
     margin-bottom: 150px;
   }
@@ -273,7 +287,6 @@ nav li:first-child {
   padding: 30px;
   width: 100%;
   box-sizing: border-box;
-  margin: 0 auto;
   /* Center the #scan div */
   margin-bottom: 100px;
 }
@@ -374,6 +387,22 @@ nav li:first-child {
   border: 1px solid #ccc;
   max-height: 200px;
   overflow-y: auto;
+}
+@media screen and (max-width: 962px) {
+  .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .row {
+    flex: 1;
+    /* Takes up remaining space (100% - 50% = 50%) */
+  }
+  .col {
+    width: 95%;
+  }
+
+
 }
 
 /* preset css */
