@@ -1,0 +1,38 @@
+.teamContainer{
+    width: 100%;
+    background-color: #1a1a1a;
+    display: block;
+    text-align: center;
+}
+.teamTitle1 {
+    font-size: 3rem;
+    color: white;
+    margin-top: 5%;
+    font-family: 'Courier New', Courier, monospace;
+}
+.teamMembers{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 90%;
+    margin: 5%;
+}
+.teamMember{
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    margin: 1%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.teamMember img{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
