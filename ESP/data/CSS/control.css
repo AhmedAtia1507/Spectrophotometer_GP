@@ -66,18 +66,20 @@ td, th {
     padding: 3px;  /* Adjust padding for better mobile display */
 }
 .grid-container {
+    border: 1px solid rgba(0, 0, 0, 0.11);
       display: grid;
+      padding: 10px;
       grid-template-columns: repeat(2, 1fr); /* Three equal columns */
-      gap: 20px; /* Adjust the gap between grid items */
+      gap: 10px; /* Adjust the gap between grid items */
     }
 
 .grid-item {
-      background-color: #ddd;
-      padding: 20px;
-      text-align: center;
+    padding: 10px;
+    text-align: left;  
     }
 
-@media only screen and (max-width: 700px) {
+
+@media only screen and (max-width: 600px) {
     td, th {
         font-size: 12px;  
         padding: 1px;
@@ -92,7 +94,7 @@ td, th {
         grid-template-columns: repeat(1, 1fr); /* Three equal columns */
       
     }
-    
+  
 }
 
 
@@ -114,7 +116,6 @@ button{
    background-color: #0a0e24;
     color: white; 
     padding: 3px;
-    margin-left: 10px;
     border: 1px solid black;
     transition: all 0.3s;
 
@@ -268,4 +269,3 @@ nav ul li.active {
       width: 50px; /* Adjust the width as needed */
       text-align: center;
 }
-

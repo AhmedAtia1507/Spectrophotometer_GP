@@ -85,6 +85,10 @@ function sendStatus() {
     supplystutus: "send",
   };
   websocket.send(JSON.stringify(supplystutus));
+  var motors = {
+    motors: "send",
+  };
+  websocket.send(JSON.stringify(motors));
 
 }
 
@@ -326,6 +330,15 @@ function handleMessage(event) {
     setTimeout(function () {
       document.getElementById("timeupdated").innerHTML = "";
     }, 4000);
+  }
+  else if (myObj.hasOwnProperty("motorssteps")) {
+    console.log(myObj.motorssteps)
+    const ary = myObj.motorssteps.split('-');
+    document.getElementById("lampstep").textContent = ary[0];
+    document.getElementById("gratingstep").textContent = ary[1];
+    document.getElementById("filterstep").textContent = ary[2];
+    document.getElementById("filterwave").textContent = ary[3];
+
   }
 }
 

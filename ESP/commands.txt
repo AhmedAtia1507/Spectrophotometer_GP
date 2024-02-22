@@ -3,7 +3,7 @@ commands:
 1-lamps commands
 2-Supply commands
 3-time commands
-4-
+4- motors
 
 //add new commands titles here to make it easy to find
 ===============================================================================================================
@@ -39,15 +39,12 @@ twelve  //read supply 12==>its value (only number 11.9)
 sndtime  //send the time ==> send day/month/year hour:minutes:seconds in 24 format like( 1/13/2024 13:32:12 )
 
 //update your time
-
-rday  	//update your day
-rmonth  //update your month
-ryear	//updat your year
-rhour   //update your hour in 24 format
-rminute	//update minuts
-rsecond //update seconds==> responde when done with "time update success" or "time update failed"
+updatedate {date time} like "updatedate 1/13/2024 13:32:12\n"==> responde when done with "time update success" or "time update failed"
 =================================================================================================================
 
+4-motors
+//send current motors position
+sndmotorsteps  //send motor steps and current wavelength ==> response with "lampmoter-gratingmotor-filtermotor-currentwavelength\n" like 50-34-200-1100
 
 
 
