@@ -31,12 +31,12 @@ function onOpen(event) {
   console.log("Connection opened");
   // asks the server if the user have logged in or not
   redirectToLoginPage();
-  sendStatus(); //send lamp stutus upon open
+  sendStatus(); //send components stutus upon open
+  loadtime(); //send current time time upon open
 }
 
 function onClose(event) {
-  // in case connection down
-  // try again after 2 sec
+
   console.log("Connection closed");
   setTimeout(initWebSocket, 2000);
 }
@@ -85,6 +85,7 @@ function sendStatus() {
     supplystutus: "send",
   };
   websocket.send(JSON.stringify(supplystutus));
+
 }
 
 //ui function
@@ -260,8 +261,8 @@ function handleMessage(event) {
       console.log("flag is false");
       login();
     }
-  } else if (myObj.hasOwnProperty("uvlampstutus")) {
-    if (myObj.uvlampstutus === "on") {
+  } else if (myObj.hasOwnProperty("uvstutus")) {
+    if (myObj.uvstutus === "on") {
       console.log("lamp is working fine");
       document.getElementById("uvstate").innerHTML = "on";
       document.getElementById("uvstate").style.color = "white";
@@ -270,7 +271,7 @@ function handleMessage(event) {
       var thumb = document.getElementById("uvthumb");
       check.style.background = "green";
       thumb.style.transform = "translateX(20px)";
-    } else if (myObj.uvlampstutus == "off") {
+    } else if (myObj.uvstutus == "off") {
       console.log("uv lamp is off");
       document.getElementById("uvstate").innerHTML = "off";
       document.getElementById("uvstate").style.color = "white";
@@ -283,8 +284,8 @@ function handleMessage(event) {
       document.getElementById("uvstate").innerHTML =
         "error ocurred reload page";
     }
-  } else if (myObj.hasOwnProperty("vilampstutus")) {
-    if (myObj.vilampstutus === "on") {
+  } else if (myObj.hasOwnProperty("vistutus")) {
+    if (myObj.vistutus === "on") {
       console.log("lamp is working fine");
       document.getElementById("vistate").innerHTML = "on";
       document.getElementById("vistate").style.color = "white";
@@ -293,7 +294,7 @@ function handleMessage(event) {
       var thumb = document.getElementById("vithumb");
       check.style.background = "green";
       thumb.style.transform = "translateX(20px)";
-    } else if (myObj.vilampstutus == "off") {
+    } else if (myObj.vistutus == "off") {
       console.log("vi lamp is off");
       document.getElementById("vistate").innerHTML = "off";
       document.getElementById("vistate").style.color = "white";
@@ -314,72 +315,111 @@ function handleMessage(event) {
     document.getElementById("p33").textContent = myObj.p33;
     document.getElementById("twelve").textContent = myObj.twelve;
   }
+  else if (myObj.hasOwnProperty("currenttime")) {
+    updateDateTime(myObj.currenttime);
+    console.log("lllllllllllllllllllllllllllllaa");
+  }
+  else if (myObj.hasOwnProperty("timeupdated")) {
+    var display = document.getElementById("timeupdated")
+    display.style.color = "green"
+    display.innerHTML = myObj.timeupdated;
+    setTimeout(function () {
+      document.getElementById("timeupdated").innerHTML = "";
+    }, 4000);
+  }
 }
 
-// Get current date and time
+/**------------------------------------------------------------------------
+ * ====================  Date and Time==========================
+ *------------------------------------------------------------------------**/
+
+// Get current date and time to initillaize the time data inputs to browser time
 const currentDateTime = new Date();
-
-// Format the date and time as per the input requirements
 const currentDate = currentDateTime.toISOString().split("T")[0];
-const currentTime = currentDateTime.toLocaleTimeString([], {
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-});
-
-// Set the initial values of date and time inputs
 document.getElementById("datepicker").value = currentDate;
-document.getElementById("timepicker").value = currentTime;
+
+function loadtime() {
+  var loadtime = {
+    loadtime: "loadtime",
+  };
+  // Assuming 'websocket' is your WebSocket object
+  websocket.send(JSON.stringify(loadtime));
+}
+
 
 function saveDateTime() {
   const selectedDate = new Date(document.getElementById("datepicker").value);
   const selectedTime = document.getElementById("timepicker").value;
-  const dateTimeString = `${
-    selectedDate.toISOString().split("T")[0]
-  } ${selectedTime}`;
-  updateDateTimeElement(dateTimeString, "currentDateTime");
+  const dateTimeString = `${selectedDate.toLocaleDateString().split("T")[0].replace(/-/g, '/')} ${selectedTime}`;
+  console.log(dateTimeString);
 
-  const dateTime = new Date(dateTimeString);
-  const year = dateTime.getFullYear();
-  const month = dateTime.getMonth() + 1; // Month is zero-based, so add 1
-  const day = dateTime.getDate();
-  const hour = dateTime.getHours();
-  const minute = dateTime.getMinutes();
-  const second = dateTime.getSeconds();
-
-  // Additional actions or logging as needed
-  console.log("Year:", year);
-  console.log("Month:", month);
-  console.log("Day:", day);
-  console.log("Hour:", hour);
-  console.log("Minute:", minute);
-  console.log("Second:", second);
+  var updatetime = {
+    updatetime: dateTimeString,
+  };
+  // Assuming 'websocket' is your WebSocket object
+  websocket.send(JSON.stringify(updatetime));
+  loadtime();
 }
 
-function updateDateTimeElement(dateTimeString, elementId) {
-  const dateTime = new Date(dateTimeString);
-  const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const formattedDateTime = dateTime.toLocaleString("en-US", options);
+/*
+ * Updates the text content of an element with the current date and time.
+ */
 
-  document.getElementById(elementId).innerText = formattedDateTime;
+let intervalId; // Variable to store the interval ID
 
-  setInterval(() => {
-    const now = new Date(formattedDateTime);
-    const currentTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    document.getElementById(
-      "currentDateTime"
-    ).innerText = `Current Time: ${currentTime}`;
+function updateDateTime(initialDateTimeString) {
+  // Clear the existing interval if it's set
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+
+  // Convert the initial date time string to a Date object
+  let currentDateTime = new Date(initialDateTimeString);
+
+  // Update the HTML element initially
+  updateElement(currentDateTime);
+
+  // Set up a new interval to update the time every second
+  intervalId = setInterval(function () {
+    // Increase the time by one second
+    currentDateTime.setSeconds(currentDateTime.getSeconds() + 1);
+    // Update the HTML element with the new date and time
+    updateElement(currentDateTime);
   }, 1000);
 }
 
-// Example usage:
-const dateTimeString = "1/31/2021 12:55:01";
-const elementId = "currentDateTime";
-updateDateTimeElement(dateTimeString, elementId);
+
+
+function updateElement(dateTime) {
+  // Get the current date and time in a formatted string
+  const formattedDateTime = dateTime.toLocaleString();
+  // Update the HTML element with the formatted date and time
+  document.getElementById('currentDateTime').innerText = formattedDateTime;
+}
+
+/**------------------------------------------------------------------------
+ * ==================== motors ==========================
+ *------------------------------------------------------------------------**/
+function validat(min, max) {
+  var inputElement = document.getElementById('increasestep');
+  var currentValue = parseInt(inputElement.value);
+  if (currentValue < min) {
+    inputElement.value = min;
+  }
+  else if (currentValue > max) {
+    inputElement.value = max;
+  }
+  if (currentValue) {
+    var latsetstep = document.getElementById('increasestep').value
+    console.log(latsetstep);
+  }
+}
+
+
+function gohome(element) {
+  var motor = {
+    home: "gohome",
+    type: element.id
+  }
+  websocket.send(JSON.stringify(motor));
+}

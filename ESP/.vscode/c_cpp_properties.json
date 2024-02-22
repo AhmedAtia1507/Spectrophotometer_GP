@@ -10,7 +10,6 @@
             "includePath": [
                 "e:/GP Repo/Spectrophotometer_GP/ESP/include",
                 "e:/GP Repo/Spectrophotometer_GP/ESP/src",
-                "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
@@ -238,6 +237,7 @@
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
+                "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -245,7 +245,6 @@
                 "path": [
                     "e:/GP Repo/Spectrophotometer_GP/ESP/include",
                     "e:/GP Repo/Spectrophotometer_GP/ESP/src",
-                    "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
@@ -473,6 +472,7 @@
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                     "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
+                    "C:/Users/Mina isaac/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     ""
                 ]
             },

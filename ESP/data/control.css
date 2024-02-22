@@ -23,16 +23,30 @@ header {
     
 }
 .col {
-    width: 40%;
+    width: 44%;
     min-width: 200px;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     background:#33324e69;
     color: white;
     padding: 20px;
+    padding-bottom: 40px;
     box-shadow: 0 0 29px 0 black;
     border-radius:  5px;
 }
+
+.tab-content {
+    font-weight: 600;
+    display: none;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.tab-content.active {
+    display: block;
+    
+}
+
 table {
     padding: 20px;
     width: calc(80% + 20px);
@@ -51,8 +65,19 @@ td, th {
     border: 1px solid #000406;
     padding: 3px;  /* Adjust padding for better mobile display */
 }
+.grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Three equal columns */
+      gap: 20px; /* Adjust the gap between grid items */
+    }
 
-@media only screen and (max-width: 600px) {
+.grid-item {
+      background-color: #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+
+@media only screen and (max-width: 700px) {
     td, th {
         font-size: 12px;  
         padding: 1px;
@@ -60,6 +85,14 @@ td, th {
     .col{
         width: 80%;
     }
+    body{
+        font-size: small;
+    }
+    .grid-container{
+        grid-template-columns: repeat(1, 1fr); /* Three equal columns */
+      
+    }
+    
 }
 
 
@@ -77,6 +110,21 @@ td, th {
     cursor: pointer;
     
 }
+button{
+   background-color: #0a0e24;
+    color: white; 
+    padding: 3px;
+    margin-left: 10px;
+    border: 1px solid black;
+    transition: all 0.3s;
+
+ }
+button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: transparent;
+    transform: translateY(3px);
+    }
 
 main {
     display: flex;
@@ -99,6 +147,7 @@ nav {
 
 nav ul {
     list-style:none;
+    margin-left: -20px;
 }
 
 nav ul li { 
@@ -111,6 +160,7 @@ nav ul li {
     cursor: pointer;
     border-radius: 10px;
     transition: all 0.5s ;
+    margin-right: 20px;
 }
 #li0{
     transition: width 0.3s 200ms ease-out;
@@ -124,23 +174,10 @@ nav ul li {
 
 
 nav ul li:hover {
-    margin-right: 20px;
+    
     background-color: #ddd;
     color: black;
     transform: scale(1.05);
-}
-
-.tab-content {
-    font-weight: 600;
-    display: none;
-    margin-left: 10px;
-    flex: 1;
-    padding: 10px;
-}
-
-.tab-content.active {
-    display: block;
-    
 }
 
 nav ul li.active {
@@ -150,8 +187,7 @@ nav ul li.active {
 
 /* Style for the checkbox container */
 .toggle-container {
-    display: inline-block;
-    position: relative;
+    position: absolute;
   }
   
 /* Hide the default checkbox */
@@ -190,6 +226,10 @@ nav ul li.active {
     margin-bottom: 30px;
 }
 
+.state,.toggle-container,label{
+    display: inline;
+}
+
 .underlined-heading {
     width: 100%;
     padding: 5px 20px;
@@ -209,3 +249,23 @@ nav ul li.active {
     color: blue;
 
 }
+/**------------------------------------------------------------------------
+ * ==================== motors section==========================
+ *------------------------------------------------------------------------**/
+.currentstep{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 3px;
+    margin-right: 4px;
+}
+.currentstep,label{
+    display: inline;
+    font-size: small;
+}
+
+#increasestep {
+    color: black;
+      width: 50px; /* Adjust the width as needed */
+      text-align: center;
+}
+

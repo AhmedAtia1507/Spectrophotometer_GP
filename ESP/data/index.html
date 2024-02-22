@@ -1,268 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!---------------------------- Start of Nabber ---------------------------->
     <nav>
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24"
-                        viewBox="0 -960 960 960" width="24">
-                        <path
-                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                    </svg></a></li>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="#">Page #1</a></li>
-            <li><a href="#">Page #2</a></li>
-            <li><a href="#">Page #3</a></li>
-            <li><a href="#">Page #4</a></li>
-        </ul>
-        <ul>
-            <li class="logo"><a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24"
-                        viewBox="0 -960 960 960" width="24">
-                        <path
-                            d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
-                    </svg> <span>SpectroPhotometer</span></a></li>
-            <li class="hideOnMobile"><a href="home.html">Home</a></li>
-            <li class="hideOnMobile"><a href="login.html">direct control</a></li>
-            <li class="hideOnMobile"><a href="#">Page #2</a></li>
-            <li class="hideOnMobile"><a href="#">Page #3</a></li>
-            <li class="hideOnMobile"><a href="#">Page #4</a></li>
-            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                        height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-                    </svg></a></li>
-        </ul>
+      <ul class="sidebar">
+        <li onclick="hideSidebar()">
+          <a href="#"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+            >
+              <path
+                d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+              /></svg
+          ></a>
+        </li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="login.html">direct control</a></li>
+        <li><a href="#">Page #2</a></li>
+        <li><a href="#">Page #3</a></li>
+        <li><a href="#">Page #4</a></li>
+      </ul>
+      <ul>
+        <li class="logo">
+          <a href="#"
+            ><svg
+              class="iconLogo"
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+            >
+              <path
+                d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z"
+              />
+            </svg>
+            <span>SpectroPhotometer</span></a
+          >
+        </li>
+        <li class="hideOnMobile"><a href="home.html">Home</a></li>
+        <li class="hideOnMobile"><a href="login.html">direct control</a></li>
+        <li class="hideOnMobile"><a href="#">Page #2</a></li>
+        <li class="hideOnMobile"><a href="#">Page #3</a></li>
+        <li class="hideOnMobile"><a href="#">Page #4</a></li>
+        <li class="menu-button" onclick="showSidebar()">
+          <a href="#"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+            >
+              <path
+                d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+              /></svg
+          ></a>
+        </li>
+      </ul>
     </nav>
     <!---------------------------- END OF Navbar ---------------------------->
     <main>
-        <section>
-            <div id="tab" class="tab">
-                <button id="first" class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
-                <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
-                <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
-            </div>
+      <section>
+        <div id="tab" class="tab">
+          <button id="first" class="tablinks" onclick="openTab(event, 'scan')">
+            Scan T_T
+          </button>
+          <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
+          <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
+        </div>
 
-            <div id="scan" class="tabcontent" style="display: block;">
-
-                <div class="container">
-                    <div class="col chartScan">
-                        <div class="row">
-                            <canvas id="chartScan" width="800" height="200"></canvas>
-                        </div>
-                        <div class="row">
-                            <div class="tab-1">
-                                <div class="row">
-                                    <table id="table" border="1">
-                                        <tr>
-                                            <th class="t1">State</th>
-                                            <th class="t2">Sample Name</th>
-                                            <th class="t3">Describtion</th>
-                                            <th class="t2">Range</th>
-                                            <th class="t2">Mode</th>
-                                            <th class="t2">Peak</th>
-                                            <th class="t2">Color</th>
-                                            <th class="t2">Function</th>
-                                            <th class="t1">Select</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="TwoBtn">
-                                    <button id="Save" onclick="addHtmlTableRow()">Save <svg xmlns="http://www.w3.org/2000/svg" height="24"
-                                            viewBox="0 -960 960 960" width="24">
-                                            <path
-                                                d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
-                                        </svg></button>
-                                    <button id="DeleteRows" onclick="deleteHtmlTableRow()">Delete Selected <svg xmlns="http://www.w3.org/2000/svg"
-                                            height="24" viewBox="0 -960 960 960" width="24">
-                                            <path
-                                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-                                        </svg></button>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="col setup">
-                        <div>
-                            <Strong>Sample Name: </Strong>
-                            <input type="text" name="SampleID" id="SampleID" onfocus="this.value=''" value="Sample Name">
-                        </div>
-                        <div>
-                            <Strong>Describtion: </Strong>
-                            <input type="text" name="SampleDecribe" id="SampleDecribe" onfocus="this.value=''" value="Describtion">
-                        </div>
-                        <div class="TwoBtn">
-                            <div>
-                                <strong>Start: </strong> <input class="number" type="number" id="start" name="start" onfocus="this.value=''" value="100">
-                            </div>
-                            <div>
-                                <strong>Stop: </strong> <input class="number" type="number" id="stop" name="stop" onfocus="this.value=''" value="900">
-                            </div>
-                        </div>
-                        <div class="TwoBtn">
-                            <div>
-                                <strong>Step: </strong> <input class="number" type="number" id="step" name="step" onfocus="this.value=''" value="20">
-                            </div>
-                            <div>
-                                <strong>Integration Time: </strong><input class="number" type="number" id="initTime" onfocus="this.value=''" name="initTime"
-                                    value="0">
-                            </div>
-                        </div>
-                      
-
-                        <div>
-                            <strong>Measurment Mode: </strong><select id="mySelect" name="mode">
-                                <option value="absorption">Absorption</option>
-                                <option value="transmission">Transmission</option>
-                                <!-- <option value="transmission">Eneregy</option> -->
-                            </select>
-                        </div>
-                        <div>
-                            <Strong>lamp Change Point: </Strong>
-                        </div>
-                        <div class="TwoBtn">
-                            <button onclick="startScan()">Scan <svg xmlns="http://www.w3.org/2000/svg" height="24"
-                                    viewBox="0 -960 960 960" width="24">
-                                    <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
-                                </svg></button>
-                            <button onclick="pauseScan()">Pause <svg xmlns="http://www.w3.org/2000/svg" height="24"
-                                    viewBox="0 -960 960 960" width="24">
-                                    <path
-                                        d="M360-320h80v-320h-80v320Zm160 0h80v-320h-80v320ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
-                                </svg></button>
-                        </div>
-                        <div class="TwoBtn">
-                            <button id="savepreset" onclick="savepreset()">Save Preset <svg
-                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                    <path
-                                        d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
-                                </svg></button>
-                            <button id="loadpreset" onclick="showpreset()">Load Preset <svg
-                                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                    <path
-                                        d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v240h-80v-80H200v400h280v80H200ZM760 0q-73 0-127.5-45.5T564-160h62q13 44 49.5 72T760-60q58 0 99-41t41-99q0-58-41-99t-99-41q-29 0-54 10.5T662-300h58v60H560v-160h60v57q27-26 63-41.5t77-15.5q83 0 141.5 58.5T960-200q0 83-58.5 141.5T760 0ZM200-640h560v-80H200v80Zm0 0v-80 80Z" />
-                                </svg></button>
-                        </div>
-
-                    </div>
+        <div id="scan" class="tabcontent" style="display: block">
+          <div class="container">
+            <div class="col chartScan">
+              <div class="row">
+                <canvas id="chartScan" width="800" height="200"></canvas>
+              </div>
+              <div class="row">
+                <div class="tab-1">
+                  <div class="row">
+                    <table id="table" border="1">
+                      <tr>
+                        <th class="t1">State</th>
+                        <th class="t2">Sample Name</th>
+                        <th class="t3">Describtion</th>
+                        <th class="t2">Range</th>
+                        <th class="t2">Mode</th>
+                        <th class="t2">Peak</th>
+                        <th class="t2">Color</th>
+                        <th class="t2">Function</th>
+                        <th class="t1">Select</th>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="TwoBtn">
+                    <button id="Save" onclick="addHtmlTableRow()">
+                      Save
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 -960 960 960"
+                        width="24"
+                      >
+                        <path
+                          d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z"
+                        />
+                      </svg>
+                    </button>
+                    <button id="DeleteRows" onclick="deleteHtmlTableRow()">
+                      Delete Selected
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 -960 960 960"
+                        width="24"
+                      >
+                        <path
+                          d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-
-
-
-
-
+              </div>
             </div>
-
-            <div id="presets" class="presets">
-
-                <ul class="blurred-list" id="presetlist">
-                    <input type="text" id="search" placeholder="search &#128269;">
-                    <div id="nopresets"></div>
-                </ul>
-            </div>
-            <div class="presetname" id="presetname">
-                <div class="blurred-name">
-                    <label class="presetlabel" for="name">Enter preset name:</label><br><br>
-                    <input id="prestinput" class="presetinput" type="text"><br><br>
-                    <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
-                    <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
-                    <div id="nameexist"></div>
+            <div class="col setup">
+              <div>
+                <strong>Sample Name: </strong>
+                <input
+                  type="text"
+                  name="SampleID"
+                  id="SampleID"
+                  onfocus="this.value=''"
+                  value="Sample Name"
+                />
+              </div>
+              <div>
+                <strong>Describtion: </strong>
+                <input
+                  type="text"
+                  name="SampleDecribe"
+                  id="SampleDecribe"
+                  onfocus="this.value=''"
+                  value="Describtion"
+                />
+              </div>
+              <div class="TwoBtn">
+                <div>
+                  <strong>Start: </strong>
+                  <input
+                    class="number"
+                    type="number"
+                    id="start"
+                    name="start"
+                    onfocus="this.value=''"
+                    value="100"
+                  />
                 </div>
-            </div>
+                <div>
+                  <strong>Stop: </strong>
+                  <input
+                    class="number"
+                    type="number"
+                    id="stop"
+                    name="stop"
+                    onfocus="this.value=''"
+                    value="900"
+                  />
+                </div>
+              </div>
+              <div class="TwoBtn">
+                <div>
+                  <strong>Step: </strong>
+                  <input
+                    class="number"
+                    type="number"
+                    id="step"
+                    name="step"
+                    onfocus="this.value=''"
+                    value="20"
+                  />
+                </div>
+                <div>
+                  <strong>Integration Time: </strong
+                  ><input
+                    class="number"
+                    type="number"
+                    id="initTime"
+                    onfocus="this.value=''"
+                    name="initTime"
+                    value="0"
+                  />
+                </div>
+              </div>
 
-            <div id="ADC" class="tabcontent" style="align-items: center; text-align: center;">
+              <div>
+                <strong>Measurment Mode: </strong
+                ><select id="mySelect" name="mode">
+                  <option value="absorption">Absorption</option>
+                  <option value="transmission">Transmission</option>
+                  <!-- <option value="transmission">Eneregy</option> -->
+                </select>
+              </div>
+              <div>
+                <strong>lamp Change Point: </strong>
+              </div>
+              <div class="TwoBtn">
+                <button onclick="startScan()">
+                  Scan
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"
+                    />
+                  </svg>
+                </button>
+                <button onclick="pauseScan()">
+                  Pause
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M360-320h80v-320h-80v320Zm160 0h80v-320h-80v320ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="TwoBtn">
+                <button id="savepreset" onclick="savepreset()">
+                  Save Preset
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z"
+                    />
+                  </svg>
+                </button>
+                <button id="loadpreset" onclick="showpreset()">
+                  Load Preset
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v240h-80v-80H200v400h280v80H200ZM760 0q-73 0-127.5-45.5T564-160h62q13 44 49.5 72T760-60q58 0 99-41t41-99q0-58-41-99t-99-41q-29 0-54 10.5T662-300h58v60H560v-160h60v57q27-26 63-41.5t77-15.5q83 0 141.5 58.5T960-200q0 83-58.5 141.5T760 0ZM200-640h560v-80H200v80Zm0 0v-80 80Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="presets" class="presets">
+          <ul class="blurred-list" id="presetlist">
+            <input type="text" id="search" placeholder="search &#128269;" />
+            <div id="nopresets"></div>
+          </ul>
+        </div>
+        <div class="presetname" id="presetname">
+          <div class="blurred-name">
+            <label class="presetlabel" for="name">Enter preset name:</label
+            ><br /><br />
+            <input
+              id="prestinput"
+              class="presetinput"
+              type="text"
+            /><br /><br />
+            <button class="presetbtn" id="savebtn" onclick="addtolist()">
+              save
+            </button>
+            <button class="presetbtn" id="savecancel" onclick="cancelpreset()">
+              cancel
+            </button>
+            <div id="nameexist"></div>
+          </div>
+        </div>
+
+        <div
+          id="ADC"
+          class="tabcontent"
+          style="align-items: center; text-align: center"
+        >
+          <div class="row">
+            <div class="col">
+              <h1>I2C Data:</h1>
+              <div id="i2cValue">Waiting for data...</div>
+            </div>
+            <div class="col">
+              <div class="TwoBtn">
+                <button onclick="readADC()">Start Reading</button>
+                <button onclick="pauseReading()">Pause Reading</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="FLC" class="tabcontent">
+          <div class="row">
+            <div class="col">
+              <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <label for="absorption">Absorption:</label>
+                  <input
+                    type="text"
+                    id="absorption"
+                    placeholder="Enter absorption"
+                  />
+                </div>
+                <div class="col">
+                  <label for="concentration">Concentration:</label>
+                  <input
+                    type="text"
+                    id="concentration"
+                    placeholder="Enter concentration"
+                  />
+                </div>
                 <div class="row">
-                    <div class="col">
-                        <h1>I2C Data:</h1>
-                        <div id="i2cValue">Waiting for data...</div>
-                    </div>
-                    <div class="col">
-                        <div class="TwoBtn">
-                            <button onclick="readADC()">Start Reading</button>
-                            <button onclick="pauseReading()">Pause Reading</button>
-                        </div>
-
-                    </div>
+                  <div class="TwoBtn">
+                    <button onclick="addPoint()">Add Point</button>
+                    <button onclick="clearAll()">Clear All</button>
+                  </div>
                 </div>
-            </div>
-            <div id="FLC" class="tabcontent">
-
                 <div class="row">
-                    <div class="col">
-                        <canvas id="myChart" width="400" height="400"></canvas>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <label for="absorption">Absorption:</label>
-                                <input type="text" id="absorption" placeholder="Enter absorption">
-
-                            </div>
-                            <div class="col">
-                                <label for="concentration">Concentration:</label>
-                                <input type="text" id="concentration" placeholder="Enter concentration">
-                            </div>
-                            <div class="row">
-                                <div class=" TwoBtn">
-                                    <button onclick="addPoint()">Add Point</button>
-                                    <button onclick="clearAll()">Clear All</button>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div id="messageBox">
-                                    <!-- Messages will be displayed here -->
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
+                  <div id="messageBox">
+                    <!-- Messages will be displayed here -->
+                  </div>
                 </div>
-
-
-
-
+              </div>
             </div>
-
-        </section>
-        <!---------------------------- START OF Footer ---------------------------->
-        <footer class="sticky" id="sticky">
-            <button class="foot_btn" id="hidefoot">hide</button>
-            <div class="footer-col" id="hidethis">
-                <h4>States</h4>
-                <ul>
-                    <li><label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label></li>
-                    <li><label for="">Visible Lamp Status: <span id="VIstateBar">"loading"</span></label></li>
-                    <li><label for="">Current Wavelength: <span id="WLstateBar">"loading"</span> </label></li>
-                    <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
-                    <li><label for="" class="DateTime" style="position: absolute; right: 0;margin-right: 30px;"> <span
-                                id="DateTime"></span></label></li>
-
-                </ul>
-            </div>
-
-        </footer>
-        <!---------------------------- END OF Footer ---------------------------->
-
+          </div>
+        </div>
+      </section>
+      <!---------------------------- START OF Footer ---------------------------->
+      <footer class="sticky" id="sticky">
+        <button class="foot_btn" id="hidefoot">hide</button>
+        <div class="footer-col" id="hidethis">
+          <h4>States</h4>
+          <ul>
+            <li>
+              <label for=""
+                >UV Lamp Status: <span id="UVstateBar">"loading"</span></label
+              >
+            </li>
+            <li>
+              <label for=""
+                >Visible Lamp Status:
+                <span id="VIstateBar">"loading"</span></label
+              >
+            </li>
+            <li>
+              <label for=""
+                >Current Wavelength: <span id="WLstateBar">"loading"</span>
+              </label>
+            </li>
+            <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+            <li>
+              <label
+                for=""
+                class="DateTime"
+                style="position: absolute; right: 0; margin-right: 30px"
+              >
+                <span id="DateTime"></span
+              ></label>
+            </li>
+          </ul>
+        </div>
+      </footer>
+      <!---------------------------- END OF Footer ---------------------------->
     </main>
     <script src="chart.js"></script>
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>

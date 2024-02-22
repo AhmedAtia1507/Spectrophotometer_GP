@@ -10,7 +10,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 * {
@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   background-color: #bbbbbb;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -31,10 +31,8 @@ body {
   /* Set container height to 100% of the viewport height */
 }
 
-
 section {
   padding: 0.5rem 0;
-
 }
 
 .row {
@@ -47,14 +45,12 @@ section h2 {
   margin-bottom: 4rem;
 }
 
-
 .col {
   padding: 1%;
   margin: 1%;
   flex: 0 0 30%;
   /* Takes up 50% of the container height */
   background-color: lightgreen;
-
 }
 
 .setup {
@@ -77,7 +73,7 @@ section h2 {
 }
 
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 /**========================================================================
@@ -160,7 +156,7 @@ nav li:first-child {
   font-weight: bolder;
 }
 
-@media(max-width:740px) {
+@media (max-width: 740px) {
   .hideOnMobile {
     display: none;
   }
@@ -180,7 +176,6 @@ nav li:first-child {
 *                           End Navbar
 *------------------------------------------------------------------------**/
 
-
 /**------------------------------------------------------------------------
 *                           sidebar
 *------------------------------------------------------------------------**/
@@ -199,7 +194,6 @@ nav li:first-child {
   height: 37px;
 }
 
-
 /* Style the buttons that are used to open the tab content */
 .tab button {
   display: block;
@@ -216,7 +210,6 @@ nav li:first-child {
   transition: all 0.2s;
 }
 
-
 .tab button.active {
   background-color: #234f68;
 }
@@ -224,7 +217,6 @@ nav li:first-child {
 .tablinks.inactive {
   background-color: transparent;
 }
-
 
 /* Style the tab content */
 .tabcontent {
@@ -259,8 +251,6 @@ nav li:first-child {
 }
 
 /*---------------------------- END OF SIDEBAR ----------------------------*/
-
-
 
 /**========================================================================
 *                           SCAN Tab
@@ -325,8 +315,8 @@ nav li:first-child {
   display: flex;
   flex-direction: row;
 }
-.TwoBtn div{
-  margin-right:20px;
+.TwoBtn div {
+  margin-right: 20px;
 }
 
 .TwoBtn button {
@@ -433,7 +423,6 @@ nav li:first-child {
   list-style-type: decimal;
   margin-bottom: 5px;
   cursor: pointer;
-
 }
 
 .presets li:hover {
@@ -465,7 +454,6 @@ nav li:first-child {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 6;
-
 }
 
 #search {
@@ -499,8 +487,6 @@ nav li:first-child {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
-
 .presetname .presetbtn {
   margin-left: 30px;
   padding: 5px;
@@ -509,8 +495,6 @@ nav li:first-child {
   background-color: #2464b3;
   cursor: pointer;
 }
-
-
 
 .presetname .presetinput {
   padding: 4px;
@@ -526,19 +510,16 @@ nav li:first-child {
   display: block;
 }
 
-.number{
+.number {
   width: 60px;
 }
 
 /*---------------------------- END OF SCAN ----------------------------*/
 
-
-
 /**------------------------------------------------------------------------
 *                           Footer
 *------------------------------------------------------------------------**/
 footer {
-
   display: flex;
   color: #f0f0f0;
   flex-wrap: wrap;
@@ -569,7 +550,7 @@ footer ul {
 }
 
 .footer-col h4::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
@@ -592,7 +573,7 @@ ul li label {
   margin-right: 10px;
 }
 
-@media(max-width: 740px) {
+@media (max-width: 740px) {
   .footer-col {
     width: 100%;
     margin-bottom: 5px;
@@ -608,10 +589,10 @@ ul li label {
   }
 }
 
-@media(max-width: 555px) {}
+@media (max-width: 555px) {
+}
 
 .sticky {
-
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -655,7 +636,6 @@ ul li label {
 }
 
 /*---------------------------- END OF Footer ----------------------------*/
-
 
 /**------------------------------------------------------------------------
  *                           TABLE CONTENT
