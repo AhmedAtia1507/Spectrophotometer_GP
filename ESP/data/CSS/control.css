@@ -1,0 +1,271 @@
+body {
+    user-select: none;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ccc9c9;
+}
+
+header {
+    background-color: #0a0e24;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+
+    
+}
+.col {
+    width: 44%;
+    min-width: 200px;
+    margin-left: 10px;
+    margin-top: 10px;
+    background:#33324e69;
+    color: white;
+    padding: 20px;
+    padding-bottom: 40px;
+    box-shadow: 0 0 29px 0 black;
+    border-radius:  5px;
+}
+
+.tab-content {
+    font-weight: 600;
+    display: none;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.tab-content.active {
+    display: block;
+    
+}
+
+table {
+    padding: 20px;
+    width: calc(80% + 20px);
+    border-collapse: collapse;
+    position: relative;
+    box-shadow: 0 0 29px 0 black;
+}
+
+thead {
+    background-color: #0a0e24;
+    color: #fffafa;
+}
+
+td, th {
+    text-align: center;
+    border: 1px solid #000406;
+    padding: 3px;  /* Adjust padding for better mobile display */
+}
+.grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Three equal columns */
+      gap: 20px; /* Adjust the gap between grid items */
+    }
+
+.grid-item {
+      background-color: #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+
+@media only screen and (max-width: 700px) {
+    td, th {
+        font-size: 12px;  
+        padding: 1px;
+    }
+    .col{
+        width: 80%;
+    }
+    body{
+        font-size: small;
+    }
+    .grid-container{
+        grid-template-columns: repeat(1, 1fr); /* Three equal columns */
+      
+    }
+    
+}
+
+
+
+.logout-button {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #0400ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    width: fit-content;
+    cursor: pointer;
+    
+}
+button{
+   background-color: #0a0e24;
+    color: white; 
+    padding: 3px;
+    margin-left: 10px;
+    border: 1px solid black;
+    transition: all 0.3s;
+
+ }
+button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: transparent;
+    transform: translateY(3px);
+    }
+
+main {
+    display: flex;
+    flex: 1;
+}
+.container {
+    transition: opacity 0.1s 300ms;
+    opacity: 0;
+}
+
+nav {
+    opacity: 0;
+    background-color: #33324e;
+    color: #ddd;
+    width: 0;
+    max-width: 250px;
+    transition: width 0.4s ease-out;
+}
+
+
+nav ul {
+    list-style:none;
+    margin-left: -20px;
+}
+
+nav ul li { 
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+    max-width: 200px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.5s ;
+    margin-right: 20px;
+}
+#li0{
+    transition: width 0.3s 200ms ease-out;
+    max-width: 230px;
+    padding: 10px 10px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    line-height: 0.3;
+}
+
+
+nav ul li:hover {
+    
+    background-color: #ddd;
+    color: black;
+    transform: scale(1.05);
+}
+
+nav ul li.active {
+    background-color: #007bff; /* Change to the color you prefer */
+    color: white;
+}
+
+/* Style for the checkbox container */
+.toggle-container {
+    position: absolute;
+  }
+  
+/* Hide the default checkbox */
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+
+/* Style for the toggle switch track */
+.toggle-track {
+    margin-left: 20px;
+    width: 50px;
+    height: 30px;
+    background-color: red; /* Initial color when off */
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Style for the toggle switch thumb */
+.toggle-thumb {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s;
+}
+
+.state {
+    padding: 10px;
+    border-radius: 5px;
+    width: 40%;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.state,.toggle-container,label{
+    display: inline;
+}
+
+.underlined-heading {
+    width: 100%;
+    padding: 5px 20px;
+    margin-top: -20px;
+    margin-left: -20px;
+    color: white;
+    background-color: #0a0e24;
+    text-align: center;
+    text-decoration-line: underline;
+
+}
+.alert{
+    color: yellow;
+
+}
+.good{
+    color: blue;
+
+}
+/**------------------------------------------------------------------------
+ * ==================== motors section==========================
+ *------------------------------------------------------------------------**/
+.currentstep{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 3px;
+    margin-right: 4px;
+}
+.currentstep,label{
+    display: inline;
+    font-size: small;
+}
+
+#increasestep {
+    color: black;
+      width: 50px; /* Adjust the width as needed */
+      text-align: center;
+}
+
