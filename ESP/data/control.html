@@ -108,54 +108,60 @@
     </div>
 
     <div id="tab2" class="tab-content"></div>
+
     <div id="tab3" class="tab-content">
       <h2 style="text-decoration: double;">Motors Test and Calibration</h2>
-      <div class="row">
-        <div class="col" style="padding-top: 0%;">
-          <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
+
+      <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
+      <div class="grid-container">
+        <div class="grid-item">
           <label for="currentstep">current step</label>
           <div class="currentstep" id="lampstep"> 100 </div>
-          <button id="lampmotorhome" onclick="gohome(this)">Go Home</button>
         </div>
-        <div class="col" style="padding-top: 0%;">
-          <h3 style="text-decoration: underline;">Filter Wheel Motor</h3>
-          <label for="currentstep">current step</label>
-          <div class="currentstep" id="filterstep"> 100 </div>
-          <button id="filtermotorhome" onclick="gohome(this)">Go Home</button>
+        <div class="grid-item">
+          <button id="lampmotorhome" onclick="gohome(this)" title="press to send motor to home point">Go Home</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col" style="padding-top: 0%; width: 80%;">
-          <h3 style="text-decoration: underline;">Grating Motor</h3>
-          <div class="grid-container">
-            <div class="grid-item">
-              <label for="currentstep" class="">current step</label>
-              <div class="currentstep" id="gratingstep"> 100 </div>
-            </div>
-            <div class="grid-item">
-              <label for="currentstep">current wavelength</label>
-              <div class="currentstep" id="gratingwave"> 1200 </div>
-            </div>
-            <div class="grid-item">
-              <label for="increasestep">move motor to</label>
-              <input type="number" id="increasestep" min="0" max="1000" oninput="validat(min,max)" value="0">
-              <label for="increasestep"> steps</label>
-            </div>
-            <button onclick="savecalb()">save calibration</button>
-            <button id="gratingmotorhome" onclick="gohome(this)">Go Home</button>
-          </div>
-        </div>
-      </div>
+      
+      <h3 style="text-decoration: underline;">Grating Motor</h3>
       <div class="grid-container">
-        <div class="grid-item">Item 1</div>
-        <div class="grid-item">Item 2</div>
-        <div class="grid-item">Item 3</div>
-        <div class="grid-item">Item 2</div>
-        <div class="grid-item">Item 3</div>
-        <!-- Add more items as needed -->
+        <div class="grid-item">
+          <label for="currentstep">current step</label>
+          <div class="currentstep" id="gratingstep"> 100 </div>
+        </div>
+        <div class="grid-item">
+          <button title="press to send motor to home point" id="gratingmotorhome" onclick="gohome(this)">Go
+            Home</button>
+        </div>
       </div>
-      <div id="current"></div>
 
+
+      <h3 style="text-decoration: underline;">Filter Wheel Motor</h3>
+      <div class="grid-container">
+        <div class="grid-item">
+          <label for="currentstep" class="">current step</label>
+          <div class="currentstep" id="filterstep"> 100 </div>
+        </div>
+        <div class="grid-item">
+          <label for="currentstep">current wavelength</label>
+          <div class="currentstep" id="filterwave"> 1200 </div>
+        </div>
+        <div class="grid-item">
+          <label for="increasestep">move motor to</label>
+          <input type="number" id="increasestep" min="0" max="1000" oninput="validat(min,max)" value="0">
+          <label for="increasestep"> steps</label>
+        </div>
+        <div class="grid-item"></div>
+        <div class="grid-item">
+          <button onclick="savecalb()" title="click to update the new calibration step">save calibration</button>
+        </div>
+        <div class="grid-item">
+          <button id="filtermotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
+            Home</button>
+        </div>
+      </div>
+
+      <div id="current"></div>
     </div>
 
     <div id="tab4" class="tab-content">

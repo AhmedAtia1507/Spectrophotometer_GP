@@ -19,5 +19,6 @@ void handleSupplyStatus();
 void notifyClients(String state);
 void savetime(const DynamicJsonDocument &doc);
 void loadtime();
+void sendsteps();
 
 #endif // HANDLE_MESSAGE_H

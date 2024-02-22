@@ -179,11 +179,23 @@ void savetime(const DynamicJsonDocument &doc)
 {
     String command = doc["updatetime"].as<String>();
     Serial.print(command);
-    // String respnse = sendCMD(command + "\n");
+    // String respnse = sendCMD("savedate "+command + "\n");
     String respnse = "success";
     Serial.print(respnse);
     DynamicJsonDocument object(29);
     object["timeupdated"] = respnse;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
+void sendsteps()
+{
+    String command = "sndmotorsteps\n";
+    // String response = sendCMD(command);
+    String response = "30-40-50-1100\n";
+    Serial.print(response);
+    DynamicJsonDocument object(60);
+    object["motorssteps"] = response;
     String jsonString;
     serializeJson(object, jsonString);
     notifyClients(jsonString);
