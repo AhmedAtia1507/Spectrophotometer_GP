@@ -257,27 +257,16 @@ let isScanning = false;
 var intensityData = [];
 var wavelengthData = [];
 var chartScan;
+let chartData;
 
-// Initialize chartData
-let chartData = {
-  labels: [],
-  datasets: [{
-    label: 'Scan Curve',
-    data: [],
-    borderColor: '#3498db',
-    borderWidth: 2,
-    fill: false,
-    lineTension: 0.4 // Adjust the line tension for the curve
-  }]
-};
 
 const ctxScan = document.getElementById('chartScan').getContext('2d');
 chartScan = new Chart(ctxScan, {
   type: 'line',
   data: chartData,
   options: {
-    responsive: false, // Set responsive to false
-    maintainAspectRatio: false, // Set maintainAspectRatio to false
+    responsive: true, // Set responsive to false
+    maintainAspectRatio: true, // Set maintainAspectRatio to false
     scales: {
       x: {
         type: 'linear',
@@ -287,6 +276,7 @@ chartScan = new Chart(ctxScan, {
         type: 'linear',
         position: 'left'
       }
+      
     }
   }
 });
@@ -365,19 +355,14 @@ function pauseScan() {
 let first = 0;
 function scan() {
   const SampleID = document.getElementById('SampleID').value;
-  const SampleDecribe = document.getElementById('SampleDecribe').value;
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
-  const initTimeInput = parseFloat(document.getElementById('initTime').value);
+  const curveColor = document.getElementById('curveColor').value;
+
   const modeInput = document.getElementById('mySelect').value;
-  // add curve to chart 
-  if (first == 0) {
-    removeCurve(0);
-    first = 1;
-  }
   
-  addCurve([1,2,3,4], [1,2,3,4], 'red', SampleID);
+  addCurve([1,2,3,4], [1,2,3,4], curveColor, SampleID);
   chartData.labels = []; // wavelength
   chartData.datasets[0].data = []; // intensity
 
@@ -749,17 +734,14 @@ function addHtmlTableRow() {
   cell9.innerHTML = '<input type="checkbox" value="Delete" name="check-tab1">';
   changeColor();
 }
-
 function deleteHtmlTableRow() {
   var table1 = document.getElementById("table"),
     checkboxes = document.getElementsByName("check-tab1");
   for (var i = 0; i < checkboxes.length; i++)
     if (checkboxes[i].checked) {
-
       var index = table1.rows[i + 1].rowIndex;
       removeCurve(index-1);
       table1.deleteRow(index);
-
       i--;
     }
 }
@@ -774,17 +756,17 @@ function changeCurveColor(index, color) {
 
 function changeColor() {
   var rIndex, table = document.getElementById('table');
+  checkboxes = document.getElementsByName("check-tab1");
   for (var i = 1; i < table.rows.length; i++) {
     table.rows[i].onclick = function () {
-      rIndex = this.rowIndex;
-      console.log(rIndex);
-      var color = this.cells[6].querySelector('select').value;
-      changeCurveColor(rIndex-1, color);
+      if (this.cells[8].querySelector('input').checked) {
+        rIndex = this.rowIndex;
+        var color = this.cells[6].querySelector('select').value;
+        changeCurveColor(rIndex-1, color);
+      }
     }
   }
-
 }
-changeColor();
 
 setTimeout(showfoot, 1000); //autohide foot in 1sec
 
