@@ -1,12 +1,13 @@
 body {
     user-select: none;
+    overflow-y: hidden;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #ccc9c9;
+    background-color: hsl(0, 3%, 79%);
 }
 
 header {
@@ -31,11 +32,12 @@ header {
     color: white;
     padding: 20px;
     padding-bottom: 40px;
-    box-shadow: 0 0 29px 0 black;
     border-radius:  5px;
 }
 
 .tab-content {
+     overflow-y: auto;
+     height: 450px;
     font-weight: 600;
     display: none;
     margin-left: 10px;
@@ -52,7 +54,6 @@ table {
     width: calc(80% + 20px);
     border-collapse: collapse;
     position: relative;
-    box-shadow: 0 0 29px 0 black;
 }
 
 thead {
@@ -66,9 +67,10 @@ td, th {
     padding: 3px;  /* Adjust padding for better mobile display */
 }
 .grid-container {
-    border: 1px solid rgba(0, 0, 0, 0.11);
+    border: 1px solid rgba(34, 34, 34, 0.274);
       display: grid;
       padding: 10px;
+      margin-right: 10px;
       grid-template-columns: repeat(2, 1fr); /* Three equal columns */
       gap: 10px; /* Adjust the gap between grid items */
     }
@@ -124,7 +126,6 @@ button:hover{
     cursor: pointer;
     color: black;
     background-color: transparent;
-    transform: translateY(3px);
     }
 
 main {
@@ -178,7 +179,6 @@ nav ul li:hover {
     
     background-color: #ddd;
     color: black;
-    transform: scale(1.05);
 }
 
 nav ul li.active {
@@ -188,7 +188,8 @@ nav ul li.active {
 
 /* Style for the checkbox container */
 .toggle-container {
-    position: absolute;
+    position:absolute;
+    
   }
   
 /* Hide the default checkbox */
@@ -231,17 +232,7 @@ nav ul li.active {
     display: inline;
 }
 
-.underlined-heading {
-    width: 100%;
-    padding: 5px 20px;
-    margin-top: -20px;
-    margin-left: -20px;
-    color: white;
-    background-color: #0a0e24;
-    text-align: center;
-    text-decoration-line: underline;
 
-}
 .alert{
     color: yellow;
 
