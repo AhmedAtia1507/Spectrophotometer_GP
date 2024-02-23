@@ -179,72 +179,68 @@
 
           </div>
         </div>
-   
 
-      <div id="presets" class="presets">
-        <ul class="blurred-list" id="presetlist">
-          <input type="text" id="search" placeholder="search &#128269;" />
-          <div id="nopresets"></div>
-        </ul>
-      </div>
-      <div class="presetname" id="presetname">
-        <div class="blurred-name">
-          <label class="presetlabel" for="name">Enter preset name:</label><br /><br />
-          <input id="prestinput" class="presetinput" type="text" /><br /><br />
-          <button class="presetbtn" id="savebtn" onclick="addtolist()">
-            save
-          </button>
-          <button class="presetbtn" id="savecancel" onclick="cancelpreset()">
-            cancel
-          </button>
-          <div id="nameexist"></div>
+
+        <div id="presets" class="presets">
+          <ul class="blurred-list" id="presetlist">
+            <input type="text" id="search" placeholder="search &#128269;" />
+            <div id="nopresets"></div>
+          </ul>
         </div>
-      </div>
-
-      <div id="ADC" class="tabcontent" style="align-items: center; text-align: center">
-        <div class="row">
-          <div class="col">
-            <h1>I2C Data:</h1>
-            <div id="i2cValue">Waiting for data...</div>
+        <div class="presetname" id="presetname">
+          <div class="blurred-name">
+            <label class="presetlabel" for="name">Enter preset name:</label>
+            <input id="prestinput" class="presetinput" type="text" maxlength="12" />
+            <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
+            <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+            <div id="nameexist"></div>
           </div>
-          <div class="col">
-            <div class="TwoBtn">
-              <button onclick="readADC()">Start Reading</button>
-              <button onclick="pauseReading()">Pause Reading</button>
+        </div>
+
+        <div id="ADC" class="tabcontent" style="align-items: center; text-align: center">
+          <div class="row">
+            <div class="col">
+              <h1>I2C Data:</h1>
+              <div id="i2cValue">Waiting for data...</div>
+            </div>
+            <div class="col">
+              <div class="TwoBtn">
+                <button onclick="readADC()">Start Reading</button>
+                <button onclick="pauseReading()">Pause Reading</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="FLC" class="tabcontent">
-        <div class="row">
-          <div class="col">
-            <canvas id="myChart" width="400" height="400"></canvas>
-          </div>
-          <div class="col">
-            <div class="row">
-              <div class="col">
-                <label for="absorption">Absorption:</label>
-                <input type="text" id="absorption" placeholder="Enter absorption" />
-              </div>
-              <div class="col">
-                <label for="concentration">Concentration:</label>
-                <input type="text" id="concentration" placeholder="Enter concentration" />
-              </div>
+        <div id="FLC" class="tabcontent">
+          <div class="row">
+            <div class="col">
+              <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col">
               <div class="row">
-                <div class="TwoBtn">
-                  <button onclick="addPoint()">Add Point</button>
-                  <button onclick="clearAll()">Clear All</button>
+                <div class="col">
+                  <label for="absorption">Absorption:</label>
+                  <input type="text" id="absorption" placeholder="Enter absorption" />
                 </div>
-              </div>
-              <div class="row">
-                <div id="messageBox">
-                  <!-- Messages will be displayed here -->
+                <div class="col">
+                  <label for="concentration">Concentration:</label>
+                  <input type="text" id="concentration" placeholder="Enter concentration" />
+                </div>
+                <div class="row">
+                  <div class="TwoBtn">
+                    <button onclick="addPoint()">Add Point</button>
+                    <button onclick="clearAll()">Clear All</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div id="messageBox">
+                    <!-- Messages will be displayed here -->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
     <!---------------------------- START OF Footer ---------------------------->
     <footer class="sticky" id="sticky">

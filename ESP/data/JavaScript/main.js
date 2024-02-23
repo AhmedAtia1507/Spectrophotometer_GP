@@ -276,7 +276,7 @@ chartScan = new Chart(ctxScan, {
         type: 'linear',
         position: 'left'
       }
-      
+
     }
   }
 });
@@ -331,7 +331,7 @@ function startScan() {
     scan();
     //isScanning = true;
     //disableInputs();
-   
+
 
   }
 }
@@ -361,8 +361,8 @@ function scan() {
   const curveColor = document.getElementById('curveColor').value;
 
   const modeInput = document.getElementById('mySelect').value;
-  
-  addCurve([1,2,3,4], [1,2,3,4], curveColor, SampleID);
+
+  addCurve([1, 2, 3, 4], [1, 2, 3, 4], curveColor, SampleID);
   chartData.labels = []; // wavelength
   chartData.datasets[0].data = []; // intensity
 
@@ -478,10 +478,7 @@ function showpreset() {
           console.log(child.id);
           // Check if the element has an id and it is not "nopresets"
           if (child.id !== 'nopresets' && child.id !== 'search') {
-
-
             myList.removeChild(child);
-            console.log('i deletet the child');
           }
         }
 
@@ -493,7 +490,6 @@ function showpreset() {
             var itemName = myObj[file];
             var textSpan = document.createElement("span");
             var textNode = document.createTextNode(itemName);
-
             textSpan.appendChild(textNode);
             newItem.appendChild(textSpan);
             myList.insertBefore(newItem, myList.lastChild);
@@ -515,18 +511,20 @@ function showpreset() {
                 var itemName = event.data;
                 var textNode = document.createTextNode(itemName);
                 newItem.appendChild(textNode);
-
-                myreadings.insertBefore(newItem, myreadings.lastChild);
+                //myreadings.insertBefore(newItem, myreadings.lastChild);
                 if (myObj.hasOwnProperty('loaded')) {
                   var startValue = parseInt(myObj.start, 10);
                   var stopValue = parseInt(myObj.stop, 10);
                   var stepValue = parseInt(myObj.step, 10);
-                  var speedValue = parseInt(myObj.speed, 10);
+                  var nameValue = myObj.id;
+                  var discription = myObj.speed;
                   var initTimeValue = parseInt(myObj.inittime, 10);
+
                   document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
                   document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
                   document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
-                  document.getElementById('speed').value = isNaN(speedValue) ? '' : speedValue;
+                  document.getElementById('SampleID').value = nameValue;
+                  document.getElementById('SampleDecribe').value = discription;
                   document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
 
                   if ((myObj.mode.trim() === 'transmission')) {
@@ -542,6 +540,7 @@ function showpreset() {
               }
 
             });
+
           })(i);
         }
       }
@@ -557,8 +556,8 @@ function showpreset() {
 
 
 function deletepreset(myList, names, newItem) {
-  var deleteButton = document.createElement("button");
-  deleteButton.innerHTML = "delete";
+  var deleteButton = document.createElement("div");
+  deleteButton.textContent = "delete";
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", function () {
     myList.removeChild(newItem);
@@ -569,10 +568,8 @@ function deletepreset(myList, names, newItem) {
     websocket.send(JSON.stringify(message));
     showpreset();
   });
-
   // Append the delete button to the new list item
   newItem.appendChild(deleteButton);
-
 }
 function savepreset() {
   document.getElementById('nameexist').innerHTML = '';
@@ -589,17 +586,18 @@ function addtolist() {
       let startInput = parseFloat(document.getElementById('start').value);
       let stopInput = parseFloat(document.getElementById('stop').value);
       let stepInput = parseFloat(document.getElementById('step').value);
-      let speedInput = parseFloat(document.getElementById('speed').value);
+      let nameInput = document.getElementById('SampleID').value;
+      let disInput = document.getElementById('SampleDecribe').value;
       let initTimeInput = parseFloat(document.getElementById('initTime').value);
       let modeInput = document.getElementById('mySelect').value;
       var message = {
         savepreset: 'savepreset',
-        id: '1',
+        id: nameInput,
         name: itemName,
         start: startInput,
         stop: stopInput,
         step: stepInput,
-        speed: speedInput,
+        speed: disInput,
         inittime: initTimeInput,
         mode: modeInput,
       };
@@ -740,7 +738,7 @@ function deleteHtmlTableRow() {
   for (var i = 0; i < checkboxes.length; i++)
     if (checkboxes[i].checked) {
       var index = table1.rows[i + 1].rowIndex;
-      removeCurve(index-1);
+      removeCurve(index - 1);
       table1.deleteRow(index);
       i--;
     }
@@ -762,7 +760,7 @@ function changeColor() {
       if (this.cells[8].querySelector('input').checked) {
         rIndex = this.rowIndex;
         var color = this.cells[6].querySelector('select').value;
-        changeCurveColor(rIndex-1, color);
+        changeCurveColor(rIndex - 1, color);
       }
     }
   }

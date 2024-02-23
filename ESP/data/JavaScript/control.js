@@ -340,6 +340,25 @@ function handleMessage(event) {
     document.getElementById("filterwave").textContent = ary[3];
 
   }
+  else if (myObj.hasOwnProperty("detector")) {
+    console.log(myObj.detector)
+    document.getElementById("detector").textContent = myObj.detector;
+  }
+  else if (myObj.hasOwnProperty("gohome")) {
+    console.log(myObj.type);
+    if (myObj.type == 'lampmotorhome') {
+      document.getElementById("lampstep").textContent = myObj.step;
+      document.getElementById("filterwave").textContent = myObj.wavelength;
+    }
+    else if (myObj.type == 'gratingmotorhome') {
+      document.getElementById("gratingstep").textContent = myObj.step;
+      document.getElementById("filterwave").textContent = myObj.wavelength;
+    }
+    else if (myObj.type == 'filtermotorhome') {
+      document.getElementById("filterstep").textContent = myObj.step;
+      document.getElementById("filterwave").textContent = myObj.wavelength;
+    }
+  }
 }
 
 /**------------------------------------------------------------------------
@@ -434,5 +453,6 @@ function gohome(element) {
     home: "gohome",
     type: element.id
   }
+  console.log(element.id);
   websocket.send(JSON.stringify(motor));
 }

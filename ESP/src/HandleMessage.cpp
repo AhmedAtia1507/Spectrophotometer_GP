@@ -117,7 +117,7 @@ void handleLampControl(const String &lampType, bool turnOn)
 void handleShowPresets()
 {
     const char *directory = "/presets";
-    JsonObject result = getFilesJson(directory);
+    DynamicJsonDocument result = getFilesJson(directory);
     String jsonString;
     serializeJson(result, jsonString);
     notifyClients(jsonString);
@@ -130,6 +130,7 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
     Serial.print(path);
     String jsonString;
     DynamicJsonDocument preset = readFromDatabase(path.c_str());
+    preset["loaded"] = "loaded";
     serializeJson(preset, jsonString);
     notifyClients(jsonString);
 }
