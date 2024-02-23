@@ -61,11 +61,12 @@ td, th {
 
 .grid-item {
     padding: 10px;
-    text-align: left;  
+    text-align: left;
+      
     }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 720px) {
     td, th {
         font-size: 12px;  
         padding: 1px;
@@ -169,15 +170,10 @@ nav ul li:hover {
 }
 
 nav ul li.active {
-    background-color: #007bff; /* Change to the color you prefer */
+    background-color: #1a5696; /* Change to the color you prefer */
     color: white;
 }
 
-/* Style for the checkbox container */
-.toggle-container {
-    position:absolute;
-    
-  }
   
 /* Hide the default checkbox */
 .toggle-container input[type="checkbox"] {
@@ -227,9 +223,9 @@ nav ul li.active {
     width: fit-content;
     padding: 3px;
     margin-right: 4px;
+    display: inline-block;
 }
 .currentstep,label{
-    display: inline;
     font-size: small;
 }
 
