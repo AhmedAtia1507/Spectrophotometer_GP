@@ -9,6 +9,18 @@ body {
     min-height: 100vh;
     background-color: hsl(0, 3%, 79%);
 }
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.342); /* Semi-transparent gray background */
+    z-index: 999; /* Ensure the overlay is above other elements */
+    cursor:wait; /* Set cursor style to not-allowed */
+}
+
 
 header {
     background-color: #0a0e24;

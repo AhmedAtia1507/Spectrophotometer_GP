@@ -338,15 +338,17 @@ function handleMessage(event) {
     document.getElementById("gratingstep").textContent = ary[1];
     document.getElementById("filterstep").textContent = ary[2];
     document.getElementById("filterwave").textContent = ary[3];
-
+    syncstep();
   }
   else if (myObj.hasOwnProperty("detector")) {
     console.log(myObj.detector)
     document.getElementById("detector").textContent = myObj.detector;
   }
   else if (myObj.hasOwnProperty("gohome")) {
-    console.log(myObj.type);
+
+    console.log(myObj);
     if (myObj.type == 'lampmotorhome') {
+      console.log("lammmmmp");
       document.getElementById("lampstep").textContent = myObj.step;
       document.getElementById("filterwave").textContent = myObj.wavelength;
     }
@@ -358,6 +360,21 @@ function handleMessage(event) {
       document.getElementById("filterstep").textContent = myObj.step;
       document.getElementById("filterwave").textContent = myObj.wavelength;
     }
+    togglePageState();
+    syncstep();
+  }
+  else if (myObj.hasOwnProperty("stepsaved")) {
+    console.log(myObj.stepsaved);
+    var display = document.getElementById("stepsaved");
+    display.style.color = "green";
+    display.textContent = myObj.stepsaved;
+    setTimeout(function () {
+      document.getElementById("stepsaved").innerHTML = "";
+    }, 4000);
+  }
+  else if (myObj.hasOwnProperty("motermoved")) {
+    togglePageState();
+
   }
 }
 
@@ -432,6 +449,17 @@ function updateElement(dateTime) {
 /**------------------------------------------------------------------------
  * ==================== motors ==========================
  *------------------------------------------------------------------------**/
+
+//sechronize current step with input
+function syncstep() {
+  var filterStepText = document.getElementById("filterstep").innerText;
+  var filterStepNumber = parseInt(filterStepText, 10); // or parseFloat for decimal numbers
+  document.getElementById("increasestep").value = filterStepNumber;
+}
+
+
+
+
 function validat(min, max) {
   var inputElement = document.getElementById('increasestep');
   var currentValue = parseInt(inputElement.value);
@@ -444,15 +472,42 @@ function validat(min, max) {
   if (currentValue) {
     var latsetstep = document.getElementById('increasestep').value
     console.log(latsetstep);
+    var moveto = {
+      movemoter: "movto-" + latsetstep,
+    };
+    togglePageState();
+    websocket.send(JSON.stringify(moveto));
+
   }
 }
 
 
 function gohome(element) {
+  togglePageState();
+
   var motor = {
-    home: "gohome",
+    gohome: "gohome",
     type: element.id
   }
   console.log(element.id);
   websocket.send(JSON.stringify(motor));
 }
+function savecalb() {
+  var correctstep = document.getElementById('filterstep').textContent;
+  var correctwave = document.getElementById('filterwave').textContent;
+
+  console.log(correctstep);
+  var savethis = {
+    savethis: 'savestep-' + correctstep,
+    wavelength: 'savewave-' + correctwave,
+  }
+  websocket.send(JSON.stringify(savethis));
+}
+
+
+//function to wait for the motor to move
+function togglePageState() {
+  var overlay = document.getElementById('overlay');
+  overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
+}
+togglePageState();

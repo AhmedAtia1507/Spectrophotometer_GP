@@ -201,3 +201,48 @@ void sendsteps()
     serializeJson(object, jsonString);
     notifyClients(jsonString);
 }
+void handleGoHome(const DynamicJsonDocument &doc)
+{
+    String motortype = doc["type"];
+    Serial.print(motortype);
+    String command = motortype + "\n";
+    // String response = sendCMD(command);
+    // String wavelength = sendCMD("crnt-wav\n");
+    String response = "0";
+    String wavelength = "878";
+    DynamicJsonDocument object(90);
+    object["gohome"] = "gone";
+    object["step"] = response;
+    object["type"] = motortype;
+    object["wavelength"] = wavelength;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
+
+void handleSavestep(const DynamicJsonDocument &doc)
+{
+    String correctstep = doc["savethis"];
+    String correctwave = doc["wavelength"];
+    // String response = sendCMD(correctstep+"\n");
+    // String wavelength = sendCMD(correctwave+"\n");
+    String response = "saved";
+    // String wavelength = "878";
+    DynamicJsonDocument object(90);
+    object["stepsaved"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
+void handlemovestep(const DynamicJsonDocument &doc)
+{
+    String correctstep = doc["movemoter"];
+    // String response = sendCMD(correctstep+"\n");
+    String response = "moved";
+    DynamicJsonDocument object(90);
+    object["motermoved"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+    sendsteps();
+}

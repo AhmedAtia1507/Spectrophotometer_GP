@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <div class="overlay" id="overlay" title="wait for the motor to move"></div>
   <header>
     <h1>SpectoPhotoMeter test mode</h1>
   </header>
@@ -164,6 +165,7 @@
 
         <div class="grid-item">
           <button onclick="savecalb()" title="click to update the new calibration step">save calibration</button>
+          <div id="stepsaved"></div>
         </div>
         <div class="grid-item">
           <button id="filtermotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
