@@ -106,8 +106,20 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     {
       savetime(doc);
     }
-    else if (doc.containsKey("motors")){
+    else if (doc.containsKey("motors"))
+    {
       sendsteps();
+    }
+    else if (doc.containsKey("gohome"))
+    {
+      handleGoHome(doc);
+    }
+    else if (doc.containsKey("savethis")){
+      handleSavestep(doc);
+    }
+    else if (doc.containsKey("movemoter"))
+    {
+      handlemovestep(doc);
     }
 
     else if (doc.containsKey("command"))

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <div class="overlay" id="overlay" title="wait for the motor to move"></div>
   <header>
     <h1>SpectoPhotoMeter test mode</h1>
   </header>
@@ -45,43 +46,49 @@
 
     <div id="tab1" class="tab-content active">
       <h2 style="text-decoration: underline">Lamps test</h2>
-      <div class="row">
-        <div class="col">
-          <h2 class="underlined-heading">uv lamp test</h2>
+      <h2 class="underlined-heading">uv lamp test</h2>
+
+      <div class="grid-container">
+        <div class="grid-item">
           <label for="uvstate">current state:</label>
           <p class="state" id="uvstate"></p>
-          <br>
-          <br>
-          <label for="checkbox"> tap to turn uv lamp on/off </label>
-          <label class="toggle-container">
-            <input type="checkbox" id="uvin" />
-            <div class="toggle-track" id="uvcheck">
-              <div class="toggle-thumb" id="uvthumb"></div>
-            </div>
-          </label>
         </div>
-        <div class="col">
-          <h2 class="underlined-heading">visible lamp test</h2>
-          <label for="vistate">current state:</label>
-          <p class="state" id="vistate"></p>
-          <br>
-          <br>
-          <label for="checkbox"> tap to turn visible lamp on/off </label>
-          <label class="toggle-container">
-            <input type="checkbox" id="viin" />
-            <div class="toggle-track" id="vicheck">
-              <div class="toggle-thumb" id="vithumb"></div>
-            </div>
-          </label>
+        <div class="grid-item">
+          <div class="grid-container" style="border: none;">
+            <label for="checkbox"> tap to turn uv lamp on/off </label>
+            <label class="toggle-container">
+              <input type="checkbox" id="uvin" />
+              <div class="toggle-track" id="uvcheck">
+                <div class="toggle-thumb" id="uvthumb"></div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
-      <br />
-      <br />
-      <hr />
-      <hr />
-      <hr />
-      <br />
+      <h2 class="underlined-heading">visible lamp test</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <label for="vistate">current state:</label>
+          <p class="state" id="vistate"></p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-container" style="border: none;">
+            <label for="checkbox"> tap to turn visible lamp on/off </label>
+            <div class="toggle-container">
+              <input type="checkbox" id="viin" />
+              <div class="toggle-track" id="vicheck">
+                <div class="toggle-thumb" id="vithumb"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+
+
+
+    <div id="tab2" class="tab-content">
       <h2 style="text-decoration: underline">power supplies test</h2>
       <table>
         <thead>
@@ -105,39 +112,43 @@
       </table>
       <br />
       <br />
-    </div>
 
-    <div id="tab2" class="tab-content"></div>
+    </div>
 
     <div id="tab3" class="tab-content">
       <h2 style="text-decoration: double;">Motors Test and Calibration</h2>
-
-      <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
       <div class="grid-container">
         <div class="grid-item">
-          <label for="currentstep">current step</label>
-          <div class="currentstep" id="lampstep"> 100 </div>
+          <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
+          <div class="grid-container" style="border: none;">
+            <div class="grid-item">
+              <label for="currentstep">current step</label>
+              <div class="currentstep" id="lampstep"> 100 </div>
+            </div>
+            <div class="grid-item">
+              <button id="lampmotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
+                Home</button>
+            </div>
+          </div>
         </div>
         <div class="grid-item">
-          <button id="lampmotorhome" onclick="gohome(this)" title="press to send motor to home point">Go Home</button>
+          <h3 style="text-decoration: underline;">Grating Motor</h3>
+          <div class="grid-container" style="border: none;">
+            <div class="grid-item">
+              <label for="currentstep">current step</label>
+              <div class="currentstep" id="gratingstep"> 100 </div>
+            </div>
+            <div class="grid-item">
+              <button title="press to send motor to home point" id="gratingmotorhome" onclick="gohome(this)">Go
+                Home</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <h3 style="text-decoration: underline;">Grating Motor</h3>
       <div class="grid-container">
-        <div class="grid-item">
-          <label for="currentstep">current step</label>
-          <div class="currentstep" id="gratingstep"> 100 </div>
-        </div>
-        <div class="grid-item">
-          <button title="press to send motor to home point" id="gratingmotorhome" onclick="gohome(this)">Go
-            Home</button>
-        </div>
-      </div>
+        <h3 style="text-decoration: underline; padding-left: 20px;">Filter Wheel Motor</h3>
 
-
-      <h3 style="text-decoration: underline;">Filter Wheel Motor</h3>
-      <div class="grid-container">
         <div class="grid-item">
           <label for="currentstep" class="">current step</label>
           <div class="currentstep" id="filterstep"> 100 </div>
@@ -151,9 +162,10 @@
           <input type="number" id="increasestep" min="0" max="1000" oninput="validat(min,max)" value="0">
           <label for="increasestep"> steps</label>
         </div>
-        <div class="grid-item"></div>
+
         <div class="grid-item">
           <button onclick="savecalb()" title="click to update the new calibration step">save calibration</button>
+          <div id="stepsaved"></div>
         </div>
         <div class="grid-item">
           <button id="filtermotorhome" onclick="gohome(this)" title="press to send motor to home point">Go

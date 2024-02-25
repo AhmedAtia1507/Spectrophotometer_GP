@@ -20,5 +20,8 @@ void notifyClients(String state);
 void savetime(const DynamicJsonDocument &doc);
 void loadtime();
 void sendsteps();
+void handleGoHome(const DynamicJsonDocument &doc);
+void handleSavestep(const DynamicJsonDocument &doc);
+void handlemovestep(const DynamicJsonDocument &doc);
 
 #endif // HANDLE_MESSAGE_H
