@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="CSS/dataTables.css">
+  <link rel="stylesheet" href="CSS/buttonDataTables.css">
 </head>
 
 <body>
@@ -79,17 +81,43 @@
                 </div>
                 <div class="row" style="overflow-x:auto;">
                   <table id="table" border="1">
+                    <thead>
+                      <tr>
+                        <th>State</th>
+                        <th>Sample Name</th>
+                        <th>Describtion</th>
+                        <th>Range</th>
+                        <th>Mode</th>
+                        <th>Peak</th>
+                        <th>Color</th>
+                        <th>Select</th>
+                      </tr>
+                    </thead>
+                  
+                  </table>
+                </div>
+                <div class="row">
+                  <table id="myTable" class="display nowrap">
+                    <thead>
+                      <tr>
+                          <th>Time</th>
+                          <th>Wave  length</th>
+                          <th>Io</th>
+                          <th>I</th>
+                          <th>Absorption</th>
+                          <th>Transmission</th>
+                      </tr>
+                  </thead>
+                  <tbody>
                     <tr>
-                      <th class="t1">State</th>
-                      <th class="t2">Sample Name</th>
-                      <th class="t3">Describtion</th>
-                      <th class="t2">Range</th>
-                      <th class="t2">Mode</th>
-                      <th class="t2">Peak</th>
-                      <th class="t2">Color</th>
-                      <th class="t2">Function</th>
-                      <th class="t1">Select</th>
+                        <td>3 12 2000</td>
+                        <td>23nm</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
                     </tr>
+                  </tbody>
                   </table>
                 </div>
               </div>
@@ -270,6 +298,11 @@
     <!---------------------------- END OF Footer ---------------------------->
   </main>
   <script src="JavaScript/chart.js"></script>
+  <script src="JavaScript/jQuery.js"></script>
+  <script src="JavaScript/dataTables.js"></script>
+  <script src="JavaScript/dataTablesButtons.js"></script>
+  <script src="JavaScript/jszip.js"></script>
+  <script src="JavaScript/htmlTablesButton.js"></script>
   <script src="JavaScript/main.js"></script>
 </body>
 

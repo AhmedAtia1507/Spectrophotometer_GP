@@ -681,8 +681,11 @@ function filter() {
  *                           TABLE
  *------------------------------------------------------------------------**/
 
+
 function addHtmlTableRow() {
   var table = document.getElementById('table'),
+  // tbody = table.getElementsByTagName('tbody')[0], // Get the table body
+  // newRow = tbody.insertRow(tbody.length),
     newRow = table.insertRow(table.length),
     cell1 = newRow.insertCell(0), // state
     cell2 = newRow.insertCell(1), // Sample ID
@@ -691,8 +694,7 @@ function addHtmlTableRow() {
     cell5 = newRow.insertCell(4), // Mode
     cell6 = newRow.insertCell(5), // Peak
     cell7 = newRow.insertCell(6), // color
-    cell8 = newRow.insertCell(7), // Function
-    cell9 = newRow.insertCell(8), // Select
+    cell8 = newRow.insertCell(7), // select
     samplename = document.getElementById('SampleID').value,
     sampledisk = document.getElementById('SampleDecribe').value,
     samplestart = document.getElementById('start').value,
@@ -720,16 +722,11 @@ function addHtmlTableRow() {
       </select>
     </div>
   `;
-  cell8.innerHTML = `
-    <div>
-    <select name="function" id="element16">
-    <option value="none">none</option>
-    <option value="area">Area</option>
-    <option value="height">Height</option>
-    <option value="peak">Peak</option>
-</select>
-    </div>`;
-  cell9.innerHTML = '<input type="checkbox" value="Delete" name="check-tab1">';
+
+  cell8.innerHTML = '<input type="checkbox" value="Delete" name="check-tab1">';
+  
+ 
+  addNewRow(newRow);
   changeColor();
 }
 function deleteHtmlTableRow() {
@@ -757,7 +754,7 @@ function changeColor() {
   checkboxes = document.getElementsByName("check-tab1");
   for (var i = 1; i < table.rows.length; i++) {
     table.rows[i].onclick = function () {
-      if (this.cells[8].querySelector('input').checked) {
+      if (this.cells[7].querySelector('input').checked) {
         rIndex = this.rowIndex;
         var color = this.cells[6].querySelector('select').value;
         changeCurveColor(rIndex - 1, color);
@@ -883,4 +880,28 @@ function readADC() {
   continueReadADC();
 }
 
+/**------------------------------------------------------------------------
+ *                           READINGS TABLE
+ *------------------------------------------------------------------------**/
+	
+new DataTable('#myTable', {
+  layout: {
+      topStart: {
+          buttons: ['excel']
+      }
+  }
+});
+new DataTable('#table', {
+  layout: {
+      topStart: {
+        
+      }
+  }
+});
+var dataTable = $('#table').DataTable();
 
+// Your function to add a new row
+function addNewRow(data) {
+    // Use DataTables API to add a new row
+    dataTable.row.add(data).draw();
+}
