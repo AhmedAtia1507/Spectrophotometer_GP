@@ -51,14 +51,12 @@
   <main>
     <section>
       <div id="tab" class="tab">
-        <button id="first" class="tablinks" onclick="openTab(event, 'scan')">
-          Scan T_T
-        </button>
+        <button class="tablinks" onclick="openTab(event, 'scan')">Scan T_T</button>
         <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
         <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
       </div>
 
-      <div id="scan" class="tabcontent" style="display: block;">
+      <div id="scan" class="tabcontent" >
 
         <div class="container">
           <div class="col chartScan">
@@ -67,13 +65,9 @@
             </div>
             <div class="row">
               <div class="tab-1">
+                <h1 class="heading">Scans Table</h1>
                 <div class="TwoBtn">
-                  <button id="Save" onclick="addHtmlTableRow()">Save <svg xmlns="http://www.w3.org/2000/svg" height="24"
-                      viewBox="0 -960 960 960" width="24">
-                      <path
-                        d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
-                    </svg></button>
-                  <button id="DeleteRows" onclick="deleteHtmlTableRow()">Delete Selected <svg
+                  <button id="DeleteRows" onclick="">Delete Selected <svg
                       xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                       <path
                         d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
@@ -91,12 +85,15 @@
                         <th>Peak</th>
                         <th>Color</th>
                         <th>Select</th>
+
                       </tr>
                     </thead>
                   
                   </table>
                 </div>
-                <div class="row">
+                <h1 class="heading"> Readings </h1>
+                <div class="row" style="overflow-x:auto;">
+                  
                   <table id="myTable" class="display nowrap">
                     <thead>
                       <tr>
@@ -207,7 +204,7 @@
 
           </div>
         </div>
-
+      
 
         <div id="presets" class="presets">
           <ul class="blurred-list" id="presetlist">
@@ -224,7 +221,8 @@
             <div id="nameexist"></div>
           </div>
         </div>
-
+      </div>
+      
         <div id="ADC" class="tabcontent" style="align-items: center; text-align: center">
           <div class="row">
             <div class="col">

@@ -29,7 +29,6 @@ body {
   /* Set container height to 100% of the viewport height */
 }
 
-
   
 
 
@@ -299,17 +298,7 @@ nav li:first-child {
   font-size: 12px;
 }
 
-.tabcontent button {
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-}
+
 
 .tabcontent canvas {
   margin: 20px 20px;
@@ -332,15 +321,19 @@ nav li:first-child {
 .TwoBtn button {
   background-color: #3498db;
   color: #fff;
-  margin-left: 10px;
-  padding: 10px;
+  margin: 10px;
+  padding: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   display: flex;
   align-items: center;
+}
+#DeleteRows{
+  background-color: #e74c3c;
+
 }
 
 .TwoBtn svg {
@@ -674,4 +667,13 @@ th {
 .t3 {
   width: 150px;
   height: 35px;
+}
+
+.heading{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-decoration: underline;
+  margin-bottom: 20px;
 }

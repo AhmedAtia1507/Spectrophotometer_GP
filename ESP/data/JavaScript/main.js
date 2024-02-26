@@ -79,7 +79,6 @@ function onMessage(event) {
 /**========================================================================
  *                           Tabs control
  *========================================================================**/
-openTab(onLoad, 'scan');
 function openTab(evt, Control) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -91,20 +90,7 @@ function openTab(evt, Control) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
   document.getElementById(Control).style.display = "block";
-  if (evt == onLoad) {
-    document.getElementById('first').classList.add('active');
-  }
-  else {
-    evt.currentTarget.className += " active";
-    if (Control !== 'scan') {
-      document.getElementById('first').classList.add('inactive')
-    }
-    else {
-      document.getElementById('first').classList.add('active');
-      console.log("inactive");
-    }
-  }
-
+  evt.currentTarget.className += " active";
 }
 /*============================ END OF Tabs ============================*/
 
@@ -681,7 +667,7 @@ function filter() {
  *                           TABLE
  *------------------------------------------------------------------------**/
 
-
+var tableIndex = 1;
 function addHtmlTableRow() {
   var table = document.getElementById('table'),
   // tbody = table.getElementsByTagName('tbody')[0], // Get the table body
@@ -700,7 +686,7 @@ function addHtmlTableRow() {
     samplestart = document.getElementById('start').value,
     samplestop = document.getElementById('stop').value,
     samplemode = document.getElementById('mySelect').value;
-  cell1.innerHTML = '0';
+  cell1.innerHTML = tableIndex;
   cell2.innerHTML = samplename;
   cell3.innerHTML = sampledisk;
   cell4.innerHTML = `${samplestart} - ${samplestop}`;
@@ -713,7 +699,7 @@ function addHtmlTableRow() {
         <option value="blue">blue</option>;
         <option value="green">green</option>;
         <option value="yellow">yellow</option>;
-        <option value="purple">purple</option>;
+        <option value="purple">purple</option>; 
         <option value="orange">orange</option>;
         <option value="black">black</option>;
         <option value="pink">pink</option>;
@@ -724,24 +710,15 @@ function addHtmlTableRow() {
   `;
 
   cell8.innerHTML = '<input type="checkbox" value="Delete" name="check-tab1">';
-  
- 
   addNewRow(newRow);
   changeColor();
+  tableIndex++;
 }
-function deleteHtmlTableRow() {
-  var table1 = document.getElementById("table"),
-    checkboxes = document.getElementsByName("check-tab1");
-  for (var i = 0; i < checkboxes.length; i++)
-    if (checkboxes[i].checked) {
-      var index = table1.rows[i + 1].rowIndex;
-      removeCurve(index - 1);
-      table1.deleteRow(index);
-      i--;
-    }
-}
+
+
+
 /**------------------------------------------------------------------------
- *                           COLOR CHange
+ *                           COLOR CHANGE
  *------------------------------------------------------------------------**/
 // Function to change the color of a curve
 function changeCurveColor(index, color) {
@@ -898,10 +875,35 @@ new DataTable('#table', {
       }
   }
 });
-var dataTable = $('#table').DataTable();
+const dataTable = $('#table').DataTable();
 
 // Your function to add a new row
 function addNewRow(data) {
     // Use DataTables API to add a new row
     dataTable.row.add(data).draw();
 }
+dataTable.on('click', 'tbody tr', (e) => {
+  let classList = e.currentTarget.classList;
+
+  if (classList.contains('selected')) {
+
+      classList.remove('selected');
+  }
+  else {
+      dataTable.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
+      classList.add('selected');
+  }
+});
+document.querySelector('#DeleteRows').addEventListener('click', function () {
+  const selectedRows = dataTable.rows('.selected'); // Get all selected rows
+
+  if (selectedRows.any()) { // Check if any row is selected
+    selectedRows.every(function () {
+      const selectedRowIndex = this.index();
+      this.remove().draw(false);
+      removeCurve(selectedRowIndex);
+    });
+  } else {
+    console.log("No row selected");
+  }
+});
