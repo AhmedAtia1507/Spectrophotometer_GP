@@ -59,7 +59,9 @@ section h2 {
 }
 
 .setup {
-  height: 70vh;
+  margin: 5px;
+  padding: 10px;
+  height: 90vh;
   border: #000000 1px solid;
 }
 
@@ -291,14 +293,17 @@ nav li:first-child {
 .tabcontent input,
 .tabcontent select {
   padding: 10px;
-  margin-left: 5;
+  margin: 5px;
   box-sizing: border-box;
   border: 1px solid #000000;
   border-radius: 5px;
   font-size: 12px;
 }
-
-
+input:focus{
+  outline: none;
+  border: 1px solid #3498db;
+  transform: scale(1.05);
+}
 
 .tabcontent canvas {
   margin: 20px 20px;
@@ -319,11 +324,11 @@ nav li:first-child {
 }
 
 .TwoBtn button {
-  background-color: #3498db;
-  color: #fff;
+  background-color: white;
+  color: #3498db;
   margin: 10px;
   padding: 5px;
-  border: none;
+  border: 1px solid #3498db;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
@@ -333,6 +338,7 @@ nav li:first-child {
 }
 #DeleteRows{
   background-color: #e74c3c;
+  color: white;
 
 }
 

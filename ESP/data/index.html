@@ -123,36 +123,13 @@
             </div>
           </div>
           <div class="col setup">
-            <div>
-              <Strong>Sample Name: </Strong>
-              <input type="text" name="SampleID" id="SampleID" onfocus="this.value=''" value="Sample Name">
-            </div>
-            <div>
-              <Strong>Describtion: </Strong>
-              <input type="text" name="SampleDecribe" id="SampleDecribe" onfocus="this.value=''" value="Describtion">
-            </div>
-            <div class="TwoBtn">
-              <div>
-                <strong>Start: </strong> <input class="number" type="number" id="start" name="start"
-                  onfocus="this.value=''" value="100">
-              </div>
-              <div>
-                <strong>Stop: </strong> <input class="number" type="number" id="stop" name="stop"
-                  onfocus="this.value=''" value="900">
-              </div>
-            </div>
-            <div class="TwoBtn">
-              <div>
-                <strong>Step: </strong> <input class="number" type="number" id="step" name="step"
-                  onfocus="this.value=''" value="20">
-              </div>
-              <div>
-                <strong>Integration Time: </strong><input class="number" type="number" id="initTime"
-                  onfocus="this.value=''" name="initTime" value="0">
-              </div>
-            </div>
-
-
+            <h1 class="heading">Scan Setup</h1>
+            <input type="text" name="SampleID" id="SampleID"  placeholder="Sample Name">
+            <input type="text" name="SampleDecribe" id="SampleDecribe" onfocus="this.value=''" placeholder="Describtion">
+            <input type="number" id="start" name="start" placeholder="Wavelength Start: 100">
+            <input type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900">
+            <input type="number" id="step" name="step" placeholder="Wavelength Step: 20">
+            <input type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
             <div>
               <strong>Measurment Mode: </strong><select id="mySelect" name="mode">
                 <option value="absorption">Absorption</option>
