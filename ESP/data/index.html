@@ -5,9 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
+  <link rel="stylesheet" href="CSS/all.min.css">
+  <link rel="stylesheet" href="CSS/fontawesome.min.css">
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="CSS/dataTables.css">
   <link rel="stylesheet" href="CSS/buttonDataTables.css">
+  
 </head>
 
 <body>
@@ -15,13 +18,10 @@
   <nav>
     <ul class="sidebar">
       <li onclick="hideSidebar()">
-        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-            <path
-              d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-          </svg></a>
+        <a href="#"><i class="fas fa-close"></i></a>
       </li>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="login.html">direct control</a></li>
+      <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="login.html">Direct Control</a></li>
       <li><a href="#">Page #2</a></li>
       <li><a href="#">Page #3</a></li>
       <li><a href="#">Page #4</a></li>
@@ -35,15 +35,13 @@
           </svg>
           <span>SpectroPhotometer</span></a>
       </li>
-      <li class="hideOnMobile"><a href="home.html">Home</a></li>
-      <li class="hideOnMobile"><a href="login.html">direct control</a></li>
-      <li class="hideOnMobile"><a href="#">Page #2</a></li>
-      <li class="hideOnMobile"><a href="#">Page #3</a></li>
-      <li class="hideOnMobile"><a href="team.html">Team</a></li>
+      <li class="hideOnMobile"><a href="home.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <li class="hideOnMobile"><a href="login.html"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="#"></i>Page #2</a></li>
+      <li class="hideOnMobile"><a href="#"></i>Page #3</a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
       <li class="menu-button" onclick="showSidebar()">
-        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-          </svg></a>
+        <a href="#"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
   </nav>

@@ -109,17 +109,21 @@ nav li {
   height: 50px;
 }
 
-nav a {
+nav li a {
   height: 100%;
   padding: 0 30px;
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 10px;
   color: black;
   font-size: 19px;
   font-weight: 500;
 }
-
+i{
+  color: #000;
+  font-size: 22px;
+}
 nav a:hover {
   background-color: #f0f0f0;
 }
