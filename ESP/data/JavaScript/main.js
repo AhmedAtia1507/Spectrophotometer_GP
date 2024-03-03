@@ -860,7 +860,8 @@ new DataTable('#myTable', {
       topStart: {
           buttons: ['excel']
       }
-  }
+  },
+  searching: false, // Disable search
 });
 const myTable = $('#myTable').DataTable();
 // function to add a new row
@@ -880,7 +881,8 @@ new DataTable('#table', {
       topStart: {
         
     }
-  }
+  },
+  searching: false, // Disable search
 });
 const dataTable = $('#table').DataTable();
 

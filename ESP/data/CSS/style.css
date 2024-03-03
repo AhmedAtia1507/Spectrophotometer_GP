@@ -667,20 +667,6 @@ table td{
   text-align: center;
 }
 
-.t2 {
-  width: 120px;
-  height: 35px;
-}
-
-.t1 {
-  width: 30px;
-  height: 35px;
-}
-
-.t3 {
-  width: 150px;
-  height: 35px;
-}
 
 .heading{
   text-align: center;
@@ -690,3 +676,19 @@ table td{
   text-decoration: underline;
   margin-bottom: 20px;
 }
+
+/**------------------------------------------------------------------------
+ *                           Reading Table
+ *------------------------------------------------------------------------**/
+ .ReadingTable{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+ }
+ .myTable{
+  width: 100%;
+  border-collapse: collapse;
+ }  
