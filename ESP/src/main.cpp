@@ -138,8 +138,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
           scanData = scanData + String(",\"intensitySample\":") + sendCMD("sample");
           delay(100);
           scanData = scanData + String(",\"intensity0\":") + sendCMD("reference") + String("}");
-
-          Serial.print("data sent");
+          delay(100);
           notifyClients(scanData);
           Serial.print("scan data sent");
           // notifyClients(sendCMD(String(wavelengthValue)));

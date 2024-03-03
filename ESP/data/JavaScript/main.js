@@ -313,12 +313,11 @@ function validateInputs() {
 function startScan() {
   if (!isScanning) {
     if (!validateInputs()) return;
+    disableInputs();
     addHtmlTableRow();
+    isScanning = true;
     scan();
-    //isScanning = true;
-    //disableInputs();
-
-
+    enableInputs();
   }
 }
 function toggleInputs(disabled) {
@@ -338,42 +337,36 @@ function pauseScan() {
   isScanning = false;
   enableInputs();
 }
-let first = 0;
+
+
 function scan() {
   const SampleID = document.getElementById('SampleID').value;
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
   const curveColor = document.getElementById('curveColor').value;
-
   const modeInput = document.getElementById('mySelect').value;
 
-  addCurve([1, 2, 3, 4], [1, 2, 3, 4], curveColor, SampleID);
-  chartData.labels = []; // wavelength
-  chartData.datasets[0].data = []; // intensity
-
+  let x = []; // wavelength
+  let y = []; // intensity
   function processScanData(data) {
+    const cuurentTime = data.cuurentTime;
     const wavelength = data.wavelength;
     const intensitySample = data.intensitySample;
     const intensity0 = data.intensity0;
+    const absorption = Math.log10(intensity0 / intensitySample);
+    const transmission = Math.log10(intensity0 / intensitySample);
     // Update the chart data
-    chartData.labels.push(wavelength);
+    x.push(wavelength);
 
     if (modeInput == "absorption") {
-      // Calculate absorption
-      var absorption = Math.log10(intensity0 / intensitySample);
-      chartData.datasets[0].data.push(absorption);
+      y.push(absorption);
     }
     else {
-      var transmission = Math.log10(intensity0 / intensitySample);
-      chartData.datasets[0].data.push(transmission);
+      y.push(transmission);
     }
 
-
-    // Update the chart
-    chartScan.data.labels = chartData.labels;
-    chartScan.data.datasets[0].data = chartData.datasets[0].data;
-    chartScan.update();
+    addNewReadingToTable([new Date().toLocaleTimeString(),wavelength, intensity0, intensitySample, absorption, transmission]);
   }
 
   function sendScanRequest(wavelength) {
@@ -413,6 +406,7 @@ function scan() {
 
   // Start the scanning process
   continueScanning(startInput);
+  addCurve(x, y , curveColor, SampleID);
 }
 /*================preset section==============*/
 
@@ -860,7 +854,7 @@ function readADC() {
 /**------------------------------------------------------------------------
  *                           READINGS TABLE
  *------------------------------------------------------------------------**/
-	
+
 new DataTable('#myTable', {
   layout: {
       topStart: {
@@ -868,11 +862,24 @@ new DataTable('#myTable', {
       }
   }
 });
+const myTable = $('#myTable').DataTable();
+// function to add a new row
+function addNewReadingToTable(data) {
+  myTable.row.add(data).draw();
+}
+// function to remove all rows
+function removeAllReadings() {
+  myTable.clear().draw();
+}
+
+/**------------------------------------------------------------------------
+ *                           SCAN TABLE
+ *------------------------------------------------------------------------**/
 new DataTable('#table', {
   layout: {
       topStart: {
         
-      }
+    }
   }
 });
 const dataTable = $('#table').DataTable();

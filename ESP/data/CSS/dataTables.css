@@ -82,8 +82,9 @@ table.dataTable thead > tr > td.dt-ordering-desc span.dt-column-order:after {
   display: block;
   top: 50%;
   content: "▼";
-  content: "▼"/"";
-}
+  content: "▼"/""; 
+} 
+
 table.dataTable thead > tr > th.dt-orderable-asc, table.dataTable thead > tr > th.dt-orderable-desc, table.dataTable thead > tr > th.dt-ordering-asc, table.dataTable thead > tr > th.dt-ordering-desc,
 table.dataTable thead > tr > td.dt-orderable-asc,
 table.dataTable thead > tr > td.dt-orderable-desc,
@@ -261,7 +262,7 @@ table.dataTable td.dt-empty {
 table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date,
 table.dataTable td.dt-type-numeric,
 table.dataTable td.dt-type-date {
-  text-align: right;
+  text-align: center;
 }
 table.dataTable thead th,
 table.dataTable thead td,

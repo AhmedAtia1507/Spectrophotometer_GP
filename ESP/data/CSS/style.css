@@ -200,9 +200,6 @@ nav li:first-child {
 .tab {
   transition: all 0.5s;
   display: flex;
-  position: absolute;
-  left: 0px;
-  top: auto;
   background-color: #2d2e33;
   border-radius: 8px;
   padding: 2px;
@@ -212,20 +209,24 @@ nav li:first-child {
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
-  display: block;
+  display: flex;
+  justify-content: center;
   background-color: inherit;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 20px;
   width: 100%;
   height: 37px;
   font-weight: 600;
-  font-size: 15px;
-  align-self: center;
-  text-align: center;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.2s;
 }
-
+.tab button i{
+  margin-left: 10px;
+}
+.tab button:hover {
+  background-color: #506370;
+}
 .tab button.active {
   background-color: #234f68;
 }
@@ -323,6 +324,10 @@ input:focus{
   display: flex;
   flex-direction: row;
 }
+.TwoBtn i{
+  margin-left: 10px;
+  color: #3498db;
+}
 .TwoBtn div {
   margin-right: 20px;
 }
@@ -341,15 +346,10 @@ input:focus{
   align-items: center;
 }
 #DeleteRows{
-  background-color: #e74c3c;
-  color: white;
+  color: red;
 
 }
 
-.TwoBtn svg {
-  margin: 0px 7px;
-  color: white;
-}
 
 .headfont {
   font-size: 20px;
@@ -662,6 +662,9 @@ th {
   font-size: 12px;
   font-weight: bold;
   padding: 10px 10px;
+}
+table td{
+  text-align: center;
 }
 
 .t2 {
