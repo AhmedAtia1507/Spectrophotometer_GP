@@ -684,3 +684,12 @@ table td{
   width: 60%;
   border-collapse: collapse;
  }  
+ @media screen and (max-width: 962px) {
+  .myTable{
+    width: 100%;
+  }
+  .ReadingTable{
+    width: 100%;
+  }
+  
+ }
