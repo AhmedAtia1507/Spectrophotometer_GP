@@ -779,18 +779,9 @@ function save(event) {
  *                           TIME AND DATE
  *------------------------------------------------------------------------**/
 
-function formatWithLeadingZero(number) {
-  return number < 10 ? `0${number}` : number;
-}
 function updateDateTime() {
-  const now = new Date(); // Get the current date and time
-  let hours = now.getHours();
-  const minutes = formatWithLeadingZero(now.getMinutes());
-  const seconds = formatWithLeadingZero(now.getSeconds());
-  const amPm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12;
-  const dateTimeString = `${now.toDateString()} || ${hours}:${minutes} ${amPm}`;
-  document.getElementById('DateTime').textContent = dateTimeString;
+
+  document.getElementById('DateTime').textContent = new Date().toDateString() + " ," + new Date().toLocaleTimeString();
 }
 
 // Update the date and time every second

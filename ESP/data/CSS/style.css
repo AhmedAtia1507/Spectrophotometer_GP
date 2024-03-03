@@ -642,12 +642,6 @@ table {
   padding-bottom: 80px;
 }
 
-th,
-td {
-  width: auto;
-  text-align: center;
-  padding: 3px 3px;
-}
 
 .tab-1 {
   display: flex;
@@ -660,8 +654,6 @@ th {
   background-color: #3498db;
   color: white;
   font-size: 12px;
-  font-weight: bold;
-  padding: 10px 10px;
 }
 table td{
   text-align: center;
@@ -689,6 +681,6 @@ table td{
   padding: 10px;
  }
  .myTable{
-  width: 100%;
+  width: 60%;
   border-collapse: collapse;
  }  
