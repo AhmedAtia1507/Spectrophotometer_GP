@@ -17,16 +17,266 @@ Library Manager: ArmAr.exe V6.21
 Hex Converter:   FromElf.exe V6.21
 CPU DLL:         SARMCM3.DLL V5.39.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      UL2CM3.DLL V1.164.9.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.2.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\Senior_2\Graduation_Project\COTS\STM32F103C8T6\STM32\stm32_spectro.uvprojx
-Project File Date:  03/11/2024
+Project File Date:  03/12/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.21', folder: 'D:\KEIL_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
+MCAL/EXTI/EXTI_Program.c(11): warning: In file included from...
+MCAL/EXTI/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/EXTI/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/EXTI/EXTI_Program.c(11): warning: In file included from...
+MCAL/EXTI/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/EXTI/EXTI_Program.c(13): warning: In file included from...
+MCAL/EXTI/EXTI_Private.h(31): warning: no newline at end of file [-Wnewline-eof]
+   31 | #endif /*_EXTI_PRIVATE_H_*/
+      |                            ^
+MCAL/EXTI/EXTI_Program.c(14): warning: In file included from...
+MCAL/EXTI/EXTI_Interface.h(44): warning: no newline at end of file [-Wnewline-eof]
+   44 | #endif /*_EXTI_INTERFACE_H_*/
+      |                              ^
+MCAL/EXTI/EXTI_Program.c(15): warning: In file included from...
+MCAL/EXTI/EXTI_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
+   14 | #endif /*_EXTI_CONFIG_H_*/
+      |                           ^
+MCAL/EXTI/EXTI_Program.c(44): warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]
+   44 |             default:
+      |             ^
+MCAL/EXTI/EXTI_Program.c(44): note: insert '__attribute__((fallthrough));' to silence this warning
+   44 |             default:
+      |             ^
+      |             __attribute__((fallthrough)); 
+MCAL/EXTI/EXTI_Program.c(44): note: insert 'break;' to avoid fall-through
+   44 |             default:
+      |             ^
+      |             break; 
+MCAL/EXTI/EXTI_Program.c(101): warning: no previous prototype for function 'EXTI0_IRQHandler' [-Wmissing-prototypes]
+  101 | void EXTI0_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(101): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  101 | void EXTI0_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(113): warning: no previous prototype for function 'EXTI1_IRQHandler' [-Wmissing-prototypes]
+  113 | void EXTI1_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(113): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  113 | void EXTI1_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(125): warning: no previous prototype for function 'EXTI2_IRQHandler' [-Wmissing-prototypes]
+  125 | void EXTI2_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(125): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  125 | void EXTI2_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(137): warning: no previous prototype for function 'EXTI3_IRQHandler' [-Wmissing-prototypes]
+  137 | void EXTI3_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(137): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  137 | void EXTI3_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(149): warning: no previous prototype for function 'EXTI4_IRQHandler' [-Wmissing-prototypes]
+  149 | void EXTI4_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(149): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  149 | void EXTI4_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(161): warning: no previous prototype for function 'EXTI9_5_IRQHandler' [-Wmissing-prototypes]
+  161 | void EXTI9_5_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(161): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  161 | void EXTI9_5_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(306): warning: no newline at end of file [-Wnewline-eof]
+  306 | }
+      |  ^
+MCAL/EXTI/EXTI_Program.c(228): warning: no previous prototype for function 'EXTI15_10_IRQHandler' [-Wmissing-prototypes]
+  228 | void EXTI15_10_IRQHandler(void)
+      |      ^
+MCAL/EXTI/EXTI_Program.c(228): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  228 | void EXTI15_10_IRQHandler(void)
+      | ^
+      | static 
+MCAL/EXTI/EXTI_Program.c(93): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   93 |         glbl_PEXTICallbackFunctions[Copy_uint8EXTILine] = P_EXTICallBackFunc;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(115): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  115 |     if(glbl_PEXTICallbackFunctions[1] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(117): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  117 |         (glbl_PEXTICallbackFunctions[1])();
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(127): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  127 |     if(glbl_PEXTICallbackFunctions[2] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(129): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  129 |         (glbl_PEXTICallbackFunctions[2])();
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(139): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  139 |     if(glbl_PEXTICallbackFunctions[3] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(141): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  141 |         (glbl_PEXTICallbackFunctions[3])();
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(151): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  151 |     if(glbl_PEXTICallbackFunctions[4] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(153): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  153 |         (glbl_PEXTICallbackFunctions[4])();
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(165): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  165 |         if(glbl_PEXTICallbackFunctions[5] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(167): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  167 |             (glbl_PEXTICallbackFunctions[5])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(177): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  177 |         if(glbl_PEXTICallbackFunctions[6] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(179): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  179 |             (glbl_PEXTICallbackFunctions[6])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(189): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  189 |         if(glbl_PEXTICallbackFunctions[7] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(191): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  191 |             (glbl_PEXTICallbackFunctions[7])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(201): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  201 |         if(glbl_PEXTICallbackFunctions[8] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(203): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  203 |             (glbl_PEXTICallbackFunctions[8])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(213): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  213 |         if(glbl_PEXTICallbackFunctions[9] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(215): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  215 |             (glbl_PEXTICallbackFunctions[9])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(232): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  232 |         if(glbl_PEXTICallbackFunctions[10] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(234): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  234 |             (glbl_PEXTICallbackFunctions[10])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(244): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  244 |         if(glbl_PEXTICallbackFunctions[11] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(246): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  246 |             (glbl_PEXTICallbackFunctions[11])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(256): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  256 |         if(glbl_PEXTICallbackFunctions[12] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(258): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  258 |             (glbl_PEXTICallbackFunctions[12])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(268): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  268 |         if(glbl_PEXTICallbackFunctions[13] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(270): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  270 |             (glbl_PEXTICallbackFunctions[13])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(280): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  280 |         if(glbl_PEXTICallbackFunctions[14] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(282): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  282 |             (glbl_PEXTICallbackFunctions[14])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(292): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  292 |         if(glbl_PEXTICallbackFunctions[15] != NULL_PTR)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/EXTI/EXTI_Program.c(294): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  294 |             (glbl_PEXTICallbackFunctions[15])();
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+45 warnings generated.
+compiling EXTI_Program.c...
+MCAL/RCC/RCC_Program.c(13): warning: In file included from...
+MCAL/RCC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/RCC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/RCC/RCC_Program.c(13): warning: In file included from...
+MCAL/RCC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/RCC/RCC_Program.c(15): warning: In file included from...
+MCAL/RCC/RCC_Private.h(129): warning: no newline at end of file [-Wnewline-eof]
+  129 | #endif /*_RCC_PRIVATE_H_*/
+      |                           ^
+MCAL/RCC/RCC_Program.c(16): warning: In file included from...
+MCAL/RCC/RCC_Config.h(86): warning: no newline at end of file [-Wnewline-eof]
+   86 | #endif /*_RCC_CONFIG_H_*/
+      |                          ^
+MCAL/RCC/RCC_Program.c(47): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   47 |                 CLR_BIT(MRCC_CR, MRCC_CR_HSEBYP);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RCC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RCC/RCC_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   61 |             CLR_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RCC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RCC/RCC_Program.c(123): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  123 |     MRCC_CFGR &= ~(((uint32)0b1111) << (MRCC_CFGR_HPRE_START));
+      |                             ^
+MCAL/RCC/RCC_Program.c(124): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  124 |     MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_HPRE_START));
+      |                             ^
+MCAL/RCC/RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
+   64 | #define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
+      |                                                     ^
+MCAL/RCC/RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
+  106 | #define MRCC_AHB_CLK_DIV_1                               0b0000
+      |                                                          ^
+MCAL/RCC/RCC_Program.c(126): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  126 |     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE1_START));
+      |                             ^
+MCAL/RCC/RCC_Program.c(127): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  127 |     MRCC_CFGR |= (((uint32)(MRCC_APB1_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
+      |                             ^
+MCAL/RCC/RCC_Config.h(74): note: expanded from macro 'MRCC_APB1_PRESCALAR'
+   74 | #define MRCC_APB1_PRESCALAR                         MRCC_APB1_CLK_DIV_1
+      |                                                     ^
+MCAL/RCC/RCC_Private.h(117): note: expanded from macro 'MRCC_APB1_CLK_DIV_1'
+  117 | #define MRCC_APB1_CLK_DIV_1                              0b000
+      |                                                          ^
+MCAL/RCC/RCC_Program.c(129): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  129 |     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE2_START));
+      |                             ^
+MCAL/RCC/RCC_Program.c(130): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  130 |     MRCC_CFGR |= (((uint32)(MRCC_APB2_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
+      |                             ^
+MCAL/RCC/RCC_Config.h(84): note: expanded from macro 'MRCC_APB2_PRESCALAR'
+   84 | #define MRCC_APB2_PRESCALAR                         MRCC_APB2_CLK_DIV_1
+      |                                                     ^
+MCAL/RCC/RCC_Private.h(124): note: expanded from macro 'MRCC_APB2_CLK_DIV_1'
+  124 | #define MRCC_APB2_CLK_DIV_1                              0b000
+      |                                                          ^
+MCAL/RCC/RCC_Program.c(217): warning: no newline at end of file [-Wnewline-eof]
+  217 | }
+      |  ^
+13 warnings generated.
+compiling RCC_Program.c...
+compiling GI_Program.c...
 MCAL/STK/STK_Program.c(2): warning: In file included from...
 MCAL/STK/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
 MCAL/STK/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
@@ -89,146 +339,443 @@ MCAL/STK/STK_Program.c(222): note: declare 'static' if the function is not inten
       | static 
 11 warnings generated.
 compiling STK_Program.c...
-MCAL/RTC/RTC_Program.c(12): warning: In file included from...
-MCAL/RTC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/RTC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+MCAL/GPIO/GPIO_Program.c(12): warning: In file included from...
+MCAL/GPIO/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/GPIO/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
    72 | #endif /*_PLATFORM_TYPES_H_*/
       |                              ^
-MCAL/RTC/RTC_Program.c(12): warning: In file included from...
-MCAL/RTC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+MCAL/GPIO/GPIO_Program.c(12): warning: In file included from...
+MCAL/GPIO/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
    30 | #endif /*_STD_TYPES_H_*/
       |                         ^
-MCAL/RTC/RTC_Program.c(14): warning: In file included from...
-MCAL/RTC/RTC_Private.h(155): warning: no newline at end of file [-Wnewline-eof]
-  155 | #endif /*_RTC_PRIVATE_H_*/
+MCAL/GPIO/GPIO_Program.c(14): warning: In file included from...
+MCAL/GPIO/GPIO_Private.h(138): warning: no newline at end of file [-Wnewline-eof]
+  138 | #endif /*_GPIO_PRIVATE_H_*/
+      |                            ^
+MCAL/GPIO/GPIO_Program.c(15): warning: In file included from...
+MCAL/GPIO/GPIO_Interface.h(131): warning: no newline at end of file [-Wnewline-eof]
+  131 | #endif /*_GPIO_INTERFACE_H_*/
+      |                              ^
+MCAL/GPIO/GPIO_Program.c(16): warning: In file included from...
+MCAL/GPIO/GPIO_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
+   14 | #endif /*_GPIO_CONFIG_H_*/
       |                           ^
-MCAL/RTC/RTC_Program.c(15): warning: In file included from...
-MCAL/RTC/RTC_Interface.h(71): warning: no newline at end of file [-Wnewline-eof]
+MCAL/GPIO/GPIO_Program.c(38): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   38 |                 MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(38): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   38 |                 MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(39): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   39 |                 MGPIOA_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(44): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   44 |                 MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(44): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   44 |                 MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(45): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   45 |                 MGPIOA_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(54): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   54 |                 MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(54): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   54 |                 MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(55): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   55 |                 MGPIOB_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(60): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   60 |                 MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(60): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   60 |                 MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   61 |                 MGPIOB_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(70): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   70 |                 MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   70 |                 MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(71): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   71 |                 MGPIOC_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(77): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   77 |                 MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                                  ^
+MCAL/GPIO/GPIO_Program.c(77): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   77 |                 MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(78): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   78 |                 MGPIOC_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
+      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPIO/GPIO_Program.c(358): warning: no newline at end of file [-Wnewline-eof]
+  358 | }
+      |  ^
+24 warnings generated.
+compiling GPIO_Program.c...
+HAL/ESP32/ESP32_Program.c(16): warning: In file included from...
+HAL/ESP32/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+HAL/ESP32/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+HAL/ESP32/ESP32_Program.c(16): warning: In file included from...
+HAL/ESP32/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+HAL/ESP32/ESP32_Program.c(19): warning: In file included from...
+HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(131): warning: no newline at end of file [-Wnewline-eof]
+  131 | #endif /*_GPIO_INTERFACE_H_*/
+      |                              ^
+HAL/ESP32/ESP32_Program.c(20): warning: In file included from...
+HAL/ESP32/../../MCAL/UART/UART_Interface.h(129): warning: no newline at end of file [-Wnewline-eof]
+  129 | #endif /*_UART_INTERFACE_H_*/
+      |                              ^
+HAL/ESP32/ESP32_Program.c(21): warning: In file included from...
+HAL/ESP32/../../MCAL/NVIC/NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
+  151 | #endif /*_NVIC_INTERFACE_H_*/
+      |                              ^
+HAL/ESP32/ESP32_Program.c(22): warning: In file included from...
+HAL/ESP32/../../MCAL/RTC/RTC_Interface.h(71): warning: no newline at end of file [-Wnewline-eof]
    71 | #endif /*_RTC_INTERFACE_H_*/
       |                             ^
-MCAL/RTC/RTC_Program.c(16): warning: In file included from...
-MCAL/RTC/RTC_Config.h(27): warning: no newline at end of file [-Wnewline-eof]
-   27 | #endif /*_RTC_CONFIG_H_*/
-      |                          ^
-MCAL/RTC/RTC_Program.c(27): warning: use of an empty initializer is a C23 extension [-Wc23-extensions]
-   27 |     struct tm time = {};
-      |                      ^
-MCAL/RTC/RTC_Program.c(40): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   40 |         time_t Loc_SspecificTime_t = mktime(&Loc_SspecificTime);
-      |                ^
-MCAL/RTC/RTC_Program.c(27): warning: unused variable 'time' [-Wunused-variable]
-   27 |     struct tm time = {};
-      |               ^~~~
-MCAL/RTC/RTC_Program.c(25): warning: no previous prototype for function 'MRTC_CalculateSeconds' [-Wmissing-prototypes]
-   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
-      |                ^
-MCAL/RTC/RTC_Program.c(25): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
-      | ^
-      | static 
-MCAL/RTC/RTC_Program.c(73): warning: implicit conversion loses integer precision: 'int' to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
-   73 |         P_SDate -> m_years = (Loc_PBrokenTime -> tm_year) + 1900;
-      |                            ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
-MCAL/RTC/RTC_Program.c(74): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   74 |         P_SDate -> m_months = (Loc_PBrokenTime -> tm_mon) + 1;
-      |                             ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
-MCAL/RTC/RTC_Program.c(75): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   75 |         P_SDate -> m_days = (Loc_PBrokenTime -> tm_mday);
-      |                           ~  ~~~~~~~~~~~~~~~~~~~^~~~~~~
-MCAL/RTC/RTC_Program.c(76): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   76 |         P_STime -> m_hours = Loc_PBrokenTime -> tm_hour;
-      |                            ~ ~~~~~~~~~~~~~~~~~~~^~~~~~~
-MCAL/RTC/RTC_Program.c(77): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   77 |         P_STime -> m_minutes = Loc_PBrokenTime -> tm_min;
-      |                              ~ ~~~~~~~~~~~~~~~~~~~^~~~~~
-MCAL/RTC/RTC_Program.c(78): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   78 |         P_STime ->m_seconds = Loc_PBrokenTime -> tm_sec;
-      |                             ~ ~~~~~~~~~~~~~~~~~~~^~~~~~
-MCAL/RTC/RTC_Program.c(67): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   67 |         time_t Loc_SspecificTime_t = mktime(&Loc_SspecificTime);
-      |                ^
-MCAL/RTC/RTC_Program.c(52): warning: no previous prototype for function 'MRTC_CalculateDateTime' [-Wmissing-prototypes]
-   52 | Std_ReturnType MRTC_CalculateDateTime(uint32* P_uint32Seconds, Sdate_t* P_SDate, Stime_t* P_STime)
-      |                ^
-MCAL/RTC/RTC_Program.c(52): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   52 | Std_ReturnType MRTC_CalculateDateTime(uint32* P_uint32Seconds, Sdate_t* P_SDate, Stime_t* P_STime)
-      | ^
-      | static 
-MCAL/RTC/RTC_Program.c(111): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  111 |         CLR_BIT(MRCC_BDCR_R, (MRCC_BDCR_RTCSEL_START_BIT + 1));
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(125): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  125 |     CLR_BIT((RTC -> CRL), MRTC_CRL_CNF_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(132): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  132 |         CLR_BIT((RTC -> CRH), MRTC_CRH_SECIE_BIT);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(139): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  139 |     CLR_BIT((RTC -> CRL), MRTC_CRL_RSF_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile Sdate_t *' (aka 'volatile struct Sdate *') to parameter of type 'Sdate_t *' (aka 'struct Sdate *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
-      |                           ^~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_SDate' here
-   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+HAL/ESP32/ESP32_Program.c(24): warning: In file included from...
+HAL/ESP32/ESP32_Interface.h(37): warning: no newline at end of file [-Wnewline-eof]
+   37 | #endif /*_ESP32_INTERFACE_H_*/
+      |                               ^
+HAL/ESP32/ESP32_Program.c(25): warning: In file included from...
+HAL/ESP32/ESP32_Private.h(22): warning: no newline at end of file [-Wnewline-eof]
+   22 | #endif /*_ESP32_PRIVATE_H_*/
+      |                             ^
+HAL/ESP32/ESP32_Program.c(26): warning: In file included from...
+HAL/ESP32/ESP32_Config.h(53): warning: no newline at end of file [-Wnewline-eof]
+   53 | #endif /*_ESP32_CONFIG_H_*/
+      |                            ^
+HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(335): note: passing argument to parameter here
+  335 | extern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
+      |                                                ^
+HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(132): note: passing argument to parameter here
+  132 | extern _ARMABI int strncmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
       |                                               ^
-MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile Stime_t *' (aka 'volatile struct Stime *') to parameter of type 'Stime_t *' (aka 'struct Stime *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
-      |                                                 ^~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_STime' here
-   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
-      |                                                                 ^
-MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile uint32 *' (aka 'volatile unsigned long *') to parameter of type 'uint32 *' (aka 'unsigned long *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
-      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_uint32Seconds' here
-   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
-      |                                                                                  ^
-MCAL/RTC/RTC_Program.c(121): warning: while loop has empty body [-Wempty-body]
-  121 |         while(!(GET_BIT((RTC -> CRL), MRTC_CRL_RTOFF_BIT)));
-      |                                                            ^
-MCAL/RTC/RTC_Program.c(121): note: put the semicolon on a separate line to silence this warning
-MCAL/RTC/RTC_Program.c(127): warning: while loop has empty body [-Wempty-body]
-  127 |         while(!(GET_BIT((RTC -> CRL), MRTC_CRL_RTOFF_BIT)));
-      |                                                            ^
-MCAL/RTC/RTC_Program.c(127): note: put the semicolon on a separate line to silence this warning
-MCAL/RTC/RTC_Program.c(175): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  175 |             CLR_BIT((RTC -> CRL), MRTC_CRL_CNF_BIT);
-      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(247): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  247 |                                 CLR_BIT(RTC->CRL, MRTC_CRL_SECF_BIT);
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RTC/RTC_Program.c(253): warning: no newline at end of file [-Wnewline-eof]
-  253 | }
+HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[50]' (aka 'volatile unsigned char[50]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(132): note: passing argument to parameter here
+  132 | extern _ARMABI int strncmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
+      |                                                                    ^
+HAL/ESP32/ESP32_Program.c(57): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                          ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(80): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                                                                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(335): note: passing argument to parameter here
+  335 | extern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
+      |                                                ^
+HAL/ESP32/ESP32_Program.c(80): warning: passing 'volatile uint8 *' (aka 'volatile unsigned char *') to parameter of type 'uint8 *' (aka 'unsigned char *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(51): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   51 |             uint8 Loc_uint8Index = 0; 
+      |                   ^
+HAL/ESP32/ESP32_Program.c(167): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  167 |         MGPIO_SetPinMode(MUART3_TX_PORT_ID, MUART3_TX_PIN_ID, MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ);
+      |                                                               ^
+HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(57): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ'
+   57 | #define MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ              (uint32)0b1010     /* GPIO Output Alternate Function Push-Pull Mode, 2MHz */
+      |                                                             ^
+HAL/ESP32/ESP32_Program.c(168): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  168 |         MGPIO_SetPinMode(MUART3_RX_PORT_ID, MUART3_RX_PIN_ID, MGPIO_INPUT_PULL_UP_OR_DOWN_MODE);
+      |                                                               ^
+HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(47): note: expanded from macro 'MGPIO_INPUT_PULL_UP_OR_DOWN_MODE'
+   47 | #define MGPIO_INPUT_PULL_UP_OR_DOWN_MODE            (uint32)0b1000     /* GPIO Input Pull down Mode */
+      |                                                             ^
+HAL/ESP32/ESP32_Program.c(301): warning: passing 'uint8[14]' (aka 'unsigned char[14]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  301 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(440): note: passing argument to parameter here
+  440 | extern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
+      |                                                    ^
+HAL/ESP32/ESP32_Program.c(301): warning: implicit conversion increases floating-point precision: 'float32' (aka 'float') to 'double' [-Wdouble-promotion]
+  301 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
+      |         ~~~~~~~~                                                                   ^~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(304): warning: passing 'uint8[14]' (aka 'unsigned char[14]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+  304 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(440): note: passing argument to parameter here
+  440 | extern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
+      |                                                    ^
+HAL/ESP32/ESP32_Program.c(304): warning: implicit conversion increases floating-point precision: 'float32' (aka 'float') to 'double' [-Wdouble-promotion]
+  304 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
+      |         ~~~~~~~~                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(359): warning: no newline at end of file [-Wnewline-eof]
+  359 |                         //}
+      |                            ^
+HAL/ESP32/ESP32_Program.c(49): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   49 |             glbl_uint8CommandBuffer[glbl_uint8BufferIndex] = '\0';
+      |             ^~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(57): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(57): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
+      |                                                                                                                              ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(65): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   65 |                         if((glbl_PCallbackFunc[Loc_uint8Index]) != NULL_PTR)
+      |                             ^~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(67): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   67 |                             (glbl_PCallbackFunc[Loc_uint8Index])();
+      |                              ^~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(78): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   78 |                             if((glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS]) != NULL_PTR)
+      |                                 ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(80): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                  ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(80): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(80): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                                                                                          ^~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(80): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
+      |                                                                                                                                            ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(104): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  104 |             glbl_uint8CommandBuffer[glbl_uint8BufferIndex] = (uint8)(Loc_uint16RxChar);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(206): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  206 |         glbl_PCallbackFunc[Copy_uint8CommandNumber] = P_CommandCallbackFunc;
+      |         ^~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(224): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  224 |             glbl_PArgCallbackFunc[Copy_uint8CommandNumber - HESP32_NO_OF_NON_ARG_COMMANDS] = P_CommandCallbackFunc;
+      |             ^~~~~~~~~~~~~~~~~~~~~
+HAL/ESP32/ESP32_Program.c(245): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  245 |             MUART_SendIntegerValue(HESP32_UART_CHOICE, P_uint32MotorSteps[Loc_uint8Index]);
+      |                                                        ^~~~~~~~~~~~~~~~~~
+37 warnings generated.
+compiling ESP32_Program.c...
+MCAL/AFIO/AFIO_Program.c(11): warning: In file included from...
+MCAL/AFIO/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/AFIO/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/AFIO/AFIO_Program.c(11): warning: In file included from...
+MCAL/AFIO/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/AFIO/AFIO_Program.c(13): warning: In file included from...
+MCAL/AFIO/AFIO_Private.h(29): warning: no newline at end of file [-Wnewline-eof]
+   29 | #endif /*_AFIO_PRIVATE_H_*/
+      |                            ^
+MCAL/AFIO/AFIO_Program.c(14): warning: In file included from...
+MCAL/AFIO/AFIO_Interface.h(39): warning: no newline at end of file [-Wnewline-eof]
+   39 | #endif /*_AFIO_INTERFACE_H_*/
+      |                              ^
+MCAL/AFIO/AFIO_Program.c(15): warning: In file included from...
+MCAL/AFIO/AFIO_Config.h(13): warning: no newline at end of file [-Wnewline-eof]
+   13 | #endif /*_AFIO_CONFIG_H_*/
+      |                           ^
+MCAL/AFIO/AFIO_Program.c(20): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   20 |     if((Copy_uint8Port <= MAFIO_PORTG_PIN) && (Copy_uint8EXTILine <= MAFIO_EXTI15))
+      |                           ^
+MCAL/AFIO/AFIO_Interface.h(36): note: expanded from macro 'MAFIO_PORTG_PIN'
+   36 | #define MAFIO_PORTG_PIN                                 0b0110
+      |                                                         ^
+MCAL/AFIO/AFIO_Program.c(25): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
+      |                                                 ^
+MCAL/AFIO/AFIO_Program.c(25): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
+      |                                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/AFIO/AFIO_Program.c(26): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   26 |         MAFIO ->EXTICR[Loc_uint8RegIndex] |= ((Copy_uint8Port) << Loc_uint8RegOffset * 4);
+      |                                           ~~  ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/AFIO/AFIO_Program.c(33): warning: no newline at end of file [-Wnewline-eof]
+   33 | }
       |  ^
-MCAL/RTC/RTC_Program.c(242): warning: no previous prototype for function 'RTC_IRQHandler' [-Wmissing-prototypes]
-  242 | void RTC_IRQHandler(void)
-      |      ^
-MCAL/RTC/RTC_Program.c(242): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  242 | void RTC_IRQHandler(void)
+MCAL/AFIO/AFIO_Program.c(25): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
+      |         ^~~~~~~~~~~~~~
+MCAL/AFIO/AFIO_Private.h(28): note: expanded from macro 'MAFIO'
+   28 | #define MAFIO                                        ((MAFIO_Typedef *)(MAFIO_BASE_ADDRESS))
+      |                                                      ^
+MCAL/AFIO/AFIO_Program.c(26): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   26 |         MAFIO ->EXTICR[Loc_uint8RegIndex] |= ((Copy_uint8Port) << Loc_uint8RegOffset * 4);
+      |         ^~~~~~~~~~~~~~
+MCAL/AFIO/AFIO_Private.h(28): note: expanded from macro 'MAFIO'
+   28 | #define MAFIO                                        ((MAFIO_Typedef *)(MAFIO_BASE_ADDRESS))
+      |                                                      ^
+12 warnings generated.
+compiling AFIO_Program.c...
+MCAL/NVIC/NVIC_Program.c(12): warning: In file included from...
+MCAL/NVIC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/NVIC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/NVIC/NVIC_Program.c(12): warning: In file included from...
+MCAL/NVIC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/NVIC/NVIC_Program.c(14): warning: In file included from...
+MCAL/NVIC/NVIC_Private.h(211): warning: no newline at end of file [-Wnewline-eof]
+  211 | #endif /*_NVIC_PRIVATE_H_*/
+      |                            ^
+MCAL/NVIC/NVIC_Program.c(15): warning: In file included from...
+MCAL/NVIC/NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
+  151 | #endif /*_NVIC_INTERFACE_H_*/
+      |                              ^
+MCAL/NVIC/NVIC_Program.c(16): warning: In file included from...
+MCAL/NVIC/NVIC_Config.h(16): warning: no newline at end of file [-Wnewline-eof]
+   16 | #endif /*_NVIC_CONFIG_H_*/
+      |                           ^
+MCAL/NVIC/NVIC_Program.c(202): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  202 |                 Loc_uint8PriorityValue = (Copy_uint8GroupPriority << 4);
+      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/NVIC/NVIC_Program.c(210): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  210 |                 Loc_uint8PriorityValue = ((Copy_uint8SubGroupPriority) | (Copy_uint8GroupPriority << ((Loc_uint16AIRCRPriorityGroupVal - (uint16)MNVIC_PRIORITY_GROUP_4_SUB_0) / 0x100)));
+      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Program.c(211): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  211 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
+      |                                                         ~ ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/NVIC/NVIC_Program.c(216): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  216 |                 Loc_uint8PriorityValue = (Copy_uint8SubGroupPriority << 4);
+      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/NVIC/NVIC_Program.c(38): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   38 |         SET_BIT((NVIC -> ISER[1]), Copy_uint32InterruptNumber);
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/NVIC/NVIC_Program.c(66): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   66 |         SET_BIT((NVIC -> ICER[1]), Copy_uint32InterruptNumber);
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/NVIC/NVIC_Program.c(94): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   94 |         SET_BIT((NVIC -> ISPR[1]), Copy_uint32InterruptNumber);
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/NVIC/NVIC_Program.c(122): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  122 |         SET_BIT((NVIC -> ICPR[1]), Copy_uint32InterruptNumber);
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/NVIC/NVIC_Program.c(153): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  153 |             *P_uint8ActiveFlag = GET_BIT((NVIC -> IABR[1]), Copy_uint32InterruptNumber);
+      |                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(17): note: expanded from macro 'GET_BIT'
+   17 | #define GET_BIT(REG,BIT)                        ((REG >> BIT) & 1)
+      |                                                   ^~~
+MCAL/NVIC/NVIC_Program.c(203): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  203 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
+      |                 ^~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/NVIC_Program.c(211): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  211 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
+      |                 ^~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+MCAL/NVIC/NVIC_Program.c(217): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  217 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
+      |                 ^~~~~~~~~~~
+MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
+  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
+      |                                                         ^
+17 warnings generated.
+compiling NVIC_Program.c...
+MCAL/SCB/SCB_Program.c(11): warning: In file included from...
+MCAL/SCB/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/SCB/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/SCB/SCB_Program.c(11): warning: In file included from...
+MCAL/SCB/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/SCB/SCB_Program.c(13): warning: In file included from...
+MCAL/SCB/SCB_Private.h(293): warning: 'SCB_SHCSR_MEMFAULTACT' macro redefined [-Wmacro-redefined]
+  293 | #define SCB_SHCSR_MEMFAULTACT                               7
+      |         ^
+MCAL/SCB/SCB_Private.h(287): note: previous definition is here
+  287 | #define SCB_SHCSR_MEMFAULTACT                               0
+      |         ^
+MCAL/SCB/SCB_Private.h(314): warning: no newline at end of file [-Wnewline-eof]
+  314 | #endif /*_SCB_PRIVATE_H_*/
+      |                           ^
+MCAL/SCB/SCB_Program.c(14): warning: In file included from...
+MCAL/SCB/SCB_Interface.h(141): warning: no newline at end of file [-Wnewline-eof]
+  141 | #endif /*_SCB_INTERFACE_H_*/
+      |                             ^
+MCAL/SCB/SCB_Program.c(15): warning: In file included from...
+MCAL/SCB/SCB_Config.h(13): warning: no newline at end of file [-Wnewline-eof]
+   13 | #endif
+      |       ^
+MCAL/SCB/SCB_Program.c(22): warning: function 'MSCB_SystemReset' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+   22 | {
       | ^
-      | static 
-30 warnings generated.
-compiling RTC_Program.c...
-compiling GI_Program.c...
+MCAL/SCB/SCB_Program.c(74): warning: signed shift result (0x80000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
+   74 |     SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/SCB/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                          ~ ^  ~~~
+MCAL/SCB/SCB_Program.c(74): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   74 |     SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/SCB/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                      ~~  ~~^~~~~~
+MCAL/SCB/SCB_Program.c(148): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  148 |         uint16 Loc_uint16ExceptionNum = (SCB -> ICSR) & ((0b111111111) << SCB_ICSR_VECTACTIVE_START);
+      |                                                           ^
+MCAL/SCB/SCB_Program.c(188): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  188 |                 SCB -> SHPR[Copy_uint8SystemHandler] = (Copy_uint8SysHandlerPriority << 4);
+      |                                                      ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/SCB/SCB_Program.c(252): warning: no newline at end of file [-Wnewline-eof]
+  252 | }
+      |  ^
+MCAL/SCB/SCB_Program.c(188): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  188 |                 SCB -> SHPR[Copy_uint8SystemHandler] = (Copy_uint8SysHandlerPriority << 4);
+      |                 ^~~~~~~~~~~
+MCAL/SCB/SCB_Private.h(102): note: expanded from macro 'SCB'
+  102 | #define SCB                                                 ((SCB_RegDef_t *) SCB_BASE_ADDRESS)
+      |                                                             ^
+13 warnings generated.
+compiling SCB_Program.c...
 MCAL/ADC/ADC_Program.c(11): warning: In file included from...
 MCAL/ADC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
 MCAL/ADC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
@@ -463,6 +1010,378 @@ MCAL/ADC/ADC_Program.c(147): warning: unsafe buffer access [-Wunsafe-buffer-usag
       |              ^~~~~~~~~~~~~~~~~~~~
 55 warnings generated.
 compiling ADC_Program.c...
+MCAL/GPTMR/GPTMR_Program.c(11): warning: In file included from...
+MCAL/GPTMR/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/GPTMR/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/GPTMR/GPTMR_Program.c(11): warning: In file included from...
+MCAL/GPTMR/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/GPTMR/GPTMR_Program.c(13): warning: In file included from...
+MCAL/GPTMR/GPTMR_Private.h(208): warning: no newline at end of file [-Wnewline-eof]
+  208 | #endif /*_GPTMR_PRIVATE_H_*/
+      |                             ^
+MCAL/GPTMR/GPTMR_Program.c(14): warning: In file included from...
+MCAL/GPTMR/GPTMR_Interface.h(75): warning: no newline at end of file [-Wnewline-eof]
+   75 | #endif /*_GPTMR_INTERFACE_H_*/
+      |                               ^
+MCAL/GPTMR/GPTMR_Program.c(15): warning: In file included from...
+MCAL/GPTMR/GPTMR_Config.h(77): warning: no newline at end of file [-Wnewline-eof]
+   77 | #endif /*_GPTMR_CONFIG_H_*/
+      |                            ^
+MCAL/GPTMR/GPTMR_Program.c(18): warning: redundant parentheses surrounding declarator [-Wredundant-parens]
+   18 | static volatile ptr_to_func_t (glbl_PCallbackFunc[3]) = {NULL_PTR};
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(38): warning: implicit conversion loses integer precision: 'uint32' (aka 'unsigned long') to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
+   38 |             *P_uint16PreloadValue = Loc_uint32TempPreload;
+      |                                   ~ ^~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(66): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   66 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_UDIS_BIT);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   70 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_URS_BIT);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(99): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+   99 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_OPM_BIT);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(109): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  109 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(110): warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]
+  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                             ~~ ^~~
+MCAL/GPTMR/GPTMR_Program.c(110): note: place parentheses around the '+' expression to silence this warning
+  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                                ^~~
+MCAL/GPTMR/GPTMR_Program.c(110): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(114): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  114 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_DIR_BIT);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(183): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  183 |                 CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> SR), MGPTMR_SR_UIF_BIT);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(213): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  213 |     CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(278): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  278 |     CLR_BIT((GPTMR[0] -> SR), MGPTMR_SR_UIF_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(268): warning: no previous prototype for function 'TIM2_IRQHandler' [-Wmissing-prototypes]
+  268 | void TIM2_IRQHandler(void)
+      |      ^
+MCAL/GPTMR/GPTMR_Program.c(268): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  268 | void TIM2_IRQHandler(void)
+      | ^
+      | static 
+MCAL/GPTMR/GPTMR_Program.c(291): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  291 |     CLR_BIT((GPTMR[1] -> SR), MGPTMR_SR_UIF_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(281): warning: no previous prototype for function 'TIM3_IRQHandler' [-Wmissing-prototypes]
+  281 | void TIM3_IRQHandler(void)
+      |      ^
+MCAL/GPTMR/GPTMR_Program.c(281): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  281 | void TIM3_IRQHandler(void)
+      | ^
+      | static 
+MCAL/GPTMR/GPTMR_Program.c(304): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  304 |     CLR_BIT((GPTMR[2] -> SR), MGPTMR_SR_UIF_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(305): warning: no newline at end of file [-Wnewline-eof]
+  305 | }
+      |  ^
+MCAL/GPTMR/GPTMR_Program.c(294): warning: no previous prototype for function 'TIM4_IRQHandler' [-Wmissing-prototypes]
+  294 | void TIM4_IRQHandler(void)
+      |      ^
+MCAL/GPTMR/GPTMR_Program.c(294): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  294 | void TIM4_IRQHandler(void)
+      | ^
+      | static 
+MCAL/GPTMR/GPTMR_Program.c(66): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   66 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_UDIS_BIT);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(70): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   70 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_URS_BIT);
+      |                      ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(99): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   99 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_OPM_BIT);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(109): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  109 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(110): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(114): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  114 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_DIR_BIT);
+      |                      ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(147): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  147 |         SET_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_ARPE_BIT);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(161): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  161 |         SET_BIT((GPTMR[Copy_uint32TimerSelect] -> DIER), MGPTMR_DIER_UIE_BIT);
+      |                  ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(175): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  175 |         GPTMR[Copy_uint32TimerSelect] -> PSC = (uint16)((uint16)(MGPTMR_CLK_PRESCALER) - 1);
+      |         ^~~~~
+MCAL/GPTMR/GPTMR_Program.c(183): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  183 |                 CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> SR), MGPTMR_SR_UIF_BIT);
+      |                          ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(198): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  198 |     SET_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
+      |              ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
+   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(199): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  199 |     GPTMR[Copy_uint32TimerSelect] -> CNT = 0;
+      |     ^~~~~
+MCAL/GPTMR/GPTMR_Program.c(213): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  213 |     CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
+      |              ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(235): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  235 |         GPTMR[Copy_uint32TimerSelect] -> ARR = Loc_uint16PreloadValue;
+      |         ^~~~~
+MCAL/GPTMR/GPTMR_Program.c(259): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  259 |         glbl_PCallbackFunc[Copy_uint32TimerSelect] = P_UpdateCallbackFunc;
+      |         ^~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(283): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  283 |     if(glbl_PCallbackFunc[1] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(285): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  285 |         (glbl_PCallbackFunc[1])();
+      |          ^~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(291): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  291 |     CLR_BIT((GPTMR[1] -> SR), MGPTMR_SR_UIF_BIT);
+      |              ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+MCAL/GPTMR/GPTMR_Program.c(296): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  296 |     if(glbl_PCallbackFunc[2] != NULL_PTR)
+      |        ^~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(298): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  298 |         (glbl_PCallbackFunc[2])();
+      |          ^~~~~~~~~~~~~~~~~~
+MCAL/GPTMR/GPTMR_Program.c(304): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  304 |     CLR_BIT((GPTMR[2] -> SR), MGPTMR_SR_UIF_BIT);
+      |              ^~~~~
+MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                  ^~~
+44 warnings generated.
+compiling GPTMR_Program.c...
+MCAL/RTC/RTC_Program.c(12): warning: In file included from...
+MCAL/RTC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/RTC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/RTC/RTC_Program.c(12): warning: In file included from...
+MCAL/RTC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/RTC/RTC_Program.c(14): warning: In file included from...
+MCAL/RTC/RTC_Private.h(155): warning: no newline at end of file [-Wnewline-eof]
+  155 | #endif /*_RTC_PRIVATE_H_*/
+      |                           ^
+MCAL/RTC/RTC_Program.c(15): warning: In file included from...
+MCAL/RTC/RTC_Interface.h(71): warning: no newline at end of file [-Wnewline-eof]
+   71 | #endif /*_RTC_INTERFACE_H_*/
+      |                             ^
+MCAL/RTC/RTC_Program.c(16): warning: In file included from...
+MCAL/RTC/RTC_Config.h(27): warning: no newline at end of file [-Wnewline-eof]
+   27 | #endif /*_RTC_CONFIG_H_*/
+      |                          ^
+MCAL/RTC/RTC_Program.c(27): warning: use of an empty initializer is a C23 extension [-Wc23-extensions]
+   27 |     struct tm time = {};
+      |                      ^
+MCAL/RTC/RTC_Program.c(40): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   40 |         time_t Loc_SspecificTime_t = mktime(&Loc_SspecificTime);
+      |                ^
+MCAL/RTC/RTC_Program.c(27): warning: unused variable 'time' [-Wunused-variable]
+   27 |     struct tm time = {};
+      |               ^~~~
+MCAL/RTC/RTC_Program.c(25): warning: no previous prototype for function 'MRTC_CalculateSeconds' [-Wmissing-prototypes]
+   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+      |                ^
+MCAL/RTC/RTC_Program.c(25): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+      | ^
+      | static 
+MCAL/RTC/RTC_Program.c(73): warning: implicit conversion loses integer precision: 'int' to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
+   73 |         P_SDate -> m_years = (Loc_PBrokenTime -> tm_year) + 1900;
+      |                            ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+MCAL/RTC/RTC_Program.c(74): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   74 |         P_SDate -> m_months = (Loc_PBrokenTime -> tm_mon) + 1;
+      |                             ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+MCAL/RTC/RTC_Program.c(75): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   75 |         P_SDate -> m_days = (Loc_PBrokenTime -> tm_mday);
+      |                           ~  ~~~~~~~~~~~~~~~~~~~^~~~~~~
+MCAL/RTC/RTC_Program.c(76): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   76 |         P_STime -> m_hours = Loc_PBrokenTime -> tm_hour;
+      |                            ~ ~~~~~~~~~~~~~~~~~~~^~~~~~~
+MCAL/RTC/RTC_Program.c(77): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   77 |         P_STime -> m_minutes = Loc_PBrokenTime -> tm_min;
+      |                              ~ ~~~~~~~~~~~~~~~~~~~^~~~~~
+MCAL/RTC/RTC_Program.c(78): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
+   78 |         P_STime ->m_seconds = Loc_PBrokenTime -> tm_sec;
+      |                             ~ ~~~~~~~~~~~~~~~~~~~^~~~~~
+MCAL/RTC/RTC_Program.c(67): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   67 |         time_t Loc_SspecificTime_t = mktime(&Loc_SspecificTime);
+      |                ^
+MCAL/RTC/RTC_Program.c(52): warning: no previous prototype for function 'MRTC_CalculateDateTime' [-Wmissing-prototypes]
+   52 | Std_ReturnType MRTC_CalculateDateTime(uint32* P_uint32Seconds, Sdate_t* P_SDate, Stime_t* P_STime)
+      |                ^
+MCAL/RTC/RTC_Program.c(52): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   52 | Std_ReturnType MRTC_CalculateDateTime(uint32* P_uint32Seconds, Sdate_t* P_SDate, Stime_t* P_STime)
+      | ^
+      | static 
+MCAL/RTC/RTC_Program.c(111): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  111 |         CLR_BIT(MRCC_BDCR_R, (MRCC_BDCR_RTCSEL_START_BIT + 1));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(125): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  125 |     CLR_BIT((RTC -> CRL), MRTC_CRL_CNF_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(132): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  132 |         CLR_BIT((RTC -> CRH), MRTC_CRH_SECIE_BIT);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(139): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  139 |     CLR_BIT((RTC -> CRL), MRTC_CRL_RSF_BIT);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile Sdate_t *' (aka 'volatile struct Sdate *') to parameter of type 'Sdate_t *' (aka 'struct Sdate *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
+      |                           ^~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_SDate' here
+   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+      |                                               ^
+MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile Stime_t *' (aka 'volatile struct Stime *') to parameter of type 'Stime_t *' (aka 'struct Stime *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_STime' here
+   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+      |                                                                 ^
+MCAL/RTC/RTC_Program.c(144): warning: passing 'volatile uint32 *' (aka 'volatile unsigned long *') to parameter of type 'uint32 *' (aka 'unsigned long *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+  144 |     MRTC_CalculateSeconds(&glbl_SReferenceDate, &glbl_SReferenceTime, &glbl_uint32ReferenceSeconds);
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(25): note: passing argument to parameter 'P_uint32Seconds' here
+   25 | Std_ReturnType MRTC_CalculateSeconds(Sdate_t* P_SDate, Stime_t* P_STime, uint32* P_uint32Seconds)
+      |                                                                                  ^
+MCAL/RTC/RTC_Program.c(121): warning: while loop has empty body [-Wempty-body]
+  121 |         while(!(GET_BIT((RTC -> CRL), MRTC_CRL_RTOFF_BIT)));
+      |                                                            ^
+MCAL/RTC/RTC_Program.c(121): note: put the semicolon on a separate line to silence this warning
+MCAL/RTC/RTC_Program.c(127): warning: while loop has empty body [-Wempty-body]
+  127 |         while(!(GET_BIT((RTC -> CRL), MRTC_CRL_RTOFF_BIT)));
+      |                                                            ^
+MCAL/RTC/RTC_Program.c(127): note: put the semicolon on a separate line to silence this warning
+MCAL/RTC/RTC_Program.c(175): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  175 |             CLR_BIT((RTC -> CRL), MRTC_CRL_CNF_BIT);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(247): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  247 |                                 CLR_BIT(RTC->CRL, MRTC_CRL_SECF_BIT);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/RTC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
+   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
+      |                                                      ~~ ^~~~~~~~~~~
+MCAL/RTC/RTC_Program.c(253): warning: no newline at end of file [-Wnewline-eof]
+  253 | }
+      |  ^
+MCAL/RTC/RTC_Program.c(242): warning: no previous prototype for function 'RTC_IRQHandler' [-Wmissing-prototypes]
+  242 | void RTC_IRQHandler(void)
+      |      ^
+MCAL/RTC/RTC_Program.c(242): note: declare 'static' if the function is not intended to be used outside of this translation unit
+  242 | void RTC_IRQHandler(void)
+      | ^
+      | static 
+30 warnings generated.
+compiling RTC_Program.c...
 MCAL/UART/UART_Program.c(11): warning: In file included from...
 MCAL/UART/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
 MCAL/UART/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
@@ -857,925 +1776,6 @@ MCAL/UART/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
       |                                                  ^~~
 76 warnings generated.
 compiling UART_Program.c...
-MCAL/NVIC/NVIC_Program.c(12): warning: In file included from...
-MCAL/NVIC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/NVIC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/NVIC/NVIC_Program.c(12): warning: In file included from...
-MCAL/NVIC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/NVIC/NVIC_Program.c(14): warning: In file included from...
-MCAL/NVIC/NVIC_Private.h(211): warning: no newline at end of file [-Wnewline-eof]
-  211 | #endif /*_NVIC_PRIVATE_H_*/
-      |                            ^
-MCAL/NVIC/NVIC_Program.c(15): warning: In file included from...
-MCAL/NVIC/NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
-  151 | #endif /*_NVIC_INTERFACE_H_*/
-      |                              ^
-MCAL/NVIC/NVIC_Program.c(16): warning: In file included from...
-MCAL/NVIC/NVIC_Config.h(16): warning: no newline at end of file [-Wnewline-eof]
-   16 | #endif /*_NVIC_CONFIG_H_*/
-      |                           ^
-MCAL/NVIC/NVIC_Program.c(202): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  202 |                 Loc_uint8PriorityValue = (Copy_uint8GroupPriority << 4);
-      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/NVIC/NVIC_Program.c(210): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  210 |                 Loc_uint8PriorityValue = ((Copy_uint8SubGroupPriority) | (Copy_uint8GroupPriority << ((Loc_uint16AIRCRPriorityGroupVal - (uint16)MNVIC_PRIORITY_GROUP_4_SUB_0) / 0x100)));
-      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Program.c(211): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  211 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
-      |                                                         ~ ~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/NVIC/NVIC_Program.c(216): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  216 |                 Loc_uint8PriorityValue = (Copy_uint8SubGroupPriority << 4);
-      |                                        ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/NVIC/NVIC_Program.c(38): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   38 |         SET_BIT((NVIC -> ISER[1]), Copy_uint32InterruptNumber);
-      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/NVIC/NVIC_Program.c(66): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   66 |         SET_BIT((NVIC -> ICER[1]), Copy_uint32InterruptNumber);
-      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/NVIC/NVIC_Program.c(94): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   94 |         SET_BIT((NVIC -> ISPR[1]), Copy_uint32InterruptNumber);
-      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/NVIC/NVIC_Program.c(122): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  122 |         SET_BIT((NVIC -> ICPR[1]), Copy_uint32InterruptNumber);
-      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/NVIC/NVIC_Program.c(153): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  153 |             *P_uint8ActiveFlag = GET_BIT((NVIC -> IABR[1]), Copy_uint32InterruptNumber);
-      |                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/../../LIB/BIT_MATH/BIT_MATH.h(17): note: expanded from macro 'GET_BIT'
-   17 | #define GET_BIT(REG,BIT)                        ((REG >> BIT) & 1)
-      |                                                   ^~~
-MCAL/NVIC/NVIC_Program.c(203): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  203 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
-      |                 ^~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/NVIC_Program.c(211): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  211 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
-      |                 ^~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-MCAL/NVIC/NVIC_Program.c(217): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  217 |                 NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
-      |                 ^~~~~~~~~~~
-MCAL/NVIC/NVIC_Private.h(135): note: expanded from macro 'NVIC'
-  135 | #define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
-      |                                                         ^
-17 warnings generated.
-compiling NVIC_Program.c...
-MCAL/SCB/SCB_Program.c(11): warning: In file included from...
-MCAL/SCB/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/SCB/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/SCB/SCB_Program.c(11): warning: In file included from...
-MCAL/SCB/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/SCB/SCB_Program.c(13): warning: In file included from...
-MCAL/SCB/SCB_Private.h(293): warning: 'SCB_SHCSR_MEMFAULTACT' macro redefined [-Wmacro-redefined]
-  293 | #define SCB_SHCSR_MEMFAULTACT                               7
-      |         ^
-MCAL/SCB/SCB_Private.h(287): note: previous definition is here
-  287 | #define SCB_SHCSR_MEMFAULTACT                               0
-      |         ^
-MCAL/SCB/SCB_Private.h(314): warning: no newline at end of file [-Wnewline-eof]
-  314 | #endif /*_SCB_PRIVATE_H_*/
-      |                           ^
-MCAL/SCB/SCB_Program.c(14): warning: In file included from...
-MCAL/SCB/SCB_Interface.h(141): warning: no newline at end of file [-Wnewline-eof]
-  141 | #endif /*_SCB_INTERFACE_H_*/
-      |                             ^
-MCAL/SCB/SCB_Program.c(15): warning: In file included from...
-MCAL/SCB/SCB_Config.h(13): warning: no newline at end of file [-Wnewline-eof]
-   13 | #endif
-      |       ^
-MCAL/SCB/SCB_Program.c(22): warning: function 'MSCB_SystemReset' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-   22 | {
-      | ^
-MCAL/SCB/SCB_Program.c(74): warning: signed shift result (0x80000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
-   74 |     SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/SCB/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                          ~ ^  ~~~
-MCAL/SCB/SCB_Program.c(74): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   74 |     SET_BIT(SCB -> ICSR, SCB_ICSR_NMIPENDSET);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/SCB/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                      ~~  ~~^~~~~~
-MCAL/SCB/SCB_Program.c(148): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  148 |         uint16 Loc_uint16ExceptionNum = (SCB -> ICSR) & ((0b111111111) << SCB_ICSR_VECTACTIVE_START);
-      |                                                           ^
-MCAL/SCB/SCB_Program.c(188): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  188 |                 SCB -> SHPR[Copy_uint8SystemHandler] = (Copy_uint8SysHandlerPriority << 4);
-      |                                                      ~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/SCB/SCB_Program.c(252): warning: no newline at end of file [-Wnewline-eof]
-  252 | }
-      |  ^
-MCAL/SCB/SCB_Program.c(188): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  188 |                 SCB -> SHPR[Copy_uint8SystemHandler] = (Copy_uint8SysHandlerPriority << 4);
-      |                 ^~~~~~~~~~~
-MCAL/SCB/SCB_Private.h(102): note: expanded from macro 'SCB'
-  102 | #define SCB                                                 ((SCB_RegDef_t *) SCB_BASE_ADDRESS)
-      |                                                             ^
-13 warnings generated.
-compiling SCB_Program.c...
-MCAL/AFIO/AFIO_Program.c(11): warning: In file included from...
-MCAL/AFIO/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/AFIO/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/AFIO/AFIO_Program.c(11): warning: In file included from...
-MCAL/AFIO/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/AFIO/AFIO_Program.c(13): warning: In file included from...
-MCAL/AFIO/AFIO_Private.h(29): warning: no newline at end of file [-Wnewline-eof]
-   29 | #endif /*_AFIO_PRIVATE_H_*/
-      |                            ^
-MCAL/AFIO/AFIO_Program.c(14): warning: In file included from...
-MCAL/AFIO/AFIO_Interface.h(39): warning: no newline at end of file [-Wnewline-eof]
-   39 | #endif /*_AFIO_INTERFACE_H_*/
-      |                              ^
-MCAL/AFIO/AFIO_Program.c(15): warning: In file included from...
-MCAL/AFIO/AFIO_Config.h(13): warning: no newline at end of file [-Wnewline-eof]
-   13 | #endif /*_AFIO_CONFIG_H_*/
-      |                           ^
-MCAL/AFIO/AFIO_Program.c(20): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   20 |     if((Copy_uint8Port <= MAFIO_PORTG_PIN) && (Copy_uint8EXTILine <= MAFIO_EXTI15))
-      |                           ^
-MCAL/AFIO/AFIO_Interface.h(36): note: expanded from macro 'MAFIO_PORTG_PIN'
-   36 | #define MAFIO_PORTG_PIN                                 0b0110
-      |                                                         ^
-MCAL/AFIO/AFIO_Program.c(25): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
-      |                                                 ^
-MCAL/AFIO/AFIO_Program.c(25): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
-      |                                           ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/AFIO/AFIO_Program.c(26): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   26 |         MAFIO ->EXTICR[Loc_uint8RegIndex] |= ((Copy_uint8Port) << Loc_uint8RegOffset * 4);
-      |                                           ~~  ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/AFIO/AFIO_Program.c(33): warning: no newline at end of file [-Wnewline-eof]
-   33 | }
-      |  ^
-MCAL/AFIO/AFIO_Program.c(25): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   25 |         MAFIO ->EXTICR[Loc_uint8RegIndex] &= ~((0b1111) << Loc_uint8RegOffset * 4);
-      |         ^~~~~~~~~~~~~~
-MCAL/AFIO/AFIO_Private.h(28): note: expanded from macro 'MAFIO'
-   28 | #define MAFIO                                        ((MAFIO_Typedef *)(MAFIO_BASE_ADDRESS))
-      |                                                      ^
-MCAL/AFIO/AFIO_Program.c(26): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   26 |         MAFIO ->EXTICR[Loc_uint8RegIndex] |= ((Copy_uint8Port) << Loc_uint8RegOffset * 4);
-      |         ^~~~~~~~~~~~~~
-MCAL/AFIO/AFIO_Private.h(28): note: expanded from macro 'MAFIO'
-   28 | #define MAFIO                                        ((MAFIO_Typedef *)(MAFIO_BASE_ADDRESS))
-      |                                                      ^
-12 warnings generated.
-compiling AFIO_Program.c...
-MCAL/RCC/RCC_Program.c(13): warning: In file included from...
-MCAL/RCC/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/RCC/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/RCC/RCC_Program.c(13): warning: In file included from...
-MCAL/RCC/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/RCC/RCC_Program.c(15): warning: In file included from...
-MCAL/RCC/RCC_Private.h(129): warning: no newline at end of file [-Wnewline-eof]
-  129 | #endif /*_RCC_PRIVATE_H_*/
-      |                           ^
-MCAL/RCC/RCC_Program.c(16): warning: In file included from...
-MCAL/RCC/RCC_Config.h(86): warning: no newline at end of file [-Wnewline-eof]
-   86 | #endif /*_RCC_CONFIG_H_*/
-      |                          ^
-MCAL/RCC/RCC_Program.c(47): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   47 |                 CLR_BIT(MRCC_CR, MRCC_CR_HSEBYP);
-      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RCC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RCC/RCC_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   61 |             CLR_BIT(MRCC_CFGR, (MRCC_CFGR_SW_START + 1));
-      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/RCC/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/RCC/RCC_Program.c(123): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  123 |     MRCC_CFGR &= ~(((uint32)0b1111) << (MRCC_CFGR_HPRE_START));
-      |                             ^
-MCAL/RCC/RCC_Program.c(124): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  124 |     MRCC_CFGR |= (((uint32)(MRCC_AHB_PRESCALAR)) << (MRCC_CFGR_HPRE_START));
-      |                             ^
-MCAL/RCC/RCC_Config.h(64): note: expanded from macro 'MRCC_AHB_PRESCALAR'
-   64 | #define MRCC_AHB_PRESCALAR                          MRCC_AHB_CLK_DIV_1
-      |                                                     ^
-MCAL/RCC/RCC_Private.h(106): note: expanded from macro 'MRCC_AHB_CLK_DIV_1'
-  106 | #define MRCC_AHB_CLK_DIV_1                               0b0000
-      |                                                          ^
-MCAL/RCC/RCC_Program.c(126): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  126 |     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE1_START));
-      |                             ^
-MCAL/RCC/RCC_Program.c(127): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  127 |     MRCC_CFGR |= (((uint32)(MRCC_APB1_PRESCALAR)) << (MRCC_CFGR_PPRE1_START));
-      |                             ^
-MCAL/RCC/RCC_Config.h(74): note: expanded from macro 'MRCC_APB1_PRESCALAR'
-   74 | #define MRCC_APB1_PRESCALAR                         MRCC_APB1_CLK_DIV_1
-      |                                                     ^
-MCAL/RCC/RCC_Private.h(117): note: expanded from macro 'MRCC_APB1_CLK_DIV_1'
-  117 | #define MRCC_APB1_CLK_DIV_1                              0b000
-      |                                                          ^
-MCAL/RCC/RCC_Program.c(129): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  129 |     MRCC_CFGR &= ~(((uint32)0b111) << (MRCC_CFGR_PPRE2_START));
-      |                             ^
-MCAL/RCC/RCC_Program.c(130): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  130 |     MRCC_CFGR |= (((uint32)(MRCC_APB2_PRESCALAR)) << (MRCC_CFGR_PPRE2_START));
-      |                             ^
-MCAL/RCC/RCC_Config.h(84): note: expanded from macro 'MRCC_APB2_PRESCALAR'
-   84 | #define MRCC_APB2_PRESCALAR                         MRCC_APB2_CLK_DIV_1
-      |                                                     ^
-MCAL/RCC/RCC_Private.h(124): note: expanded from macro 'MRCC_APB2_CLK_DIV_1'
-  124 | #define MRCC_APB2_CLK_DIV_1                              0b000
-      |                                                          ^
-MCAL/RCC/RCC_Program.c(217): warning: no newline at end of file [-Wnewline-eof]
-  217 | }
-      |  ^
-13 warnings generated.
-compiling RCC_Program.c...
-MCAL/GPTMR/GPTMR_Program.c(11): warning: In file included from...
-MCAL/GPTMR/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/GPTMR/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/GPTMR/GPTMR_Program.c(11): warning: In file included from...
-MCAL/GPTMR/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/GPTMR/GPTMR_Program.c(13): warning: In file included from...
-MCAL/GPTMR/GPTMR_Private.h(208): warning: no newline at end of file [-Wnewline-eof]
-  208 | #endif /*_GPTMR_PRIVATE_H_*/
-      |                             ^
-MCAL/GPTMR/GPTMR_Program.c(14): warning: In file included from...
-MCAL/GPTMR/GPTMR_Interface.h(75): warning: no newline at end of file [-Wnewline-eof]
-   75 | #endif /*_GPTMR_INTERFACE_H_*/
-      |                               ^
-MCAL/GPTMR/GPTMR_Program.c(15): warning: In file included from...
-MCAL/GPTMR/GPTMR_Config.h(77): warning: no newline at end of file [-Wnewline-eof]
-   77 | #endif /*_GPTMR_CONFIG_H_*/
-      |                            ^
-MCAL/GPTMR/GPTMR_Program.c(18): warning: redundant parentheses surrounding declarator [-Wredundant-parens]
-   18 | static volatile ptr_to_func_t (glbl_PCallbackFunc[3]) = {NULL_PTR};
-      |                               ^~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(38): warning: implicit conversion loses integer precision: 'uint32' (aka 'unsigned long') to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
-   38 |             *P_uint16PreloadValue = Loc_uint32TempPreload;
-      |                                   ~ ^~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(66): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   66 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_UDIS_BIT);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   70 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_URS_BIT);
-      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(99): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   99 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_OPM_BIT);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(109): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  109 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(110): warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]
-  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
-      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                             ~~ ^~~
-MCAL/GPTMR/GPTMR_Program.c(110): note: place parentheses around the '+' expression to silence this warning
-  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
-      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                                ^~~
-MCAL/GPTMR/GPTMR_Program.c(110): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(114): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  114 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_DIR_BIT);
-      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(183): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  183 |                 CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> SR), MGPTMR_SR_UIF_BIT);
-      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(213): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  213 |     CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(278): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  278 |     CLR_BIT((GPTMR[0] -> SR), MGPTMR_SR_UIF_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(268): warning: no previous prototype for function 'TIM2_IRQHandler' [-Wmissing-prototypes]
-  268 | void TIM2_IRQHandler(void)
-      |      ^
-MCAL/GPTMR/GPTMR_Program.c(268): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  268 | void TIM2_IRQHandler(void)
-      | ^
-      | static 
-MCAL/GPTMR/GPTMR_Program.c(291): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  291 |     CLR_BIT((GPTMR[1] -> SR), MGPTMR_SR_UIF_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(281): warning: no previous prototype for function 'TIM3_IRQHandler' [-Wmissing-prototypes]
-  281 | void TIM3_IRQHandler(void)
-      |      ^
-MCAL/GPTMR/GPTMR_Program.c(281): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  281 | void TIM3_IRQHandler(void)
-      | ^
-      | static 
-MCAL/GPTMR/GPTMR_Program.c(304): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-  304 |     CLR_BIT((GPTMR[2] -> SR), MGPTMR_SR_UIF_BIT);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                      ~~ ^~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(305): warning: no newline at end of file [-Wnewline-eof]
-  305 | }
-      |  ^
-MCAL/GPTMR/GPTMR_Program.c(294): warning: no previous prototype for function 'TIM4_IRQHandler' [-Wmissing-prototypes]
-  294 | void TIM4_IRQHandler(void)
-      |      ^
-MCAL/GPTMR/GPTMR_Program.c(294): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  294 | void TIM4_IRQHandler(void)
-      | ^
-      | static 
-MCAL/GPTMR/GPTMR_Program.c(66): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   66 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_UDIS_BIT);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(70): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   70 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_URS_BIT);
-      |                      ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(99): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   99 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_OPM_BIT);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(109): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  109 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(110): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  110 |         CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CMS_START_BIT + 1);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(114): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  114 |             CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_DIR_BIT);
-      |                      ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(147): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  147 |         SET_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_ARPE_BIT);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(161): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  161 |         SET_BIT((GPTMR[Copy_uint32TimerSelect] -> DIER), MGPTMR_DIER_UIE_BIT);
-      |                  ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(175): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  175 |         GPTMR[Copy_uint32TimerSelect] -> PSC = (uint16)((uint16)(MGPTMR_CLK_PRESCALER) - 1);
-      |         ^~~~~
-MCAL/GPTMR/GPTMR_Program.c(183): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  183 |                 CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> SR), MGPTMR_SR_UIF_BIT);
-      |                          ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(198): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  198 |     SET_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
-      |              ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(14): note: expanded from macro 'SET_BIT'
-   14 | #define SET_BIT(REG,BIT)                        (REG |= (1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(199): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  199 |     GPTMR[Copy_uint32TimerSelect] -> CNT = 0;
-      |     ^~~~~
-MCAL/GPTMR/GPTMR_Program.c(213): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  213 |     CLR_BIT((GPTMR[Copy_uint32TimerSelect] -> CR1), MGPTMR_CR1_CEN_BIT);
-      |              ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(235): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  235 |         GPTMR[Copy_uint32TimerSelect] -> ARR = Loc_uint16PreloadValue;
-      |         ^~~~~
-MCAL/GPTMR/GPTMR_Program.c(259): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  259 |         glbl_PCallbackFunc[Copy_uint32TimerSelect] = P_UpdateCallbackFunc;
-      |         ^~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(283): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  283 |     if(glbl_PCallbackFunc[1] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(285): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  285 |         (glbl_PCallbackFunc[1])();
-      |          ^~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(291): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  291 |     CLR_BIT((GPTMR[1] -> SR), MGPTMR_SR_UIF_BIT);
-      |              ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-MCAL/GPTMR/GPTMR_Program.c(296): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  296 |     if(glbl_PCallbackFunc[2] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(298): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  298 |         (glbl_PCallbackFunc[2])();
-      |          ^~~~~~~~~~~~~~~~~~
-MCAL/GPTMR/GPTMR_Program.c(304): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  304 |     CLR_BIT((GPTMR[2] -> SR), MGPTMR_SR_UIF_BIT);
-      |              ^~~~~
-MCAL/GPTMR/../../LIB/BIT_MATH/BIT_MATH.h(15): note: expanded from macro 'CLR_BIT'
-   15 | #define CLR_BIT(REG,BIT)                        (REG &= ~(1 << BIT))
-      |                                                  ^~~
-44 warnings generated.
-compiling GPTMR_Program.c...
-MCAL/GPIO/GPIO_Program.c(12): warning: In file included from...
-MCAL/GPIO/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/GPIO/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/GPIO/GPIO_Program.c(12): warning: In file included from...
-MCAL/GPIO/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/GPIO/GPIO_Program.c(14): warning: In file included from...
-MCAL/GPIO/GPIO_Private.h(138): warning: no newline at end of file [-Wnewline-eof]
-  138 | #endif /*_GPIO_PRIVATE_H_*/
-      |                            ^
-MCAL/GPIO/GPIO_Program.c(15): warning: In file included from...
-MCAL/GPIO/GPIO_Interface.h(131): warning: no newline at end of file [-Wnewline-eof]
-  131 | #endif /*_GPIO_INTERFACE_H_*/
-      |                              ^
-MCAL/GPIO/GPIO_Program.c(16): warning: In file included from...
-MCAL/GPIO/GPIO_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
-   14 | #endif /*_GPIO_CONFIG_H_*/
-      |                           ^
-MCAL/GPIO/GPIO_Program.c(38): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   38 |                 MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(38): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   38 |                 MGPIOA_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(39): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   39 |                 MGPIOA_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(44): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   44 |                 MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(44): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   44 |                 MGPIOA_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(45): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   45 |                 MGPIOA_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(54): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   54 |                 MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(54): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   54 |                 MGPIOB_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(55): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   55 |                 MGPIOB_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(60): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   60 |                 MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(60): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   60 |                 MGPIOB_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(61): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   61 |                 MGPIOB_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(70): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   70 |                 MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(70): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   70 |                 MGPIOC_CRL &= ~((0b1111) << (4 * Copy_uint8PinID));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(71): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   71 |                 MGPIOC_CRL |= ((Copy_uint8PinMode) << (4 * Copy_uint8PinID));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(77): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-   77 |                 MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                                  ^
-MCAL/GPIO/GPIO_Program.c(77): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   77 |                 MGPIOC_CRH &= ~((0b1111) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(78): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
-   78 |                 MGPIOC_CRH |= ((Copy_uint8PinMode) << (4 * (Copy_uint8PinID - 8)));
-      |                            ~~  ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/GPIO/GPIO_Program.c(358): warning: no newline at end of file [-Wnewline-eof]
-  358 | }
-      |  ^
-24 warnings generated.
-compiling GPIO_Program.c...
-MCAL/EXTI/EXTI_Program.c(11): warning: In file included from...
-MCAL/EXTI/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-MCAL/EXTI/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-MCAL/EXTI/EXTI_Program.c(11): warning: In file included from...
-MCAL/EXTI/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-MCAL/EXTI/EXTI_Program.c(13): warning: In file included from...
-MCAL/EXTI/EXTI_Private.h(31): warning: no newline at end of file [-Wnewline-eof]
-   31 | #endif /*_EXTI_PRIVATE_H_*/
-      |                            ^
-MCAL/EXTI/EXTI_Program.c(14): warning: In file included from...
-MCAL/EXTI/EXTI_Interface.h(44): warning: no newline at end of file [-Wnewline-eof]
-   44 | #endif /*_EXTI_INTERFACE_H_*/
-      |                              ^
-MCAL/EXTI/EXTI_Program.c(15): warning: In file included from...
-MCAL/EXTI/EXTI_Config.h(14): warning: no newline at end of file [-Wnewline-eof]
-   14 | #endif /*_EXTI_CONFIG_H_*/
-      |                           ^
-MCAL/EXTI/EXTI_Program.c(44): warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]
-   44 |             default:
-      |             ^
-MCAL/EXTI/EXTI_Program.c(44): note: insert '__attribute__((fallthrough));' to silence this warning
-   44 |             default:
-      |             ^
-      |             __attribute__((fallthrough)); 
-MCAL/EXTI/EXTI_Program.c(44): note: insert 'break;' to avoid fall-through
-   44 |             default:
-      |             ^
-      |             break; 
-MCAL/EXTI/EXTI_Program.c(101): warning: no previous prototype for function 'EXTI0_IRQHandler' [-Wmissing-prototypes]
-  101 | void EXTI0_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(101): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  101 | void EXTI0_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(113): warning: no previous prototype for function 'EXTI1_IRQHandler' [-Wmissing-prototypes]
-  113 | void EXTI1_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(113): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  113 | void EXTI1_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(125): warning: no previous prototype for function 'EXTI2_IRQHandler' [-Wmissing-prototypes]
-  125 | void EXTI2_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(125): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  125 | void EXTI2_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(137): warning: no previous prototype for function 'EXTI3_IRQHandler' [-Wmissing-prototypes]
-  137 | void EXTI3_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(137): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  137 | void EXTI3_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(149): warning: no previous prototype for function 'EXTI4_IRQHandler' [-Wmissing-prototypes]
-  149 | void EXTI4_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(149): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  149 | void EXTI4_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(161): warning: no previous prototype for function 'EXTI9_5_IRQHandler' [-Wmissing-prototypes]
-  161 | void EXTI9_5_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(161): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  161 | void EXTI9_5_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(306): warning: no newline at end of file [-Wnewline-eof]
-  306 | }
-      |  ^
-MCAL/EXTI/EXTI_Program.c(228): warning: no previous prototype for function 'EXTI15_10_IRQHandler' [-Wmissing-prototypes]
-  228 | void EXTI15_10_IRQHandler(void)
-      |      ^
-MCAL/EXTI/EXTI_Program.c(228): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  228 | void EXTI15_10_IRQHandler(void)
-      | ^
-      | static 
-MCAL/EXTI/EXTI_Program.c(93): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   93 |         glbl_PEXTICallbackFunctions[Copy_uint8EXTILine] = P_EXTICallBackFunc;
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(115): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  115 |     if(glbl_PEXTICallbackFunctions[1] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(117): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  117 |         (glbl_PEXTICallbackFunctions[1])();
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(127): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  127 |     if(glbl_PEXTICallbackFunctions[2] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(129): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  129 |         (glbl_PEXTICallbackFunctions[2])();
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(139): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  139 |     if(glbl_PEXTICallbackFunctions[3] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(141): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  141 |         (glbl_PEXTICallbackFunctions[3])();
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(151): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  151 |     if(glbl_PEXTICallbackFunctions[4] != NULL_PTR)
-      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(153): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  153 |         (glbl_PEXTICallbackFunctions[4])();
-      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(165): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  165 |         if(glbl_PEXTICallbackFunctions[5] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(167): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  167 |             (glbl_PEXTICallbackFunctions[5])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(177): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  177 |         if(glbl_PEXTICallbackFunctions[6] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(179): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  179 |             (glbl_PEXTICallbackFunctions[6])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(189): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  189 |         if(glbl_PEXTICallbackFunctions[7] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(191): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  191 |             (glbl_PEXTICallbackFunctions[7])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(201): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  201 |         if(glbl_PEXTICallbackFunctions[8] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(203): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  203 |             (glbl_PEXTICallbackFunctions[8])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(213): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  213 |         if(glbl_PEXTICallbackFunctions[9] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(215): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  215 |             (glbl_PEXTICallbackFunctions[9])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(232): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  232 |         if(glbl_PEXTICallbackFunctions[10] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(234): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  234 |             (glbl_PEXTICallbackFunctions[10])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(244): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  244 |         if(glbl_PEXTICallbackFunctions[11] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(246): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  246 |             (glbl_PEXTICallbackFunctions[11])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(256): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  256 |         if(glbl_PEXTICallbackFunctions[12] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(258): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  258 |             (glbl_PEXTICallbackFunctions[12])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(268): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  268 |         if(glbl_PEXTICallbackFunctions[13] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(270): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  270 |             (glbl_PEXTICallbackFunctions[13])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(280): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  280 |         if(glbl_PEXTICallbackFunctions[14] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(282): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  282 |             (glbl_PEXTICallbackFunctions[14])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(292): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  292 |         if(glbl_PEXTICallbackFunctions[15] != NULL_PTR)
-      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-MCAL/EXTI/EXTI_Program.c(294): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  294 |             (glbl_PEXTICallbackFunctions[15])();
-      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-45 warnings generated.
-compiling EXTI_Program.c...
-HAL/ESP32/ESP32_Program.c(16): warning: In file included from...
-HAL/ESP32/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
-HAL/ESP32/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
-   72 | #endif /*_PLATFORM_TYPES_H_*/
-      |                              ^
-HAL/ESP32/ESP32_Program.c(16): warning: In file included from...
-HAL/ESP32/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
-   30 | #endif /*_STD_TYPES_H_*/
-      |                         ^
-HAL/ESP32/ESP32_Program.c(19): warning: In file included from...
-HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(131): warning: no newline at end of file [-Wnewline-eof]
-  131 | #endif /*_GPIO_INTERFACE_H_*/
-      |                              ^
-HAL/ESP32/ESP32_Program.c(20): warning: In file included from...
-HAL/ESP32/../../MCAL/UART/UART_Interface.h(129): warning: no newline at end of file [-Wnewline-eof]
-  129 | #endif /*_UART_INTERFACE_H_*/
-      |                              ^
-HAL/ESP32/ESP32_Program.c(21): warning: In file included from...
-HAL/ESP32/../../MCAL/NVIC/NVIC_Interface.h(151): warning: no newline at end of file [-Wnewline-eof]
-  151 | #endif /*_NVIC_INTERFACE_H_*/
-      |                              ^
-HAL/ESP32/ESP32_Program.c(22): warning: In file included from...
-HAL/ESP32/../../MCAL/RTC/RTC_Interface.h(71): warning: no newline at end of file [-Wnewline-eof]
-   71 | #endif /*_RTC_INTERFACE_H_*/
-      |                             ^
-HAL/ESP32/ESP32_Program.c(24): warning: In file included from...
-HAL/ESP32/ESP32_Interface.h(37): warning: no newline at end of file [-Wnewline-eof]
-   37 | #endif /*_ESP32_INTERFACE_H_*/
-      |                               ^
-HAL/ESP32/ESP32_Program.c(25): warning: In file included from...
-HAL/ESP32/ESP32_Private.h(22): warning: no newline at end of file [-Wnewline-eof]
-   22 | #endif /*_ESP32_PRIVATE_H_*/
-      |                             ^
-HAL/ESP32/ESP32_Program.c(26): warning: In file included from...
-HAL/ESP32/ESP32_Config.h(53): warning: no newline at end of file [-Wnewline-eof]
-   53 | #endif /*_ESP32_CONFIG_H_*/
-      |                            ^
-HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(335): note: passing argument to parameter here
-  335 | extern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
-      |                                                ^
-HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(132): note: passing argument to parameter here
-  132 | extern _ARMABI int strncmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
-      |                                               ^
-HAL/ESP32/ESP32_Program.c(57): warning: passing 'volatile uint8[50]' (aka 'volatile unsigned char[50]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                                                                             ^~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(132): note: passing argument to parameter here
-  132 | extern _ARMABI int strncmp(const char * /*s1*/, const char * /*s2*/, size_t /*n*/) __attribute__((__nonnull__(1,2)));
-      |                                                                    ^
-HAL/ESP32/ESP32_Program.c(57): warning: implicit conversion loses integer precision: 'int' to 'uint8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                          ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(80): warning: passing 'volatile uint8[20]' (aka 'volatile unsigned char[20]') to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                                                                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\string.h(335): note: passing argument to parameter here
-  335 | extern _ARMABI size_t strlen(const char * /*s*/) __attribute__((__nonnull__(1)));
-      |                                                ^
-HAL/ESP32/ESP32_Program.c(80): warning: passing 'volatile uint8 *' (aka 'volatile unsigned char *') to parameter of type 'uint8 *' (aka 'unsigned char *') discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(51): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   51 |             uint8 Loc_uint8Index = 0; 
-      |                   ^
-HAL/ESP32/ESP32_Program.c(167): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  167 |         MGPIO_SetPinMode(MUART3_TX_PORT_ID, MUART3_TX_PIN_ID, MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ);
-      |                                                               ^
-HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(57): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ'
-   57 | #define MGPIO_OUTPUT_AF_PUSH_PULL_2MHZ              (uint32)0b1010     /* GPIO Output Alternate Function Push-Pull Mode, 2MHz */
-      |                                                             ^
-HAL/ESP32/ESP32_Program.c(168): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
-  168 |         MGPIO_SetPinMode(MUART3_RX_PORT_ID, MUART3_RX_PIN_ID, MGPIO_INPUT_PULL_UP_OR_DOWN_MODE);
-      |                                                               ^
-HAL/ESP32/../../MCAL/GPIO/GPIO_Interface.h(47): note: expanded from macro 'MGPIO_INPUT_PULL_UP_OR_DOWN_MODE'
-   47 | #define MGPIO_INPUT_PULL_UP_OR_DOWN_MODE            (uint32)0b1000     /* GPIO Input Pull down Mode */
-      |                                                             ^
-HAL/ESP32/ESP32_Program.c(301): warning: passing 'uint8[14]' (aka 'unsigned char[14]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
-  301 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
-      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(440): note: passing argument to parameter here
-  440 | extern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
-      |                                                    ^
-HAL/ESP32/ESP32_Program.c(301): warning: implicit conversion increases floating-point precision: 'float32' (aka 'float') to 'double' [-Wdouble-promotion]
-  301 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
-      |         ~~~~~~~~                                                                   ^~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(304): warning: passing 'uint8[14]' (aka 'unsigned char[14]') to parameter of type 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
-  304 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
-      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
-D:\KEIL_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(440): note: passing argument to parameter here
-  440 | extern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
-      |                                                    ^
-HAL/ESP32/ESP32_Program.c(304): warning: implicit conversion increases floating-point precision: 'float32' (aka 'float') to 'double' [-Wdouble-promotion]
-  304 |         snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
-      |         ~~~~~~~~                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(359): warning: no newline at end of file [-Wnewline-eof]
-  359 |                         //}
-      |                            ^
-HAL/ESP32/ESP32_Program.c(49): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   49 |             glbl_uint8CommandBuffer[glbl_uint8BufferIndex] = '\0';
-      |             ^~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(57): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                                     ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(57): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   57 |                         Loc_uint8Compare = strncmp((HESP32_AvailableTasks[Loc_uint8Index]), glbl_uint8CommandBuffer, strlen((HESP32_AvailableTasks[Loc_uint8Index])));
-      |                                                                                                                              ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(65): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   65 |                         if((glbl_PCallbackFunc[Loc_uint8Index]) != NULL_PTR)
-      |                             ^~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(67): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   67 |                             (glbl_PCallbackFunc[Loc_uint8Index])();
-      |                              ^~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(78): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   78 |                             if((glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS]) != NULL_PTR)
-      |                                 ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(80): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                  ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(80): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(80): warning: unsafe pointer arithmetic [-Wunsafe-buffer-usage]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                                                                                          ^~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(80): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-   80 |                                 (glbl_PArgCallbackFunc[Loc_uint8Index - HESP32_NO_OF_NON_ARG_COMMANDS])((glbl_uint8CommandBuffer + strlen((HESP32_AvailableTasks[Loc_uint8Index])) + 1));
-      |                                                                                                                                            ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(104): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  104 |             glbl_uint8CommandBuffer[glbl_uint8BufferIndex] = (uint8)(Loc_uint16RxChar);
-      |             ^~~~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(206): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  206 |         glbl_PCallbackFunc[Copy_uint8CommandNumber] = P_CommandCallbackFunc;
-      |         ^~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(224): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  224 |             glbl_PArgCallbackFunc[Copy_uint8CommandNumber - HESP32_NO_OF_NON_ARG_COMMANDS] = P_CommandCallbackFunc;
-      |             ^~~~~~~~~~~~~~~~~~~~~
-HAL/ESP32/ESP32_Program.c(245): warning: unsafe buffer access [-Wunsafe-buffer-usage]
-  245 |             MUART_SendIntegerValue(HESP32_UART_CHOICE, P_uint32MotorSteps[Loc_uint8Index]);
-      |                                                        ^~~~~~~~~~~~~~~~~~
-37 warnings generated.
-compiling ESP32_Program.c...
 HAL/SPWRVolt/SPWRVolt_Program.c(10): warning: In file included from...
 HAL/SPWRVolt/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
 HAL/SPWRVolt/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
@@ -2708,6 +2708,225 @@ MCAL/I2C/I2C_Program.c(265): warning: unsafe buffer access [-Wunsafe-buffer-usag
       |            ^~~~~~~~~~~~~~~~~
 30 warnings generated.
 compiling I2C_Program.c...
+MCAL/SPI/SPI_Program.c(9): warning: In file included from...
+MCAL/SPI/SPI_Interface.h(11): warning: In file included from...
+MCAL/SPI/SPI_Config.h(11): warning: In file included from...
+MCAL/SPI/../../LIB/STD_TYPES/Std_Types.h(13): warning: In file included from...
+MCAL/SPI/../../LIB/STD_TYPES/Platform_Types.h(72): warning: no newline at end of file [-Wnewline-eof]
+   72 | #endif /*_PLATFORM_TYPES_H_*/
+      |                              ^
+MCAL/SPI/SPI_Program.c(9): warning: In file included from...
+MCAL/SPI/SPI_Interface.h(11): warning: In file included from...
+MCAL/SPI/SPI_Config.h(11): warning: In file included from...
+MCAL/SPI/../../LIB/STD_TYPES/Std_Types.h(30): warning: no newline at end of file [-Wnewline-eof]
+   30 | #endif /*_STD_TYPES_H_*/
+      |                         ^
+MCAL/SPI/SPI_Program.c(9): warning: In file included from...
+MCAL/SPI/SPI_Interface.h(11): warning: In file included from...
+MCAL/SPI/SPI_Config.h(35): warning: declaration of 'struct S_IRQ_SRC' will not be visible outside of this function [-Wvisibility]
+   35 |         void(* P_IRQ_CallBack)(struct S_IRQ_SRC irq_scr); //set the C Function() which will be called once the IRQ Happen
+      |                                       ^
+MCAL/SPI/SPI_Program.c(9): warning: In file included from...
+MCAL/SPI/SPI_Interface.h(15): warning: In file included from...
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(131): warning: no newline at end of file [-Wnewline-eof]
+  131 | #endif /*_GPIO_INTERFACE_H_*/
+      |                              ^
+MCAL/SPI/SPI_Program.c(16): warning: no previous extern declaration for non-static variable 'Global_SPI_Config' [-Wmissing-variable-declarations]
+   16 | SPI_Config* Global_SPI_Config[2]  = {0,0} ;
+      |             ^
+MCAL/SPI/SPI_Program.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   16 | SPI_Config* Global_SPI_Config[2]  = {0,0} ;
+      | ^
+MCAL/SPI/SPI_Program.c(9): warning: In file included from...
+MCAL/SPI/SPI_Interface.h(11): warning: In file included from...
+MCAL/SPI/SPI_Config.h(35): warning: padding struct 'SPI_Config' with 2 bytes to align 'P_IRQ_CallBack' [-Wpadded]
+   35 |         void(* P_IRQ_CallBack)(struct S_IRQ_SRC irq_scr); //set the C Function() which will be called once the IRQ Happen
+      |                ^
+MCAL/SPI/SPI_Program.c(130): warning: implicit conversion changes signedness: 'int' to 'uint32' (aka 'unsigned long') [-Wsign-conversion]
+  130 |         SPIx->SPI_I2SCFGR &= ~(1<<11);
+      |                           ~~ ^~~~~~~~
+MCAL/SPI/SPI_Program.c(91): warning: result of comparison of constant 4294967291 with expression of type 'uint16' (aka 'unsigned short') is always false [-Wtautological-constant-out-of-range-compare]
+   91 |         }else   if (SPI_Config->NSS == SPI_NSS_Hard_Master_SS_output_disable )
+      |                     ~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(160): warning: implicit conversion loses integer precision: 'volatile uint32' (aka 'volatile unsigned long') to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
+  160 |         *pTxBuffer = SPIx->SPI_DR;
+      |                    ~ ~~~~~~^~~~~~
+MCAL/SPI/SPI_Program.c(155): warning: unused parameter 'PollingEn' [-Wunused-parameter]
+  155 | void  MCAL_SPI_TX_RX (SPI_TypeDef *SPIx, uint16 *pTxBuffer,enum PollingMechism PollingEn )
+      |                                                                                ^
+MCAL/SPI/SPI_Program.c(212): warning: implicit conversion loses integer precision: 'volatile uint32' (aka 'volatile unsigned long') to 'uint16' (aka 'unsigned short') [-Wimplicit-int-conversion]
+  212 |                 *pTxBuffer =    SPIx->SPI_DR  ;
+      |                            ~    ~~~~~~^~~~~~
+MCAL/SPI/SPI_Program.c(269): warning: implicit conversion changes signedness: 'unsigned int' to 'int' [-Wsign-conversion]
+  269 |                         case SPI_NSS_Hard_Master_SS_output_disable:
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Config.h(80): note: expanded from macro 'SPI_NSS_Hard_Master_SS_output_disable'
+   80 | #define SPI_NSS_Hard_Master_SS_output_disable           ~(0x1U << 2)       //SPI_CR2 Bit 2 SSOE: SS output disable
+      |                                                         ^~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(271): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  271 |                                 MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN4, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                           ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(277): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  277 |                                 MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN4, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                           ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(269): warning: overflow converting case value to switch condition type (4294967291 to 65531) [-Wswitch]
+  269 |                         case SPI_NSS_Hard_Master_SS_output_disable:
+      |                              ^
+MCAL/SPI/SPI_Config.h(80): note: expanded from macro 'SPI_NSS_Hard_Master_SS_output_disable'
+   80 | #define SPI_NSS_Hard_Master_SS_output_disable           ~(0x1U << 2)       //SPI_CR2 Bit 2 SSOE: SS output disable
+      |                                                         ^
+MCAL/SPI/SPI_Program.c(284): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  284 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN5, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(290): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  290 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN6, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(297): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  297 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN7, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(310): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  310 |                                 MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN4, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                           ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(316): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  316 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN5, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(322): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  322 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN6, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(326): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  326 |                         MGPIO_SetPinMode(MGPIO_PORTA, MGPIO_PIN7, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                   ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(349): warning: implicit conversion changes signedness: 'unsigned int' to 'int' [-Wsign-conversion]
+  349 |                         case SPI_NSS_Hard_Master_SS_output_disable:
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Config.h(80): note: expanded from macro 'SPI_NSS_Hard_Master_SS_output_disable'
+   80 | #define SPI_NSS_Hard_Master_SS_output_disable           ~(0x1U << 2)       //SPI_CR2 Bit 2 SSOE: SS output disable
+      |                                                         ^~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(351): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  351 |                                 MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN12, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                            ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(357): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  357 |                                 MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN12, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                            ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(349): warning: overflow converting case value to switch condition type (4294967291 to 65531) [-Wswitch]
+  349 |                         case SPI_NSS_Hard_Master_SS_output_disable:
+      |                              ^
+MCAL/SPI/SPI_Config.h(80): note: expanded from macro 'SPI_NSS_Hard_Master_SS_output_disable'
+   80 | #define SPI_NSS_Hard_Master_SS_output_disable           ~(0x1U << 2)       //SPI_CR2 Bit 2 SSOE: SS output disable
+      |                                                         ^
+MCAL/SPI/SPI_Program.c(364): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  364 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(370): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  370 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(377): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  377 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN15, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(391): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  391 |                                 MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN12, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                            ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(397): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  397 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_INPUT_FLOATING_MODE);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(46): note: expanded from macro 'MGPIO_INPUT_FLOATING_MODE'
+   46 | #define MGPIO_INPUT_FLOATING_MODE                   (uint32)0b0100     /* GPIO Input Floating Mode */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(403): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  403 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(407): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+  407 |                         MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN15, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+      |                                                                    ^
+MCAL/SPI/../../MCAL/GPIO/GPIO_Interface.h(52): note: expanded from macro 'MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ'
+   52 | #define MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ             (uint32)0b1001     /* GPIO Output Alternate Function Push-Pull Mode, 10MHz */
+      |                                                             ^
+MCAL/SPI/SPI_Program.c(17): warning: no previous extern declaration for non-static variable 'Global_SPI_Config1' [-Wmissing-variable-declarations]
+   17 | SPI_Config Global_SPI_Config1 ;
+      |            ^
+MCAL/SPI/SPI_Program.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   17 | SPI_Config Global_SPI_Config1 ;
+      | ^
+MCAL/SPI/SPI_Program.c(18): warning: no previous extern declaration for non-static variable 'Global_SPI_Config2' [-Wmissing-variable-declarations]
+   18 | SPI_Config Global_SPI_Config2 ;
+      |            ^
+MCAL/SPI/SPI_Program.c(18): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+   18 | SPI_Config Global_SPI_Config2 ;
+      | ^
+MCAL/SPI/SPI_Program.c(58): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+   58 |                 Global_SPI_Config[SPI2_INDEX] =  &Global_SPI_Config2 ;
+      |                 ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(177): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  177 |         if (Global_SPI_Config[index]->Communication_Mode ==  SPI_Direction_2LINES || Global_SPI_Config[index]->Communication_Mode == SPI_Direction_1LINE_transmit_only) {
+      |             ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(177): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  177 |         if (Global_SPI_Config[index]->Communication_Mode ==  SPI_Direction_2LINES || Global_SPI_Config[index]->Communication_Mode == SPI_Direction_1LINE_transmit_only) {
+      |                                                                                      ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(205): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  205 |         if ( (Global_SPI_Config[index]->Communication_Mode ==  SPI_Direction_2LINES)  || (Global_SPI_Config[index]->Communication_Mode  ==  SPI_Direction_2LINES_RXONLY) )
+      |               ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(205): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  205 |         if ( (Global_SPI_Config[index]->Communication_Mode ==  SPI_Direction_2LINES)  || (Global_SPI_Config[index]->Communication_Mode  ==  SPI_Direction_2LINES_RXONLY) )
+      |                                                                                           ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(340): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  340 |                 if (Global_SPI_Config[SPI2_INDEX]->Device_Mode == SPI_Device_Mode_MASTER )
+      |                     ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(346): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  346 |                         switch  (Global_SPI_Config[SPI2_INDEX]->NSS)
+      |                                  ^~~~~~~~~~~~~~~~~
+MCAL/SPI/SPI_Program.c(386): warning: unsafe buffer access [-Wunsafe-buffer-usage]
+  386 |                         switch  (Global_SPI_Config[SPI2_INDEX]->NSS)
+      |                                  ^~~~~~~~~~~~~~~~~
+43 warnings generated.
+compiling SPI_Program.c...
 assembling startup_stm32f10x_md.s...
 RTE/Device/STM32F103C8/system_stm32f10x.c(64): warning: In file included from...
 C:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(18): warning: invalid UTF-8 in comment [-Winvalid-utf8]
@@ -2732,7 +2951,7 @@ RTE/Device/STM32F103C8/system_stm32f10x.c(408): warning: unsafe buffer access [-
 compiling system_stm32f10x.c...
 linking...
 Program Size: Code=28464 RO-data=956 RW-data=524 ZI-data=2252  
-".\Objects\stm32_spectro.axf" - 0 Error(s), 598 Warning(s).
+".\Objects\stm32_spectro.axf" - 0 Error(s), 641 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -2760,9 +2979,9 @@ Package Vendor: Keil
 
    * Component: Keil::Device:Startup@1.0.0
       Include file:  RTE_Driver/Config/RTE_Device.h
-      Source file:   Device/Source/ARM/STM32F1xx_OPT.s
       Source file:   Device/Source/ARM/startup_stm32f10x_md.s
       Source file:   Device/Source/system_stm32f10x.c
+      Source file:   Device/Source/ARM/STM32F1xx_OPT.s
 Build Time Elapsed:  00:00:04
 </pre>
 </body>
