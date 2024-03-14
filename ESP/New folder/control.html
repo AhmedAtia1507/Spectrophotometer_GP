@@ -246,11 +246,11 @@
       <h2 style="text-decoration: underline">Date and time</h2>
       <div style="margin-left: 20px">
         <label for="datepicker">Select Date:</label>
-        <input style="padding: 8px; margin-left: 30px; border-radius: 5px" type="date" id="datepicker2" />
+        <input style="padding: 8px; margin-left: 30px; border-radius: 5px" type="date" id="datepicker" />
         <br />
         <br /><br />
         <label for="timepicker">Select Time:</label>
-        <input style="padding: 5px; margin-left: 30px; border-radius: 5px" type="time" id="timepicker2" step="1" /><br />
+        <input style="padding: 5px; margin-left: 30px; border-radius: 5px" type="time" id="timepicker" step="1" /><br />
         <br /><br />
         <button class="page" style="margin-left: 80%;" onclick="saveDateTime(this)">
           Save
@@ -287,9 +287,9 @@
             </li>
             <li id="savestep-" class="Direct" onclick="savecalb(this)">save filter moter calibration step <div id="stepsaved2" class="state"></div></li>
             <li id="sndtime" onclick="loadtime()">send current stm time</li>
-            <li id="updatedate">update time <input  type="date" id="datepicker" />
-              <label for="timepicker">Select Time:</label>
-              <input  type="time" id="timepicker" step="1" />
+            <li id="updatedate">update time <input  type="date" id="datepicker2" />
+              <label for="timepicker2">Select Time:</label>
+              <input  type="time" id="timepicker2" step="1" />
               <button class="Direct"  onclick="saveDateTime(this)">
               Save
               </button>
