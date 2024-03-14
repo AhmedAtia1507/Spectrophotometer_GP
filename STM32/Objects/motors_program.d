@@ -1,0 +1,12 @@
+./objects/motors_program.o: HAL\STEPPER_MOTOR\MOTORS_Program.c \
+  HAL\STEPPER_MOTOR\..\..\LIB\BIT_MATH\BIT_MATH.h \
+  HAL\STEPPER_MOTOR\..\..\LIB\STD_TYPES\Std_Types.h \
+  HAL\STEPPER_MOTOR\..\..\LIB\STD_TYPES\Platform_Types.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\GPIO\GPIO_Interface.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\RCC\RCC_Interface.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\STK\STK_Interface.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\EXTI\EXTI_Interface.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\NVIC\NVIC_Interface.h \
+  HAL\STEPPER_MOTOR\..\..\MCAL\AFIO\AFIO_Interface.h \
+  HAL\STEPPER_MOTOR\MOTORS_Config.h HAL\STEPPER_MOTOR\MOTORS_Private.h \
+  HAL\STEPPER_MOTOR\MOTORS_Interface.h

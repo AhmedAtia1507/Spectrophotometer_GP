@@ -273,8 +273,10 @@ function addCurve(xData, yData, color, curveName) {
     data: curveData,
     borderColor: color,
     borderWidth: 2,
-    fill: false,
-    lineTension: 0.4
+    pointRadius: 0,
+    fill: 'origin', 
+    lineTension: 0.4,
+    backgroundColor: 'rgba(255, 0, 0, 0.3)'
   });
   chartScan.update();
 }
@@ -843,25 +845,41 @@ function readADC() {
 }
 
 /**------------------------------------------------------------------------
- *                           READINGS TABLE
+ *                           SCAN II TABLE
  *------------------------------------------------------------------------**/
+var scanTable= document.getElementById('scanTable');
+var cells = scanTable.getElementsByTagName('td');
 
-new DataTable('#myTable', {
-  layout: {
-      topStart: {
-          buttons: ['excel']
-      }
-  },
-  searching: false, // Disable search
-});
-const myTable = $('#myTable').DataTable();
-// function to add a new row
-function addNewReadingToTable(data) {
-  myTable.row.add(data).draw();
-}
-// function to remove all rows
-function removeAllReadings() {
-  myTable.clear().draw();
+for (var i = 0; i < cells.length; i++) {
+  // Take each cell
+   cells[i].onclick = function () {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.value = this.innerHTML;
+    input.style.margin = "0";
+    input.style.padding = "0";  
+    input.style.width = "166px";
+    input.style.border = "0px";
+    input.style.textAlign = "center";
+    input.style.fontFamily = "inherit";
+    input.style.fontSize = "inherit";
+    input.style.textAlign = "inherit";
+    input.style.backgroundColor = "green";
+    this.innerHTML = '';
+    this.append(input);
+    this.firstElementChild.select();
+    // Get the row id where the cell exists
+    var rowId = this.parentNode.rowIndex;
+    var rowsNotSelected = scanTable.getElementsByTagName('tr');
+    for (var row = 0; row < rowsNotSelected.length; row++) {
+      rowsNotSelected[row].style.backgroundColor = "";
+      rowsNotSelected[row].classList.remove('selected');
+    }
+    var rowSelected = scanTable.getElementsByTagName('tr')[rowId];
+    rowSelected.style.backgroundColor = "lightblue";
+    rowSelected.className += "selected";
+  };
+  
 }
 
 /**------------------------------------------------------------------------
