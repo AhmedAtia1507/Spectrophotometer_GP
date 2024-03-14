@@ -2,7 +2,6 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "SPIFFS.h"
 #include <AsyncWebSocket.h>
 #include <ArduinoJson.h>
 #include <AsyncTCP.h>
@@ -36,125 +35,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     {
       notifyClients(getOutputStates());
     }
-    // to handle login
-    else if (doc.containsKey("username"))
-    {
-      if (doc["username"].as<String>() == "esp32" && doc["password"].as<String>() == "123")
-      {
-        sendLoginSuccessNotification();
-      }
-      else
-      {
-        sendLoginFailureNotification();
-      }
-    }
-    // check if logged in
-    else if (doc.containsKey("flag"))
-    {
-      sendFlagStatus();
-    }
-    // lamps check
-    else if (doc.containsKey("uvlampstutus"))
-    {
-      handleLampStatus("uv");
-    }
-    else if (doc.containsKey("vilampstutus"))
-    {
-      handleLampStatus("vi");
-    }
-    else if (doc.containsKey("turnuvon"))
-    {
-      handleLampControl("uv", true);
-    }
-    else if (doc.containsKey("turnuvoff"))
-    {
-      handleLampControl("uv", false);
-    }
-    else if (doc.containsKey("turnvion"))
-    {
-      handleLampControl("vi", true);
-    }
-    else if (doc.containsKey("turnvioff"))
-    {
-      handleLampControl("vi", false);
-    }
-    else if (doc.containsKey("savepreset"))
-    {
-      writeToDatabase("/presets", doc);
-    }
-    else if (doc.containsKey("deletepreset"))
-    {
-      SD.remove("/presets/" + doc["name"].as<String>() + ".txt");
-    }
-    else if (doc.containsKey("showpreset"))
-    {
-      handleShowPresets();
-    }
-    else if (doc.containsKey("loadthis"))
-    {
-      handleLoadPreset(doc);
-    }
-    else if (doc.containsKey("supplystutus"))
-    {
-      handleSupplyStatus();
-    }
-    else if (doc.containsKey("loadtime"))
-    {
-      loadtime();
-    }
-    else if (doc.containsKey("updatetime"))
-    {
-      savetime(doc);
-    }
-    else if (doc.containsKey("motors"))
-    {
-      sendsteps();
-    }
-    else if (doc.containsKey("gohome"))
-    {
-      handleGoHome(doc);
-    }
-    else if (doc.containsKey("savethis")){
-      handleSavestep(doc);
-    }
-    else if (doc.containsKey("movemoter"))
-    {
-      handlemovestep(doc);
-    }
-
-    else if (doc.containsKey("command"))
-    {
-      String command = doc["command"].as<String>();
-
-      if (command == "Scan")
-      {
-        if (doc.containsKey("wavelength"))
-        {
-          Serial2.println("wavelength");
-          float wavelengthValue = doc["wavelength"].as<float>();
-          delay(100);
-          String scanData = String("{\"wavelength\":") + String(wavelengthValue);
-          delay(100);
-          scanData = scanData + String(",\"intensitySample\":") + sendCMD("sample");
-          delay(100);
-          scanData = scanData + String(",\"intensity0\":") + sendCMD("reference") + String("}");
-          delay(100);
-          notifyClients(scanData);
-          Serial.print("scan data sent");
-          // notifyClients(sendCMD(String(wavelengthValue)));
-          // ws.textAll("Wavelength value received: " + String(wavelengthValue));
-        }
-        else
-        {
-          ws.textAll("Invalid Scan command: Wavelength value is missing.");
-        }
-      }
-
-      else
-      {
-        ws.textAll("Unknown command");
-      }
-    }
+   handleifelse(doc);
   }
 }
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
@@ -182,15 +63,21 @@ void initWebSocket()
   ws.onEvent(onEvent);
   server.addHandler(&ws);
 }
-
+ void listFiles() {
+    File root = SD.open("/");
+    while (File file = root.openNextFile()) {
+        Serial.println(file.name());
+        file.close();
+    }
+}
 void setup()
 {
   Serial.begin(115200);
   Serial2.begin(115200);
   MyInitialization::initAP();
-  MyInitialization::initSPIFFS();
   initWebSocket();
   MyInitialization::sdInit();
+  listFiles();
   MyInitialization::initWeb(server);
 }
 void loop()

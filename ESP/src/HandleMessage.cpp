@@ -96,9 +96,9 @@ void sendFlagStatus()
 
 void handleLampStatus(const String &lampType)
 {
-    String command = "snd" + lampType + "\n";
-    // String status = sendCMD(command);
-    String status = "on";
+    String command = String("snd" + lampType);
+    String status = sendCMD(command);
+    //String status = "on";
     String jsonString;
     DynamicJsonDocument object(50);
     String condition = lampType + "stutus";
@@ -111,6 +111,7 @@ void handleLampStatus(const String &lampType)
 void handleLampControl(const String &lampType, bool turnOn)
 {
     String command = turnOn ? lampType + "on" : lampType + "off";
+    String status = sendCMD(command);
     handleLampStatus(lampType);
 }
 
@@ -137,23 +138,23 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    // String stutusp12 = sendCMD((char *)"p12\n");
-    // String stutusn12 = sendCMD((char *)"n12ff\n");
-    // String stutusp5 = sendCMD((char *)"p5\n");
-    // String stutusp33 = sendCMD((char *)"p33\n");
-    // String stutustwelve = sendCMD((char *)"twelve\n");
+    String stutusp12 = sendCMD((char *)"p12");
+    String stutusn12 = sendCMD((char *)"n12ff");
+    String stutusp5 = sendCMD((char *)"p5");
+    String stutusp33 = sendCMD((char *)"p33");
+    String stutustwelve = sendCMD((char *)"twelve");
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
-    // object["p12"] = stutusp12;
-    // object["n12"] = stutusn12;
-    // object["p5"] = stutusp5;
-    // object["p33"] = stutusp33;
-    // object["twelve"] = stutustwelve;
-    object["p12"] = "+12.1\n";
-    object["n12"] = "-12.3\n";
-    object["p5"] = "4.3\n";
-    object["p33"] = "3.2\n";
-    object["twelve"] = "11\n";
+     object["p12"] = stutusp12;
+     object["n12"] = stutusn12;
+     object["p5"] = stutusp5;
+     object["p33"] = stutusp33;
+     object["twelve"] = stutustwelve;
+    //object["p12"] = "+12.1\n";
+    //object["n12"] = "-12.3\n";
+    //object["p5"] = "4.3\n";
+    //object["p33"] = "3.2\n";
+    //object["twelve"] = "11\n";
 
     String jsonString;
     serializeJson(object, jsonString);
@@ -162,8 +163,8 @@ void handleSupplyStatus()
 
 void loadtime()
 {
-    // String response = sendCMD("sndtime\n");
-    String response = "1/13/2024 13:32:12\n";
+    String response = sendCMD("sndtime");
+    //String response = "1/13/2024 13:32:12\n";
     Serial.print(response);
     DynamicJsonDocument object(200);
     object["currenttime"] = response;
@@ -180,8 +181,8 @@ void savetime(const DynamicJsonDocument &doc)
 {
     String command = doc["updatetime"].as<String>();
     Serial.print(command);
-    // String respnse = sendCMD("savedate "+command + "\n");
-    String respnse = "success";
+    String respnse = sendCMD("savedate "+command);
+    //String respnse = "success";
     Serial.print(respnse);
     DynamicJsonDocument object(29);
     object["timeupdated"] = respnse;
@@ -191,9 +192,9 @@ void savetime(const DynamicJsonDocument &doc)
 }
 void sendsteps()
 {
-    String command = "sndmotorsteps\n";
-    // String response = sendCMD(command);
-    String response = "30-40-50-1100\n";
+    String command = "sndmotorsteps";
+    String response = sendCMD(command);
+    //String response = "30-40-50-1100\n";
     Serial.print(response);
     DynamicJsonDocument object(60);
     object["motorssteps"] = response;
@@ -205,11 +206,11 @@ void handleGoHome(const DynamicJsonDocument &doc)
 {
     String motortype = doc["type"];
     Serial.print(motortype);
-    String command = motortype + "\n";
-    // String response = sendCMD(command);
-    // String wavelength = sendCMD("crnt-wav\n");
-    String response = "0";
-    String wavelength = "878";
+    String command = motortype ;
+    String response = sendCMD(command);
+    String wavelength = sendCMD("crnt-wav");
+    //String response = "0";
+    //String wavelength = "878";
     DynamicJsonDocument object(90);
     object["gohome"] = "gone";
     object["step"] = response;
@@ -224,9 +225,9 @@ void handleSavestep(const DynamicJsonDocument &doc)
 {
     String correctstep = doc["savethis"];
     String correctwave = doc["wavelength"];
-    // String response = sendCMD(correctstep+"\n");
-    // String wavelength = sendCMD(correctwave+"\n");
-    String response = "saved";
+    String response = sendCMD(correctstep);
+    String wavelength = sendCMD(correctwave);
+    //String response = "saved";
     // String wavelength = "878";
     DynamicJsonDocument object(90);
     object["stepsaved"] = response;
@@ -237,8 +238,8 @@ void handleSavestep(const DynamicJsonDocument &doc)
 void handlemovestep(const DynamicJsonDocument &doc)
 {
     String correctstep = doc["movemoter"];
-    // String response = sendCMD(correctstep+"\n");
-    String response = "moved";
+    String response = sendCMD(correctstep);
+    //String response = "moved";
     DynamicJsonDocument object(90);
     object["motermoved"] = response;
     String jsonString;
@@ -246,3 +247,151 @@ void handlemovestep(const DynamicJsonDocument &doc)
     notifyClients(jsonString);
     sendsteps();
 }
+void handelreaddetecor(){
+    //String response = sendCMD("snddet");
+    String response = "12-122-22-260-17";
+    DynamicJsonDocument object(90);
+    object["detreadings"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
+void handlenewgain(const DynamicJsonDocument &doc)
+{
+    String newgain = doc["newgain"];
+    //String response = sendCMD("newgain-"+newgain);
+    String response = "applied";
+    if(response=="applied"){
+      handelreaddetecor();
+    }
+    //else{handlenewgain(doc);}
+    }
+
+
+
+ 
+ void handleifelse(const DynamicJsonDocument &doc){
+ // to handle login
+     if (doc.containsKey("username"))
+    {
+      if (doc["username"].as<String>() == "esp32" && doc["password"].as<String>() == "123")
+      {
+        sendLoginSuccessNotification();
+      }
+      else
+      {
+        sendLoginFailureNotification();
+      }
+    }
+    // check if logged in
+    else if (doc.containsKey("flag"))
+    {
+      sendFlagStatus();
+    }
+    // lamps check
+    else if (doc.containsKey("uvlampstutus"))
+    {
+      handleLampStatus("uv");
+    }
+    else if (doc.containsKey("vilampstutus"))
+    {
+      handleLampStatus("vi");
+    }
+    else if (doc.containsKey("turnuvon"))
+    {
+      handleLampControl("uv", true);
+    }
+    else if (doc.containsKey("turnuvoff"))
+    {
+      handleLampControl("uv", false);
+    }
+    else if (doc.containsKey("turnvion"))
+    {
+      handleLampControl("vi", true);
+    }
+    else if (doc.containsKey("turnvioff"))
+    {
+      handleLampControl("vi", false);
+    }
+    else if (doc.containsKey("savepreset"))
+    {
+      writeToDatabase("/presets", doc);
+    }
+    else if (doc.containsKey("deletepreset"))
+    {
+      SD.remove("/presets/" + doc["name"].as<String>() + ".txt");
+    }
+    else if (doc.containsKey("showpreset"))
+    {
+      handleShowPresets();
+    }
+    else if (doc.containsKey("loadthis"))
+    {
+      handleLoadPreset(doc);
+    }
+    else if (doc.containsKey("supplystutus"))
+    {
+      handleSupplyStatus();
+    }
+    else if (doc.containsKey("loadtime"))
+    {
+      loadtime();
+    }
+    else if (doc.containsKey("updatetime"))
+    {
+      savetime(doc);
+    }
+    else if (doc.containsKey("motors"))
+    {
+      sendsteps();
+    }
+    else if (doc.containsKey("gohome"))
+    {
+      handleGoHome(doc);
+    }
+    else if (doc.containsKey("savethis")){
+      handleSavestep(doc);
+    }
+    else if (doc.containsKey("movemoter"))
+    {
+      handlemovestep(doc);
+    }
+    else if (doc.containsKey("newgain")){
+      handlenewgain(doc);
+    }
+    else if (doc.containsKey("senddetector")){
+      handelreaddetecor();
+    }
+      
+
+    else if (doc.containsKey("command"))
+    {
+      String command = doc["command"].as<String>();
+
+      if (command == "Scan")
+      {
+        if (doc.containsKey("wavelength"))
+        {
+          Serial2.println("wavelength");
+          float wavelengthValue = doc["wavelength"].as<float>();
+          delay(100);
+          String scanData = String("{\"wavelength\":") + String(wavelengthValue);
+          delay(100);
+          scanData = scanData + String(",\"intensitySample\":") + sendCMD("sample");
+          delay(100);
+          scanData = scanData + String(",\"intensity0\":") + sendCMD("reference") + String("}");
+          delay(100);
+          notifyClients(scanData);
+          Serial.print("scan data sent");
+          // notifyClients(sendCMD(String(wavelengthValue)));
+          // ws.textAll("Wavelength value received: " + String(wavelengthValue));
+        }
+       
+      }
+
+      else
+      {
+        notifyClients("Unknown command");
+      }
+    }
+ }

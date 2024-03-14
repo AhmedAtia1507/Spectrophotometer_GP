@@ -1,6 +1,6 @@
 body {
     user-select: none;
-    overflow-y: hidden;
+    overflow-y: auto;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -32,8 +32,7 @@ header {
 
 
 .tab-content {
-     overflow-y: auto;
-     height: 450px;
+    
     font-weight: 600;
     display: none;
     margin-left: 10px;
@@ -67,18 +66,19 @@ td, th {
       display: grid;
       padding: 10px;
       margin-right: 10px;
-      grid-template-columns: repeat(2, 1fr); /* Three equal columns */
+      grid-template-columns: repeat(2, 1fr); /* Two equal columns */
       gap: 10px; /* Adjust the gap between grid items */
     }
 
 .grid-item {
+    
     padding: 10px;
     text-align: left;
       
     }
 
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 900px) {
     td, th {
         font-size: 12px;  
         padding: 1px;
@@ -87,10 +87,10 @@ td, th {
         width: 80%;
     }
     body{
-        font-size: small;
+        font-size:14px;
     }
     .grid-container{
-        grid-template-columns: repeat(1, 1fr); /* Three equal columns */
+        grid-template-columns: repeat(1, 1fr); 
       
     }
   
@@ -227,6 +227,14 @@ nav ul li.active {
     display: inline;
 }
 
+.timeelements{
+    position: fixed; 
+    bottom: 10px;
+    right: 30px;
+    display: flex;
+    gap: 50px;
+}
+
 /**------------------------------------------------------------------------
  * ==================== motors section==========================
  *------------------------------------------------------------------------**/
@@ -234,7 +242,7 @@ nav ul li.active {
     border: 1px solid black;
     width: fit-content;
     padding: 3px;
-    margin-right: 4px;
+    margin-left: 10px;
     display: inline-block;
 }
 .currentstep,label{
@@ -243,6 +251,30 @@ nav ul li.active {
 
 #increasestep {
     color: black;
-      width: 50px; /* Adjust the width as needed */
-      text-align: center;
+    width: 50px; 
+    text-align: center;
 }
+
+.Directcmd{
+    font-size: small;
+    
+}
+
+/* photodetect */
+.Directcmd li{
+padding: 6px;
+border: #000406 1px solid; 
+list-style:decimal;
+list-style-position: inside;
+background-color: rgb(196, 195, 194);
+margin: 5px;
+border-radius: 3px;
+
+}
+
+.Directcmd li:hover{
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+

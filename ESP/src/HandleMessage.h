@@ -23,5 +23,8 @@ void sendsteps();
 void handleGoHome(const DynamicJsonDocument &doc);
 void handleSavestep(const DynamicJsonDocument &doc);
 void handlemovestep(const DynamicJsonDocument &doc);
+void handleifelse(const DynamicJsonDocument &doc);
+void handlenewgain(const DynamicJsonDocument &doc);
+void handelreaddetecor();
 
 #endif // HANDLE_MESSAGE_H
