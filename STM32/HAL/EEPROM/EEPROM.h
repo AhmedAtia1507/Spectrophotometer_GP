@@ -13,7 +13,7 @@
 #define EEPROM_Slave_address		0b1010000
 
 void eeprom_init(void);
-unsigned char eeprom_write_Nbytes(unsigned int Memory_address, unsigned char* bytes, u8 Data_Length);
-unsigned char eeprom_read_byte(unsigned int address, u8 *dataOut, u8 dataLen);
+Std_ReturnType eeprom_write_Nbytes(uint32 Memory_address, uint8* bytes, uint8 Data_Length);
+Std_ReturnType eeprom_read_byte(uint32 address, uint8 *dataOut, uint8 dataLen);
 
 #endif /* HAL_I2C_EEPROM_I2C_SLAVE_EEPROM_H_ */

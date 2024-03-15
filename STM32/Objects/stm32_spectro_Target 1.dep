@@ -6,7 +6,7 @@ F (.\MCAL\ADC\ADC_Private.h)(0x65CA12FD)()
 F (.\MCAL\ADC\ADC_Program.c)(0x65EF06CC)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/adc_program.o -MD)
 I (MCAL\ADC\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
 I (MCAL\ADC\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\ADC\..\..\LIB\STD_TYPES\Platform_Types.h?CAL\ADC\ADC_Private.h)(0x00000000)
+I (MCAL\ADC\..\..\LIB\STD_TYPES\Platform_Types.hFCAL\ADC\ADC_Private.h)(0x00000000)
 I (MCAL\ADC\ADC_Interface.hYCAL\ADC\ADC_Config.h)(0x00000000)
 F (.\MCAL\AFIO\AFIO_Config.h)(0x65CA12F4)()
 F (.\MCAL\AFIO\AFIO_Interface.h)(0x65CA12E9)()
@@ -146,12 +146,11 @@ I (HAL\STEPPER_MOTOR\MOTORS_Config.h\AL\STEPPER_MOTOR\MOTORS_Private.h)(0x000000
 I (HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x65E226E2)
 F (.\APP\SCommands\SCommands_Config.h)(0x65D4C05D)()
 F (.\APP\SCommands\SCommands_Interface.h)(0x65D396D3)()
-F (.\APP\SCommands\SCommands_Program.c)(0x65EF1AE4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/scommands_program.o -MD)
+F (.\APP\SCommands\SCommands_Program.c)(0x65F45C5A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/scommands_program.o -MD)
 I (D:\KEIL_v5\ARM\ARMCLANG\include\string.h)(0x656A0472)
 I (D:\KEIL_v5\ARM\ARMCLANG\include\stdio.h)(0x656A0472)
 I (D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h)(0x656A0472)
 I (D:\KEIL_v5\ARM\ARMCLANG\include\time.h)(0x656A0472)
-I (APP\SCommands\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
 I (APP\SCommands\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
 I (APP\SCommands\..\..\LIB\STD_TYPES\Platform_Types.h)(0x65CA1316)
 I (APP\SCommands\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
@@ -177,17 +176,15 @@ I (RTE\_Target_1\..\..\MCAL\RTC\RTC_Interface.h)(0x65AD2A16)
 I (RTE\_Target_1\..\..\HAL\ESP32\ESP32_Interface.h)(0x65E631F7)
 I (RTE\_Target_1\..\..\APP\SCommands\SCommands_Interface.h)(0x65D396D3)
 F (.\MCAL\I2C\I2C_Config.h)(0x65EF0BF3)()
-F (.\MCAL\I2C\I2C_Interface.h)(0x65D366F3)()
+F (.\MCAL\I2C\I2C_Interface.h)(0x65F45BE7)()
 F (.\MCAL\I2C\I2C_private.h)(0x65D366F3)()
 F (.\MCAL\I2C\I2C_Program.c)(0x65EF0B91)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/i2c_program.o -MD)
 I (MCAL\I2C\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
 I (MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
 I (MCAL\I2C\..\..\LIB\STD_TYPES\Platform_Types.h)(0x65CA1316)
 I (MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.hyCAL\I2C\I2C_Interface.h)(0x00000000)
-I (MCAL\I2C\..\GPIO\GPIO_Interface.hfCAL\I2C\..\RCC\RCC_Interface.h)(0x00000000)
-I (MCAL\I2C\I2C_Config.h_CAL\I2C\I2C_private.h)(0x00000000)
-I (MCAL\I2C\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
+I (MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.hACAL\I2C\I2C_Config.h)(0x00000000)
+I (MCAL\I2C\I2C_private.hICAL\I2C\..\..\MCAL\NVIC\NVIC_Interface.h)(0x00000000)
 F (.\MCAL\SPI\SPI_Config.h)(0x65F0BB80)()
 F (.\MCAL\SPI\SPI_Interface.h)(0x65F0BBD7)()
 F (.\MCAL\SPI\SPI_Private.h)(0x65F0BBC2)()
@@ -196,6 +193,28 @@ I (MCAL\SPI\SPI_Config.hcCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x00000000)
 I (MCAL\SPI\..\..\LIB\STD_TYPES\Platform_Types.hYCAL\SPI\SPI_Private.h)(0x00000000)
 I (MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
 I (MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
+F (.\HAL\EEPROM\EEPROM.c)(0x65F45BF2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/eeprom.o -MD)
+I (HAL\EEPROM\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
+I (HAL\EEPROM\..\..\LIB\STD_TYPES\Platform_Types.hAAL\EEPROM\EEPROM.h)(0x00000000)
+I (HAL\EEPROM\..\..\MCAL\I2C\I2C_Interface.h)(0x65F45BE7)
+I (HAL\EEPROM\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
+I (HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
+I (HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
+I (HAL\EEPROM\..\..\MCAL\I2C\I2C_Config.h)(0x65EF0BF3)
+I (HAL\EEPROM\..\..\MCAL\I2C\I2C_private.h)(0x65D366F3)
+F (.\HAL\EEPROM\EEPROM.h)(0x65F45859)()
+F (.\HAL\ADS1115\ADS1115.c)(0x65F459CD)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/ads1115.o -MD)
+I (HAL\ADS1115\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
+I (HAL\ADS1115\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
+I (HAL\ADS1115\..\..\LIB\STD_TYPES\Platform_Types.h)(0x65CA1316)
+I (HAL\ADS1115\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
+I (HAL\ADS1115\..\..\MCAL\I2C\I2C_Interface.h)(0x65F45BE7)
+I (HAL\ADS1115\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
+I (HAL\ADS1115\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
+I (HAL\ADS1115\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
+I (HAL\ADS1115\..\..\MCAL\I2C\I2C_Config.h)(0x65EF0BF3)
+I (HAL\ADS1115\..\..\MCAL\I2C\I2C_private.hCAL\ADS1115\ADS1115.h)(0x00000000)
+F (.\HAL\ADS1115\ADS1115.h)(0x65F4565F)()
 F (RTE/Device/STM32F103C8/RTE_Device.h)(0x65DB021E)()
 F (RTE/Device/STM32F103C8/startup_stm32f10x_md.s)(0x65DB021E)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 539" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32F10X_MD SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_stm32f10x_md.o)
 F (RTE/Device/STM32F103C8/system_stm32f10x.c)(0x65DB021E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/system_stm32f10x.o -MD)

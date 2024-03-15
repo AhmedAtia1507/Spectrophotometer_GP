@@ -3,7 +3,6 @@
   D:\KEIL_v5\ARM\ARMCLANG\include\stdio.h \
   D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h \
   D:\KEIL_v5\ARM\ARMCLANG\include\time.h \
-  APP\SCommands\..\..\LIB\BIT_MATH\BIT_MATH.h \
   APP\SCommands\..\..\LIB\STD_TYPES\Std_Types.h \
   APP\SCommands\..\..\LIB\STD_TYPES\Platform_Types.h \
   APP\SCommands\..\..\MCAL\GPIO\GPIO_Interface.h \

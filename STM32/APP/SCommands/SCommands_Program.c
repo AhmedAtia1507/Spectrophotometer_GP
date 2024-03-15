@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../LIB/BIT_MATH/BIT_MATH.h"
 #include "../../LIB/STD_TYPES/Std_Types.h"
 
 #include "../../MCAL/GPIO/GPIO_Interface.h"

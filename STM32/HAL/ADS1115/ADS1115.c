@@ -6,7 +6,11 @@
  *      Author: Mohanad
  */
 
-#include "I2C_Interface.h"
+#include "../../LIB/BIT_MATH/BIT_MATH.h"
+#include "../../LIB/STD_TYPES/Std_Types.h"
+
+#include "../../MCAL/GPIO/GPIO_Interface.h"
+#include "../../MCAL/I2C/I2C_Interface.h"
 #include "ADS1115.h"
 
 uint8 ch4[2];
