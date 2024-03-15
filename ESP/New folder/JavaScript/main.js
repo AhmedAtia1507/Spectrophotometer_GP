@@ -280,6 +280,7 @@ function addCurve(xData, yData, color, curveName) {
   });
   chartScan.update();
 }
+addCurve([1,2,3,4,5,6,7,8],[2,3,4,56,7,5,43,2],'blue','mina');
 // Function to remove a curve from the chart
 function removeCurve(index) {
   chartScan.data.datasets.splice(index, 1);
@@ -410,6 +411,7 @@ function scan() {
   continueScanning(startInput);
   addCurve(x, y , curveColor, SampleID);
 }
+
 /*================preset section==============*/
 
 function selectAbsorption() {

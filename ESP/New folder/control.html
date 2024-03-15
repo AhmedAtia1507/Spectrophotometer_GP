@@ -1,0 +1,313 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control</title>
+  <link rel="stylesheet" href="CSS/control.css" />
+  <link rel="stylesheet" href="CSS/all.min.css">
+  <link rel="stylesheet" href="CSS/fontawesome.min.css">
+</head>
+
+<body>
+  <div class="overlay" id="overlay" title="wait for the motor to move"></div>
+  <header>
+    <h1>SpectoPhotoMeter test mode</h1>
+  </header>
+  <li id="li0" onclick="showSidebar()">
+    <a href="#"><i class="fas fa-bars"></i></a>
+  </li>
+  <a href="index.html" class="logout-button">Home <i class="fas fa-home"></i></a>
+  <main>
+    <nav>
+      <ul>
+        <div class="container">
+          <li class="list" id="li1" onclick="showTab('tab1','li1')">
+            <span id="li1-text">Lamp and supplies</span>
+          </li>
+          <li class="list" id="li2" onclick="showTab('tab2','li2')">
+            <span id="li2-text">Supplies</span>
+          </li>
+          <li class="list" id="li3" onclick="showTab('tab3','li3')">
+            <span id="li3-text">Motors</span>
+          </li>
+          <li class="list" id="li4" onclick="showTab('tab4','li4')">
+            <span id="li4-text">Detector</span>
+          </li>
+          <li class="list" id="li5" onclick="showTab('tab5','li5')">
+            <span id="li5-text">Date and Time</span>
+          </li>
+          <li class="list" id="li6" onclick="showTab('tab6','li6')">
+            <span id="li6-text">Direct Command</span>
+          </li>
+        </div>
+      </ul>
+    </nav>
+
+    <div id="tab1" class="tab-content active">
+      <h2 style="text-decoration: underline">Lamps test</h2>
+      <h2 class="underlined-heading">uv lamp test</h2>
+
+      <div class="grid-container">
+        <div class="grid-item">
+          <label for="uvstate">current state:</label>
+          <p class="state" id="uvstate"></p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-container" style="border: none;">
+            <label for="checkbox"> tap to turn uv lamp on/off </label>
+            <label class="toggle-container">
+              <input type="checkbox" id="uvin" />
+              <div class="toggle-track" id="uvcheck">
+                <div class="toggle-thumb" id="uvthumb"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <h2 class="underlined-heading">visible lamp test</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <label for="vistate">current state:</label>
+          <p class="state" id="vistate"></p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-container" style="border: none;">
+            <label for="checkbox"> tap to turn visible lamp on/off </label>
+            <label class="toggle-container">
+              <input type="checkbox" id="viin" />
+              <div class="toggle-track" id="vicheck">
+                <div class="toggle-thumb" id="vithumb"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <button style="margin-left: 70%;" onclick="senduvStatus(),sendviStatus()">update</button>
+
+    </div>
+
+
+
+
+    <div id="tab2" class="tab-content">
+      <h2 style="text-decoration: underline">power supplies test</h2>
+      <table>
+        <thead>
+          <th></th>
+          <th>+12v supply</th>
+          <th>-12v supply</th>
+          <th>5V supply</th>
+          <th>3.3v supply</th>
+          <th>12v supply</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>values</td>
+            <td id="p12"></td>
+            <td id="n12"></td>
+            <td id="p5"></td>
+            <td id="p33"></td>
+            <td id="twelve"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br />
+      <br />
+      <button style="margin-left: 70%;" onclick="sendsupplystutus()">update</button>
+    </div>
+
+    <div id="tab3" class="tab-content">
+      <h2 style="text-decoration: double;">Motors Test and Calibration</h2>
+      <button style="margin-left: 70%;" onclick="sendmoterssteps()">update</button>
+  
+      <div class="grid-container">
+        <div class="grid-item">
+          <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
+          <div class="grid-container" style="border: none;">
+            <div class="grid-item">
+              <label for="currentstep">current step</label>
+              <div class="currentstep" id="lampstep"> 100 </div>
+            </div>
+            <div class="grid-item">
+              <button id="lampmotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
+                Home</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid-item">
+          <h3 style="text-decoration: underline;">Grating Motor</h3>
+          <div class="grid-container" style="border: none;">
+            <div class="grid-item">
+              <label for="currentstep">current step</label>
+              <div class="currentstep" id="gratingstep"> 100 </div>
+            </div>
+            <div class="grid-item">
+              <button title="press to send motor to home point" id="gratingmotorhome" onclick="gohome(this)">Go
+                Home</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3 style="text-decoration: underline; padding-left: 20px;">Filter Wheel Motor</h3>
+
+        <div class="grid-item">
+          <label for="currentstep" class="">current step</label>
+          <div class="currentstep" id="filterstep"> 100 </div>
+        </div>
+        <div class="grid-item">
+          <label for="currentstep">current wavelength</label>
+          <div class="currentstep" id="filterwave"> 1200 </div>
+        </div>
+
+        <div class="grid-item">
+          <label for="increasestep">move motor to</label>
+          <input type="number" id="increasestep" min="0" max="1000" oninput="validat(min,max),moveto(event)" value="0">
+          <label for="increasestep"> steps</label>
+          <button onclick="moveto(event)">Move</button>
+        </div>
+
+        <div class="grid-item">
+          <button class="page" onclick="savecalb(this)" title="click to update the new calibration step">save calibration</button>
+          <div id="stepsaved"></div>
+        </div>
+        <div class="grid-item">
+          <button id="filtermotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
+            Home</button>
+        </div>
+      </div>
+
+      <div id="current"></div>
+    </div>
+
+    <div id="tab4" class="tab-content">
+      <h2 style="text-decoration: underline; display: inline-block;">PhotoDetector Test</h2>
+      <button style="margin-left: 20px;" onclick="senddetector()">update</button>
+          
+      <div class="grid-container">
+        <div class="grid-item">
+          <h3 style="display: inline-block;">Referance Sample</h3>
+          <br>
+          <label for="smallsignal">small signal value:</label>
+          <div class="currentstep" id="smallref">12</div><br>
+          <label for="largesignal">amplified signal value:</label>
+          <div class="currentstep" id="largeref">122</div><br>
+        <label for="calcgain">calculated gain:</label>
+          <div class="currentstep" id="calcgainref">10</div><br>
+        </div>
+        <div class="grid-item">
+          <h3>Measure Sample</h3>
+          <label for="smallsignal">small signal value:</label>
+          <div class="currentstep" id="smallmes">11</div><br>
+          <label for="largesignal">amplified signal value:</label>
+          <div class="currentstep" id="largemes">1100</div><br>
+        <label for="calcgain">calculated gain:</label>
+          <div class="currentstep" id="calcgainmes">10</div><br>
+        </div>
+        
+        
+      </div>
+          
+<div class="grid-container">
+      <div class="grid-item">
+        <label for="potentiometer">current digital potentiometer gain:</label>
+        <div class="currentstep" id="potgain">12</div><br>
+        <br>
+        <br>
+        <label for="range">1</label>
+        <input id="currentgain" oninput="updategain(this)" title="slide to change the digital potentiometer gain"
+          type="range" step="0.5" min="1" max="100" value="12">
+        <label for="range">100</label>
+        <button class="currentstep" style="margin-left: 20px;" onclick="sendnewgain()">apply</button>
+        <br>
+        <br>
+        
+        <label for="gaain"> current value:</label>
+        <div id="gaain" class="currentstep">12</div>
+        <br>
+        <br>
+        <label for="error"> Refernce gain accurecy:</label>
+        <div class="currentstep" id="gainerrorref">99%</div><br><br>
+        <label for="error"> Sample gain accurecy:</label>
+        <div class="currentstep" id="gainerrormes">99%</div>
+      
+      
+      </div>
+    </div>
+    </div>
+   
+
+    <div id="tab5" class="tab-content">
+      <h2 style="text-decoration: underline">Date and time</h2>
+      <div style="margin-left: 20px">
+        <label for="datepicker">Select Date:</label>
+        <input style="padding: 8px; margin-left: 30px; border-radius: 5px" type="date" id="datepicker" />
+        <br />
+        <br /><br />
+        <label for="timepicker">Select Time:</label>
+        <input style="padding: 5px; margin-left: 30px; border-radius: 5px" type="time" id="timepicker" step="1" /><br />
+        <br /><br />
+        <button class="page" style="margin-left: 80%;" onclick="saveDateTime(this)">
+          Save
+        </button>
+        
+        <br /><br />
+        <hr />
+        <hr />
+      </div>
+    </div>
+  <div class="timeelements">
+    <div id="timeupdated" ></div>
+    <div id="currentDateTime" ></div>
+  </div>
+
+    <div id="tab6" class="tab-content">
+      <h2>Direct commands</h2>
+      <ul class="Directcmd">
+        <div class="grid-container" style="border: none;">
+          <div class="grid-item">
+            <li id="snduv" onclick="senduvStatus();">send UV Lamp stutus<p class="state" id="uvstate2"></p></li>
+            <li id="uvon" onclick="toggleuv()">toggle Uv lamp stutus</li>
+            <li id="sndvi" onclick="sendviStatus();">send visible Lamp stutus   <p class="state" id="vistate2"></p></li>
+            <li id="vion" onclick="togglevi()">toggle Vi lamp stutus</li>
+            <li id="p12" onclick="sendsupplystutus()">send Supplies values <div class="state" id="suppliesvalues"></div></li>
+            <li id="sndmotorsteps" onclick="sendmoterssteps()">send current steps and wavelength <div class="state" id="motorssteps"></div></li>
+            <li  id="lampmotorhome" onclick="gohome(this)">send lamp moter home</li>
+            <li id="gratingmotorhome" onclick="gohome(this)">send grating motor home</li>
+            <li id="filtermotorhome" onclick="gohome(this)">send filter motor home</li>
+            <li id="movto-"><label for="increasestep2">move filter motor to</label>
+              <input type="number" id="increasestep2" min="0" max="1000" oninput="validat(min,max),moveto(event)" value="0">
+              <label for="increasestep"> steps</label>
+              <button onclick="moveto(event)">Move</button>
+            </li>
+            <li id="savestep-" class="Direct" onclick="savecalb(this)">save filter moter calibration step <div id="stepsaved2" class="state"></div></li>
+            <li id="sndtime" onclick="loadtime()">send current stm time</li>
+            <li id="updatedate">update time <input  type="date" id="datepicker2" />
+              <label for="timepicker2">Select Time:</label>
+              <input  type="time" id="timepicker2" step="1" />
+              <button class="Direct"  onclick="saveDateTime(this)">
+              Save
+              </button>
+            </li>
+            <li onclick="senddetector()">read detector <div class="currentstep" id="CMDdetect"></div></li>
+            <li>applay new gain  <label for="range">1</label>
+              <input id="currentgain" oninput="updategain(this)" title="slide to change the digital potentiometer gain"
+                type="range" step="0.5" min="1" max="100" value="12">
+              <label for="range">100</label>
+              <button class="currentstep" style="margin-left: 20px;" onclick="sendnewgain()">apply</button>
+             </li>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </main>
+
+  <script src="JavaScript/control.js"></script>
+</body>
+
+</html>

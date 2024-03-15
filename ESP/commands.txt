@@ -4,6 +4,7 @@ commands:
 2-Supply commands
 3-time commands
 4- motors
+5-photodetector
 
 //add new commands titles here to make it easy to find
 ===============================================================================================================
@@ -57,3 +58,9 @@ movto-(value) like movto-100  //send the filter moter to the "value" steps posit
 savestep-(value)  like savestep-122   //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 
+=====================================================================================================================================================================
+5-photodetector
+
+
+snddet //send the current detector readings ==>replay with refernce small signal - refernce amplified signal- sample small signal-sample amplified signal-current digital pot gain like 1-9-2-18-9
+newgain-(value)  like newgain-12 //apply the new gaon then reply replay with "applied" or "not applied"
