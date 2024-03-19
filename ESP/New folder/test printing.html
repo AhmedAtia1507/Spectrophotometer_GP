@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Variables</title>
+</head>
+<body>
+
+<!-- Print button -->
+<button id="printButton">Print readings</button>
+
+<script>
+// JavaScript variables to be printed
+const variable1 = "Mina isaac";
+const sex = "male";
+
+const variable2 = "Blood concentration test";
+const variable3 = "readings:high Hb";
+
+// Function to format the variables for printing
+function formatVariables() {
+  return `
+    <h2>ASU Labs </h2>
+    <p>Name: ${variable1}</p>
+    <p>(fe)/male: ${sex} </p>
+    <p>Discription: ${variable2}</p>
+    <p> ${variable3}</p>
+  `;
+}
+
+// Function to open a new window and print the variables
+function printVariables() {
+  const content = formatVariables();
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(content);
+  printWindow.document.close();
+  printWindow.print();
+}
+
+// Event listener for the print button
+document.getElementById('printButton').addEventListener('click', printVariables);
+</script>
+
+</body>
+</html>

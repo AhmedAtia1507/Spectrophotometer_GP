@@ -80,10 +80,7 @@ void setup()
   listFiles();
   MyInitialization::initWeb(server);
   DynamicJsonDocument doc(2024) ;
-  doc["name"]="mina";
-  doc["readings"]="(20,30),(30,40)";
-  doc["date"]="12/24/2024 17:04:24";
-  writeToDatabase("/readings", doc);
+  
 }
 void loop()
 {

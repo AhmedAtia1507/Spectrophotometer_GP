@@ -115,9 +115,7 @@ void handleLampControl(const String &lampType, bool turnOn)
     handleLampStatus(lampType);
 }
 
-void handleShowPresets()
-{
-    const char *directory = "/presets";
+void handleShowPresets( const char *directory){
     DynamicJsonDocument result = getFilesJson(directory);
     String jsonString;
     serializeJson(result, jsonString);
@@ -323,7 +321,7 @@ void handlenewgain(const DynamicJsonDocument &doc)
     }
     else if (doc.containsKey("showpreset"))
     {
-      handleShowPresets();
+      handleShowPresets("/presets");
     }
     else if (doc.containsKey("loadthis"))
     {
@@ -362,6 +360,17 @@ void handlenewgain(const DynamicJsonDocument &doc)
     else if (doc.containsKey("senddetector")){
       handelreaddetecor();
     }
+    else if(doc.containsKey("sdsave")){
+      writeToDatabase("/readings", doc);
+    }
+    else if(doc.containsKey("sdshow")){
+      handleShowPresets("/readings");
+    }
+    else if (doc.containsKey("deletereadings"))
+    {
+      SD.remove("/readings/" + doc["name"].as<String>() + ".txt");
+    }
+    
       
 
     else if (doc.containsKey("command"))

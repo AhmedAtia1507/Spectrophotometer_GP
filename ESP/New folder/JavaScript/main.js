@@ -280,7 +280,7 @@ function addCurve(xData, yData, color, curveName) {
   });
   chartScan.update();
 }
-addCurve([1,2,3,4,5,6,7,8],[2,3,4,56,7,5,43,2],'blue','mina');
+
 // Function to remove a curve from the chart
 function removeCurve(index) {
   chartScan.data.datasets.splice(index, 1);
@@ -927,3 +927,40 @@ document.querySelector('#DeleteRows').addEventListener('click', function () {
     console.log("No row selected");
   }
 });
+
+
+
+/**------------------------------------------------------------------------
+ *                           SD Save Readings
+ *------------------------------------------------------------------------**/
+
+function savetosd(x,y,SampleID){
+var time =document.getElementById('DateTime').textContent;
+var sampledisk = document.getElementById('SampleDecribe').textContent;
+var message={
+  command:"sdsave",
+  name:SampleID,
+  discription:sampledisk,
+  x:x,
+  y:y,
+  time:time,
+}
+console.log(message);
+websocket.send(JSON.stringify(message));
+
+
+}
+
+const x =[1,2,3,4,5,6];
+const y=[3,2,3,1,2,3];
+savetosd(x,y,"mina");
+
+
+websocket.onmessage = function (event) {
+
+  var myObj = JSON.parse(event.data);
+  if (myObj.hasOwnProperty('sdsaved')) {
+    addCurve(myObj.x,myObj.y,"blue",myObj.SampleID);
+
+   }
+}
