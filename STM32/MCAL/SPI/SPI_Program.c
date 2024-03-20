@@ -361,13 +361,13 @@ void MCAL_SPI_GPIO_Set_Pins (SPI_TypeDef *SPIx)
 
 			//		PB13 : SPI2_SCK
 			//			Master Alternate function push-pull
-			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+		MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
 
 
 			//		PB14 : SPI1_MISO  (supported only full duplex)
 			//			Full duplex / master Input floating
 
-			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_INPUT_FLOATING_MODE);
+//			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_INPUT_FLOATING_MODE);
 
 			//todo to suport half duplex and simplex
 
@@ -394,13 +394,13 @@ void MCAL_SPI_GPIO_Set_Pins (SPI_TypeDef *SPIx)
 
 			//		B13 : SPI1_SCK
 			//			Slave Input floating
-//			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_INPUT_FLOATING_MODE);
+			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_INPUT_FLOATING_MODE);
 
 
 			//		PB14 : SPI1_MISO  (supported only full duplex)
 			//			Full duplex / slave (point to point) Alternate function push-pull
 			//todo			Full duplex / slave (multi-slave) Alternate function open drain
-			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
+//			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN14, MGPIO_OUTPUT_AF_PUSH_PULL_10MHZ);
 
 			//		PB15 : SPI1_MOSI
 			//			Full duplex / slave Input floating
