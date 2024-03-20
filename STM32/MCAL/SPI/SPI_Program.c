@@ -394,7 +394,7 @@ void MCAL_SPI_GPIO_Set_Pins (SPI_TypeDef *SPIx)
 
 			//		B13 : SPI1_SCK
 			//			Slave Input floating
-			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_INPUT_FLOATING_MODE);
+//			MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN13, MGPIO_INPUT_FLOATING_MODE);
 
 
 			//		PB14 : SPI1_MISO  (supported only full duplex)
