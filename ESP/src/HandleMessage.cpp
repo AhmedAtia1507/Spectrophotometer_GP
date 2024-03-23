@@ -2,6 +2,7 @@
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
 
+
 const unsigned long interval = 600000; // 10 minutes in milliseconds
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
@@ -125,13 +126,28 @@ void handleShowPresets( const char *directory){
 void handleLoadPreset(const DynamicJsonDocument &doc)
 {
     String selectthis = doc["loadthis"].as<String>();
-    String path = "/presets/" + selectthis + ".txt";
+    String path="";
+    if(doc["Dictionary"]=="readings"){
+    path = "/readings/" + selectthis + ".txt";
     Serial.print(path);
+    }
+    else if(doc["Dictionary"]=="presets"){
+    path = "/presets/" + selectthis + ".txt";
+    Serial.print(path);
+    }
     String jsonString;
     DynamicJsonDocument preset = readFromDatabase(path.c_str());
-    preset["loaded"] = "loaded";
+    if(doc["Dictionary"]=="readings"){
+    preset["loadedReadings"] = "loaded";
     serializeJson(preset, jsonString);
     notifyClients(jsonString);
+    }
+    else if(doc["Dictionary"]=="presets"){
+     preset["loaded"] = "loaded";
+    serializeJson(preset, jsonString);
+    notifyClients(jsonString);
+   }
+    
 }
 
 void handleSupplyStatus()
@@ -272,16 +288,18 @@ void handleScan(const DynamicJsonDocument &doc) {
     String startInput = doc["startInput"].as<String>();
     String stopInput = doc["stopInput"].as<String>();
     String stepInput = doc["stepInput"].as<String>();
-    Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
+    //Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
-      delay(100);
-      if (Serial2.available()) {
-        int startTime = millis();
-        while (Serial2.available() == 0 && millis() - startTime < 2000) {
-          delay(1);
-        }
-        // Read and return the response
-        String response = Serial2.readStringUntil('\n');
+      // delay(100);
+      // if (Serial2.available()) {
+      //   int startTime = millis();
+      //   while (Serial2.available() == 0 && millis() - startTime < 2000) {
+      //     delay(1);
+      //   }
+      //   // Read and return the response
+      //   String response = Serial2.readStringUntil('\n');
+        
+        String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
         
         // Split the response into components
@@ -300,7 +318,8 @@ void handleScan(const DynamicJsonDocument &doc) {
 
         // Add data to the JSON document
         scanData["currentTime"] = Time;
-        scanData["wavelength"] = wavelength.toInt();
+        //scanData["wavelength"] = wavelength.toInt();
+        scanData["wavelength"] = i;
         scanData["intensityReference"] = reference.toFloat(); 
         scanData["intensitySample"] = sample.toFloat(); 
 
@@ -314,10 +333,7 @@ void handleScan(const DynamicJsonDocument &doc) {
       }
     }
   }
-  else{
-    Serial.println("Unknown command");
-    notifyClients("Unknown command");}
-}
+
 
 
  
@@ -413,13 +429,15 @@ void handleScan(const DynamicJsonDocument &doc) {
     else if (doc.containsKey("senddetector")){
       handelreaddetecor();
     }
-    else if(doc.containsKey("sdsave")){
+    else if(doc["command"]=="sdsave"){
+      Serial.print("saved");
       writeToDatabase("/readings", doc);
-    }
-    else if(doc.containsKey("sdshow")){
+      
+}
+    else if(doc.containsKey("showreadings")){
       handleShowPresets("/readings");
     }
-    else if (doc.containsKey("deletereadings"))
+    else if (doc.containsKey("deletereading"))
     {
       SD.remove("/readings/" + doc["name"].as<String>() + ".txt");
     }

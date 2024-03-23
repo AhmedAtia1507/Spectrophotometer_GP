@@ -18,8 +18,8 @@ DynamicJsonDocument readFromDatabase(const char *filename) {
     DynamicJsonDocument doc(1024);
     File file = SD.open(filename);
     if (file) {
+     
         if (deserializeJson(doc, file)) {
-            // Assuming the txt structure matches the expected fields
         } else {
             Serial.println("Failed to parse JSON from txt");
         }
@@ -29,6 +29,7 @@ DynamicJsonDocument readFromDatabase(const char *filename) {
     }
     return doc;
 }
+
 
 JsonObject getFilesJson(const char *directory) {
     DynamicJsonDocument doc(2048);
@@ -42,7 +43,12 @@ JsonObject getFilesJson(const char *directory) {
             doc["file" + String(count++)] = fileName;
         }
     }
+    if(directory=="/presets"){
     doc["presetsno"] = count - 1;
+    }
+    else if(directory=="/readings"){
+        doc["readingsno"] = count - 1;
+    }
     dir.close();
     return doc.as<JsonObject>();
 }
