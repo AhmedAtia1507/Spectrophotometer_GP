@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "bit_math.h": "c",
+        "rtc_interface.h": "c",
+        "std_types.h": "c",
+        "uart_private.h": "c",
+        "string.h": "c"
+    }
+}

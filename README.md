@@ -3,7 +3,7 @@
 Graduation Project for year 2023/2024 at Faculty of Engineering, Ain Shams University. This Project is sponsored by MIAC Company and under the supervision of Dr.Diaa Khalil and Eng. Bassem Ali "Representing MIAC Company".
 
 ## Project Group
-1. [Ahmed Atia Said Abdelwahed](https://www.linkedin.com/in/ahmed-atia-said-abdelwahed-b8aa38135/)
+1. [Ahmed Atia Said Abdelwahed](https://www.linkedin.com/in/ahmed-atia-said-b8aa38135)
 2. [Mennat Allah Lotfy Ahmed](https://www.linkedin.com/in/mennalotfy1111)
 3. [Donia Saeed Kamal Saeed Ramadan](https://www.linkedin.com/in/donia-saeed-kamal-35551a233/)
 4. [Mohanad Mohamed Abdelmonem](https://www.linkedin.com/in/mohanad-mohamed-7860aa203/)

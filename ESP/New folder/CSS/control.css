@@ -1,0 +1,280 @@
+body {
+    user-select: none;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: hsl(0, 3%, 79%);
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.342); /* Semi-transparent gray background */
+    z-index: 999; /* Ensure the overlay is above other elements */
+    cursor:wait; /* Set cursor style to not-allowed */
+}
+
+
+header {
+    background-color: #0a0e24;
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size:10px;
+}
+
+
+.tab-content {
+    
+    font-weight: 600;
+    display: none;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.tab-content.active {
+    display: block;
+    
+}
+
+table {
+    padding: 20px;
+    width: calc(80% + 20px);
+    border-collapse: collapse;
+    position: relative;
+}
+
+thead {
+    background-color: #0a0e24;
+    color: #fffafa;
+}
+
+td, th {
+    text-align: center;
+    border: 1px solid #000406;
+    padding: 3px;  /* Adjust padding for better mobile display */
+}
+.grid-container {
+    border: 1px solid rgba(34, 34, 34, 0.274);
+      display: grid;
+      padding: 10px;
+      margin-right: 10px;
+      grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+      gap: 10px; /* Adjust the gap between grid items */
+    }
+
+.grid-item {
+    
+    padding: 10px;
+    text-align: left;
+      
+    }
+
+
+@media only screen and (max-width: 900px) {
+    td, th {
+        font-size: 12px;  
+        padding: 1px;
+    }
+    .col{
+        width: 80%;
+    }
+    body{
+        font-size:14px;
+    }
+    .grid-container{
+        grid-template-columns: repeat(1, 1fr); 
+      
+    }
+  
+}
+
+
+
+.logout-button {
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    padding: 5px 10px;
+     border: 1px solid black;
+    background-color: #0a0e24;
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+    cursor: pointer;
+    
+}
+.logout-button:hover{
+    background-color: transparent;
+}
+button{
+   background-color: #0a0e24;
+    color: white; 
+    padding: 3px;
+    border: 1px solid black;
+    transition: all 0.3s;
+
+ }
+button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: transparent;
+    }
+
+main {
+    display: flex;
+    flex: 1;
+}
+.container {
+    transition: opacity 0.1s 300ms;
+    opacity: 0;
+}
+
+nav {
+    opacity: 0;
+    background-color: #33324e;
+    color: #ddd;
+    width: 0;
+    max-width: 250px;
+    transition: width 0.4s ease-out;
+}
+
+
+nav ul {
+    list-style:none;
+    margin-left: -20px;
+}
+
+nav ul li { 
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80%;
+    max-width: 200px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.5s ;
+    margin-right: 20px;
+}
+#li0{
+    transition: width 0.3s 200ms ease-out;
+    max-width: 230px;
+    padding: 10px 10px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    line-height: 0.3;
+}
+
+
+nav ul li:hover {
+    
+    background-color: #ddd;
+    color: black;
+}
+
+nav ul li.active {
+    background-color: #1a5696; /* Change to the color you prefer */
+    color: white;
+}
+
+  
+/* Hide the default checkbox */
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+
+/* Style for the toggle switch track */
+.toggle-track {
+    margin-left: 20px;
+    width: 50px;
+    height: 30px;
+    background-color: red; /* Initial color when off */
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Style for the toggle switch thumb */
+.toggle-thumb {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s;
+}
+
+.state {
+    padding: 10px;
+    border-radius: 5px;
+    width: 40%;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.state,.toggle-container,label{
+    display: inline;
+}
+
+.timeelements{
+    position: fixed; 
+    bottom: 10px;
+    right: 30px;
+    display: flex;
+    gap: 50px;
+}
+
+/**------------------------------------------------------------------------
+ * ==================== motors section==========================
+ *------------------------------------------------------------------------**/
+.currentstep{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 3px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.currentstep,label{
+    font-size: small;
+}
+
+#increasestep {
+    color: black;
+    width: 50px; 
+    text-align: center;
+}
+
+.Directcmd{
+    font-size: small;
+    
+}
+
+/* photodetect */
+.Directcmd li{
+padding: 6px;
+border: #000406 1px solid; 
+list-style:decimal;
+list-style-position: inside;
+background-color: rgb(196, 195, 194);
+margin: 5px;
+border-radius: 3px;
+
+}
+
+.Directcmd li:hover{
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+

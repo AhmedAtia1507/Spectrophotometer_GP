@@ -2,7 +2,6 @@
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "SPIFFS.h"
 #include <AsyncWebSocket.h>
 #include <ArduinoJson.h>
 #include <AsyncTCP.h>
@@ -36,6 +35,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     {
       notifyClients(getOutputStates());
     }
+<<<<<<< HEAD
     // to handle login
     else if (doc.containsKey("username"))
     {
@@ -130,6 +130,9 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     {
       ws.textAll("Unknown command");
     }
+=======
+   handleifelse(doc);
+>>>>>>> ce29d35dcdb2a919594f1b09dc8f87719c9909f9
   }
 }
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
@@ -157,16 +160,24 @@ void initWebSocket()
   ws.onEvent(onEvent);
   server.addHandler(&ws);
 }
-
+ void listFiles() {
+    File root = SD.open("/");
+    while (File file = root.openNextFile()) {
+        Serial.println(file.name());
+        file.close();
+    }
+}
 void setup()
 {
   Serial.begin(115200);
   Serial2.begin(115200);
   MyInitialization::initAP();
-  MyInitialization::initSPIFFS();
   initWebSocket();
   MyInitialization::sdInit();
+  listFiles();
   MyInitialization::initWeb(server);
+  DynamicJsonDocument doc(2024) ;
+  
 }
 void loop()
 {
