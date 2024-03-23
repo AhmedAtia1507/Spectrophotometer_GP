@@ -245,8 +245,27 @@ void handlemovestep(const DynamicJsonDocument &doc)
     notifyClients(jsonString);
     sendsteps();
 }
-<<<<<<< HEAD
+void handelreaddetecor(){
+    //String response = sendCMD("snddet");
+    String response = "12-122-22-260-17";
+    DynamicJsonDocument object(90);
+    object["detreadings"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
+void handlenewgain(const DynamicJsonDocument &doc)
+{
+    String newgain = doc["newgain"];
+    //String response = sendCMD("newgain-"+newgain);
+    String response = "applied";
+    if(response=="applied"){
+      handelreaddetecor();
+    }
+    //else{handlenewgain(doc);}
+    }
 
+    
 void handleScan(const DynamicJsonDocument &doc) {
   String command = doc["command"].as<String>();
   if (command == "Scan") {
@@ -299,27 +318,6 @@ void handleScan(const DynamicJsonDocument &doc) {
     Serial.println("Unknown command");
     notifyClients("Unknown command");}
 }
-=======
-void handelreaddetecor(){
-    //String response = sendCMD("snddet");
-    String response = "12-122-22-260-17";
-    DynamicJsonDocument object(90);
-    object["detreadings"] = response;
-    String jsonString;
-    serializeJson(object, jsonString);
-    notifyClients(jsonString);
-}
-void handlenewgain(const DynamicJsonDocument &doc)
-{
-    String newgain = doc["newgain"];
-    //String response = sendCMD("newgain-"+newgain);
-    String response = "applied";
-    if(response=="applied"){
-      handelreaddetecor();
-    }
-    //else{handlenewgain(doc);}
-    }
-
 
 
  
@@ -430,33 +428,13 @@ void handlenewgain(const DynamicJsonDocument &doc)
 
     else if (doc.containsKey("command"))
     {
-      String command = doc["command"].as<String>();
+      handleScan(doc);
 
-      if (command == "Scan")
-      {
-        if (doc.containsKey("wavelength"))
-        {
-          Serial2.println("wavelength");
-          float wavelengthValue = doc["wavelength"].as<float>();
-          delay(100);
-          String scanData = String("{\"wavelength\":") + String(wavelengthValue);
-          delay(100);
-          scanData = scanData + String(",\"intensitySample\":") + sendCMD("sample");
-          delay(100);
-          scanData = scanData + String(",\"intensity0\":") + sendCMD("reference") + String("}");
-          delay(100);
-          notifyClients(scanData);
-          Serial.print("scan data sent");
-          // notifyClients(sendCMD(String(wavelengthValue)));
-          // ws.textAll("Wavelength value received: " + String(wavelengthValue));
-        }
-       
-      }
+    }
 
       else
       {
         notifyClients("Unknown command");
       }
-    }
+  
  }
->>>>>>> ce29d35dcdb2a919594f1b09dc8f87719c9909f9
