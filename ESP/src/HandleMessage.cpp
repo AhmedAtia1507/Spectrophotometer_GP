@@ -246,3 +246,56 @@ void handlemovestep(const DynamicJsonDocument &doc)
     notifyClients(jsonString);
     sendsteps();
 }
+
+void handleScan(const DynamicJsonDocument &doc) {
+  String command = doc["command"].as<String>();
+  if (command == "Scan") {
+    String startInput = doc["startInput"].as<String>();
+    String stopInput = doc["stopInput"].as<String>();
+    String stepInput = doc["stepInput"].as<String>();
+    Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
+    for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
+      delay(100);
+      if (Serial2.available()) {
+        int startTime = millis();
+        while (Serial2.available() == 0 && millis() - startTime < 2000) {
+          delay(1);
+        }
+        // Read and return the response
+        String response = Serial2.readStringUntil('\n');
+        Serial.println(response); // debug
+        
+        // Split the response into components
+        int space1 = response.indexOf(' ');
+        int space2 = response.indexOf(' ', space1 + 1);
+        int space3 = response.indexOf(' ', space2 + 1);
+
+        // Extract individual components
+        String Time = response.substring(0, space1);
+        String wavelength = response.substring(space1 + 1, space2);
+        String reference = response.substring(space2 + 1, space3);
+        String sample = response.substring(space3 + 1);
+
+        // Create a DynamicJsonDocument for serialization
+        DynamicJsonDocument scanData(256); // Adjust the size as per your needs
+
+        // Add data to the JSON document
+        scanData["currentTime"] = Time;
+        scanData["wavelength"] = wavelength.toInt();
+        scanData["intensityReference"] = reference.toFloat(); 
+        scanData["intensitySample"] = sample.toFloat(); 
+
+        
+        String jsonString;
+        serializeJson(scanData, jsonString);
+
+        // Notify clients with the serialized data
+        notifyClients(jsonString);
+        Serial.println("Scan data sent");
+      }
+    }
+  }
+  else{
+    Serial.println("Unknown command");
+    notifyClients("Unknown command");}
+}

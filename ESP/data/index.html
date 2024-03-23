@@ -54,123 +54,77 @@
 
       <div id="scan" class="tabcontent" style="display: block;" >
 
-        <div class="container">
-          <div class="col chartScan">
-            <div class="row">
-              <canvas id="chartScan" width="" height=""></canvas>
-            </div>
-            <div class="row">
-              <div class="tab-1">
-                <h1 class="heading">Scans Table</h1>
-                <div class="TwoBtn">
-                  <button id="DeleteRows" onclick="">Delete Selected <i class="fas fa-trash" style="color: red;"></i></button>
-                </div>
-                <div class="row" style="overflow-x:auto;">
-                  <table id="table" class="display nowrap">
-                    <thead>
-                      <tr>
-                        <th>State</th>
-                        <th>Sample Name</th>
-                        <th>Describtion</th>
-                        <th>Range</th>
-                        <th>Mode</th>
-                        <th>Peak</th>
-                        <th>Color</th>
-                        <th>Select</th>
-
-                      </tr>
-                    </thead>
-                  
-                  </table>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-          <div class="col setup">         
-            <h1 class="heading">Scan Setup</h1>
-            <input class="Scanin" type="text" name="SampleID" id="SampleID"  placeholder="Sample Name">
-            <input class="Scanin" type="text" name="SampleDecribe" id="SampleDecribe" placeholder="Describtion">
-            <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100" value="100">
-            <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900" value="900">
-            <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20" value="20">
-            <input class="Scanin" type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
-            <div>
+          <div class="row">
+            <fieldset class="fsetup">
+              <legend>Setup</legend>
+              <input class="Scanin" id="SampleNum" class = "SampleNum" placeholder="Number of Samples">
+              <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100" >
+              <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900" >
+              <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20" >
+              <input class="Scanin" type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
+            <div class="selectScan">
               <strong>Measurment Mode: </strong><select id="mySelect" name="mode">
                 <option value="absorption">Absorption</option>
                 <option value="transmission">Transmission</option>
-                <!-- <option value="transmission">Eneregy</option> -->
               </select>
-            </div>
-            <div>
-              <Strong>lamp Change Point: </Strong>
-            </div>
-            <div>
-              <strong>Color: </strong>
-              <select name="" id="curveColor">
-                <option value="red">red</option>;
-                <option value="blue">blue</option>;
-                <option value="green">green</option>;
-                <option value="yellow">yellow</option>;
-                <option value="purple">purple</option>;
-                <option value="orange">orange</option>;
-                <option value="black">black</option>;
-                <option value="pink">pink</option>;
-                <option value="brown">brown</option>;
-                <option value="grey">grey</option>;
-              </select>
-            </div>
-            <div class="TwoBtn">
-              <button onclick="startScan()">Scan <i class="fas fa-play"></i>  </button>
-              <button onclick="pauseScan()">Pause <i class="fas fa-pause"></i></button>
-            </div>
-            <div class="TwoBtn">
-              <button id="savepreset" onclick="savepreset()">Save Preset <i class="fas fa-save"></i></button>
-              <button id="loadpreset" onclick="showpreset()">Load Preset <i class="fas fa-bars-progress"></i></button>
             </div>
 
+            <div class="TwoBtn">
+              <button id="SampleNumBTN">Start</button>
+              <button onclick="pauseScan()">Pause</button>
+              <button id="savepreset" onclick="savepreset()">Save Preset</button>
+              <button id="loadpreset" onclick="showpreset()">Load Preset</button>
+            </div>
+
+            </fieldset>
           </div>
-        </div>
-      <div class="tab-1">
 
-          <h1 class="heading"> Readings </h1>
-        
-        <div class="myTable" style="overflow-x:auto;">
+          <div class="row">
+            <fieldset class="fchart">
+              <legend>Chart</legend>
+              <canvas id="chartScan"></canvas>
+            </fieldset>
+            
+          </div>
+
           
-          <table id="scanTable" class="display nowrap" style="width:100%">
-            <thead>
-              <tr>
-                  <th>#</th>
-                  <th>State</th>
-                  <th>Sample Name</th>
-                  <th>Describtion</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Completed</td>
-                <td>Sample 1</td>
-                <td>Describtion 1</td>
-                <td><button>Edit</button></td>
-                <td><button>Delete</button></td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Completed</td>
-                <td>Sample 1</td>
-                <td>Describtion 1</td>
-                <td><button>Edit</button></td>
-                <td><button>Delete</button></td>
-              </tr>
-          </thead>
-          <tbody>
+  
+            <div class="row">
 
-          </tbody>
-          </table>
-        </div>
-      </div>
+                <fieldset class="ftable">
+                  <legend>Scan Table</legend>
+                  <div class="TwoBtn">
+                    <button class = "SampleNumBTN" id="deleteBTN"> Delete All</button>
+                  </div>
+                  <table id="myTable">
+                    <tr>
+                      <th>#</th>
+                      <th>State</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                      <th><input type='text' class='cmd' id='cmd' placeholder='Command'></th>
+                    </tr>
+                  </table>
+                  
+                    <h2>Command Terminal</h2>
+                    <div id="CMDMB">
+                      <!-- Messages will be displayed here -->
+                    </div>
+              
+                </fieldset>
+    
+
+   
+                  
+          
+
+
+            </div>                        
+      
+
+
+
 
         <div id="presets" class="presets">
           <ul class="blurred-list" id="presetlist">
@@ -262,114 +216,10 @@
     <!---------------------------- END OF Footer ---------------------------->
   </main>
   <script src="JavaScript/chart.js"></script>
-  <script src="JavaScript/jQuery.js"></script>
-  <script src="JavaScript/dataTables.js"></script>
-  <script src="JavaScript/dataTablesButtons.js"></script>
-  <script src="JavaScript/jszip.js"></script>
-  <script src="JavaScript/htmlTablesButton.js"></script>
+
   <script src="JavaScript/main.js"></script>
   <script>
-    function trap(xPoints, yPoints) {
-    if (xPoints.length !== yPoints.length) {
-        throw new Error("Number of x and y points must be the same.");
-    }
-
-    const n = xPoints.length;
-
-    let result = 0;
-
-    for (let i = 1; i < n; i++) {
-        const trapezoidArea = 0.5 * (yPoints[i] + yPoints[i - 1]) * (xPoints[i] - xPoints[i - 1]);
-        result += trapezoidArea;
-    }
-
-    return result;
-}
-// Example usage:
-const xValues = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const yValues = [7.69459862670642e-23, 1.0279773571668917e-18, 5.052271083536893e-15, 9.134720408364594e-12, 6.075882849823286e-9, 0.0000014867195147342977, 0.00013383022576488537, 0.0044318484119380075, 0.05399096651318806, 0.24197072451914337, 0.3989422804014327, 0.24197072451914337, 0.05399096651318806, 0.0044318484119380075, 0.00013383022576488537, 0.0000014867195147342977, 6.075882849823286e-9, 9.134720408364594e-12, 5.052271083536893e-15, 1.0279773571668917e-18, 7.69459862670642e-23];
-var result = trap(xValues, yValues);
-console.log("Approximated trap Area:", result);
-// JavaScriptprogram for simpson's 1/3 rule
- 
-function simpsonsFromPoints(xPoints, yPoints) {
-    if (xPoints.length !== yPoints.length) {
-        throw new Error("Input arrays must have the same length");
-    }
-
-    let n = xPoints.length - 1;
-    let h = (xPoints[n] - xPoints[0]) / n;
-
-    let res = 0;
-
-    for (let i = 0; i <= n; i++) {
-        if (i === 0 || i === n) {
-            res += yPoints[i];
-        } else if (i % 2 !== 0) {
-            res += 4 * yPoints[i];
-        } else {
-            res += 2 * yPoints[i];
-        }
-    }
-
-    res = res * (h / 3);
-    return res;
-}
-
-// Example usage:
-
-
-console.log("Approximated Simpson Area:", simpsonsFromPoints(xValues, yValues));
-
-
-
-        function polynomialInterpolation(x, xValues, yValues) {
-    const n = xValues.length;
-    let result = 0;
-
-    for (let i = 0; i < n; i++) {
-        let term = yValues[i];
-
-        for (let j = 0; j < n; j++) {
-            if (j !== i) {
-                term *= (x - xValues[j]) / (xValues[i] - xValues[j]);
-            }
-        }
-
-        result += term;
-    }
-
-    return result;
-}
-
-function gaussQuadratureFromPoints(xValues, yValues) {
-    const points = [-0.7745966692414834, 0, 0.7745966692414834];
-    const weights = [0.5555555555555556, 0.8888888888888888, 0.5555555555555556];
-    const n = xValues.length;
-    let integral = 0;
-
-    for (let i = 0; i < n - 1; i++) {
-        const x0 = xValues[i];
-        const x1 = xValues[i + 1];
-        const y0 = yValues[i];
-        const y1 = yValues[i + 1];
-
-        for (let j = 0; j < 3; j++) {
-            const xi = 0.5 * (x1 - x0) * points[j] + 0.5 * (x0 + x1);
-            const yi = polynomialInterpolation(xi, [x0, x1], [y0, y1]);
-            integral += weights[j] * yi;
-        }
-    }
-
-    integral *= 0.5;
-
-    return integral;
-}
-
-
-const integral = gaussQuadratureFromPoints(xValues, yValues);
-
-console.log("Approximated gauss Area:", integral);
+    
 
   </script>
 </body>

@@ -124,36 +124,11 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 
     else if (doc.containsKey("command"))
     {
-      String command = doc["command"].as<String>();
-
-      if (command == "Scan")
-      {
-        if (doc.containsKey("wavelength"))
-        {
-          Serial2.println("wavelength");
-          float wavelengthValue = doc["wavelength"].as<float>();
-          delay(100);
-          String scanData = String("{\"wavelength\":") + String(wavelengthValue);
-          delay(100);
-          scanData = scanData + String(",\"intensitySample\":") + sendCMD("sample");
-          delay(100);
-          scanData = scanData + String(",\"intensity0\":") + sendCMD("reference") + String("}");
-          delay(100);
-          notifyClients(scanData);
-          Serial.print("scan data sent");
-          // notifyClients(sendCMD(String(wavelengthValue)));
-          // ws.textAll("Wavelength value received: " + String(wavelengthValue));
-        }
-        else
-        {
-          ws.textAll("Invalid Scan command: Wavelength value is missing.");
-        }
-      }
-
-      else
-      {
-        ws.textAll("Unknown command");
-      }
+      handleScan(doc);
+    }
+    else
+    {
+      ws.textAll("Unknown command");
     }
   }
 }

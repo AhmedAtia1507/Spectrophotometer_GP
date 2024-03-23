@@ -22,12 +22,6 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
-  display: flex;
-  margin: 1%;
-  justify-content: center;
-  /* Set container height to 100% of the viewport height */
-}
 
   
 
@@ -37,14 +31,18 @@ section {
 }
 
 .row {
-  flex: 1;
+  width: 100%;
+  padding: 30px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
   
   /* Takes up remaining space (100% - 50% = 50%) */
 }
 
 section h2 {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .col {
@@ -53,7 +51,6 @@ section h2 {
   justify-content: center;
   padding: 1%;
   margin: 1%;
-  flex: 0 0 30%;
   /* Takes up 50% of the container height */
   background-color: white;
 }
@@ -284,25 +281,28 @@ nav li:first-child {
   margin-bottom: 100px;
 }
 
-.tabcontent label {
-  color: black;
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+strong{
+  padding: 5px;
+  margin: 5px;
 }
-
+legend{
+  font-size: 26px;
+  font-weight:bolder;
+  font-family:Arial, Helvetica, sans-serif;
+}
 .tabcontent .col strong {
   padding-right: 20px;
 }
 
-.tabcontent .Scanin,
-.tabcontent select {
+.tabcontent .Scanin
+{
   padding: 10px;
-  margin: 5px;
+  margin:5px 15%;
   box-sizing: border-box;
   border: 1px solid #000000;
   border-radius: 5px;
   font-size: 12px;
+  width: 70%;
 }
 .Scanin:focus{
   outline: none;
@@ -310,19 +310,23 @@ nav li:first-child {
   transform: scale(1.05);
 }
 
-.tabcontent canvas {
-  margin: 20px 20px;
-}
 
 .setup {
   display: flex;
   flex-direction: column;
   width: 28%;
 }
-
+.selectScan{
+  display: flex;
+  margin: 5px 13%;
+}
 .TwoBtn {
   display: flex;
   flex-direction: row;
+  margin: 5px 15%;
+}
+.ftable .TwoBtn{
+  margin: 0px 40%;
 }
 .TwoBtn i{
   margin-left: 10px;
@@ -349,7 +353,10 @@ nav li:first-child {
   color: red;
 
 }
-
+.ftable table{
+  width: 70%;
+  margin-bottom: 80px;
+}
 
 .headfont {
   font-size: 20px;
@@ -366,7 +373,7 @@ nav li:first-child {
 }
 
 #scanReadings,
-#messageBox,
+#messageBox,#CMDMB,
 #i2cValue {
   background-color: whitesmoke;
   color: black;
@@ -509,7 +516,46 @@ nav li:first-child {
 .number {
   width: 60px;
 }
+.fsetup {
+  width: 40%;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+.fchart{
+  width: 80%;
+  display: relative;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+.ftable{
+  width: 80%;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
 
+}
+@media(max-width: 552px) {
+  .row{
+    width: 100%;
+  }
+  .fsetup {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+  }
+  .fchart{
+    width: 100%;
+  }
+  .fchart canvas{
+    width: 100%;
+  }
+  
+}
 /*---------------------------- END OF SCAN ----------------------------*/
 
 /**------------------------------------------------------------------------

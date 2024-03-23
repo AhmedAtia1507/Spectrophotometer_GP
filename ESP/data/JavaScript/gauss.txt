@@ -1,0 +1,52 @@
+
+function polynomialInterpolation(x, xValues, yValues) {
+const n = xValues.length;
+let result = 0;
+
+for (let i = 0; i < n; i++) {
+    let term = yValues[i];
+
+    for (let j = 0; j < n; j++) {
+        if (j !== i) {
+            term *= (x - xValues[j]) / (xValues[i] - xValues[j]);
+        }
+    }
+
+    result += term;
+}
+
+return result;
+}
+
+function gaussQuadratureFromPoints(xValues, yValues) {
+const points = [-0.7745966692414834, 0, 0.7745966692414834];
+const weights = [0.5555555555555556, 0.8888888888888888, 0.5555555555555556];
+const n = xValues.length;
+let integral = 0;
+
+for (let i = 0; i < n - 1; i++) {
+    const x0 = xValues[i];
+    const x1 = xValues[i + 1];
+    const y0 = yValues[i];
+    const y1 = yValues[i + 1];
+
+    for (let j = 0; j < 3; j++) {
+        const xi = 0.5 * (x1 - x0) * points[j] + 0.5 * (x0 + x1);
+        const yi = polynomialInterpolation(xi, [x0, x1], [y0, y1]);
+        integral += weights[j] * yi;
+    }
+}
+
+integral *= 0.5;
+
+return integral;
+}
+
+
+const integral = gaussQuadratureFromPoints(xValues.slice(140, 180 + 1), yValues.slice(140, 180 + 1));
+
+console.log("Result Gauss (560 to 520):", integral);
+
+const integral2 = gaussQuadratureFromPoints(xValues.slice(230, 270 + 1), yValues.slice(230, 270 + 1));
+
+console.log("Result Gauss (430 to 470):", integral2);

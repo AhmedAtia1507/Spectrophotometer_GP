@@ -23,5 +23,5 @@ void sendsteps();
 void handleGoHome(const DynamicJsonDocument &doc);
 void handleSavestep(const DynamicJsonDocument &doc);
 void handlemovestep(const DynamicJsonDocument &doc);
-
+void handleScan(const DynamicJsonDocument &doc);
 #endif // HANDLE_MESSAGE_H
