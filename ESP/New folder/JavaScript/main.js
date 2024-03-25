@@ -333,21 +333,23 @@ function validateInputs() {
 }
 
 function startScan(btn) {
+  document.getElementById("CMDMB").innerHTML='';
   var row = btn.parentNode.parentNode; // Get the parent row of the button
   var index=row.rowIndex;  // Get the row index
-  var SampleID = row.cells[2].innerHTML;  
-  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
+  var SampleID = row.cells[2].innerHTML; 
+  console.log("index0:"+index);
+  console.log("sampleID0:"+SampleID);
+   
   if (!isScanning) {
     if (!validateInputs()) return;
     disableInputs();
     isScanning = true;
-    const result = scan(index); // send index to display message with index
-    xValues = result.xValues;
-    yValues = result.yValues;
-    addCurve(xValues, yValues , colorSelectArr[index], SampleID);
+    scan(index,SampleID); // send index to display message with index
     enableInputs();
+    isScanning = false;
   }
   changeState(index, "Completed");
+  
 }
 
 function toggleInputs(disabled) {
@@ -369,21 +371,27 @@ function pauseScan() {
 }
 
 
-function scan(index) {
+function scan(index,SampleID) {
+  console.log("index1:"+index);
+  console.log("sampleID1:"+SampleID);
+  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
-
+  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
+  
   let x = []; // wavelength
   let y = []; // intensity
   function processScanData(data) {
-    const cuurentTime = data.cuurentTime;
+    const currentTime = data.currentTime;
     const wavelength = data.wavelength;
-    const intensityRef = data.intensityRef;
+    const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
-    const transmission = Math.log10(intensitySample / intensityRef);
-    const absorption = Math.log10(intensityRef/ intensitySample);
+    const transmission = Math.log10(intensitySample / intensityReference);
+    const absorption = Math.log10(intensityReference/ intensitySample);
+
+
     // Update the chart data
     x.push(wavelength);
 
@@ -393,8 +401,13 @@ function scan(index) {
     else {
       y.push(transmission);
     }
-    const res = cuurentTime +": " +"|| Wavelength: "+wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
+    const res = currentTime +": " +"|| Wavelength: "+wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
     displayCMD(res, 'green', index);
+    addCurve(x, y , colorSelectArr[index], SampleID);
+   if(wavelength===stopInput){
+    console.log("final wavelength is reached");
+    savetosd(SampleID); 
+   }
 
   }
 
@@ -436,12 +449,12 @@ function scan(index) {
     // Continue scanning for the next wavelength after a delay
     setTimeout(() => {
       continueScanning(data.wavelength + stepInput);
-    }, speedInput * 1000);
+    }, 3000);
   };
 
   // Start the scanning process
   continueScanning(startInput);
-  return {xValues: x, yValues: y};
+   
 }
 /*================preset section==============*/
 
@@ -459,8 +472,8 @@ function selectTransmission() {
   selectElement.selectedIndex = transmissionIndex;
 }
 
-var myList = document.getElementById("presetlist");
 function showpreset() {
+  var myList = document.getElementById("presetlist");
 
   var message = {
     showpreset: 'showpreset'
@@ -479,8 +492,8 @@ function showpreset() {
       let i = myObj.presetSampleIDo;
       if (i == 0) {
         console.log('iiiii b =0');
-        var nopresetsDiv = document.getElementById('nopresets');
-        nopresetsDiv.innerHTML = 'No presets available';
+        var nopresetsDiv = document.getElementById('noreadings');
+        nopresetsDiv.innerHTML = 'No Readings available';
       }
 
 
@@ -514,6 +527,7 @@ function showpreset() {
             newItem.addEventListener("click", function () {
               console.log("Clicked on item: " + itemName);
               var message = {
+                Dictionary:"presets",
                 loadthis: itemName
               };
               websocket.send(JSON.stringify(message));
@@ -648,8 +662,9 @@ function cancelpreset() {
 document.addEventListener('click', function (event) {
   const flyoutBtn = document.getElementById('loadpreset');
   const flyoutMenu = document.getElementById('presets');
+  const raedingsbutton= document.getElementById('loadreadings');
 
-  if (event.target !== flyoutBtn && event.target !== flyoutMenu && !flyoutMenu.contains(event.target)) {
+  if (event.target !== flyoutBtn &&event.target!==raedingsbutton&& event.target !== flyoutMenu && !flyoutMenu.contains(event.target)) {
     // Click outside the button and the flyout menu, close the flyout menu
     flyoutMenu.classList.remove('active');
   }
@@ -662,8 +677,10 @@ function openname() {
 }
 
 function openlist() {
+
   const flyoutMenu = document.getElementById('presets');
   flyoutMenu.classList.toggle('active');
+  console.log("anaaaaaa")
 
 }
 
@@ -1014,38 +1031,157 @@ function displayCMD(message, color, num) {
   messageBox.appendChild(messageElement);
 }
 
+function getAllTextContent() {
+  var messageBox = document.getElementById("CMDMB");
+  var allTextContent = "";
+  
+  // Loop through all child elements of CMDMB
+  for (var i = 0; i < messageBox.children.length; i++) {
+    var child = messageBox.children[i];
+    // Check if the child element is a <p> element
+    if (child.tagName === 'P') {
+      // Concatenate its textContent to the string
+      allTextContent += child.textContent+"\n" ;
+    }
+  }
+  
+  // Return the string containing all textContent
+ 
+  return allTextContent;
+
+}
+
+
 
 /**------------------------------------------------------------------------
  *                           SD Save Readings
  *------------------------------------------------------------------------**/
-
-function savetosd(x,y,SampleID){
-var time =document.getElementById('DateTime').textContent;
-var sampledisk = document.getElementById('SampleDecribe').textContent;
-var message={
+function savetosd(SampleID){
+// Example usage:
+var content = getAllTextContent();
+console.log(content);
+  var message={
   command:"sdsave",
   name:SampleID,
-  discription:sampledisk,
-  x:x,
-  y:y,
-  time:time,
+  content:content,
 }
 console.log(message);
 websocket.send(JSON.stringify(message));
-
-
 }
 
-const x =[1,2,3,4,5,6];
-const y=[3,2,3,1,2,3];
-savetosd(x,y,"mina");
 
+function showreadings(){
+  var myList = document.getElementById("presetlist");
+  var message = {
+    showreadings: 'showreadings'
+  };
+  const flyoutMenu = document.getElementById('presets');
+  const computedStyle = window.getComputedStyle(flyoutMenu);
+  if (computedStyle.display === 'none') {
+    websocket.send(JSON.stringify(message));
+  }
 
-websocket.onmessage = function (event) {
-
+  websocket.onmessage = function (event) {
+  console.log(event.data);
   var myObj = JSON.parse(event.data);
-  if (myObj.hasOwnProperty('sdsaved')) {
-    addCurve(myObj.x,myObj.y,"blue",myObj.SampleID);
+    console.log(myObj);
+    if (myObj.hasOwnProperty('readingsno')) {
 
-   }
+      let i = myObj.readingsno;
+      if (i == 0) {
+     
+        var nopresetsDiv = document.getElementById('nopresets');
+        nopresetsDiv.innerHTML = 'No readings available';
+      }
+
+
+      else {
+     
+        var nopresetsDiv = document.getElementById('nopresets');
+        nopresetsDiv.innerHTML = '';
+        for (var j = myList.children.length - 1; j >= 0; j--) {
+          var child = myList.children[j];
+          console.log(child.id);
+          // Check if the element has an id and it is not "nopresets"
+          if (child.id !== 'nopresets' && child.id !== 'search') {
+            myList.removeChild(child);
+          }
+        }
+
+        for (i; i > 0; i--) {
+          (function (i) {
+            let file = 'file' + i;
+            console.log(myObj[file] + ": ");
+            var newItem = document.createElement("li");
+            var itemName = myObj[file];
+            var textSpan = document.createElement("span");
+            var textNode = document.createTextNode(itemName);
+            textSpan.appendChild(textNode);
+            newItem.appendChild(textSpan);
+            myList.insertBefore(newItem, myList.lastChild);
+            deletereading(myList, itemName, newItem);
+
+
+            newItem.addEventListener("click", function () {
+              console.log("Clicked on item: " + itemName);
+              var message = {
+                Dictionary:"readings",
+                loadthis: itemName
+              };
+              websocket.send(JSON.stringify(message));
+
+              websocket.onmessage = function (event) {
+                var myObj = JSON.parse(event.data);
+                console.log(myObj);
+                if (myObj.hasOwnProperty('loadedReadings')) {
+                  displayCMD(myObj.name,"red",i);
+                  displayCMD(myObj.content,"green",i+1);
+
+                }
+
+
+              }
+
+            });
+
+          })(i);
+        }
+        
+        
+      }
+    
+
+
+
+    }
+    
+  }
+
+  openlist();
+  
 }
+  
+
+
+
+
+
+function deletereading(myList, names, newItem) {
+  var deleteButton = document.createElement("div");
+  deleteButton.textContent = "delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", function () {
+    myList.removeChild(newItem);
+    var message = {
+      deletereading: 'deletereading',
+      name: names,
+    };
+    websocket.send(JSON.stringify(message));
+    showreadings();
+  });
+  // Append the delete button to the new list item
+  newItem.appendChild(deleteButton);
+}
+
+
+
