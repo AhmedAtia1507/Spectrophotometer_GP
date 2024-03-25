@@ -404,10 +404,11 @@ function scan(index,SampleID) {
     const res = currentTime +": " +"|| Wavelength: "+wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
     displayCMD(res, 'green', index);
     addCurve(x, y , colorSelectArr[index], SampleID);
-   if(wavelength===stopInput){
-    console.log("final wavelength is reached");
-    savetosd(SampleID); 
-   }
+    StoreData(SampleID,x,y);
+  //  if(wavelength===stopInput){
+  //   console.log("final wavelength is reached");
+  //   savetosd(SampleID); 
+  //  }
 
   }
 
