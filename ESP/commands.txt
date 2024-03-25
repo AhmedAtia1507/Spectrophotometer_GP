@@ -27,11 +27,11 @@ set-vi-off  ////turn visible lamp off ==> reply with current stutus after toggle
 
 note: +12 -12 are dc dc converter and 12 is the lamp supply
 
-p12	//read supply +12==>its value (only number and sign like +11.9)
-n12 	//read supply -12==>its value (only number and sign like -11.9)
-p5      //read supply 5==>its value (only number like 4.9)
-p33    	//read supply 3.3==>its value (only number like 2.9)
-twelve  //read supply 12==>its value (only number 11.9)
+get-voltage-p12	    //read supply +12==>its value (only number and sign like +11.9)
+get-voltage-n12 	//read supply -12==>its value (only number and sign like -11.9)
+get-voltage-p5      //read supply 5==>its value (only number like 4.9)
+get-voltage-p33    	//read supply 3.3==>its value (only number like 2.9)
+get-voltage-twelve  //read supply 12==>its value (only number 11.9)
 =================================================================================================================
 
 3-time commands

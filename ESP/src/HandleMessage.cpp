@@ -152,11 +152,11 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    String stutusp12 = sendCMD((char *)"p12");
-    String stutusn12 = sendCMD((char *)"n12ff");
-    String stutusp5 = sendCMD((char *)"p5");
-    String stutusp33 = sendCMD((char *)"p33");
-    String stutustwelve = sendCMD((char *)"twelve");
+    String stutusp12 = sendCMD("get-voltage-p12");
+    String stutusn12 = sendCMD("get-voltage-n12");
+    String stutusp5 = sendCMD("get-voltage-p5");
+    String stutusp33 = sendCMD("get-voltage-p33");
+    String stutustwelve = sendCMD("get-voltage-twelve");
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
      object["p12"] = stutusp12;
