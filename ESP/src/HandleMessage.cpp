@@ -305,6 +305,8 @@ void handleScanTask(void *pvParameters) {
         // String response = Serial2.readStringUntil('\n');
         String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
+        
+        // Split the response into components
         int space1 = response.indexOf(' ');
         int space2 = response.indexOf(' ', space1 + 1);
         int space3 = response.indexOf(' ', space2 + 1);
@@ -324,6 +326,7 @@ void handleScanTask(void *pvParameters) {
         serializeJson(scanData, jsonString);
         notifyClients(jsonString);
         Serial.println("Scan data sent");
+       
       }
     }
   }
