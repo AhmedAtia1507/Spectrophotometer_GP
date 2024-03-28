@@ -331,11 +331,13 @@ void handleScanTask(void *pvParameters) {
 }
 
 void handleScan(const DynamicJsonDocument &doc) {
+    DynamicJsonDocument *docCopy = new DynamicJsonDocument(doc.capacity());
+    *docCopy = doc;
   xTaskCreatePinnedToCore(
       handleScanTask,       // Task function
       "ScanTask",           // Task name
       8192,                 // Stack size (bytes)
-      (void *)&doc,         // Parameter to pass to the task
+      (void *)docCopy,         // Parameter to pass to the task
       1,                    // Task priority
       &scanTask,            // Task handle
       0);                   // Core (0 or 1, depending on your setup)
