@@ -12,10 +12,12 @@
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
 #include "HandleMessage.h"
-#include "esp_task_wdt.h"
+#include <esp_task_wdt.h>
+
+
 
 // Set the task watchdog timeout to 10 seconds
-esp_task_wdt_init(10, false); // Timeout in seconds
+//esp_task_wdt_init(10, false); // Timeout in seconds
 
 
 AsyncWebServer server(80); // Create AsyncWebServer object on port 80
@@ -65,6 +67,7 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
 
 void initWebSocket()
 {
+  esp_task_wdt_init(90000000, true);
   ws.onEvent(onEvent);
   server.addHandler(&ws);
 }

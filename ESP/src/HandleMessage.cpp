@@ -3,6 +3,7 @@
 #include "MySDFunctions.h"
 
 
+
 const unsigned long interval = 600000; // 10 minutes in milliseconds
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
@@ -27,37 +28,23 @@ void checkCountdown()
 
 String sendCMD(const String &input)
 {
-  int timeout = 2000;
-  int retryInterval = 100;
+
+  
     // Send the command to the STM32 via UART
     Serial2.println(input);
     Serial.println(input);
     Serial.println("sent command");
-    
     // Wait for a response from the STM32
     int startTime = millis();
-    while (Serial2.available() == 0 && millis() - startTime < timeout)
+    while (Serial2.available() == 0 && millis() - startTime < 2000)
     {
         delay(1);
     }
-    
-    // Check if response is received within the timeout
-    if (Serial2.available() > 0) {
-        // Read and return the response
-        String response = Serial2.readStringUntil('\n');
-        Serial.println(response);
-        return response;
-    } else {
-        // If no response is received within timeout, handle the timeout case here
-        
-        // Optionally, you can retry sending the command after a certain interval
-        // You may need to modify this part based on your specific requirement
-        delay(retryInterval); // Wait for a while before retrying
-        // Recursive call to retry sending the command
-        return sendCMD(input); 
-    }
+    // Read and return the response
+    String response = Serial2.readStringUntil('\n');
+    Serial.println(response);
+    return response;
 }
-
 
 String outputSBar[3] = {"UV", "VI", "WL"};
 String getOutputStates()
@@ -303,16 +290,20 @@ void handlenewgain(const DynamicJsonDocument &doc)
 TaskHandle_t scanTask;
 // TASK
 void handleScanTask(void *pvParameters) {
+  Serial.println("in task");
   DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
 
   String command = doc["command"].as<String>();
-  if (command == "Scan") {
     String startInput = doc["startInput"].as<String>();
     String stopInput = doc["stopInput"].as<String>();
     String stepInput = doc["stepInput"].as<String>();
     Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
+    Serial.println("Scanning");
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
       delay(100);
+        Serial.println(i);
+      
+      //if (Serial2.available()) {
         // int startTime = millis();
         // while (Serial2.available() == 0 && millis() - startTime < 2000) {
         //   delay(1);
@@ -341,19 +332,19 @@ void handleScanTask(void *pvParameters) {
         serializeJson(scanData, jsonString);
         notifyClients(jsonString);
         Serial.println("Scan data sent");
+       
+      //}
     }
-  }
+  
   vTaskDelete(NULL); // delete the task when done
 }
 
 void handleScan(const DynamicJsonDocument &doc) {
-    DynamicJsonDocument *docCopy = new DynamicJsonDocument(doc.capacity());
-    *docCopy = doc;
   xTaskCreatePinnedToCore(
       handleScanTask,       // Task function
       "ScanTask",           // Task name
       8192,                 // Stack size (bytes)
-      (void *)docCopy,         // Parameter to pass to the task
+      (void *)&doc,         // Parameter to pass to the task
       1,                    // Task priority
       &scanTask,            // Task handle
       0);                   // Core (0 or 1, depending on your setup)
