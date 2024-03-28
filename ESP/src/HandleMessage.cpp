@@ -313,7 +313,6 @@ void handleScanTask(void *pvParameters) {
     Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
       delay(100);
-      if (Serial2.available()) {
         // int startTime = millis();
         // while (Serial2.available() == 0 && millis() - startTime < 2000) {
         //   delay(1);
@@ -342,8 +341,6 @@ void handleScanTask(void *pvParameters) {
         serializeJson(scanData, jsonString);
         notifyClients(jsonString);
         Serial.println("Scan data sent");
-       
-      }
     }
   }
   vTaskDelete(NULL); // delete the task when done
