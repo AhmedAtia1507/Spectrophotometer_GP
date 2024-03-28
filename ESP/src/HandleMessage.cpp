@@ -27,21 +27,37 @@ void checkCountdown()
 
 String sendCMD(const String &input)
 {
+  int timeout = 2000;
+  int retryInterval = 100;
     // Send the command to the STM32 via UART
     Serial2.println(input);
     Serial.println(input);
     Serial.println("sent command");
+    
     // Wait for a response from the STM32
     int startTime = millis();
-    while (Serial2.available() == 0 && millis() - startTime < 2000)
+    while (Serial2.available() == 0 && millis() - startTime < timeout)
     {
         delay(1);
     }
-    // Read and return the response
-    String response = Serial2.readStringUntil('\n');
-    Serial.println(response);
-    return response;
+    
+    // Check if response is received within the timeout
+    if (Serial2.available() > 0) {
+        // Read and return the response
+        String response = Serial2.readStringUntil('\n');
+        Serial.println(response);
+        return response;
+    } else {
+        // If no response is received within timeout, handle the timeout case here
+        
+        // Optionally, you can retry sending the command after a certain interval
+        // You may need to modify this part based on your specific requirement
+        delay(retryInterval); // Wait for a while before retrying
+        // Recursive call to retry sending the command
+        return sendCMD(input); 
+    }
 }
+
 
 String outputSBar[3] = {"UV", "VI", "WL"};
 String getOutputStates()
