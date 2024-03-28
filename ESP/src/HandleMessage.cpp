@@ -290,18 +290,18 @@ void handleScan(const DynamicJsonDocument &doc) {
     String stepInput = doc["stepInput"].as<String>();
     //Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
-      // delay(100);
-      // if (Serial2.available()) {
-      //   int startTime = millis();
-      //   while (Serial2.available() == 0 && millis() - startTime < 2000) {
-      //     delay(1);
-      //   }
-      //   // Read and return the response
-      //   String response = Serial2.readStringUntil('\n');
+  
+      if (Serial2.available()) {
+        int startTime = millis();
+        while (Serial2.available() == 0 && millis() - startTime < 2000) {
+          delay(1);
+        }
+        // Read and return the response
+        String response = Serial2.readStringUntil('\n');
         
-        String response ="23/3||1:30 200 10 10.5";
+        // String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
-        
+  
         // Split the response into components
         int space1 = response.indexOf(' ');
         int space2 = response.indexOf(' ', space1 + 1);
@@ -330,6 +330,7 @@ void handleScan(const DynamicJsonDocument &doc) {
         // Notify clients with the serialized data
         notifyClients(jsonString);
         Serial.println("Scan data sent");
+       
       }
     }
   }
