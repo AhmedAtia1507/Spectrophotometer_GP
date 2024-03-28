@@ -66,7 +66,7 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
 }
 
 void initWebSocket()
-{
+{ //don't kill my task
   esp_task_wdt_init(90000000, true);
   ws.onEvent(onEvent);
   server.addHandler(&ws);
