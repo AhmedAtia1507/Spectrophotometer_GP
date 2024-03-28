@@ -12,14 +12,14 @@ commands:
 1-lamps commands
 
 uv:
-snduv  //send uv lamp stutus ==> on/off
-uvon   //turn uv lamp on ==> reply with current stutus after toggle on/off 
-uvoff  //turn uv lamp off ==> reply with current stutus after toggle on/off
+get-uv  //send uv lamp stutus ==> on/off
+set-uv-on   //turn uv lamp on ==> reply with current stutus after toggle on/off 
+set-uv-off  //turn uv lamp off ==> reply with current stutus after toggle on/off
 
 vi:
-sndvi  //send visible lamp stutus ==> on/off
-vion   //turn visible lamp on ==> reply with current stutus after toggle on/off
-vioff  ////turn visible lamp off ==> reply with current stutus after toggle on/off
+get-vi  //send visible lamp stutus ==> on/off
+set-vi-on   //turn visible lamp on ==> reply with current stutus after toggle on/off
+set-vi-off  ////turn visible lamp off ==> reply with current stutus after toggle on/off
 
 ===============================================================================================================
 
@@ -27,31 +27,31 @@ vioff  ////turn visible lamp off ==> reply with current stutus after toggle on/o
 
 note: +12 -12 are dc dc converter and 12 is the lamp supply
 
-p12	//read supply +12==>its value (only number and sign like +11.9)
-n12 	//read supply -12==>its value (only number and sign like -11.9)
-p5      //read supply 5==>its value (only number like 4.9)
-p33    	//read supply 3.3==>its value (only number like 2.9)
-twelve  //read supply 12==>its value (only number 11.9)
+get-voltage-p12	    //read supply +12==>its value (only number and sign like +11.9)
+get-voltage-n12 	//read supply -12==>its value (only number and sign like -11.9)
+get-voltage-p5      //read supply 5==>its value (only number like 4.9)
+get-voltage-p33    	//read supply 3.3==>its value (only number like 2.9)
+get-voltage-twelve  //read supply 12==>its value (only number 11.9)
 =================================================================================================================
 
 3-time commands
 //send time
 
-sndtime  //send the time ==> send day/month/year hour:minutes:seconds in 24 format like( 1/13/2024 13:32:12 )
+get-time  //send the time ==> send day/month/year hour:minutes:seconds in 24 format like( 1/13/2024 13:32:12 )
 
 //update your time
-updatedate {date time} like "updatedate 1/13/2024 13:32:12\n"==> responde when done with "time update success" or "time update failed"
+set-time-{date time} like "set-time-1/13/2024 13:32:12\n"==> responde when done with "time update success" or "time update failed"
 =================================================================================================================
 
 4-motors
 //send current motors position
-sndmotorsteps  //send motor steps and current wavelength ==> response with "lampmoter-gratingmotor-filtermotor-currentwavelength\n" like 50-34-200-1100
+get-motors-steps  //send motor steps and current wavelength ==> response with "lampmoter-gratingmotor-filtermotor-currentwavelength\n" like 50-34-200-1100
 
 //gohome
 lampmotorhome      //send lamp moter home ==>respond with the current step after excuting the gohome function like "0\n"
 gratingmotorhome   // same but for grating ==>same
 filtermotorhome    // same but for filter ==> same
-crnt-wav           //send me the current wavelength ==> just the number  like "1100\n"
+get-current-wav           //send me the current wavelength ==> just the number  like "1100\n"
 
 //calibration 
 movto-(value) like movto-100  //send the filter moter to the "value" steps position ==> respond with "moved" or "failed to move"
@@ -63,4 +63,4 @@ savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respon
 
 
 snddet //send the current detector readings ==>replay with refernce small signal - refernce amplified signal- sample small signal-sample amplified signal-current digital pot gain like 1-9-2-18-9
-newgain-(value)  like newgain-12 //apply the new gaon then reply replay with "applied" or "not applied"
+set-newgain-(value)  like set-newgain-12 //apply the new gaon then reply replay with "applied" or "not applied"

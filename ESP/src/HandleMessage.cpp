@@ -97,7 +97,7 @@ void sendFlagStatus()
 
 void handleLampStatus(const String &lampType)
 {
-    String command = String("snd" + lampType);
+    String command = String("get-" + lampType);
     String status = sendCMD(command);
     //String status = "on";
     String jsonString;
@@ -111,7 +111,7 @@ void handleLampStatus(const String &lampType)
 
 void handleLampControl(const String &lampType, bool turnOn)
 {
-    String command = turnOn ? lampType + "on" : lampType + "off";
+    String command = turnOn ?"set-"+ lampType + "-on" :"set-"+lampType + "-off";
     String status = sendCMD(command);
     handleLampStatus(lampType);
 }
@@ -152,11 +152,11 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    String stutusp12 = sendCMD((char *)"p12");
-    String stutusn12 = sendCMD((char *)"n12ff");
-    String stutusp5 = sendCMD((char *)"p5");
-    String stutusp33 = sendCMD((char *)"p33");
-    String stutustwelve = sendCMD((char *)"twelve");
+    String stutusp12 = sendCMD("get-voltage-p12");
+    String stutusn12 = sendCMD("get-voltage-n12");
+    String stutusp5 = sendCMD("get-voltage-p5");
+    String stutusp33 = sendCMD("get-voltage-p33");
+    String stutustwelve = sendCMD("get-voltage-twelve");
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
      object["p12"] = stutusp12;
@@ -177,7 +177,7 @@ void handleSupplyStatus()
 
 void loadtime()
 {
-    String response = sendCMD("sndtime");
+    String response = sendCMD("get-time");
     //String response = "1/13/2024 13:32:12\n";
     Serial.print(response);
     DynamicJsonDocument object(200);
@@ -195,7 +195,7 @@ void savetime(const DynamicJsonDocument &doc)
 {
     String command = doc["updatetime"].as<String>();
     Serial.print(command);
-    String respnse = sendCMD("savedate "+command);
+    String respnse = sendCMD("set-time-"+command);
     //String respnse = "success";
     Serial.print(respnse);
     DynamicJsonDocument object(29);
@@ -206,7 +206,7 @@ void savetime(const DynamicJsonDocument &doc)
 }
 void sendsteps()
 {
-    String command = "sndmotorsteps";
+    String command = "get-motors-steps";
     String response = sendCMD(command);
     //String response = "30-40-50-1100\n";
     Serial.print(response);
@@ -222,7 +222,7 @@ void handleGoHome(const DynamicJsonDocument &doc)
     Serial.print(motortype);
     String command = motortype ;
     String response = sendCMD(command);
-    String wavelength = sendCMD("crnt-wav");
+    String wavelength = sendCMD("get-current-wav");
     //String response = "0";
     //String wavelength = "878";
     DynamicJsonDocument object(90);
@@ -262,7 +262,7 @@ void handlemovestep(const DynamicJsonDocument &doc)
     sendsteps();
 }
 void handelreaddetecor(){
-    //String response = sendCMD("snddet");
+    //String response = sendCMD("get-det-readings");
     String response = "12-122-22-260-17";
     DynamicJsonDocument object(90);
     object["detreadings"] = response;
@@ -273,7 +273,7 @@ void handelreaddetecor(){
 void handlenewgain(const DynamicJsonDocument &doc)
 {
     String newgain = doc["newgain"];
-    //String response = sendCMD("newgain-"+newgain);
+    //String response = sendCMD("set-newgain-"+newgain);
     String response = "applied";
     if(response=="applied"){
       handelreaddetecor();
