@@ -36,7 +36,7 @@ String sendCMD(const String &input)
     Serial.println("sent command");
     // Wait for a response from the STM32
     int startTime = millis();
-    while (Serial2.available() == 0 && millis() - startTime < 2000)
+    while (Serial2.available() == 0 && millis() - startTime < 30000)
     {
         delay(1);
     }
