@@ -281,58 +281,66 @@ void handlenewgain(const DynamicJsonDocument &doc)
     //else{handlenewgain(doc);}
     }
 
-    
-void handleScan(const DynamicJsonDocument &doc) {
+/**------------------------------------------------------------------------
+ *                           SCAN TASK
+ *------------------------------------------------------------------------**/
+TaskHandle_t scanTask;
+// TASK
+void handleScanTask(void *pvParameters) {
+  DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
+
   String command = doc["command"].as<String>();
   if (command == "Scan") {
     String startInput = doc["startInput"].as<String>();
     String stopInput = doc["stopInput"].as<String>();
     String stepInput = doc["stepInput"].as<String>();
-    //Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
+    Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
-      // delay(100);
-      // if (Serial2.available()) {
-      //   int startTime = millis();
-      //   while (Serial2.available() == 0 && millis() - startTime < 2000) {
-      //     delay(1);
-      //   }
-      //   // Read and return the response
-      //   String response = Serial2.readStringUntil('\n');
-        
+      delay(100);
+      if (Serial2.available()) {
+        int startTime = millis();
+        // while (Serial2.available() == 0 && millis() - startTime < 2000) {
+        //   delay(1);
+        // }
+        // String response = Serial2.readStringUntil('\n');
         String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
-        
-        // Split the response into components
         int space1 = response.indexOf(' ');
         int space2 = response.indexOf(' ', space1 + 1);
         int space3 = response.indexOf(' ', space2 + 1);
 
-        // Extract individual components
         String Time = response.substring(0, space1);
         String wavelength = response.substring(space1 + 1, space2);
         String reference = response.substring(space2 + 1, space3);
         String sample = response.substring(space3 + 1);
 
-        // Create a DynamicJsonDocument for serialization
-        DynamicJsonDocument scanData(256); // Adjust the size as per your needs
-
-        // Add data to the JSON document
+        DynamicJsonDocument scanData(256); 
         scanData["currentTime"] = Time;
-        //scanData["wavelength"] = wavelength.toInt();
         scanData["wavelength"] = i;
         scanData["intensityReference"] = reference.toFloat(); 
         scanData["intensitySample"] = sample.toFloat(); 
-
         
         String jsonString;
         serializeJson(scanData, jsonString);
-
-        // Notify clients with the serialized data
         notifyClients(jsonString);
         Serial.println("Scan data sent");
       }
     }
   }
+  vTaskDelete(NULL); // delete the task when done
+}
+
+void handleScan(const DynamicJsonDocument &doc) {
+  xTaskCreatePinnedToCore(
+      handleScanTask,       // Task function
+      "ScanTask",           // Task name
+      8192,                 // Stack size (bytes)
+      (void *)&doc,         // Parameter to pass to the task
+      1,                    // Task priority
+      &scanTask,            // Task handle
+      0);                   // Core (0 or 1, depending on your setup)
+}
+
 
 
 
