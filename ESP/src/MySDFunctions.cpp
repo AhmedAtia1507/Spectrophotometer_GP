@@ -32,7 +32,7 @@ DynamicJsonDocument readFromDatabase(const char *filename) {
 
 
 JsonObject getFilesJson(const char *directory) {
-    DynamicJsonDocument doc(2048);
+    StaticJsonDocument<2048> doc;
     File dir = SD.open(directory);
     int count = 1;
     while (File file = dir.openNextFile()) {
@@ -43,10 +43,10 @@ JsonObject getFilesJson(const char *directory) {
             doc["file" + String(count++)] = fileName;
         }
     }
-    if(directory=="/presets"){
-    doc["presetsno"] = count - 1;
+    if (strcmp(directory, "/presets") == 0) {
+        doc["presetsno"] = count - 1;
     }
-    else if(directory=="/readings"){
+    else if (strcmp(directory, "/readings") == 0) {
         doc["readingsno"] = count - 1;
     }
     dir.close();

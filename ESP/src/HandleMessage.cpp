@@ -296,6 +296,7 @@ void handleScanTask(void *pvParameters) {
     String stopInput = doc["stopInput"].as<String>();
     String stepInput = doc["stepInput"].as<String>();
     Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
+    bool scanning= true;
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
       delay(100);
         // int startTime = millis();
@@ -315,12 +316,15 @@ void handleScanTask(void *pvParameters) {
         String wavelength = response.substring(space1 + 1, space2);
         String reference = response.substring(space2 + 1, space3);
         String sample = response.substring(space3 + 1);
- 
+        if(i==stopInput.toInt()||(i + stepInput.toInt() > stopInput.toInt())){
+          scanning=false;
+        }
         DynamicJsonDocument scanData(256);
         scanData["currentTime"] = Time;
         scanData["wavelength"] = i;
         scanData["intensityReference"] = reference.toFloat();
         scanData["intensitySample"] = sample.toFloat();
+        scanData["scanning"]=scanning;
        
         String jsonString;
         serializeJson(scanData, jsonString);

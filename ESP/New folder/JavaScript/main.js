@@ -109,7 +109,7 @@ function addPoint() {
   var absorptionValue = parseFloat(document.getElementById("absorption").value);
   var concentrationValue = parseFloat(document.getElementById("concentration").value);
 
-  if (!iSampleIDaN(absorptionValue) && !iSampleIDaN(concentrationValue)) {
+  if (!isNaN(absorptionValue) && !isNaN(concentrationValue)) {
     absorptionData.push(absorptionValue);
     concentrationData.push(concentrationValue);
 
@@ -201,7 +201,7 @@ function calculateRegressionLine() {
   var intercept = (sumY - slope * sumX) / N;
 
   // Check if slope and intercept are valid numbers
-  if (iSampleIDaN(slope) || iSampleIDaN(intercept)) {
+  if (isNaN(slope) || isNaN(intercept)) {
     console.error("Invalid slope or intercept. Unable to calculate regression line.");
     return [];
   }
@@ -314,7 +314,7 @@ function validateInputs() {
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
 
-  if (iSampleIDaN(startInput) || iSampleIDaN(stopInput) || startInput < 100 || stopInput > 1200) {
+  if (isNaN(startInput) || isNaN(stopInput) || startInput < 100 || stopInput > 1200) {
     alert('Start and Stop values must be between 100 and 1200');
     return false;
   }
@@ -390,6 +390,8 @@ function scan(index,SampleID) {
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference/ intensitySample);
+    let scanning=data.scanning;
+    console.log(scanning);
 
 
     // Update the chart data
@@ -404,7 +406,7 @@ function scan(index,SampleID) {
     const res = currentTime +": " +"|| Wavelength: "+wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
     displayCMD(res, 'green', index);
     addCurve(x, y , colorSelectArr[index], SampleID);
-    StoreData(SampleID,x,y);
+    StoreData(SampleID,x,y,scanning);
   //  if(wavelength===stopInput){
   //   console.log("final wavelength is reached");
   //   savetosd(SampleID); 
@@ -550,12 +552,12 @@ function showpreset() {
                   var discription = myObj.speed;
                   var initTimeValue = parseInt(myObj.inittime, 10);
 
-                  document.getElementById('start').value = iSampleIDaN(startValue) ? '' : startValue;
-                  document.getElementById('stop').value = iSampleIDaN(stopValue) ? '' : stopValue;
-                  document.getElementById('step').value = iSampleIDaN(stepValue) ? '' : stepValue;
+                  document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
+                  document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
+                  document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
                   document.getElementById('SampleID').value = nameValue;
                   document.getElementById('SampleDecribe').value = discription;
-                  document.getElementById('initTime').value = iSampleIDaN(initTimeValue) ? '' : initTimeValue;
+                  document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
 
                   if ((myObj.mode.trim() === 'transmission')) {
                     selectTransmission();
@@ -935,13 +937,21 @@ return result;
 // let xValues=[];
 // let yValues=[];
 let data = {};
-function StoreData(SampleID, xData, yData) {
+function StoreData(SampleID, xData, yData,scanning) {
   if (!(SampleID in data)) {
       data[SampleID] = { x: xData, y: yData };
-  } else {
+      
+
+  } 
+  
+  else {
       // Update existing data
       data[SampleID].x = xData;
       data[SampleID].y = yData;
+      
+  }
+  if(scanning===false){
+  savetosd(SampleID,data[SampleID].x,data[SampleID].y)
   }
 }
 
@@ -973,7 +983,7 @@ cmdInput.addEventListener('keyup', function(event) {
         const rows = table.querySelectorAll('tr'); // Declare rows variable here
         switch (cmdName) {
           case 'TABLE':
-            if (!iSampleIDaN(cmdParam)) {
+            if (!isNaN(cmdParam)) {
               constructtable(cmdParam); // Pass the parameter to the constructTable function
             } else {
               alert('Invalid parameter for SCAN command');
@@ -1057,14 +1067,15 @@ function getAllTextContent() {
 /**------------------------------------------------------------------------
  *                           SD Save Readings
  *------------------------------------------------------------------------**/
-function savetosd(SampleID){
+function savetosd(SampleID,x,y){
 // Example usage:
 var content = getAllTextContent();
 console.log(content);
   var message={
   command:"sdsave",
   name:SampleID,
-  content:content,
+  xvalues:x,
+  yvalues:y,
 }
 console.log(message);
 websocket.send(JSON.stringify(message));
