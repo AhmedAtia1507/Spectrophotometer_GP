@@ -128,22 +128,21 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 {
     String selectthis = doc["loadthis"].as<String>();
     String path="";
+    DynamicJsonDocument preset(1024);
     if(doc["Dictionary"]=="readings"){
     path = "/readings/" + selectthis + ".txt";
-    Serial.print(path);
+    readFromDatabase2(doc);
     }
+
     else if(doc["Dictionary"]=="presets"){
     path = "/presets/" + selectthis + ".txt";
-    Serial.print(path);
+    
+    preset = readFromDatabase(path.c_str());
+  
     }
     String jsonString;
-    DynamicJsonDocument preset = readFromDatabase(path.c_str());
-    if(doc["Dictionary"]=="readings"){
-    preset["loadedReadings"] = "loaded";
-    serializeJson(preset, jsonString);
-    notifyClients(jsonString);
-    }
-    else if(doc["Dictionary"]=="presets"){
+    
+    if(doc["Dictionary"]=="presets"){
      preset["loaded"] = "loaded";
     serializeJson(preset, jsonString);
     notifyClients(jsonString);
@@ -295,6 +294,9 @@ void handleScanTask(void *pvParameters) {
     String startInput = doc["startInput"].as<String>();
     String stopInput = doc["stopInput"].as<String>();
     String stepInput = doc["stepInput"].as<String>();
+    float current=(stopInput.toInt()-startInput.toInt())/stepInput.toInt();
+    
+    int j=1; //represent the current iteration
     Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
     bool scanning= true;
     for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt()) {
@@ -316,15 +318,25 @@ void handleScanTask(void *pvParameters) {
         String wavelength = response.substring(space1 + 1, space2);
         String reference = response.substring(space2 + 1, space3);
         String sample = response.substring(space3 + 1);
+        DynamicJsonDocument scanData(256);
+        
+        
         if(i==stopInput.toInt()||(i + stepInput.toInt() > stopInput.toInt())){
           scanning=false;
+          scanData["current"]=100;
         }
-        DynamicJsonDocument scanData(256);
         scanData["currentTime"] = Time;
         scanData["wavelength"] = i;
         scanData["intensityReference"] = reference.toFloat();
         scanData["intensitySample"] = sample.toFloat();
         scanData["scanning"]=scanning;
+        if(scanning){
+        float ratio =100/current*j;
+        scanData["current"]=ratio;  //to help display the % progress
+        }
+        j++;
+
+        
        
         String jsonString;
         serializeJson(scanData, jsonString);
@@ -396,7 +408,7 @@ void handleScan(const DynamicJsonDocument &doc) {
     }
     else if (doc.containsKey("savepreset"))
     {
-      writeToDatabase("/presets", doc);
+      writeToDatabase("/presets/", doc);
     }
     else if (doc.containsKey("deletepreset"))
     {
@@ -443,9 +455,9 @@ void handleScan(const DynamicJsonDocument &doc) {
     else if (doc.containsKey("senddetector")){
       handelreaddetecor();
     }
-    else if(doc["command"]=="sdsave"){
+    else if(doc.containsKey("isFirst")){
       Serial.print("saved");
-      writeToDatabase("/readings", doc);
+      writeToDatabase("/readings/",doc);
       
 }
     else if(doc.containsKey("showreadings")){

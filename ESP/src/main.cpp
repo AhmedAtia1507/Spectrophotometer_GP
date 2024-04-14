@@ -23,10 +23,13 @@
 AsyncWebServer server(80); // Create AsyncWebServer object on port 80
 AsyncWebSocket ws("/ws");  // Create a WebSocket object
 
-void notifyClients(String state)
+bool notifyClients(String state)
 {
   ws.textAll(state); // send data to the connected webpage
+  WS_MAX_QUEUED_MESSAGES;
+  return true;
 }
+
 
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 {

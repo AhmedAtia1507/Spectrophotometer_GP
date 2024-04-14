@@ -133,15 +133,17 @@
         <div id="presets" class="presets">
           <ul class="blurred-list" id="presetlist">
             <input type="text" id="search" placeholder="search &#128269;" />
-            <div id="nopresets"></div>
+            <div id="nopresets"></div>  
           </ul>
         </div>
         <div class="presetname" id="presetname">
           <div class="blurred-name">
             <label class="presetlabel" for="name">Enter preset name:</label>
-            <input id="prestinput" class="presetinput" type="text" maxlength="12" />
+            <input id="prestinput" class="presetinput"  maxlength="17" autocomplete="off"/>
+            <div class="TwoBtn">
             <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
             <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+          </div>
             <div id="nameexist"></div>
           </div>
         </div>

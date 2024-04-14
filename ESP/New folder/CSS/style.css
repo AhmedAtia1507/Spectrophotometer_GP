@@ -60,6 +60,7 @@ section h2 {
   padding: 10px;
   height: 90vh;
   border: #000000 1px solid;
+
 }
 
 .col div {
@@ -408,48 +409,47 @@ legend{
   display: none;
   overflow-y: auto;
   position: fixed;
-  border: 1px solid #08080860;
-  top: 5%;
+  top: 0;
   right: 0;
   
 }
 
 .blurred-list {
   list-style: none;
-  width: fit-content;
+  width: max-content;
+  min-width: 300px;
   padding: 15px;
   margin: 0;
   backdrop-filter: blur(9px);
-  max-height: 70vh;
+  max-height: 100vh;
   color: #ffffff;
   background: rgba(5, 5, 33, 0.565);
   overflow-y: auto;
 }
 
 .presets li {
-  position: relative;
-  z-index: 2;
-  width: 180px;
-  height: 22px;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 8px;
-  padding: 5px 10px;
-  list-style-type: decimal;
-  margin-bottom: 5px;
-  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 9px;
   cursor: pointer;
+  border: #000 1px solid;
+}
 
+.presets li > * {
+  display: inline-block;
+}
+
+.presets li > *:not(:last-child) {
+  margin-right: 15px; /* Adjust this value as needed */
+}
+#search{
+  width: 100%;
 }
 
 
 .delete-button {
-  display: inline;
-  position: absolute;
-  right: 20px;
-  text-decoration: underline;
-  color: white;
   padding: 3px;
+  background: inherit;
+  
 }
 
 .presets.active {
@@ -460,7 +460,6 @@ legend{
   display: none;
   position: fixed;
   width: max-content;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -477,32 +476,34 @@ legend{
 .blurred-name {
   position: relative;
   z-index: 1;
-  padding: 20px 60px;
-  backdrop-filter: blur(9px);
+  padding: 30px 30px;
+  height: 200px;
+  width: 250px;
+  backdrop-filter: blur(5px);
   background: rgba(5, 5, 33, 0.565);
-  border-radius: 8px;
+  border-radius: 3px;
   color: #ffffff;
+  align-content: center;
+  
+  
 }
 
-.presetname .presetbtn {
-  display: inline;
-  align-content: space-between;
-  padding: 5px;
-  border-radius: 5px;
-  color: #ffffff;
-  background-color: #2464b3;
-  border: 1px solid #2464b3;
-  cursor: pointer;
-}
+
 .presetbtn:hover{
   background-color: transparent;
   
 }
 
 .presetname .presetinput {
+  margin-top: 10px;
   padding: 4px;
-  border-radius: 5px;
+  border-radius: 3px;
+  width: 200px;
+  height: 30px;
+  background-color: white;
+  color: #000;
 }
+
 
 .presetname #nameexist {
   color: #b30000;
@@ -517,7 +518,8 @@ legend{
   width: 60px;
 }
 .fsetup {
-  width: 40%;
+  width: 60%;
+  min-width:400px ;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
