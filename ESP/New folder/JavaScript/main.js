@@ -1303,8 +1303,6 @@ return combined;
 
 
 
-let mina="(100,0.9)";
-
 function decombinCoordinates(reading){
   console.log(reading);
   let temp =reading.replaceAll("(","");
@@ -1320,6 +1318,5 @@ function decombinCoordinates(reading){
   // 
   return val
 }
-let nabil = decombinCoordinates(mina);
-addCurve()
+
 
