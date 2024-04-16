@@ -21,6 +21,8 @@ void resumeTask() {
 }
 
 
+
+
 bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
     String filename = String(basePath)+ doc["name"].as<String>()+" === " +doc["time"].as<String>()+ ".txt";
     File file = SD.open(filename, FILE_APPEND);
@@ -33,6 +35,8 @@ bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
         Serial.println("Error opening file");
         return false;
     }
+    
+    
 }
 
 DynamicJsonDocument readFromDatabase(const char *filename) {
@@ -140,6 +144,7 @@ void handleread(const DynamicJsonDocument &doc) {
 void readFromDatabase2(const DynamicJsonDocument &doc) { 
     handleread(doc);
     }
+
 
 
 // bool writeToDatabase2(const char *basePath,String &message,const DynamicJsonDocument &doc) {

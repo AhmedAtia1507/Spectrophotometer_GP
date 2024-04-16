@@ -15,7 +15,15 @@
 #include <esp_task_wdt.h>
 
 
-
+File dataFile;
+void writeCSV(String name, int age, String city) {
+  // Write data to CSV file
+  dataFile.print(name);
+  dataFile.print(",");
+  dataFile.print(age);
+  dataFile.print(",");
+  dataFile.println(city);
+}
 // Set the task watchdog timeout to 10 seconds
 //esp_task_wdt_init(10, false); // Timeout in seconds
 
@@ -29,6 +37,7 @@ bool notifyClients(String state)
   WS_MAX_QUEUED_MESSAGES;
   return true;
 }
+
 
 
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
@@ -91,6 +100,23 @@ void setup()
   listFiles();
   MyInitialization::initWeb(server);
   DynamicJsonDocument doc(2024) ;
+  dataFile = SD.open("/data.csv", FILE_WRITE);
+  if (!dataFile) {
+    Serial.println("Failed to open file for writing");
+    return;
+  }
+
+  // Write header to CSV file
+  dataFile.println("Name, Age, City");
+
+  // Write data to CSV file
+  writeCSV("John", 30, "New York");
+  writeCSV("Alice", 25, "Los Angeles");
+
+  // Close the file
+  dataFile.close();
+
+  Serial.println("File written successfully");
   
 }
 void loop()
