@@ -1309,21 +1309,12 @@ let combined="("+xvalues2+","+yvalues2+")";
 return combined;
 }
 
-
-
 function decombinCoordinates(reading){
   console.log(reading);
   let temp =reading.replaceAll("(","");
   temp=temp.replaceAll(","," ")
   temp=temp.replaceAll(")","")
   let val= temp.split(" ");
-  
-  // let xval=parseFloat(val[0]);
-  // let yval=parseFloat(val[1]);
-
-  // console.log("xvalue is: " +xval);
-  // console.log("yvalue is: "+yval);
-  // 
   return val
 }
 
