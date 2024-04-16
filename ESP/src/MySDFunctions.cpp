@@ -2,6 +2,25 @@
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
 
+// Define a global flag variable
+volatile bool stopTaskFlag = false; //to stop the task from webpage
+// Define a global flag variable for pausing
+volatile bool pauseTaskFlag = false; //to pause the task from webpage
+// Function to stop the task
+void stopTask() {
+    stopTaskFlag = true;
+}
+// Function to pause the task
+void pauseTask() {
+    pauseTaskFlag = true;
+}
+
+// Function to resume the task
+void resumeTask() {
+    pauseTaskFlag = false;
+}
+
+
 bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
     String filename = String(basePath)+ doc["name"].as<String>()+" === " +doc["time"].as<String>()+ ".txt";
     File file = SD.open(filename, FILE_APPEND);
@@ -70,16 +89,37 @@ String jsonString;
     }
     // Read the file line by line
     while (file.available()) {
+        // Check if the pause flag is set
+        while (pauseTaskFlag) {
+            vTaskDelay(pdMS_TO_TICKS(120)); // Delay to reduce CPU load
+        }
+        if (stopTaskFlag) {
+            stopTaskFlag = false;
+            // Break out of the loop to stop the task
+            break;
+        }
+
         Serial.println("open file for reading");
         // Read a line from the file
         String line = file.readStringUntil('\n');
         line.trim();
         notifyClients(line);
-        delay(100);
+        // Delay or yield to allow other tasks to run
+        vTaskDelay(pdMS_TO_TICKS(80)); // Example delay of 80 ms
 
     }
+    //send a message when finished to tell the webpage that loading reading is finished
+    DynamicJsonDocument lastmessage(1024);
+    lastmessage["isFirst"]="last";
+    lastmessage["readings"]="";
+    lastmessage["time"]="";
+    String message="";
+    serializeJson(lastmessage, message);
+    notifyClients(message);
     // Close the file
     file.close();
+    stopTaskFlag=false;
+    pauseTaskFlag=false;
     vTaskDelete(NULL);
 }
 

@@ -467,6 +467,20 @@ void handleScan(const DynamicJsonDocument &doc) {
     {
       SD.remove("/readings/" + doc["name"].as<String>() + ".txt");
     }
+    else if (doc.containsKey("Stopreading"))
+    {
+      stopTask();
+    }
+    else if (doc.containsKey("pausereading"))
+    {
+      pauseTask();
+    }
+    else if (doc.containsKey("resumereading"))
+    {
+      resumeTask();
+    }
+    
+    
     
       
 

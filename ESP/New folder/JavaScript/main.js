@@ -81,16 +81,16 @@ function onMessage(event) {
  *========================================================================**/
 function openTab(evt, Control) {
   var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClasSampleIDame("tabcontent");
+  tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  tablinks = document.getElementsByClasSampleIDame("tablinks");
+  tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].clasSampleIDame = tablinks[i].clasSampleIDame.replace(" active", "");
+    tablinks[i].ClassName = tablinks[i].ClassName.replace("active","");
   }
   document.getElementById(Control).style.display = "block";
-  evt.currentTarget.clasSampleIDame += " active";
+  evt.currentTarget.ClassName += "active";
 }
 /*============================ END OF Tabs ============================*/
 
@@ -373,21 +373,19 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
-  console.log("index1:"+index);
-  console.log("sampleID1:"+SampleID);
+  stopreading(); //to stop loading readings task if running
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
-    
-
-  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
-  
   let x = []; // wavelength
   let y = []; // intensity
+  
+  
+  
   function processScanData(data) {
     const currentTime = data.currentTime;
     const wavelength = data.wavelength;
@@ -542,7 +540,6 @@ function showpreset() {
                 loadthis: itemName
               };
               websocket.send(JSON.stringify(message));
-
               websocket.onmessage = function (event) {
                 var myObj = JSON.parse(event.data);
                 console.log(myObj);
@@ -689,7 +686,7 @@ function openlist() {
 
   const flyoutMenu = document.getElementById('presets');
   flyoutMenu.classList.toggle('active');
-  console.log("anaaaaaa")
+  
 
 }
 
@@ -986,7 +983,6 @@ function StoreData(SampleID,time,SampleDecribe,modeInput, xData, yData,wavelengt
       // Update existing data
       data[SampleID].x = xData;
       data[SampleID].y = yData;
-      indexofy=indexofy+1;
       savetosd(SampleID,false,time,SampleDecribe,modeInput ,wavelength,absorption,transmission);
       
   }
@@ -1134,9 +1130,14 @@ websocket.send(JSON.stringify(message));
 
 
 let colorindex=0;
+var PauseButton =document.getElementById("pausereading");//to use in displaying the stop/pause buttons
+var StopButton =document.getElementById("stopreading");//to use in displaying the stop/pause buttons
+var LoadButton =document.getElementById("loadreadings");//to use in displaying the stop/pause buttons
+  
 function showreadings(){
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
   var myList = document.getElementById("presetlist");
+  
   var message = {
     showreadings: 'showreadings'
   };
@@ -1194,8 +1195,12 @@ function showreadings(){
               let x = []; // wavelength
               let y = []; // intensity
               colorindex=colorindex+1;
+              PauseButton.style.display="block";
+              StopButton.style.display="block";
+              LoadButton.style.display="none";
+              openlist(); //when choosing one to load hid the list
+              
 
-    
               var message = {
                 Dictionary:"readings",
                 loadthis: itemName
@@ -1224,7 +1229,7 @@ function showreadings(){
 
 
                   }
-                  else{
+                  else if(myObj.isFirst==false){
                     displayCMD(myObj.readings,"black",i+3);
                     let reading=myObj.readings;
                     let xy=decombinCoordinates(reading);
@@ -1232,11 +1237,16 @@ function showreadings(){
                     let yval=[parseFloat(xy[1])];
                     x.push(xval);  
                     y.push(yval);
-                  
                     addCurve(x, y , colorSelectArr[colorindex], myObj.name);
                     
 
                 
+                  }
+                  else if(myObj.isFirst=="last"){
+                    PauseButton.style.display="none";
+                    StopButton.style.display="none";
+                    LoadButton.style.display="block";
+
                   }
                   i++;
                   
@@ -1319,4 +1329,48 @@ function decombinCoordinates(reading){
   return val
 }
 
+function stopreading(){
+  var currentfunction =document.getElementById("pausereading");
+  var message = {
+    Stopreading: 'Stopreading',
+  };
+  websocket.send(JSON.stringify(message));
+  if(currentfunction.innerHTML=="resume loading")
+  {
+    var message = {
+      resumereading: 'resumereading',
+    };
+    websocket.send(JSON.stringify(message));
+    currentfunction.innerHTML="pause loading"
+
+  }
+  PauseButton.style.display="none";
+  StopButton.style.display="none";
+  LoadButton.style.display="block";
+  
+
+
+}
+function pausereading(){
+  var currentfunction =document.getElementById("pausereading");
+  if(currentfunction.innerHTML=="pause loading")
+  {
+    var message = {
+      pausereading: 'pausereading',
+    };
+    websocket.send(JSON.stringify(message));
+    currentfunction.innerHTML="resume loading"
+
+  }
+  else {
+    var message = {
+      resumereading: 'resumereading',
+    };
+    websocket.send(JSON.stringify(message));
+    currentfunction.innerHTML="pause loading"
+
+  }
+
+
+}
 

@@ -9,6 +9,9 @@ DynamicJsonDocument readFromDatabase(const char* filename);
 //bool writeToDatabase2(const char *basePath, String &message,const DynamicJsonDocument &doc);
 DynamicJsonDocument getFilesJson(const char *directory);
 void readFromDatabase2(const DynamicJsonDocument &doc);
+void stopTask();
+void pauseTask();
+void resumeTask();
 //void handleread(const DynamicJsonDocument &doc)
 //bool deleteLineFromFile(const char* filename, const char* searchName);
 
