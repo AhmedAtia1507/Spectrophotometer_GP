@@ -79,19 +79,17 @@ function onMessage(event) {
 /**========================================================================
  *                           Tabs control
  *========================================================================**/
+
 function openTab(evt, Control) {
-  var i, tabcontent, tablinks;
+  var i, tabcontent
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].ClassName = tablinks[i].ClassName.replace("active","");
-  }
   document.getElementById(Control).style.display = "block";
-  evt.currentTarget.ClassName += "active";
+  //evt.currentTarget.ClassName += "active";
 }
+
 /*============================ END OF Tabs ============================*/
 
 
