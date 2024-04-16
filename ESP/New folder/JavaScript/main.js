@@ -253,6 +253,23 @@ chartScan = new Chart(ctxScan, {
   options: {
     responsive: true, // Set responsive to false
     maintainAspectRatio: true, // Set maintainAspectRatio to false
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy'
+        },   
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true
+          },
+          mode: 'xy'
+        }
+      }
+    },
     scales: {
       x: {
         type: 'linear',
@@ -266,24 +283,32 @@ chartScan = new Chart(ctxScan, {
     }
   }
 });
-function addCurve(xData, yData, color, curveName, fillCurve = false) {
+function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 'curve') {
   // Check if the curve already exists
   const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
 
   // If the curve exists, update its data
   if (existingCurveIndex !== -1) {
-    chartScan.data.datasets[existingCurveIndex].data = xData.map((x, index) => ({ x: x, y: yData[index] }));
+    chartScan.data.datasets[existingCurveIndex].data = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
     chartScan.data.datasets[existingCurveIndex].borderColor = color;
     chartScan.data.datasets[existingCurveIndex].backgroundColor = fillCurve ? 'rgba(255, 0, 0, 0.3)' : undefined;
+    chartScan.data.datasets[existingCurveIndex].showLine = drawMode !== 'points'; // Don't connect points if drawing separate points
   } else { // If the curve does't exist, add it
-    var curveData = xData.map((x, index) => ({ x: x, y: yData[index] }));
+    var curveData = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
     var dataset = {
       label: curveName,
       data: curveData,
       borderColor: color,
       borderWidth: 2,
-      pointRadius: 0,
-      lineTension: 0.4
+      pointRadius: drawMode === 'points' ? 5 : 0, // Set point radius if drawing points
+      lineTension: drawMode === 'points' ? 0 : 0.4, // Set line tension if drawing points
+      showLine: drawMode !== 'points' // Don't connect points if drawing separate points
     };
 
     if (fillCurve) {
@@ -296,6 +321,9 @@ function addCurve(xData, yData, color, curveName, fillCurve = false) {
 
   chartScan.update(); // Update the chart
 }
+
+
+
 
 // funcation to remove all curves in chart js
 function removeAllCurves() {
@@ -957,15 +985,12 @@ return result;
 /**========================================================================
  *                           Global Data
  *========================================================================**/
-// Example usage:
+// // Example usage:
 // const xtest = [700,699,698,697,696,695,694,693,692,691,690,689,688,687,686,685,684,683,682,681,680,679,678,677,676,675,674,673,672,671,670,669,668,667,666,665,664,663,662,661,660,659,658,657,656,655,654,653,652,651,650,649,648,647,646,645,644,643,642,641,640,639,638,637,636,635,634,633,632,631,630,629,628,627,626,625,624,623,622,621,620,619,618,617,616,615,614,613,612,611,610,609,608,607,606,605,604,603,602,601,600,599,598,597,596,595,594,593,592,591,590,589,588,587,586,585,584,583,582,581,580,579,578,577,576,575,574,573,572,571,570,569,568,567,566,565,564,563,562,561,560,559,558,557,556,555,554,553,552,551,550,549,548,547,546,545,544,543,542,541,540,539,538,537,536,535,534,533,532,531,530,529,528,527,526,525,524,523,522,521,520,519,518,517,516,515,514,513,512,511,510,509,508,507,506,505,504,503,502,501,500,499,498,497,496,495,494,493,492,491,490,489,488,487,486,485,484,483,482,481,480,479,478,477,476,475,474,473,472,471,470,469,468,467,466,465,464,463,462,461,460,459,458,457,456,455,454,453,452,451,450,449,448,447,446,445,444,443,442,441,440,439,438,437,436,435,434,433,432,431,430,429,428,427,426,425,424,423,422,421,420,419,418,417,416,415,414,413,412,411,410,409,408,407,406,405,404,403,402,401,400,399,398,397,396,395,394,393,392,391,390,389,388,387,386,385,384,383,382,381,380,379,378,377,376,375,374,373,372,371,370,369,368,367,366,365,364,363,362,361,360,359,358,357,356,355,354,353,352,351,350,349,348,347,346,345,344,343,342,341,340,339,338,337,336,335,334,333,332,331,330,329,328,327,326,325,324,323,322,321,320,319,318,317,316,315,314,313,312,311,310,309,308,307,306,305,304,303,302,301,300,299,298,297,296,295,294,293,292,291,290,289,288,287,286,285,284,283,282,281,280,279,278,277,276,275,274,273,272,271,270,269,268,267,266,265,264,263,262,261,260,259,258,257,256,255,254,253,252,251,250];
 // const ytest = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253,0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267,0.02261,0.02275,0.02288,0.0227,0.02303,0.02294,0.02304,0.02313,0.02327,0.02347,0.02343,0.02344,0.0238,0.02398,0.02453,0.02492,0.02623,0.02783,0.03071,0.03561,0.04003,0.04439,0.04769,0.0513,0.05325,0.05321,0.05159,0.0496,0.04809,0.04671,0.0453,0.04582,0.0478,0.05092,0.05624,0.06206,0.06895,0.07599,0.0784,0.0761,0.07425,0.07339,0.07221,0.07159,0.07205,0.07575,0.08285,0.09243,0.10083,0.10491,0.10434,0.10021,0.09375,0.08347,0.07018,0.05825,0.04889,0.04257,0.03817,0.03515,0.03327,0.03156,0.03022,0.02928,0.02843,0.02766,0.02734,0.02677,0.02645,0.02593,0.02577,0.02554,0.02531,0.02499,0.02512,0.02501,0.02502,0.02495,0.02487,0.02491,0.02478,0.02474,0.0246,0.02459,0.02465,0.02468,0.02447,0.02458,0.02462,0.02444,0.02467,0.02465,0.02453,0.02456,0.02434,0.02422,0.02416,0.02411,0.02404,0.02443,0.02433,0.02462,0.02449,0.02469,0.02506,0.02544,0.02562,0.0258,0.0264,0.02652,0.02689,0.02722,0.02761,0.02779,0.02785,0.02834,0.02857,0.02848,0.02872,0.02872,0.02919,0.02888,0.02897,0.02937,0.0294,0.0294,0.02949,0.02944,0.0295,0.03008,0.03064,0.0324,0.03581,0.04131,0.04587,0.04853,0.05166,0.05632,0.06351,0.07405,0.07908,0.07995,0.07867,0.07831,0.08163,0.09221,0.10707,0.12825,0.16216,0.19453,0.20988,0.21171,0.18648,0.14277,0.1036,0.0757,0.06007,0.0502,0.04474,0.04053,0.03814,0.03615,0.0346,0.03343,0.03253,0.03177,0.03132,0.03083,0.03043,0.03066,0.03012,0.03042,0.03038,0.03015,0.03036,0.03006,0.0303,0.03097,0.03068,0.03072,0.03007,0.03003,0.02999,0.03013,0.0297,0.02968,0.02979,0.02976,0.03008,0.03076,0.03145,0.03316,0.03575,0.03863,0.04314,0.05021,0.05607,0.06269,0.07103,0.07353,0.06963,0.06919,0.07468,0.07744,0.06806,0.06032,0.05305,0.04654,0.04341,0.04568,0.05466,0.0671,0.07488,0.07921,0.0766,0.07283,0.06931,0.06514,0.06935,0.08389,0.10123,0.12107,0.17581,0.28013,0.38436,0.45968,0.60599,0.6733,0.55068,0.35602,0.28656,0.34277,0.45544,0.57377,0.55374,0.44017,0.35037,0.36305,0.53452,0.87108,1.19864,1.52639,1.4128,0.7816,0.3186,0.16443,0.11064,0.08583,0.07091,0.06015,0.05236,0.04784,0.04494,0.04394,0.04396,0.04283,0.04145,0.04203,0.04491,0.05047,0.0597,0.07054,0.07513,0.06943,0.05927,0.06482,0.08834,0.12146,0.14571,0.13558,0.09944,0.07767,0.07555,0.07272,0.062,0.05048,0.0432,0.03989,0.03789,0.03695,0.03618,0.03581,0.03596,0.03581,0.03598,0.03604,0.03622,0.03568,0.03592,0.03618,0.03629,0.0357,0.03622,0.03705,0.03954,0.04242,0.0448,0.04262,0.04203,0.0479,0.05951,0.06634,0.05958,0.0483,0.05176,0.06,0.05639,0.04352,0.04146,0.03931,0.03937,0.03869,0.0382,0.03923,0.04076,0.04403,0.05415,0.06622,0.07438,0.07695,0.08271,0.10044,0.13299,0.15769,0.20891,0.32465,0.60804,0.36616,0.17272,0.11024,0.07852,0.06575,0.06036,0.06124,0.0619,0.06393,0.06189,0.0639,0.0728,0.07918,0.0734,0.06985,0.07072,0.06979,0.066,0.06633,0.06497,0.06424,0.06363,0.06827,0.06802,0.07111,0.08246,0.1133,0.0875,0.07205,0.06591,0.05975,0.05833,0.05745,0.05843,0.05888,0.06009,0.06181,0.06291,0.06351,0.06459,0.06504,0.06673,0.06823,0.0694,0.07159,0.07312,0.0751,0.07729,0.07949,0.08153,0.08402,0.08668,0.08999,0.09309,0.0956,0.09871,0.1023,0.10615,0.11008,0.11487,0.11987,0.12678,0.13418,0.14342,0.15239,0.1626,0.17317,0.18143,0.1903,0.22734,0.25164,0.24429,0.32932,0.28155,0.22248,0.22278,0.23069,0.24206,0.26148,0.28955,0.39305,0.40237,0.32548,0.32363,0.33042,0.34142,0.35018,0.3595,0.37066,0.38637,0.39886,0.41183,0.42682,0.44379,0.46173,0.48214,0.50347,0.53878,0.556,0.56991,0.58464,0.59192,0.60936,0.62944,0.65129,0.67347,0.69756,0.72395,0.75808,0.79345,0.80799];
-//let indexofy=0;
-//addCurve([10], [0.2] , "green", "SampleID");
-//addCurve([10], [0.5] , "green", "SampleID");
-//addCurve([20], [0.4] , "green", "SampleID");
-// let xValues=[];
-// let yValues=[];
+
+
+
 
 // xtest.reverse();
 // ytest.reverse();
@@ -980,7 +1005,7 @@ return result;
 //   }
 // }
 
-// StoreData2("SampleID", xtest, ytest);
+// StoreData2("Name 1", xtest, ytest);
 
 
 function StoreData(SampleID,time,SampleDecribe,modeInput, xData, yData,wavelength,absorption,transmission,scanning) {
@@ -1009,7 +1034,20 @@ function StoreData(SampleID,time,SampleDecribe,modeInput, xData, yData,wavelengt
 //console.log("Approximated trap Area(430 to 470):", result2);
 
 
+function findPeaks(arr) {
+    var peaks = [];
+    var numPeaks = 5; // Number of peaks to return
+    for (var i = 1; i < arr.length - 1; i++) {
+        if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+            peaks.push(arr[i]);
+        }
+    }
 
+    peaks.sort((a, b) => b - a); // Sort peaks in descending order
+
+    // Return the specified number of highest peaks
+    return peaks.slice(0, numPeaks);
+}
 
 /**------------------------------------------------------------------------
  *                           COMMANDS - NEVER THINK TO TOUCH ANYTHING HERE
@@ -1021,6 +1059,7 @@ var table = document.querySelector('table');
 cmdInput.addEventListener('keyup', function(event) {
   if (event.key === 'Enter') {
     const inputValue = this.value.trim();
+    displayCMD(inputValue, 'black', "CMD: ");
     if (inputValue !== '') {
       // Regular expression to match the command with its parameter
       const match = inputValue.match(/^=(\w+)\((\d+)\)$/);
@@ -1078,14 +1117,22 @@ cmdInput.addEventListener('keyup', function(event) {
             break;
 
           case 'PEAK':
-          rows.forEach(function(row,index) {
-            const cells = row.querySelectorAll('td');
-            if (cells.length >= 5) {
-              const rowIndex = index;
-              cells[5].textContent = "peak";
-              displayCMD("peak", 'green', rowIndex);
-            }
-          });
+            rows.forEach(function(row,index) {
+              const cells = row.querySelectorAll('td');
+              if (cells.length >= 5 && index==cmdParam) {
+                const rowIndex = index;
+                var SampleID = table.rows[rowIndex].cells[2].textContent;
+                // input from user to specify the range
+                const result = findPeaks(data[SampleID].y);
+                cells[5].textContent = 'LOOK COMMAND';
+                var numbers = [];
+              for (var i = 0; i < result.length; i++) {
+               numbers[i] = data[SampleID].x[data[SampleID].y.indexOf(result[i])];
+               displayCMD(" "+ result[i], 'green', rowIndex + " Peaks at "+numbers[i]);
+              }
+              addCurve(numbers, result, 'green', SampleID+" Peaks",false,'points');                
+              }
+            });
 
           // Clear the input field after processing the command
           this.value = '';
@@ -1109,7 +1156,7 @@ cmdInput.addEventListener('keyup', function(event) {
 function displayCMD(message, color, num) {
   var messageBox = document.getElementById("CMDMB");
   var messageElement = document.createElement("p");
-  messageElement.textContent = num +":" + message;
+  messageElement.textContent = "#"+num +": " + message;
   messageElement.style.color = color; // Set the text color
   messageBox.appendChild(messageElement);
 }
