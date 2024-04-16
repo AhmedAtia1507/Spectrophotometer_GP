@@ -326,6 +326,7 @@ legend{
   flex-direction: row;
   margin: 5px 15%;
 }
+
 .ftable .TwoBtn{
   margin: 0px 40%;
 }
@@ -350,6 +351,12 @@ legend{
   display: flex;
   align-items: center;
 }
+.TwoBtn button:hover{
+  color:white;
+  background-color:#3498db; 
+  transition: all 0.2s;
+}
+
 #DeleteRows{
   color: red;
 
