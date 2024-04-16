@@ -29,6 +29,7 @@ function initWebSocket() {
 
 function onOpen(event) {
   console.log("Connection opened");
+  
   // asks the server if the user have logged in or not
   //redirectToLoginPage();
   senduvStatus();
@@ -41,7 +42,7 @@ function onClose(event) {
   console.log("Connection closed");
   setTimeout(initWebSocket, 2000);
 }
-
+showTab('tab3','li3');
 document.querySelector("nav").addEventListener("mouseover", delayedShowNav);
 document.getElementById("li0").addEventListener("mouseover", delayedShowNav2);
 document.getElementById("li0").addEventListener("mouseout", delayedhideNav);
@@ -98,6 +99,13 @@ function sendmoterssteps(){
   };
   websocket.send(JSON.stringify(motors));
 }
+function sendLampmoter(){
+  var motors = {
+    lampmotor: "send",
+  };
+  websocket.send(JSON.stringify(motors));
+}
+
 
 
 
@@ -388,6 +396,10 @@ function handleMessage(event) {
       document.getElementById("timeupdated").innerHTML = "";
     }, 4000);
   }
+  else if(myObj.hasOwnProperty("current")){
+
+
+  }
   else if (myObj.hasOwnProperty("motorssteps")) {
     console.log(myObj.motorssteps)
     const ary = myObj.motorssteps.split('-');
@@ -569,6 +581,26 @@ function validat(min, max) {
   }
   
 }
+//function to toggle Lamp motor position
+function toggleLamp(){
+  var currentfunction =document.getElementById("currentlamp");
+  if(currentfunction.innerHTML=="UV Lamp")
+  {
+    var message = {
+      Lampmotortoggle: 'VI',
+    };
+    websocket.send(JSON.stringify(message));
+  }
+  else {
+    var message = {
+      Lampmotortoggle: 'UV',
+    };
+    websocket.send(JSON.stringify(message));
+
+  }
+}
+
+
 
 function moveto(event){
   if (event.inputType === 'insertText') {

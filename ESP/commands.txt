@@ -57,6 +57,8 @@ get-current-wav           //send me the current wavelength ==> just the number  
 movto-(value) like movto-100  //send the filter moter to the "value" steps position ==> respond with "moved" or "failed to move"
 savestep-(value)  like savestep-122   //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respond with "saved" or "failed to save"
+//new commands
+get-lamp-moter-position    //send lamp moter current position ==> "UV Lamp" or "VI Lamp"
 
 =====================================================================================================================================================================
 5-photodetector
