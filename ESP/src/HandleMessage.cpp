@@ -25,9 +25,7 @@ void checkCountdown()
 }
 
 String sendCMD(const String &input)
-{
-
-  
+{ 
     // Send the command to the STM32 via UART
     Serial2.println(input);
     Serial.println(input);
@@ -208,7 +206,7 @@ void sendsteps()
 {
     String command = "get-motors-steps";
     String response = sendCMD(command);
-    //String response = "30-40-50-1100\n";
+    //String response = "30-40-50-110\n";
     Serial.print(response);
     DynamicJsonDocument object(60);
     object["motorssteps"] = response;
@@ -219,15 +217,29 @@ void sendsteps()
 void getlampmoter(){
     String command = "get-lamp-moter-position";
     String response = sendCMD(command);
-    //String response = "30-40-50-1100\n";
-    Serial.print(response);
+    //String response = "VI Lamp";
+    //Serial.print(response);
     DynamicJsonDocument object(60);
-    object["motorssteps"] = response;
+    object["currenlamp"] = response;
     String jsonString;
     serializeJson(object, jsonString);
     notifyClients(jsonString);
 
 }
+void ToggleLampMotor(const DynamicJsonDocument &doc)
+{
+    String setto = doc["Lampmotortoggle"];
+    String command="set-lamp-moter-"+setto;
+    String response = sendCMD(command);
+    //String response = "moved";
+    DynamicJsonDocument object(90);
+    object["motermoved"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+    
+
+    }
 void handleGoHome(const DynamicJsonDocument &doc)
 {
     String motortype = doc["type"];
@@ -254,7 +266,7 @@ void handleSavestep(const DynamicJsonDocument &doc)
     String response = sendCMD(correctstep);
     String wavelength = sendCMD(correctwave);
     //String response = "saved";
-    // String wavelength = "878";
+    //String wavelength = "878";
     DynamicJsonDocument object(90);
     object["stepsaved"] = response;
     String jsonString;
@@ -264,6 +276,7 @@ void handleSavestep(const DynamicJsonDocument &doc)
 void handlemovestep(const DynamicJsonDocument &doc)
 {
     String correctstep = doc["movemoter"];
+    Serial.println(correctstep);
     String response = sendCMD(correctstep);
     //String response = "moved";
     DynamicJsonDocument object(90);
@@ -456,6 +469,10 @@ void handleScan(const DynamicJsonDocument &doc) {
     else if(doc.containsKey("lampmotor")){
       getlampmoter();
     }
+    else if(doc.containsKey("Lampmotortoggle")){
+      ToggleLampMotor(doc);
+      getlampmoter();
+    }
     else if (doc.containsKey("gohome"))
     {
       handleGoHome(doc);
@@ -466,6 +483,7 @@ void handleScan(const DynamicJsonDocument &doc) {
     else if (doc.containsKey("movemoter"))
     {
       handlemovestep(doc);
+      sendsteps();
     }
     else if (doc.containsKey("newgain")){
       handlenewgain(doc);

@@ -53,12 +53,17 @@ gratingmotorhome   // same but for grating ==>same
 filtermotorhome    // same but for filter ==> same
 get-current-wav           //send me the current wavelength ==> just the number  like "1100\n"
 
-//calibration 
-movto-(value) like movto-100  //send the filter moter to the "value" steps position ==> respond with "moved" or "failed to move"
+//calibration   //removed move-to command 
 savestep-(value)  like savestep-122   //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respond with "saved" or "failed to save"
-//new commands
+
+//new commands updated
 get-lamp-moter-position    //send lamp moter current position ==> "UV Lamp" or "VI Lamp"
+set-lamp-moter-VI          //set the lamp moter to be in the VI ==>response with "moved" or "failed to move"
+set-lamp-moter-UV          //set the lamp moter to be in the UV ==>response with "moved" or "failed to move"
+set-filtermoter-to-(value) like set-filtermoter-to-100    //send the filter moter to the "value" steps position ==> respond with "moved" or "failed to move"
+set-filtermoter-to-(value) like set-filtermoter-to-F1    //send the filter moter to the "value" filter position ==> respond with "moved" or "failed to move"
+set-gratingmoter-to-(value) like set-gratingmoter-to-100   //send the filter moter to the "value" WL in nm position ==> respond with "moved" or "failed to move"
 
 =====================================================================================================================================================================
 5-photodetector

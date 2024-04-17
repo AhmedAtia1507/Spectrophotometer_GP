@@ -14,7 +14,7 @@
   <header>
     <h1>SpectoPhotoMeter test mode</h1>
   </header>
-  <li id="li0" onclick="showSidebar()">
+  <li id="li0" onclick="delayedShowNav()">
     <a href="#"><i class="fas fa-bars"></i></a>
   </li>
   <a href="index.html" class="logout-button">Home <i class="fas fa-home"></i></a>
@@ -122,14 +122,15 @@
 
     <div id="tab3" class="tab-content">
       <h2 style="text-decoration: double;">Motors Test and Calibration</h2>
-      <button style="margin-left: 70%;" onclick="sendmoterssteps()">update</button>
+     
   
-      <div class="grid-container">
+      <div class="grid-container2">
+        <div class="moterdiv">
         <div class="grid-item">
           <h3 style="text-decoration: underline;"> Lamp Change Moter</h3>
           <div class="grid-container" style="border: none;">
             <div class="grid-item">
-              <label for="currentstep">current step</label>
+              <label for="currentstep">Current Step</label>
               <div class="currentstep" id="lampstep"> 100 </div>
             </div>
             <div class="grid-item">
@@ -137,7 +138,7 @@
                 Home</button>
             </div>
             <div class="grid-item">
-              <label for="CurrentLamp">CurrentLamp is: </label>
+              <label for="CurrentLamp">Current Lamp is</label>
               <div class="currentstep" id="currentlamp">UV Lamp</div>
             </div>
             <div class="grid-item">
@@ -145,53 +146,89 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="moterdiv">
         <div class="grid-item">
           <h3 style="text-decoration: underline;">Grating Motor</h3>
           <div class="grid-container" style="border: none;">
             <div class="grid-item">
-              <label for="currentstep">current step</label>
+              <label for="currentstep">Current Step</label>
               <div class="currentstep" id="gratingstep"> 100 </div>
             </div>
             <div class="grid-item">
               <button title="press to send motor to home point" id="gratingmotorhome" onclick="gohome(this)">Go
                 Home</button>
             </div>
+            <div class="grid-item">
+              <label for="currentstep">Move Grating Motor To</label>
+              <input class="page" id="gratingmotorwl" type="number" min="0" max="1200" oninput="validat(this,min,max),moveto(event)" value="100">  
+              <label for="currentstep">nm</label>
+            </div>
+            <div class="grid-item">
+              <button class="page" title="press to send motor to this wavelength" id="gratingmotermove" onclick="moveto(event)">Set</button>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="grid-container">
+      <div class="moterdiv">
+        <div class="grid-item">
         <h3 style="text-decoration: underline; padding-left: 20px;">Filter Wheel Motor</h3>
-
+        <div class="grid-container" style="border: none;">
+        
         <div class="grid-item">
-          <label for="currentstep" class="">current step</label>
+          <label for="currentstep" >Current Step</label>
           <div class="currentstep" id="filterstep"> 100 </div>
-        </div>
-        <div class="grid-item">
-          <label for="currentstep">current wavelength</label>
-          <div class="currentstep" id="filterwave"> 1200 </div>
-        </div>
-
-        <div class="grid-item">
-          <label for="increasestep">move motor to</label>
-          <input type="number" id="increasestep" min="0" max="1000" oninput="validat(min,max),moveto(event)" value="0">
-          <label for="increasestep"> steps</label>
-          <button onclick="moveto(event)">Move</button>
-        </div>
-
-        <div class="grid-item">
-          <button class="page" onclick="savecalb(this)" title="click to update the new calibration step">save calibration</button>
-          <div id="stepsaved"></div>
         </div>
         <div class="grid-item">
           <button id="filtermotorhome" onclick="gohome(this)" title="press to send motor to home point">Go
             Home</button>
         </div>
-      </div>
+      
+        <div class="grid-item">
+          <label for="currentstep">Current Wavelength</label>
+          <div class="currentstep" id="filterwave"> 1200 </div>
+        </div>
+        <div class="grid-item">
+          <button class="page" onclick="savecalb(this)" title="click to update the new calibration step">save calibration</button>
+          <div id="stepsaved"></div>
+        </div>
 
-      <div id="current"></div>
+        <div class="grid-item">
+          <label for="increasestep">Move Filter Motor To</label>
+          <input class="page" type="number" id="increasestep" min="0" max="1000" oninput="validat(this,min,max),moveto(event)" value="0">
+          <label for="increasestep"> Steps</label>
+        </div>
+
+        <div class="grid-item">
+          <button id="filtermotermove" class="page" onclick="moveto(event)">Move</button>
+        </div>
+        <div class="grid-item">
+          <label for="increasestep">Move Filter Motor To filter</label>
+          <select class="Page" name="filter" id="filterselector">
+            <option value="F1">F1</option>
+            <option value="F2">F2</option>
+            <option value="F3">F3</option>
+            <option value="F4">F4</option>
+            <option value="F5">F5</option>
+            <option value="F6">F6</option>
+            <option value="F7">F7</option>
+            <option value="F8">F8</option>
+          </select>
+        </div>
+        <div class="grid-item">
+          <button id="filtermotermove" class="page" onclick="moveto(event)">Select</button>
+        </div>
+        </div>
+        </div>
+        
+  
     </div>
-
+   <div class="grid-item" style="border: 6px solid rgba(85, 78, 78, 0.212);">      
+    <button style="position: relative; top: 50%;left: 50%;transform: translate(-50%, -50%);" onclick="sendmoterssteps(),sendLampmoter()">update</button>
+  </div>
+    </div>
+   
+  </div>
     <div id="tab4" class="tab-content">
       <h2 style="text-decoration: underline; display: inline-block;">PhotoDetector Test</h2>
       <button style="margin-left: 20px;" onclick="senddetector()">update</button>
@@ -288,9 +325,9 @@
             <li id="gratingmotorhome" onclick="gohome(this)">send grating motor home</li>
             <li id="filtermotorhome" onclick="gohome(this)">send filter motor home</li>
             <li id="movto-"><label for="increasestep2">move filter motor to</label>
-              <input type="number" id="increasestep2" min="0" max="1000" oninput="validat(min,max),moveto(event)" value="0">
+              <input type="number" id="increasestep2" min="0" max="1000" oninput="validat(this,min,max),moveto(event)" value="0">
               <label for="increasestep"> steps</label>
-              <button onclick="moveto(event)">Move</button>
+              <button id="filtermotermove" class="Direct" onclick="moveto(event)">Move</button>
             </li>
             <li id="savestep-" class="Direct" onclick="savecalb(this)">save filter moter calibration step <div id="stepsaved2" class="state"></div></li>
             <li id="sndtime" onclick="loadtime()">send current stm time</li>

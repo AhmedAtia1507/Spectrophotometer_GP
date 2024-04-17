@@ -32,8 +32,8 @@ function onOpen(event) {
   
   // asks the server if the user have logged in or not
   //redirectToLoginPage();
-  senduvStatus();
-  sendviStatus();
+  //senduvStatus();
+  //sendviStatus();
 
 }
 
@@ -42,7 +42,13 @@ function onClose(event) {
   console.log("Connection closed");
   setTimeout(initWebSocket, 2000);
 }
-showTab('tab3','li3');
+//function to wait for the motor to move
+function togglePageState(enable) {
+  var overlay = document.getElementById('overlay');
+  overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
+}
+togglePageState("first");
+
 document.querySelector("nav").addEventListener("mouseover", delayedShowNav);
 document.getElementById("li0").addEventListener("mouseover", delayedShowNav2);
 document.getElementById("li0").addEventListener("mouseout", delayedhideNav);
@@ -104,6 +110,7 @@ function sendLampmoter(){
     lampmotor: "send",
   };
   websocket.send(JSON.stringify(motors));
+  
 }
 
 
@@ -130,13 +137,13 @@ function showTab(tabId, li_id) {
 
   switch (tabId) {
     case "tab1":
-      
       break;
     case "tab2":
       sendsupplystutus();
       break;
     case "tab3":
       sendmoterssteps();
+      sendLampmoter();
       break;
     case "tab4":
       senddetector();
@@ -150,7 +157,6 @@ function showTab(tabId, li_id) {
 
   
 }
-showTab('tab1','li1');
 
 document.getElementById("uvin").addEventListener("change", toggleuv);
 document.getElementById("viin").addEventListener("change", togglevi);
@@ -173,7 +179,7 @@ function toggleuv() {
 
 //ui function
 function togglevi() {
-  console.log("vgtftfgvtfg");
+  
   if (document.getElementById("vistate").innerHTML === "on") {
     var turnvioff = {
       turnvioff: "turnoff",
@@ -396,23 +402,23 @@ function handleMessage(event) {
       document.getElementById("timeupdated").innerHTML = "";
     }, 4000);
   }
-  else if(myObj.hasOwnProperty("current")){
-
-
+  else if(myObj.hasOwnProperty("currenlamp")){
+    
+    var currenlamp=document.getElementById("currentlamp");
+    currenlamp.innerHTML=myObj.currenlamp;
   }
   else if (myObj.hasOwnProperty("motorssteps")) {
-    console.log(myObj.motorssteps)
     const ary = myObj.motorssteps.split('-');
     document.getElementById("lampstep").textContent = ary[0];
     document.getElementById("gratingstep").textContent = ary[1];
     document.getElementById("filterstep").textContent = ary[2];
     document.getElementById("filterwave").textContent = ary[3];
+    document.getElementById("gratingmotorwl").value=parseFloat(ary[3]);
     document.getElementById("motorssteps").textContent=myObj.motorssteps;
     syncstep();
   }
   else if (myObj.hasOwnProperty("gohome")) {
-
-    console.log(myObj);
+    togglePageState("disable");
     if (myObj.type == 'lampmotorhome') {
       document.getElementById("lampstep").textContent = myObj.step;
       document.getElementById("filterwave").textContent = myObj.wavelength;
@@ -425,7 +431,6 @@ function handleMessage(event) {
       document.getElementById("filterstep").textContent = myObj.step;
       document.getElementById("filterwave").textContent = myObj.wavelength;
     }
-    togglePageState();
     syncstep();
   }
   else if (myObj.hasOwnProperty("stepsaved")) {
@@ -449,7 +454,7 @@ function handleMessage(event) {
 
   }
   else if (myObj.hasOwnProperty("motermoved")) {
-    togglePageState();
+    togglePageState("disable");
 
   }
   else if (myObj.hasOwnProperty("detreadings")){
@@ -570,8 +575,8 @@ function syncstep() {
 
 
 
-function validat(min, max) {
-  var inputElement = document.getElementById('increasestep');
+function validat(target,min, max) {
+  var inputElement = document.getElementById(target.id);
   var currentValue = parseInt(inputElement.value);
   if (currentValue < min) {
     inputElement.value = min;
@@ -583,6 +588,7 @@ function validat(min, max) {
 }
 //function to toggle Lamp motor position
 function toggleLamp(){
+  togglePageState("enable");
   var currentfunction =document.getElementById("currentlamp");
   if(currentfunction.innerHTML=="UV Lamp")
   {
@@ -601,47 +607,105 @@ function toggleLamp(){
 }
 
 
-
+let i=0
 function moveto(event){
-  if (event.inputType === 'insertText') {
-    // Input from the keyboard
-    console.log("Input from keyboard: " + event.target.value);
-} else {
-    // Input from arrows
-    console.log("Input from arrows: " + event.target.value);
-    // Add your additional logic for arrow input
-    var inputElement = document.getElementById('increasestep');
-    var inputElement2 = document.getElementById('increasestep2');
-    
-    var currentValue = parseInt(inputElement.value);
-    var currentValue2 = parseInt(inputElement2.value);
-    
-    if (currentValue||currentValue2) {
-      var latsetstep = document.getElementById('increasestep').value
-      console.log(latsetstep);
+  console.log(event.target.id);
+  console.log(i);
+  i++;
+  switch(event.target.id){
+    case "filtermotermove":
+    console.log("this is filter case");
+    movefiltermoter(event);  
+    break;
+      
+    case "gratingmotermove":
+    console.log("this is grating case");
+    movegratingmoter(event);
+    break;
+  }
+}
+
+function movefiltermoter(targetevent){
+  if (targetevent.inputType === 'insertText') {
+  }
+
+else {
+    if (targetevent.target.classList.value==="page") {
+      if(targetevent.target.innerHTML !== "Select"){
+      var lateststep = document.getElementById('increasestep').value
+      console.log(lateststep);
+      }
+      else{
+        var selectElement = document.getElementById("filterselector");
+        var lateststep = selectElement.value;
+        console.log(lateststep);
+      }
+    }
+    else{
+      if(targetevent.target.innerHTML !=="Select"){
+        var lateststep = document.getElementById('increasestep2').value
+        console.log(lateststep);
+        }
+        else{
+          var selectElement = document.getElementById("filterselector2");
+          var lateststep = selectElement.value;
+          console.log(lateststep);
+        }
+      }
+    if(lateststep){
       var moveto = {
-        movemoter: "movto-" + latsetstep,
+        movemoter: "set-filtermoter-to-" + lateststep,
       };
-      togglePageState();
+      togglePageState("enable");
       websocket.send(JSON.stringify(moveto));
   
     }
 
+    }
+
+}
+
+function movegratingmoter(targetevent){
+  if (targetevent.inputType === 'insertText') {
+    // Input from the keyboard
+    console.log("Input from keyboard: " + targetevent.target.value);
   }
-  
+
+  else {
+    // Input from arrows
+    console.log("Input from arrows: " + targetevent.target.value);
+    // Add your additional logic for arrow input
+    if (targetevent.target.classList.value==="page"&&targetevent.target.innerHTML !=="Select") {
+      var lateststep = document.getElementById('gratingmotorwl').value
+      console.log(lateststep);
+    }
+    else if(targetevent.target.innerHTML !=="Select"){
+      var lateststep = document.getElementById('gratingmotorwl2').value
+      console.log(lateststep);
+    }
+
+    if(lateststep){
+      var moveto = {
+        movemoter: "set-gratingmoter-to-" + lateststep,
+      };
+      
+      websocket.send(JSON.stringify(moveto));
+      togglePageState("enable");
+    }
+    }
 
 }
 
 
 function gohome(element) {
-  togglePageState();
-
+ 
   var motor = {
     gohome: "gohome",
     type: element.id
   }
   console.log(element.id);
   websocket.send(JSON.stringify(motor));
+  togglePageState("enable");
 }
 function savecalb(event) {
   console.log(event.classList.value);
@@ -669,12 +733,8 @@ else{
 }
 }
 
-//function to wait for the motor to move
-function togglePageState() {
-  var overlay = document.getElementById('overlay');
-  overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
-}
-togglePageState();
+
+
 
 
 /**------------------------------------------------------------------------
@@ -736,3 +796,4 @@ function gainaccurecy(){
 gainaccurecy();
 
 
+showTab('tab3','li3');
