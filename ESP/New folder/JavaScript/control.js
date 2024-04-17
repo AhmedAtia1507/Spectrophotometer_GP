@@ -4,9 +4,13 @@ section 2 : handles the webpage ui (ongoing)
 section 3 : handles user messages (ongoing)
 */
 
+/**
+ * intialize the websocket connection section
+ */
+
 var gateway = `ws://${window.location.hostname}/ws`;
 var websocket;
-document.getElementById("li1").classList.add("active");
+
 // Init web socket when the page loads
 window.addEventListener("load", onLoad);
 
@@ -17,10 +21,8 @@ function onLoad(event) {
 function initWebSocket() {
   console.log("Trying to open a WebSocket connection...");
   websocket = new WebSocket(gateway);
-
   websocket.onopen = onOpen;
   websocket.onclose = onClose;
-
   // Set onmessage handler after the WebSocket is opened
   websocket.onmessage = function (event) {
     handleMessage(event);
@@ -29,56 +31,72 @@ function initWebSocket() {
 
 function onOpen(event) {
   console.log("Connection opened");
-  
-  // asks the server if the user have logged in or not
-  //redirectToLoginPage();
-  //senduvStatus();
-  //sendviStatus();
+  sendCurrentLoginFlag();                               // asks the server if the user have logged in or not
+  senduvStatus();                                      // send us lamp stutus to diplay it on open 
+  sendviStatus();                                      // send visible lamp stutus to diplay it on open  
 
 }
 
 function onClose(event) {
-
   console.log("Connection closed");
-  setTimeout(initWebSocket, 2000);
+  setTimeout(initWebSocket, 2000);                    //try to connect every 2 sec
 }
-//function to wait for the motor to move
+
+/**
+ * handles the webpage ui section
+ */
+
+
+//Toggles the visibility of the overlay element
 function togglePageState(enable) {
   var overlay = document.getElementById('overlay');
   overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
 }
+
+// should be toggled for the first time to work properly
 togglePageState("first");
 
-document.querySelector("nav").addEventListener("mouseover", delayedShowNav);
-document.getElementById("li0").addEventListener("mouseover", delayedShowNav2);
-document.getElementById("li0").addEventListener("mouseout", delayedhideNav);
-document.querySelector("nav").addEventListener("mouseout", delayedhideNav);
-let hoverTimeout;
-let outTimeout;
-function delayedShowNav() {
-  // Set a new timeout
-  if (document.querySelector("nav").style.opacity == 1) {
-    clearTimeout(outTimeout);
-    hoverTimeout = setTimeout(function () {
-      showNav();
-    }, 300);
-  } // 300 milliseconds delay
+// // toggle the visibility of the side menu on mouse hover or click and add some delay to make it robust
+// document.querySelector("nav").addEventListener("mouseover", delayedShowNav);
+// document.getElementById("li0").addEventListener("mouseover", delayedShowNav2);
+// document.getElementById("li0").addEventListener("mouseout", delayedhideNav);
+// document.querySelector("nav").addEventListener("mouseout", delayedhideNav);
+
+// //constats to determine the hover time
+// let hoverTimeout;
+// let outTimeout;
+
+// function delayedShowNav() {
+//   // Set a new timeout
+//   if (document.querySelector("nav").style.opacity == 1) {
+//     clearTimeout(outTimeout);
+//     hoverTimeout = setTimeout(function () {
+//       showNav();
+//     }, 300);
+//   } // 300 milliseconds delay
+// }
+// function delayedShowNav2() {
+//   // Set a new timeout
+//   clearTimeout(outTimeout);
+//   hoverTimeout = setTimeout(function () {
+//     showNav();
+//   }, 300); // 300 milliseconds delay
+// }
+// function delayedhideNav() {
+//   clearTimeout(hoverTimeout);
+//   outTimeout = setTimeout(() => {
+//     hideNav(); // Execute hideNav() after 200ms when mouse leaves
+//   }, 300);
+// }
+
+//function to check the login flag from the esp32
+function sendCurrentLoginFlag() {
+  var login = {
+    flag: "islogin?",
+  };
+  websocket.send(JSON.stringify(login));
 }
-function delayedShowNav2() {
-  // Set a new timeout
-  clearTimeout(outTimeout);
-  hoverTimeout = setTimeout(function () {
-    showNav();
-  }, 300); // 300 milliseconds delay
-}
-function delayedhideNav() {
-  clearTimeout(hoverTimeout);
-  outTimeout = setTimeout(() => {
-    hideNav(); // Execute hideNav() after 200ms when mouse leaves
-  }, 300);
-}
-//function to ask the server to send the lamps stutus
-//future stustus like supplies stutus can be placed her
+//function to ask the server to send the lamp stutus
 function sendviStatus() {
   var vilampstutus = {
     vilampstutus: "send",
@@ -86,12 +104,14 @@ function sendviStatus() {
   websocket.send(JSON.stringify(vilampstutus));
 }
 
+//function to ask the server to send the lamps stutus
 function senduvStatus(){
   var uvlampstutus = {
     uvlampstutus: "send",
   };
   websocket.send(JSON.stringify(uvlampstutus));
 }
+//send the supply voltages
 function sendsupplystutus(){
   var supplystutus = {
     supplystutus: "send",
@@ -99,12 +119,15 @@ function sendsupplystutus(){
   websocket.send(JSON.stringify(supplystutus));
   
 }
+//send the current moters steps and wavelength
 function sendmoterssteps(){
   var motors = {
     motors: "send",
   };
   websocket.send(JSON.stringify(motors));
 }
+
+//send the current position of the lamp moter 
 function sendLampmoter(){
   var motors = {
     lampmotor: "send",
@@ -112,12 +135,19 @@ function sendLampmoter(){
   websocket.send(JSON.stringify(motors));
   
 }
+function login() {
+  window.location.href = "login.html";
+}
+
+//open a session for 20 minutes after this period user need to login again
+setInterval(login, 1200000);
 
 
+//at the begaining li1 is the lamp page which should be active
+document.getElementById("li1").classList.add("active");
 
 
-
-//ui function
+// function to show the tab content
 function showTab(tabId, li_id) {
 
   // Hide all tabs
@@ -133,8 +163,6 @@ function showTab(tabId, li_id) {
   // Show the selected tab
   document.getElementById(tabId).classList.add("active");
   document.getElementById(li_id).classList.add("active");
-
-
   switch (tabId) {
     case "tab1":
       break;
@@ -154,320 +182,224 @@ function showTab(tabId, li_id) {
     case "tab6":
       break;
   }
-
-  
 }
 
-document.getElementById("uvin").addEventListener("change", toggleuv);
-document.getElementById("viin").addEventListener("change", togglevi);
-//ui function
-function toggleuv() {
-  if (document.getElementById("uvstate").innerHTML === "on") {
-    var turnuvoff = {
-      turnuvoff: "turnoff",
-    };
-    // Assuming 'websocket' is your WebSocket object
-    websocket.send(JSON.stringify(turnuvoff));
-  } else {
-    var turnuvon = {
-      turnuvon: "turnon",
-    };
-    // Assuming 'websocket' is your WebSocket object
-    websocket.send(JSON.stringify(turnuvon));
-  }
+
+// Add event listener for changes in UV or VI devices
+document.getElementById("uvin").addEventListener("change", toggleLamp);
+document.getElementById("viin").addEventListener("change", toggleLamp);
+// Function to toggle UV or VI device
+function toggleLamp() {
+  // Determine which device triggered the event
+  const deviceId = this.id === "uvin" ? "uv" : "vi";
+  // Get the state element and current state of the device
+  const stateElement = document.getElementById(`${deviceId}state`);
+  const currentState = stateElement.innerHTML;
+  // Define the command to be sent based on the current state
+  const command = currentState === "on" ? { [`turn${deviceId}off`]: "turnoff" } : { [`turn${deviceId}on`]: "turnon" };
+  // Send command via WebSocket
+  console.log(command);
+  websocket.send(JSON.stringify(command));
 }
 
-//ui function
-function togglevi() {
-  
-  if (document.getElementById("vistate").innerHTML === "on") {
-    var turnvioff = {
-      turnvioff: "turnoff",
-    };
-    // Assuming 'websocket' is your WebSocket object
-    websocket.send(JSON.stringify(turnvioff));
-  } else {
-    var turnvion = {
-      turnvion: "turnon",
-    };
-    // Assuming 'websocket' is your WebSocket object
-    websocket.send(JSON.stringify(turnvion));
-  }
-}
+//it is a global variable that contains the current state of the nav sidbar 
+var NavCurrentstate = "none";
 
-var curruntstate = "none";
-
-//ui function
-hidelabel(); //intially shrink the sidebar
+hideLabels(); //intially shrink the sidebar
 let menu = document.getElementById("li0");
-menu.addEventListener("click", togglemenu);
+menu.addEventListener("click", toggleMenu);
 
-function showNav() {
+// UI function to toggle menu visibility and labels
+function toggleMenu() {
   const navElement = document.querySelector("nav");
+  const containerElement = document.querySelector(".container");
 
-  navElement.style.width = "30%";
-  navElement.style.opacity = "1";
-  menu.style.backgroundColor = "#33324e";
-  menu.style.textAlign = "center";
-  menu.style.width = "calc(30% - 20px)";
-  showlabel();
-}
-//ui function
-function hideNav() {
-  clearTimeout(hoverTimeout);
-  const navElement = document.querySelector("nav");
-  if (curruntstate === "none") {
-    navElement.style.width = "0%";
-    navElement.style.opacity = "0";
-    menu.style.backgroundColor = "#ccc9c9";
-    menu.style.textAlign = "left";
-    menu.style.width = "fit-content";
-    hidelabel();
+  // Determine the desired width and opacity of the navigation menu
+  const desiredWidth = NavCurrentstate === "block" ? "0%" : "30%";
+  const desiredOpacity = NavCurrentstate === "block" ? "0" : "1";
+
+  // Set the width and opacity of the navigation menu
+  navElement.style.width = desiredWidth;
+  navElement.style.opacity = desiredOpacity;
+
+  // Set the background color, text alignment, and width of the menu button
+  menu.style.backgroundColor = NavCurrentstate === "block" ? "#ccc9c9" : "#33324e";
+  menu.style.textAlign = NavCurrentstate === "block" ? "left" : "center";
+  menu.style.width = NavCurrentstate === "block" ? "fit-content" : "calc(30% - 20px)";
+
+  // Toggle the visibility of labels in the container
+  containerElement.style.opacity = NavCurrentstate === "block" ? "0" : "1";
+  NavCurrentstate = NavCurrentstate === "block" ? "none" : "block";
+
+  // Update the labels based on the current state
+  if (NavCurrentstate === "block") {
+    showLabels();
   } else {
-    navElement.style.width = "30%";
-    navElement.style.opacity = "1";
-    menu.style.backgroundColor = "#33324e";
-    menu.style.textAlign = "center";
-    menu.style.width = "calc(30% - 20px)";
-    showlabel();
+    hideLabels();
   }
 }
-//ui function
-function togglemenu() {
-  const navElement = document.querySelector("nav");
-  if (curruntstate === "block") {
-    navElement.style.width = "0%";
-    menu.style.backgroundColor = "#ccc9c9";
-    menu.style.textAlign = "left";
-    menu.style.width = "fit-content";
-    navElement.style.opacity = "0";
-    hidelabel();
-  } else {
-    navElement.style.width = "30%";
-    navElement.style.opacity = "1";
-    showlabel();
-    menu.style.backgroundColor = "#33324e";
-    menu.style.textAlign = "center";
-    menu.style.width = "calc(30% - 20px)";
-    curruntstate = "block";
-  }
-}
-//ui function
-function hidelabel() {
-  document.querySelector(".container").style.opacity = "0";
-  curruntstate = "none";
+
+// Function to hide labels in the container
+function hideLabels() {
   for (let i = 1; i <= 6; i++) {
     document.getElementById("li" + i).innerHTML = "";
   }
 }
 
-//ui function
-function showlabel() {
-  for (let J = 1; J <= 6; J++) {
-    switch (J) {
-      case 1:
-        document.getElementById("li" + J).innerHTML = "Lamps test";
-        break;
-      case 2:
-        document.getElementById("li" + J).innerHTML = "Supplies";
-        break;
-      case 3:
-        document.getElementById("li" + J).innerHTML = "Motors";
-        break;
-      case 4:
-        document.getElementById("li" + J).innerHTML = "Detector";
-        break;
-      case 5:
-        document.getElementById("li" + J).innerHTML = "Date and Time";
-        break;
-      case 6:
-        document.getElementById("li" + J).innerHTML = "Direct command";
-        break;
-    }
+// Function to show labels in the container
+function showLabels() {
+  const labels = ["Lamps test", "Supplies", "Motors", "Detector", "Date and Time", "Direct command"];
+  for (let j = 1; j <= 6; j++) {
+    document.getElementById("li" + j).innerHTML = labels[j - 1];
   }
-  document.querySelector(".container").style.opacity = "1";
 }
 
-function redirectToLoginPage() {
-  var login = {
-    flag: "islogin?",
-  };
-  websocket.send(JSON.stringify(login));
-}
 
-// Set interval to run every 5 seconds (5000 milliseconds)
-//setInterval(sendStatus, 5000);
-function login() {
-  window.location.href = "login.html";
-}
 
-//open a session for 20 minutes after this period user need to login again
-setInterval(redirectToLoginPage, 1200000);
+
+
+/**
+ * handles the webpage ui section
+ */
 
 function handleMessage(event) {
   var myObj = JSON.parse(event.data);
   console.log(myObj);
+
   if (myObj.hasOwnProperty("flag")) {
     console.log("flag is sent");
-    if (myObj.flag === true) {
+    if (myObj.flag) {
       console.log("flag is true");
     } else {
       console.log("flag is false");
       login();
     }
-  } else if (myObj.hasOwnProperty("uvstutus")) {
-    if (myObj.uvstutus === "on") {
-      console.log("lamp is working fine");
-      document.getElementById("uvstate").innerHTML = "on";
-      document.getElementById("uvstate").style.color = "white";
-      document.getElementById("uvstate").style.background = "green";
-
-      document.getElementById("uvstate2").innerHTML = "on";
-      document.getElementById("uvstate2").style.color = "white";
-      document.getElementById("uvstate2").style.background = "green";
-      
-      var check = document.getElementById("uvcheck");
-      var thumb = document.getElementById("uvthumb");
-      check.style.background = "green";
-      thumb.style.transform = "translateX(20px)";
-    } else if (myObj.uvstutus == "off") {
-      console.log("uv lamp is off");
-      document.getElementById("uvstate").innerHTML = "off";
-      document.getElementById("uvstate").style.color = "white";
-      document.getElementById("uvstate").style.background = "red";
-
-      document.getElementById("uvstate2").innerHTML = "off";
-      document.getElementById("uvstate2").style.color = "white";
-      document.getElementById("uvstate2").style.background = "red";
-
-      var check = document.getElementById("uvcheck");
-      var thumb = document.getElementById("uvthumb");
-      check.style.background = "red";
-      thumb.style.transform = "translateX(0px)";
-    } else {
-      document.getElementById("uvstate2").innerHTML =
-        "error ocurred reload page";
-    }
-  } else if (myObj.hasOwnProperty("vistutus")) {
-    if (myObj.vistutus === "on") {
-      console.log("lamp is working fine");
-      document.getElementById("vistate").innerHTML = "on";
-      document.getElementById("vistate").style.color = "white";
-      document.getElementById("vistate").style.background = "green";
-     
-      document.getElementById("vistate2").innerHTML = "on";
-      document.getElementById("vistate2").style.color = "white";
-      document.getElementById("vistate2").style.background = "green";
-     
-      var check = document.getElementById("vicheck");
-      var thumb = document.getElementById("vithumb");
-      check.style.background = "green";
-      thumb.style.transform = "translateX(20px)";
-    } else if (myObj.vistutus == "off") {
-      console.log("vi lamp is off");
-      document.getElementById("vistate").innerHTML = "off";
-      document.getElementById("vistate").style.color = "white";
-      document.getElementById("vistate").style.background = "red";
-      
-      document.getElementById("vistate2").innerHTML = "off";
-      document.getElementById("vistate2").style.color = "white";
-      document.getElementById("vistate2").style.background = "red";
-      
-      var check = document.getElementById("vicheck");
-      var thumb = document.getElementById("vithumb");
-      check.style.background = "red";
-      thumb.style.transform = "translateX(0)";
-    } else {
-      document.getElementById("vistate2").innerHTML =
-        "error occured reload page";
-    }
+  } else if (myObj.hasOwnProperty("uvstutus") || myObj.hasOwnProperty("vistutus")) {
+    handleLampStatus(myObj);
   } else if (myObj.hasOwnProperty("supplystutus")) {
-    console.log("supplies recieved");
-    document.getElementById("p12").textContent = myObj.p12;
-    document.getElementById("n12").textContent = myObj.n12;
-    document.getElementById("p5").textContent = myObj.p5;
-    document.getElementById("p33").textContent = myObj.p33;
-    document.getElementById("twelve").textContent = myObj.twelve;
-    document.getElementById("suppliesvalues").textContent=myObj.supplystutus;
-  }
-  else if (myObj.hasOwnProperty("currenttime")) {
+    handleSupplyStatus(myObj);
+  } else if (myObj.hasOwnProperty("currenttime")) {
     updateDateTime(myObj.currenttime);
-    
-  }
-  else if (myObj.hasOwnProperty("timeupdated")) {
-    var display = document.getElementById("timeupdated")
-    display.style.color = "green"
-    display.innerHTML = myObj.timeupdated;
-    setTimeout(function () {
-      document.getElementById("timeupdated").innerHTML = "";
-    }, 4000);
-  }
-  else if(myObj.hasOwnProperty("currenlamp")){
-    
-    var currenlamp=document.getElementById("currentlamp");
-    currenlamp.innerHTML=myObj.currenlamp;
-  }
-  else if (myObj.hasOwnProperty("motorssteps")) {
-    const ary = myObj.motorssteps.split('-');
-    document.getElementById("lampstep").textContent = ary[0];
-    document.getElementById("gratingstep").textContent = ary[1];
-    document.getElementById("filterstep").textContent = ary[2];
-    document.getElementById("filterwave").textContent = ary[3];
-    document.getElementById("gratingmotorwl").value=parseFloat(ary[3]);
-    document.getElementById("motorssteps").textContent=myObj.motorssteps;
-    syncstep();
-  }
-  else if (myObj.hasOwnProperty("gohome")) {
+  } else if (myObj.hasOwnProperty("timeupdated")) {
+    handleTimeUpdated(myObj.timeupdated);
+  } else if (myObj.hasOwnProperty("currenlamp")) {
+    document.getElementById("currentlamp").innerHTML = myObj.currenlamp;
+  } else if (myObj.hasOwnProperty("motorssteps")) {
+    handleMotorsSteps(myObj);
+  } else if (myObj.hasOwnProperty("gohome")) {
+    handleGoHome(myObj);
+  } else if (myObj.hasOwnProperty("stepsaved")) {
+    handleStepSaved(myObj.stepsaved);
+  } else if (myObj.hasOwnProperty("motermoved")) {
     togglePageState("disable");
-    if (myObj.type == 'lampmotorhome') {
-      document.getElementById("lampstep").textContent = myObj.step;
-      document.getElementById("filterwave").textContent = myObj.wavelength;
-    }
-    else if (myObj.type == 'gratingmotorhome') {
-      document.getElementById("gratingstep").textContent = myObj.step;
-      document.getElementById("filterwave").textContent = myObj.wavelength;
-    }
-    else if (myObj.type == 'filtermotorhome') {
-      document.getElementById("filterstep").textContent = myObj.step;
-      document.getElementById("filterwave").textContent = myObj.wavelength;
-    }
-    syncstep();
+  } else if (myObj.hasOwnProperty("detreadings")) {
+    handleDetReadings(myObj.detreadings);
   }
-  else if (myObj.hasOwnProperty("stepsaved")) {
-    console.log(myObj.stepsaved);
-    var display = document.getElementById("stepsaved");
-    display.style.color = "green";
-    display.textContent = myObj.stepsaved;
-    setTimeout(function () {
-      document.getElementById("stepsaved").innerHTML = "";
-    }, 4000);
+}
+
+function handleLampStatus(myObj) {
+  var lampType = myObj.hasOwnProperty("uvstutus") ? "uv" : "vi";
+  var stateElement = document.getElementById(lampType + "state");
+  var stateElement2 = document.getElementById(lampType + "state2");
+
+  if (myObj[lampType + "stutus"] === "on") {
+    console.log("lamp is working fine");
+    stateElement.innerHTML = "on";
+    stateElement.style.color = "white";
+    stateElement.style.background = "green";
+
+    stateElement2.innerHTML = "on";
+    stateElement2.style.color = "white";
+    stateElement2.style.background = "green";
     
-    var display2 = document.getElementById("stepsaved2");
-    display2.style.color = "green";
-    display2.textContent = myObj.stepsaved;
-    setTimeout(function () {
-      document.getElementById("stepsaved2").innerHTML = "";
-    }, 4000);
-    
+    var check = document.getElementById(lampType + "check");
+    var thumb = document.getElementById(lampType + "thumb");
+    check.style.background = "green";
+    thumb.style.transform = "translateX(20px)";
+  } else if (myObj[lampType + "stutus"] === "off") {
+    console.log(lampType + " lamp is off");
+    stateElement.innerHTML = "off";
+    stateElement.style.color = "white";
+    stateElement.style.background = "red";
 
+    stateElement2.innerHTML = "off";
+    stateElement2.style.color = "white";
+    stateElement2.style.background = "red";
 
-
+    var check = document.getElementById(lampType + "check");
+    var thumb = document.getElementById(lampType + "thumb");
+    check.style.background = "red";
+    thumb.style.transform = "translateX(0px)";
+  } else {
+    stateElement2.innerHTML = "error occurred, reload page";
   }
-  else if (myObj.hasOwnProperty("motermoved")) {
-    togglePageState("disable");
+}
 
-  }
-  else if (myObj.hasOwnProperty("detreadings")){
-    console.log(myObj.detreadings)
-    const ary = myObj.detreadings.split('-');
-    document.getElementById("smallref").textContent = ary[0];
-    document.getElementById("largeref").textContent = ary[1];
-    document.getElementById("smallmes").textContent = ary[2];
-    document.getElementById("largemes").textContent = ary[3];
-    document.getElementById("potgain").textContent = ary[4];
-    document.getElementById('CMDdetect').textContent=myObj.detreadings;
-    gainaccurecy();
-  }
+function handleSupplyStatus(myObj) {
+  console.log("supplies received");
+  document.getElementById("p12").textContent = myObj.p12;
+  document.getElementById("n12").textContent = myObj.n12;
+  document.getElementById("p5").textContent = myObj.p5;
+  document.getElementById("p33").textContent = myObj.p33;
+  document.getElementById("twelve").textContent = myObj.twelve;
+  document.getElementById("suppliesvalues").textContent = myObj.supplystutus;
+}
+
+function handleTimeUpdated(message) {
+  var display = document.getElementById("timeupdated");
+  display.style.color = "green";
+  display.innerHTML = message;
+  setTimeout(function () {
+    display.innerHTML = "";
+  }, 4000);
+}
+
+function handleMotorsSteps(myObj) {
+  const ary = myObj.motorssteps.split('-');
+  document.getElementById("lampstep").textContent = ary[0];
+  document.getElementById("gratingstep").textContent = ary[1];
+  document.getElementById("filterstep").textContent = ary[2];
+  document.getElementById("filterwave").textContent = ary[3];
+  document.getElementById("gratingmotorwl").value = parseFloat(ary[3]);
+  document.getElementById("motorssteps").textContent = myObj.motorssteps;
+  syncstep();
+}
+
+function handleGoHome(myObj) {
+  togglePageState("disable");
+  const type = myObj.type.replace("motorhome", "step");
+  document.getElementById(type).textContent = myObj.step;
+  document.getElementById("filterwave").textContent = myObj.wavelength;
+  syncstep();
+}
+
+function handleStepSaved(message) {
+  console.log(message);
+  var display = document.getElementById("stepsaved");
+  display.style.color = "green";
+  display.textContent = message;
+  setTimeout(function () {
+    display.innerHTML = "";
+  }, 4000);
+
+  var display2 = document.getElementById("stepsaved2");
+  display2.style.color = "green";
+  display2.textContent = message;
+  setTimeout(function () {
+    display2.innerHTML = "";
+  }, 4000);
+}
+
+function handleDetReadings(detReadings) {
+  console.log(detReadings);
+  const ary = detReadings.split('-');
+  document.getElementById("smallref").textContent = ary[0];
+  document.getElementById("largeref").textContent = ary[1];
+  document.getElementById("smallmes").textContent = ary[2];
+  document.getElementById("largemes").textContent = ary[3];
+  document.getElementById("potgain").textContent = ary[4];
+  document.getElementById('CMDdetect').textContent = detReadings;
+  gainaccurecy();
 }
 
 /**------------------------------------------------------------------------
@@ -587,7 +519,7 @@ function validat(target,min, max) {
   
 }
 //function to toggle Lamp motor position
-function toggleLamp(){
+function toggleLampMoter(){
   togglePageState("enable");
   var currentfunction =document.getElementById("currentlamp");
   if(currentfunction.innerHTML=="UV Lamp")
@@ -749,7 +681,6 @@ function updategain(target){
 }
 
 
-
 //read current detector values
 function senddetector(){
   var detector={
@@ -757,9 +688,6 @@ function senddetector(){
   }
   websocket.send(JSON.stringify(detector));
 }
-
-
-
 
 
 
@@ -788,12 +716,11 @@ function gainaccurecy(){
   document.getElementById('calcgainref').innerText=calcgain2;
   document.getElementById('calcgainmes').innerText=calcgain1;
   document.getElementById('gainerrorref').innerText=referror;
-  document.getElementById('gainerrormes').innerText=meserror  ;
+  document.getElementById('gainerrormes').innerText=meserror;
   
-
-
 }
+
 gainaccurecy();
 
 
-showTab('tab3','li3');
+
