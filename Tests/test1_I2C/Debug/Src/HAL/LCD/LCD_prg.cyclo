@@ -1,0 +1,5 @@
+../Src/HAL/LCD/LCD_prg.c:14:6:HLCD_vInit	1
+../Src/HAL/LCD/LCD_prg.c:43:6:HLCD_vSendCmd	1
+../Src/HAL/LCD/LCD_prg.c:72:6:HLCD_vWriteChar	1
+../Src/HAL/LCD/LCD_prg.c:100:6:HLCD_vWriteString	2
+../Src/HAL/LCD/LCD_prg.c:110:6:HLCD_vCursor_Position	5
