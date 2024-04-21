@@ -1,0 +1,8 @@
+"./Src/HAL/MCP4151.o"
+"./Src/MCAL/GPIO/GPIO_Program.o"
+"./Src/MCAL/RCC/RCC_Program.o"
+"./Src/MCAL/SPI/SPI_Program.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f103c8tx.o"
