@@ -362,7 +362,8 @@ legend{
 
 }
 .ftable table{
-  width: 70%;
+  width: 90%;
+  margin: 0px 5%;
   margin-bottom: 80px;
 }
 
@@ -393,6 +394,9 @@ legend{
   max-height: 200px;
   overflow-y: auto;
 }
+canvas {
+  width: 80%;
+}
 @media screen and (max-width: 962px) {
   .container {
     flex-direction: column;
@@ -408,6 +412,14 @@ legend{
   }
 
 
+
+}
+@media screen and (max-width: 650px) {
+canvas {
+  width: 100%;
+  height: 200px;
+}
+  
 }
 
 /* preset css */
@@ -542,11 +554,15 @@ legend{
 }
 .ftable{
   width: 80%;
+  overflow-x: auto;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
 
+}
+table{
+  table-layout: fixed;
 }
 @media(max-width: 552px) {
   .row{
@@ -560,11 +576,9 @@ legend{
   .fchart{
     width: 100%;
   }
-  .fchart canvas{
-    width: 100%;
-  }
   
 }
+
 /*---------------------------- END OF SCAN ----------------------------*/
 
 /**------------------------------------------------------------------------
@@ -692,17 +706,20 @@ ul li label {
  *                           TABLE CONTENT
  *------------------------------------------------------------------------**/
 
-table,th,td {
+th,td {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 5px;
-  width: 176px;
   text-align: center;
 }
 
 table{
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: center;
 }
 .tab-1 {
   display: flex;
@@ -758,3 +775,4 @@ th {
   }
   
  }
+

@@ -42,24 +42,7 @@ String sendCMD(const String &input)
     return response;
 }
 
-String outputSBar[3] = {"UV", "VI", "WL"};
-String getOutputStates()
-{
-    Serial.print("WS received");
-    DynamicJsonDocument doc(1024);
-    JsonArray sbar = doc.createNestedArray("sbar");
-    for (int i = 0; i < 3; i++)
-    {
-        JsonObject element = sbar.createNestedObject();
-        element["output"] = outputSBar[i];
-        element["state"] = sendCMD(outputSBar[i]);
-    }
-    // Serialize the JSON document to a string
-    String jsonString;
-    serializeJson(doc, jsonString);
 
-    return jsonString;
-}
 
 void sendLoginSuccessNotification()
 {
@@ -388,6 +371,40 @@ void handleScan(const DynamicJsonDocument &doc) {
       0);                   // Core (0 or 1, depending on your setup)
 }
 
+/**========================================================================
+ *                           STATE BAR
+ *========================================================================**/
+void handleSB() {
+String tempArr[] = {"get-UV", "get-VI", "get-WL"};
+String resArr[] = {"UV", "VI", "WL"};
+DynamicJsonDocument SBDATA(256);
+for (size_t i = 0; i < 2; i++)
+{
+  Serial2.println(tempArr[i]);
+  int startTime = millis();
+        while (Serial2.available() == 0 && millis() - startTime < 2000) {
+          delay(1);
+        }
+        String response = Serial2.readStringUntil('\n');
+        SBDATA[resArr[i]] = response;
+}
+
+        String jsonString;
+        serializeJson(SBDATA, jsonString);
+        notifyClients(jsonString);
+        Serial.println("State Bar data sent");
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
  
@@ -526,6 +543,11 @@ void handleScan(const DynamicJsonDocument &doc) {
       handleScan(doc);
 
     }
+    else if (doc["command"]=="StateBar")
+    {
+      handleSB(doc);
+    }
+    
 
       else
       {

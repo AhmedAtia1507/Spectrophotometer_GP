@@ -79,10 +79,14 @@
             </fieldset>
           </div>
 
-          <div class="row">
-            <fieldset class="fchart">
+          <div class="row" style="height: 80vh; width: 100%;">
+            <fieldset class="fchart" style="height: 100%; width: 100%;">
               <legend>Chart</legend>
-              <canvas id="chartScan"></canvas>
+          
+                <canvas id="chartScan" style="height: 100%; width: 100%;"></canvas>
+ 
+              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
+              <!-- <button id="resetBtn">Reset Zoom</button> -->
             </fieldset>
             
           </div>
@@ -93,17 +97,52 @@
 
                 <fieldset class="ftable">
                   <legend>Scan Table</legend>
+                  <div class="commandTable" style="margin-bottom: 50px; width: 70%;margin: 0 15%;">
+                    <table>
+                      <tr>
+                        <th>Funcation</th>
+                        <th>Command</th>
+                        <th>Example</th>
+                      </tr>
+                      <tr>
+                        <td>Add Rows</td>
+                        <td>t + Num of rows</td>
+                        <td> T5 contrauct 5 rows</td>
+                      </tr>
+                      <tr>
+                        <td> get Area for specific</td>
+                        <td>A + index of row</td>
+                        <td> A3 get Area for sample 3</td>
+                      </tr>
+                      <tr>
+                        <td> get Area for all samples</td>
+                        <td>AA0</td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>get Peak for sample</td>
+                        <td>P + index of row</td>
+                        <td>  P3 get Peak for sample 3</td>
+                      </tr>
+                      <tr>
+                        <td>get specific Area for sample</td>
+                        <td>AS + index of row</td>
+                        <td>  AS3</td>
+                      </tr>
+                    </table>
+                  
+                  </div>
                   <div class="TwoBtn">
                     <button class = "SampleNumBTN" id="deleteBTN"> Delete All</button>
                   </div>
                   <table id="myTable">
                     <tr>
-                      <th>#</th>
-                      <th>State</th>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th>Action</th>
-                      <th><input type='text' class='cmd' id='cmd' placeholder='Command'></th>
+                      <th style="width: 5%;">#</th>
+                      <th style="width: 17.5%;">State</th>
+                      <th style="width: 26%;">Name</th>
+                      <th style="width: 52%;">Description</th>
+                      <th style="width: 17.5%;">Action</th>
+                      <th style="width: 28%;"><input type='text' class='cmd'  id='cmd' placeholder='Command' style="width: 80%;"></th>
                     </tr>
                   </table>
                   
@@ -224,6 +263,7 @@
   </main>
   <script src="JavaScript/chart.js"></script>
   <script src="JavaScript/zoom.js"></script>
+  <script src="JavaScript/crosshair.js"></script>
   <script src="JavaScript/main.js"></script>
   <script>
     
