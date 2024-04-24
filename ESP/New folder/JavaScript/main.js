@@ -25,9 +25,7 @@ function onLoad(event) {
 
 
 
-document.getElementById('sBarBtn').addEventListener('click', function () {
-  websocket.send("barStates");
-});
+
 function initWebSocket() {
   console.log('Trying to open a WebSocket connection...');
   websocket = new WebSocket(gateway);
@@ -49,27 +47,8 @@ function onClose(event) {
   setTimeout(initWebSocket, 20000);
 }
 function onMessage(event) {
-  var myObj = JSON.parse(event.data);
-  // Check if the received data contains intensity information
-  if (myObj.hasOwnProperty('intensityData')) {
-    // Assuming intensityData is an array of objects { wavelength, intensity }
-    var intensityData = myObj.intensityData;
 
-    // Update the chart with the received intensity data
-    updateChart(intensityData);
-  }
-  var keys = Object.keys(myObj);
-  for (i in myObj.sbar) {
-    var output = myObj.sbar[i].output; // UV , VI , WL
-    var state = myObj.sbar[i].state; // on (1) , off (0)
-    if (state != "0") {
-      document.getElementById(output + "stateBar").textContent = state;
-    }
-    else {
-      document.getElementById(output + "stateBar").textContent = "OFF";
-    }
 
-  }
   console.log(event.data); // for debugging 
 }
 
@@ -92,8 +71,31 @@ function openTab(evt, Control) {
 
 /*============================ END OF Tabs ============================*/
 
+/**========================================================================
+ *                           STATE BAR
+ *========================================================================**/
+document.getElementById('sBarBtn').addEventListener('click', function () {
+
+  const message = {
+    command: 'StateBar',
+  }
+    ;
+  websocket.send(JSON.stringify(message));
 
 
+
+  // Set up the WebSocket onmessage event
+  websocket.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const UV = data.UV;
+    const VI = data.VI;
+    const WL = data.WL;
+    document.getElementById('UVstateBar').textContent = UV;
+    document.getElementById('VIstateBar').textContent = VI;
+    document.getElementById('WLstateBar').textContent = WL;
+  }
+});
 
 /**------------------------------------------------------------------------
  *                           FLC
@@ -278,15 +280,15 @@ chartScan = new Chart(ctxScan, {
       ,
       zoom: {
         pan: {
-          enabled: true,
+          enabled: false,
           mode: 'xy'
         },   
         zoom: {
           wheel: {
-            enabled: true,
+            enabled: false,
           },
           pinch: {
-            enabled: true
+            enabled: false
           },
           mode: 'xy'
         }
@@ -309,9 +311,9 @@ chartScan = new Chart(ctxScan, {
 
 
 // Reset button functionality
-document.getElementById('resetBtn').addEventListener('click', function() {
-  chartScan.resetZoom();
-});
+// document.getElementById('resetBtn').addEventListener('click', function() {
+//   chartScan.resetZoom();
+// });
 
 
 
@@ -454,10 +456,8 @@ function scan(index,SampleID,SampleDecribe) {
     const absorption = Math.log10(intensityReference/ intensitySample);
     let scanning=data.scanning; //check if the scan end or not
     const progress=data.current; //represent the progress to display the current progress
-    changeState(index, "scanning..",progress); 
-    if(progress==100){
-    changeState(index, "Completed",progress); 
-    }
+    changeState(index, "...",progress); 
+
 
     // Update the chart data
     x.push(wavelength);
@@ -974,30 +974,22 @@ function changeState(rowIndex, newState, progress) {
   var table = document.getElementById("myTable");
   var cell = table.rows[rowIndex].cells[1]; // Index 1 corresponds to the State cell
 
-  // Check if the progress bar already exists in the cell
-  var progressBar = cell.querySelector("progress");
   var stateSpan = cell.querySelector("p");
-  // If the progress bar doesn't exist, create it
-  if (!progressBar) {
-      // Create a span element for the state
-      var stateSpan = document.createElement("p");
+  
+  // If the state span doesn't exist, create it
+  if (!stateSpan) {
+      stateSpan = document.createElement("p");
       cell.appendChild(stateSpan);
-      // Create a progress element for the progress bar
-      progressBar = document.createElement("progress");
-      progressBar.max = 100; // Assuming progress ranges from 0 to 100
-      cell.appendChild(progressBar);
   }
 
   stateSpan.innerHTML = newState;
   stateSpan.style.color = "rgb(0, 35, 151)";
   if (progress == 100) {
+      stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
       stateSpan.style.color = "green";
   }
-  
-  // Update the value of the progress bar
-  progressBar.value = progress;
-
 }
+
 
 
 function trap(xPoints, yPoints) {
@@ -1027,10 +1019,18 @@ let ytest = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253,0.02244,0.0226,0.022
 
 
 
-xtest.reverse();
-ytest.reverse();
-addCurve(xtest, ytest, 'red', 'Name 1',false);
+// xtest.reverse();
+// ytest.reverse();
+// let xValues=[] ;
+// let yValues=[] ;
+// let i = 0;
 
+// setInterval(function () {
+//   xValues[i]=xtest[i];
+//   yValues[i]=ytest[i];
+//   addCurve(xValues, yValues, 'red', 'Name 1',false);
+//   i++;
+// }, 1000);
 // function StoreData2(SampleID, xData, yData) {
 //   if (!(SampleID in data)) {
 //     data[SampleID] = { x: xData, y: yData };
