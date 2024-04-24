@@ -1,0 +1,9 @@
+../Src/HAL/MCP4151.c:11:6:MCP4151_Sample_SetWiperPosition	1
+../Src/HAL/MCP4151.c:24:6:MCP4151_Referance_SetWiperPosition	1
+../Src/HAL/MCP4151.c:44:6:MCP4151_Init	1
+../Src/HAL/MCP4151.c:79:6:Set_Sample_Gain	1
+../Src/HAL/MCP4151.c:98:6:Set_Reference_Gain	1
+../Src/HAL/MCP4151.c:118:7:steps_calculate	2
+../Src/HAL/MCP4151.c:141:9:get_reference_gain	1
+../Src/HAL/MCP4151.c:158:9:get_sample_gain	1
+../Src/HAL/MCP4151.c:168:6:delay_ms	2
