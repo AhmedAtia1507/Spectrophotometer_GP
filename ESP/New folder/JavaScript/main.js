@@ -90,10 +90,10 @@ document.getElementById('sBarBtn').addEventListener('click', function () {
     console.log(event.data); // for test
     const UV = data.UV;
     const VI = data.VI;
-    const WL = data.WL;
+    // const WL = data.WL;
     document.getElementById('UVstateBar').textContent = UV;
     document.getElementById('VIstateBar').textContent = VI;
-    document.getElementById('WLstateBar').textContent = WL;
+    // document.getElementById('WLstateBar').textContent = WL;
   }
 });
 

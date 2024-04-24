@@ -376,6 +376,7 @@ void handleScan(const DynamicJsonDocument &doc) {
  *========================================================================**/
 void handleSB() {
 String tempArr[] = {"get-UV", "get-VI", "get-WL"};
+String resArr[] = {"UV", "VI", "WL"};
 DynamicJsonDocument SBDATA(256);
 for (size_t i = 0; i < 2; i++)
 {
@@ -385,7 +386,7 @@ for (size_t i = 0; i < 2; i++)
           delay(1);
         }
         String response = Serial2.readStringUntil('\n');
-        SBDATA[tempArr[i]] = response;
+        SBDATA[resArr[i]] = response;
 }
 
         String jsonString;
