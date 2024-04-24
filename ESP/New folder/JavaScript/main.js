@@ -1098,14 +1098,14 @@ cmdInput.addEventListener('keyup', function(event) {
     displayCMD(inputValue, 'black', "CMD: ");
     if (inputValue !== '') {
       // Regular expression to match the command with its parameter
-      const match = inputValue.match(/^=(\w+)\((\d+)\)$/);
+      const match = inputValue.match(/(\w)(\d+)/);
 
       if (match) {
-        const cmdName = match[1].toUpperCase(); // Extract the command name
-        const cmdParam = parseInt(match[2]); // Extract the parameter as an integer
-        const rows = table.querySelectorAll('tr'); // Declare rows variable here
+        const cmdName = match[1].toUpperCase(); // Extract the command name, 'T' in this case
+  const cmdParam = parseInt(match[2]); // Extract the parameter as an integer
+  const rows = table.querySelectorAll('tr'); // Declare rows variable here
         switch (cmdName) {
-          case 'TABLE': // Done
+          case 'T': // Done
             if (!isNaN(cmdParam)&& cmdParam>0 && cmdParam<=10) {
               constructtable(cmdParam); // Pass the parameter to the constructTable function
             } else {
@@ -1114,7 +1114,7 @@ cmdInput.addEventListener('keyup', function(event) {
             break;
 
 
-          case 'CAUC':
+          case 'A':
           rows.forEach(function(row,index) {
             const cells = row.querySelectorAll('td');
             if (cells.length >= 5 && index==cmdParam) {
@@ -1129,7 +1129,22 @@ cmdInput.addEventListener('keyup', function(event) {
           // Clear the input field after processing the command
           this.value = '';
             break;
-          case 'CAUCSPEC':
+          case 'AA':
+          rows.forEach(function(row,index) {
+            const cells = row.querySelectorAll('td');
+            if (cells.length >= 5) {
+              const rowIndex = index;
+              var SampleID = table.rows[rowIndex].cells[2].textContent;
+              const result = trap(data[SampleID].x , data[SampleID].y);
+              cells[5].textContent = result;
+              displayCMD(result, 'green', rowIndex);
+            }
+          });
+
+          // Clear the input field after processing the command
+          this.value = '';
+            break;
+          case 'AS':
           rows.forEach(function(row,index) {
             const cells = row.querySelectorAll('td');
             if (cells.length >= 5 && index==cmdParam) {
@@ -1152,7 +1167,7 @@ cmdInput.addEventListener('keyup', function(event) {
           this.value = '';
             break;
 
-          case 'PEAK':
+          case 'P':
             rows.forEach(function(row,index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index==cmdParam) {
