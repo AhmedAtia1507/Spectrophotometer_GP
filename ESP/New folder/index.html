@@ -79,10 +79,14 @@
             </fieldset>
           </div>
 
-          <div class="row">
-            <fieldset class="fchart">
+          <div class="row" style="height: 80vh; width: 100%;">
+            <fieldset class="fchart" style="height: 100%; width: 100%;">
               <legend>Chart</legend>
-              <canvas id="chartScan"></canvas>
+          
+                <canvas id="chartScan" style="height: 100%; width: 100%;"></canvas>
+ 
+              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
+              <button id="resetBtn">Reset Zoom</button>
             </fieldset>
             
           </div>
@@ -224,6 +228,7 @@
   </main>
   <script src="JavaScript/chart.js"></script>
   <script src="JavaScript/zoom.js"></script>
+  <script src="JavaScript/crosshair.js"></script>
   <script src="JavaScript/main.js"></script>
   <script>
     

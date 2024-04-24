@@ -393,6 +393,9 @@ legend{
   max-height: 200px;
   overflow-y: auto;
 }
+canvas {
+  width: 80%;
+}
 @media screen and (max-width: 962px) {
   .container {
     flex-direction: column;
@@ -408,6 +411,14 @@ legend{
   }
 
 
+
+}
+@media screen and (max-width: 650px) {
+canvas {
+  width: 100%;
+  height: 200px;
+}
+  
 }
 
 /* preset css */
@@ -560,11 +571,9 @@ legend{
   .fchart{
     width: 100%;
   }
-  .fchart canvas{
-    width: 100%;
-  }
   
 }
+
 /*---------------------------- END OF SCAN ----------------------------*/
 
 /**------------------------------------------------------------------------
@@ -758,3 +767,4 @@ th {
   }
   
  }
+
