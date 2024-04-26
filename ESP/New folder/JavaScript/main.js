@@ -47,9 +47,12 @@ function onClose(event) {
   setTimeout(initWebSocket, 20000);
 }
 function onMessage(event) {
+  var myObj = JSON.parse(event.data);
+  console.log(myObj);
+  if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
+  handleLogin(myObj);
+  }
 
-
-  console.log(event.data); // for debugging 
 }
 
 
@@ -1534,9 +1537,7 @@ function sendCredentials(user, pass) {
   }
 }
 
-
-function handleMessage(event) {
-  var myObj = JSON.parse(event.data);
+function handleLogin(myObj) {
   console.log(myObj);
 
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {

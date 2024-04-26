@@ -214,9 +214,15 @@ function handleMessage(event) {
 
   } else if (myObj.hasOwnProperty("detreadings")) {
     handleDetReadings(myObj.detreadings);
-  } else if(myObj.hasOwnProperty("DirectResponse"))
-  document.getElementById("CMDresponse").innerHTML=myObj.DirectResponse;
+  } else if(myObj.hasOwnProperty("DirectResponse")){
+    document.getElementById("CMDresponse").innerHTML=myObj.DirectResponse;
 
+  }
+  else if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
+    handleLogin(myObj);
+  }
+  
+  
 }
 
 // Function to toggle UV or VI device
@@ -687,10 +693,8 @@ function sendCredentials(user, pass) {
 }
 
 
-function handleMessage(event) {
-  var myObj = JSON.parse(event.data);
-  console.log(myObj);
-
+function handleLogin(myObj) {
+  
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
       // Check if the username and password are true
       if (myObj.username === true && myObj.password === true) {
@@ -702,7 +706,7 @@ function handleMessage(event) {
           console.log("Wrong username or password.");
           document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
       }
-  } 
+  }
    else {
       // Handle other error conditions, such as 404 (Not Found)
       console.log("Error: " + event.data);

@@ -1,3 +1,50 @@
+
+/**========================================================================
+ *                           WebSocket
+ *========================================================================**/
+var gateway = `ws://${window.location.hostname}/ws`;
+var websocket;
+// Init web socket when the page loads
+window.addEventListener('load', onLoad);
+function onLoad(event) {
+  initWebSocket();
+}
+
+
+
+
+function initWebSocket() {
+  console.log('Trying to open a WebSocket connection...');
+  websocket = new WebSocket(gateway);
+  websocket.onopen = onOpen;
+  websocket.onclose = onClose;
+  websocket.onmessage = onMessage;
+}
+// When websocket is established
+// call  function 
+// use event listener  
+function onOpen(event) {
+  console.log('Connection opened');
+}
+
+function onClose(event) {
+  // in case connection down
+  // try again after 2 sec
+  console.log('Connection closed');
+  setTimeout(initWebSocket, 20000);
+}
+function onMessage(event) {
+  var myObj = JSON.parse(event.data);
+  console.log(myObj);
+  if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
+  handleLogin(myObj);
+  }
+
+}
+
+
+
+
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -95,10 +142,16 @@ function sendCredentials(user, pass) {
       initWebSocket();
   }
 }
+  // Set up the WebSocket onmessage event
+  websocket.onmessage = function (event) {
+    var myObj = JSON.parse(event.data);
+    console.log(myObj);
+    if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
+    handleLogin()
+    }
+  }
 
-
-function handleMessage(event) {
-  var myObj = JSON.parse(event.data);
+function handleLogin(myObj) {
   console.log(myObj);
 
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
@@ -120,6 +173,8 @@ function handleMessage(event) {
       
   }
 }
+
+
 
 
 
