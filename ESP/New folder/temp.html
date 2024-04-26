@@ -16,44 +16,36 @@
     <!---------------------------- Start of Nabber ---------------------------->
     <nav>
         <ul class="sidebar">
-            <li onclick="hideSidebar()">
-                <a href="#"><i class="fas fa-close"></i></a>
-            </li>
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="login.html">Direct Control</a></li>
-            <li><a href="temp.html">Temp control</a></li>
-            <li><a href="#">Page #3</a></li>
-            <li><a href="#">Page #4</a></li>
+          <li onclick="hideSidebar()">
+            <a href="#"><i class="fas fa-close"></i></a>
+          </li>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+          <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+          <li><a href="temp.html">temp</a></li>
+          <li><a href="#">Page #3</a></li>
+          
         </ul>
         <ul>
-            <li class="logo">
-                <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24"
-                        viewBox="0 -960 960 960" width="24">
-                        <path
-                            d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
-                    </svg>
-                    <span>SpectroPhotometer</span></a>
-            </li>
-            <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
-                    <p>Home</p>
-                </a></li>
-            <li class="hideOnMobile"><a href="login.html"><i class="fas fa-gear"></i>
-                    <p>Direct Control</p>
-                </a></li>
-            <li class="hideOnMobile"><a href="temp.html" style="background-color: rgba(220, 236, 215, 0.637);"></i><i
-                        class="fas fa-gear"></i>
-                    <p>Temp Control</p>
-                </a></li>
-            <li class="hideOnMobile"><a href="#"></i>Page #3</a></li>
-            <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i>
-                    <p>Team</p>
-                </a></li>
-            <li class="menu-button" onclick="showSidebar()">
-                <a href="#"><i class="fas fa-bars"></i></a>
-            </li>
+          <li class="logo">
+            <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                width="24">
+                <path
+                  d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+              </svg>
+              <span>SpectroPhotometer</span></a>
+          </li>
+          <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+          <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+          <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+          <li class="hideOnMobile"><a href="#"></i>Page #3</a></li>
+          <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+          <li class="menu-button" onclick="showSidebar()">
+            <a href="#"><i class="fas fa-bars"></i></a>
+          </li>
         </ul>
-    </nav>
-    <!---------------------------- END OF Navbar ---------------------------->
+      </nav>
+      <!---------------------------- END OF Navbar ---------------------------->
     <main>
         <section>
             <div id="testpage" class="tabcontent" style="display: block;">
@@ -70,7 +62,7 @@
                                 <div class="grid-containertwo">
                                     <div class="grid-item">
                                         <label for="vistate">Current State</label>
-                                        <p class="state" id="vistate"></p>
+                                        <div class="state" id="vistate"></div>
                                     </div>
                                     <div class="grid-item">
                                         <i class="toggle-icon fas fa-toggle-off" id="viicon" onclick="toggleLamp('vi')"
@@ -84,7 +76,7 @@
                                 <div class="grid-containertwo">
                                     <div class="grid-item">
                                         <label for="uvstate">Current State</label>
-                                        <p class="state" id="uvstate"></p>
+                                        <div class="state" id="uvstate"></div>
                                     </div>
                                     <div class="grid-item">
 
@@ -98,7 +90,9 @@
                             <div class="grid-item">
                                 <table style="width: 90%;">
                                     <thead>
-                                        <th></th>
+                                        <th>  <i onclick="sendsupplystutus()"
+                                            class="fa-solid fa-arrows-rotate" title="click to update values"></i>
+            </th>
                                         <th>+12v supply</th>
                                         <th>-12v supply</th>
                                         <th>5V supply</th>
@@ -233,24 +227,24 @@
                                             title="press to send motor to this wavelength" id="filtermotermove"
                                             onclick="moveto(event)"></i>
                                     </div>
-                                    
-                                   
-                                        <div class="grid-containerStep">
-                                            <div class="grid-item">
-                                                <i class="fa-regular fa-circle-left" id="filtermotermove"
-                                                    onclick="moveto(event)"></i>
-                                            </div>
-                                            <div class="grid-item">
-                                                <input placeholder="in Steps" type="number" min="0" max="40000"
-                                                    id="filtermotorstep" oninput="validat(this,min,max)"
-                                                    style="width: 70px">
 
-                                            </div>
-                                        </div>
+
+                                    <div class="grid-containerStep">
                                         <div class="grid-item">
-                                            <i class="fa-regular fa-circle-right" id="filtermotermove"
+                                            <i class="fa-regular fa-circle-left" id="filtermotermove"
                                                 onclick="moveto(event)"></i>
                                         </div>
+                                        <div class="grid-item">
+                                            <input placeholder="in Steps" type="number" min="0" max="40000"
+                                                id="filtermotorstep" oninput="validat(this,min,max)"
+                                                style="width: 70px">
+
+                                        </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i class="fa-regular fa-circle-right" id="filtermotermove"
+                                            onclick="moveto(event)"></i>
+                                    </div>
                                     <div class="grid-containerStep">
                                         <label for="currentstep">Current W.L</label>
                                         <div class="currentstep" id="filterwave"> 1200 </div>
@@ -258,10 +252,10 @@
                                     <div class="grid-item">
                                         <i onclick="savecalb(this)" title="click to update the new calibration step"
                                             class="fa-solid fa-floppy-disk"></i>
-                                        <div id="stepsaved"></div>
                                     </div>
+                                    <div id="stepsaved"></div>
+                                </div>
                             </div>
-                        </div>
                     </fieldset>
                 </div>
                 <div class="row">
@@ -290,7 +284,7 @@
                                 <div class="grid-containertwo">
                                     <label for="error"> Refernce gain accurecy:</label>
                                     <div class="currentstep" id="gainerrorref">99%</div>
-                                   
+
                                 </div>
                             </div>
                             <div class="grid-item">
@@ -312,7 +306,7 @@
                                 </div>
                                 <div class="grid-containertwo">
                                     <label for="error"> Sample gain accurecy:</label>
-                                    <div class="currentstep" id="gainerrormes">99%</div>    
+                                    <div class="currentstep" id="gainerrormes">99%</div>
                                 </div>
                             </div>
                             <div class="grid-item">
@@ -322,72 +316,69 @@
                                     <div class="currentstep" id="SampleGain">12</div>
                                 </div>
                                 <div class="grid-containertwo">
-                                <div class="grid-item">
-                                    <label>1</label>
+                                    <div class="grid-item">
+                                        <label>1</label>
                                         <input id="CurrentSampleGain" oninput="updategain(this)"
-                                            title="slide to change the digital potentiometer gain" type="range" step="0.5"
-                                            min="1" max="100" value="12">
+                                            title="slide to change the digital potentiometer gain" type="range"
+                                            step="0.5" min="1" max="100" value="12">
                                         <label for="range">100</label>
-          
-                                </div>
-                                <div class="grid-item">
-                                <i onclick="sendnewgain('sample')"
-                                        class="fa-solid fa-floppy-disk"></i>
+
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="sendnewgain('sample')" class="fa-solid fa-floppy-disk"></i>
                                     </div>
 
-                                
 
-                            </div>
-                            <div class="grid-containertwo">
-                                <label for="potentiometer">current Reference gain</label>
-                                <div class="currentstep" id="RefGain">12</div>
-                            </div>
-                            <div class="grid-containertwo">
-                                <div class="grid-item">
-                                    <label>1</label>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="potentiometer">current Reference gain</label>
+                                    <div class="currentstep" id="RefGain">12</div>
+                                </div>
+                                <div class="grid-containertwo">
+                                    <div class="grid-item">
+                                        <label>1</label>
                                         <input id="CurrentRefGain" oninput="updategain(this)"
-                                            title="slide to change the digital potentiometer gain" type="range" step="0.5"
-                                            min="1" max="100" value="12">
+                                            title="slide to change the digital potentiometer gain" type="range"
+                                            step="0.5" min="1" max="100" value="12">
                                         <label for="range">100</label>
-          
-                                </div>
-                                <div class="grid-item">
-                                <i onclick="sendnewgain('ref')"
-                                        class="fa-solid fa-floppy-disk"></i>
+
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="sendnewgain('ref')" class="fa-solid fa-floppy-disk"></i>
                                     </div>
 
-                                
+
+
+                                </div>
+
 
                             </div>
 
+                            <div class="grid-container">
 
-                        </div>
-
-                        <div class="grid-container">
-
-                        </div>
+                            </div>
 
                     </fieldset>
                 </div>
                 <div class="row">
                     <fieldset class="lamps">
-                        <legend>Date </legend>
-                        <div class="grid-container">
-                            <div class="grid-item">
-                                <label for="datepicker">Select Date:</label>
-                                <input style="padding: 8px; margin: 10px 20px; border-radius: 5px" type="date"
-                                    id="datepicker" />
-                            </div>
-                            <div class="grid-item">
-                                <label for="timepicker">Select Time:</label>
-                                <input style="padding: 8px; margin: 10px 20px; border-radius: 5px" type="time"
-                                    id="timepicker" step="1" />
+                        <legend>Date      <i class="fa-solid fa-arrows-rotate" onclick="loadtime()"></i>
+                        
 
+                        </legend>
+                        <div class="grid-container">
+                            <div class="grid-containerStep">
+                                <label for="datepicker">Select Date:</label>
+                                <input type="date" id="datepicker" style="padding: 2px; width: fit-content;" />
+                            </div>
+                            <div class="grid-containerStep">
+                                <label for="timepicker">Select Time:</label>
+                                <input style="padding: 2px; width: fit-content;" type="time" id="timepicker" step="1" />
                             </div>
                             <div class="grid-item">
-                                <br>
-                                <button class="UpdateButton" onclick="saveDateTime(this)"> <i
-                                        class="fa-solid fa-floppy-disk"></i></button>
+                                <i onclick="saveDateTime(this)" title="click to save the new date and time"
+                                    class="fa-solid fa-floppy-disk" style="margin-left: 75%;"></i>
                             </div>
                         </div>
                     </fieldset>
@@ -405,14 +396,16 @@
                 <div class="row">
                     <fieldset class="lamps">
                         <legend>Direct CMD </legend>
-                        <div class="grid-container">
+                        <div class="grid-containerStep">
+                            
                             <div class="grid-item">
-                                <label for="datepicker">Enter CMD:</label>
-                                <input id="commandinput" style="padding: 8px; margin: 10px 20px; border-radius: 5px"
-                                    type="text" placeholder="get-voltages">
-                                <button class="UpdateButton" onclick="SendCMD()"><i
-                                        class="fa-solid fa-arrow-right"></i></button>
+                                <input maxlength="40" id="commandinput"
+                                    style="padding: 8px; margin: 10px 20px; border-radius: 5px" type="text"
+                                    placeholder="get-voltages">
+                                    <i onclick="SendCMD()" class="fa-solid fa-arrow-right" title="click to send this command to stm32, use carefully !"></i>
+
                             </div>
+                           
                             <div class="grid-item">
                                 <label for="CMDresponse">Response is:</label>
                                 <div class="currentstep" id="CMDresponse"></div>
@@ -422,6 +415,33 @@
                     </fieldset>
 
                 </div>
+                <div class="login-container" id="login">
+                    <div class="login_form_box" > 
+                      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
+                      <h2>Log-in form</h2>
+                          <div class="grid-containerStep">
+                            <div>
+                              <i class="fa-regular fa-circle-user"></i>
+                          <label for="username" >Username</label>
+                          
+                            </div>
+                            <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+                          </div>
+                          
+                          <div class="grid-containerStep">
+                            <div>
+                              <i class="fa-solid fa-key"></i>
+                              <label for="password" >Password</label>
+                          
+                            </div>
+                          <input type="password" maxlength="40" placeholder="your password" id="password" required>
+                          </div>
+                          <br>
+                        
+                            <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+                          <div class="wrongpass">
+                          <label id="wrongpass" for="wrongpass"></label>
+                          </div></div>
 
 
 

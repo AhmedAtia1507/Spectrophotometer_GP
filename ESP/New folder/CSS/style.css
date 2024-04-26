@@ -781,8 +781,7 @@ th {
  /**------------------------------------------------------------------------
  *                           direct control
  *------------------------------------------------------------------------**/
- button:hover,
- .toggle-container:hover {
+ button:hover {
    cursor: pointer;
  }
 
@@ -792,20 +791,6 @@ th {
   border-radius: 5px;
   padding: 5px;
 }
-.UpdateButton{
-  padding: 3px;
-  border-radius: 1px;
-  background-color: rgb(168, 200, 243);
-  border: 1px solid #000000;
- 
-
-}
-.UpdateButton:hover{
-  background-color: inherit;
-  color:#3498db;
-  border: 1px solid #3498db;
-}
-
 
  .grid-container {
     display: grid;
@@ -821,16 +806,14 @@ th {
   }
   .grid-containerStep {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* First column takes up 4 times the width of the second column */
+    padding: 5px 3px;
+    grid-template-columns: repeat(2, 1fr); 
     gap: 15px; /* Adjust the gap between grid items */
   }
   
   
  
-.grid-item {
-  text-align: left; 
-  font-size: 15px;     
-  }
+
   .grid-item table {
     width: 95%;
     border-collapse: collapse;
@@ -870,12 +853,13 @@ th {
 }
 
 .state {
-  padding: 5px;
+  display: inline;
+ margin-left: 50px;
+  padding: 3px;
   border-radius: 3px;
-  width: 40%;
+  width: 30px;
   align-items: center;
   text-align: center;
-  margin-bottom: 3px;
 }
 
 
@@ -887,12 +871,55 @@ th {
   display: flex;
   gap: 50px;
 }
-.currentstep{
-font-weight: 500;
 
-}
 label,.currentstep{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
+  font-size: 15px;  
 }
 
+/**------------------------------------------------------------------------
+ *                           login page css
+ *------------------------------------------------------------------------**/
+li:hover{
+  cursor: pointer;
+}
+ .login-container{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5); /* horizontal-offset vertical-offset blur spread color */
+  transform: translate(-50%, -50%);
+  min-width: 300px;
+  border-radius: 10px;
+  padding: 20px 30px 30px 20px;
+  backdrop-filter: blur(9px);
+  max-height: 100vh;
+  background: rgba(5, 5, 33, 0.565);
+  color: white;
+
+
+  }
+  
+  .login_form_box input{
+  width: 150px;
+  padding: 5px 5px;    
+  color: black;
+  }
+ 
+  .login_form_box #submit{
+      margin-left: 90%;  
+      transform: scale(3); 
+      cursor: pointer;
+  }
+  .login_form_box #submit:hover{
+    cursor: pointer;
+    transform: scale(3.1);
+    transition: all 0.2s;
+}
+  .login_form_box  label[for="wrongpass"] {
+      text-align: center;
+      color: red;
+      text-decoration: underline;
+   }
+  

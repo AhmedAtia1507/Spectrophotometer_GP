@@ -19,10 +19,11 @@
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="login.html">Direct Control</a></li>
-      <li><a href="#">Page #2</a></li>
+      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li><a href="temp.html">temp</a></li>
       <li><a href="#">Page #3</a></li>
-      <li><a href="#">Page #4</a></li>
+      
     </ul>
     <ul>
       <li class="logo">
@@ -34,8 +35,8 @@
           <span>SpectroPhotometer</span></a>
       </li>
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
-      <li class="hideOnMobile"><a href="login.html"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
-      <li class="hideOnMobile"><a href="#"></i>Page #2</a></li>
+      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
       <li class="hideOnMobile"><a href="#"></i>Page #3</a></li>
       <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
       <li class="menu-button" onclick="showSidebar()">
@@ -43,8 +44,9 @@
       </li>
     </ul>
   </nav>
-  <!---------------------------- END OF Navbar ---------------------------->
-  <div class="teamContainer">
+  <!---------------------------- END OF Navba---------------------------->
+
+<div class="teamContainer">
 
       <h1 class="teamTitle1">Our Team</h1>
 
@@ -129,6 +131,33 @@
             </a>
           </div>
         </div>
+        <div class="login-container" id="login">
+          <div class="login_form_box" > 
+            <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
+            <h2>Log-in form</h2>
+                <div class="grid-containerStep">
+                  <div>
+                    <i class="fa-regular fa-circle-user"></i>
+                <label for="username" >Username</label>
+                
+                  </div>
+                  <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+                </div>
+                
+                <div class="grid-containerStep">
+                  <div>
+                    <i class="fa-solid fa-key"></i>
+                    <label for="password" >Password</label>
+                
+                  </div>
+                <input type="password" maxlength="40" placeholder="your password" id="password" required>
+                </div>
+                <br>
+              
+                  <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+                <div class="wrongpass">
+                <label id="wrongpass" for="wrongpass"></label>
+                </div></div>
      
      
     </div>
@@ -158,6 +187,7 @@
               <span id="DateTime"></span></label>
           </li>
         </ul>
+
       </div>
     </footer>
     <!---------------------------- END OF Footer ---------------------------->

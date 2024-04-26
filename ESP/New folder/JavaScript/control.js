@@ -147,6 +147,14 @@ function senddetector(){
   }
   websocket.send(JSON.stringify(detector));
 }
+function loadtime() {
+  var loadtime = {
+    loadtime: "loadtime",
+  };
+  // Assuming 'websocket' is your WebSocket object
+  websocket.send(JSON.stringify(loadtime));
+}
+
 
 function login() {
   window.location.href = "login.html";
@@ -194,7 +202,7 @@ function handleMessage(event) {
     handleTimeUpdated(myObj.timeupdated);
   } else if (myObj.hasOwnProperty("currenlamp")) {
     document.getElementById("currentlamp").innerHTML = myObj.currenlamp;
-    sendmoterssteps();
+    
   } else if (myObj.hasOwnProperty("motorssteps")) {
     handleMotorsSteps(myObj);
   } else if (myObj.hasOwnProperty("gohome")) {
@@ -203,7 +211,7 @@ function handleMessage(event) {
     handleStepSaved(myObj.stepsaved);
   } else if (myObj.hasOwnProperty("motermoved")) {
     togglePageState("disable");
-    sendmoterssteps();
+
   } else if (myObj.hasOwnProperty("detreadings")) {
     handleDetReadings(myObj.detreadings);
   } else if(myObj.hasOwnProperty("DirectResponse"))
@@ -229,7 +237,7 @@ function toggleLamp(deviceId) {
 function handleLampStatus(myObj) {
   var lampType = myObj.hasOwnProperty("uvstutus") ? "uv" : "vi";
   var stateElement = document.getElementById(lampType + "state");
-  var icon = document.getElementById(lampType + "icon").querySelector("i");
+  var icon = document.getElementById(lampType + "icon");
   
   if (myObj[lampType + "stutus"] === "on") {
     console.log("lamp is working fine");
@@ -265,7 +273,7 @@ function handleLampStatus(myObj) {
 
 function handleSupplyStatus(myObj) {
   console.log("supplies received");
-  const ary =myObj.voltages;
+  const ary =myObj.voltages.split(' ');
   document.getElementById("p12").textContent = ary[0];
   document.getElementById("n12").textContent = ary[1];
   document.getElementById("p5").textContent = ary[2];
@@ -289,8 +297,6 @@ function handleMotorsSteps(myObj) {
   document.getElementById("filterstep").textContent = ary[2];
   document.getElementById("filterwave").textContent = ary[3];
   document.getElementById("gratingmotorwl").value = parseFloat(ary[3]);
-  document.getElementById("motorssteps").textContent = myObj.motorssteps;
-  syncstep();
 }
 
 function handleGoHome(myObj) {
@@ -298,7 +304,6 @@ function handleGoHome(myObj) {
   const type = myObj.type.replace("motorhome", "step");
   document.getElementById(type).textContent = myObj.step;
   document.getElementById("filterwave").textContent = myObj.wavelength;
-  syncstep();
 }
 
 function handleStepSaved(message) {
@@ -321,6 +326,7 @@ function handleDetReadings(detReadings) {
   document.getElementById("largemes").textContent = ary[3];
   document.getElementById("RefGain").textContent = ary[4];
   document.getElementById("SampleGain").textContent = ary[5];
+
   
   gainaccurecy();
 }
@@ -333,13 +339,6 @@ function handleDetReadings(detReadings) {
 const currentDateTime = new Date();
 const currentDate = currentDateTime.toISOString().split("T")[0];
 document.getElementById("datepicker").value = currentDate;
-function loadtime() {
-  var loadtime = {
-    loadtime: "loadtime",
-  };
-  // Assuming 'websocket' is your WebSocket object
-  websocket.send(JSON.stringify(loadtime));
-}
 
 
 function saveDateTime(target) {  
@@ -397,14 +396,6 @@ function updateElement(dateTime) {
  * ==================== motors ==========================
  *------------------------------------------------------------------------**/
 
-//sechronize current step with input
-function syncstep() {
-  var filterStepText = document.getElementById("filterstep").innerText;
-  var filterStepNumber = parseInt(filterStepText, 10); 
-  document.getElementById("increasestep").value = filterStepNumber;
-}
-
-
 
 
 function validat(target,min, max) {
@@ -422,12 +413,25 @@ function validat(target,min, max) {
 function toggleLampMoter(){
   togglePageState("enable");
   var currentfunction =document.getElementById("currentlamp");
+  var icon=document.getElementById("lampchangeicon");
+    // Toggle the icon class
+    if (icon.classList.contains("fa-toggle-off")) {
+      // If the icon is currently off, toggle it on
+      icon.classList.remove("fa-toggle-off");
+      icon.classList.add("fa-toggle-on");
+    } else {
+      // If the icon is currently on, toggle it off
+      icon.classList.remove("fa-toggle-on");
+      icon.classList.add("fa-toggle-off");
+    }
+
   if(currentfunction.innerHTML=="UV Lamp")
   {
     var message = {
       Lampmotortoggle: 'VI',
     };
     websocket.send(JSON.stringify(message));
+    
   }
   else {
     var message = {
@@ -615,6 +619,9 @@ function sendnewgain(type){
 function gainaccurecy(){
   var Refdigital =parseInt(document.getElementById('RefGain').innerText);
   var Sampledigital =parseInt(document.getElementById('SampleGain').innerText);
+  document.getElementById("CurrentRefGain").value=Refdigital;
+  document.getElementById("CurrentSampleGain").value=Sampledigital;
+  
   var smallref = parseInt(document.getElementById('smallref').innerText);
   var largeref = parseInt(document.getElementById('largeref').innerText);
   var smallmes = parseInt(document.getElementById('smallmes').innerText);
@@ -634,12 +641,75 @@ gainaccurecy();
 
 //direct cmd
 function SendCMD(){
-  var command =document.getElementById("commandinput").textContent;
+  var command =document.getElementById("commandinput").value;
   var CMD={
     DirectCommand:command,
   }
   websocket.send(JSON.stringify(CMD));
 
 }
+
+
+/**------------------------------------------------------------------------
+ *                           login functions
+ *------------------------------------------------------------------------**/
+function toggleLogin(){
+  var login = document.getElementById("login");
+  if(login.style.display=="none"){
+    login.style.display="block";
+  }
+  else{
+    login.style.display="none";
+  }
+}
+
+
+document.getElementById("submit").addEventListener("click", function () {
+  var user = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+  console.log(user, pass);
+  sendCredentials(user, pass);
+});
+
+function sendCredentials(user, pass) {
+  if (websocket.readyState === WebSocket.OPEN) {
+      var car = {
+          username: user,
+          password: pass,
+      }
+
+      // Assuming 'websocket' is your WebSocket object
+      websocket.send(JSON.stringify(car));
+  } else {
+      console.log('WebSocket not open. Reinitializing...');
+      initWebSocket();
+  }
+}
+
+
+function handleMessage(event) {
+  var myObj = JSON.parse(event.data);
+  console.log(myObj);
+
+  if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
+      // Check if the username and password are true
+      if (myObj.username === true && myObj.password === true) {
+          console.log("Login successful. Redirecting to control.html");
+          // request control page
+          window.location.href = "temp.html";
+      } else {
+          localStorage.setItem('username', 'false');
+          console.log("Wrong username or password.");
+          document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
+      }
+  } 
+   else {
+      // Handle other error conditions, such as 404 (Not Found)
+      console.log("Error: " + event.data);
+      document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
+      
+  }
+}
+
 
 

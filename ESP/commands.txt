@@ -12,14 +12,14 @@ commands:
 1-lamps commands
 
 uv:
-get-uv  //send uv lamp stutus ==> on/off
+get-uv      //send uv lamp stutus ==> on/off
 set-uv-on   //turn uv lamp on ==> reply with current stutus after toggle on/off 
 set-uv-off  //turn uv lamp off ==> reply with current stutus after toggle on/off
 
 vi:
-get-vi  //send visible lamp stutus ==> on/off
+get-vi      //send visible lamp stutus ==> on/off
 set-vi-on   //turn visible lamp on ==> reply with current stutus after toggle on/off
-set-vi-off  ////turn visible lamp off ==> reply with current stutus after toggle on/off
+set-vi-off  //turn visible lamp off ==> reply with current stutus after toggle on/off
 
 ===============================================================================================================
 
@@ -75,6 +75,7 @@ set-gratingmoter-to-R-(value) like set-gratingmoter-to-R-100   //send the gratin
 =====================================================================================================================================================================
 5-photodetector
 
-
-snddet //send the current detector readings ==>replay with refernce small signal - refernce amplified signal- sample small signal-sample amplified signal-current digital pot gain like 1-9-2-18-9
-set-newgain-(value)  like set-newgain-12 //apply the new gaon then reply replay with "applied" or "not applied"
+//updated
+get-det-readings //send the current detector readings ==>replay with refernce small signal - refernce amplified signal- sample small signal-sample amplified signal-current ref digital pot gain - current sample digital pot gain like 1-9-2-18-9-20
+set-ref-newgain-to-(value)  like set-ref-newgain-to-12 //apply the refernce new gain then reply replay with "applied" or "not applied"
+set-sample-newgain-to-(value)  like set-sample-newgain-to-20 //apply the sample new gain then reply replay with "applied" or "not applied"

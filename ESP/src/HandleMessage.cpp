@@ -2,6 +2,7 @@
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
 
+
 const unsigned long interval = 600000; // 10 minutes in milliseconds
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
@@ -24,12 +25,12 @@ void checkCountdown()
     }
 }
 
+
 String sendCMD(const String &input)
 { 
     // Send the command to the STM32 via UART
     Serial2.println(input);
-    Serial.println(input);
-    Serial.println("sent command");
+    Serial.println(input+"\n");
     // Wait for a response from the STM32
     int startTime = millis();
     while (Serial2.available() == 0 && millis() - startTime < 2000)
@@ -40,6 +41,26 @@ String sendCMD(const String &input)
     String response = Serial2.readStringUntil('\n');
     Serial.println(response);
     return response;
+}
+void handleSB(const DynamicJsonDocument &doc) {
+String tempArr[] = {"get-UV", "get-VI", "get-WL"};
+String resArr[] = {"UV", "VI", "WL"};
+DynamicJsonDocument SBDATA(256);
+for (size_t i = 0; i < 2; i++)
+{
+  Serial2.println(tempArr[i]);
+  int startTime = millis();
+        while (Serial2.available() == 0 && millis() - startTime < 2000) {
+          delay(1);
+        }
+        String response = Serial2.readStringUntil('\n');
+        SBDATA[resArr[i]] = response;
+}
+
+        String jsonString;
+        serializeJson(SBDATA, jsonString);
+        notifyClients(jsonString);
+        Serial.println("State Bar data sent");
 }
 
 
@@ -80,8 +101,8 @@ void sendFlagStatus()
 void handleLampStatus(const String &lampType)
 {
     String command = String("get-" + lampType);
-    String status = sendCMD(command);
-    //String status = "on";
+    //String status = sendCMD(command);
+    String status = "on";
     String jsonString;
     DynamicJsonDocument object(50);
     String condition = lampType + "stutus";
@@ -133,7 +154,8 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    String stutus = sendCMD("get-voltages");
+    //String stutus = sendCMD("get-voltages");
+    String stutus="12 2 2 2 13";
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
     object["voltages"] = stutus;
@@ -175,8 +197,8 @@ void savetime(const DynamicJsonDocument &doc)
 void sendsteps()
 {
     String command = "get-motors-steps";
-    String response = sendCMD(command);
-    //String response = "30-40-50-110\n";
+   // String response = sendCMD(command);
+    String response = "30-40-50-1100\n";
     Serial.print(response);
     DynamicJsonDocument object(60);
     object["motorssteps"] = response;
@@ -186,8 +208,8 @@ void sendsteps()
 }
 void getlampmoter(){
     String command = "get-lamp-moter-position";
-    String response = sendCMD(command);
-    //String response = "VI Lamp";
+    //String response = sendCMD(command);
+    String response = "VI Lamp";
     //Serial.print(response);
     DynamicJsonDocument object(60);
     object["currenlamp"] = response;
@@ -198,7 +220,7 @@ void getlampmoter(){
 }
 void ToggleLampMotor(const DynamicJsonDocument &doc)
 {
-    String setto = doc["Lampmotortoggle"];
+    String setto = doc["Lampmotortoggle"].as<String>();
     String command="set-lamp-moter-"+setto;
     String response = sendCMD(command);
     //String response = "moved";
@@ -212,13 +234,13 @@ void ToggleLampMotor(const DynamicJsonDocument &doc)
     }
 void handleGoHome(const DynamicJsonDocument &doc)
 {
-    String motortype = doc["type"];
+    String motortype = doc["type"].as<String>();
     Serial.print(motortype);
     String command = motortype ;
-    String response = sendCMD(command);
-    String wavelength = sendCMD("get-current-wav");
-    //String response = "0";
-    //String wavelength = "878";
+    //String response = sendCMD(command);
+    //String wavelength = sendCMD("get-current-wav");
+    String response = "0";
+    String wavelength = "878";
     DynamicJsonDocument object(90);
     object["gohome"] = "gone";
     object["step"] = response;
@@ -231,12 +253,12 @@ void handleGoHome(const DynamicJsonDocument &doc)
 
 void handleSavestep(const DynamicJsonDocument &doc)
 {
-    String correctstep = doc["savethis"];
-    String correctwave = doc["wavelength"];
-    String response = sendCMD(correctstep);
-    String wavelength = sendCMD(correctwave);
-    //String response = "saved";
-    //String wavelength = "878";
+    String correctstep = doc["savethis"].as<String>();
+    String correctwave = doc["wavelength"].as<String>();
+    //String response = sendCMD(correctstep);
+    //String wavelength = sendCMD(correctwave);
+    String response = "saved";
+    String wavelength = "878";
     DynamicJsonDocument object(90);
     object["stepsaved"] = response;
     String jsonString;
@@ -245,7 +267,7 @@ void handleSavestep(const DynamicJsonDocument &doc)
 }
 void handlemovestep(const DynamicJsonDocument &doc)
 {
-    String correctstep = doc["movemoter"];
+    String correctstep = doc["movemoter"].as<String>();
     Serial.println(correctstep);
     String response = sendCMD(correctstep);
     //String response = "moved";
@@ -257,8 +279,8 @@ void handlemovestep(const DynamicJsonDocument &doc)
     sendsteps();
 }
 void handelreaddetecor(){
-    String response = sendCMD("get-det-readings");
-    //String response = "12-122-22-260-17";
+    //String response = sendCMD("get-det-readings");
+    String response = "12-122-22-260-17-18";
     DynamicJsonDocument object(90);
     object["detreadings"] = response;
     String jsonString;
@@ -267,10 +289,11 @@ void handelreaddetecor(){
 }
 void handlenewgain(const DynamicJsonDocument &doc)
 {
-    String newgain = doc["newgain"];
-    String gainType = doc["gaintype"];
-    String response = sendCMD("set-"+gainType+"newgain-"+newgain);
-    //String response = "applied";
+    String newgain = doc["newgain"].as<String>();
+    String gainType = doc["gaintype"].as<String>();
+    String command ="set-"+gainType+"-newgain-to-"+newgain;
+    //String response = sendCMD(command);
+    String response = "applied";
     if(response=="applied"){
       handelreaddetecor();
     }
@@ -279,14 +302,17 @@ void handlenewgain(const DynamicJsonDocument &doc)
 
 void handleDirectCommand(const DynamicJsonDocument &doc)
 {
-    String command=doc["DirectCommand"];
-    String response=sendCMD(command);
+    String command=doc["DirectCommand"].as<String>();
+   // String response=sendCMD(command);
+    String response=command;
+   
     DynamicJsonDocument object(90);
     object["DirectResponse"] = response;
     String jsonString;
     serializeJson(object, jsonString);
     notifyClients(jsonString);
 }
+
 /**------------------------------------------------------------------------
  *                           SCAN TASK
  *------------------------------------------------------------------------**/
@@ -372,26 +398,6 @@ void handleScan(const DynamicJsonDocument &doc) {
 /**========================================================================
  *                           STATE BAR
  *========================================================================**/
-void handleSB() {
-String tempArr[] = {"get-UV", "get-VI", "get-WL"};
-String resArr[] = {"UV", "VI", "WL"};
-DynamicJsonDocument SBDATA(256);
-for (size_t i = 0; i < 2; i++)
-{
-  Serial2.println(tempArr[i]);
-  int startTime = millis();
-        while (Serial2.available() == 0 && millis() - startTime < 2000) {
-          delay(1);
-        }
-        String response = Serial2.readStringUntil('\n');
-        SBDATA[resArr[i]] = response;
-}
-
-        String jsonString;
-        serializeJson(SBDATA, jsonString);
-        notifyClients(jsonString);
-        Serial.println("State Bar data sent");
-}
 
 
 
