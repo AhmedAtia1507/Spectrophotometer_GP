@@ -27,4 +27,5 @@ void handleifelse(const DynamicJsonDocument &doc);
 void handlenewgain(const DynamicJsonDocument &doc);
 void handelreaddetecor();
 void handleScan(const DynamicJsonDocument &doc);
+void handleSB(const DynamicJsonDocument &doc);
 #endif // HANDLE_MESSAGE_H

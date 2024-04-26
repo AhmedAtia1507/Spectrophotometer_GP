@@ -1,0 +1,2 @@
+../Src/HAL/ADS1115/ADS1115.c:19:6:adc_init	1
+../Src/HAL/ADS1115/ADS1115.c:43:9:adc_read_mv	1

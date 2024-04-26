@@ -1,0 +1,3 @@
+../Src/MCAL/RCC/RCC_Program.c:30:16:MRCC_u8InitClock	3
+../Src/MCAL/RCC/RCC_Program.c:154:16:MRCC_u8EnablePeripheralClock	5
+../Src/MCAL/RCC/RCC_Program.c:196:16:MRCC_u8DisablePeripheralClock	5
