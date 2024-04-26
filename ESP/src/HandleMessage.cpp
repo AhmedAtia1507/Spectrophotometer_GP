@@ -101,8 +101,8 @@ void sendFlagStatus()
 void handleLampStatus(const String &lampType)
 {
     String command = String("get-" + lampType);
-    //String status = sendCMD(command);
-    String status = "on";
+    String status = sendCMD(command);
+    //String status = "on";
     String jsonString;
     DynamicJsonDocument object(50);
     String condition = lampType + "stutus";
@@ -154,8 +154,8 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    //String stutus = sendCMD("get-voltages");
-    String stutus="12 2 2 2 13";
+    String stutus = sendCMD("get-voltages");
+    //String stutus="12 2 2 2 13";
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
     object["voltages"] = stutus;
@@ -167,8 +167,8 @@ void handleSupplyStatus()
 
 void loadtime()
 {
-    String response = sendCMD("get-time");
-    //String response = "1/13/2024 13:32:12\n";
+    //String response = sendCMD("get-time");
+    String response = "1/13/2024 13:32:12\n";
     Serial.print(response);
     DynamicJsonDocument object(200);
     object["currenttime"] = response;
@@ -197,8 +197,8 @@ void savetime(const DynamicJsonDocument &doc)
 void sendsteps()
 {
     String command = "get-motors-steps";
-   // String response = sendCMD(command);
-    String response = "30-40-50-1100\n";
+    String response = sendCMD(command);
+    //String response = "30-40-50-1100\n";
     Serial.print(response);
     DynamicJsonDocument object(60);
     object["motorssteps"] = response;
@@ -208,8 +208,8 @@ void sendsteps()
 }
 void getlampmoter(){
     String command = "get-lamp-moter-position";
-    //String response = sendCMD(command);
-    String response = "VI Lamp";
+    String response = sendCMD(command);
+    //String response = "VI Lamp";
     //Serial.print(response);
     DynamicJsonDocument object(60);
     object["currenlamp"] = response;
@@ -237,10 +237,10 @@ void handleGoHome(const DynamicJsonDocument &doc)
     String motortype = doc["type"].as<String>();
     Serial.print(motortype);
     String command = motortype ;
-    //String response = sendCMD(command);
-    //String wavelength = sendCMD("get-current-wav");
-    String response = "0";
-    String wavelength = "878";
+    String response = sendCMD(command);
+    String wavelength = sendCMD("get-current-wav");
+    //String response = "0";
+    //String wavelength = "878";
     DynamicJsonDocument object(90);
     object["gohome"] = "gone";
     object["step"] = response;
@@ -255,10 +255,10 @@ void handleSavestep(const DynamicJsonDocument &doc)
 {
     String correctstep = doc["savethis"].as<String>();
     String correctwave = doc["wavelength"].as<String>();
-    //String response = sendCMD(correctstep);
-    //String wavelength = sendCMD(correctwave);
-    String response = "saved";
-    String wavelength = "878";
+    String response = sendCMD(correctstep);
+    String wavelength = sendCMD(correctwave);
+    //String response = "saved";
+    //String wavelength = "878";
     DynamicJsonDocument object(90);
     object["stepsaved"] = response;
     String jsonString;
@@ -279,8 +279,8 @@ void handlemovestep(const DynamicJsonDocument &doc)
     sendsteps();
 }
 void handelreaddetecor(){
-    //String response = sendCMD("get-det-readings");
-    String response = "12-122-22-260-17-18";
+    String response = sendCMD("get-det-readings");
+    //String response = "12-122-22-260-17-18";
     DynamicJsonDocument object(90);
     object["detreadings"] = response;
     String jsonString;
@@ -292,8 +292,8 @@ void handlenewgain(const DynamicJsonDocument &doc)
     String newgain = doc["newgain"].as<String>();
     String gainType = doc["gaintype"].as<String>();
     String command ="set-"+gainType+"-newgain-to-"+newgain;
-    //String response = sendCMD(command);
-    String response = "applied";
+    String response = sendCMD(command);
+    //String response = "applied";
     if(response=="applied"){
       handelreaddetecor();
     }
@@ -303,8 +303,8 @@ void handlenewgain(const DynamicJsonDocument &doc)
 void handleDirectCommand(const DynamicJsonDocument &doc)
 {
     String command=doc["DirectCommand"].as<String>();
-   // String response=sendCMD(command);
-    String response=command;
+    String response=sendCMD(command);
+    //String response=command;
    
     DynamicJsonDocument object(90);
     object["DirectResponse"] = response;
