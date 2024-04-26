@@ -150,24 +150,11 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    String stutusp12 = sendCMD("get-voltage-p12");
-    String stutusn12 = sendCMD("get-voltage-n12");
-    String stutusp5 = sendCMD("get-voltage-p5");
-    String stutusp33 = sendCMD("get-voltage-p33");
-    String stutustwelve = sendCMD("get-voltage-twelve");
+    String stutus = sendCMD("get-voltages");
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
-     object["p12"] = stutusp12;
-     object["n12"] = stutusn12;
-     object["p5"] = stutusp5;
-     object["p33"] = stutusp33;
-     object["twelve"] = stutustwelve;
-    //object["p12"] = "+12.1\n";
-    //object["n12"] = "-12.3\n";
-    //object["p5"] = "4.3\n";
-    //object["p33"] = "3.2\n";
-    //object["twelve"] = "11\n";
-
+    object["voltages"] = stutus;
+    
     String jsonString;
     serializeJson(object, jsonString);
     notifyClients(jsonString);
@@ -287,8 +274,8 @@ void handlemovestep(const DynamicJsonDocument &doc)
     sendsteps();
 }
 void handelreaddetecor(){
-    //String response = sendCMD("get-det-readings");
-    String response = "12-122-22-260-17";
+    String response = sendCMD("get-det-readings");
+    //String response = "12-122-22-260-17";
     DynamicJsonDocument object(90);
     object["detreadings"] = response;
     String jsonString;
@@ -298,14 +285,25 @@ void handelreaddetecor(){
 void handlenewgain(const DynamicJsonDocument &doc)
 {
     String newgain = doc["newgain"];
-    //String response = sendCMD("set-newgain-"+newgain);
-    String response = "applied";
+    String gainType = doc["gaintype"];
+    String response = sendCMD("set-"+gainType+"newgain-"+newgain);
+    //String response = "applied";
     if(response=="applied"){
       handelreaddetecor();
     }
     //else{handlenewgain(doc);}
     }
 
+void handleDirectCommand(const DynamicJsonDocument &doc)
+{
+    String command=doc["DirectCommand"];
+    String response=sendCMD(command);
+    DynamicJsonDocument object(90);
+    object["DirectResponse"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
 /**------------------------------------------------------------------------
  *                           SCAN TASK
  *------------------------------------------------------------------------**/
@@ -514,6 +512,10 @@ void handleScan(const DynamicJsonDocument &doc) {
     else if (doc.containsKey("resumereading"))
     {
       resumeTask();
+    }
+    else if(doc.containsKey("DirectCommand")){
+      handleDirectCommand(doc);
+
     }
     
     

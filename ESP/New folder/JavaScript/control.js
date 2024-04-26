@@ -31,10 +31,14 @@ function initWebSocket() {
 
 function onOpen(event) {
   console.log("Connection opened");
-  sendCurrentLoginFlag();                               // asks the server if the user have logged in or not
-  senduvStatus();                                      // send us lamp stutus to diplay it on open 
-  sendviStatus();                                      // send visible lamp stutus to diplay it on open  
-
+  // sendCurrentLoginFlag();                               // asks the server if the user have logged in or not
+  // senduvStatus();                                      // send us lamp stutus to diplay it on open 
+  // sendviStatus();                                      // send visible lamp stutus to diplay it on open  
+  // sendsupplystutus();
+  // sendmoterssteps();
+  // sendLampmoter();
+  // senddetector();
+  // loadtime();
 }
 
 function onClose(event) {
@@ -135,127 +139,33 @@ function sendLampmoter(){
   websocket.send(JSON.stringify(motors));
   
 }
+
+//read current detector values
+function senddetector(){
+  var detector={
+    senddetector:"senddetector",
+  }
+  websocket.send(JSON.stringify(detector));
+}
+
 function login() {
   window.location.href = "login.html";
 }
 
 //open a session for 20 minutes after this period user need to login again
 setInterval(login, 1200000);
-
-
-//at the begaining li1 is the lamp page which should be active
-document.getElementById("li1").classList.add("active");
-
-
-// function to show the tab content
-function showTab(tabId, li_id) {
-
-  // Hide all tabs
-  document.getElementById("li1").classList.add("active");
-  var tabs = document.getElementsByClassName("tab-content");
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].classList.remove("active");
-  }
-  var list = document.getElementsByClassName("list");
-  for (var i = 0; i < list.length; i++) {
-    list[i].classList.remove("active");
-  }
-  // Show the selected tab
-  document.getElementById(tabId).classList.add("active");
-  document.getElementById(li_id).classList.add("active");
-  switch (tabId) {
-    case "tab1":
-      break;
-    case "tab2":
-      sendsupplystutus();
-      break;
-    case "tab3":
-      sendmoterssteps();
-      sendLampmoter();
-      break;
-    case "tab4":
-      senddetector();
-      break;
-    case "tab5":
-      loadtime();
-      break;
-    case "tab6":
-      break;
-  }
+/**========================================================================
+ *                           Navbar
+ *========================================================================**/
+function showSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'flex';
 }
-
-
-// Add event listener for changes in UV or VI devices
-document.getElementById("uvin").addEventListener("change", toggleLamp);
-document.getElementById("viin").addEventListener("change", toggleLamp);
-// Function to toggle UV or VI device
-function toggleLamp() {
-  // Determine which device triggered the event
-  const deviceId = this.id === "uvin" ? "uv" : "vi";
-  // Get the state element and current state of the device
-  const stateElement = document.getElementById(`${deviceId}state`);
-  const currentState = stateElement.innerHTML;
-  // Define the command to be sent based on the current state
-  const command = currentState === "on" ? { [`turn${deviceId}off`]: "turnoff" } : { [`turn${deviceId}on`]: "turnon" };
-  // Send command via WebSocket
-  console.log(command);
-  websocket.send(JSON.stringify(command));
+function hideSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'none';
 }
-
-//it is a global variable that contains the current state of the nav sidbar 
-var NavCurrentstate = "none";
-
-hideLabels(); //intially shrink the sidebar
-let menu = document.getElementById("li0");
-menu.addEventListener("click", toggleMenu);
-
-// UI function to toggle menu visibility and labels
-function toggleMenu() {
-  const navElement = document.querySelector("nav");
-  const containerElement = document.querySelector(".container");
-
-  // Determine the desired width and opacity of the navigation menu
-  const desiredWidth = NavCurrentstate === "block" ? "0%" : "30%";
-  const desiredOpacity = NavCurrentstate === "block" ? "0" : "1";
-
-  // Set the width and opacity of the navigation menu
-  navElement.style.width = desiredWidth;
-  navElement.style.opacity = desiredOpacity;
-
-  // Set the background color, text alignment, and width of the menu button
-  menu.style.backgroundColor = NavCurrentstate === "block" ? "#ccc9c9" : "#33324e";
-  menu.style.textAlign = NavCurrentstate === "block" ? "left" : "center";
-  menu.style.width = NavCurrentstate === "block" ? "fit-content" : "calc(30% - 20px)";
-
-  // Toggle the visibility of labels in the container
-  containerElement.style.opacity = NavCurrentstate === "block" ? "0" : "1";
-  NavCurrentstate = NavCurrentstate === "block" ? "none" : "block";
-
-  // Update the labels based on the current state
-  if (NavCurrentstate === "block") {
-    showLabels();
-  } else {
-    hideLabels();
-  }
-}
-
-// Function to hide labels in the container
-function hideLabels() {
-  for (let i = 1; i <= 6; i++) {
-    document.getElementById("li" + i).innerHTML = "";
-  }
-}
-
-// Function to show labels in the container
-function showLabels() {
-  const labels = ["Lamps test", "Supplies", "Motors", "Detector", "Date and Time", "Direct command"];
-  for (let j = 1; j <= 6; j++) {
-    document.getElementById("li" + j).innerHTML = labels[j - 1];
-  }
-}
-
-
-
+/*============================ END OF Nabbar ============================*/
 
 
 /**
@@ -284,6 +194,7 @@ function handleMessage(event) {
     handleTimeUpdated(myObj.timeupdated);
   } else if (myObj.hasOwnProperty("currenlamp")) {
     document.getElementById("currentlamp").innerHTML = myObj.currenlamp;
+    sendmoterssteps();
   } else if (myObj.hasOwnProperty("motorssteps")) {
     handleMotorsSteps(myObj);
   } else if (myObj.hasOwnProperty("gohome")) {
@@ -292,57 +203,74 @@ function handleMessage(event) {
     handleStepSaved(myObj.stepsaved);
   } else if (myObj.hasOwnProperty("motermoved")) {
     togglePageState("disable");
+    sendmoterssteps();
   } else if (myObj.hasOwnProperty("detreadings")) {
     handleDetReadings(myObj.detreadings);
-  }
+  } else if(myObj.hasOwnProperty("DirectResponse"))
+  document.getElementById("CMDresponse").innerHTML=myObj.DirectResponse;
+
 }
+
+// Function to toggle UV or VI device
+function toggleLamp(deviceId) {
+  // Get the state element and current state of the device
+  const stateElement = document.getElementById(`${deviceId}state`);
+  const currentState = stateElement.innerHTML;
+  
+  // Define the command to be sent based on the current state
+  const command = currentState === "on" ? { [`turn${deviceId}off`]: "turnoff" } : { [`turn${deviceId}on`]: "turnon" };
+  
+  // Send command via WebSocket
+  console.log(command);
+  websocket.send(JSON.stringify(command));
+}
+
 
 function handleLampStatus(myObj) {
   var lampType = myObj.hasOwnProperty("uvstutus") ? "uv" : "vi";
   var stateElement = document.getElementById(lampType + "state");
-  var stateElement2 = document.getElementById(lampType + "state2");
-
+  var icon = document.getElementById(lampType + "icon").querySelector("i");
+  
   if (myObj[lampType + "stutus"] === "on") {
     console.log("lamp is working fine");
     stateElement.innerHTML = "on";
     stateElement.style.color = "white";
     stateElement.style.background = "green";
 
-    stateElement2.innerHTML = "on";
-    stateElement2.style.color = "white";
-    stateElement2.style.background = "green";
-    
-    var check = document.getElementById(lampType + "check");
-    var thumb = document.getElementById(lampType + "thumb");
-    check.style.background = "green";
-    thumb.style.transform = "translateX(20px)";
+    // Update toggle icon
+    icon.classList.remove("fa-toggle-off");
+    icon.classList.add("fa-toggle-on");
   } else if (myObj[lampType + "stutus"] === "off") {
     console.log(lampType + " lamp is off");
     stateElement.innerHTML = "off";
     stateElement.style.color = "white";
     stateElement.style.background = "red";
-
-    stateElement2.innerHTML = "off";
-    stateElement2.style.color = "white";
-    stateElement2.style.background = "red";
-
-    var check = document.getElementById(lampType + "check");
-    var thumb = document.getElementById(lampType + "thumb");
-    check.style.background = "red";
-    thumb.style.transform = "translateX(0px)";
-  } else {
-    stateElement2.innerHTML = "error occurred, reload page";
-  }
+    
+    // Update toggle icon
+    icon.classList.remove("fa-toggle-on");
+    icon.classList.add("fa-toggle-off");
+  } 
+  else if (myObj[lampType + "stutus"] === "fault") {
+    console.log(lampType + " lamp is fault");
+    stateElement.innerHTML = "fault";
+    stateElement.style.color = "white";
+    stateElement.style.background = "red";
+    
+    // Update toggle icon
+    icon.classList.remove("fa-toggle-on");
+    icon.classList.add("fa-toggle-off");
+ 
+}
 }
 
 function handleSupplyStatus(myObj) {
   console.log("supplies received");
-  document.getElementById("p12").textContent = myObj.p12;
-  document.getElementById("n12").textContent = myObj.n12;
-  document.getElementById("p5").textContent = myObj.p5;
-  document.getElementById("p33").textContent = myObj.p33;
-  document.getElementById("twelve").textContent = myObj.twelve;
-  document.getElementById("suppliesvalues").textContent = myObj.supplystutus;
+  const ary =myObj.voltages;
+  document.getElementById("p12").textContent = ary[0];
+  document.getElementById("n12").textContent = ary[1];
+  document.getElementById("p5").textContent = ary[2];
+  document.getElementById("p33").textContent = ary[3];
+  document.getElementById("twelve").textContent = ary[4];
 }
 
 function handleTimeUpdated(message) {
@@ -382,12 +310,6 @@ function handleStepSaved(message) {
     display.innerHTML = "";
   }, 4000);
 
-  var display2 = document.getElementById("stepsaved2");
-  display2.style.color = "green";
-  display2.textContent = message;
-  setTimeout(function () {
-    display2.innerHTML = "";
-  }, 4000);
 }
 
 function handleDetReadings(detReadings) {
@@ -397,8 +319,9 @@ function handleDetReadings(detReadings) {
   document.getElementById("largeref").textContent = ary[1];
   document.getElementById("smallmes").textContent = ary[2];
   document.getElementById("largemes").textContent = ary[3];
-  document.getElementById("potgain").textContent = ary[4];
-  document.getElementById('CMDdetect').textContent = detReadings;
+  document.getElementById("RefGain").textContent = ary[4];
+  document.getElementById("SampleGain").textContent = ary[5];
+  
   gainaccurecy();
 }
 
@@ -410,11 +333,6 @@ function handleDetReadings(detReadings) {
 const currentDateTime = new Date();
 const currentDate = currentDateTime.toISOString().split("T")[0];
 document.getElementById("datepicker").value = currentDate;
-
-const currentDateTime2 = new Date();
-const currentDate2 = currentDateTime2.toISOString().split("T")[0];
-document.getElementById("datepicker2").value = currentDate2;
-
 function loadtime() {
   var loadtime = {
     loadtime: "loadtime",
@@ -424,9 +342,7 @@ function loadtime() {
 }
 
 
-function saveDateTime(target) {
-
-  if(target.classList.value==="page"){
+function saveDateTime(target) {  
   const selectedDate = new Date(document.getElementById("datepicker").value);
   const selectedTime = document.getElementById("timepicker").value;
   const dateTimeString = `${selectedDate.toLocaleDateString().split("T")[0].replace(/-/g, '/')} ${selectedTime}`;
@@ -439,22 +355,7 @@ function saveDateTime(target) {
   websocket.send(JSON.stringify(updatetime));
   loadtime();
 }
-else{
-  console.log(target.classList.value);
-  const selectedDate2 = new Date(document.getElementById("datepicker2").value);
-  const selectedTime2 = document.getElementById("timepicker2").value;
-  const dateTimeString2 = `${selectedDate2.toLocaleDateString().split("T")[0].replace(/-/g, '/')} ${selectedTime2}`;
-  console.log(dateTimeString2);
 
-  var updatetime = {
-    updatetime: dateTimeString2,
-  };
-  // Assuming 'websocket' is your WebSocket object
-  websocket.send(JSON.stringify(updatetime));
-  loadtime();
-
-}
-}
 /*
  * Updates the text content of an element with the current date and time.
  */
@@ -501,7 +402,6 @@ function syncstep() {
   var filterStepText = document.getElementById("filterstep").innerText;
   var filterStepNumber = parseInt(filterStepText, 10); 
   document.getElementById("increasestep").value = filterStepNumber;
-  document.getElementById("increasestep2").value = filterStepNumber;
 }
 
 
@@ -539,11 +439,8 @@ function toggleLampMoter(){
 }
 
 
-let i=0
 function moveto(event){
   console.log(event.target.id);
-  console.log(i);
-  i++;
   switch(event.target.id){
     case "filtermotermove":
     console.log("this is filter case");
@@ -558,73 +455,89 @@ function moveto(event){
 }
 
 function movefiltermoter(targetevent){
-  if (targetevent.inputType === 'insertText') {
-  }
+  var step = document.getElementById('filtermotorstep').value;
+        if(targetevent.target.classList=="fa-regular fa-circle-left"){
+          if(step){
+            var moveto = {
+              movemoter: "set-filtermoter-to-L-" + step,
+            };
+            console.log(moveto);
+            websocket.send(JSON.stringify(moveto));
+            togglePageState("enable");
+          }
+        }
 
-else {
-    if (targetevent.target.classList.value==="page") {
-      if(targetevent.target.innerHTML !== "Select"){
-      var lateststep = document.getElementById('increasestep').value
-      console.log(lateststep);
+      
+        else if(targetevent.target.classList=="fa-regular fa-circle-right"){
+        if(step){
+          var moveto = {
+            movemoter: "set-filtermoter-to-R-" + step,
+          };
+          console.log(moveto);
+          websocket.send(JSON.stringify(moveto));
+          togglePageState("enable");
+        }
       }
+    
+    
+      
       else{
         var selectElement = document.getElementById("filterselector");
         var lateststep = selectElement.value;
-        console.log(lateststep);
-      }
-    }
-    else{
-      if(targetevent.target.innerHTML !=="Select"){
-        var lateststep = document.getElementById('increasestep2').value
-        console.log(lateststep);
+        if(lateststep){
+          var moveto = {
+            movemoter: "set-filtermoter-to-" + lateststep,
+          };
+          togglePageState("enable");
+          console.log(moveto);
+          websocket.send(JSON.stringify(moveto));
+      
         }
-        else{
-          var selectElement = document.getElementById("filterselector2");
-          var lateststep = selectElement.value;
-          console.log(lateststep);
-        }
-      }
-    if(lateststep){
-      var moveto = {
-        movemoter: "set-filtermoter-to-" + lateststep,
-      };
-      togglePageState("enable");
-      websocket.send(JSON.stringify(moveto));
-  
-    }
+      }  
+    
 
-    }
+    
 
 }
 
 function movegratingmoter(targetevent){
-  if (targetevent.inputType === 'insertText') {
-    // Input from the keyboard
-    console.log("Input from keyboard: " + targetevent.target.value);
-  }
+      var wavelength = document.getElementById('gratingmotorwl').value;
+      var step=document.getElementById('gratingmotorstep').value;
+      if(targetevent.target.classList=="fa-solid fa-angles-right"){
+      if(wavelength){
+        var moveto = {
+          movemoter: "set-gratingmoter-to-WL-" + wavelength,
+        };
+        console.log(moveto);
+        websocket.send(JSON.stringify(moveto));
+        togglePageState("enable");
+      }
 
-  else {
-    // Input from arrows
-    console.log("Input from arrows: " + targetevent.target.value);
-    // Add your additional logic for arrow input
-    if (targetevent.target.classList.value==="page"&&targetevent.target.innerHTML !=="Select") {
-      var lateststep = document.getElementById('gratingmotorwl').value
-      console.log(lateststep);
+    }  
+    else if(targetevent.target.classList=="fa-regular fa-circle-left"){
+      if(step){
+        var moveto = {
+          movemoter: "set-gratingmoter-to-L-" + step,
+        };
+        console.log(moveto);
+        websocket.send(JSON.stringify(moveto));
+        togglePageState("enable");
+      }
     }
-    else if(targetevent.target.innerHTML !=="Select"){
-      var lateststep = document.getElementById('gratingmotorwl2').value
-      console.log(lateststep);
+    else if(targetevent.target.classList=="fa-regular fa-circle-right"){
+      if(step){
+        var moveto = {
+          movemoter: "set-gratingmoter-to-R-" + step,
+        };
+        console.log(moveto);
+        websocket.send(JSON.stringify(moveto));
+        togglePageState("enable");
+      }
     }
-
-    if(lateststep){
-      var moveto = {
-        movemoter: "set-gratingmoter-to-" + lateststep,
-      };
-      
-      websocket.send(JSON.stringify(moveto));
-      togglePageState("enable");
-    }
-    }
+    
+    
+    
+    
 
 }
 
@@ -643,26 +556,14 @@ function savecalb(event) {
   console.log(event.classList.value);
   var correctstep = document.getElementById('filterstep').textContent;
   var correctwave = document.getElementById('filterwave').textContent;
-  var correctstep2 = document.getElementById('increasestep2').value;
-  var correctwave2 = document.getElementById('filterwave').textContent;
 
-  if(event.classList.value==="page"){
   console.log(correctstep);
   var savethis = {
     savethis: 'savestep-' + correctstep,
     wavelength: 'savewave-' + correctwave,
   }
   websocket.send(JSON.stringify(savethis));
-}
-else{
-  console.log(correctstep2);
-  var savethis = {
-    savethis: 'savestep-' + correctstep2,
-    wavelength: 'savewave-' + correctwave2,
-  }
-  websocket.send(JSON.stringify(savethis));
 
-}
 }
 
 
@@ -675,52 +576,70 @@ else{
 //ui function to display the current slider value
 function updategain(target){
   console.log(target.value);
-  var display=document.getElementById('gaain');
-  display.textContent=target.value;
-
-}
-
-
-//read current detector values
-function senddetector(){
-  var detector={
-    senddetector:"senddetector",
+  console.log(target.id);
+  if(target.id=="CurrentSampleGain"){
+    var display=document.getElementById('SampleGain');
+    display.textContent=target.value;
+  
   }
-  websocket.send(JSON.stringify(detector));
+  else if(target.id=="CurrentRefGain"){
+    var display=document.getElementById('RefGain');
+    display.textContent=target.value;
+
+  }
+  
 }
+
 
 
 
 //send the new value pot to esp
-function sendnewgain(){
-  var currentgain= document.getElementById('currentgain');
+function sendnewgain(type){
+  if(type=="sample"){
+    var currentgain= document.getElementById('CurrentSampleGain');  
+  }
+  else if(type=="ref"){
+    var currentgain= document.getElementById('CurrentRefGain');
+  }
+  
   console.log(currentgain.value);
   var gaain={
     newgain:currentgain.value,
+    gaintype:type,
   }
-  console.log(currentgain.value)
+  console.log(gaain);
   websocket.send(JSON.stringify(gaain));
 }
 
 //gain calcualtions
 function gainaccurecy(){
-  var digital =parseInt(document.getElementById('potgain').innerText);
+  var Refdigital =parseInt(document.getElementById('RefGain').innerText);
+  var Sampledigital =parseInt(document.getElementById('SampleGain').innerText);
   var smallref = parseInt(document.getElementById('smallref').innerText);
   var largeref = parseInt(document.getElementById('largeref').innerText);
   var smallmes = parseInt(document.getElementById('smallmes').innerText);
   var largemes = parseInt(document.getElementById('largemes').innerText);
   var calcgain1= largemes/smallmes;
   var calcgain2=largeref/smallref;
-  var meserror=parseFloat(calcgain1/digital )*100;
-  var referror=parseFloat(calcgain2/digital )*100;
-  document.getElementById('calcgainref').innerText=calcgain2;
-  document.getElementById('calcgainmes').innerText=calcgain1;
-  document.getElementById('gainerrorref').innerText=referror;
-  document.getElementById('gainerrormes').innerText=meserror;
+  var meserror=parseFloat(calcgain1/Sampledigital )*100;
+  var referror=parseFloat(calcgain2/Refdigital )*100;
+  document.getElementById('calcgainref').innerText=calcgain2.toFixed(2);
+  document.getElementById('calcgainmes').innerText=calcgain1.toFixed(2);
+  document.getElementById('gainerrorref').innerText=referror.toFixed(2);
+  document.getElementById('gainerrormes').innerText=meserror.toFixed(2);
   
 }
 
 gainaccurecy();
 
+//direct cmd
+function SendCMD(){
+  var command =document.getElementById("commandinput").textContent;
+  var CMD={
+    DirectCommand:command,
+  }
+  websocket.send(JSON.stringify(CMD));
+
+}
 
 

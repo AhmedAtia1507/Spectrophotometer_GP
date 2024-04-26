@@ -27,11 +27,9 @@ set-vi-off  ////turn visible lamp off ==> reply with current stutus after toggle
 
 note: +12 -12 are dc dc converter and 12 is the lamp supply
 
-get-voltage-p12	    //read supply +12==>its value (only number and sign like +11.9)
-get-voltage-n12 	//read supply -12==>its value (only number and sign like -11.9)
-get-voltage-p5      //read supply 5==>its value (only number like 4.9)
-get-voltage-p33    	//read supply 3.3==>its value (only number like 2.9)
-get-voltage-twelve  //read supply 12==>its value (only number 11.9)
+get-voltages  //send the current supplies voltages ==> replay with p12 n12 p5 p33 twelve like 12 -12 5 3.3 12
+
+
 =================================================================================================================
 
 3-time commands
@@ -58,12 +56,21 @@ savestep-(value)  like savestep-122   //save the value in the eeprom  ==> respon
 savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 
 //new commands updated
+//lamp moter
 get-lamp-moter-position    //send lamp moter current position ==> "UV Lamp" or "VI Lamp"
 set-lamp-moter-VI          //set the lamp moter to be in the VI ==>response with "moved" or "failed to move"
 set-lamp-moter-UV          //set the lamp moter to be in the UV ==>response with "moved" or "failed to move"
-set-filtermoter-to-(value) like set-filtermoter-to-100    //send the filter moter to the "value" steps position ==> respond with "moved" or "failed to move"
+
+//filter moter
+set-filtermoter-to-L-(value) like set-filtermoter-to-L-100    //send the filter moter to the "value" steps to the left ==> respond with "moved" or "failed to move"
+set-filtermoter-to-R-(value) like set-filtermoter-to-R-100    //send the filter moter to the "value" steps to the right ==> respond with "moved" or "failed to move"
 set-filtermoter-to-(value) like set-filtermoter-to-F1    //send the filter moter to the "value" filter position ==> respond with "moved" or "failed to move"
-set-gratingmoter-to-(value) like set-gratingmoter-to-100   //send the filter moter to the "value" WL in nm position ==> respond with "moved" or "failed to move"
+
+//grating moter
+
+set-gratingmoter-to-WL-(value) like set-gratingmoter-to-WL-100   //send the grating moter to the "value"in nm position ==> respond with "moved" or "failed to move"
+set-gratingmoter-to-L-(value) like set-gratingmoter-to-L-100   //send the grating moter to the "value"  in steps pto the left ==> respond with "moved" or "failed to move"
+set-gratingmoter-to-R-(value) like set-gratingmoter-to-R-100   //send the grating moter to the "value"  in steps pto the right ==> respond with "moved" or "failed to move"
 
 =====================================================================================================================================================================
 5-photodetector
