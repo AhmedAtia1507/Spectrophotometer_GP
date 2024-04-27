@@ -54,76 +54,169 @@ DynamicJsonDocument readFromDatabase(const char *filename) {
     }
     return doc;
 }
+
 DynamicJsonDocument getFilesJson(const char *directory) {
-    DynamicJsonDocument doc(2048);
+    // Create a JSON document to store the file information
+    DynamicJsonDocument doc(3048);
+
+    // Open the directory
     File dir = SD.open(directory);
-    int count = 1;
-    while (File file = dir.openNextFile()) {
-        if (!file.isDirectory()) {
-            String fileName = file.name();
-            fileName.replace(".txt", "");
-            doc["presets"] = "presets";
-            doc["file" + String(count++)] = fileName;
-            file.close();
-        }
+
+    // Check if the directory is open
+    if (!dir) {
+        Serial.println("Failed to open directory");
+        return doc; // Return an empty document
     }
+
+    // Initialize a counter for the files
+    int count = 1;
+
+    // Iterate over the files in the directory
+while (true) {
+    File file = dir.openNextFile();
+    
+    // Print the result of opening the next file
+    Serial.print("File opened: ");
+    Serial.println(file ? "success" : "failed");
+    
+    if (!file) {
+        // If no more files can be opened, break out of the loop
+        break;
+    }
+
+    // Get the file name
+    String fileName = file.name();
+
+    // Remove the ".txt" extension from the file name
+    fileName.replace(".txt", "");
+
+    // Store the file name in the JSON document
+    doc["file" + String(count++)] = fileName;
+
+    // Close the file
+    file.close();
+}
+
+    // Close the directory
+    dir.close();
+
+    // Add the total number of files to the JSON document
     if (strcmp(directory, "/presets") == 0) {
         doc["presetno"] = count - 1;
-    }
-    else if (strcmp(directory, "/readings") == 0) {
+    } else if (strcmp(directory, "/readings") == 0) {
         doc["readingsno"] = count - 1;
     }
-    dir.close();
+    Serial.println(count);
+
+    // Return the JSON document
     return doc;
 }
 
 
+
 TaskHandle_t readTask;
+// void handlereadTask(void *pvParameters){
+//  DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
+//  String selectthis = doc["loadthis"].as<String>();
+//  String path="";
+//  path = "/readings/" + selectthis + ".txt";
+// Serial.print(path+"\n");
+// String jsonString;
+//     // Open the file for reading
+//     File file = SD.open(path);
+//     if (!file) {
+//         Serial.println("Failed to open file for reading");
+//     }
+//     // Read the file line by line
+//     while (file.available()) {
+//         // Check if the pause flag is set
+//         while (pauseTaskFlag) {
+//             vTaskDelay(pdMS_TO_TICKS(120)); // Delay to reduce CPU load
+//         }
+//         if (stopTaskFlag) {
+//             stopTaskFlag = false;
+//             // Break out of the loop to stop the task
+//             break;
+//         }
+
+//         Serial.println("open file for reading");
+//         // Read a line from the file
+//         String line = file.readStringUntil('\n');
+//         line.trim();
+//         notifyClients(line);
+//         // Delay or yield to allow other tasks to run
+//         vTaskDelay(pdMS_TO_TICKS(80)); // Example delay of 80 ms
+
+//     }
+//     //send a message when finished to tell the webpage that loading reading is finished
+//     DynamicJsonDocument lastmessage(1024);
+//     lastmessage["isFirst"]="last";
+//     lastmessage["readings"]="";
+//     lastmessage["time"]="";
+//     String message="";
+//     serializeJson(lastmessage, message);
+//     notifyClients(message);
+//     // Close the file
+//     file.close();
+//     stopTaskFlag=false;
+//     pauseTaskFlag=false;
+//     vTaskDelete(NULL);
+// }
+
 void handlereadTask(void *pvParameters){
- DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
- String selectthis = doc["loadthis"].as<String>();
- String path="";
- path = "/readings/" + selectthis + ".txt";
-Serial.print(path+"\n");
-String jsonString;
+    DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
+    String selectthis = doc["loadthis"].as<String>();
+    String path = "/readings/" + selectthis + ".txt";
+    Serial.print(path + "\n");
+    String jsonString;
+
     // Open the file for reading
     File file = SD.open(path);
     if (!file) {
         Serial.println("Failed to open file for reading");
     }
-    // Read the file line by line
+
+    // Read the file in chunks of 50 lines
     while (file.available()) {
         // Check if the pause flag is set
         while (pauseTaskFlag) {
             vTaskDelay(pdMS_TO_TICKS(120)); // Delay to reduce CPU load
         }
+
         if (stopTaskFlag) {
             stopTaskFlag = false;
             // Break out of the loop to stop the task
             break;
         }
 
-        Serial.println("open file for reading");
-        // Read a line from the file
-        String line = file.readStringUntil('\n');
-        line.trim();
-        notifyClients(line);
+        // Read 50 lines from the file
+        String linesToSend;
+        for (int i = 0; i <500 && file.available(); i++) {
+            String line = file.readStringUntil('\n');
+            line.trim();
+            linesToSend += line + "\n";
+        }
+
+        // Send the chunk of lines to the clients
+        notifyClients(linesToSend);
+
         // Delay or yield to allow other tasks to run
         vTaskDelay(pdMS_TO_TICKS(80)); // Example delay of 80 ms
-
     }
-    //send a message when finished to tell the webpage that loading reading is finished
+
+    // Send a message when finished to tell the webpage that loading reading is finished
     DynamicJsonDocument lastmessage(1024);
-    lastmessage["isFirst"]="last";
-    lastmessage["readings"]="";
-    lastmessage["time"]="";
-    String message="";
+    lastmessage["isFirst"] = "last";
+    lastmessage["readings"] = "";
+    lastmessage["time"] = "";
+    String message = "";
     serializeJson(lastmessage, message);
     notifyClients(message);
+
     // Close the file
     file.close();
-    stopTaskFlag=false;
-    pauseTaskFlag=false;
+    stopTaskFlag = false;
+    pauseTaskFlag = false;
     vTaskDelete(NULL);
 }
 

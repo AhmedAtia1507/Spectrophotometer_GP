@@ -26,22 +26,74 @@ void checkCountdown()
 }
 
 
-String sendCMD(const String &input)
-{ 
-    // Send the command to the STM32 via UART
-    Serial2.println(input);
-    Serial.println(input+"\n");
-    // Wait for a response from the STM32
-    int startTime = millis();
-    while (Serial2.available() == 0 && millis() - startTime < 2000)
-    {
-        delay(1);
-    }
-    // Read and return the response
-    String response = Serial2.readStringUntil('\n');
-    Serial.println(response);
-    return response;
+// Define a task handle
+TaskHandle_t cmdTask;
+
+// Define a semaphore to synchronize task execution
+SemaphoreHandle_t responseSemaphore;
+
+// Function to handle sending commands to STM32
+void sendCMDTask(void *parameter) {
+    String input = *((String *)parameter);
+    // Send the command to the STM32 via UART if UART is connected
+        Serial2.println(input);
+        Serial.println(input);
+        int startTime = millis();
+        Serial.println("wait");
+        // Wait for response or timeout
+        while (Serial2.available() == 0 && millis() - startTime < 2000) { // 2 sec timeout
+            vTaskDelay(pdMS_TO_TICKS(100));
+             Serial.println(".");     
+        }
+        // Release the semaphore to indicate that the response is ready
+        xSemaphoreGive(responseSemaphore);
+    // Delete the task when done
+    vTaskDelete(NULL);
 }
+
+// Function to send a command to STM32 and get the response
+String sendCMD(const String &input) {
+    // Create a semaphore to synchronize task execution
+    responseSemaphore = xSemaphoreCreateBinary();
+    if (responseSemaphore == NULL) {
+        // Semaphore creation failed
+        return "Semaphore creation failed";
+    }
+
+    // Take the semaphore to reset it
+    xSemaphoreTake(responseSemaphore, 0);
+
+    // Create the task to send the command
+    xTaskCreatePinnedToCore(
+        sendCMDTask,        // Task function
+        "sendCMDTask",      // Task name
+        4096,               // Stack size (bytes)
+        (void *)new String(input),  // Parameter to pass to the task
+        1,                  // Task priority
+        &cmdTask,           // Task handle
+        0                   // Core (0 or 1, depending on your setup)
+    );
+
+    // Wait for the response semaphore
+    if (xSemaphoreTake(responseSemaphore, pdMS_TO_TICKS(600000)) == pdTRUE) { // 10 minutes timeout
+        // Semaphore was successfully taken, indicating response is ready
+        // Return the response string
+        if (Serial2.available()) {
+            String response = Serial2.readStringUntil('\n');
+            Serial.println("Response received: " + response);
+            return response;
+        } else {
+            // No response received
+            Serial.println("No response received");
+            return "";
+        }
+    } else {
+        // Semaphore timed out, indicating response not received within timeout
+        Serial.println("Timeout");
+        return "Response timeout";
+    }
+}
+
 void handleSB(const DynamicJsonDocument &doc) {
 String tempArr[] = {"get-UV", "get-VI", "get-WL"};
 String resArr[] = {"UV", "VI", "WL"};
@@ -341,7 +393,8 @@ void handleScanTask(void *pvParameters) {
           delay(1);
         }
         String response = Serial2.readStringUntil('\n');
-        //String response ="23/3||1:30 200 10 10.5";
+       
+        // String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
        
         // Split the response into components

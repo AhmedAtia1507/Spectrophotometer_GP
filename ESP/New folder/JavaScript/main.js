@@ -1296,6 +1296,15 @@ function showreadings(){
      
         var nopresetsDiv = document.getElementById('nopresets');
         nopresetsDiv.innerHTML = 'No readings available';
+        for (var j = myList.children.length - 1; j >= 0; j--) {
+          var child = myList.children[j];
+          console.log(child.id);
+          // Check if the element has an id and it is not "nopresets"
+          if (child.id !== 'nopresets' && child.id !== 'search') {
+            myList.removeChild(child);
+          }
+        }
+
       }
 
 
@@ -1344,49 +1353,57 @@ function showreadings(){
                 loadthis: itemName
               };
               websocket.send(JSON.stringify(message));
-              let i=1;
+
               websocket.onmessage = function (event) {
-                var myObj = JSON.parse(event.data);
-                console.log(myObj);
-                if (myObj.hasOwnProperty('readings')&&myObj.hasOwnProperty('time')) {
-                  
-                  if(myObj.isFirst==true){
-                    displayCMD(myObj.name+"    "+myObj.discription,"red","SD O");
-                    displayCMD(myObj.time,"green","SD O");
-                    displayCMD(myObj.mode,"blue","SD O");
-                    displayCMD(myObj.readings,"black","SD O");
-                    let reading=myObj.readings;
-                    let xy=decombinCoordinates(reading);
-                    let xval=[parseFloat(xy[0])];
-                    let yval=[parseFloat(xy[1])];
-                    x.push(xval);  
-                    y.push(yval);
-        
-                    addCurve(x, y , colorSelectArr[colorindex], myObj.name);
-                   
-
-
-                  }
-                  else if(myObj.isFirst==false){
-                    displayCMD(myObj.readings,"black",i+3);
-                    let reading=myObj.readings;
-                    let xy=decombinCoordinates(reading);
-                    let xval=[parseFloat(xy[0])];
-                    let yval=[parseFloat(xy[1])];
-                    x.push(xval);  
-                    y.push(yval);
-                    addCurve(x, y , colorSelectArr[colorindex], myObj.name);
+              
+                var lines = event.data.split('\n');
+            
+                // Process each line individually
+                lines.forEach(function(line) {
+                    // Skip empty lines
+                    if (line.trim() === '') {
+                        return;
+                    }
+            
+                    try {
+                        var myObj = JSON.parse(line);
+                        console.log(myObj);
+                        if (myObj.hasOwnProperty('readings') && myObj.hasOwnProperty('time')) {
+                            if (myObj.isFirst == true) {
+                                displayCMD(myObj.name + "    " + myObj.discription, "red", "SD O");
+                                displayCMD(myObj.time, "green", "SD O");
+                                displayCMD(myObj.mode, "blue", "SD O");
+                                displayCMD(myObj.readings, "black", "SD O");
+                                let reading = myObj.readings;
+                                let xy = decombinCoordinates(reading);
+                                let xval = [parseFloat(xy[0])];
+                                let yval = [parseFloat(xy[1])];
+                                x.push(xval);
+                                y.push(yval);
+                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
+                            } else if (myObj.isFirst == false) {
+                                displayCMD(myObj.readings, "black", i + 3);
+                                let reading = myObj.readings;
+                                let xy = decombinCoordinates(reading);
+                                let xval = [parseFloat(xy[0])];
+                                let yval = [parseFloat(xy[1])];
+                                x.push(xval);
+                                y.push(yval);
+                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
+                            } else if (myObj.isFirst == "last") {
+                                PauseButton.style.display = "none";
+                                StopButton.style.display = "none";
+                                LoadButton.style.display = "block";
+                            }
+                            i++;
+                        }
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
                     
-
-                
-                  }
-                  else if(myObj.isFirst=="last"){
-                    PauseButton.style.display="none";
-                    StopButton.style.display="none";
-                    LoadButton.style.display="block";
-
-                  }
-                  i++;
+                });
+            
+                 
                   
                   
 
@@ -1396,7 +1413,7 @@ function showreadings(){
 
               
 
-            });
+            );
           
 
           })(i);
@@ -1416,11 +1433,6 @@ function showreadings(){
   
 }
   
-
-
-
-
-
 function deletereading(myList, names, newItem) {
   var deleteButton = document.createElement("div");
   deleteButton.textContent = "🗑️";

@@ -71,6 +71,7 @@ void initWebSocket()
         Serial.println(file.name());
         file.close();
     }
+    root.close();
 }
 void setup()
 {
