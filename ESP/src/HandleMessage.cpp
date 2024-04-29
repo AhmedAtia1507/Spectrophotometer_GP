@@ -105,7 +105,9 @@ for (size_t i = 0; i < 2; i++)
         notifyClients(jsonString);
         Serial.println("State Bar data sent");
 }
-
+//mina
+void mina()
+{}
 
 
 void sendLoginSuccessNotification()
