@@ -2,5 +2,6 @@
     "cmake.sourceDirectory": "E:/GP Repo/Spectrophotometer_GP/ESP/.pio/libdeps/esp32doit-devkit-v1/ArduinoJson",
     "C_Cpp.default.compilerPath": "C:/Users/Mina/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
     "liveServer.settings.port": 5501,
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "stm32-for-vscode.openOCDPath": false
 }
