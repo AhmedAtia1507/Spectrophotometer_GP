@@ -9,6 +9,7 @@ DynamicJsonDocument readFromDatabase(const char* filename);
 //bool writeToDatabase2(const char *basePath, String &message,const DynamicJsonDocument &doc);
 DynamicJsonDocument getFilesJson(const char *directory);
 void readFromDatabase2(const DynamicJsonDocument &doc);
+String jsonToCsv(const DynamicJsonDocument& doc);
 void stopTask();
 void pauseTask();
 void resumeTask();

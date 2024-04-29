@@ -164,9 +164,9 @@ void handleLampControl(const String &lampType, bool turnOn)
 
 void handleShowPresets( const char *directory){
     DynamicJsonDocument result = getFilesJson(directory);
-    String jsonString;
-    serializeJson(result, jsonString);
-    notifyClients(jsonString);
+//   String jsonString;
+//  serializeJson(result, jsonString);
+// notifyClients(jsonString);
 }
 
 void handleLoadPreset(const DynamicJsonDocument &doc)
