@@ -553,6 +553,16 @@ function showpreset() {
   const computedStyle = window.getComputedStyle(flyoutMenu);
   if (computedStyle.display === 'none') {
     websocket.send(JSON.stringify(message));
+
+    for (var j = myList.children.length - 1; j >= 0; j--) {
+      var child = myList.children[j];
+      console.log(child.id);
+      // Check if the element has an id and it is not "nopresets"
+      if (child.id !== 'nopresets' && child.id !== 'search') {
+        myList.removeChild(child);
+      }
+    }
+
   }
   websocket.onmessage = function (event) {
 
@@ -572,15 +582,7 @@ function showpreset() {
         console.log('iiiii mesh b =0');
         var nopresetsDiv = document.getElementById('nopresets');
         nopresetsDiv.innerHTML = '';
-        for (var j = myList.children.length - 1; j >= 0; j--) {
-          var child = myList.children[j];
-          console.log(child.id);
-          // Check if the element has an id and it is not "nopresets"
-          if (child.id !== 'nopresets' && child.id !== 'search') {
-            myList.removeChild(child);
-          }
-        }
-
+    
         for (i; i > 0; i--) {
           (function (i) {
             let file = 'file' + i;
@@ -986,7 +988,7 @@ function changeState(rowIndex, newState, progress) {
       cell.appendChild(stateSpan);
   }
 
-  stateSpan.innerHTML = newState;
+  stateSpan.innerHTML = progress.toFixed(0)+" %";
   stateSpan.style.color = "rgb(0, 35, 151)";
   if (progress == 100) {
       stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
@@ -1283,6 +1285,15 @@ function showreadings(){
   const computedStyle = window.getComputedStyle(flyoutMenu);
   if (computedStyle.display === 'none') {
     websocket.send(JSON.stringify(message));
+    for (var j = myList.children.length - 1; j >= 0; j--) {
+      var child = myList.children[j];
+      console.log(child.id);
+      // Check if the element has an id and it is not "nopresets"
+      if (child.id !== 'nopresets' && child.id !== 'search') {
+        myList.removeChild(child);
+      }
+    }
+
   }
 
   websocket.onmessage = function (event) {
@@ -1312,15 +1323,7 @@ function showreadings(){
      
         var nopresetsDiv = document.getElementById('nopresets');
         nopresetsDiv.innerHTML = '';
-        for (var j = myList.children.length - 1; j >= 0; j--) {
-          var child = myList.children[j];
-          console.log(child.id);
-          // Check if the element has an id and it is not "nopresets"
-          if (child.id !== 'nopresets' && child.id !== 'search') {
-            myList.removeChild(child);
-          }
-        }
-
+        
         for (i; i > 0; i--) {
           (function (i) {
             let file = 'file' + i;
