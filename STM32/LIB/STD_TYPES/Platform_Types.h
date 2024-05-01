@@ -37,10 +37,10 @@ typedef enum
 #define CPU_BYTE_ORDER              LOW_BYTE_FIRST
 
 #ifndef TRUE
-    #define TRUE                    (boolean)true
+    #define TRUE                    (boolean)1
 #endif
 #ifndef FALSE
-    #define FALSE                   (boolean)false
+    #define FALSE                   (boolean)0
 #endif
 
 typedef unsigned char               boolean;

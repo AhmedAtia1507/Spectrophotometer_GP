@@ -73,5 +73,5 @@ Interrupt Status for End of Conversion:
 1) Enabled                                                                      MADC_EOC_INTERRUPT_ENABLED
 2) Disabled                                                                     MADC_EOC_INTERRUPT_DISABLED
 */
-#define MADC_EOC_INTERRUPT_STATUS                                               MADC_EOC_INTERRUPT_ENABLED
+#define MADC_EOC_INTERRUPT_STATUS                                               MADC_EOC_INTERRUPT_DISABLED
 #endif /*_ADC_CONFIG_H_*/

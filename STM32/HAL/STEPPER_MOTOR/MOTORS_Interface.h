@@ -19,13 +19,37 @@ typedef enum Motor_Select
     HMOTOR4
 }HMOTORS_Select_t;
 
+typedef enum Lamp_Motor_Select
+{
+    HMOTOR_LAMP_UV,
+    HMOTOR_LAMP_VIS
+}HMOTOR_Lamp_Select_t;
+
+typedef enum Filter_Motor_Select
+{
+    HMOTOR_FILTER_AIR,
+    HMOTOR_FILTER_1,
+    HMOTOR_FILTER_2,
+    HMOTOR_FILTER_3,
+    HMOTOR_FILTER_4,
+    HMOTOR_FILTER_5,
+    HMOTOR_FILTER_6,
+    HMOTOR_FILTER_7,
+}HMOTOR_Filter_Select_t;
+
 #define HMOTORS_CLKWISE_DIRECTION		    	        1
 #define HMOTORS_CCLKWISE_DIRECTION		                2
 
 #define HMOTORS_FULL_CYCLE                              24
+#define HMOTORS_WL_SELECT_FULL_CYCLE					48
 
-void HMOTORS_Init   (void);
-void HMOTOR_Step    (HMOTORS_Select_t Copy_uint32MotorSelect, uint8 Copy_uint8NoOfSetps, uint8 Copy_uint8Direction);
-void HMOTOR_GoHome  (HMOTORS_Select_t Copy_uint32MotorSelect);
-
+Std_ReturnType HMOTORS_Init                             (void);
+Std_ReturnType HMOTOR_Step                              (HMOTORS_Select_t Copy_uint32MotorSelect, uint32 Copy_uint32NoOfSetps, uint8 Copy_uint8Direction, uint8 Copy_uint8MotorSpeed);
+Std_ReturnType HMOTOR_GoHome                            (HMOTORS_Select_t Copy_uint32MotorSelect);
+Std_ReturnType HMOTOR_GetCurrentMotorSteps              (HMOTORS_Select_t Copy_uint32MotorSelect, uint32* P_uint32MotorSteps);
+Std_ReturnType HMOTOR_GetCurrentWL                      (uint32* P_uint32CurrentWL);
+Std_ReturnType HMOTOR_MoveLampMotor                     (HMOTOR_Lamp_Select_t Copy_uint32LampSelect);
+Std_ReturnType HMOTOR_MoveFilterMotor                   (HMOTOR_Filter_Select_t Copy_uint32FilterSelect);
+Std_ReturnType HMOTOR_MoveWLSelectMotor                 (float32 Copy_float32NextWL);
+Std_ReturnType HMOTOR_GetWLSelectCalibration            (uint32 Copy_float32ZeroWLSteps, uint32 Copy_float32StepsPerNm);
 #endif /*_MOTORS_INTERFACE_H_*/

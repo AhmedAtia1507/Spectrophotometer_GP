@@ -4,11 +4,10 @@
  *  Created on: Dec 10, 2023
  *      Author: Mohanad
  */
-#include "../../LIB/BIT_MATH/BIT_MATH.h"
-#include "../../LIB/STD_TYPES/Std_Types.h"
 
-#include "../../MCAL/RCC/RCC_Interface.h"
 #include "I2C_Interface.h"
+#include "../../MCAL/STK/STK_Interface.h"
+#include "../../MCAL/RCC/RCC_Interface.h"
 #include "I2C_Config.h"
 #include "../../MCAL/NVIC/NVIC_Interface.h"
 #include "../../MCAL/GPIO/GPIO_Interface.h"
@@ -42,7 +41,7 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 	uint32 pclk1 = 8000000;
 	uint16 result = 0 ;
 
-	I2C1->CR1 &= ~I2C_CR1_SWRST;
+	
 
 	//Enable RCC Clock
 	if (I2Cx == I2C1)
@@ -54,6 +53,7 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 		Global_I2C_Config[I2C2_INDEX] = *I2C_InitStruct ;
 		MRCC_EnablePeripheralClock(MRCC_APB1, MRCC_APB1_I2C2_EN);
 	}
+	MCAL_I2C_RESET();
 	if (I2C_InitStruct->I2C_Mode == I2C_mode_I2C)
 	{
 		/*---------------------------- INIT Timing  ------------------------*/
@@ -145,6 +145,9 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 void MCAL_I2C_RESET()
 {
 	I2C1->CR1 |= I2C_CR1_SWRST;
+	MSTK_uint8Delay(1000);
+	I2C1->CR1 &= ~I2C_CR1_SWRST;
+	MSTK_uint8Delay(1000);
 }
 
 void MCAL_I2C_DInit(I2C_TypeDef* I2Cx)
@@ -167,8 +170,8 @@ void MCAL_I2C_GPIO_Set_Pins(I2C_TypeDef* I2Cx)
 	{
 		//		PB6 : I2C1_SCL
 		//		PB7 : I2C1_SDA
-		MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN6, MGPIO_OUTPUT_AF_OPEN_DRAIN_10MHZ);
-		MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN7, MGPIO_OUTPUT_AF_OPEN_DRAIN_10MHZ);
+		MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN6, MGPIO_OUTPUT_AF_OPEN_DRAIN_2MHZ);
+		MGPIO_SetPinMode(MGPIO_PORTB, MGPIO_PIN7, MGPIO_OUTPUT_AF_OPEN_DRAIN_2MHZ);
 	}
 	else if(I2Cx == I2C2)
 	{
@@ -334,7 +337,8 @@ FlagStatus I2C_GetFlagStatus(I2C_TypeDef* I2Cx, Status flag)
 	{
 		// chech bit ADDR = 1 (address sent), cleared by reading SR1 followed by reading SR2
 		if((I2Cx->SR1)&(I2C_SR1_ADDR))
-			bitstatus = SET;
+			
+		bitstatus = SET;
 		else
 			bitstatus = RESET;
 
@@ -436,18 +440,3 @@ void I2C_ACKnowledgeConfig(I2C_TypeDef* I2Cx, FunctionalState NewState)
 
 }
 
-// Function to provide a delay in milliseconds
-void delay_ms(uint32 milliseconds) {
-	// Assuming a 1 MHz clock frequency for illustration purposes
-	// Adjust the loop count based on your actual clock frequency
-	// This is a simple and blocking delay function
-	// In a real application, you might want to use a timer for more accurate timing
-
-	// Calculate the loop count needed for the specified delay
-	uint32 loop_count = milliseconds * 1000;
-
-	// Perform the delay using a loop
-	for (uint32 i = 0; i < loop_count; i++) {
-		// Do nothing
-	}
-}

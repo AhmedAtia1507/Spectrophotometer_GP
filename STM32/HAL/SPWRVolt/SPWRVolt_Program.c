@@ -22,28 +22,22 @@
 static volatile uint16 glbl_uint16VoltageValues[SPWRVOLT_NO_OF_VOLTAGE_SOURCES] = {0};
 static volatile uint8 glbl_uint8VoltageIndex = 0;
 
-void SPWRVolt_StartConversion       (void)
-{
-    MADC_StartConversion(MADC1, SPWRVolt_VoltageChannels[glbl_uint8VoltageIndex]);
-}
+
 void SPWRVolt_GetConversionValue    (void)
 {
     uint16 Loc_uint16VoltageValue = 0;
-    MADC_RxConvertedDataAsynchronous(MADC1, &Loc_uint16VoltageValue);
-    
+
+    MADC_Conversion(MADC1, SPWRVolt_VoltageChannels[glbl_uint8VoltageIndex], &Loc_uint16VoltageValue);
     glbl_uint16VoltageValues[glbl_uint8VoltageIndex] = Loc_uint16VoltageValue;
 
     glbl_uint8VoltageIndex++;
     if(glbl_uint8VoltageIndex == SPWRVOLT_NO_OF_VOLTAGE_SOURCES)
     {
         glbl_uint8VoltageIndex = 0;
-        MGPTMR_StopTimer(MGPTMR3);
+        //MGPTMR_StopTimer(MGPTMR3);
     }
 }
-void SPWRVolt_StartSequence         (void)
-{
-    MGPTMR_StartTimer(MGPTMR3);
-}
+
 /**
  * @brief: Function to initialize interface with various power supplies
  * 
@@ -54,33 +48,27 @@ void SPWRVolt_StartSequence         (void)
 Std_ReturnType SPWRVolt_Init        (void)
 {
     /*Initialize Pins to be input analog*/
-	MRCC_EnablePeripheralClock(MRCC_APB1, MRCC_APB1_TIM2_EN);
     MRCC_EnablePeripheralClock(MRCC_APB1, MRCC_APB1_TIM3_EN);
     MRCC_EnablePeripheralClock(MRCC_APB2, MRCC_APB2_ADC1_EN);
     
-		uint8 Loc_uint8Index = 0;
+	uint8 Loc_uint8Index = 0;
     for(Loc_uint8Index = 0; Loc_uint8Index < SPWRVOLT_NO_OF_VOLTAGE_SOURCES; Loc_uint8Index++)
     {
         MGPIO_SetPinMode(SPWRVolt_VoltagesPortIDs[Loc_uint8Index], SPWRVolt_VoltagesPinIDs[Loc_uint8Index], MGPIO_INPUT_ANALOG_MODE);
     }
 		
-	MNVIC_EnableInterrupt(MNVIC_ADC1_2);
-    MADC_SetConversionCompleteCallback(MADC1, SPWRVolt_GetConversionValue);
     MADC_Init(MADC1);
 
-    MGPTMR_SetTimerUpdateCallbackFunc(MGPTMR3, SPWRVolt_StartConversion);
-    MGPTMR_SetTimerUpdateCallbackFunc(MGPTMR2, SPWRVolt_StartSequence);
+    MGPTMR_SetTimerUpdateCallbackFunc(MGPTMR3, SPWRVolt_GetConversionValue);
 
-    MGPTMR_SetTimerPeriod(MGPTMR2, 6000);
-    MGPTMR_SetTimerPeriod(MGPTMR3, 500);
+    MGPTMR_SetTimerPeriod(MGPTMR3, 1000);
 		
-	MNVIC_EnableInterrupt(MNVIC_TIM2);
 	MNVIC_EnableInterrupt(MNVIC_TIM3);
 		
-    MGPTMR_Init(MGPTMR2);
     MGPTMR_Init(MGPTMR3);
 
-    MGPTMR_StartTimer(MGPTMR2);
+    SPWRVolt_GetConversionValue();
+
     MGPTMR_StartTimer(MGPTMR3);
 
     return E_OK;

@@ -750,24 +750,89 @@
               <FilePath>.\MCAL\SPI\SPI_Program.c</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HAL\EEPROM\EEPROM.c</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.h</FileName>
+              <FileName>SCommands_Private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\HAL\EEPROM\EEPROM.h</FilePath>
+              <FilePath>.\APP\SCommands\SCommands_Private.h</FilePath>
             </File>
             <File>
-              <FileName>ADS1115.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HAL\ADS1115\ADS1115.c</FilePath>
-            </File>
-            <File>
-              <FileName>ADS1115.h</FileName>
+              <FileName>HPWRSupply_Config.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\HAL\ADS1115\ADS1115.h</FilePath>
+              <FilePath>.\HAL\PWRSupply\HPWRSupply_Config.h</FilePath>
+            </File>
+            <File>
+              <FileName>HPWRSupply_Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\PWRSupply\HPWRSupply_Interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>HPWRSupply_Private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\PWRSupply\HPWRSupply_Private.h</FilePath>
+            </File>
+            <File>
+              <FileName>HPWRSupply_Program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\PWRSupply\HPWRSupply_Program.c</FilePath>
+            </File>
+            <File>
+              <FileName>SpectroStatus_Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\SpectroStatus\SpectroStatus_Interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>SpectroStatus_Program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\SpectroStatus\SpectroStatus_Program.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\ADS1115\ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\ADS1115\ADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>I2C_Slave_EEPROM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\EEPROM\I2C_Slave_EEPROM.c</FilePath>
+            </File>
+            <File>
+              <FileName>I2C_Slave_EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\EEPROM\I2C_Slave_EEPROM.h</FilePath>
+            </File>
+            <File>
+              <FileName>SPECTRO_Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\SPECTRO\SPECTRO_Interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>SPECTRO_Program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\SPECTRO\SPECTRO_Program.c</FilePath>
+            </File>
+            <File>
+              <FileName>signal_conditioning.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\Signal_Conditioning\signal_conditioning.c</FilePath>
+            </File>
+            <File>
+              <FileName>signal_conditioning.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\Signal_Conditioning\signal_conditioning.h</FilePath>
+            </File>
+            <File>
+              <FileName>MCP4151.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\MCP4151\MCP4151.c</FilePath>
+            </File>
+            <File>
+              <FileName>MCP4151.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\MCP4151\MCP4151.h</FilePath>
             </File>
           </Files>
         </Group>
