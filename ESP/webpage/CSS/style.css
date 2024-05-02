@@ -1,3 +1,12 @@
+/*
+1-main page css
+2- control page css
+3-login semi page css
+4-validate page css
+*/
+
+
+
 /**------------------------------------------------------------------------
  *                           Configuration
  *------------------------------------------------------------------------**/
@@ -806,13 +815,11 @@ th {
   }
   .grid-containerStep {
     display: grid;
-    padding: 5px 3px;
     grid-template-columns: repeat(2, 1fr); 
     gap: 15px; /* Adjust the gap between grid items */
   }
   
-  
- 
+
 
   .grid-item table {
     width: 95%;
@@ -922,4 +929,8 @@ li:hover{
       color: red;
       text-decoration: underline;
    }
-  
+
+
+  /**------------------------------------------------------------------------
+ *                           validate page css
+ *------------------------------------------------------------------------**/

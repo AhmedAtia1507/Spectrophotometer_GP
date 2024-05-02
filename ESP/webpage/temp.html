@@ -13,40 +13,42 @@
 
 <body>
     <div class="overlay" id="overlay" title="wait for the motor to move"></div>
-    <!---------------------------- Start of Nabber ---------------------------->
-    <nav>
-        <ul class="sidebar">
-          <li onclick="hideSidebar()">
-            <a href="#"><i class="fas fa-close"></i></a>
-          </li>
-          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
-          <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
-          <li><a href="temp.html">temp</a></li>
-          <li><a href="#">Page #3</a></li>
-          
-        </ul>
-        <ul>
-          <li class="logo">
-            <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                width="24">
-                <path
-                  d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
-              </svg>
-              <span>SpectroPhotometer</span></a>
-          </li>
-          <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
-          <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
-          <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
-          <li class="hideOnMobile"><a href="#"></i>Page #3</a></li>
-          <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
-          <li class="menu-button" onclick="showSidebar()">
-            <a href="#"><i class="fas fa-bars"></i></a>
-          </li>
-        </ul>
-      </nav>
-      <!---------------------------- END OF Navbar ---------------------------->
-    <main>
+      <!---------------------------- Start of Nabber ---------------------------->
+  <nav>
+    <ul class="sidebar">
+      <li onclick="hideSidebar()">
+        <a href="#"><i class="fas fa-close"></i></a>
+      </li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li><a href="temp.html">temp</a></li>
+      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
+      
+    </ul>
+    <ul>
+      <li class="logo">
+        <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+            width="24">
+            <path
+              d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+          </svg>
+          <span>SpectroPhotometer</span></a>
+      </li>
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li class="menu-button" onclick="showSidebar()">
+        <a href="#"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!---------------------------- END OF Navbar ---------------------------->
+
+  <!---------------------------- END OF Navbar ---------------------------->
+ <main>
         <section>
             <div id="testpage" class="tabcontent" style="display: block;">
                 <div class="row">
@@ -193,6 +195,16 @@
                                         <i class="fa-regular fa-circle-right" id="gratingmotermove"
                                             onclick="moveto(event)"></i>
                                     </div>
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Save Step</label>
+                                        <div class="currentstep"></div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="savecalb('grating')" title="click to update the new calibration step"
+                                            class="fa-solid fa-floppy-disk"></i>
+                                    </div>
+                                    <div id="stepsaved"></div>
+                                
                                 </div>
                             </div>
 
@@ -250,7 +262,7 @@
                                         <div class="currentstep" id="filterwave"> 1200 </div>
                                     </div>
                                     <div class="grid-item">
-                                        <i onclick="savecalb(this)" title="click to update the new calibration step"
+                                        <i onclick="savecalb('filter')" title="click to update the new calibration step"
                                             class="fa-solid fa-floppy-disk"></i>
                                     </div>
                                     <div id="stepsaved"></div>

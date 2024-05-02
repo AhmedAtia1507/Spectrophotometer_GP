@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="css/all.min.css">
+
+
+</head>
+
+<body>
+  <!---------------------------- Start of Nabber ---------------------------->
+  <nav>
+    <ul class="sidebar">
+      <li onclick="hideSidebar()">
+        <a href="#"><i class="fas fa-close"></i></a>
+      </li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li><a href="temp.html">temp</a></li>
+      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
+      
+    </ul>
+    <ul>
+      <li class="logo">
+        <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+            width="24">
+            <path
+              d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+          </svg>
+          <span>SpectroPhotometer</span></a>
+      </li>
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li class="menu-button" onclick="showSidebar()">
+        <a href="#"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!---------------------------- END OF Navbar ---------------------------->
+
+<main>
+<!--- your codes should be here-->
+
+
+
+
+<!--- this is a code for the login elements don't change-->
+<div class="login-container" id="login">
+    <div class="login_form_box" > 
+      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
+      <h2>Log-in form</h2>
+          <div class="grid-containerStep">
+            <div>
+              <i class="fa-regular fa-circle-user"></i>
+          <label for="username" >Username</label>
+          
+            </div>
+            <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+          </div>
+          
+          <div class="grid-containerStep">
+            <div>
+              <i class="fa-solid fa-key"></i>
+              <label for="password" >Password</label>
+          
+            </div>
+          <input type="password" maxlength="40" placeholder="your password" id="password" required>
+          </div>
+          <br>
+        
+            <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+          <div class="wrongpass">
+          <label id="wrongpass" for="wrongpass"></label>
+          </div></div>
+        </div>
+
+</main>
+<script src="JavaScript/chart.js"></script>
+<script src="JavaScript/main.js"></script>

@@ -256,6 +256,9 @@ chartScan = new Chart(ctxScan, {
   type: 'line',
   data: chartData,
   options: {
+    animation: {
+      duration:0
+    },
     responsive: false,
     maintainAspectRatio: false,
     plugins: {
@@ -299,6 +302,8 @@ chartScan = new Chart(ctxScan, {
     },
     scales: {
       x: {
+        min:100,
+        max:1100,
         type: 'linear',
         position: 'bottom'
       },
@@ -1027,16 +1032,16 @@ let ytest = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253,0.02244,0.0226,0.022
 
 // xtest.reverse();
 // ytest.reverse();
-// let xValues=[] ;
-// let yValues=[] ;
-// let i = 0;
+let xValues=[] ;
+let yValues=[] ;
+let i = 0;
 
 // setInterval(function () {
 //   xValues[i]=xtest[i];
 //   yValues[i]=ytest[i];
 //   addCurve(xValues, yValues, 'red', 'Name 1',false);
 //   i++;
-// }, 1000);
+// }, 100);
 // function StoreData2(SampleID, xData, yData) {
 //   if (!(SampleID in data)) {
 //     data[SampleID] = { x: xData, y: yData };
@@ -1275,7 +1280,7 @@ var StopButton =document.getElementById("stopreading");//to use in displaying th
 var LoadButton =document.getElementById("loadreadings");//to use in displaying the stop/pause buttons
   
 function showreadings(){
-  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
+  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'black'];
   var myList = document.getElementById("presetlist");
   
   var message = {
@@ -1575,4 +1580,6 @@ function handleLogin(myObj) {
   }
 }
 
-
+/**------------------------------------------------------------------------
+ *                           validate page functions should be here 
+ *------------------------------------------------------------------------**/
