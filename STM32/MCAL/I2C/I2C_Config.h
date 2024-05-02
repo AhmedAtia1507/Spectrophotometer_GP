@@ -8,9 +8,8 @@
 #ifndef MCAL_I2C_I2C_CONFIG_H_
 #define MCAL_I2C_I2C_CONFIG_H_
 
-
-#include "../../LIB/STD_TYPES/Std_Types.h"
 #include "I2C_private.h"
+#include "../../LIB/STD_TYPES/Std_Types.h"
 
 struct S_I2C_Slave_Device_Address
 {

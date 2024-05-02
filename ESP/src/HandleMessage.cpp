@@ -38,13 +38,6 @@ void sendCMDTask(void *parameter) {
     // Send the command to the STM32 via UART if UART is connected
         Serial2.println(input);
         Serial.println(input);
-        int startTime = millis();
-        Serial.println("wait");
-        // Wait for response or timeout
-        while (Serial2.available() == 0 && millis() - startTime < 2000) { // 2 sec timeout
-            vTaskDelay(pdMS_TO_TICKS(100));
-             Serial.println(".");     
-        }
         // Release the semaphore to indicate that the response is ready
         xSemaphoreGive(responseSemaphore);
     // Delete the task when done
@@ -78,20 +71,18 @@ String sendCMD(const String &input) {
     if (xSemaphoreTake(responseSemaphore, pdMS_TO_TICKS(600000)) == pdTRUE) { // 10 minutes timeout
         // Semaphore was successfully taken, indicating response is ready
         // Return the response string
-        if (Serial2.available()) {
+        int startTime = millis();
+        while (Serial2.available()&& millis() - startTime < 2000) {
             String response = Serial2.readStringUntil('\n');
             Serial.println("Response received: " + response);
             return response;
-        } else {
-            // No response received
-            Serial.println("No response received");
-            return "";
-        }
+        } 
     } else {
         // Semaphore timed out, indicating response not received within timeout
         Serial.println("Timeout");
         return "Response timeout";
     }
+    return "och";
 }
 
 void handleSB(const DynamicJsonDocument &doc) {
@@ -114,7 +105,9 @@ for (size_t i = 0; i < 2; i++)
         notifyClients(jsonString);
         Serial.println("State Bar data sent");
 }
-
+//mina
+void mina()
+{}
 
 
 void sendLoginSuccessNotification()

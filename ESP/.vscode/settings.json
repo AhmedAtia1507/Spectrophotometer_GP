@@ -3,7 +3,5 @@
     "C_Cpp.default.compilerPath": "C:/Users/Mina/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe",
     "liveServer.settings.port": 5501,
     "cmake.configureOnOpen": false,
-    "files.associations": {
-        "string": "cpp"
-    }
+    "stm32-for-vscode.openOCDPath": false
 }

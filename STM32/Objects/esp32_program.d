@@ -2,6 +2,7 @@
   D:\KEIL_v5\ARM\ARMCLANG\include\string.h \
   D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h \
   D:\KEIL_v5\ARM\ARMCLANG\include\stdio.h \
+  D:\KEIL_v5\ARM\ARMCLANG\include\math.h \
   HAL\ESP32\..\..\LIB\BIT_MATH\BIT_MATH.h \
   HAL\ESP32\..\..\LIB\STD_TYPES\Std_Types.h \
   HAL\ESP32\..\..\LIB\STD_TYPES\Platform_Types.h \

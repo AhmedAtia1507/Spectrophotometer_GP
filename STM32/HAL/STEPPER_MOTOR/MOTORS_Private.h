@@ -52,4 +52,8 @@ static volatile uint8 glbl_uint8MotorHomingPinIDs[HMOTORS_NUM_MOTORS - 1]= {
 																				HMOTOR_WL_SELECT_HOMING_PIN_ID,
 																				HMOTOR4_HOMING_PIN_ID
 																			};
+
+void HMOTOR4_HomeIndicator(void);
+void HMOTOR_WLHomeIndicator(void);
+void HMOTOR_FilterHomeIndicator(void);
 #endif /*_MOTORS_PRIVATE_H_*/

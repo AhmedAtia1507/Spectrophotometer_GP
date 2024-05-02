@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "../../LIB/BIT_MATH/BIT_MATH.h"
 #include "../../LIB/STD_TYPES/Std_Types.h"
@@ -36,6 +37,63 @@ static volatile ptr_to_Callback_func glbl_PCallbackFunc[(HESP32_NO_OF_COMMANDS -
 
 static volatile uint8 glbl_uint8CommandBuffer[HESP32_MAX_BUFFER_SPACE] = {0};
 static volatile uint8 glbl_uint8BufferIndex = 0;
+
+void float_to_string_manual(uint8* P_uint8Buffer, float32 Copy_float32FloatNum, uint32 Loc_uint32precision) 
+{
+    uint32 Loc_uint32IntPart = 0, Loc_uint32DecimalPart = 0;
+    uint32 i = 0, k = 0;
+    uint8 Loc_uint8TempBuffer[8] = {0};
+    boolean is_negative = FALSE;
+
+    // Handle sign and extract integer part (modify for specific needs)
+    if (Copy_float32FloatNum < 0) 
+    {
+        Copy_float32FloatNum = -Copy_float32FloatNum;
+        is_negative = TRUE;
+    }
+    Loc_uint32IntPart = (sint32)Copy_float32FloatNum;
+
+    // Handle decimal part if needed (modify for precision)
+    if (Loc_uint32precision > 0) 
+    {
+        Copy_float32FloatNum *= pow(10, Loc_uint32precision);
+        Loc_uint32DecimalPart = (uint32)Copy_float32FloatNum;
+    }
+
+    // Convert integer part to string (replace with your implementation)
+    if (is_negative) 
+    {
+        P_uint8Buffer[i++] = '-';
+    }
+    do 
+    {
+        //buf[i++] = int_part % 10 + '0';
+        Loc_uint8TempBuffer[k++] = Loc_uint32IntPart % 10 + '0';
+        Loc_uint32IntPart /= 10;
+    } while (Loc_uint32IntPart > 0);
+
+    // Append sign, decimal point, and decimal digits (modify for precision)
+    for(sint32 j = (k - 1); j >= 0; j--)
+    {
+        P_uint8Buffer[i++] = Loc_uint8TempBuffer[j];
+    }
+
+    if (Loc_uint32precision > 0) 
+    {
+        uint8 temp = 0;
+        P_uint8Buffer[i++] = '.';
+        for (sint32 j = 0; j < Loc_uint32precision; j++) 
+        {
+            Loc_uint8TempBuffer[j] = Loc_uint32DecimalPart % 10 + '0';
+            Loc_uint32DecimalPart /= 10;
+        }
+        for (sint32 j = (Loc_uint32precision - 1); j >= 0; j--) 
+        {
+            P_uint8Buffer[i++] = Loc_uint8TempBuffer[j];
+        }
+    }
+    P_uint8Buffer[i] = '\0'; // Null terminate the string
+}
 
 void HESP32_ParseReceivedCommand  (void)
 {
@@ -247,6 +305,10 @@ Std_ReturnType HESP32_SendMotorStatus               (uint32* P_uint32MotorSteps,
             {
                 MUART_TxChar(HESP32_UART_CHOICE, '-');
             }
+						else
+						{
+								break;
+						}
         }
         if(Copy_uint8MotorNum == 3)
         {
@@ -262,7 +324,7 @@ Std_ReturnType HESP32_SendMotorStatus               (uint32* P_uint32MotorSteps,
     }
     return Loc_uint8FuncStatus;
 }
-Std_ReturnType HESP32_SendDataTime                  (Sdate_t* P_SDateToBeSent, Stime_t* P_STimeToBeSent)
+Std_ReturnType HESP32_SendDateTime                  (Sdate_t* P_SDateToBeSent, Stime_t* P_STimeToBeSent)
 {
     Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
 
@@ -292,17 +354,40 @@ Std_ReturnType HESP32_SendDataTime                  (Sdate_t* P_SDateToBeSent, S
     return Loc_uint8FuncStatus;
 }
 
-Std_ReturnType HESP32_SendIntensities               (float32* P_float32RefIntensity, float32* P_float32SampleIntensity)
+Std_ReturnType HESP32_SendIntensities\               
+    (float32 Copy_float32CurrentWL ,float32 P_float32RefIntensity, float32 P_float32SampleIntensity, Sdate_t* P_SCurrentDate, Stime_t* P_SCurrentTime)
 {
     Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
-    if((P_float32RefIntensity != NULL_PTR) && (P_float32SampleIntensity != NULL_PTR))
+    if((P_SCurrentDate != NULL_PTR) && (P_SCurrentTime != NULL_PTR))
     {
-        uint8 Loc_uint8IntensityBuffer[14] = {0};
-        snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
+        uint8 Loc_uint8IntensityBuffer[32] = {0};
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentDate -> m_months));
+        MUART_TxChar(HESP32_UART_CHOICE, '/');
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentDate -> m_days));
+        MUART_TxChar(HESP32_UART_CHOICE, '/');
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentDate -> m_years));
+        MUART_TxString(HESP32_UART_CHOICE, "||");
+
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentTime -> m_hours));
+        MUART_TxChar(HESP32_UART_CHOICE, ':');
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentTime -> m_minutes));
+        MUART_TxChar(HESP32_UART_CHOICE, ':');
+        MUART_SendIntegerValue(HESP32_UART_CHOICE,(uint32)(P_SCurrentTime -> m_seconds));
+        MUART_TxChar(HESP32_UART_CHOICE, ' ');
+
+        //snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", Copy_float32CurrentWL);
+        float_to_string_manual(Loc_uint8IntensityBuffer, Copy_float32CurrentWL, 3);
         MUART_TxString(HESP32_UART_CHOICE, Loc_uint8IntensityBuffer);
         MUART_TxChar(HESP32_UART_CHOICE, ' ');
-        snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
+        //snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32RefIntensity);
+        float_to_string_manual(Loc_uint8IntensityBuffer, P_float32RefIntensity, 3);
         MUART_TxString(HESP32_UART_CHOICE, Loc_uint8IntensityBuffer);
+        MUART_TxChar(HESP32_UART_CHOICE, ' ');
+        //snprintf(Loc_uint8IntensityBuffer, sizeof(Loc_uint8IntensityBuffer), "%f", *P_float32SampleIntensity);
+        float_to_string_manual(Loc_uint8IntensityBuffer, P_float32SampleIntensity, 3);
+        MUART_TxString(HESP32_UART_CHOICE, Loc_uint8IntensityBuffer);
+        
+        
         MUART_TxChar(HESP32_UART_CHOICE, '\n');
         Loc_uint8FuncStatus = E_OK;
     }
@@ -313,9 +398,58 @@ Std_ReturnType HESP32_SendIntensities               (float32* P_float32RefIntens
     return Loc_uint8FuncStatus;
 }
 
+Std_ReturnType HESP32_SendVoltages(uint8 PP_uint8Voltages[][32])
+{
+    if(PP_uint8Voltages != NULL_PTR)
+    {
+        uint8 Loc_uint8Index = 0;
+        for(Loc_uint8Index = 0; Loc_uint8Index < 5; Loc_uint8Index++)
+        {
+            MUART_TxString(HESP32_UART_CHOICE, PP_uint8Voltages[Loc_uint8Index]);
+            if(Loc_uint8Index < 4)
+            {
+                MUART_TxChar(HESP32_UART_CHOICE, ' ');
+            }
+        }
+        MUART_TxChar(HESP32_UART_CHOICE, '\n');
+        return E_OK;
 
+    }
+    else
+    {
+        return E_NOT_OK;
+    }
+}
 
-
+Std_ReturnType HESP32_SendDetectorValues(float32* P_float32Readings, float32* P_float32GainValues)
+{
+    if((P_float32GainValues != NULL_PTR) && (P_float32Readings != NULL_PTR))
+    {
+        uint8 Loc_uint8Index = 0;
+        uint8 Loc_uint8DetBuffer[32] = {0};
+        for(Loc_uint8Index = 0; Loc_uint8Index < 2; Loc_uint8Index++)
+        {
+            float_to_string_manual(Loc_uint8DetBuffer, P_float32Readings[Loc_uint8Index], 3);
+            MUART_TxString(HESP32_UART_CHOICE, Loc_uint8DetBuffer);
+            MUART_TxChar(HESP32_UART_CHOICE, ' ');
+        }
+        for(Loc_uint8Index = 0; Loc_uint8Index < 2; Loc_uint8Index++)
+        {
+            float_to_string_manual(Loc_uint8DetBuffer, P_float32GainValues[Loc_uint8Index], 3);
+            MUART_TxString(HESP32_UART_CHOICE, Loc_uint8DetBuffer);
+            if(Loc_uint8Index < 1)
+            {
+                MUART_TxChar(HESP32_UART_CHOICE, ' ');
+            }
+        }
+        MUART_TxChar(HESP32_UART_CHOICE, '\n');
+        return E_OK;
+    }
+    else
+    {
+        return E_NOT_OK;
+    }
+}
 
 
 
