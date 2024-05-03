@@ -8,8 +8,9 @@
 #ifndef MCAL_I2C_I2C_INTERFACE_H_
 #define MCAL_I2C_I2C_INTERFACE_H_
 
-#include "../GPIO/GPIO_Interface.h"
-#include "../RCC/RCC_Interface.h"
+#include "../LIB/Std_Types.h"
+#include "../MCAL/GPIO/GPIO_Interface.h"
+#include "../MCAL/RCC/RCC_Interface.h"
 #include "I2C_Config.h"
 #include "I2C_private.h"
 

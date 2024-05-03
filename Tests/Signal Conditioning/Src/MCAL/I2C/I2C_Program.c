@@ -5,11 +5,12 @@
  *      Author: Mohanad
  */
 
-#include "RCC_Interface.h"
 #include "I2C_Interface.h"
+#include "../STK/STK_Interface.h"
+#include "../RCC/RCC_Interface.h"
 #include "I2C_Config.h"
-#include "NVIC_Interface.h"
-#include "GPIO_Interface.h"
+#include "../NVIC/NVIC_Interface.h"
+#include "../GPIO/GPIO_Interface.h"
 
 /*
  * =============================================================================
@@ -40,7 +41,7 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 	uint32 pclk1 = 8000000;
 	uint16 result = 0 ;
 
-	I2C1->CR1 &= ~I2C_CR1_SWRST;
+	
 
 	//Enable RCC Clock
 	if (I2Cx == I2C1)
@@ -52,6 +53,7 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 		Global_I2C_Config[I2C2_INDEX] = *I2C_InitStruct ;
 		MRCC_EnablePeripheralClock(MRCC_APB1, MRCC_APB1_I2C2_EN);
 	}
+	MCAL_I2C_RESET();
 	if (I2C_InitStruct->I2C_Mode == I2C_mode_I2C)
 	{
 		/*---------------------------- INIT Timing  ------------------------*/
@@ -143,19 +145,22 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 void MCAL_I2C_RESET()
 {
 	I2C1->CR1 |= I2C_CR1_SWRST;
+	MSTK_uint8Delay(1000);
+	I2C1->CR1 &= ~I2C_CR1_SWRST;
+	MSTK_uint8Delay(1000);
 }
 
 void MCAL_I2C_DInit(I2C_TypeDef* I2Cx)
 {
 	if(I2Cx == I2C1)
 	{
-		MNVIC_u8DisableInterrupt(NVIC_I2C1_EV);
-		MNVIC_u8DisableInterrupt(NVIC_I2C1_ER);
+		MNVIC_DisableInterrupt(MNVIC_I2C1_EV);
+		MNVIC_DisableInterrupt(MNVIC_I2C1_ER);
 	}
 	else if(I2Cx == I2C2)
 	{
-		MNVIC_u8DisableInterrupt(NVIC_I2C2_EV);
-		MNVIC_u8DisableInterrupt(NVIC_I2C2_ER);
+		MNVIC_DisableInterrupt(MNVIC_I2C2_EV);
+		MNVIC_DisableInterrupt(MNVIC_I2C2_ER);
 	}
 }
 
