@@ -135,7 +135,7 @@ void sendFileNamesTask(void *parameter) {
     bool allFilesProcessed = false;
 while (!allFilesProcessed) {
         
-for (int i = 0; i <50; i++) {
+for (int i = 0; i <15; i++) {
     File file = dir.openNextFile();
         // Check if a file can be opened
         if (!file) {
@@ -171,7 +171,7 @@ for (int i = 0; i <50; i++) {
     
     
     // Notify all clients with the JSON object
-     Serial.println(fileNamesJSON);
+     //Serial.println(fileNamesJSON);
     notifyClients(fileNamesJSON);
     fileNamesJSON = "{";
     count=1;

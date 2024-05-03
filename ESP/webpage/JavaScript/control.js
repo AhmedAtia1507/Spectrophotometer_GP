@@ -157,7 +157,7 @@ function loadtime() {
 
 
 function login() {
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 //open a session for 20 minutes after this period user need to login again
@@ -562,18 +562,30 @@ function gohome(element) {
   websocket.send(JSON.stringify(motor));
   togglePageState("enable");
 }
-function savecalb(event) {
-  console.log(event.classList.value);
-  var correctstep = document.getElementById('filterstep').textContent;
+function savecalb(type) {
+  var correctfilterstep = document.getElementById('filterstep').textContent;
+  var correctgratingstep = document.getElementById('gratingstep').textContent;
   var correctwave = document.getElementById('filterwave').textContent;
 
-  console.log(correctstep);
+
+if(type=='filter'){
   var savethis = {
-    savethis: 'savestep-' + correctstep,
-    wavelength: 'savewave-' + correctwave,
+    savethis: 'save-filter-step-'+correctfilterstep,
+    wavelength: 'save-wave-'+correctwave,
   }
+  console.log(savethis);
+  websocket.send(JSON.stringify(savethis));
+}
+if(type=='grating'){
+  var savethis = {
+    savethis: 'save-grating-step-'+correctgratingstep,
+    wavelength: 'save-wave-'+correctwave,
+  }
+  console.log(savethis);
   websocket.send(JSON.stringify(savethis));
 
+}
+  
 }
 
 
