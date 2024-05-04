@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -11,6 +11,7 @@ RM := rm -rf
 -include sources.mk
 -include Startup/subdir.mk
 -include Src/MCAL/SYSTICK/subdir.mk
+-include Src/MCAL/STK/subdir.mk
 -include Src/MCAL/SPI/subdir.mk
 -include Src/MCAL/RCC/subdir.mk
 -include Src/MCAL/NVIC/subdir.mk
@@ -67,8 +68,8 @@ all: main-build
 main-build: Signal\ Conditioning\ 1.elf secondary-outputs
 
 # Tool invocations
-Signal\ Conditioning\ 1.elf Signal\ Conditioning\ 1.map: $(OBJS) $(USER_OBJS) D:\ASU\ ENG\GP_Spectrophotometer\Final\ tests\Signal\ Conditioning\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -gdwarf-2 -o "Signal Conditioning 1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\ASU ENG\GP_Spectrophotometer\Final tests\Signal Conditioning\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Signal Conditioning 1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Signal\ Conditioning\ 1.elf Signal\ Conditioning\ 1.map: $(OBJS) $(USER_OBJS) D:\Senior_2\Graduation_Project\GRADUATION_PROJECT_REPO\Spectrophotometer_GP\Tests\Signal\ Conditioning\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -gdwarf-2 -o "Signal Conditioning 1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Senior_2\Graduation_Project\GRADUATION_PROJECT_REPO\Spectrophotometer_GP\Tests\Signal Conditioning\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Signal Conditioning 1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

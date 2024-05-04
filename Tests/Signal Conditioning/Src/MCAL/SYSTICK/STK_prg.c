@@ -89,15 +89,4 @@ uint32 MSTK_uint32GetRemainingTime(void)
 	return  (STK->VAL) ;
 }
 
-void SysTick_Handler(void)
-{
-	if(G_vCallBack != 0)
-	{
-		G_vCallBack();
-	}
-	if(G_u8Flag == SINGLE)
-	{
-		G_u8Flag = PERIODIC;
-		MSTK_vStopTimer();
-	}
-}
+

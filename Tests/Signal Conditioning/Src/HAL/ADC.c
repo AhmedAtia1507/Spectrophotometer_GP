@@ -30,8 +30,8 @@ void adc_init(void)
 
 	MCAL_I2C_GPIO_Set_Pins (I2C1);
 	MCAL_I2C_Init(I2C1, &I2C1CFG);
-	MCAL_I2C_RESET();
-	MCAL_I2C_Init(I2C1, &I2C1CFG);
+	//MCAL_I2C_RESET();
+	//MCAL_I2C_Init(I2C1, &I2C1CFG);
 }
 
 float32 adc_read_mv(ADC_config a)

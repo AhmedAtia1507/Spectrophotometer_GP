@@ -8,182 +8,177 @@
  * @copyright Copyright (c) 2023
  * 
  */
-#include "../NVIC/NVIC_Config.h"
-#include "../NVIC/NVIC_Interface.h"
-#include "../NVIC/NVIC_Private.h"
+#include "../LIB/BIT_MATH.h"
+#include "../LIB/Std_Types.h"
+
+#include "NVIC_Private.h"
+#include "NVIC_Interface.h"
+#include "NVIC_Config.h"
 
 
-///**
-// * @brief: Static Global Variable to Save the Priority Grouping Type In
-// *          (I had to make this variable so that when user calls MNVIC_u8SetPriorityGrouping function
-// *              I have to save the value that the user has entered in order to use it in set priority
-// *              function)
-// * 
-// */
-//static volatile u32 glob_u32PriorityGrouping = NVIC_PRIORITY_GROUP_4_SUB_0;
 /**
  * @brief: Function to enable interrupt of a peripheral
  * 
- * @param Copy_u8InterruptNumber: ID of the peripheral
+ * @param Copy_uint8InterruptNumber: ID of the peripheral
  * @return Std_ReturnType
  * @retval E_OK: Peripheral Interrupt is enabled successfully
  * @retval E_NOT_OK: Peripheral Interrupt is not enabled 
  */
-Std_ReturnType MNVIC_u8EnableInterrupt(NVIC_InterruptType Copy_u32InterruptNumber)
+Std_ReturnType MNVIC_EnableInterrupt(MNVIC_InterruptType Copy_uint32InterruptNumber)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(Copy_u32InterruptNumber < 32)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(Copy_uint32InterruptNumber < 32)
     {
-        SET_BIT((NVIC -> ISER[0]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        SET_BIT((NVIC -> ISER[0]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
-    else if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+    else if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
     {
-        Copy_u32InterruptNumber -= 32;
-        SET_BIT((NVIC -> ISER[1]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        Copy_uint32InterruptNumber -= 32;
+        SET_BIT((NVIC -> ISER[1]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }
 /**
  * @brief: Function to disable interrupt of a peripheral
  * 
- * @param Copy_u8InterruptNumber: ID of the peripheral
+ * @param Copy_uint8InterruptNumber: ID of the peripheral
  * @return Std_ReturnType
  * @retval E_OK: Peripheral Interrupt is disabled successfully
  * @retval E_NOT_OK: Peripheral Interrupt is not disabled 
  */
-Std_ReturnType MNVIC_u8DisableInterrupt(NVIC_InterruptType Copy_u32InterruptNumber)
+Std_ReturnType MNVIC_DisableInterrupt(MNVIC_InterruptType Copy_uint32InterruptNumber)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(Copy_u32InterruptNumber < 32)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(Copy_uint32InterruptNumber < 32)
     {
-        SET_BIT((NVIC -> ICER[0]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        SET_BIT((NVIC -> ICER[0]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
-    else if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+    else if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
     {
-        Copy_u32InterruptNumber -= 32;
-        SET_BIT((NVIC -> ICER[1]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        Copy_uint32InterruptNumber -= 32;
+        SET_BIT((NVIC -> ICER[1]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }
 /**
  * @brief: Function to set pending flag of interrupt of a peripheral
  *      "This function can be used to fire an interrupt without having to wait for the actual interrupt to happen"
- * @param Copy_u8InterruptNumber: ID of the peripheral
+ * @param Copy_uint8InterruptNumber: ID of the peripheral
  * @return Std_ReturnType
  * @retval E_OK: Peripheral Interrupt Pending Flag is set successfully
  * @retval E_NOT_OK: Peripheral Interrupt Pending Flag is not set 
  */
-Std_ReturnType MNVIC_u8SetPendingFlag(NVIC_InterruptType Copy_u32InterruptNumber)
+Std_ReturnType MNVIC_SetPendingFlag(MNVIC_InterruptType Copy_uint32InterruptNumber)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(Copy_u32InterruptNumber < 32)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(Copy_uint32InterruptNumber < 32)
     {
-        SET_BIT((NVIC -> ISPR[0]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        SET_BIT((NVIC -> ISPR[0]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
-    else if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+    else if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
     {
-        Copy_u32InterruptNumber -= 32;
-        SET_BIT((NVIC -> ISPR[1]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        Copy_uint32InterruptNumber -= 32;
+        SET_BIT((NVIC -> ISPR[1]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }
 /**
  * @brief: Function to clear pending flag of interrupt of a peripheral
  * 
- * @param Copy_u8InterruptNumber: ID of the peripheral
+ * @param Copy_uint8InterruptNumber: ID of the peripheral
  * @return Std_ReturnType
  * @retval E_OK: Peripheral Interrupt Pending Flag is cleared successfully
  * @retval E_NOT_OK: Peripheral Interrupt Pending Flag is not cleared 
  */
-Std_ReturnType MNVIC_u8ClearPendingFlag(NVIC_InterruptType Copy_u32InterruptNumber)
+Std_ReturnType MNVIC_ClearPendingFlag(MNVIC_InterruptType Copy_uint32InterruptNumber)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(Copy_u32InterruptNumber < 32)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(Copy_uint32InterruptNumber < 32)
     {
-        SET_BIT((NVIC -> ICPR[0]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        SET_BIT((NVIC -> ICPR[0]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
-    else if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+    else if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
     {
-        Copy_u32InterruptNumber -= 32;
-        SET_BIT((NVIC -> ICPR[1]), Copy_u32InterruptNumber);
-        Loc_u8FuncStatus = E_OK;
+        Copy_uint32InterruptNumber -= 32;
+        SET_BIT((NVIC -> ICPR[1]), Copy_uint32InterruptNumber);
+        Loc_uint8FuncStatus = E_OK;
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }
 /**
  * @brief: Function to get the status of active flag of an interrupt
  * 
- * @param Copy_u32InterruptNumber: ID of the interrupt
- * @param P_u8ActiveFlag: Pointer to send the status of active flag in (High or low)
+ * @param Copy_uint32InterruptNumber: ID of the interrupt
+ * @param P_uint8ActiveFlag: Pointer to send the status of active flag in (High or low)
  * @return Std_ReturnType
  * @retval E_OK: Peripheral Interrupt Active Flag Status is read successfully
  * @retval E_NOT_OK: Peripheral Interrupt Active Flag Status is not read  
  */
-Std_ReturnType MNVIC_u8GetActiveFlag(NVIC_InterruptType Copy_u32InterruptNumber, uint8* P_u8ActiveFlag)
+Std_ReturnType MNVIC_GetActiveFlag(MNVIC_InterruptType Copy_uint32InterruptNumber, uint8* P_uint8ActiveFlag)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(P_u8ActiveFlag != 0)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(P_uint8ActiveFlag != NULL_PTR)
     {
-        if(Copy_u32InterruptNumber < 32)
+        if(Copy_uint32InterruptNumber < 32)
         {
-            *P_u8ActiveFlag = GET_BIT((NVIC -> IABR[0]), Copy_u32InterruptNumber);
-            Loc_u8FuncStatus = E_OK;
+            *P_uint8ActiveFlag = GET_BIT((NVIC -> IABR[0]), Copy_uint32InterruptNumber);
+            Loc_uint8FuncStatus = E_OK;
         }
-        else if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+        else if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
         {
-            Copy_u32InterruptNumber -= 32;
-            *P_u8ActiveFlag = GET_BIT((NVIC -> IABR[1]), Copy_u32InterruptNumber);
-            Loc_u8FuncStatus = E_OK;
+            Copy_uint32InterruptNumber -= 32;
+            *P_uint8ActiveFlag = GET_BIT((NVIC -> IABR[1]), Copy_uint32InterruptNumber);
+            Loc_uint8FuncStatus = E_OK;
         }
         else
         {
-            Loc_u8FuncStatus = E_NOT_OK;
+            Loc_uint8FuncStatus = E_NOT_OK;
         }
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }
 
 /**
  * @brief: Function to set the priority of an interrupt
  * 
- * @param Copy_u32InterruptNumber: ID of the interrupt
- * @param Copy_u8GroupPriority: Group Priority of the interrupt
- * @param Copy_u8SubGroupPriority: Sub priority of the interrupt
+ * @param Copy_uint32InterruptNumber: ID of the interrupt
+ * @param Copy_uint8GroupPriority: Group Priority of the interrupt
+ * @param Copy_uint8SubGroupPriority: Sub priority of the interrupt
  * @return Std_ReturnType
  * @retval E_OK: Priority has been set successfully
  * @retval E_NOT_OK: Priority has not been set  
  */
-Std_ReturnType MNVIC_u8SetInterruptPriority(NVIC_InterruptType Copy_u32InterruptNumber, uint8 Copy_u8GroupPriority, uint8 Copy_u8SubGroupPriority)
+Std_ReturnType MNVIC_SetInterruptPriority(MNVIC_InterruptType Copy_uint32InterruptNumber, uint8 Copy_uint8GroupPriority, uint8 Copy_uint8SubGroupPriority)
 {
-    Std_ReturnType Loc_u8FuncStatus = E_NOT_OK;
-    if(Copy_u32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
+    Std_ReturnType Loc_uint8FuncStatus = E_NOT_OK;
+    if(Copy_uint32InterruptNumber < NVIC_NUMBER_OF_INTERRUPTS)
     {
         /*
             In order to set the priority of interrupt:
@@ -197,34 +192,34 @@ Std_ReturnType MNVIC_u8SetInterruptPriority(NVIC_InterruptType Copy_u32Interrupt
                                             |     Priority    ||||||||||||||||||                 
                                              -----------------------------------
         */
-        uint16 Loc_u16AIRCRPriorityGroupVal = (uint16)(SCB_AIRCR & (0xFFFF));
-        uint8 Loc_u8PriorityValue = 0;
+        uint16 Loc_uint16AIRCRPriorityGroupVal = (uint16)(MSCB_AIRCR & (0xFFFF));
+        uint8 Loc_uint8PriorityValue = 0;
 
-        switch(Loc_u16AIRCRPriorityGroupVal)
+        switch(Loc_uint16AIRCRPriorityGroupVal)
         {
-            case NVIC_PRIORITY_GROUP_4_SUB_0:
+            case MNVIC_PRIORITY_GROUP_4_SUB_0:
             {
-                Loc_u8PriorityValue = (Copy_u8GroupPriority << 4);
-                NVIC -> IPR[Copy_u32InterruptNumber] = Loc_u8PriorityValue;
+                Loc_uint8PriorityValue = (Copy_uint8GroupPriority << 4);
+                NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
                 break;
             }
-            case NVIC_PRIORITY_GROUP_3_SUB_1:
-            case NVIC_PRIORITY_GROUP_2_SUB_2:
-            case NVIC_PRIORITY_GROUP_1_SUB_3:
+            case MNVIC_PRIORITY_GROUP_3_SUB_1:
+            case MNVIC_PRIORITY_GROUP_2_SUB_2:
+            case MNVIC_PRIORITY_GROUP_1_SUB_3:
             {
-                Loc_u8PriorityValue = ((Copy_u8SubGroupPriority) | (Copy_u8GroupPriority << ((Loc_u16AIRCRPriorityGroupVal - (uint16)NVIC_PRIORITY_GROUP_4_SUB_0) / 0x100)));
-                NVIC -> IPR[Copy_u32InterruptNumber] = Loc_u8PriorityValue << 4;
+                Loc_uint8PriorityValue = ((Copy_uint8SubGroupPriority) | (Copy_uint8GroupPriority << ((Loc_uint16AIRCRPriorityGroupVal - (uint16)MNVIC_PRIORITY_GROUP_4_SUB_0) / 0x100)));
+                NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue << 4;
                 break;
             }
-            case NVIC_PRIORITY_GROUP_0_SUB_4:
+            case MNVIC_PRIORITY_GROUP_0_SUB_4:
             {
-                Loc_u8PriorityValue = (Copy_u8SubGroupPriority << 4);
-                NVIC -> IPR[Copy_u32InterruptNumber] = Loc_u8PriorityValue;
+                Loc_uint8PriorityValue = (Copy_uint8SubGroupPriority << 4);
+                NVIC -> IPR[Copy_uint32InterruptNumber] = Loc_uint8PriorityValue;
                 break;
             }
             default:
             {
-                Loc_u8FuncStatus = E_NOT_OK;
+                Loc_uint8FuncStatus = E_NOT_OK;
                 break;
             }
         }
@@ -232,7 +227,7 @@ Std_ReturnType MNVIC_u8SetInterruptPriority(NVIC_InterruptType Copy_u32Interrupt
     }
     else
     {
-        Loc_u8FuncStatus = E_NOT_OK;
+        Loc_uint8FuncStatus = E_NOT_OK;
     }
-    return Loc_u8FuncStatus;
+    return Loc_uint8FuncStatus;
 }

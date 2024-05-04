@@ -6,4 +6,3 @@
 ../Src/MCAL/SYSTICK/STK_prg.c:72:6:MSTK_vSetInterval_Periodic	16	static
 ../Src/MCAL/SYSTICK/STK_prg.c:82:8:MSTK_uint32GetElapsedTime	4	static
 ../Src/MCAL/SYSTICK/STK_prg.c:87:8:MSTK_uint32GetRemainingTime	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:92:6:SysTick_Handler	8	static

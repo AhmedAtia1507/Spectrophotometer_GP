@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 ELF_SRCS := 
@@ -29,6 +29,7 @@ Src/MCAL/I2C \
 Src/MCAL/NVIC \
 Src/MCAL/RCC \
 Src/MCAL/SPI \
+Src/MCAL/STK \
 Src/MCAL/SYSTICK \
 Src \
 Startup \
