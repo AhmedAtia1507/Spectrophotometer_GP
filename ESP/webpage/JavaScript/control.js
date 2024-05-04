@@ -2,11 +2,11 @@
 section 1 : intialize the websocket connection and handles login stuff (done)
 section 2 : handles the webpage ui (ongoing)
 section 3 : handles user messages (ongoing)
+section 4 : some function used by handle message (ongoing)
+section 5 : login functions (done)
 */
 
-/**
- * intialize the websocket connection section
- */
+/*================== intialize the websocket connection section 1===============*/
 
 var gateway = `ws://${window.location.hostname}/ws`;
 var websocket;
@@ -31,9 +31,9 @@ function initWebSocket() {
 
 function onOpen(event) {
   console.log("Connection opened");
-  // sendCurrentLoginFlag();                               // asks the server if the user have logged in or not
-  // senduvStatus();                                      // send us lamp stutus to diplay it on open 
-  // sendviStatus();                                      // send visible lamp stutus to diplay it on open  
+  // sendCurrentLoginFlag();                // asks the server if the user have logged in or not
+  // senduvStatus();                        // send us lamp stutus to diplay it on open 
+  // sendviStatus();                       // send visible lamp stutus to diplay it on open  
   // sendsupplystutus();
   // sendmoterssteps();
   // sendLampmoter();
@@ -43,55 +43,21 @@ function onOpen(event) {
 
 function onClose(event) {
   console.log("Connection closed");
-  setTimeout(initWebSocket, 2000);                    //try to connect every 2 sec
+  setTimeout(initWebSocket, 2000);  //try to connect every 2 sec
 }
-
-/**
- * handles the webpage ui section
- */
+/*===========================================================end of section 1===========================================================================*/
 
 
-//Toggles the visibility of the overlay element
+
+/*===========================================================handles the webpage ui section 2========================================================================*/
+
+//Toggles the visibility of the overlay element that appears to wait for the moter to move
 function togglePageState(enable) {
   var overlay = document.getElementById('overlay');
   overlay.style.display = (overlay.style.display === 'none') ? 'block' : 'none';
 }
-
 // should be toggled for the first time to work properly
 togglePageState("first");
-
-// // toggle the visibility of the side menu on mouse hover or click and add some delay to make it robust
-// document.querySelector("nav").addEventListener("mouseover", delayedShowNav);
-// document.getElementById("li0").addEventListener("mouseover", delayedShowNav2);
-// document.getElementById("li0").addEventListener("mouseout", delayedhideNav);
-// document.querySelector("nav").addEventListener("mouseout", delayedhideNav);
-
-// //constats to determine the hover time
-// let hoverTimeout;
-// let outTimeout;
-
-// function delayedShowNav() {
-//   // Set a new timeout
-//   if (document.querySelector("nav").style.opacity == 1) {
-//     clearTimeout(outTimeout);
-//     hoverTimeout = setTimeout(function () {
-//       showNav();
-//     }, 300);
-//   } // 300 milliseconds delay
-// }
-// function delayedShowNav2() {
-//   // Set a new timeout
-//   clearTimeout(outTimeout);
-//   hoverTimeout = setTimeout(function () {
-//     showNav();
-//   }, 300); // 300 milliseconds delay
-// }
-// function delayedhideNav() {
-//   clearTimeout(hoverTimeout);
-//   outTimeout = setTimeout(() => {
-//     hideNav(); // Execute hideNav() after 200ms when mouse leaves
-//   }, 300);
-// }
 
 //function to check the login flag from the esp32
 function sendCurrentLoginFlag() {
@@ -100,6 +66,7 @@ function sendCurrentLoginFlag() {
   };
   websocket.send(JSON.stringify(login));
 }
+
 //function to ask the server to send the lamp stutus
 function sendviStatus() {
   var vilampstutus = {
@@ -115,6 +82,7 @@ function senduvStatus(){
   };
   websocket.send(JSON.stringify(uvlampstutus));
 }
+
 //send the supply voltages
 function sendsupplystutus(){
   var supplystutus = {
@@ -123,6 +91,7 @@ function sendsupplystutus(){
   websocket.send(JSON.stringify(supplystutus));
   
 }
+
 //send the current moters steps and wavelength
 function sendmoterssteps(){
   var motors = {
@@ -130,6 +99,7 @@ function sendmoterssteps(){
   };
   websocket.send(JSON.stringify(motors));
 }
+
 
 //send the current position of the lamp moter 
 function sendLampmoter(){
@@ -140,6 +110,7 @@ function sendLampmoter(){
   
 }
 
+
 //read current detector values
 function senddetector(){
   var detector={
@@ -147,6 +118,7 @@ function senddetector(){
   }
   websocket.send(JSON.stringify(detector));
 }
+
 function loadtime() {
   var loadtime = {
     loadtime: "loadtime",
@@ -156,15 +128,15 @@ function loadtime() {
 }
 
 
-function login() {
+function redirecttohome() {
   window.location.href = "index.html";
 }
 
 //open a session for 20 minutes after this period user need to login again
-setInterval(login, 1200000);
-/**========================================================================
- *                           Navbar
- *========================================================================**/
+setInterval(redirecttohome, 1200000);
+
+
+/*============================ END OF Nabbar ============================*/
 function showSidebar() {
   const sidebar = document.querySelector('.sidebar');
   sidebar.style.display = 'flex';
@@ -173,24 +145,19 @@ function hideSidebar() {
   const sidebar = document.querySelector('.sidebar');
   sidebar.style.display = 'none';
 }
-/*============================ END OF Nabbar ============================*/
+/* ================================================================end of section 2===========================================================  */
 
 
-/**
- * handles the webpage ui section
- */
+/*======================================================== handles the esp32 messages section 3=================================================*/
 
 function handleMessage(event) {
   var myObj = JSON.parse(event.data);
   console.log(myObj);
 
   if (myObj.hasOwnProperty("flag")) {
-    console.log("flag is sent");
     if (myObj.flag) {
-      console.log("flag is true");
     } else {
-      console.log("flag is false");
-      login();
+      redirecttohome();
     }
   } else if (myObj.hasOwnProperty("uvstutus") || myObj.hasOwnProperty("vistutus")) {
     handleLampStatus(myObj);
@@ -202,7 +169,6 @@ function handleMessage(event) {
     handleTimeUpdated(myObj.timeupdated);
   } else if (myObj.hasOwnProperty("currenlamp")) {
     document.getElementById("currentlamp").innerHTML = myObj.currenlamp;
-    
   } else if (myObj.hasOwnProperty("motorssteps")) {
     handleMotorsSteps(myObj);
   } else if (myObj.hasOwnProperty("gohome")) {
@@ -211,12 +177,10 @@ function handleMessage(event) {
     handleStepSaved(myObj.stepsaved);
   } else if (myObj.hasOwnProperty("motermoved")) {
     togglePageState("disable");
-
   } else if (myObj.hasOwnProperty("detreadings")) {
     handleDetReadings(myObj.detreadings);
   } else if(myObj.hasOwnProperty("DirectResponse")){
     document.getElementById("CMDresponse").innerHTML=myObj.DirectResponse;
-
   }
   else if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
     handleLogin(myObj);
@@ -224,6 +188,13 @@ function handleMessage(event) {
   
   
 }
+
+/*=============================================================end of secion 3========================================================== */
+
+
+
+/*========================================================function used by handle messages section 4=====================================*/ 
+
 
 // Function to toggle UV or VI device
 function toggleLamp(deviceId) {
@@ -571,7 +542,7 @@ function savecalb(type) {
 if(type=='filter'){
   var savethis = {
     savethis: 'save-filter-step-'+correctfilterstep,
-    wavelength: 'save-wave-'+correctwave,
+    wavelength: 'save-filter-wave-'+correctwave,
   }
   console.log(savethis);
   websocket.send(JSON.stringify(savethis));
@@ -579,7 +550,7 @@ if(type=='filter'){
 if(type=='grating'){
   var savethis = {
     savethis: 'save-grating-step-'+correctgratingstep,
-    wavelength: 'save-wave-'+correctwave,
+    wavelength: 'save-grating-wave-'+correctwave,
   }
   console.log(savethis);
   websocket.send(JSON.stringify(savethis));
@@ -667,11 +638,12 @@ function SendCMD(){
 
 }
 
+/*=======================================================================end of section 4=======================================================*/ 
 
-/**------------------------------------------------------------------------
- *                           login functions
- *------------------------------------------------------------------------**/
-function toggleLogin(){
+
+
+/*======================================================================== Login section 5 =====================================================*/
+function toggleLoginContainer(){
   var login = document.getElementById("login");
   if(login.style.display=="none"){
     login.style.display="block";
@@ -681,51 +653,37 @@ function toggleLogin(){
   }
 }
 
-
-document.getElementById("submit").addEventListener("click", function () {
+// Get the submit button element
+var submitButton = document.getElementById('submit');
+function login(){
   var user = document.getElementById("username").value;
   var pass = document.getElementById("password").value;
-  console.log(user, pass);
-  sendCredentials(user, pass);
-});
-
-function sendCredentials(user, pass) {
-  if (websocket.readyState === WebSocket.OPEN) {
-      var car = {
-          username: user,
-          password: pass,
-      }
-
-      // Assuming 'websocket' is your WebSocket object
-      websocket.send(JSON.stringify(car));
-  } else {
-      console.log('WebSocket not open. Reinitializing...');
-      initWebSocket();
+  var car = {
+      username: user,
+      password: pass,
   }
-}
+  websocket.send(JSON.stringify(car));
+};
+
+ document.addEventListener('keydown', function(event) {
+   // Check if the key pressed is Enter and the login container is opened
+   if (event.key == 'Enter' && document.getElementById('login').style.display=='block') {
+     // Simulate a click on the submit button
+     submitButton.click();
+   }
+ });
 
 
+
+//function to handle the esp32 login message 
 function handleLogin(myObj) {
-  
+  console.log(myObj);
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-      // Check if the username and password are true
       if (myObj.username === true && myObj.password === true) {
-          console.log("Login successful. Redirecting to control.html");
-          // request control page
           window.location.href = "temp.html";
       } else {
-          localStorage.setItem('username', 'false');
-          console.log("Wrong username or password.");
           document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
       }
+  } 
   }
-   else {
-      // Handle other error conditions, such as 404 (Not Found)
-      console.log("Error: " + event.data);
-      document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
-      
-  }
-}
-
-
-
+  /*========================================================= END OF section 5===============================================================*/

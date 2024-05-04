@@ -901,7 +901,6 @@ li:hover{
   border-radius: 10px;
   padding: 20px 30px 30px 20px;
   backdrop-filter: blur(9px);
-  max-height: 100vh;
   background: rgba(5, 5, 33, 0.565);
   color: white;
 

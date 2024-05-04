@@ -45,26 +45,27 @@ set-time-{date time} like "set-time-1/13/2024 13:32:12\n"==> responde when done 
 //send current motors position
 get-motors-steps  //send motor steps and current wavelength ==> response with "lampmoter-gratingmotor-filtermotor-currentwavelength\n" like 50-34-200-1100
 
-//gohome
-lampmotorhome      //send lamp moter home ==>respond with the current step after excuting the gohome function like "0\n"
-gratingmotorhome   // same but for grating ==>same
-filtermotorhome    // same but for filter ==> same
-get-current-wav           //send me the current wavelength ==> just the number  like "1100\n"
+//gohome           //updated 2/5
+set-lamp-motor-home      //send lamp moter home            ==>respond with the current step after excuting the gohome function like "0\n"
+set-grating-motor-home   // same but for grating           ==>same
+set-filter-motor-home    // same but for filter            ==> same
+get-current-wav          //send me the current wavelength  ==> just the number  like "1100\n"
 
-//calibration   //removed move-to command 
-savestep-(value)  like savestep-122   //save the value in the eeprom  ==> respond with "saved" or "failed to save"
-savewave-(value)  like savewave-1100  //save the value in the eeprom  ==> respond with "saved" or "failed to save"
+//calibration      //updated 2/5   
+save-filter-step-(value)   like save-filter-step-200       //save the value in the eeprom  ==> respond with "saved" or "failed to save"
+save-grating-step-(value)  like save-grating-step-100      //save the value in the eeprom  ==> respond with "saved" or "failed to save"
+save-grating-wave-(value)  like save-grating-wave-1100     //save the value in the eeprom  ==> respond with "saved" or "failed to save"
+save-filter-wave-(value)   like save-filter-wave-1200      //save the value in the eeprom  ==> respond with "saved" or "failed to save"
 
-//new commands updated
 //lamp moter
-get-lamp-moter-position    //send lamp moter current position ==> "UV Lamp" or "VI Lamp"
+get-lamp-moter-position    //send lamp moter current position   ==> "UV Lamp" or "VI Lamp"
 set-lamp-moter-VI          //set the lamp moter to be in the VI ==>response with "moved" or "failed to move"
 set-lamp-moter-UV          //set the lamp moter to be in the UV ==>response with "moved" or "failed to move"
 
 //filter moter
-set-filtermoter-to-L-(value) like set-filtermoter-to-L-100    //send the filter moter to the "value" steps to the left ==> respond with "moved" or "failed to move"
+set-filtermoter-to-L-(value) like set-filtermoter-to-L-100    //send the filter moter to the "value" steps to the left  ==> respond with "moved" or "failed to move"
 set-filtermoter-to-R-(value) like set-filtermoter-to-R-100    //send the filter moter to the "value" steps to the right ==> respond with "moved" or "failed to move"
-set-filtermoter-to-(value) like set-filtermoter-to-F1    //send the filter moter to the "value" filter position ==> respond with "moved" or "failed to move"
+set-filtermoter-to-(value) like set-filtermoter-to-F1         //send the filter moter to the "value" filter position    ==> respond with "moved" or "failed to move"
 
 //grating moter
 

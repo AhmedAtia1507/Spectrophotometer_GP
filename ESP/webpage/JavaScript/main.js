@@ -442,7 +442,6 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
-  stopreading(); //to stop loading readings task if running
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
   const startInput = parseFloat(document.getElementById('start').value);
@@ -1275,12 +1274,8 @@ websocket.send(JSON.stringify(message));
 
 
 let colorindex=0;
-var PauseButton =document.getElementById("pausereading");//to use in displaying the stop/pause buttons
-var StopButton =document.getElementById("stopreading");//to use in displaying the stop/pause buttons
-var LoadButton =document.getElementById("loadreadings");//to use in displaying the stop/pause buttons
-  
 function showreadings(){
-  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'black'];
+  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
   var myList = document.getElementById("presetlist");
   
   var message = {
@@ -1350,8 +1345,6 @@ function showreadings(){
               let x = []; // wavelength
               let y = []; // intensity
               colorindex=colorindex+1;
-              PauseButton.style.display="block";
-              StopButton.style.display="block";
               LoadButton.style.display="none";
               openlist(); //when choosing one to load hid the list
               
@@ -1363,9 +1356,11 @@ function showreadings(){
               websocket.send(JSON.stringify(message));
 
               websocket.onmessage = function (event) {
-              
+                var samplename;
+                console.log(event.data);
                 var lines = event.data.split('\n');
-            
+                console.log("lines are:: "+lines);
+                     
                 // Process each line individually
                 lines.forEach(function(line) {
                     // Skip empty lines
@@ -1376,31 +1371,22 @@ function showreadings(){
                     try {
                         var myObj = JSON.parse(line);
                         console.log(myObj);
-                        if (myObj.hasOwnProperty('readings') && myObj.hasOwnProperty('time')) {
-                            if (myObj.isFirst == true) {
-                                displayCMD(myObj.name + "    " + myObj.discription, "red", "SD O");
+                        if ( myObj.hasOwnProperty('isFirst')) {
+                            if (myObj.isFirst == "true") {
+                                samplename=myObj.SampleID;
+                                displayCMD(samplename + "  ===> " + myObj.SampleDescribe, "red", "SD O");
                                 displayCMD(myObj.time, "green", "SD O");
-                                displayCMD(myObj.mode, "blue", "SD O");
-                                displayCMD(myObj.readings, "black", "SD O");
-                                let reading = myObj.readings;
-                                let xy = decombinCoordinates(reading);
-                                let xval = [parseFloat(xy[0])];
-                                let yval = [parseFloat(xy[1])];
-                                x.push(xval);
-                                y.push(yval);
-                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
-                            } else if (myObj.isFirst == false) {
-                                displayCMD(myObj.readings, "black", i + 3);
-                                let reading = myObj.readings;
-                                let xy = decombinCoordinates(reading);
-                                let xval = [parseFloat(xy[0])];
-                                let yval = [parseFloat(xy[1])];
-                                x.push(xval);
-                                y.push(yval);
-                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
+                                displayCMD(myObj.modeInput, "blue", "SD O");
+                                displayCMD(myObj.wavelength+","+myObj.transmission+","+myObj.absorption, "black", "SD O");
+                                x.push(myObj.wavelength);
+                                y.push(myObj.absorption);
+                              addCurve(x, y, "green", myObj.SampleID);
+                            } else if (myObj.isFirst == "false") {
+                              displayCMD(myObj.wavelength+","+myObj.transmission+","+myObj.absorption, "black", "SD O");
+                              x.push(myObj.wavelength);
+                              y.push(myObj.absorption);
+                              addCurve(x, y, "blue", samplename);
                             } else if (myObj.isFirst == "last") {
-                                PauseButton.style.display = "none";
-                                StopButton.style.display = "none";
                                 LoadButton.style.display = "block";
                             }
                             i++;
@@ -1475,56 +1461,8 @@ function decombinCoordinates(reading){
   return val
 }
 
-function stopreading(){
-  var currentfunction =document.getElementById("pausereading");
-  var message = {
-    Stopreading: 'Stopreading',
-  };
-  websocket.send(JSON.stringify(message));
-  if(currentfunction.innerHTML=="resume loading")
-  {
-    var message = {
-      resumereading: 'resumereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="pause loading"
-
-  }
-  PauseButton.style.display="none";
-  StopButton.style.display="none";
-  LoadButton.style.display="block";
-  
-
-
-}
-function pausereading(){
-  var currentfunction =document.getElementById("pausereading");
-  if(currentfunction.innerHTML=="pause loading")
-  {
-    var message = {
-      pausereading: 'pausereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="resume loading"
-
-  }
-  else {
-    var message = {
-      resumereading: 'resumereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="pause loading"
-
-  }
-
-
-}
-
-
-/**------------------------------------------------------------------------
- *                           login functions
- *------------------------------------------------------------------------**/
-function toggleLogin(){
+/*============================ Login ============================*/
+function toggleLoginContainer(){
   var login = document.getElementById("login");
   if(login.style.display=="none"){
     login.style.display="block";
@@ -1534,52 +1472,37 @@ function toggleLogin(){
   }
 }
 
-
-document.getElementById("submit").addEventListener("click", function () {
+// Get the submit button element
+var submitButton = document.getElementById('submit');
+function login(){
   var user = document.getElementById("username").value;
   var pass = document.getElementById("password").value;
-  console.log(user, pass);
-  sendCredentials(user, pass);
-});
-
-function sendCredentials(user, pass) {
-  if (websocket.readyState === WebSocket.OPEN) {
-      var car = {
-          username: user,
-          password: pass,
-      }
-
-      // Assuming 'websocket' is your WebSocket object
-      websocket.send(JSON.stringify(car));
-  } else {
-      console.log('WebSocket not open. Reinitializing...');
-      initWebSocket();
+  var car = {
+      username: user,
+      password: pass,
   }
-}
+  websocket.send(JSON.stringify(car));
+};
 
+ document.addEventListener('keydown', function(event) {
+   // Check if the key pressed is Enter and the login container is opened
+   if (event.key == 'Enter' && document.getElementById('login').style.display=='block') {
+     // Simulate a click on the submit button
+     submitButton.click();
+   }
+ });
+
+
+
+//function to handle the esp32 login message 
 function handleLogin(myObj) {
   console.log(myObj);
-
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-      // Check if the username and password are true
       if (myObj.username === true && myObj.password === true) {
-          console.log("Login successful. Redirecting to control.html");
-          // request control page
           window.location.href = "temp.html";
       } else {
-          localStorage.setItem('username', 'false');
-          console.log("Wrong username or password.");
           document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
       }
   } 
-   else {
-      // Handle other error conditions, such as 404 (Not Found)
-      console.log("Error: " + event.data);
-      document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
-      
   }
-}
-
-/**------------------------------------------------------------------------
- *                           validate page functions should be here 
- *------------------------------------------------------------------------**/
+  /*============================ END OF LOGIN ============================*/
