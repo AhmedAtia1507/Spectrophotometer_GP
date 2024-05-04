@@ -55,15 +55,7 @@ section h2 {
   margin-bottom: 2rem;
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1%;
-  margin: 1%;
-  /* Takes up 50% of the container height */
-  background-color: white;
-}
+
 
 .setup {
   margin: 5px;
@@ -73,19 +65,20 @@ section h2 {
 
 }
 
-.col div {
-  margin-bottom: 10px;
+fieldset{
+  display: block;
 }
-
 @media screen and (max-width: 962px) {
   .col {
     width: 95%;
   }
   .row{
-    width: 100%;
+    width: 80%;
+
+    flex-direction: column;
   }
   .setup {
-    width: 95%;
+    width: 80%;
   }
   section {
     margin-bottom: 150px;
@@ -548,16 +541,15 @@ canvas {
 }
 
 .fsetup {
-  width: 60%;
-  min-width:400px ;
+  width: 30%;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
 }
 .fchart{
-  width: 80%;
-  display: relative;
+  width: 70%;
+  display: block;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
@@ -586,6 +578,8 @@ table{
   }
   .fchart{
     width: 100%;
+    display: relative;
+    margin-top: 200px;
   }
   
 }

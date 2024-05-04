@@ -51,13 +51,22 @@
     <section>
       <div id="tab" class="tab">
         <button class="tablinks" onclick="openTab(event, 'scan')"><p>Scan</p> <i class="fas fa-play" style="color: white;"></i></button>
-        <button class="tablinks" onclick="openTab(event, 'ADC')">ADC</button>
         <button class="tablinks" onclick="openTab(event, 'FLC')">FLC</button>
       </div>
 
       <div id="scan" class="tabcontent" style="display: block;" >
 
-          <div class="row">
+          <div class="row" style="height: 70vh;">
+            <fieldset class="fchart" >
+              <legend>Chart</legend>
+          
+                <canvas id="chartScan" style="height: 100%; width: 100%;"></canvas>
+ 
+              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
+              <!-- <button id="resetBtn">Reset Zoom</button> -->
+            </fieldset>
+
+            
             <fieldset class="fsetup">
               <legend>Setup</legend>
               <input class="Scanin" id="SampleNum" class = "SampleNum" placeholder="Number of Samples">
@@ -82,17 +91,7 @@
             </fieldset>
           </div>
 
-          <div class="row" style="height: 80vh; width: 100%;">
-            <fieldset class="fchart" style="height: 100%; width: 100%;">
-              <legend>Chart</legend>
-          
-                <canvas id="chartScan" style="height: 100%; width: 100%;"></canvas>
- 
-              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
-              <!-- <button id="resetBtn">Reset Zoom</button> -->
-            </fieldset>
-            
-          </div>
+
 
           
   
@@ -192,20 +191,7 @@
         </div>
       </div>
       
-        <div id="ADC" class="tabcontent" style="align-items: center; text-align: center">
-          <div class="row">
-            <div class="col">
-              <h1>I2C Data:</h1>
-              <div id="i2cValue">Waiting for data...</div>
-            </div>
-            <div class="col">
-              <div class="TwoBtn">
-                <button onclick="readADC()">Start Reading</button>
-                <button onclick="pauseReading()">Pause Reading</button>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div id="FLC" class="tabcontent">
           <div class="row">
             <div class="col">
