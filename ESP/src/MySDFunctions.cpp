@@ -231,6 +231,7 @@ String header = "isFirst,SampleID,SampleDescribe,Time,ModeInput,Wavelength,Absor
 String jsonToCsv(const DynamicJsonDocument& doc, int numKeys) {
     String csv = "";
     String filename = "/readings/"+ doc["SampleID"].as<String>()+" === " +doc["time"].as<String>()+ ".csv";
+    Serial.print(filename);
 
     String flag =doc["isFirst"].as<String>();
     if(flag=="true"){

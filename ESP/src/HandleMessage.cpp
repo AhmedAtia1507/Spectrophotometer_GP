@@ -536,8 +536,8 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     Serial.print("saved");
    // writeToDatabase("/readings/", doc); //old version
-   jsonToCsv(doc,8);
-    String filename=doc["name"].as<String>()+" === " +doc["time"].as<String>()+ ".txt";
+    jsonToCsv(doc,8);
+    String filename=doc["SampleID"].as<String>()+" === " +doc["time"].as<String>()+ ".csv";
     String bath="/ReadingsDB.txt"; 
     CsvWriteToSd(bath,filename);//save the name of the file into database
   }

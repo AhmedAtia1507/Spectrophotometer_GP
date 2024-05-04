@@ -444,6 +444,8 @@ function pauseScan() {
 function scan(index,SampleID,SampleDecribe) {
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
+  var time= time.replaceAll(","," ");  //because file name can't contain ,
+  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
@@ -693,6 +695,7 @@ function addtolist() {
       let modeInput = document.getElementById('mySelect').value;
       let temp=document.getElementById('DateTime').textContent;
       var time= temp.replaceAll(":"," ");
+      var time= time.replaceAll(","," ");
       console.log(time);
       var message = {
         savepreset: 'savepreset',
@@ -1247,26 +1250,21 @@ function getAllTextContent() {
 /**------------------------------------------------------------------------
  *                           SD Save Readings
  *------------------------------------------------------------------------**/
-function savetosd(SampleID,flag,time,SampleDecribe,modeInput,wavelength,absorption,transmission){
-let xyvalues;
-if (modeInput == "absorption") {
-  xyvalues = combineCoordinates(wavelength,absorption);}
-else {
-  xyvalues = combineCoordinates(wavelength,transmission);
-}
-
-var message={
-isFirst:flag,
-name:SampleID,
-discription:SampleDecribe,
-time:time,
-mode:modeInput,
-readings:xyvalues,
-}
-console.log(message);
-websocket.send(JSON.stringify(message));
-}
-
+function savetosd(SampleID,flag,time,SampleDescribe,modeInput,wavelength,absorption,transmission){
+  var message = {
+    isFirst: flag,
+    SampleID: SampleID,
+    SampleDescribe: SampleDescribe,
+    time: time,
+    modeInput: modeInput,
+    wavelength: wavelength,
+    absorption: absorption,
+    transmission: transmission
+  };
+  console.log(message);
+  websocket.send(JSON.stringify(message));
+  }
+  
 
 
 
@@ -1274,6 +1272,7 @@ websocket.send(JSON.stringify(message));
 
 
 let colorindex=0;
+let LoadButton=document.getElementById('loadreadings');
 function showreadings(){
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
   var myList = document.getElementById("presetlist");
@@ -1446,20 +1445,20 @@ function deletereading(myList, names, newItem) {
 
 
 
-// Function to combine xvalues and yvalues into an array of coordinates
-function combineCoordinates(xvalues2, yvalues2) {
-let combined="("+xvalues2+","+yvalues2+")";
-return combined;
-}
+// // Function to combine xvalues and yvalues into an array of coordinates
+// function combineCoordinates(xvalues2, yvalues2) {
+// let combined="("+xvalues2+","+yvalues2+")";
+// return combined;
+// }
 
-function decombinCoordinates(reading){
-  console.log(reading);
-  let temp =reading.replaceAll("(","");
-  temp=temp.replaceAll(","," ")
-  temp=temp.replaceAll(")","")
-  let val= temp.split(" ");
-  return val
-}
+// function decombinCoordinates(reading){
+//   console.log(reading);
+//   let temp =reading.replaceAll("(","");
+//   temp=temp.replaceAll(","," ")
+//   temp=temp.replaceAll(")","")
+//   let val= temp.split(" ");
+//   return val
+// }
 
 /*============================ Login ============================*/
 function toggleLoginContainer(){
