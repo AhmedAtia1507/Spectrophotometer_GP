@@ -549,9 +549,9 @@ function selectTransmission() {
   selectElement.selectedIndex = transmissionIndex;
 }
 
-function showpreset() {
-  var myList = document.getElementById("presetlist");
 
+var myList = document.getElementById("presetlist");
+function showpreset() {
   var message = {
     showpreset: 'showpreset'
   };
@@ -562,7 +562,6 @@ function showpreset() {
 
     for (var j = myList.children.length - 1; j >= 0; j--) {
       var child = myList.children[j];
-      console.log(child.id);
       // Check if the element has an id and it is not "nopresets"
       if (child.id !== 'nopresets' && child.id !== 'search') {
         myList.removeChild(child);
@@ -574,9 +573,9 @@ function showpreset() {
 
     var myObj = JSON.parse(event.data);
     console.log(myObj);
-    if (myObj.hasOwnProperty('presetno')) {
+    if (myObj.hasOwnProperty('presetsno')) {
 
-      let i = myObj.presetno;
+      let i = myObj.presetsno;
       if (i == 0) {
         console.log('iiiii b =0');
         var nopresetsDiv = document.getElementById('nopresets');
@@ -1272,7 +1271,7 @@ function savetosd(SampleID,flag,time,SampleDescribe,modeInput,wavelength,absorpt
 
 
 let colorindex=0;
-let LoadButton=document.getElementById('loadreadings');
+
 function showreadings(){
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
   var myList = document.getElementById("presetlist");
@@ -1344,7 +1343,6 @@ function showreadings(){
               let x = []; // wavelength
               let y = []; // intensity
               colorindex=colorindex+1;
-              LoadButton.style.display="none";
               openlist(); //when choosing one to load hid the list
               
 
@@ -1385,8 +1383,9 @@ function showreadings(){
                               x.push(myObj.wavelength);
                               y.push(myObj.absorption);
                               addCurve(x, y, "blue", samplename);
-                            } else if (myObj.isFirst == "last") {
-                                LoadButton.style.display = "block";
+                            } 
+                            else if (myObj.isFirst == "last") {
+                            //we can add codes here   
                             }
                             i++;
                         }
@@ -1459,6 +1458,45 @@ function deletereading(myList, names, newItem) {
 //   let val= temp.split(" ");
 //   return val
 // }
+
+
+// Common function to remove all children except specified IDs
+function removeAllChildrenExcept(parent, exceptions) {
+  for (let j = parent.children.length - 1; j >= 0; j--) {
+      const child = parent.children[j];
+      if (!exceptions.includes(child.id)) {
+          parent.removeChild(child);
+      }
+  }
+}
+
+// Function to create a list item with item name and delete button
+function createListItem(itemName, myList, names, messageType) {
+  const newItem = document.createElement("li");
+  newItem.classList.add("list-item");
+
+  // Item name span
+  const itemNameSpan = document.createElement("span");
+  itemNameSpan.textContent = itemName;
+  newItem.appendChild(itemNameSpan);
+
+  // Delete button with Font Awesome icon
+  const deleteButton = document.createElement("i");
+  deleteButton.classList.add("fa-solid", "fa-trash-can");
+  deleteButton.addEventListener("click", function () {
+      myList.removeChild(newItem);
+      const message = {
+          [messageType]: messageType,
+          name: names
+      };
+      websocket.send(JSON.stringify(message));
+      showList();
+  });
+  newItem.appendChild(deleteButton);
+
+  return newItem;
+}
+
 
 /*============================ Login ============================*/
 function toggleLoginContainer(){

@@ -12,7 +12,7 @@ void sendLoginFailureNotification();
 void sendFlagStatus();
 void handleLampStatus(const String &lampType);
 void handleLampControl(const String &lampType, bool turnOn);
-void handleShowPresets(const char *directory);
+//void handleShowPresets(const char *directory);           //old version
 void handleLoadPreset(const DynamicJsonDocument &doc);
 void handleSupplyStatus();
 bool notifyClients(String state);

@@ -52,13 +52,13 @@ String sendCMD(const String &input)
 
   // Create the task to send the command
   xTaskCreatePinnedToCore(
-      sendCMDTask,               // Task function
-      "sendCMDTask",             // Task name
-      4096,                      // Stack size (bytes)
-      (void *)&input,            // Parameter to pass to the task
-      1,                         // Task priority
-      NULL,                      // Task handle (not needed)
-      0                          // Core (0 or 1, depending on your setup)
+      sendCMDTask,    // Task function
+      "sendCMDTask",  // Task name
+      4096,           // Stack size (bytes)
+      (void *)&input, // Parameter to pass to the task
+      1,              // Task priority
+      NULL,           // Task handle (not needed)
+      0               // Core (0 or 1, depending on your setup)
   );
 
   // Return the response string
@@ -143,32 +143,34 @@ void handleLampControl(const String &lampType, bool turnOn)
   handleLampStatus(lampType);
 }
 
-void handleShowPresets(const char *directory)
-{
-  DynamicJsonDocument result = getFilesJson(directory);
-  //   String jsonString;
-  //  serializeJson(result, jsonString);
-  // notifyClients(jsonString);
-}
+// void handleShowPresets(const char *directory)
+// {
+//   getFilesJson(directory);
+//   //   String jsonString;
+//   //  serializeJson(result, jsonString);
+//   // notifyClients(jsonString);
+// }
 
 void handleLoadPreset(const DynamicJsonDocument &doc)
 {
-   String selectthis = doc["loadthis"].as<String>();
-    String path="";
-    DynamicJsonDocument preset(1024);
-    if(doc["Dictionary"]=="readings"){
-    //path = "/readings/" + selectthis + ".csv";
-    readFromDatabase2(doc);
-    }
+  String selectthis = doc["loadthis"].as<String>();
+  String path = "";
+  DynamicJsonDocument preset(1024);
+  if (doc["Dictionary"] == "readings")
+  {
+    // path = "/readings/" + selectthis + ".csv";
+    ReadFromDBTask(doc);
+  }
 
-    else if(doc["Dictionary"]=="presets"){
+  else if (doc["Dictionary"] == "presets")
+  {
     path = "/presets/" + selectthis + ".txt";
     String jsonString;
     preset = readFromDatabase(path.c_str());
     preset["loaded"] = "loaded";
     serializeJson(preset, jsonString);
     notifyClients(jsonString);
-   }
+  }
 }
 
 void handleSupplyStatus()
@@ -340,16 +342,19 @@ void handleScanTask(void *pvParameters)
   DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
 
   String command = doc["command"].as<String>();
+  String startInput = doc["startInput"].as<String>();
+  String stopInput = doc["stopInput"].as<String>();
+  String stepInput = doc["stepInput"].as<String>();
+  float current = (stopInput.toInt() - startInput.toInt()) / stepInput.toInt();
+  int j = 1; // represent the current iteration
+  bool scanning = true;
+  DynamicJsonDocument scanData(256);
+
+    
   if (command == "Scan")
   {
-    String startInput = doc["startInput"].as<String>();
-    String stopInput = doc["stopInput"].as<String>();
-    String stepInput = doc["stepInput"].as<String>();
-    float current = (stopInput.toInt() - startInput.toInt()) / stepInput.toInt();
-
-    int j = 1; // represent the current iteration
     Serial2.println(command + " " + startInput + " " + stopInput + " " + stepInput);
-    bool scanning = true;
+    
     // float x[]={250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300};
     // float y[]={0.79345, 0.75808, 0.72395, 0.69756, 0.67347, 0.65129, 0.62944, 0.60936, 0.59192, 0.58464, 0.56991, 0.556, 0.53878, 0.50347, 0.48214, 0.46173, 0.44379, 0.42682, 0.41183, 0.39886, 0.38637, 0.37066, 0.3595, 0.35018, 0.34142, 0.33042, 0.32363, 0.32548, 0.40237, 0.39305, 0.28955, 0.26148, 0.24206, 0.23069, 0.22278, 0.22248, 0.28155, 0.32932, 0.24429, 0.25164, 0.22734, 0.1903, 0.18143, 0.17317, 0.1626, 0.15239, 0.14342, 0.13418, 0.12678, 0.11987};
 
@@ -363,7 +368,7 @@ void handleScanTask(void *pvParameters)
       }
       String response = Serial2.readStringUntil('\n');
 
-      // String response ="23/3||1:30 200 10 10.5";
+      //String response ="23/3||1:30 200 10 10.5";
       Serial.println(response); // debug
 
       // Split the response into components
@@ -375,12 +380,11 @@ void handleScanTask(void *pvParameters)
       String wavelength = response.substring(space1 + 1, space2);
       String reference = response.substring(space2 + 1, space3);
       String sample = response.substring(space3 + 1);
-      DynamicJsonDocument scanData(256);
-
+     
       if (i == stopInput.toInt() || (i + stepInput.toInt() > stopInput.toInt()))
       {
-        scanning = false;
-        scanData["current"] = 100;
+        scanning = true;
+        scanData["current"] = 99;
       }
       scanData["currentTime"] = Time;
       scanData["wavelength"] = i;
@@ -400,6 +404,14 @@ void handleScanTask(void *pvParameters)
       Serial.println("Scan data sent");
     }
   }
+    scanning = false;
+    scanData["scanning"] = scanning;
+    scanData["current"] = 100;
+    String jsonString;
+    serializeJson(scanData, jsonString);
+    notifyClients(jsonString);
+    Serial.println("last");
+      
   vTaskDelete(NULL); // delete the task when done
 }
 
@@ -467,18 +479,21 @@ void handleifelse(const DynamicJsonDocument &doc)
   }
   else if (doc.containsKey("savepreset"))
   {
-    String filename=doc["name"].as<String>()+" === " +doc["time"].as<String>()+ ".txt";
-    String bath="/presetsDB.txt"; 
+    String filename = doc["name"].as<String>() + " === " + doc["time"].as<String>() + ".txt";
+    String bath = "/presetsDB.txt";
     writeToDatabase("/presets/", doc);
-    CsvWriteToSd(bath,filename);//save the name of the file into database
+    SdWriteString(bath, filename); // save the name of the file into database
   }
   else if (doc.containsKey("deletepreset"))
   {
-    SD.remove("/presets/" + doc["name"].as<String>() + ".txt");
+    SD.remove("/presets/" + doc["name"].as<String>() + ".txt"); // delete the file itself
+    String LineToDelete = doc["name"].as<String>() + ".txt";
+    deleteLineFromFile("/presetsDB.txt", LineToDelete); // delete its name from the DB
   }
   else if (doc.containsKey("showpreset"))
   {
-    handleShowPresets("/presets");
+    // handleShowPresets("/presets");                              //old version
+    getFilesJson("/presets"); // like list dictionary function and send it to web
   }
   else if (doc.containsKey("loadthis"))
   {
@@ -535,20 +550,26 @@ void handleifelse(const DynamicJsonDocument &doc)
   else if (doc.containsKey("isFirst"))
   {
     Serial.print("saved");
-   // writeToDatabase("/readings/", doc); //old version
-    jsonToCsv(doc,8);
-    String filename=doc["SampleID"].as<String>()+" === " +doc["time"].as<String>()+ ".csv";
-    String bath="/ReadingsDB.txt"; 
-    CsvWriteToSd(bath,filename);//save the name of the file into database
+    // writeToDatabase("/readings/", doc); //old version
+    WriteAsCsv(doc, 8);
+    String filename = doc["SampleID"].as<String>() + " === " + doc["time"].as<String>() + ".csv";
+    String bath = "/readingsDB.txt";
+    if (doc["isFirst"].as<String>() == "true")
+    {
+      SdWriteString(bath, filename); // save the name of the file into database
+    }
   }
   else if (doc.containsKey("showreadings"))
   {
-    handleShowPresets("/readings");
+    // handleShowPresets("/readings");       //old version
+    getFilesJson("/readings");
   }
   else if (doc.containsKey("deletereading"))
   {
-     SD.remove("/readings/" + doc["name"].as<String>() + ".csv");
-   }
+    SD.remove("/readings/" + doc["name"].as<String>() + ".csv");
+    String LineToDelete = doc["name"].as<String>() + ".csv";
+    deleteLineFromFile("/ReadingsDB.txt", LineToDelete);
+  }
   else if (doc.containsKey("DirectCommand"))
   {
     handleDirectCommand(doc);

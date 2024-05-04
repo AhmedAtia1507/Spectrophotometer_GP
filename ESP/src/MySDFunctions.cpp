@@ -3,8 +3,17 @@
 #include "MySDFunctions.h"
 #include <ArduinoJson.h>
 
+//to make it easy to transform manually from String to Json format
+String createJsonString(String key, String value) {
+  String jsonString = "\"" + key + "\":\"" + value + "\""+",";
+  return jsonString;
+}
+String createJsonString(String key, int value) {
+  String jsonString = "\"" + key + "\":" + String(value);
+  return jsonString;
+}
 
-// a normal function that print a doc into a txt file 
+// a unction that print a doc into a txt file 
 bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
     String filename = String(basePath)+ doc["name"].as<String>()+" === " +doc["time"].as<String>()+ ".txt";
     File file = SD.open(filename, FILE_APPEND);
@@ -16,12 +25,25 @@ bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc) {
     } else {
         Serial.println("Error opening file");
         return false;
-    }
-    
-    
+    } 
 }
+//it read the files was written in doc format
+DynamicJsonDocument readFromDatabase(const char *filename) {
+    DynamicJsonDocument doc(1024);
+    File file = SD.open(filename);
+    if (file) {
+        deserializeJson(doc, file);
+        }  
+    else {
+        Serial.println("Error opening file");
+    }
+    file.close();
+    return doc;
+}
+
+
 //this function writes any string into a file name at any format
-bool CsvWriteToSd(String &filename,String &content) {
+bool SdWriteString(String &filename,String &content) {
     File file = SD.open(filename, FILE_APPEND);
     if (file) {
         file.println(content);
@@ -32,106 +54,53 @@ bool CsvWriteToSd(String &filename,String &content) {
         return false;
     }
 }
-//it read the files was written in doc format
-DynamicJsonDocument readFromDatabase(const char *filename) {
-    DynamicJsonDocument doc(1024);
-    File file = SD.open(filename);
-    if (file) {
-     
-        if (deserializeJson(doc, file)) {
-        } else {
-            Serial.println("Failed to parse JSON from txt");
-        }
-        file.close();
-    } else {
-        Serial.println("Error opening file");
-    }
-    return doc;
-}
-
 
 // Function to handle sending file names in chunks
 void sendFileNamesTask(void *parameter) {
     String directory = *((String *)parameter);
-
-    // Open the directory
-    File dir = SD.open(directory);
-
-    // Check if the directory is open
-    if (!dir) {
-        Serial.println("Failed to open directory");
-        vTaskDelete(NULL);
+    String path=directory+"DB.txt";
+    int counter=0;
+    String linesToSend="{";
+    // Open the file for reading
+    File file = SD.open(path);
+ 
+    directory.replace("/","");
+    String jsonkey=directory+"no";   //to store no of lines in the json format
+    if (!file||!file.available()) {
+        Serial.println("Failed to open file for reading or an empty file");
+          String Nofile="{"+createJsonString(jsonkey,0)+"}";
+          Serial.println(Nofile);
+          notifyClients(Nofile);
+          vTaskDelete(NULL);
     }
-
-    // Initialize a counter for the files
-    int count = 1;
-    String fileNamesJSON = "{"; // Start JSON object
-
-    // Iterate over the files in the directory
-    bool allFilesProcessed = false;
-while (!allFilesProcessed) {
-        
-for (int i = 0; i <15; i++) {
-    File file = dir.openNextFile();
-        // Check if a file can be opened
-        if (!file) {
-           allFilesProcessed = true;         
-            // If no more files can be opened, break out of the loop
-            break;
-        }
-        else {
-              // Get the file name
-        String fileName = file.name();
-        // Remove the ".txt" extension from the file name
-        fileName.replace(".csv", "");
-        fileName.replace(".txt", "");
-        
-        // Add the file name to the JSON object
-        fileNamesJSON += "\"file" + String(count++) + "\": \"" + fileName + "\",";
-        // Close the file
-        file.close();
-        }
-
-      
-      
-}
+    
    
-        fileNamesJSON.remove(fileNamesJSON.length() - 1);
-
-        // Add the total number of files to the JSON object
-        if(directory=="/readings"){
-         if(count>1){
-            fileNamesJSON += ",\"readingsno\": " + String(count - 1)+ "}"+"\n";        
-         
-         }  
-         else{
-         fileNamesJSON += "{\"readingsno\": " + String(count - 1)+ "}"+"\n";        
-            
-         } 
+ while (file.available()) {
+        // Read 500 lines from the file
+        for (int i = 0; i <200 && file.available(); i++) {
+            String line = file.readStringUntil('\n');
+            line.trim();
+            line.replace(".txt","");
+            line.replace(".csv","");
+            linesToSend =linesToSend+createJsonString("file"+String(i+1),line);
+            if(!file.available()){
+                break;
+            }
+             counter++;
         }
-        else if(directory=="/presets"){
-             if(count>1){
-        fileNamesJSON += ",\"presetno\": " + String(count - 1)+ "}"+"\n";        
-             }
-               else{
-         fileNamesJSON += "{\"presetno\": " + String(count - 1)+ "}"+"\n";        
-            
-         } 
+        linesToSend =linesToSend+createJsonString(jsonkey,counter+1)+"}";
+        // Send the chunk of lines to the clients
+        Serial.print(linesToSend);
+        vTaskDelay(pdMS_TO_TICKS(60)); // Example delay of 60 ms
+        notifyClients(linesToSend);
+        linesToSend = "{";
+        counter=0;
 
-        }
+        // Delay or yield to allow other tasks to run
+        
+}  
     
-    
-    // Notify all clients with the JSON object
-     Serial.println(fileNamesJSON);
-    notifyClients(fileNamesJSON);
-    fileNamesJSON = "{";
-    count=1;
-    }
-
-    // Close the directory
-    dir.close();
-
-    
+    file.close();  
     // Delete the task when done
     vTaskDelete(NULL);
 }
@@ -171,6 +140,7 @@ void handlereadTask(void *pvParameters){
     File file = SD.open(path);
     if (!file) {
         Serial.println("Failed to open file for reading");
+        vTaskDelete(NULL);
     }
 
     // Read the file in chunks of 50 lines
@@ -182,6 +152,10 @@ void handlereadTask(void *pvParameters){
             line.trim();
             String json=csvToJsonString(line);
             linesToSend += json + "\n";
+            if(!file.available()){
+                break;
+            }
+        
         }
 
         // Send the chunk of lines to the clients
@@ -189,7 +163,7 @@ void handlereadTask(void *pvParameters){
         notifyClients(linesToSend);
 
         // Delay or yield to allow other tasks to run
-        vTaskDelay(pdMS_TO_TICKS(80)); // Example delay of 80 ms
+        vTaskDelay(pdMS_TO_TICKS(60)); // Example delay of 60 ms to ping
     }
 
     // Send a message when finished to tell the webpage that loading reading is finished
@@ -200,15 +174,14 @@ void handlereadTask(void *pvParameters){
     String message = "";
     serializeJson(lastmessage, message);
     notifyClients(message);
-
     // Close the file
     file.close();
-   
     vTaskDelete(NULL);
 }
 
-void handleread(const DynamicJsonDocument &doc) {
-   Serial.print("ana fel taaaaaaask\n");
+
+void ReadFromDBTask(const DynamicJsonDocument &doc) { 
+      Serial.print("ana fel taaaaaaask\n");
    DynamicJsonDocument *docCopy = new DynamicJsonDocument(doc.capacity());
     *docCopy = doc;
   
@@ -219,16 +192,13 @@ void handleread(const DynamicJsonDocument &doc) {
       (void *)docCopy,       // Parameter to pass to the task
       1,                    // Task priority
       &readTask,            // Task handle
-      0);                   // Core (0 or 1, depending on your setup)
-}
-void readFromDatabase2(const DynamicJsonDocument &doc) { 
-    handleread(doc);
+      0);  
     }
 
 
 String header = "isFirst,SampleID,SampleDescribe,Time,ModeInput,Wavelength,Absorption,Transmission,";
 //from json to csv and write them into sd
-String jsonToCsv(const DynamicJsonDocument& doc, int numKeys) {
+String WriteAsCsv(const DynamicJsonDocument& doc, int numKeys) {
     String csv = "";
     String filename = "/readings/"+ doc["SampleID"].as<String>()+" === " +doc["time"].as<String>()+ ".csv";
     Serial.print(filename);
@@ -236,15 +206,15 @@ String jsonToCsv(const DynamicJsonDocument& doc, int numKeys) {
     String flag =doc["isFirst"].as<String>();
     if(flag=="true"){
         csv=doc["isFirst"].as<String>()+","+doc["SampleID"].as<String>()+","+doc["SampleDescribe"].as<String>()+","+doc["time"].as<String>()+","+doc["modeInput"].as<String>()+","+doc["wavelength"].as<String>()+","+doc["absorption"].as<String>()+","+doc["transmission"].as<String>();
-    CsvWriteToSd(filename,header);
-    CsvWriteToSd(filename,csv);    
+    SdWriteString(filename,header);
+    SdWriteString(filename,csv);    
     csv="";
     
     }
 
     else if(flag=="false"){
     csv=doc["isFirst"].as<String>()+",,,,,"+doc["wavelength"].as<String>()+","+doc["absorption"].as<String>()+","+doc["transmission"].as<String>();
-    CsvWriteToSd(filename,csv);
+    SdWriteString(filename,csv);
     csv="";
     }
 
@@ -280,13 +250,54 @@ if(fields[0]=="true"||fields[0]=="false"){
     jsonString += "\"absorption\":\"" + fields[6] + "\",";
     jsonString += "\"transmission\":\"" + fields[7] + "\"";
     jsonString += "}";
-    Serial.print(jsonString);
+   // Serial.print(jsonString);
     return jsonString;
 
 }
  return "";
     }
 
+bool deleteLineFromFile(String filename, String searchName) {
+    // Temporary file to hold modified content
+    File tempFile = SD.open("/temp.txt", FILE_WRITE);
+    if (!tempFile) {
+        Serial.println("Failed to create temp file");
+        return false;
+    }
+
+    // Open the original file for reading
+    File file = SD.open(filename);
+    if (!file) {
+        Serial.println("Failed to open file for reading");
+        tempFile.close();
+        return false;
+    }
+
+    // Read the file line by line and copy to temp file except the line containing the specified name
+    while (file.available()) {
+        String line = file.readStringUntil('\n');
+        line.trim();
+        // Check if deserialization was successful and the line contains the specified name
+          if (line== searchName) {
+           // Skip this line
+            continue;
+            }
+
+        // Write the line to the temp file
+        tempFile.println(line);
+    }
+    // Close both files
+    file.close();
+    tempFile.close();
+    // Remove the original file
+    SD.remove(filename);
+    // Rename the temp file to original filename
+    if (!SD.rename("/temp.txt", filename)) {
+        Serial.println("Failed to rename temp file");
+        return false;
+    }
+    return true;
+}
 
 
 
@@ -339,7 +350,7 @@ if(fields[0]=="true"||fields[0]=="false"){
 // }
 
 
-// bool CsvWriteToSd(const char *basePath,String &message,const DynamicJsonDocument &doc) {
+// bool SdWriteString(const char *basePath,String &message,const DynamicJsonDocument &doc) {
 //     String filename = String(basePath)+ doc["name"].as<String>()+" === "+doc["time"].as<String>() + ".txt";
 //     File file = SD.open(filename, FILE_APPEND);
 //     if (file&&doc["isFirst"].as<String>()=="true") {
@@ -425,54 +436,7 @@ if(fields[0]=="true"||fields[0]=="false"){
 //     return files;
 // }
 
-// bool deleteLineFromFile(const char* filename, const char* searchName) {
-//     // Temporary file to hold modified content
-//     File tempFile = SD.open("/presets/temp.txt", FILE_WRITE);
-//     if (!tempFile) {
-//         Serial.println("Failed to create temp file");
-//         return false;
-//     }
 
-//     // Open the original file for reading
-//     File file = SD.open(filename);
-//     if (!file) {
-//         Serial.println("Failed to open file for reading");
-//         tempFile.close();
-//         return false;
-//     }
-
-//     // Read the file line by line and copy to temp file except the line containing the specified name
-//     while (file.available()) {
-//         String line = file.readStringUntil('\n');
-//         line.trim();
-//         DynamicJsonDocument doc(1024);
-//         DeserializationError error = deserializeJson(doc, line);
-
-//         // Check if deserialization was successful and the line contains the specified name
-//           if (!error && doc.containsKey("name") && doc["name"] == searchName||doc["name"].as<String>()+doc["time"].as<String>() == searchName) {
-//            // Skip this line
-//             continue;
-//         }
-
-//         // Write the line to the temp file
-//         tempFile.println(line);
-//     }
-
-//     // Close both files
-//     file.close();
-//     tempFile.close();
-
-//     // Remove the original file
-//     SD.remove(filename);
-
-//     // Rename the temp file to original filename
-//     if (!SD.rename("/presets/temp.txt", filename)) {
-//         Serial.println("Failed to rename temp file");
-//         return false;
-//     }
-
-//     return true;
-// }
 // DynamicJsonDocument getFilesJson(const char *directory) {
 //     // Create a JSON document to store the file information
 //     DynamicJsonDocument doc(3048);

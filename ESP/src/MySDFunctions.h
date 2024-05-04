@@ -6,11 +6,14 @@
 
 bool writeToDatabase(const char *basePath, const DynamicJsonDocument &doc);
 DynamicJsonDocument readFromDatabase(const char* filename);
-bool CsvWriteToSd(String &filename,String &content);
+bool SdWriteString(String &filename,String &content);
+String createJsonString(String key, String value);
+String createJsonString(String key, int value) ;
 DynamicJsonDocument getFilesJson(const char *directory);
-void readFromDatabase2(const DynamicJsonDocument &doc);
-String jsonToCsv(const DynamicJsonDocument& doc, int numKeys);
+void ReadFromDBTask(const DynamicJsonDocument &doc);
+String WriteAsCsv(const DynamicJsonDocument& doc, int numKeys);
 String csvToJsonString(const String& csvLine);
+bool deleteLineFromFile(String filename, String searchName);
 
 //void handleread(const DynamicJsonDocument &doc)
 //bool deleteLineFromFile(const char* filename, const char* searchName);
