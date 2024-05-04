@@ -36,10 +36,6 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     String message = (char *)data;
     DynamicJsonDocument doc(1024);
     deserializeJson(doc, message);
-    if (strcmp((char *)data, "barStates") == 0)
-    {
-      notifyClients(getOutputStates());
-    }
    handleifelse(doc);
   }
 }
@@ -75,6 +71,7 @@ void initWebSocket()
         Serial.println(file.name());
         file.close();
     }
+    root.close();
 }
 void setup()
 {

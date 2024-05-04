@@ -2,6 +2,7 @@
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
 
+
 const unsigned long interval = 600000; // 10 minutes in milliseconds
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
@@ -24,24 +25,89 @@ void checkCountdown()
     }
 }
 
-String sendCMD(const String &input)
-{ 
-    // Send the command to the STM32 via UART
-    Serial2.println(input);
-    Serial.println(input);
-    Serial.println("sent command");
-    // Wait for a response from the STM32
-    int startTime = millis();
-    while (Serial2.available() == 0 && millis() - startTime < 2000)
-    {
-        delay(1);
-    }
-    // Read and return the response
-    String response = Serial2.readStringUntil('\n');
-    Serial.println(response);
-    return response;
+
+// Define a task handle
+TaskHandle_t cmdTask;
+
+// Define a semaphore to synchronize task execution
+SemaphoreHandle_t responseSemaphore;
+
+// Function to handle sending commands to STM32
+void sendCMDTask(void *parameter) {
+    String input = *((String *)parameter);
+    // Send the command to the STM32 via UART if UART is connected
+        Serial2.println(input);
+        Serial.println(input);
+        // Release the semaphore to indicate that the response is ready
+        xSemaphoreGive(responseSemaphore);
+    // Delete the task when done
+    vTaskDelete(NULL);
 }
 
+// Function to send a command to STM32 and get the response
+String sendCMD(const String &input) {
+    // Create a semaphore to synchronize task execution
+    responseSemaphore = xSemaphoreCreateBinary();
+    if (responseSemaphore == NULL) {
+        // Semaphore creation failed
+        return "Semaphore creation failed";
+    }
+
+    // Take the semaphore to reset it
+    xSemaphoreTake(responseSemaphore, 0);
+
+    // Create the task to send the command
+    xTaskCreatePinnedToCore(
+        sendCMDTask,        // Task function
+        "sendCMDTask",      // Task name
+        4096,               // Stack size (bytes)
+        (void *)new String(input),  // Parameter to pass to the task
+        1,                  // Task priority
+        &cmdTask,           // Task handle
+        0                   // Core (0 or 1, depending on your setup)
+    );
+
+    // Wait for the response semaphore
+    if (xSemaphoreTake(responseSemaphore, pdMS_TO_TICKS(600000)) == pdTRUE) { // 10 minutes timeout
+        // Semaphore was successfully taken, indicating response is ready
+        // Return the response string
+        int startTime = millis();
+        while (Serial2.available()&& millis() - startTime < 2000) {
+            String response = Serial2.readStringUntil('\n');
+            Serial.println("Response received: " + response);
+            return response;
+        } 
+    } else {
+        // Semaphore timed out, indicating response not received within timeout
+        Serial.println("Timeout");
+        return "Response timeout";
+    }
+    return "och";
+}
+
+void handleSB(const DynamicJsonDocument &doc) {
+String tempArr[] = {"get-UV", "get-VI", "get-WL"};
+String resArr[] = {"UV", "VI", "WL"};
+DynamicJsonDocument SBDATA(256);
+for (size_t i = 0; i < 2; i++)
+{
+  Serial2.println(tempArr[i]);
+  int startTime = millis();
+        while (Serial2.available() == 0 && millis() - startTime < 2000) {
+          delay(1);
+        }
+        String response = Serial2.readStringUntil('\n');
+        SBDATA[resArr[i]] = response;
+}
+
+        String jsonString;
+        serializeJson(SBDATA, jsonString);
+        notifyClients(jsonString);
+        Serial.println("State Bar data sent");
+}
+//mina
+void mina()
+{}
 
 
 void sendLoginSuccessNotification()
@@ -100,9 +166,9 @@ void handleLampControl(const String &lampType, bool turnOn)
 
 void handleShowPresets( const char *directory){
     DynamicJsonDocument result = getFilesJson(directory);
-    String jsonString;
-    serializeJson(result, jsonString);
-    notifyClients(jsonString);
+//   String jsonString;
+//  serializeJson(result, jsonString);
+// notifyClients(jsonString);
 }
 
 void handleLoadPreset(const DynamicJsonDocument &doc)
@@ -133,24 +199,12 @@ void handleLoadPreset(const DynamicJsonDocument &doc)
 
 void handleSupplyStatus()
 {
-    String stutusp12 = sendCMD("get-voltage-p12");
-    String stutusn12 = sendCMD("get-voltage-n12");
-    String stutusp5 = sendCMD("get-voltage-p5");
-    String stutusp33 = sendCMD("get-voltage-p33");
-    String stutustwelve = sendCMD("get-voltage-twelve");
+    String stutus = sendCMD("get-voltages");
+    //String stutus="12 2 2 2 13";
     DynamicJsonDocument object(1024);
     object["supplystutus"] = "good";
-     object["p12"] = stutusp12;
-     object["n12"] = stutusn12;
-     object["p5"] = stutusp5;
-     object["p33"] = stutusp33;
-     object["twelve"] = stutustwelve;
-    //object["p12"] = "+12.1\n";
-    //object["n12"] = "-12.3\n";
-    //object["p5"] = "4.3\n";
-    //object["p33"] = "3.2\n";
-    //object["twelve"] = "11\n";
-
+    object["voltages"] = stutus;
+    
     String jsonString;
     serializeJson(object, jsonString);
     notifyClients(jsonString);
@@ -158,8 +212,8 @@ void handleSupplyStatus()
 
 void loadtime()
 {
-    String response = sendCMD("get-time");
-    //String response = "1/13/2024 13:32:12\n";
+    //String response = sendCMD("get-time");
+    String response = "1/13/2024 13:32:12\n";
     Serial.print(response);
     DynamicJsonDocument object(200);
     object["currenttime"] = response;
@@ -189,7 +243,7 @@ void sendsteps()
 {
     String command = "get-motors-steps";
     String response = sendCMD(command);
-    //String response = "30-40-50-110\n";
+    //String response = "30-40-50-1100\n";
     Serial.print(response);
     DynamicJsonDocument object(60);
     object["motorssteps"] = response;
@@ -211,7 +265,7 @@ void getlampmoter(){
 }
 void ToggleLampMotor(const DynamicJsonDocument &doc)
 {
-    String setto = doc["Lampmotortoggle"];
+    String setto = doc["Lampmotortoggle"].as<String>();
     String command="set-lamp-moter-"+setto;
     String response = sendCMD(command);
     //String response = "moved";
@@ -225,7 +279,7 @@ void ToggleLampMotor(const DynamicJsonDocument &doc)
     }
 void handleGoHome(const DynamicJsonDocument &doc)
 {
-    String motortype = doc["type"];
+    String motortype = doc["type"].as<String>();
     Serial.print(motortype);
     String command = motortype ;
     String response = sendCMD(command);
@@ -244,8 +298,8 @@ void handleGoHome(const DynamicJsonDocument &doc)
 
 void handleSavestep(const DynamicJsonDocument &doc)
 {
-    String correctstep = doc["savethis"];
-    String correctwave = doc["wavelength"];
+    String correctstep = doc["savethis"].as<String>();
+    String correctwave = doc["wavelength"].as<String>();
     String response = sendCMD(correctstep);
     String wavelength = sendCMD(correctwave);
     //String response = "saved";
@@ -258,7 +312,7 @@ void handleSavestep(const DynamicJsonDocument &doc)
 }
 void handlemovestep(const DynamicJsonDocument &doc)
 {
-    String correctstep = doc["movemoter"];
+    String correctstep = doc["movemoter"].as<String>();
     Serial.println(correctstep);
     String response = sendCMD(correctstep);
     //String response = "moved";
@@ -270,8 +324,8 @@ void handlemovestep(const DynamicJsonDocument &doc)
     sendsteps();
 }
 void handelreaddetecor(){
-    //String response = sendCMD("get-det-readings");
-    String response = "12-122-22-260-17";
+    String response = sendCMD("get-det-readings");
+    //String response = "12-122-22-260-17-18";
     DynamicJsonDocument object(90);
     object["detreadings"] = response;
     String jsonString;
@@ -280,14 +334,29 @@ void handelreaddetecor(){
 }
 void handlenewgain(const DynamicJsonDocument &doc)
 {
-    String newgain = doc["newgain"];
-    //String response = sendCMD("set-newgain-"+newgain);
-    String response = "applied";
+    String newgain = doc["newgain"].as<String>();
+    String gainType = doc["gaintype"].as<String>();
+    String command ="set-"+gainType+"-newgain-to-"+newgain;
+    String response = sendCMD(command);
+    //String response = "applied";
     if(response=="applied"){
       handelreaddetecor();
     }
     //else{handlenewgain(doc);}
     }
+
+void handleDirectCommand(const DynamicJsonDocument &doc)
+{
+    String command=doc["DirectCommand"].as<String>();
+    String response=sendCMD(command);
+    //String response=command;
+   
+    DynamicJsonDocument object(90);
+    object["DirectResponse"] = response;
+    String jsonString;
+    serializeJson(object, jsonString);
+    notifyClients(jsonString);
+}
 
 /**------------------------------------------------------------------------
  *                           SCAN TASK
@@ -317,7 +386,8 @@ void handleScanTask(void *pvParameters) {
           delay(1);
         }
         String response = Serial2.readStringUntil('\n');
-        //String response ="23/3||1:30 200 10 10.5";
+       
+        // String response ="23/3||1:30 200 10 10.5";
         Serial.println(response); // debug
        
         // Split the response into components
@@ -374,26 +444,6 @@ void handleScan(const DynamicJsonDocument &doc) {
 /**========================================================================
  *                           STATE BAR
  *========================================================================**/
-void handleSB() {
-String tempArr[] = {"get-UV", "get-VI", "get-WL"};
-String resArr[] = {"UV", "VI", "WL"};
-DynamicJsonDocument SBDATA(256);
-for (size_t i = 0; i < 2; i++)
-{
-  Serial2.println(tempArr[i]);
-  int startTime = millis();
-        while (Serial2.available() == 0 && millis() - startTime < 2000) {
-          delay(1);
-        }
-        String response = Serial2.readStringUntil('\n');
-        SBDATA[resArr[i]] = response;
-}
-
-        String jsonString;
-        serializeJson(SBDATA, jsonString);
-        notifyClients(jsonString);
-        Serial.println("State Bar data sent");
-}
 
 
 
@@ -531,6 +581,10 @@ for (size_t i = 0; i < 2; i++)
     else if (doc.containsKey("resumereading"))
     {
       resumeTask();
+    }
+    else if(doc.containsKey("DirectCommand")){
+      handleDirectCommand(doc);
+
     }
     
     

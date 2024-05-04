@@ -4,6 +4,17 @@
         "rtc_interface.h": "c",
         "std_types.h": "c",
         "uart_private.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "hpwrsupply_private.h": "c",
+        "nvic_interface.h": "c",
+        "motors_private.h": "c",
+        "scommands_config.h": "c",
+        "scommands_private.h": "c",
+        "hpwrsupply_interface.h": "c",
+        "eeprom.h": "c",
+        "esp32_interface.h": "c",
+        "spectrostatus_interface.h": "c",
+        "math.h": "c",
+        "spectro_interface.h": "c"
     }
 }

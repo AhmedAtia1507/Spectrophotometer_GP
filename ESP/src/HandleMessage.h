@@ -7,7 +7,6 @@
 void startCountdown();
 void checkCountdown();
 String sendCMD(const String &input);
-String getOutputStates();
 void sendLoginSuccessNotification();
 void sendLoginFailureNotification();
 void sendFlagStatus();

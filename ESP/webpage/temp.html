@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="stylesheet" href="css/all.min.css">
+
+</head>
+
+<body>
+    <div class="overlay" id="overlay" title="wait for the motor to move"></div>
+      <!---------------------------- Start of Nabber ---------------------------->
+  <nav>
+    <ul class="sidebar">
+      <li onclick="hideSidebar()">
+        <a href="#"><i class="fas fa-close"></i></a>
+      </li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li><a href="temp.html">temp</a></li>
+      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
+      
+    </ul>
+    <ul>
+      <li class="logo">
+        <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+            width="24">
+            <path
+              d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+          </svg>
+          <span>SpectroPhotometer</span></a>
+      </li>
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li class="menu-button" onclick="showSidebar()">
+        <a href="#"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!---------------------------- END OF Navbar ---------------------------->
+
+  <!---------------------------- END OF Navbar ---------------------------->
+ <main>
+        <section>
+            <div id="testpage" class="tabcontent" style="display: block;">
+                <div class="row">
+                    <fieldset class="lamps">
+                        <legend>Lamps & Supplies
+                            <i onclick="senduvStatus(),sendviStatus(),sendsupplystutus()"
+                                class="fa-solid fa-arrows-rotate" title="click to update values"></i>
+
+                        </legend>
+                        <div class="grid-container">
+                            <div class="firstlamp">
+                                <h4>Visible Lamp Test</h4><br>
+                                <div class="grid-containertwo">
+                                    <div class="grid-item">
+                                        <label for="vistate">Current State</label>
+                                        <div class="state" id="vistate"></div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i class="toggle-icon fas fa-toggle-off" id="viicon" onclick="toggleLamp('vi')"
+                                            title="tab to toggle Visible lamp on/off"></i>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="secondlamp">
+                                <h4>UV Lamp Test</h4><br>
+                                <div class="grid-containertwo">
+                                    <div class="grid-item">
+                                        <label for="uvstate">Current State</label>
+                                        <div class="state" id="uvstate"></div>
+                                    </div>
+                                    <div class="grid-item">
+
+                                        <i class="toggle-icon fas fa-toggle-off" id="uvicon" onclick="toggleLamp('uv')"
+                                            title="tab to toggle UV lamp on/off"></i>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-item">
+                                <table style="width: 90%;">
+                                    <thead>
+                                        <th>  <i onclick="sendsupplystutus()"
+                                            class="fa-solid fa-arrows-rotate" title="click to update values"></i>
+            </th>
+                                        <th>+12v supply</th>
+                                        <th>-12v supply</th>
+                                        <th>5V supply</th>
+                                        <th>3.3v supply</th>
+                                        <th>Lamp supply</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Values</td>
+                                            <td id="p12"></td>
+                                            <td id="n12"></td>
+                                            <td id="p5"></td>
+                                            <td id="p33"></td>
+                                            <td id="twelve"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="row">
+                    <fieldset class="lamps">
+                        <legend>Moters
+                            <i onclick="sendmoterssteps(),sendLampmoter()" class="fa-solid fa-arrows-rotate"
+                                title="click to update values"></i>
+                        </legend>
+                        <div class="grid-container">
+                            <div class="grid-item">
+                                <h4> Lamp Change Moter</h4><br>
+                                <div class="grid-containertwo">
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Current Step</label>
+                                        <div class="currentstep" id="lampstep"> 100 </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i id="lampmotorhome" onclick="gohome(this)"
+                                            title="press to send motor to home point"
+                                            class="fa-solid fa-house-signal"></i>
+                                    </div>
+                                    <div class="grid-containerStep">
+                                        <label for="CurrentLamp">Current Lamp is</label>
+                                        <div class="currentstep" id="currentlamp">UV Lamp</div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i class="toggle-icon fas fa-toggle-off" id="lampchangeicon"
+                                            onclick="toggleLampMoter()"
+                                            title="tap to toggle the current lamp moter position"></i>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid-item">
+                                <h4>Grating Motor</h4><br>
+                                <div class="grid-containertwo">
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Current Step</label>
+                                        <div class="currentstep" id="gratingstep"> 100 </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i id="gratingmotorhome" onclick="gohome(this)"
+                                            title="press to send motor to home point"
+                                            class="fa-solid fa-house-signal"></i>
+                                    </div>
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Move To</label>
+                                        <input class="page" id="gratingmotorwl" type="number" min="0" max="1200"
+                                            oninput="validat(this,min,max)" placeholder="W.L in nm"
+                                            style="width: 70px;">
+
+                                    </div>
+                                    <div class="grid-item">
+
+                                        <i class="fa-solid fa-angles-right"
+                                            title="press to send motor to this wavelength" id="gratingmotermove"
+                                            onclick="moveto(event)"></i>
+                                    </div>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <div class="grid-containerStep">
+                                        <div class="grid-item">
+                                            <i class="fa-regular fa-circle-left" id="gratingmotermove"
+                                                onclick="moveto(event)"></i>
+                                        </div>
+                                        <div class="grid-item">
+                                            <input placeholder="in Steps" type="number" min="0" max="40000"
+                                                id="gratingmotorstep" oninput="validat(this,min,max)"
+                                                style="width: 70px">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="grid-item">
+                                        <i class="fa-regular fa-circle-right" id="gratingmotermove"
+                                            onclick="moveto(event)"></i>
+                                    </div>
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Save Step</label>
+                                        <div class="currentstep"></div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="savecalb('grating')" title="click to update the new calibration step"
+                                            class="fa-solid fa-floppy-disk"></i>
+                                    </div>
+                                    <div id="stepsaved"></div>
+                                
+                                </div>
+                            </div>
+
+
+                            <div class="grid-item">
+                                <h4>Filter Wheel Motor</h4><br>
+                                <div class="grid-containertwo">
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Current Step</label>
+                                        <div class="currentstep" id="filterstep"> 100 </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i id="filtermotorhome" onclick="gohome(this)"
+                                            title="press to send motor to home point"
+                                            class="fa-solid fa-house-signal"></i>
+                                    </div>
+                                    <div class="grid-containerStep">
+                                        <label for="increasestep">Motor To filter</label>
+                                        <select class="Page" name="filter" id="filterselector" style="width: 70px;">
+                                            <option value="F1">F1</option>
+                                            <option value="F2">F2</option>
+                                            <option value="F3">F3</option>
+                                            <option value="F4">F4</option>
+                                            <option value="F5">F5</option>
+                                            <option value="F6">F6</option>
+                                            <option value="F7">F7</option>
+                                            <option value="F8">F8</option>
+                                        </select>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i class="fa-solid fa-angles-right"
+                                            title="press to send motor to this wavelength" id="filtermotermove"
+                                            onclick="moveto(event)"></i>
+                                    </div>
+
+
+                                    <div class="grid-containerStep">
+                                        <div class="grid-item">
+                                            <i class="fa-regular fa-circle-left" id="filtermotermove"
+                                                onclick="moveto(event)"></i>
+                                        </div>
+                                        <div class="grid-item">
+                                            <input placeholder="in Steps" type="number" min="0" max="40000"
+                                                id="filtermotorstep" oninput="validat(this,min,max)"
+                                                style="width: 70px">
+
+                                        </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i class="fa-regular fa-circle-right" id="filtermotermove"
+                                            onclick="moveto(event)"></i>
+                                    </div>
+                                    <div class="grid-containerStep">
+                                        <label for="currentstep">Current W.L</label>
+                                        <div class="currentstep" id="filterwave"> 1200 </div>
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="savecalb('filter')" title="click to update the new calibration step"
+                                            class="fa-solid fa-floppy-disk"></i>
+                                    </div>
+                                    <div id="stepsaved"></div>
+                                </div>
+                            </div>
+                    </fieldset>
+                </div>
+                <div class="row">
+                    <fieldset class="lamps">
+                        <legend> Detector
+                            <i class="fa-solid fa-arrows-rotate" onclick="senddetector()"></i>
+                        </legend>
+                        <div class="grid-container">
+                            <div class="grid-item">
+                                <h4>Referance Sample</h4>
+                                <br>
+                                <div class="grid-containertwo">
+                                    <label for="smallsignal">Small Signal Value:</label>
+                                    <div class="currentstep" id="smallref">12</div>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="largesignal">Large Signal Value:</label>
+                                    <div class="currentstep" id="largeref">122</div>
+                                </div>
+
+                                <div class="grid-containertwo">
+                                    <label for="calcgain">calculated gain:</label>
+                                    <div class="currentstep" id="calcgainref">10</div>
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="error"> Refernce gain accurecy:</label>
+                                    <div class="currentstep" id="gainerrorref">99%</div>
+
+                                </div>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Measure Sample</h4><br>
+                                <div class="grid-containertwo">
+                                    <label for="smallsignal">small signal value:</label>
+                                    <div class="currentstep" id="smallmes">11</div>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="largesignal">amplified signal value:</label>
+                                    <div class="currentstep" id="largemes">110</div>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="calcgain">calculated gain:</label>
+                                    <div class="currentstep" id="calcgainmes">10</div>
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="error"> Sample gain accurecy:</label>
+                                    <div class="currentstep" id="gainerrormes">99%</div>
+                                </div>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Digital potentiometer</h4><br>
+                                <div class="grid-containertwo">
+                                    <label for="potentiometer">current Sample gain</label>
+                                    <div class="currentstep" id="SampleGain">12</div>
+                                </div>
+                                <div class="grid-containertwo">
+                                    <div class="grid-item">
+                                        <label>1</label>
+                                        <input id="CurrentSampleGain" oninput="updategain(this)"
+                                            title="slide to change the digital potentiometer gain" type="range"
+                                            step="0.5" min="1" max="100" value="12">
+                                        <label for="range">100</label>
+
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="sendnewgain('sample')" class="fa-solid fa-floppy-disk"></i>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="grid-containertwo">
+                                    <label for="potentiometer">current Reference gain</label>
+                                    <div class="currentstep" id="RefGain">12</div>
+                                </div>
+                                <div class="grid-containertwo">
+                                    <div class="grid-item">
+                                        <label>1</label>
+                                        <input id="CurrentRefGain" oninput="updategain(this)"
+                                            title="slide to change the digital potentiometer gain" type="range"
+                                            step="0.5" min="1" max="100" value="12">
+                                        <label for="range">100</label>
+
+                                    </div>
+                                    <div class="grid-item">
+                                        <i onclick="sendnewgain('ref')" class="fa-solid fa-floppy-disk"></i>
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="grid-container">
+
+                            </div>
+
+                    </fieldset>
+                </div>
+                <div class="row">
+                    <fieldset class="lamps">
+                        <legend>Date      <i class="fa-solid fa-arrows-rotate" onclick="loadtime()"></i>
+                        
+
+                        </legend>
+                        <div class="grid-container">
+                            <div class="grid-containerStep">
+                                <label for="datepicker">Select Date:</label>
+                                <input type="date" id="datepicker" style="padding: 2px; width: fit-content;" />
+                            </div>
+                            <div class="grid-containerStep">
+                                <label for="timepicker">Select Time:</label>
+                                <input style="padding: 2px; width: fit-content;" type="time" id="timepicker" step="1" />
+                            </div>
+                            <div class="grid-item">
+                                <i onclick="saveDateTime(this)" title="click to save the new date and time"
+                                    class="fa-solid fa-floppy-disk" style="margin-left: 75%;"></i>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <div class="timeelements">
+                    <div id="timeupdated"></div>
+                    <div id="currentDateTime"></div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <fieldset class="lamps">
+                        <legend>Direct CMD </legend>
+                        <div class="grid-containerStep">
+                            
+                            <div class="grid-item">
+                                <input maxlength="40" id="commandinput"
+                                    style="padding: 8px; margin: 10px 20px; border-radius: 5px" type="text"
+                                    placeholder="get-voltages">
+                                    <i onclick="SendCMD()" class="fa-solid fa-arrow-right" title="click to send this command to stm32, use carefully !"></i>
+
+                            </div>
+                           
+                            <div class="grid-item">
+                                <label for="CMDresponse">Response is:</label>
+                                <div class="currentstep" id="CMDresponse"></div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                </div>
+                <div class="login-container" id="login">
+                    <div class="login_form_box" > 
+                      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
+                      <h2>Log-in form</h2>
+                          <div class="grid-containerStep">
+                            <div>
+                              <i class="fa-regular fa-circle-user"></i>
+                          <label for="username" >Username</label>
+                          
+                            </div>
+                            <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+                          </div>
+                          
+                          <div class="grid-containerStep">
+                            <div>
+                              <i class="fa-solid fa-key"></i>
+                              <label for="password" >Password</label>
+                          
+                            </div>
+                          <input type="password" maxlength="40" placeholder="your password" id="password" required>
+                          </div>
+                          <br>
+                        
+                            <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+                          <div class="wrongpass">
+                          <label id="wrongpass" for="wrongpass"></label>
+                          </div></div>
+
+
+
+
+
+
+        </section>
+        <!---------------------------- END OF Footer ---------------------------->
+    </main>
+    <script src="JavaScript/control.js"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>
