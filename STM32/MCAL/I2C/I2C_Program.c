@@ -11,6 +11,7 @@
 #include "I2C_Config.h"
 #include "../../MCAL/NVIC/NVIC_Interface.h"
 #include "../../MCAL/GPIO/GPIO_Interface.h"
+#include "../../MCAL/RCC/RCC_Private.h"
 
 /*
  * =============================================================================
@@ -145,7 +146,9 @@ void MCAL_I2C_Init(I2C_TypeDef* I2Cx, I2C_InitTypeDef* I2C_InitStruct)
 void MCAL_I2C_RESET()
 {
 	I2C1->CR1 |= I2C_CR1_SWRST;
+	MRCC_APB1RSTR |= (1 << 21);
 	MSTK_uint8Delay(1000);
+	MRCC_APB1RSTR &= ~(1 << 21);
 	I2C1->CR1 &= ~I2C_CR1_SWRST;
 	MSTK_uint8Delay(1000);
 }
@@ -259,7 +262,7 @@ void MCAL_I2C_MASTER_RX(I2C_TypeDef* I2Cx, uint16 devAddr, uint8 *dataOut, uint3
 		I2C_ACKnowledgeConfig(I2Cx,DISABLE);
 
 	}
-
+	//MSTK_uint8Delay(50);
 	if(Stop == With_Stop)
 		//  7. Send Stop condition
 		I2C_GenerateSTOP(I2Cx, ENABLE);

@@ -445,16 +445,6 @@
               <FilePath>.\MCAL\EXTI\EXTI_Program.c</FilePath>
             </File>
             <File>
-              <FileName>GI_Interface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\MCAL\GI\GI_Interface.h</FilePath>
-            </File>
-            <File>
-              <FileName>GI_Program.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\MCAL\GI\GI_Program.c</FilePath>
-            </File>
-            <File>
               <FileName>GPIO_Config.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\MCAL\GPIO\GPIO_Config.h</FilePath>

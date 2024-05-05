@@ -15,8 +15,7 @@ typedef enum Motor_Select
 {
     HMOTOR_LAMP_SELECT,
     HMOTOR_FILTER_SELECT,
-    HMOTOR_WL_SELECT,
-    HMOTOR4
+    HMOTOR_WL_SELECT
 }HMOTORS_Select_t;
 
 typedef enum Lamp_Motor_Select
@@ -51,5 +50,5 @@ Std_ReturnType HMOTOR_GetCurrentWL                      (uint32* P_uint32Current
 Std_ReturnType HMOTOR_MoveLampMotor                     (HMOTOR_Lamp_Select_t Copy_uint32LampSelect);
 Std_ReturnType HMOTOR_MoveFilterMotor                   (HMOTOR_Filter_Select_t Copy_uint32FilterSelect);
 Std_ReturnType HMOTOR_MoveWLSelectMotor                 (float32 Copy_float32NextWL);
-Std_ReturnType HMOTOR_GetWLSelectCalibration            (uint32 Copy_float32ZeroWLSteps, uint32 Copy_float32StepsPerNm);
+Std_ReturnType HMOTOR_GetWLSelectCalibration            (uint32 Copy_uint32ZeroWLSteps, uint32 Copy_uint32StepsPerNm);
 #endif /*_MOTORS_INTERFACE_H_*/

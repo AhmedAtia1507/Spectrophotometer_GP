@@ -30,6 +30,7 @@
 #include "../../APP/SCommands/SCommands_Interface.h"
 #include "../../APP/SPECTRO/SPECTRO_Interface.h"
 #include "../../APP/SpectroStatus/SpectroStatus_Interface.h"
+#include "../../APP/Signal_Conditioning/signal_conditioning.h"
 
 
 Std_ReturnType SPECTRO_InitSystem(void)
@@ -75,20 +76,20 @@ Std_ReturnType SPECTRO_InitSoftware(void)
 	MNVIC_SetInterruptPriority              (MNVIC_EXTI15_10, 0, 0);
 	MNVIC_SetInterruptPriority              (MNVIC_USART3, 1, 0);
 	
-	//MRTC_Init();
+	MRTC_Init();
 	MSTK_uint8Init();
 	eeprom_init();
 	uint32 Loc_uint32dummyData = 32;
-	//eeprom_write_Nbytes(EEPROM_MOTOR_STEPS_MEM_ADDRESS, &Loc_uint32dummyData, 4);
-    //SCommands_Init();
-    //SPWRVolt_Init();
+	eeprom_write_Nbytes(EEPROM_MOTOR_STEPS_MEM_ADDRESS, &Loc_uint32dummyData, 4);
+    SCommands_Init();
+    SPWRVolt_Init();
     
     
     //eeprom_init();
-    adc_init();
+    
     MCP4151_Init();
-    //HPWRSupply_InitSupplies();
-	//HMOTORS_Init();
+    HPWRSupply_InitSupplies();
+	HMOTORS_Init();
 
     return E_OK;
 }
@@ -96,20 +97,20 @@ Std_ReturnType SPECTRO_InitHardware(void)
 {
     Std_ReturnType Loc_uint8InitStatus = E_NOT_OK;
 
-    Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_ON);
+    Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_UV_SUPPLY, HPWRSUPPLY_ON);
 
     if(Loc_uint8InitStatus == E_OK)
     {
-        Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_OFF);
+        Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_UV_SUPPLY, HPWRSUPPLY_OFF);
         if(Loc_uint8InitStatus == E_OK)
         {
-            Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_UV_SUPPLY, HPWRSUPPLY_ON);
+            Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_ON);
             if(Loc_uint8InitStatus == E_OK)
             {
-                Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_UV_SUPPLY, HPWRSUPPLY_OFF);
+                Loc_uint8InitStatus = HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_OFF);
                 if(Loc_uint8InitStatus == E_OK)
                 {
-                    Loc_uint8InitStatus = SPECTRO_InitCalibration();
+                    //Loc_uint8InitStatus = SPECTRO_InitCalibration();
                 }
                 else
                 {
@@ -132,6 +133,60 @@ Std_ReturnType SPECTRO_InitHardware(void)
     }
     return Loc_uint8InitStatus;
 }
+//*************************************************************************/
+//*************************************************************************/
+//**********************Mohanad was here***********************************/
+//*************************************************************************/
+//*************************************************************************/
+
+unsigned char Medium_Step_Index(float* readings, unsigned char size)
+{
+    float max = readings[0], min = readings[0];
+    for(unsigned char i = 0; i < size; i++)
+    {
+        if(readings[i] > max)
+        {
+            max = readings[i];
+        }
+        if(readings[i] < min)
+        {
+            min = readings[i];
+        }
+    }
+    float threshold = (max-min)/2.0;
+    unsigned char first_step_index, last_step_index, indicator = 0; 
+    for(unsigned char i = 0; i < size; i++)
+    {
+        if((readings[i] > threshold) && (indicator == 0))
+        {
+            indicator = 1;
+            first_step_index = i;
+            continue;
+        }
+        if((readings[i] < threshold) && (indicator == 1))
+        {
+            last_step_index = i;
+            break;
+        }
+    }
+    return (((last_step_index + first_step_index)/2));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Std_ReturnType SPECTRO_InitCalibration(void)
 {
     uint32 Loc_uint32StepsPerNm = 0;
@@ -142,64 +197,89 @@ Std_ReturnType SPECTRO_InitCalibration(void)
 	//turn on visible lamp
     HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_ON);
 	HMOTOR_MoveLampMotor(HMOTOR_LAMP_VIS);
-	HMOTOR_MoveFilterMotor(HMOTOR_FILTER_AIR);
-
-	float32 Loc_float32ADCValue = 0.0;
+	//HMOTOR_MoveFilterMotor(HMOTOR_FILTER_AIR);
     
 	//Zero Wavelength
-	uint32 Loc_uint32Index = 0, Loc_uint32Indicator = 0;
-	uint32 Loc_uint32WhiteLightSteps = 0;
-	for(Loc_uint32Index = 0; Loc_uint32Index < 1500; Loc_uint32Index++)
+	uint32 Loc_uint32Index = 0, Loc_uint32Gain = 0;
+    uint32 Loc_uint32WhiteLightSteps[33] = {0};
+    float32 Loc_uint32WhiteLightIntensities[33] = {0};
+    uint32 Loc_uint32WhiteStartIndex = 0;
+    uint32 Loc_uint32WhiteEndIndex = 0;
+    uint32 Loc_uint32Indicator = 0;
+
+	uint32 Loc_uint32ZeroWLSteps = 0;
+	HMOTOR_Step(HMOTOR_WL_SELECT, 77, HMOTORS_CLKWISE_DIRECTION, 20);
+    adc_init();
+    for(Loc_uint32Index = 0; Loc_uint32Index < 33; Loc_uint32Index++)
 	{
-		//check adc until very high intensity
-		// if found, indicator = 1
-		//save start position of white light
+		read_sample_voltage(&Loc_uint32WhiteLightIntensities[Loc_uint32Index], &Loc_uint32Gain);
+        HMOTOR_GetCurrentMotorSteps(HMOTOR_WL_SELECT, &Loc_uint32WhiteLightSteps[Loc_uint32Index]);
+        HMOTOR_Step(HMOTOR_WL_SELECT, 1, HMOTORS_CLKWISE_DIRECTION, 20);
+        MSTK_uint8Delay(50);
 	}
+    for(Loc_uint32Index = 0; Loc_uint32Index < 33; Loc_uint32Index++)
+    {
 
-    HMOTOR_GetCurrentMotorSteps(HMOTOR_WL_SELECT, &Loc_uint32WhiteLightSteps);
-
-	if(Loc_uint32Indicator == 1)
+    }
+    for(Loc_uint32Index = 0; Loc_uint32Index < 33; Loc_uint32Index++)
 	{
+		if(Loc_uint32WhiteLightIntensities[Loc_uint32Index] > 5000.0f)
+        {
+            if(Loc_uint32Indicator == 0)
+            {
+                Loc_uint32Indicator = 1;
+                Loc_uint32WhiteStartIndex = Loc_uint32Index;
+            }
+            else
+            {
+                /*Do nothing*/
+            }
+        }
+        else
+        {
+            if(Loc_uint32Indicator == 1)
+            {
+                Loc_uint32WhiteEndIndex = Loc_uint32Index - 1;
+                Loc_uint32Indicator = 2;
+                break;
+            }
+        }
+	}
+	if(Loc_uint32Indicator == 2)
+	{
+        Loc_uint32ZeroWLSteps = Loc_uint32WhiteLightSteps[((uint32)((Loc_uint32WhiteStartIndex + Loc_uint32WhiteEndIndex) / 2))];
 		HPWRSupply_SetSupplyMode(HPWRSUPPLY_VIS_SUPPLY, HPWRSUPPLY_OFF);
         HPWRSupply_SetSupplyMode(HPWRSUPPLY_UV_SUPPLY, HPWRSUPPLY_ON);
 		HMOTOR_MoveLampMotor(HMOTOR_LAMP_UV);
 
-		uint8 Loc_uint8Index_2 = 0;
-		float32 Loc_float32Voltages[20] = {0.0};
-		uint32 Loc_uint32Steps[20] = {0};
-        uint32 Loc_uint32CurrentFilterSteps = 0;
+        HMOTOR_Step(HMOTOR_WL_SELECT, 850, HMOTORS_CLKWISE_DIRECTION, 20);
+		
+		float32 Loc_float32Voltages[50] = {0.0};
+		uint32 Loc_uint32Steps[50] = {0};
 
-        HMOTOR_GetCurrentMotorSteps(HMOTOR_FILTER_SELECT, &Loc_uint32CurrentFilterSteps);
-
-		for(Loc_uint32Index = 0; Loc_uint32Index < 4500; Loc_uint32Index++)
+		for(Loc_uint32Index = 0; Loc_uint32Index < 50; Loc_uint32Index++)
 		{
-			//Check adc value
-			if(Loc_float32ADCValue > 2.0f)
-			{
-				Loc_float32Voltages[Loc_uint8Index_2] = Loc_float32ADCValue;
-				Loc_uint32Steps[Loc_uint8Index_2] = Loc_uint32CurrentFilterSteps;
-				Loc_uint8Index_2++;
-			}
-			if(Loc_uint8Index_2 > 20)
-			{
-				break;
-			}
-			// move monochromator and check if adc value is greater than threshold
+            read_sample_voltage(&Loc_float32Voltages[Loc_uint32Index], &Loc_uint32Gain);
+            HMOTOR_GetCurrentMotorSteps(HMOTOR_WL_SELECT, &Loc_uint32Steps[Loc_uint32Index]);
+            HMOTOR_Step(HMOTOR_WL_SELECT, 1, HMOTORS_CLKWISE_DIRECTION, 20);
+            MSTK_uint8Delay(50);
 		}
 
 		float32 Loc_float32MaxIntensity = Loc_float32Voltages[0];
-		uint8 Loc_uint8MaxIndex = 0;
+		uint32 Loc_uint32MaxIndex = 0;
 
-		for(Loc_uint32Index = 1; Loc_uint32Index < 20; Loc_uint32Index++)
+		for(Loc_uint32Index = 1; Loc_uint32Index < 50; Loc_uint32Index++)
 		{
 			if(Loc_float32Voltages[Loc_uint32Index] > Loc_float32MaxIntensity)
 			{
 				Loc_float32MaxIntensity = Loc_float32Voltages[Loc_uint32Index];
-				Loc_uint8MaxIndex = Loc_uint32Index;
+				Loc_uint32MaxIndex = Loc_uint32Index;
 			}
 		}
 
-		Loc_uint32StepsPerNm = (Loc_uint32Steps[Loc_uint8MaxIndex] - Loc_uint32WhiteLightSteps) / 656.1f;
+		Loc_uint32StepsPerNm = (Loc_uint32Steps[Loc_uint32MaxIndex] - Loc_uint32ZeroWLSteps) / 656.1f;
+
+        HMOTOR_GetWLSelectCalibration(Loc_uint32ZeroWLSteps, Loc_uint32StepsPerNm);
 		return E_OK;
 	}
 	else

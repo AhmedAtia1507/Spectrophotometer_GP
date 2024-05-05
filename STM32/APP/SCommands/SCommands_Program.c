@@ -9,9 +9,7 @@
  * 
  */
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #include "../../LIB/STD_TYPES/Std_Types.h"
 
@@ -279,7 +277,7 @@ void SCommands_SendCurrentMotorsSteps   (void)
     uint32 Loc_uint32CurrentWL = 0;
     uint8 Loc_uint8Index = 0;
     
-    for(Loc_uint8Index = HMOTOR_LAMP_SELECT; Loc_uint8Index < HMOTOR4; Loc_uint8Index++)
+    for(Loc_uint8Index = HMOTOR_LAMP_SELECT; Loc_uint8Index < (HMOTOR_WL_SELECT + 1); Loc_uint8Index++)
     {
         HMOTOR_GetCurrentMotorSteps(Loc_uint8Index, &Loc_uint32MotorsCurrentSteps[Loc_uint8Index]);
     }

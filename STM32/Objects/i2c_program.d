@@ -4,4 +4,5 @@
   MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h \
   MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h MCAL\I2C\I2C_Config.h \
   MCAL\I2C\I2C_private.h MCAL\I2C\..\..\MCAL\STK\STK_Interface.h \
-  MCAL\I2C\..\..\MCAL\NVIC\NVIC_Interface.h
+  MCAL\I2C\..\..\MCAL\NVIC\NVIC_Interface.h \
+  MCAL\I2C\..\..\MCAL\RCC\RCC_Private.h
