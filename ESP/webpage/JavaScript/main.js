@@ -284,7 +284,7 @@ chartScan = new Chart(ctxScan, {
     },
     scales: {
       x: {
-        min: 100,
+        min: 190,
         max: 1100,
         type: 'linear',
         position: 'bottom'

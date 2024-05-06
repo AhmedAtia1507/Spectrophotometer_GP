@@ -341,7 +341,7 @@ legend{
   margin-right: 20px;
 }
 
-.TwoBtn button {
+.TwoBtn button,.reset-zoom {
   background-color: white;
   color: #3498db;
   margin: 10px;
@@ -552,6 +552,8 @@ canvas {
   display: block;
   border: 1px solid #000000;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
   padding: 10px;
   margin: 10px;
 }
@@ -922,6 +924,8 @@ li:hover{
       color: red;
       text-decoration: underline;
    }
+
+
 
 
   /**------------------------------------------------------------------------
