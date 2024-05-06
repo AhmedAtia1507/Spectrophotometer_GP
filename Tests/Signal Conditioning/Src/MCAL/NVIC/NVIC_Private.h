@@ -13,15 +13,11 @@
 #ifndef _NVIC_PRIVATE_H_
 #define _NVIC_PRIVATE_H_
 
-#include "../../LIB/BIT_MATH.h"
-#include "../../LIB/STD_TYPES.h"
-
-
 /**
  * @brief: Structure to define registers in NVIC Peripheral
  * 
  */
-typedef struct NVIC_Registers
+typedef struct MNVIC_Registers
 {
     /*
         Interrupt Set Enable Register:
@@ -131,51 +127,51 @@ typedef struct NVIC_Registers
 
     /*Software Trigger Interrupt Register*/
     volatile uint32 STIR;
-} NVIC_TypeDef;
+} MNVIC_TypeDef;
 
-#define NVIC_BASE_ADDRESS                               0xE000E100U
-#define SCB_BASE_ADDRESS                                0xE000ED00U
+#define MNVIC_BASE_ADDRESS                              0xE000E100U
+#define MSCB_BASE_ADDRESS                               0xE000ED00U
 
-#define NVIC                                            ((NVIC_TypeDef *)NVIC_BASE_ADDRESS)
+#define NVIC                                            ((MNVIC_TypeDef *)MNVIC_BASE_ADDRESS)
 
 
 
 
 
 /*Application Interrupt and Reset control Register*/
-#define SCB_AIRCR                                       (*(volatile uint32*)(SCB_BASE_ADDRESS + 0x0C))
+#define MSCB_AIRCR                                      (*(volatile uint32*)(MSCB_BASE_ADDRESS + 0x0C))
 
 /**
  * @brief: There are 5 cases of Interrupt Grouping Priorities:
- *      1) NVIC_PRIORITY_GROUP_4_SUB_0: Which means that there will be 4 bits for group priorities
+ *      1) MNVIC_PRIORITY_GROUP_4_SUB_0: Which means that there will be 4 bits for group priorities
  *                                      and no bit for subpriority
  *                                      (Meaning that the grouping priority ranges from 0 to 15 and no subpriority)
- *      2) NVIC_PRIORITY_GROUP_3_SUB_1: Which means that there will be 3 bits for group priorities
+ *      2) MNVIC_PRIORITY_GROUP_3_SUB_1: Which means that there will be 3 bits for group priorities
  *                                      and 1 bit for subpriority
  *                                      (Meaning that the grouping priority ranges from 0 to 7 and subpriority can
  *                                       have the values 0 and 1)
  * 
- *      1) NVIC_PRIORITY_GROUP_2_SUB_2: Which means that there will be 4 bits for group priorities
+ *      1) MNVIC_PRIORITY_GROUP_2_SUB_2: Which means that there will be 4 bits for group priorities
  *                                      and no bit for subpriority
  *                                      (Meaning that the grouping priority ranges from 0 to 3 and subpriority ranges
  *                                          from 0 to 3)
  * 
- *      1) NVIC_PRIORITY_GROUP_1_SUB_3: Which means that there will be 1 bit for group priorities
+ *      1) MNVIC_PRIORITY_GROUP_1_SUB_3: Which means that there will be 1 bit for group priorities
  *                                      and 3 bit for subpriority
  *                                      (Meaning that the grouping priority can
  *                                       have the values 0 and 1 and subpriority ranges from 0 to 7)
  *      
- *      1) NVIC_PRIORITY_GROUP_0_SUB_4: Which means that there will be 4 bits for group priorities
+ *      1) MNVIC_PRIORITY_GROUP_0_SUB_4: Which means that there will be 4 bits for group priorities
  *                                      and no bit for subpriority
  *                                      (Meaning that no group priority and subpriority ranges from 0 to 15)
  *                                      (Which can also indicate that there will be no nesting as all peripherals
  *                                       will have the same group priority)
  * 
  *      As you can see below, the values start with (05FA) which is ,as stated in datasheet, the value that must
- *      be put in the most significant 2 bytes of Application Interrupt and Reset Control register (SCB_AIRCR) in
+ *      be put in the most significant 2 bytes of Application Interrupt and Reset Control register (MSCB_AIRCR) in
  *      order to write anything on this register
  * 
- *      Based on the value put in PRIGROUP Bits in SCB_AIRCR, for each interrupt, the most significant
+ *      Based on the value put in PRIGROUP Bits in MSCB_AIRCR, for each interrupt, the most significant
  *      4 bits in the Interrupt Priority Register Corresponding to this interrupt will be divided according
  *      to this table:
  * 
@@ -207,9 +203,9 @@ typedef struct NVIC_Registers
  *                         |  -----------    |                                 |
  *       ----------------------------------------------------------------------------------------
  */
-#define NVIC_PRIORITY_GROUP_4_SUB_0             0x0300
-#define NVIC_PRIORITY_GROUP_3_SUB_1             0x0400
-#define NVIC_PRIORITY_GROUP_2_SUB_2             0x0500
-#define NVIC_PRIORITY_GROUP_1_SUB_3             0x0600
-#define NVIC_PRIORITY_GROUP_0_SUB_4             0x0700
+#define MNVIC_PRIORITY_GROUP_4_SUB_0             0x0300
+#define MNVIC_PRIORITY_GROUP_3_SUB_1             0x0400
+#define MNVIC_PRIORITY_GROUP_2_SUB_2             0x0500
+#define MNVIC_PRIORITY_GROUP_1_SUB_3             0x0600
+#define MNVIC_PRIORITY_GROUP_0_SUB_4             0x0700
 #endif /*_NVIC_PRIVATE_H_*/

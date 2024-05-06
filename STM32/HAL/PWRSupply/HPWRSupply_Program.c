@@ -201,12 +201,12 @@ Std_ReturnType HPWRSupply_CheckSupplyStatus         (HPWRSupply_Choice_t Copy_ui
                 float32 Loc_float32VisSupplySenseVoltage = ((float32)glbl_uint16SenseValue[0] / 4096) * 3.3f;
                 /*Check if Loc_float32VisSupplySenseVoltage is equal to a certain value*/
                 /*if it is equal, supply is working well*/
-                if((Loc_float32VisSupplySenseVoltage > 0.124f) && (Loc_float32VisSupplySenseVoltage < 0.126f))
+                if((Loc_float32VisSupplySenseVoltage > 0.124f) && (Loc_float32VisSupplySenseVoltage < 0.2f))
                 {
                     *P_uint32SupplyStatus = HPWRSUPPLY_STATUS_OK;
                     Loc_uint8FuncStatus = E_OK;
                 }
-                else if(Loc_float32VisSupplySenseVoltage == 0.0f)
+                else if(Loc_float32VisSupplySenseVoltage < 0.05f)
                 {
                     *P_uint32SupplyStatus = HPWRSUPPLY_STATUS_OFF;
                 }
@@ -220,6 +220,7 @@ Std_ReturnType HPWRSupply_CheckSupplyStatus         (HPWRSupply_Choice_t Copy_ui
             {
                 float32 Loc_float32UVSupplySenseVoltage = ((float32)glbl_uint16SenseValue[2] / 4096) * 3.3f;
                 /*Check if Loc_float32UVSupplySenseVoltage is equal to a certain value*/
+                *P_uint32SupplyStatus = HPWRSUPPLY_STATUS_OK;
                 /*if it is equal, supply is working well*/
                 break;
             }

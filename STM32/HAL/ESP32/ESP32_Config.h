@@ -26,7 +26,7 @@
 #define HESP32_MAX_BUFFER_SPACE									50
 
 
-static volatile uint8 HESP32_AvailableTasks[HESP32_NO_OF_COMMANDS][40] =   {	/******************Commands with no arguments******************/
+static volatile uint8 HESP32_AvailableTasks[HESP32_NO_OF_COMMANDS][26] =   {	/******************Commands with no arguments******************/
 																				"get-uv",					//send uv status (on/off)
 																				"set-uv-on",				//turn uv lamp on (reply with current status)
 																				"set-uv-off",				//turn uv lamp off

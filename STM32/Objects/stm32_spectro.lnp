@@ -2,7 +2,6 @@
 ".\objects\adc_program.o"
 ".\objects\afio_program.o"
 ".\objects\exti_program.o"
-".\objects\gi_program.o"
 ".\objects\gpio_program.o"
 ".\objects\gptmr_program.o"
 ".\objects\nvic_program.o"

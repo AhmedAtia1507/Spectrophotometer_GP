@@ -67,7 +67,7 @@ void read_reference_voltage(float32 *ref, float32 *gain)
 //		reading /= get_reference_gain(3.0);
 //		*gain = get_reference_gain(3.0);
 //	};
-	reading *= (11.0 + 29.0)/11.0;
+	reading *= (11.0 + 29.4)/11.0;
 	*ref = reading;
 }
 
@@ -130,6 +130,6 @@ void read_sample_voltage(float32 *sample, float32 *gain)
 //		*gain = get_sample_gain(3.0);
 //	};
 
-	reading *= (11.0 + 29.0)/11.0;
+	reading *= (11.0 + 29.4)/11.0;
 	*sample = reading;
 }

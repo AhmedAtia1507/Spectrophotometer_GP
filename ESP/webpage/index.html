@@ -21,7 +21,7 @@
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
       <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
       <li><a href="temp.html">temp</a></li>
       <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
@@ -37,7 +37,7 @@
           <span>SpectroPhotometer</span></a>
       </li>
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
       <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
       <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
       <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
@@ -155,8 +155,6 @@
                     </div>
                     <div class="TwoBtn">
                     <button onclick="showreadings()" id="loadreadings">load Readings</button>
-                    <button onclick="pausereading()" style="display: none;"  id="pausereading">pause loading</button>
-                    <button onclick="stopreading()"  style="display: none;"  id="stopreading">stop loading</button>
                   </div>
                 </fieldset>
     
@@ -222,34 +220,39 @@
             </div>
           </div>
         </div>
-        <div class="login-container" id="login">
-        <div class="login_form_box" > 
-          <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
-          <h2>Log-in form</h2>
-              <div class="grid-containerStep">
-                <div>
-                  <i class="fa-regular fa-circle-user"></i>
-              <label for="username" >Username</label>
-              
-                </div>
-                <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
-              </div>
-              
-              <div class="grid-containerStep">
-                <div>
-                  <i class="fa-solid fa-key"></i>
-                  <label for="password" >Password</label>
-              
-                </div>
-              <input type="password" maxlength="40" placeholder="your password" id="password" required>
-              </div>
-              <br>
-            
-                <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
-              <div class="wrongpass">
-              <label id="wrongpass" for="wrongpass"></label>
-              </div></div>
-            </div>
+        
+        <!--- this is a code for the login elements don't change-->
+<div class="login-container" id="login">
+  <div class="login_form_box" > 
+    <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()" class="fa-regular fa-circle-xmark"></i>   
+    <h2>Log-in form</h2>
+        <div class="grid-containerStep">
+          <div>
+            <i class="fa-regular fa-circle-user"></i>
+        <label for="username" >Username</label>
+        
+          </div>
+          <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+        </div>
+        
+        <div class="grid-containerStep">
+          <div>
+            <i class="fa-solid fa-key"></i>
+            <label for="password" >Password</label>
+        
+          </div>
+        <input type="password" maxlength="40" placeholder="your password" id="password" required>
+        </div>
+        <br>
+      
+          <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+        <div class="wrongpass">
+        <label id="wrongpass" for="wrongpass"></label>
+        </div></div>
+ 
+    <!---------------------------- end OF Login ---------------------------->
+ 
+  </div>
     </section>
     <!---------------------------- START OF Footer ---------------------------->
     <footer class="sticky" id="sticky">

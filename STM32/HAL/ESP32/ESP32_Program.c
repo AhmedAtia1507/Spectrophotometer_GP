@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 #include "../../LIB/BIT_MATH/BIT_MATH.h"
 #include "../../LIB/STD_TYPES/Std_Types.h"
 
@@ -305,14 +306,14 @@ Std_ReturnType HESP32_SendMotorStatus               (uint32* P_uint32MotorSteps,
             {
                 MUART_TxChar(HESP32_UART_CHOICE, '-');
             }
-						else
-						{
-								break;
-						}
+			else
+			{
+				break;
+			}
         }
         if(Copy_uint8MotorNum == 3)
         {
-						MUART_TxChar(HESP32_UART_CHOICE, '-');
+			MUART_TxChar(HESP32_UART_CHOICE, '-');
             MUART_SendIntegerValue(HESP32_UART_CHOICE, *P_uint32CurrentWL);
         }
         MUART_TxChar(HESP32_UART_CHOICE, '\n');
@@ -427,13 +428,13 @@ Std_ReturnType HESP32_SendDetectorValues(float32* P_float32Readings, float32* P_
     {
         uint8 Loc_uint8Index = 0;
         uint8 Loc_uint8DetBuffer[32] = {0};
-        for(Loc_uint8Index = 0; Loc_uint8Index < 2; Loc_uint8Index++)
+        for(Loc_uint8Index = 0; Loc_uint8Index < 1; Loc_uint8Index++)
         {
             float_to_string_manual(Loc_uint8DetBuffer, P_float32Readings[Loc_uint8Index], 3);
             MUART_TxString(HESP32_UART_CHOICE, Loc_uint8DetBuffer);
             MUART_TxChar(HESP32_UART_CHOICE, ' ');
         }
-        for(Loc_uint8Index = 0; Loc_uint8Index < 2; Loc_uint8Index++)
+        for(Loc_uint8Index = 0; Loc_uint8Index < 1; Loc_uint8Index++)
         {
             float_to_string_manual(Loc_uint8DetBuffer, P_float32GainValues[Loc_uint8Index], 3);
             MUART_TxString(HESP32_UART_CHOICE, Loc_uint8DetBuffer);

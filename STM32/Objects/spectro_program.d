@@ -32,4 +32,6 @@
   APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\GPIO\GPIO_Interface.h \
   APP\SPECTRO\..\..\APP\SCommands\SCommands_Interface.h \
   APP\SPECTRO\..\..\APP\SPECTRO\SPECTRO_Interface.h \
-  APP\SPECTRO\..\..\APP\SpectroStatus\SpectroStatus_Interface.h
+  APP\SPECTRO\..\..\APP\SpectroStatus\SpectroStatus_Interface.h \
+  APP\SPECTRO\..\..\APP\Signal_Conditioning\signal_conditioning.h \
+  APP\SPECTRO\..\..\APP\Signal_Conditioning\..\..\LIB\STD_TYPES\Std_Types.h

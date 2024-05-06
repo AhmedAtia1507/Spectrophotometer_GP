@@ -1,8 +1,6 @@
 ./objects/scommands_program.o: APP\SCommands\SCommands_Program.c \
   D:\KEIL_v5\ARM\ARMCLANG\include\string.h \
-  D:\KEIL_v5\ARM\ARMCLANG\include\stdio.h \
   D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h \
-  D:\KEIL_v5\ARM\ARMCLANG\include\math.h \
   APP\SCommands\..\..\LIB\STD_TYPES\Std_Types.h \
   APP\SCommands\..\..\LIB\STD_TYPES\Platform_Types.h \
   APP\SCommands\..\..\MCAL\GPIO\GPIO_Interface.h \

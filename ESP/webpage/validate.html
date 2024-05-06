@@ -8,6 +8,8 @@
 
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/validate.css">
+  
 
 
   
@@ -21,7 +23,7 @@
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a onclick="toggleLogin()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
       <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
       <li><a href="temp.html">temp</a></li>
       <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
@@ -37,7 +39,7 @@
           <span>SpectroPhotometer</span></a>
       </li>
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLogin()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
       <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
       <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
       <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
@@ -59,7 +61,7 @@
 <!--- this is a code for the login elements don't change-->
 <div class="login-container" id="login">
     <div class="login_form_box" > 
-      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLogin()" class="fa-regular fa-circle-xmark"></i>   
+      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()" class="fa-regular fa-circle-xmark"></i>   
       <h2>Log-in form</h2>
           <div class="grid-containerStep">
             <div>
@@ -80,7 +82,7 @@
           </div>
           <br>
         
-            <i id="submit" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
+            <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
           <div class="wrongpass">
           <label id="wrongpass" for="wrongpass"></label>
           </div></div>
@@ -117,5 +119,4 @@
  
 
 </main>
-<script src="JavaScript/chart.js"></script>
-<script src="JavaScript/main.js"></script>
+<script src="JavaScript/validate.js"></script>

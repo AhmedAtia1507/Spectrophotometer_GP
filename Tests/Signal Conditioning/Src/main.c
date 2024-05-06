@@ -5,6 +5,7 @@
 #include "HAL/ADC.h"
 #include "MCP4151.h"
 #include "Signal_Conditioning/signal_conditioning.h"
+#include "HAL/I2C_Slave_EEPROM.h"
 
 void delay_ms(uint32 milliseconds);
 float32 ref;
@@ -26,7 +27,11 @@ int main()
 
 	adc_init();
 	MCP4151_Init();
-
+	uint8 de7k;
+	eeprom_write_Nbytes(EEPROM_Slave_address, 7, 1);
+	MSTK_uint8Delay(500);
+	eeprom_read_byte(EEPROM_Slave_address, &de7k, 1);
+	MSTK_uint8Delay(500);
 	while(1)
 	{
 		read_reference_voltage(&calculated_ref, &gain_ref);

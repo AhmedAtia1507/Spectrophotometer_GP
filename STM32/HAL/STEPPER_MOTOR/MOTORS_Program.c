@@ -39,7 +39,7 @@ Std_ReturnType HMOTORS_Init(void)
 	
 	uint8 Loc_uint8Index = 0;
 	
-	for(Loc_uint8Index = 0; Loc_uint8Index < (HMOTORS_NUM_MOTORS - 2); Loc_uint8Index++)
+	for(Loc_uint8Index = 0; Loc_uint8Index < (HMOTORS_NUM_MOTORS - 1); Loc_uint8Index++)
 	{
 		MGPIO_SetPinMode(glbl_uint8MotorHomingPortIDs[Loc_uint8Index],\
 							glbl_uint8MotorHomingPinIDs[Loc_uint8Index], MGPIO_INPUT_PULL_UP_OR_DOWN_MODE);
@@ -102,12 +102,12 @@ Std_ReturnType HMOTOR_Step(HMOTORS_Select_t Copy_uint32MotorSelect, uint32 Copy_
 	for(Loc_uint32Index = 0; Loc_uint32Index < (Copy_uint32NoOfSetps); Loc_uint32Index++)
 	{
 		MGPIO_SetPinValue(glbl_uint8MotorsStepPortIDs[Copy_uint32MotorSelect],\ 
-								glbl_uint8MotorsStepPinIDs[Copy_uint32MotorSelect], MGPIO_LOW);
+								glbl_uint8MotorsStepPinIDs[Copy_uint32MotorSelect], MGPIO_HIGH);
 		
 		MSTK_uint8Delay(Copy_uint8MotorSpeed / 2);
 		
 		MGPIO_SetPinValue(glbl_uint8MotorsStepPortIDs[Copy_uint32MotorSelect],\ 
-								glbl_uint8MotorsStepPinIDs[Copy_uint32MotorSelect], MGPIO_HIGH);
+								glbl_uint8MotorsStepPinIDs[Copy_uint32MotorSelect], MGPIO_LOW);
 		
 		MSTK_uint8Delay(Copy_uint8MotorSpeed / 2);
 		if(Copy_uint8Direction == HMOTORS_CLKWISE_DIRECTION)
@@ -294,10 +294,10 @@ Std_ReturnType HMOTOR_MoveFilterMotor(HMOTOR_Filter_Select_t Copy_uint32FilterSe
 	return E_OK;
 }
 
-Std_ReturnType HMOTOR_GetWLSelectCalibration            (uint32 Copy_float32ZeroWLSteps, uint32 Copy_float32StepsPerNm)
+Std_ReturnType HMOTOR_GetWLSelectCalibration            (uint32 Copy_uint32ZeroWLSteps, uint32 Copy_uint32StepsPerNm)
 {
-	glbl_uint32ZeroWLSteps = Copy_float32ZeroWLSteps;
-	glbl_uint32StepsPerNm = Copy_float32StepsPerNm;
+	glbl_uint32ZeroWLSteps = Copy_uint32ZeroWLSteps;
+	glbl_uint32StepsPerNm = Copy_uint32StepsPerNm;
 	return E_OK;
 }
 

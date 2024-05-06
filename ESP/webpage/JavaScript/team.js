@@ -107,10 +107,8 @@ function formatWithLeadingZero(number) {
     }
 
     
-/**------------------------------------------------------------------------
- *                           login functions
- *------------------------------------------------------------------------**/
-function toggleLogin(){
+/*============================ Login ============================*/
+function toggleLoginContainer(){
   var login = document.getElementById("login");
   if(login.style.display=="none"){
     login.style.display="block";
@@ -120,60 +118,40 @@ function toggleLogin(){
   }
 }
 
-
-document.getElementById("submit").addEventListener("click", function () {
+// Get the submit button element
+var submitButton = document.getElementById('submit');
+function login(){
   var user = document.getElementById("username").value;
   var pass = document.getElementById("password").value;
-  console.log(user, pass);
-  sendCredentials(user, pass);
-});
-
-function sendCredentials(user, pass) {
-  if (websocket.readyState === WebSocket.OPEN) {
-      var car = {
-          username: user,
-          password: pass,
-      }
-
-      // Assuming 'websocket' is your WebSocket object
-      websocket.send(JSON.stringify(car));
-  } else {
-      console.log('WebSocket not open. Reinitializing...');
-      initWebSocket();
+  var car = {
+      username: user,
+      password: pass,
   }
-}
-  // Set up the WebSocket onmessage event
-  websocket.onmessage = function (event) {
-    var myObj = JSON.parse(event.data);
-    console.log(myObj);
-    if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-    handleLogin()
-    }
-  }
+  websocket.send(JSON.stringify(car));
+};
 
+ document.addEventListener('keydown', function(event) {
+   // Check if the key pressed is Enter and the login container is opened
+   if (event.key == 'Enter' && document.getElementById('login').style.display=='block') {
+     // Simulate a click on the submit button
+     submitButton.click();
+   }
+ });
+
+
+
+//function to handle the esp32 login message 
 function handleLogin(myObj) {
   console.log(myObj);
-
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-      // Check if the username and password are true
       if (myObj.username === true && myObj.password === true) {
-          console.log("Login successful. Redirecting to control.html");
-          // request control page
           window.location.href = "temp.html";
       } else {
-          localStorage.setItem('username', 'false');
-          console.log("Wrong username or password.");
           document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
       }
   } 
-   else {
-      // Handle other error conditions, such as 404 (Not Found)
-      console.log("Error: " + event.data);
-      document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
-      
   }
-}
-
+  /*============================ END OF LOGIN ============================*/
 
 
 

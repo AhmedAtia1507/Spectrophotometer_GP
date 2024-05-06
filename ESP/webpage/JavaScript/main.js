@@ -460,9 +460,10 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
-  stopreading(); //to stop loading readings task if running
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
+  var time= time.replaceAll(","," ");  //because file name can't contain ,
+  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
@@ -566,9 +567,9 @@ function selectTransmission() {
   selectElement.selectedIndex = transmissionIndex;
 }
 
-function showpreset() {
-  var myList = document.getElementById("presetlist");
 
+var myList = document.getElementById("presetlist");
+function showpreset() {
   var message = {
     showpreset: 'showpreset'
   };
@@ -579,7 +580,6 @@ function showpreset() {
 
     for (var j = myList.children.length - 1; j >= 0; j--) {
       var child = myList.children[j];
-      console.log(child.id);
       // Check if the element has an id and it is not "nopresets"
       if (child.id !== 'nopresets' && child.id !== 'search') {
         myList.removeChild(child);
@@ -591,9 +591,9 @@ function showpreset() {
 
     var myObj = JSON.parse(event.data);
     console.log(myObj);
-    if (myObj.hasOwnProperty('presetno')) {
+    if (myObj.hasOwnProperty('presetsno')) {
 
-      let i = myObj.presetno;
+      let i = myObj.presetsno;
       if (i == 0) {
         console.log('iiiii b =0');
         var nopresetsDiv = document.getElementById('nopresets');
@@ -712,6 +712,7 @@ function addtolist() {
       let modeInput = document.getElementById('mySelect').value;
       let temp=document.getElementById('DateTime').textContent;
       var time= temp.replaceAll(":"," ");
+      var time= time.replaceAll(","," ");
       console.log(time);
       var message = {
         savepreset: 'savepreset',
@@ -1266,26 +1267,21 @@ function getAllTextContent() {
 /**------------------------------------------------------------------------
  *                           SD Save Readings
  *------------------------------------------------------------------------**/
-function savetosd(SampleID,flag,time,SampleDecribe,modeInput,wavelength,absorption,transmission){
-let xyvalues;
-if (modeInput == "absorption") {
-  xyvalues = combineCoordinates(wavelength,absorption);}
-else {
-  xyvalues = combineCoordinates(wavelength,transmission);
-}
-
-var message={
-isFirst:flag,
-name:SampleID,
-discription:SampleDecribe,
-time:time,
-mode:modeInput,
-readings:xyvalues,
-}
-console.log(message);
-websocket.send(JSON.stringify(message));
-}
-
+function savetosd(SampleID,flag,time,SampleDescribe,modeInput,wavelength,absorption,transmission){
+  var message = {
+    isFirst: flag,
+    SampleID: SampleID,
+    SampleDescribe: SampleDescribe,
+    time: time,
+    modeInput: modeInput,
+    wavelength: wavelength,
+    absorption: absorption,
+    transmission: transmission
+  };
+  console.log(message);
+  websocket.send(JSON.stringify(message));
+  }
+  
 
 
 
@@ -1293,12 +1289,9 @@ websocket.send(JSON.stringify(message));
 
 
 let colorindex=0;
-var PauseButton =document.getElementById("pausereading");//to use in displaying the stop/pause buttons
-var StopButton =document.getElementById("stopreading");//to use in displaying the stop/pause buttons
-var LoadButton =document.getElementById("loadreadings");//to use in displaying the stop/pause buttons
-  
+
 function showreadings(){
-  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'black'];
+  var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];
   var myList = document.getElementById("presetlist");
   
   var message = {
@@ -1368,9 +1361,6 @@ function showreadings(){
               let x = []; // wavelength
               let y = []; // intensity
               colorindex=colorindex+1;
-              PauseButton.style.display="block";
-              StopButton.style.display="block";
-              LoadButton.style.display="none";
               openlist(); //when choosing one to load hid the list
               
 
@@ -1381,9 +1371,11 @@ function showreadings(){
               websocket.send(JSON.stringify(message));
 
               websocket.onmessage = function (event) {
-              
+                var samplename;
+                console.log(event.data);
                 var lines = event.data.split('\n');
-            
+                console.log("lines are:: "+lines);
+                     
                 // Process each line individually
                 lines.forEach(function(line) {
                     // Skip empty lines
@@ -1394,32 +1386,24 @@ function showreadings(){
                     try {
                         var myObj = JSON.parse(line);
                         console.log(myObj);
-                        if (myObj.hasOwnProperty('readings') && myObj.hasOwnProperty('time')) {
-                            if (myObj.isFirst == true) {
-                                displayCMD(myObj.name + "    " + myObj.discription, "red", "SD O");
+                        if ( myObj.hasOwnProperty('isFirst')) {
+                            if (myObj.isFirst == "true") {
+                                samplename=myObj.SampleID;
+                                displayCMD(samplename + "  ===> " + myObj.SampleDescribe, "red", "SD O");
                                 displayCMD(myObj.time, "green", "SD O");
-                                displayCMD(myObj.mode, "blue", "SD O");
-                                displayCMD(myObj.readings, "black", "SD O");
-                                let reading = myObj.readings;
-                                let xy = decombinCoordinates(reading);
-                                let xval = [parseFloat(xy[0])];
-                                let yval = [parseFloat(xy[1])];
-                                x.push(xval);
-                                y.push(yval);
-                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
-                            } else if (myObj.isFirst == false) {
-                                displayCMD(myObj.readings, "black", i + 3);
-                                let reading = myObj.readings;
-                                let xy = decombinCoordinates(reading);
-                                let xval = [parseFloat(xy[0])];
-                                let yval = [parseFloat(xy[1])];
-                                x.push(xval);
-                                y.push(yval);
-                                addCurve(x, y, colorSelectArr[colorindex], myObj.name);
-                            } else if (myObj.isFirst == "last") {
-                                PauseButton.style.display = "none";
-                                StopButton.style.display = "none";
-                                LoadButton.style.display = "block";
+                                displayCMD(myObj.modeInput, "blue", "SD O");
+                                displayCMD(myObj.wavelength+","+myObj.transmission+","+myObj.absorption, "black", "SD O");
+                                x.push(myObj.wavelength);
+                                y.push(myObj.absorption);
+                              addCurve(x, y, "green", myObj.SampleID);
+                            } else if (myObj.isFirst == "false") {
+                              displayCMD(myObj.wavelength+","+myObj.transmission+","+myObj.absorption, "black", "SD O");
+                              x.push(myObj.wavelength);
+                              y.push(myObj.absorption);
+                              addCurve(x, y, "blue", samplename);
+                            } 
+                            else if (myObj.isFirst == "last") {
+                            //we can add codes here   
                             }
                             i++;
                         }
@@ -1478,71 +1462,62 @@ function deletereading(myList, names, newItem) {
 
 
 
-// Function to combine xvalues and yvalues into an array of coordinates
-function combineCoordinates(xvalues2, yvalues2) {
-let combined="("+xvalues2+","+yvalues2+")";
-return combined;
-}
+// // Function to combine xvalues and yvalues into an array of coordinates
+// function combineCoordinates(xvalues2, yvalues2) {
+// let combined="("+xvalues2+","+yvalues2+")";
+// return combined;
+// }
 
-function decombinCoordinates(reading){
-  console.log(reading);
-  let temp =reading.replaceAll("(","");
-  temp=temp.replaceAll(","," ")
-  temp=temp.replaceAll(")","")
-  let val= temp.split(" ");
-  return val
-}
+// function decombinCoordinates(reading){
+//   console.log(reading);
+//   let temp =reading.replaceAll("(","");
+//   temp=temp.replaceAll(","," ")
+//   temp=temp.replaceAll(")","")
+//   let val= temp.split(" ");
+//   return val
+// }
 
-function stopreading(){
-  var currentfunction =document.getElementById("pausereading");
-  var message = {
-    Stopreading: 'Stopreading',
-  };
-  websocket.send(JSON.stringify(message));
-  if(currentfunction.innerHTML=="resume loading")
-  {
-    var message = {
-      resumereading: 'resumereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="pause loading"
 
+// Common function to remove all children except specified IDs
+function removeAllChildrenExcept(parent, exceptions) {
+  for (let j = parent.children.length - 1; j >= 0; j--) {
+      const child = parent.children[j];
+      if (!exceptions.includes(child.id)) {
+          parent.removeChild(child);
+      }
   }
-  PauseButton.style.display="none";
-  StopButton.style.display="none";
-  LoadButton.style.display="block";
-  
-
-
-}
-function pausereading(){
-  var currentfunction =document.getElementById("pausereading");
-  if(currentfunction.innerHTML=="pause loading")
-  {
-    var message = {
-      pausereading: 'pausereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="resume loading"
-
-  }
-  else {
-    var message = {
-      resumereading: 'resumereading',
-    };
-    websocket.send(JSON.stringify(message));
-    currentfunction.innerHTML="pause loading"
-
-  }
-
-
 }
 
+// Function to create a list item with item name and delete button
+function createListItem(itemName, myList, names, messageType) {
+  const newItem = document.createElement("li");
+  newItem.classList.add("list-item");
 
-/**------------------------------------------------------------------------
- *                           login functions
- *------------------------------------------------------------------------**/
-function toggleLogin(){
+  // Item name span
+  const itemNameSpan = document.createElement("span");
+  itemNameSpan.textContent = itemName;
+  newItem.appendChild(itemNameSpan);
+
+  // Delete button with Font Awesome icon
+  const deleteButton = document.createElement("i");
+  deleteButton.classList.add("fa-solid", "fa-trash-can");
+  deleteButton.addEventListener("click", function () {
+      myList.removeChild(newItem);
+      const message = {
+          [messageType]: messageType,
+          name: names
+      };
+      websocket.send(JSON.stringify(message));
+      showList();
+  });
+  newItem.appendChild(deleteButton);
+
+  return newItem;
+}
+
+
+/*============================ Login ============================*/
+function toggleLoginContainer(){
   var login = document.getElementById("login");
   if(login.style.display=="none"){
     login.style.display="block";
@@ -1552,52 +1527,37 @@ function toggleLogin(){
   }
 }
 
-
-document.getElementById("submit").addEventListener("click", function () {
+// Get the submit button element
+var submitButton = document.getElementById('submit');
+function login(){
   var user = document.getElementById("username").value;
   var pass = document.getElementById("password").value;
-  console.log(user, pass);
-  sendCredentials(user, pass);
-});
-
-function sendCredentials(user, pass) {
-  if (websocket.readyState === WebSocket.OPEN) {
-      var car = {
-          username: user,
-          password: pass,
-      }
-
-      // Assuming 'websocket' is your WebSocket object
-      websocket.send(JSON.stringify(car));
-  } else {
-      console.log('WebSocket not open. Reinitializing...');
-      initWebSocket();
+  var car = {
+      username: user,
+      password: pass,
   }
-}
+  websocket.send(JSON.stringify(car));
+};
 
+ document.addEventListener('keydown', function(event) {
+   // Check if the key pressed is Enter and the login container is opened
+   if (event.key == 'Enter' && document.getElementById('login').style.display=='block') {
+     // Simulate a click on the submit button
+     submitButton.click();
+   }
+ });
+
+
+
+//function to handle the esp32 login message 
 function handleLogin(myObj) {
   console.log(myObj);
-
   if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-      // Check if the username and password are true
       if (myObj.username === true && myObj.password === true) {
-          console.log("Login successful. Redirecting to control.html");
-          // request control page
           window.location.href = "temp.html";
       } else {
-          localStorage.setItem('username', 'false');
-          console.log("Wrong username or password.");
           document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
       }
   } 
-   else {
-      // Handle other error conditions, such as 404 (Not Found)
-      console.log("Error: " + event.data);
-      document.getElementById("wrongpass").innerHTML = "Error: " + event.data;
-      
   }
-}
-
-/**------------------------------------------------------------------------
- *                           validate page functions should be here 
- *------------------------------------------------------------------------**/
+  /*============================ END OF LOGIN ============================*/

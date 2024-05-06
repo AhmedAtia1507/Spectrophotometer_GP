@@ -17,21 +17,21 @@ void adc_init(void)
 	//		PB6 : I2C1_SCL
 	//		PB7 : I2C1_SDA
 
-//	I2C_InitTypeDef I2C1CFG ;
+	I2C_InitTypeDef I2C1CFG ;
 
-//	//I2C Controller act as a Master
+	//I2C Controller act as a Master
 
-//	I2C1CFG.General_Call_Address_Detection = I2C_ENGC_Enable ;
-//	I2C1CFG.I2C_ACK_Control =I2C_Ack_Enable ;
-//	I2C1CFG.I2C_ClockSpeed = I2C_SCLK_SM_100k ;
-//	I2C1CFG.I2C_Mode = I2C_mode_I2C ;
-//	I2C1CFG.P_Slave_Event_CallBack = 0 ;
-//	I2C1CFG.StretchMode = I2C_StretchMode_Enable;
+	I2C1CFG.General_Call_Address_Detection = I2C_ENGC_Enable ;
+	I2C1CFG.I2C_ACK_Control =I2C_Ack_Enable ;
+	I2C1CFG.I2C_ClockSpeed = I2C_SCLK_SM_100k ;
+	I2C1CFG.I2C_Mode = I2C_mode_I2C ;
+	I2C1CFG.P_Slave_Event_CallBack = 0 ;
+	I2C1CFG.StretchMode = I2C_StretchMode_Enable;
 
-//	MCAL_I2C_GPIO_Set_Pins (I2C1);
-//	MCAL_I2C_Init(I2C1, &I2C1CFG);
-//	MCAL_I2C_RESET();
-//	MCAL_I2C_Init(I2C1, &I2C1CFG);
+	//MCAL_I2C_GPIO_Set_Pins (I2C1);
+	//MCAL_I2C_Init(I2C1, &I2C1CFG);
+	MCAL_I2C_RESET();
+	MCAL_I2C_Init(I2C1, &I2C1CFG);
 }
 
 float32 adc_read_mv(ADC_config a)

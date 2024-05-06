@@ -14,4 +14,5 @@ Std_ReturnType SPECTRO_InitSystem               (void);
 Std_ReturnType SPECTRO_InitSoftware             (void);
 Std_ReturnType SPECTRO_InitHardware             (void);
 Std_ReturnType SPECTRO_InitCalibration          (void);
+unsigned char Medium_Step_Index(float* readings, unsigned char size);
 #endif /*_SPECTRO_INTERFACE_H_*/
