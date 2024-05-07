@@ -1,7 +1,16 @@
 body{
     background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
+  .container {
+    text-align: center;
+
+  }
 .fsetup1 {
     width: 800px;
     border: 1px solid #000000;
@@ -147,6 +156,19 @@ legend {
     font-family: 'Times new roman', Courier, monospace;
 }
 
+.error {
+    width: 70px; 
+    height: 30px;
+    font-size: 1rem;
+    color: black;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-right:0.00005%;
+    border-radius: 5px;
+    border: 0ch;
+    font-family: 'Times new roman', Courier, monospace;
+}
+
 .button1 {
   width: 70px; 
   height: 30px;
@@ -159,3 +181,16 @@ legend {
   font-size: 14px;
   font-weight: 600;
   }
+
+  .button2 {
+    width: 70px; 
+    height: 30px;
+    background-color: white;
+    color: green;
+    margin-left: 50%;
+    border-radius: 5px;
+    border: 0ch;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    }

@@ -1,3 +1,57 @@
+/*==========================================================
+*                    Validatin
+*===========================================================*/
+document.addEventListener("DOMContentLoaded", function() {
+  var submitButton = document.querySelector('.button1');
+  submitButton.addEventListener('click', function() {
+      generateInputs();
+  });
+});
+
+function generateInputs() {
+  var numWavelengths = parseInt(document.querySelector('.numbers1').value);
+  var wavelengthsContainer = document.querySelector('.wavelengths-container');
+  
+  // Clear previous inputs
+  wavelengthsContainer.innerHTML = '';
+
+  // Generate new inputs
+  for (var i = 0; i < numWavelengths; i++) {
+      var label = document.createElement('label');
+      label.textContent = 'Wavelength ' + (i + 1) + ': ';
+      wavelengthsContainer.appendChild(label);
+
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'numbers2'; // Add class for identification
+      input.placeholder = '       0';
+      wavelengthsContainer.appendChild(input);
+
+      var label2 = document.createElement('label');
+      label2.textContent = '      nm';
+      wavelengthsContainer.appendChild(label2);
+      wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+  }
+
+  // Store the values entered by the user in an array
+  var wavelengthValues = [];
+  var numberInputs = document.querySelectorAll('.numbers2'); // Select all inputs with class "numbers2"
+  numberInputs.forEach(function(input) {
+      wavelengthValues.push(input.value); // Push each input value to the array
+  });
+
+  // Display the array values for testing
+  console.log(wavelengthValues);
+}
+
+
+
+
+
+
+
+
+
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -101,3 +155,5 @@ function toggleLoginContainer(){
     } 
     }
     /*============================ END OF LOGIN ============================*/
+
+
