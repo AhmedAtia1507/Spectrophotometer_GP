@@ -181,6 +181,7 @@ legend {
   font-size: 14px;
   font-weight: 600;
   }
+<<<<<<< HEAD
 
   .button2 {
     width: 70px; 
@@ -194,3 +195,8 @@ legend {
     font-size: 14px;
     font-weight: 600;
     }
+=======
+  main{
+    margin-bottom: 100px;
+  }
+>>>>>>> a12cd04f584cac2f869de34b148af2e0b9401bd7

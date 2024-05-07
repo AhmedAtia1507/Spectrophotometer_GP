@@ -155,5 +155,47 @@ function toggleLoginContainer(){
     } 
     }
     /*============================ END OF LOGIN ============================*/
+<<<<<<< HEAD
 
 
+=======
+    /**========================================================================
+ *                           STATE BAR
+ *========================================================================**/
+document.getElementById('sBarBtn').addEventListener('click', function () {
+
+  const message = {
+    command: 'StateBar',
+  }
+    ;
+  websocket.send(JSON.stringify(message));
+
+
+
+  // Set up the WebSocket onmessage event
+  websocket.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const UV = data.UV;
+    const VI = data.VI;
+    // const WL = data.WL;
+    document.getElementById('UVstateBar').textContent = UV;
+    document.getElementById('VIstateBar').textContent = VI;
+    // document.getElementById('WLstateBar').textContent = WL;
+  }
+});
+document.getElementById('hidefoot').addEventListener('click', showfoot)
+
+
+function showfoot() {
+  var but = document.getElementById('hidefoot');
+  var foot = document.getElementById('hidethis');
+  if (but.innerHTML === 'hide') {
+    but.innerHTML = 'show';
+  }
+  else {
+    but.innerHTML = 'hide';
+  }
+  foot.classList.toggle('inactive');
+}
+>>>>>>> a12cd04f584cac2f869de34b148af2e0b9401bd7
