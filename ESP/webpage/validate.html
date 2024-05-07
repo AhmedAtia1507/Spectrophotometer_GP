@@ -8,9 +8,13 @@
 
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="css/all.min.css">
+<<<<<<< HEAD
+  <link rel="stylesheet" href="css/Validation.css">
+=======
   <link rel="stylesheet" href="css/validate.css">
   
 
+>>>>>>> f0b06ff58286ab5a195137a3b889c4c31563647f
 
   
 </head>
@@ -54,6 +58,69 @@
 <div class="contianer">
   <button id="btn"></button>
 </div>
+
+<h1 class="ValidationTitle1"> Validation Tests</h1>
+
+  <fieldset class="fsetup1">
+    <legend><input class="checkboxes1" type="checkbox"> Wavelength Accuracy</legend>
+
+    <select class="dropdown-button" name="Sample" id="Sampleselector">
+      <option value="" disabled selected>Select the Sample</option>
+      <option value="Holmium  oxide">Holmium oxide</option>
+      <option value="Holmium  oxide">Holmium oxide</option>
+      <option value="Holmium  oxide">Holmium oxide</option>
+  </select>
+  
+    
+    <br>
+    <label class="labels"> Enter the requried number of wavelengths </label>
+    <input class="numbers1" type="number" placeholder="  0">
+    <br>
+    <label class="labels"> Enter the wavelengths in nm </label>
+    <input class="numbers2" type="number" placeholder="       0"> 
+    <input class="numbers2" type="number" placeholder="       0">
+    <input class="numbers2" type="number" placeholder="       0"> 
+    <br>
+    <label class="labels"> Enter the error limit </label>
+    <input class="numbers2" type="number" placeholder="    &plusmn;0.01" > 
+    
+    <input class="button1" type="button" value="Submit">
+  
+</fieldset>
+
+<fieldset class="fsetup1">
+  <legend><input class="checkboxes1" type="checkbox"> Photometric Accuracy </legend>
+  <label class="labels"> Enter the number of filters </label>
+  <input class="numbers1" type="number" placeholder="  0">
+  <label class="labels"> Enter the error limit </label>
+  <input class="numbers2" type="number" placeholder="    &plusmn;0.01" >
+  <button class="button1" onclick="showPopup()"> Submit </button>
+<script>
+  function showPopup() {
+      alert("Place the First filter");
+  }
+</script>
+
+</fieldset>
+
+<fieldset class="fsetup1">
+  <legend><input class="checkboxes1" type="checkbox"> Baseline Stability </legend>
+  <label class="labels"> Enter the error limit </label>
+  <input class="numbers2" type="number" placeholder="    &plusmn;0.01" >
+  <input class="button1" type="button" value="Submit">
+
+</fieldset>
+
+<fieldset class="fsetup1">
+  <legend><input class="checkboxes1" type="checkbox"> Photometric noise </legend>
+  <label class="labels"> Enter the Absorbation value </label>
+  <input class="numbers1" type="number"placeholder="  0">
+  <label class="labels"> Enter the error limit </label>
+  <input class="numbers2" type="number" placeholder="    &plusmn; 0.01" >
+  <input class="button1" type="button" value="Submit">
+
+</fieldset>
+
 
 
 
