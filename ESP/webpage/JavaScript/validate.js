@@ -78,6 +78,9 @@ function showfoot() {
 /**========================================================================
  *                           Chart
  *========================================================================**/
+/* 
+PUT THIS IN HTML : <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
+
 var chartScan;
 let chartData;
 const ctxVal = document.getElementById('chartScan').getContext('2d');
@@ -173,6 +176,10 @@ function removeAllCurves() {
   chartScan.data.datasets = [];
   chartScan.update();
 }
+*/
+
+
+
 /*
 
 ****************************WAvelength Accuracy********************************
@@ -204,8 +211,10 @@ document.addEventListener("DOMContentLoaded", function() {
       input.type = 'number';
       input.className = 'numbers2'; // Add class for identification
       input.placeholder = '  0';
-          // Disable the input based on checkbox state
-      input.disabled = !checkbox.checked;
+      // Set disabled state based on checkbox (optional)
+    if (!checkbox.checked) {
+      input.disabled = true;
+    }
 
     wavelengthsContainer.appendChild(input);
       wavelengthsContainer.appendChild(input);
@@ -219,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   }
   
-  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .numbers2, .button1, .error, #submitButton'); // Select all relevant elements
+  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
   var checkbox = document.querySelector('.checkboxes1'); // Get the checkbox element
 
   checkbox.addEventListener('change', function() {
