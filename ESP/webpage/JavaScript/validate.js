@@ -4,12 +4,6 @@
 
 */
 
-var dropdown = document.getElementById('Sampleselector');
-if (dropdown.value === "") {
-  alert("Please choose an option from the dropdown menu first.");
-  return; // Exit the function if no option is selected
-}
-
 document.addEventListener("DOMContentLoaded", function() {
   var submitButton = document.querySelector('.button1');
   submitButton.addEventListener('click', function() {
