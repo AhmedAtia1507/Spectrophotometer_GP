@@ -224,8 +224,6 @@ document.addEventListener("DOMContentLoaded", function() {
       wavelengthsContainer.appendChild(label2);
       wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
     }
-  
-  
   }
   
   var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
