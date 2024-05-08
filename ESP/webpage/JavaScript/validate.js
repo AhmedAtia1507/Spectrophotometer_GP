@@ -1,71 +1,19 @@
-/*==========================================================
-*                    Validatin
-*===========================================================*/
-document.addEventListener("DOMContentLoaded", function() {
-  var submitButton = document.querySelector('.button1');
-  submitButton.addEventListener('click', function() {
-      generateInputs();
-  });
-});
-
-function generateInputs() {
-  var numWavelengths = parseInt(document.querySelector('.numbers1').value);
-  var wavelengthsContainer = document.querySelector('.wavelengths-container');
-  
-  // Clear previous inputs
-  wavelengthsContainer.innerHTML = '';
-
-  // Generate new inputs
-  for (var i = 0; i < numWavelengths; i++) {
-      var label = document.createElement('label');
-      label.textContent = 'Wavelength ' + (i + 1) + ': ';
-      wavelengthsContainer.appendChild(label);
-
-      var input = document.createElement('input');
-      input.type = 'number';
-      input.className = 'numbers2'; // Add class for identification
-      input.placeholder = '       0';
-      wavelengthsContainer.appendChild(input);
-
-      var label2 = document.createElement('label');
-      label2.textContent = '      nm';
-      wavelengthsContainer.appendChild(label2);
-      wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
-  }
-
-  // Store the values entered by the user in an array
-  var wavelengthValues = [];
-  var numberInputs = document.querySelectorAll('.numbers2'); // Select all inputs with class "numbers2"
-  numberInputs.forEach(function(input) {
-      wavelengthValues.push(input.value); // Push each input value to the array
-  });
-
-  // Display the array values for testing
-  console.log(wavelengthValues);
-}
-
-
-
-
-
-
-
-
 
 /**========================================================================
  *                           Navbar
  *========================================================================**/
 function showSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.style.display = 'flex';
-  }
-  function hideSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.style.display = 'none';
-  }
-  /*============================ END OF Nabbar ============================*/
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'flex';
+}
+function hideSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.style.display = 'none';
+}
+/*============================ END OF Nabbar ============================*/
 
-  /**========================================================================
+
+/**========================================================================
  *                           WebSocket
  *========================================================================**/
 var gateway = `ws://${window.location.hostname}/ws`;
@@ -107,82 +55,11 @@ function onMessage(event) {
   }
 
 }
-
-
-  
-/*============================ Login ============================*/
-function toggleLoginContainer(){
-    var login = document.getElementById("login");
-    if(login.style.display=="none"){
-      login.style.display="block";
-    }
-    else{
-      login.style.display="none";
-    }
-  }
-  
-  // Get the submit button element
-  var submitButton = document.getElementById('submit');
-  function login(){
-    var user = document.getElementById("username").value;
-    var pass = document.getElementById("password").value;
-    var car = {
-        username: user,
-        password: pass,
-    }
-    websocket.send(JSON.stringify(car));
-  };
-
-   document.addEventListener('keydown', function(event) {
-     // Check if the key pressed is Enter and the login container is opened
-     if (event.key == 'Enter' && document.getElementById('login').style.display=='block') {
-       // Simulate a click on the submit button
-       submitButton.click();
-     }
-   });
-
-
-
-  //function to handle the esp32 login message 
-  function handleLogin(myObj) {
-    console.log(myObj);
-    if (myObj.hasOwnProperty('username') && myObj.hasOwnProperty('password')) {
-        if (myObj.username === true && myObj.password === true) {
-            window.location.href = "temp.html";
-        } else {
-            document.getElementById("wrongpass").innerHTML = "Wrong username or password.";
-        }
-    } 
-    }
-    /*============================ END OF LOGIN ============================*/
-
-
-
-    /**========================================================================
- *                           STATE BAR
+/**========================================================================
+ *                           footer
  *========================================================================**/
-document.getElementById('sBarBtn').addEventListener('click', function () {
+setTimeout(showfoot, 1000); //autohide foot in 1sec
 
-  const message = {
-    command: 'StateBar',
-  }
-    ;
-  websocket.send(JSON.stringify(message));
-
-
-
-  // Set up the WebSocket onmessage event
-  websocket.onmessage = function (event) {
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const UV = data.UV;
-    const VI = data.VI;
-    // const WL = data.WL;
-    document.getElementById('UVstateBar').textContent = UV;
-    document.getElementById('VIstateBar').textContent = VI;
-    // document.getElementById('WLstateBar').textContent = WL;
-  }
-});
 document.getElementById('hidefoot').addEventListener('click', showfoot)
 
 
@@ -198,3 +75,296 @@ function showfoot() {
   foot.classList.toggle('inactive');
 }
 
+/**========================================================================
+ *                           Chart
+ *========================================================================**/
+var chartScan;
+let chartData;
+const ctxVal = document.getElementById('chartScan').getContext('2d');
+chartScan = new Chart(ctxVal, {
+  type: 'line',
+  data: chartData,
+  options: {
+    tooltips: {
+      enabled: false
+    },
+    animation: {
+      duration: 0
+    },
+    responsive: false,
+    maintainAspectRatio: false,
+    plugins: {
+      crosshair: {
+        tooltips: {
+          enabled: false // Disable tooltips for the crosshair
+      },
+        sync: {
+          enabled: true // Enable crosshair synchronization between multiple charts
+        },
+        zoom: {
+          enabled: true // Enable crosshair zooming along the axis
+        },
+        line: {
+          color: 'blue', // Crosshair line color
+          width: 1 // Crosshair line width
+        }
+      },
+     
+    },
+    scales: {
+      x: {
+        // min: 190,
+        // max: 1100,
+        type: 'linear',
+        position: 'bottom'
+      },
+      y: {
+        type: 'linear',
+        position: 'left'
+      }
+    },
+    onHover: null // Disable the default onHover behavior
+  }
+});
+function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 'curve') {
+  // Check if the curve already exists
+  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
+
+  // If the curve exists, update its data
+  if (existingCurveIndex !== -1) {
+    chartScan.data.datasets[existingCurveIndex].data = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
+    chartScan.data.datasets[existingCurveIndex].borderColor = color;
+    chartScan.data.datasets[existingCurveIndex].backgroundColor = fillCurve ? 'rgba(255, 0, 0, 0.3)' : undefined;
+    chartScan.data.datasets[existingCurveIndex].showLine = drawMode !== 'points'; // Don't connect points if drawing separate points
+  } else { // If the curve does't exist, add it
+    var curveData = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
+    var dataset = {
+      label: curveName,
+      data: curveData,
+      borderColor: color,
+      borderWidth: 2,
+      pointRadius: drawMode === 'points' ? 5 : 0, // Set point radius if drawing points
+      lineTension: drawMode === 'points' ? 0 : 0.4, // Set line tension if drawing points
+      showLine: drawMode !== 'points' // Don't connect points if drawing separate points
+    };
+
+    if (fillCurve) {
+      dataset.fill = 'origin';
+      dataset.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+    }
+
+    chartScan.data.datasets.push(dataset);
+  }
+
+  chartScan.update(); // Update the chart
+}
+
+
+
+
+// funcation to remove all curves in chart js
+function removeAllCurves() {
+  chartScan.data.datasets = [];
+  chartScan.update();
+}
+/*
+
+****************************WAvelength Accuracy********************************
+
+*/
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var submitButton = document.querySelector('.button1');
+  submitButton.addEventListener('click', function() {
+    generateInputs();
+  });
+
+  function generateInputs() {
+    var numWavelengths = parseInt(document.querySelector('.numbers1').value);
+    var wavelengthsContainer = document.querySelector('.wavelengths-container');
+  
+    // Clear previous inputs
+    wavelengthsContainer.innerHTML = '';
+  
+    // Generate new inputs
+    for (var i = 0; i < numWavelengths; i++) {
+      var label = document.createElement('label');
+      label.textContent = 'Wavelength ' + (i + 1) + ': ';
+      label.className = 'label1';
+      wavelengthsContainer.appendChild(label);
+  
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'numbers2'; // Add class for identification
+      input.placeholder = '  0';
+          // Disable the input based on checkbox state
+      input.disabled = !checkbox.checked;
+
+    wavelengthsContainer.appendChild(input);
+      wavelengthsContainer.appendChild(input);
+  
+      var label2 = document.createElement('label');
+      label2.textContent = '      nm';
+      wavelengthsContainer.appendChild(label2);
+      wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+    }
+  
+  
+  }
+  
+  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .numbers2, .button1, .error, #submitButton'); // Select all relevant elements
+  var checkbox = document.querySelector('.checkboxes1'); // Get the checkbox element
+
+  checkbox.addEventListener('change', function() {
+    for (var element of formElements) {
+      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+    }
+  });
+
+  document.getElementById('submitButton').addEventListener('click', compareValues);
+  var submitButton2 = document.querySelector('.button11'); // Targeting the new submit button
+  submitButton2.addEventListener('click', compareValues);
+});
+
+
+function compareValues() {
+  var dropdown = document.getElementById('Sampleselector');
+  var selectedOption = dropdown.options[dropdown.selectedIndex].value;
+
+    // Check if a valid option is selected
+    if (selectedOption === "" || selectedOption === "disabled"  ) {
+      alert("Please choose a sample from the dropdown menu before proceeding.");
+      return; // Exit the function if no valid option is selected
+    }
+
+  // Get predefined values based on selected option
+  var predefinedValues = getPredefinedValues(selectedOption);
+
+  // Get user input values for wavelengths (assuming class 'wavelength-input')
+  var userInputValues = [];
+  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+  inputs.forEach(function(input) {
+    var inputValue = parseFloat(input.value);
+    userInputValues.push(inputValue);
+  });
+
+  var errorLimit= parseInt(document.querySelector('.error').value);
+  // Compare user input values with predefined values
+  var passesTest = compareWithPredefinedValues(userInputValues, predefinedValues,errorLimit);
+
+  // Display the result of the comparison
+  displayComparisonResult(passesTest);
+}
+
+function getPredefinedValues(option) {
+  // Define predefined values for each option
+  var predefinedValuesMap = {
+    "Holmium oxide1": [200, 300, 400, 500, 600, 700],
+    "Holmium oxide2": [100, 200, 300, 400, 500, 600],
+    "Holmium oxide3": [30, 40, 50, 60, 70, 80]
+  };
+
+  // Get predefined values for the selected option
+  var values = predefinedValuesMap[option] || [];
+
+  return values;
+}
+
+
+function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
+  // Consider passing the errorLimit as an argumentd
+
+  // Compare user input values with predefined values
+  var passesTest = true;
+  for (var i = 0; i < userInputValues.length; i++) {
+    var difference = userInputValues[i] - predefinedValues[i]; 
+    if (difference > errorLimit) {
+      passesTest = false;
+      break;
+    } else if (difference < -errorLimit) {
+      passesTest = false;
+      break;
+    }
+    
+  }
+  return passesTest;
+}
+
+
+function displayComparisonResult(passesTest) {
+  if (passesTest) {
+    alert('Test passes!');
+  } else {
+    var continueTest = confirm('Test fails. Do you want to continue the test?');
+    if (continueTest) {
+      // Implement logic to continue the test (consider error handling)
+    } else {
+      // Redirect to direct control page (assuming you have a URL)
+      window.location.href = "sssssssssss"; // Replace with your actual URL
+    }
+  }
+}
+
+
+/*
+
+****************************Photometric Accuracy********************************
+
+*/
+
+var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2'); // Select all relevant elements
+var checkbox2 = document.querySelector('.checkboxes2'); // Get the checkbox element
+
+checkbox2.addEventListener('change', function() {
+  for (var element of formElements2) {
+    element.disabled = !this.checked; // Toggle disabled based on checkbox state
+  }
+});
+
+
+
+function showPopup() {
+  alert("Place the First filter");
+}
+
+
+
+
+/*
+
+****************************Baseline Stability********************************
+
+*/
+
+var formElements3 = document.querySelectorAll(' .numbers13, .button13, .error3 '); // Select all relevant elements
+  var checkbox3 = document.querySelector('.checkboxes3'); // Get the checkbox element
+
+  checkbox3.addEventListener('change', function() {
+    for (var element of formElements3) {
+      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+    }
+  });
+
+
+/*
+
+****************************Photometric noise********************************
+
+*/
+
+
+var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '); // Select all relevant elements
+  var checkbox4 = document.querySelector('.checkboxes4'); // Get the checkbox element
+
+  checkbox4.addEventListener('change', function() {
+    for (var element of formElements4) {
+      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+    }
+  });
