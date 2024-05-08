@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
       input.type = 'number';
       input.className = 'numbers2'; // Add class for identification
       input.placeholder = '  0';
+          // Disable the input based on checkbox state
+      input.disabled = !checkbox.checked;
+
+    wavelengthsContainer.appendChild(input);
       wavelengthsContainer.appendChild(input);
   
       var label2 = document.createElement('label');
@@ -40,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   }
   
-  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
+  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .numbers2, .button1, .error, #submitButton'); // Select all relevant elements
   var checkbox = document.querySelector('.checkboxes1'); // Get the checkbox element
 
   checkbox.addEventListener('change', function() {
