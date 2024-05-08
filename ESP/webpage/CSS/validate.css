@@ -49,6 +49,32 @@ legend {
     border: 0ch;    
 }
 
+.checkboxes2 {
+  width: 23px; 
+  height: 23px;
+  margin-left: 0%; 
+  margin-top: 3%; 
+  border-radius: 5px;
+  border: 0ch;    
+}
+
+.checkboxes3 {
+  width: 23px; 
+  height: 23px;
+  margin-left: 0%; 
+  margin-top: 3%; 
+  border-radius: 5px;
+  border: 0ch;    
+}
+
+.checkboxes4 {
+  width: 23px; 
+  height: 23px;
+  margin-left: 0%; 
+  margin-top: 3%; 
+  border-radius: 5px;
+  border: 0ch;    
+}
 
 
 
@@ -126,6 +152,7 @@ legend {
     font-family: 'Times new roman', Courier, monospace;
 }
 
+
 .label1 {
   font-size: 18px;
   color: black;
@@ -146,6 +173,34 @@ legend {
     border-radius: 5px;
     border: 0ch;
     font-family: 'Times new roman', Courier, monospace;
+}
+
+.numbers12 {
+  width: 30px; 
+  height: 30px;
+  font-size: 1rem;
+  color: black;
+  margin-left:1%;
+  margin-top: 1%;
+  margin-bottom: 0.3%;
+  padding-left: 1%;
+  border-radius: 5px;
+  border: 0ch;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
+.numbers14 {
+  width: 30px; 
+  height: 30px;
+  font-size: 1rem;
+  color: black;
+  margin-left:1%;
+  margin-top: 1%;
+  margin-bottom: 0.3%;
+  padding-left: 1%;
+  border-radius: 5px;
+  border: 0ch;
+  font-family: 'Times new roman', Courier, monospace;
 }
 
 
@@ -178,6 +233,48 @@ legend {
     font-family: 'Times new roman', Courier, monospace;
 }
 
+.error2 {
+  width: 50px; 
+  height: 28px;
+  font-size: 1rem;
+  color: black;
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-right:0.00005%;
+  padding: 1.7%;
+  border-radius: 5px;
+  border: 0ch;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
+.error3 {
+  width: 50px; 
+  height: 28px;
+  font-size: 1rem;
+  color: black;
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-right:0.00005%;
+  padding: 1.7%;
+  border-radius: 5px;
+  border: 0ch;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
+.error4 {
+  width: 50px; 
+  height: 28px;
+  font-size: 1rem;
+  color: black;
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-right:0.00005%;
+  padding: 1.7%;
+  border-radius: 5px;
+  border: 0ch;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
 .button1 {
   width: 80px; 
   height: 40px;
@@ -191,6 +288,64 @@ legend {
   font-size: 18px;
   font-weight: 600;
   }
+
+  .button12 {
+    width: 80px; 
+    height: 40px;
+    background-color: white;
+    color: green;
+    margin-left: 88%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    border: 0ch;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    }
+
+  .button13 {
+  width: 80px; 
+  height: 40px;
+  background-color: white;
+  color: green;
+  margin-left: 88%;
+  margin-bottom: 2%;
+  border-radius: 5px;
+  border: 0ch;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  }
+
+  .button14 {
+    width: 80px; 
+    height: 40px;
+    background-color: white;
+    color: green;
+    margin-left: 88%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    border: 0ch;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    }
+
+    .button11 {
+      width: 80px; 
+      height: 40px;
+      background-color: white;
+      color: green;
+      margin-left: 88%;
+      margin-bottom: 2%;
+      border-radius: 5px;
+      border: 0ch;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      }
+
+
 <<<<<<< HEAD
 
   .button2 {
