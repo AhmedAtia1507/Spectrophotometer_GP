@@ -1,10 +1,6 @@
 body{
     background-color: lightgray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    margin-bottom: 5%;
 }
 
   .container {
@@ -12,25 +8,26 @@ body{
 
   }
 .fsetup1 {
-    width: 800px;
+    width: 1000px;
     border: 1px solid #000000;
     border-radius: 5px;
     padding: 10px;
-    margin-left: 20%;
+    margin-left: 28%;
     margin-bottom: 2%;
   }
 
 legend {
-    font-size: 21px;
+    font-size: 30px;
     font-weight:bolder;
     font-family:Arial, Helvetica, sans-serif;
   }
 
 .ValidationTitle1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: black;
     margin-left: 2%;
     margin-top: 2%;
+    margin-bottom: 1%;
     font-family: 'Times new roman', Courier, monospace;
 }
 
@@ -44,11 +41,12 @@ legend {
 }
 
 .checkboxes1 {
-    width: 15px; 
-    height: 15px;
+    width: 23px; 
+    height: 23px;
     margin-left: 0%; 
     margin-top: 3%; 
-    
+    border-radius: 5px;
+    border: 0ch;    
 }
 
 
@@ -56,15 +54,15 @@ legend {
 
  /* Style the dropdown button */
  .dropdown-button {
-    width: 150px; 
-    height: 28px;
+    width: 190px; 
+    height: 30px;
     background-color: white;
     color: black;
     font-weight: bold;
     cursor: pointer;
     padding-bottom: 7.5px;
     padding-top: 5px;
-    font-size: 13px;
+    font-size: 18px;
     margin-left: 10%; 
     margin-top: 1%; 
     border-radius: 5px;
@@ -120,13 +118,21 @@ legend {
 }
 
 .labels {
-    font-size: 0.9rem;
+    font-size: 20px;
     color: black;
     margin-left: 10%;
-    margin-top: 1%;
-    margin-bottom:3%;
+    margin-top: 0.3%;
+    margin-bottom:5%;
     font-family: 'Times new roman', Courier, monospace;
 }
+
+.label1 {
+  font-size: 18px;
+  color: black;
+  margin-left: 20%;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
 
 .numbers1 {
     width: 30px; 
@@ -135,7 +141,8 @@ legend {
     color: black;
     margin-left:1%;
     margin-top: 1%;
-    padding-left: 3px;
+    margin-bottom: 0.3%;
+    padding-left: 1%;
     border-radius: 5px;
     border: 0ch;
     font-family: 'Times new roman', Courier, monospace;
@@ -148,37 +155,40 @@ legend {
     height: 30px;
     font-size: 1rem;
     color: black;
-    margin-left: 5%;
     margin-top: 2%;
+    margin-bottom: 5%;
     margin-right:0.00005%;
+    padding-left: 2.5%;
     border-radius: 5px;
     border: 0ch;
     font-family: 'Times new roman', Courier, monospace;
 }
 
 .error {
-    width: 70px; 
-    height: 30px;
+    width: 50px; 
+    height: 28px;
     font-size: 1rem;
     color: black;
     margin-left: 5%;
     margin-top: 2%;
     margin-right:0.00005%;
+    padding: 1.7%;
     border-radius: 5px;
     border: 0ch;
     font-family: 'Times new roman', Courier, monospace;
 }
 
 .button1 {
-  width: 70px; 
-  height: 30px;
+  width: 80px; 
+  height: 40px;
   background-color: white;
   color: green;
-  margin-left: 80%;
+  margin-left: 88%;
+  margin-bottom: 2%;
   border-radius: 5px;
   border: 0ch;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   }
 <<<<<<< HEAD
