@@ -4,6 +4,7 @@
 
 */
 
+
 document.addEventListener("DOMContentLoaded", function() {
   var submitButton = document.querySelector('.button1');
   submitButton.addEventListener('click', function() {
@@ -53,12 +54,13 @@ document.addEventListener("DOMContentLoaded", function() {
   submitButton2.addEventListener('click', compareValues);
 });
 
+
 function compareValues() {
   var dropdown = document.getElementById('Sampleselector');
   var selectedOption = dropdown.options[dropdown.selectedIndex].value;
 
     // Check if a valid option is selected
-    if (selectedOption === "" || selectedOption === "disabled" || selectedOption === "" ) {
+    if (selectedOption === "" || selectedOption === "disabled"  ) {
       alert("Please choose a sample from the dropdown menu before proceeding.");
       return; // Exit the function if no valid option is selected
     }
