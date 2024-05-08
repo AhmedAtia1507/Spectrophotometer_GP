@@ -147,18 +147,46 @@ function updateChart() {
         showLine: true
       }]
     },
-    options: {
-      scales: {
-        x: {
-          type: 'linear',
-          position: 'bottom'
+   options: {
+    tooltips: {
+      enabled: false
+    },
+    animation: {
+      duration: 0
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      crosshair: {
+        tooltips: {
+          enabled: false // Disable tooltips for the crosshair
+      },
+        sync: {
+          enabled: true // Enable crosshair synchronization between multiple charts
         },
-        y: {
-          type: 'linear',
-          position: 'left'
+        zoom: {
+          enabled: true // Enable crosshair zooming along the axis
+        },
+        line: {
+          color: 'blue', // Crosshair line color
+          width: 1 // Crosshair line width
         }
+      },
+     
+    },
+    scales: {
+      x: {
+        min: -100,
+        type: 'linear',
+        position: 'bottom'
+      },
+      y: {
+        type: 'linear',
+        position: 'left'
       }
-    }
+    },
+    onHover: null // Disable the default onHover behavior
+  }
   });
 }
 
@@ -315,6 +343,7 @@ document.body.appendChild(infoDiv);
 
 // Add mousemove event listener to the canvas
 chartScan.canvas.addEventListener('mousemove', function(event) {
+  infoDiv.style.display = 'block';
   const canvasPosition = chartScan.canvas.getBoundingClientRect();
   const mouseX = event.clientX - canvasPosition.left;
   const mouseY = event.clientY - canvasPosition.top;
@@ -328,18 +357,17 @@ chartScan.canvas.addEventListener('mousemove', function(event) {
   // Position the div near the mouse pointer
   infoDiv.style.left = `${event.clientX + 10}px`; // Adding 10px offset to the right
   infoDiv.style.top = `${event.clientY + 10}px`; // Adding 10px offset to the bottom
+  // hide the div when the mouse leaves the canvas
+  chartScan.canvas.addEventListener('mouseleave', function() {
+    infoDiv.style.display = 'none';});
 });
 
-// Optionally, you can hide the div initially
-// infoDiv.style.display = 'none';
 
 
 
 
-// Reset button functionality
-// document.getElementById('resetBtn').addEventListener('click', function() {
-//   chartScan.resetZoom();
-// });
+
+
 
 
 
