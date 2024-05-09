@@ -109,8 +109,27 @@ var concentrationData = [];
 var chart;
 updateChart();
 function addPoint() {
-  var absorptionValue = parseFloat(document.getElementById("absorption").value);
+  var absorptionValue;
   var concentrationValue = parseFloat(document.getElementById("concentration").value);
+  var WLine = document.getElementById("WLine").value; // get wavelength
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: WLine,
+    stopInput: WLine,
+    stepInput: 0
+  };
+  websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const currentTime = data.currentTime;
+    const wavelength = data.wavelength;
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    absorptionValue = Math.log10(intensityReference / intensitySample);
+    
+  };
+
 
   if (!isNaN(absorptionValue) && !isNaN(concentrationValue)) {
     absorptionData.push(absorptionValue);
@@ -122,6 +141,9 @@ function addPoint() {
     alert("Please enter valid numerical values for absorption and concentration.");
   }
 }
+
+
+
 function updateChart() {
   if (chart) {
     chart.destroy(); // Destroy the existing chart to update with new data
@@ -176,7 +198,6 @@ function updateChart() {
     },
     scales: {
       x: {
-        min: -100,
         type: 'linear',
         position: 'bottom'
       },
