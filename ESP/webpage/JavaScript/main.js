@@ -109,8 +109,27 @@ var concentrationData = [];
 var chart;
 updateChart();
 function addPoint() {
-  var absorptionValue = parseFloat(document.getElementById("absorption").value);
+  var absorptionValue;
   var concentrationValue = parseFloat(document.getElementById("concentration").value);
+  var WLine = document.getElementById("WLine").value; // get wavelength
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: WLine,
+    stopInput: WLine,
+    stepInput: 0
+  };
+  websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const currentTime = data.currentTime;
+    const wavelength = data.wavelength;
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    absorptionValue = Math.log10(intensityReference / intensitySample);
+    
+  };
+
 
   if (!isNaN(absorptionValue) && !isNaN(concentrationValue)) {
     absorptionData.push(absorptionValue);
@@ -122,6 +141,9 @@ function addPoint() {
     alert("Please enter valid numerical values for absorption and concentration.");
   }
 }
+
+
+
 function updateChart() {
   if (chart) {
     chart.destroy(); // Destroy the existing chart to update with new data
@@ -147,18 +169,45 @@ function updateChart() {
         showLine: true
       }]
     },
-    options: {
-      scales: {
-        x: {
-          type: 'linear',
-          position: 'bottom'
+   options: {
+    tooltips: {
+      enabled: false
+    },
+    animation: {
+      duration: 0
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      crosshair: {
+        tooltips: {
+          enabled: false // Disable tooltips for the crosshair
+      },
+        sync: {
+          enabled: true // Enable crosshair synchronization between multiple charts
         },
-        y: {
-          type: 'linear',
-          position: 'left'
+        zoom: {
+          enabled: true // Enable crosshair zooming along the axis
+        },
+        line: {
+          color: 'blue', // Crosshair line color
+          width: 1 // Crosshair line width
         }
+      },
+     
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        position: 'bottom'
+      },
+      y: {
+        type: 'linear',
+        position: 'left'
       }
-    }
+    },
+    onHover: null // Disable the default onHover behavior
+  }
   });
 }
 
@@ -315,6 +364,7 @@ document.body.appendChild(infoDiv);
 
 // Add mousemove event listener to the canvas
 chartScan.canvas.addEventListener('mousemove', function(event) {
+  infoDiv.style.display = 'block';
   const canvasPosition = chartScan.canvas.getBoundingClientRect();
   const mouseX = event.clientX - canvasPosition.left;
   const mouseY = event.clientY - canvasPosition.top;
@@ -328,18 +378,17 @@ chartScan.canvas.addEventListener('mousemove', function(event) {
   // Position the div near the mouse pointer
   infoDiv.style.left = `${event.clientX + 10}px`; // Adding 10px offset to the right
   infoDiv.style.top = `${event.clientY + 10}px`; // Adding 10px offset to the bottom
+  // hide the div when the mouse leaves the canvas
+  chartScan.canvas.addEventListener('mouseleave', function() {
+    infoDiv.style.display = 'none';});
 });
 
-// Optionally, you can hide the div initially
-// infoDiv.style.display = 'none';
 
 
 
 
-// Reset button functionality
-// document.getElementById('resetBtn').addEventListener('click', function() {
-//   chartScan.resetZoom();
-// });
+
+
 
 
 
