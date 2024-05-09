@@ -51,70 +51,8 @@
 
 <h1 class="ValidationTitle1">Validation Tests <i class="fa-solid fa-list-check" style="font-size: 40px;"></i></h1>
 
+<canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
 
-<fieldset class="fsetup1">
-  <legend><input class="checkboxes1" type="checkbox"> Wavelength Accuracy</legend>
-
-  <select class="dropdown-button" name="Sample" id="Sampleselector"disabled>
-    <option value="" disabled selected>Select the Sample</option>
-    <option value="Holmium oxide1">Holmium oxide</option>
-    <option value="Holmium oxide2">Holmium oxide</option>
-    <option value="Holmium oxide3">Holmium oxide</option>
-  </select>
-
-  <br>
-  <label class="labels"> Enter the required number of wavelengths </label>
-  <input class="numbers1" type="number" placeholder="0"disabled>
-  <input class="button1" type="button" value="Submit"disabled>
-  <label class="labels" id="label1"></label>
-  <br>
-  <div class="wavelengths-container"></div>
-  <label class="labels"> Enter the error limit </label>
-  <input class="error" type="number" placeholder="&plusmn;1"disabled>
-  <br>
-  <input class="button11" type="button" id="submitButton" value="Submit"disabled>
-
- 
-  <div class="messageContainer" id="messageContainer1"></div>
-
-</fieldset>
-
-
-
-<fieldset class="fsetup1">
-  <legend><input class="checkboxes2" type="checkbox"> Photometric Accuracy</legend>
-  <label class="labels"> Enter the number of filters </label>
-  <input class="numbers12" type="number" placeholder="0"disabled>
-   <label class="labels"> Enter the error limit </label>
-  <input class="error2" type="number" placeholder="&plusmn;1"disabled > 
-  <button class="button12" onclick="showPopup()" disabled> Submit </button>
-
-  <div class="messageContainer" id="messageContainer2"></div>
-</fieldset>
-
-</fieldset>
-
-<fieldset class="fsetup1">
-  <legend><input class="checkboxes3" type="checkbox"> Baseline Stability </legend>
-  <label class="labels"> Enter the error limit </label>
-  <input class="error3" type="number" placeholder="&plusmn;1"disabled>
-  <input class="button13" type="button" onclick="showPopup1()" id="mynumber1" value="Submit" disabled>
-
-  <div class="messageContainer" id="messageContainer3"></div>
-
-</fieldset>
-
-<fieldset class="fsetup1">
-  <legend><input class="checkboxes4" type="checkbox"> Photometric noise </legend>
-  <label class="labels"> Enter the Absorbation value </label>
-  <input class="numbers14" type="number" id="mynumber2"placeholder="0"disabled>
-  <label class="labels"> Enter the error limit </label>
-  <input class="error4" type="number" id="mynumber3" placeholder="&plusmn;1" disabled>
-  <input class="button14" type="button" onclick="showPopup2()" id="mynumber4" value="Submit"disabled>
-
-  <div class="messageContainer" id="messageContainer4"></div>
-
-</fieldset>
 
 
 
@@ -183,8 +121,7 @@
 </main>
 <script src="JavaScript/chart.js"></script>
 <script src="JavaScript/validate.js"></script>
-<script src="JavaScript/chart copy.js"></script>
-
+<script src="JavaScript/Validationcharts.js"></script>
 
 </body>
 </html>
