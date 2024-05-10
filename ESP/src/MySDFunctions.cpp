@@ -76,8 +76,8 @@ void sendFileNamesTask(void *parameter) {
     
    
  while (file.available()) {
-        // Read 500 lines from the file
-        for (int i = 0; i <200 && file.available(); i++) {
+        // Read 150 lines from the file
+        for (int i = 0; i <150 && file.available(); i++) {
             String line = file.readStringUntil('\n');
             line.trim();
             line.replace(".txt","");
@@ -145,9 +145,9 @@ void handlereadTask(void *pvParameters){
 
     // Read the file in chunks of 50 lines
     while (file.available()) {
-        // Read 50 lines from the file
+        // Read 150 lines from the file
         String linesToSend;
-        for (int i = 0; i <500 && file.available(); i++) {
+        for (int i = 0; i <150 && file.available(); i++) {
             String line = file.readStringUntil('\n');
             line.trim();
             String json=csvToJsonString(line);
@@ -159,7 +159,7 @@ void handlereadTask(void *pvParameters){
         }
 
         // Send the chunk of lines to the clients
-        Serial.print(linesToSend);
+        //Serial.print(linesToSend);
         notifyClients(linesToSend);
 
         // Delay or yield to allow other tasks to run

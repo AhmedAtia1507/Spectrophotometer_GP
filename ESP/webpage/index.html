@@ -85,7 +85,7 @@
               <button id="SampleNumBTN">Start</button>
               <button onclick="pauseScan()">Pause</button>
               <button id="savepreset" onclick="savepreset()">Save Preset</button>
-              <button id="loadpreset" onclick="showpreset()">Load Preset</button>
+              <button id="loadpreset" onclick="showItems('presets')">Load Preset</button>
             </div>
 
             </fieldset>
@@ -154,7 +154,7 @@
                       <!-- Messages will be displayed here -->
                     </div>
                     <div class="TwoBtn">
-                    <button onclick="showreadings()" id="loadreadings">load Readings</button>
+                    <button onclick="showItems('readings')" id="loadreadings">load Readings</button>
                   </div>
                 </fieldset>
     
@@ -182,7 +182,7 @@
             <input id="prestinput" class="presetinput"  maxlength="17" autocomplete="off"/>
             <div class="TwoBtn">
             <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
-            <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+            <button class="presetbtn" id="savecancel" onclick="savepreset()">cancel</button>
           </div>
             <div id="nameexist"></div>
           </div>
