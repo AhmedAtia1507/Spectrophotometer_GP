@@ -361,13 +361,13 @@ void handleScanTask(void *pvParameters)
     {
       vTaskDelay(pdMS_TO_TICKS(100));
       int startTime = millis();
-      while (Serial2.available() == 0 && millis() - startTime < 100)
+      while (Serial2.available() == 0 && millis() - startTime < 2000)
       {
         delay(1);
       }
-      //String response = Serial2.readStringUntil('\n');
+      String response = Serial2.readStringUntil('\n');
 
-      String response ="23/3||1:30 200 10 10.5";
+      //String response ="23/3||1:30 200 10 10.5";
       Serial.println(response); // debug
 
       // Split the response into components
