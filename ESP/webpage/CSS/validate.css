@@ -2,13 +2,6 @@ body{
   background-color: lightgray;
   margin-bottom: 5%;
 }
-<<<<<<< HEAD
-main{
-background-color:lightgray;
-}
-=======
-
->>>>>>> 2f01c9230c67b9d0f0248462789aeadb4f3cfc99
 
 .container {
   text-align: center;
@@ -371,12 +364,15 @@ main{
 }
 
 
-.messageContainer{
-  display: inline-block;
+.messageContainerf{
+  width: 500px;
   padding: 20px; /* Padding around the message content */
   border-radius: 20px; /* Rounded corners */
+  margin-left: 25%;
+  padding-left: 8%;
+  display: none;
   background:-o-linea;
-  background: lightgray;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
@@ -385,13 +381,62 @@ main{
 
 }
 
-.optionButton {
-  width: 70px; 
-  height: 30px;
-  background-color: white;
-  color: red;
-  margin-top: 5%;
+.messageContainert{
+  width: 500px;
+  padding: 20px; /* Padding around the message content */
+  border-radius: 20px; /* Rounded corners */
+  margin-left: 25%;
+  padding-left: 8%;
+  display: none;
+  background:-o-linea;
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+  font-family: Times_new_roman, sans-serif; 
+  font-size: 16px; 
+  color: green; /* Text color */
+  font-weight: bold;
+
+}
+
+
+.messageContainerfilter{
+  width: 500px;
+  padding: 20px; /* Padding around the message content */
+  border-radius: 20px; /* Rounded corners */
   margin-left: 20%;
+  padding-left: 8%;
+  display: none;
+  background:-o-linea;
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+  font-family: Times_new_roman, sans-serif; 
+  font-size: 16px; 
+  color: black; /* Text color */
+  font-weight: bold;
+
+}
+
+.optionButton {
+  width: 90px; 
+  height: 30px;
+  background-color: lightgray;
+  color: black;
+  margin-top: 5%;
+  margin-left: 15%;
+  border-radius: 5px;
+  border: 0ch;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.optionButtont {
+  width: 90px; 
+  height: 30px;
+  background-color: lightgray;
+  color: black;
+  margin-top: 5%;
+  margin-left: 34%;
   border-radius: 5px;
   border: 0ch;
   cursor: pointer;

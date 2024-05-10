@@ -143,7 +143,7 @@ function compareValues() {
 
   // Check if a valid option is selected
   if (selectedOption === "" || selectedOption === "disabled"  ) {
-    showMessage("Please choose a sample from the dropdown menu before proceeding.");
+    showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1" );
       return; // Exit the function if no valid option is selected
   }
 
@@ -166,12 +166,26 @@ function compareValues() {
   // Display the comparison result
  // showMessage(passesTest ? "Test passes!" : "Test fails. Do you want to continue the test?");
 
+ var messageContainer1 = document.getElementById('messageContainer1');
+ var messageContainer2 = document.getElementById('messageContainer2');
+
  if (passesTest){
-    showMessage("Test passes!");
-    window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";
+    
+    messageContainer1.style.display = 'none';
+    if (messageContainer2) {
+      messageContainer2.textContent = '';
+    }
+    showMessaget("Test passes! " , "Show curve","messageContainer2" );
+    
  }
  else{
-  showMessage1("Test fails. Do you want to continue the test?", "Ok", "cancel");
+
+  messageContainer2.style.display = 'none';
+  if (messageContainer1) {
+    messageContainer1.textContent = '';
+  }
+  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer1" );
+ 
  }
 }
 
@@ -190,6 +204,8 @@ function getPredefinedValues(option) {
   return values;
 }
 
+
+
 function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
   // Compare user input values with predefined values
   for (var i = 0; i < userInputValues.length; i++) {
@@ -201,52 +217,6 @@ function compareWithPredefinedValues(userInputValues, predefinedValues, errorLim
   return true;
 }
 
-function showMessage(message) {
-  // respond of data entered
-  var messageContainer = document.getElementById('messageContainer1');
-
-  // Clear previous inputs
-  messageContainer.innerHTML = '';
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message; 
-  messageContainer.appendChild(messageDiv);
-}
-
-function showMessage1(message, option1Text, option2Text) {
-  var messageContainer = document.getElementById('messageContainer1');
-
-  // Clear previous content
-  messageContainer.innerHTML = '';
-
-  // Create a div for the message text
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-
-  // Create buttons for the options
-  var option1Button = document.createElement('button');
-  option1Button.textContent = option1Text;
-  option1Button.className = 'optionButton'; // Apply custom CSS class
-  option1Button.onclick = function() {
-      // Logic for option 1
-      console.log("Option 1 clicked");
-      messageContainer.innerHTML = '';
-  };
-
-  var option2Button = document.createElement('button');
-  option2Button.textContent = option2Text;
-  option2Button.className = 'optionButton'; // Apply custom CSS class
-  option2Button.onclick = function() {
-      // Logic for option 2
-      console.log("Option 2 clicked");
-      window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
-      messageContainer.innerHTML = '';
-    };
-
-  // Append message and options to the container
-  messageContainer.appendChild(messageDiv);
-  messageContainer.appendChild(option1Button);
-  messageContainer.appendChild(option2Button);
-}
 
 
 
@@ -255,9 +225,8 @@ function showMessage1(message, option1Text, option2Text) {
 ****************************Photometric Accuracy********************************
 
 */
-
-var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2'); // Select all relevant elements
-var checkbox2 = document.querySelector('.checkboxes2'); // Get the checkbox element
+var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2');
+var checkbox2 = document.querySelector('.checkboxes2');
 
 checkbox2.addEventListener('change', function() {
   for (var element of formElements2) {
@@ -266,59 +235,61 @@ checkbox2.addEventListener('change', function() {
 });
 
 
-function showMessage2(message) {
-  // respond of data entered
-  var messageContainer = document.getElementById('messageContainer2');
 
-  // Clear previous inputs
-  messageContainer.innerHTML = '';
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message; 
-  messageContainer.appendChild(messageDiv);
-}
+document.addEventListener("DOMContentLoaded", function() {
+  var submitButton1 = document.querySelector('.button12');
+  submitButton1.addEventListener('click', function() {
 
-function showMessage3(message, option1Text, option2Text) {
-  var messageContainer = document.getElementById('messageContainer2');
+    var numfilrters = parseInt(document.querySelector('.numbers12').value);
+    var messageContainer12 = document.getElementById('messageContainer12');
+    if (messageContainer12) {
+      messageContainer12.textContent = '';
+    }
 
-  // Clear previous content
-  messageContainer.innerHTML = '';
+    var messageContainer22 = document.getElementById('messageContainer22');
+    if (messageContainer22) {
+      messageContainer22.textContent = '';
+    }
 
-  // Create a div for the message text
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
+    var messageContainer31 = document.getElementById('messageContainer31');
+    if (messageContainer31) {
+      messageContainer31.textContent = '';
+    }
 
-  // Create buttons for the options
-  var option1Button = document.createElement('button');
-  option1Button.textContent = option1Text;
-  option1Button.className = 'optionButton'; // Apply custom CSS class
-  option1Button.onclick = function() {
-      // Logic for option 1
-      console.log("Option 1 clicked");
-      messageContainer.innerHTML = '';
-  };
+    var localCounter = 1;
 
-  var option2Button = document.createElement('button');
-  option2Button.textContent = option2Text;
-  option2Button.className = 'optionButton'; // Apply custom CSS class
-  option2Button.onclick = function() {
-      // Logic for option 2
-      console.log("Option 2 clicked");
-      window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
-      messageContainer.innerHTML = '';
+    if (numfilrters === 0 || numfilrters === "") {
+      showMessage("Please Enter the number of filters first","ok","messageContainer12");
+    } 
+    else {
+      showMessage3("Start placing filters", "Done", "messageContainer31",numfilrters); 
     };
-
-  // Append message and options to the container
-  messageContainer.appendChild(messageDiv);
-  messageContainer.appendChild(option1Button);
-  messageContainer.appendChild(option2Button);
-}
-
-function showPopup() {
-  showMessage2("Place the First filter");
-  //showMessage3("Test fails. Do you want to continue the test?", "Ok", "cancel");
-}
+  });
+});
 
 
+
+
+/*if (passesTest2){
+    
+   messageContainer1.style.display = 'none';
+    if (messageContainer2) {
+      messageContainer2.textContent = '';
+    }
+    showMessaget("Test passes! " , "Show curve","messageContainer22" );
+    
+ }
+ else{
+
+  messageContainer2.style.display = 'none';
+  if (messageContainer1) {
+    messageContainer1.textContent = '';
+  }
+  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer12" );
+ 
+ }
+
+*/
 
 
 /*
@@ -335,57 +306,27 @@ var formElements3 = document.querySelectorAll(' .numbers13, .button13, .error3 '
       element.disabled = !this.checked; // Toggle disabled based on checkbox state
     }
   });
+  
+  /* if (passesTest3){
+    
+     messageContainer1.style.display = 'none';
+    if (messageContainer2) {
+      messageContainer2.textContent = '';
+    }
+    showMessaget("Test passes! " , "Show curve","messageContainer23" );
+    
+ }
+ else{
 
-  function showMessage4(message) {
-    // respond of data entered
-    var messageContainer = document.getElementById('messageContainer3');
-  
-    // Clear previous inputs
-    messageContainer.innerHTML = '';
-    var messageDiv = document.createElement('div');
-    messageDiv.textContent = message; 
-    messageContainer.appendChild(messageDiv);
+  messageContainer2.style.display = 'none';
+  if (messageContainer1) {
+    messageContainer1.textContent = '';
   }
+  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer13" );
+ 
+ }
 
-  function showMessage5(message, option1Text, option2Text) {
-    var messageContainer = document.getElementById('messageContainer3');
-  
-    // Clear previous content
-    messageContainer.innerHTML = '';
-  
-    // Create a div for the message text
-    var messageDiv = document.createElement('div');
-    messageDiv.textContent = message;
-  
-    // Create buttons for the options
-    var option1Button = document.createElement('button');
-    option1Button.textContent = option1Text;
-    option1Button.className = 'optionButton'; // Apply custom CSS class
-    option1Button.onclick = function() {
-        // Logic for option 1
-        console.log("Option 1 clicked");
-        messageContainer.innerHTML = '';
-    };
-  
-    var option2Button = document.createElement('button');
-    option2Button.textContent = option2Text;
-    option2Button.className = 'optionButton'; // Apply custom CSS class
-    option2Button.onclick = function() {
-        // Logic for option 2
-        console.log("Option 2 clicked");
-        window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
-        messageContainer.innerHTML = '';
-      };
-  
-    // Append message and options to the container
-    messageContainer.appendChild(messageDiv);
-    messageContainer.appendChild(option1Button);
-    messageContainer.appendChild(option2Button);
-  }
-
-  function showPopup1() {
-    showMessage5("Test fails. Do you want to continue the test?", "Ok", "cancel");
-  }
+*/
 
 /*
 
@@ -403,53 +344,175 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     }
   });
 
-  function showMessage6(message) {
-    // respond of data entered
-    var messageContainer = document.getElementById('messageContainer4');
-  
-    // Clear previous inputs
-    messageContainer.innerHTML = '';
-    var messageDiv = document.createElement('div');
-    messageDiv.textContent = message; 
-    messageContainer.appendChild(messageDiv);
-  }
+  /*if (passesTest4){
+    
+     messageContainer1.style.display = 'none';
+    if (messageContainer2) {
+      messageContainer2.textContent = '';
+    }
+    showMessaget("Test passes! " , "Show curve","messageContainer24" );
+    
+ }
+ else{
 
-  function showMessage7(message, option1Text, option2Text) {
-    var messageContainer = document.getElementById('messageContainer4');
-  
-    // Clear previous content
-    messageContainer.innerHTML = '';
-  
-    // Create a div for the message text
-    var messageDiv = document.createElement('div');
-    messageDiv.textContent = message;
-  
-    // Create buttons for the options
-    var option1Button = document.createElement('button');
-    option1Button.textContent = option1Text;
-    option1Button.className = 'optionButton'; // Apply custom CSS class
-    option1Button.onclick = function() {
-        // Logic for option 1
-        console.log("Option 1 clicked");
-        messageContainer.innerHTML = '';
-    };
-  
-    var option2Button = document.createElement('button');
-    option2Button.textContent = option2Text;
-    option2Button.className = 'optionButton'; // Apply custom CSS class
-    option2Button.onclick = function() {
-        // Logic for option 2
-        console.log("Option 2 clicked");
-        window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
-        messageContainer.innerHTML = '';
-      };
-  
+  messageContainer2.style.display = 'none';
+  if (messageContainer1) {
+    messageContainer1.textContent = '';
+  }
+  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer14" );
+ 
+ }
+*/
+
+
+    /**========================================================================
+ *                           common functions
+ *========================================================================**/
+
+
+function showMessage(message,option1Text,ContainerID) {
+  // respond of data entered
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  // Create buttons for the options
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+  option1Button.onclick = function() {
+      // Logic for option 1
+      console.log("Option 1 clicked");
+      messageContainer.style.display = 'none';
+      messageContainer.textContent = '';// Redirect if user chooses not to continue 
+  };
     // Append message and options to the container
     messageContainer.appendChild(messageDiv);
     messageContainer.appendChild(option1Button);
-    messageContainer.appendChild(option2Button);
+}
+
+
+
+
+function showMessage3(message, option1Text, containerId, numFilters) {
+  var messageContainer = document.getElementById(containerId);
+
+  // Validate numFilters input
+  if (numFilters === 0 || numFilters === "") {
+    showMessage("Please Enter the number of filters first", "ok", "messageContainer12");
+    return; // Exit the function if validation fails
   }
 
-  function showPopup2() {
-    showMessage7("Test fails. Do you want to continue the test?", "Ok", "cancel");
-  }
+  // Create a local variable to track current filter placement (outside the function)
+  var currentFilter = 0;
+
+  messageContainer.style.display = 'block';
+
+  // Function for handling "Done" button click
+  var handleDoneClick = function() {
+    currentFilter++; // Increment filter counter
+
+    // Check if all filters have been placed
+    if (currentFilter === numFilters) {
+      showMessage("All filters placed!", "", containerId); // Display completion message
+      messageContainer.style.display = 'none'; // Hide container after completion
+      currentFilter = 0; // Reset filter counter for next sequence (optional)
+      return; // Exit the function after completing all filters
+    }
+
+    // Update the message content (without overwriting button)
+    var messageNode = messageContainer.querySelector('div'); // Select the existing message element
+    if (messageNode) {
+      messageNode.textContent = "Place filter number " + (currentFilter + 1);
+    } else {
+      // Create a message element if it doesn't exist
+      messageNode = document.createElement('div');
+      messageNode.textContent = "Place filter number " + (currentFilter + 1);
+      messageContainer.appendChild(messageNode);
+    }
+  };
+
+  // Create the "Done" button and attach click handler
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+  option1Button.onclick = handleDoneClick;
+
+  // Create a message element initially (optional)
+  var messageNode = document.createElement('div');
+  messageNode.textContent = message;
+  messageContainer.appendChild(messageNode);
+
+  // Append "Done" button to the container
+  messageContainer.appendChild(option1Button);
+}
+
+
+
+
+
+
+
+
+
+function showMessaget(message, option1Text,ContainerID) {
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  // Create buttons for the options
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+  option1Button.onclick = function() {
+      // Logic for option 1
+      console.log("Option 1 clicked");
+      window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";// Redirect if user chooses not to continue
+  };
+    // Append message and options to the container
+    messageContainer.appendChild(messageDiv);
+    messageContainer.appendChild(option1Button);
+}
+
+
+
+function showMessagef(message, option1Text, option2Text,ContainerID) {
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  sessionStorage.setItem('option2Text', option2Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButton'; // Apply custom CSS class
+  option1Button.onclick = function() {
+      // Logic for option 1
+      console.log("Option 1 clicked");
+      window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
+    };
+  var option2Button = document.createElement('button');
+  option2Button.textContent = option2Text;
+  option2Button.className = 'optionButton'; // Apply custom CSS class
+  option2Button.onclick = function() {
+      // Logic for option 2
+      console.log("Option 2 clicked");
+      window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html"; // Redirect if user chooses not to continue  
+    };
+  // Append message and options to the container
+  messageContainer.appendChild(messageDiv);
+  messageContainer.appendChild(option1Button);
+  messageContainer.appendChild(option2Button);
+}
