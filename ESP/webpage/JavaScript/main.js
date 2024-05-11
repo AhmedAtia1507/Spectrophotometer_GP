@@ -176,8 +176,8 @@ function updateChart() {
     animation: {
       duration: 0
     },
-    responsive: true,
-    maintainAspectRatio: true,
+    responsive: false,
+    maintainAspectRatio: false,
     plugins: {
       crosshair: {
         tooltips: {

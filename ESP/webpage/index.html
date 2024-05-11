@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/all.min.css">
 
 
-  
+
 </head>
 
 <body>
@@ -22,10 +22,14 @@
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
       <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
-      <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i>
+          <p>Team</p>
+        </a></li>
       <li><a href="temp.html">temp</a></li>
-      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
-      
+      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i>
+          <p>Validate</p>
+        </a></li>
+
     </ul>
     <ul>
       <li class="logo">
@@ -36,11 +40,19 @@
           </svg>
           <span>SpectroPhotometer</span></a>
       </li>
-      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
+          <p>Home</p>
+        </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i>
+          <p>Direct Control</p>
+        </a></li>
       <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
-      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
-      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i>
+          <p>validate</p>
+        </a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i>
+          <p>Team</p>
+        </a></li>
       <li class="menu-button" onclick="showSidebar()">
         <a href="#"><i class="fas fa-bars"></i></a>
       </li>
@@ -49,31 +61,34 @@
   <!---------------------------- END OF Navbar ---------------------------->
   <main>
     <section>
+
+      <!-- Tab button  -->
       <div id="tab" class="tab">
-        <button class="tablinks" onclick="openTab(event, 'scan')"><p>Scan</p> <i class="fas fa-play" style="color: white;"></i></button>
-        <button class="tablinks" onclick="openTab(event, 'FLC')"><p> Fit Line</p> <i class="fa-solid fa-chart-line" style="color: white;"></i></button>
+        <button class="tablinks" onclick="openTab(event, 'scan')">
+          <p>Scan</p> <i class="fas fa-play" style="color: white;"></i>
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'FLC')">
+          <p> Fit Line</p> <i class="fa-solid fa-chart-line" style="color: white;"></i>
+        </button>
       </div>
+      <!-- End of Tab button -->
+      <!-- Scan Tab  -->
+      <div id="scan" class="tabcontent" style="display: block;">
 
-      <div id="scan" class="tabcontent" style="display: block;" >
+        <div class="row" style="height: 70vh;">
+          <fieldset class="fchart">
+            <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
+            <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
+          </fieldset>
 
-          <div class="row" style="height: 70vh;">
-            <fieldset class="fchart" >
-              <legend>Chart</legend>
-          
-                <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
- 
-              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
-              <!-- <button id="resetBtn">Reset Zoom</button> -->
-            </fieldset>
 
-            
-            <fieldset class="fsetup">
-              <legend>Setup</legend>
-              <input class="Scanin" id="SampleNum" class = "SampleNum" placeholder="Number of Samples">
-              <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100" >
-              <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900" >
-              <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20" >
-              <input class="Scanin" type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
+          <fieldset class="fsetup">
+            <legend>Setup <i class="fa-solid fa-gear"></i></legend>
+            <input class="Scanin" id="SampleNum" class="SampleNum" placeholder="Number of Samples">
+            <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100">
+            <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900">
+            <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20">
+            <input class="Scanin" type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
             <div class="selectScan">
               <strong>Measurment Mode: </strong><select id="mySelect" name="mode">
                 <option value="absorption">Absorption</option>
@@ -82,90 +97,94 @@
             </div>
 
             <div class="TwoBtn">
-              <button id="SampleNumBTN">Start</button>
-              <button onclick="pauseScan()">Pause</button>
-              <button id="savepreset" onclick="savepreset()">Save Preset</button>
-              <button id="loadpreset" onclick="showpreset()">Load Preset</button>
+              <button id="SampleNumBTN">Start<i class="fa-solid fa-play"></i></button>
+              <button onclick="pauseScan()">Pause <i class="fa-solid fa-pause"></i></button>
+            </div>
+            <div class="TwoBtn">
+              <button id="savepreset" onclick="savepreset()">Save Preset <i class="fa-solid fa-floppy-disk"></i></button>
+              <button id="loadpreset" onclick="showpreset()">Load Preset <i class="fa-solid fa-upload"></i></button>
             </div>
 
-            </fieldset>
-          </div>
+          </fieldset>
+        </div>
 
 
 
-          
-  
-            <div class="row">
-
-                <fieldset class="ftable">
-                  <legend>Scan Table</legend>
-                  <div class="commandTable" style="margin-bottom: 50px; width: 70%;margin: 0 15%;">
-                    <table>
-                      <tr>
-                        <th>Funcation</th>
-                        <th>Command</th>
-                        <th>Example</th>
-                      </tr>
-                      <tr>
-                        <td>Add Rows</td>
-                        <td>t + Num of rows</td>
-                        <td> T5 contrauct 5 rows</td>
-                      </tr>
-                      <tr>
-                        <td> get Area for specific</td>
-                        <td>A + index of row</td>
-                        <td> A3 get Area for sample 3</td>
-                      </tr>
-                      <tr>
-                        <td> get Area for all samples</td>
-                        <td>AA0</td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td>get Peak for sample</td>
-                        <td>P + index of row</td>
-                        <td>  P3 get Peak for sample 3</td>
-                      </tr>
-                      <tr>
-                        <td>get specific Area for sample</td>
-                        <td>AS + index of row</td>
-                        <td>  AS3</td>
-                      </tr>
-                    </table>
-                  
-                  </div>
-                  <div class="TwoBtn">
-                    <button class = "SampleNumBTN" id="deleteBTN"> Delete All</button>
-                  </div>
-                  <table id="myTable">
-                    <tr>
-                      <th style="width: 5%;">#</th>
-                      <th style="width: 17.5%;">State</th>
-                      <th style="width: 26%;">Name</th>
-                      <th style="width: 52%;">Description</th>
-                      <th style="width: 17.5%;">Action</th>
-                      <th style="width: 28%;"><input type='text' class='cmd'  id='cmd' placeholder='Command' style="width: 80%;"></th>
-                    </tr>
-                  </table>
-                  
-                    <h2>Command Terminal</h2>
-                    <div id="CMDMB">
-                      
-                      <!-- Messages will be displayed here -->
-                    </div>
-                    <div class="TwoBtn">
-                    <button onclick="showreadings()" id="loadreadings">load Readings</button>
-                  </div>
-                </fieldset>
-    
-
-   
-                  
-          
 
 
-            </div>                        
-      
+        <div class="row">
+
+          <fieldset class="ftable">
+            <legend>Scan Table</legend>
+            <div class="commandTable" >
+              <table>
+                <tr>
+                  <th>Funcation</th>
+                  <th>Command</th>
+                  <th>Example</th>
+                </tr>
+                <tr>
+                  <td>Add Rows</td>
+                  <td>t + Num of rows</td>
+                  <td> T5 contrauct 5 rows</td>
+                </tr>
+                <tr>
+                  <td> get Area for specific</td>
+                  <td>A + index of row</td>
+                  <td> A3 get Area for sample 3</td>
+                </tr>
+                <tr>
+                  <td> get Area for all samples</td>
+                  <td>AA0</td>
+                  <td> </td>
+                </tr>
+                <tr>
+                  <td>get Peak for sample</td>
+                  <td>P + index of row</td>
+                  <td> P3 get Peak for sample 3</td>
+                </tr>
+                <tr>
+                  <td>get specific Area for sample</td>
+                  <td>AS + index of row</td>
+                  <td> AS3</td>
+                </tr>
+              </table>
+
+            </div>
+            <div class="TwoBtn">
+              <button class="SampleNumBTN" id="deleteBTN"> Delete All</button>
+            </div>
+            <table id="myTable">
+              <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 17.5%;">State</th>
+                <th style="width: 26%;">Name</th>
+                <th style="width: 52%;">Description</th>
+                <th style="width: 17.5%;">Action</th>
+                <th style="width: 28%;"><input type='text' class='cmd' id='cmd' placeholder='Command'
+                    style="width: 80%;"></th>
+              </tr>
+            </table>
+
+            <h2>Command Terminal</h2>
+            <div id="CMDMB">
+
+              <!-- Messages will be displayed here -->
+            </div>
+            <div class="TwoBtn">
+              <button onclick="showreadings()" id="loadreadings">load Readings</button>
+            </div>
+          </fieldset>
+        </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -173,127 +192,118 @@
         <div id="presets" class="presets">
           <ul class="blurred-list" id="presetlist">
             <input type="text" id="search" placeholder="search &#128269;" />
-            <div id="nopresets"></div>  
+            <div id="nopresets"></div>
           </ul>
         </div>
         <div class="presetname" id="presetname">
           <div class="blurred-name">
             <label class="presetlabel" for="name">Enter preset name:</label>
-            <input id="prestinput" class="presetinput"  maxlength="17" autocomplete="off"/>
+            <input id="prestinput" class="presetinput" maxlength="17" autocomplete="off" />
             <div class="TwoBtn">
-            <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
-            <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
-          </div>
+              <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
+              <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+            </div>
             <div id="nameexist"></div>
           </div>
         </div>
       </div>
-      
 
-        <div id="FLC" class="tabcontent">
-          <div class="row" style="height: 70vh;">
-            <fieldset class="fchart" >
-              <legend>Chart</legend>
-          
-                <canvas id="myChart" style="margin-top: 50px;margin-right: 20px;"></canvas>
+<div id="FLC" class="tabcontent">
+
+  <div class="row" style="height: 70vh;">
+    <fieldset class="fchart">
+      <legend>Chart</legend>
+      <canvas id="myChart" style="height: 95%;width: 95%;"></canvas>
+    </fieldset>
+
+    <fieldset class="fsetup" >
  
-              <div id="cursor" style="position: absolute; width: 8px; height: 8px; background-color: red; border-radius: 50%; display: none;"></div>
-              <!-- <button id="resetBtn">Reset Zoom</button> -->
-            </fieldset>
-            <fieldset class="fsetup" style="margin-top: 15px; width: 50%;">
-              <div class="row">
-                <h3> Lambert Abs = K C </h3>
-              </div>
-              <div class="col">
-                <label for="WLine">Wavelength:</label>
-                <input type="text" id="WLine" placeholder="Enter Wavelength" />
-                <br> 
-                <label for="concentration">Concentration:</label>
-                <input type="text" id="concentration" placeholder="Enter concentration" />
-              </div>            
-              <div class="row">
-                <div class="TwoBtn">
-                  <button onclick="addPoint()">Add Point</button>
-                  <button onclick="clearAll()">Clear All</button>
-                </div>
-              </div>
-              <div class="row">
-                <div id="messageBox">
-                  <!-- Messages will be displayed here -->
-                </div>
-              </div>
-              </div>
-            </fieldset>
-            </div>
- 
+        <h3 style="text-align: center;"> Lambert Abs = K C </h3>
+
+        <input class="Scanin" type="text" id="WLine" placeholder="Enter Wavelength" />
+        <input class="Scanin" type="text" id="concentration" placeholder="Enter concentration" />
+
+      
+        <div class="TwoBtn" style="margin-bottom: 40px;">
+          <button onclick="addPoint()">Add Point</button>
+          <button onclick="clearAll()">Clear All</button>
         </div>
-        
-        <!--- this is a code for the login elements don't change-->
-<div class="login-container" id="login">
-  <div class="login_form_box" > 
-    <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()" class="fa-regular fa-circle-xmark"></i>   
-    <h2>Log-in form</h2>
+
+        <div id="messageBox">
+          <!-- Messages will be displayed here -->
+        </div>
+
+  </fieldset>
+</div>
+</div>
+    </section>
+
+    <!--- this is a code for the login elements don't change-->
+    <div class="login-container" id="login">
+      <div class="login_form_box">
+        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()"
+          class="fa-regular fa-circle-xmark"></i>
+        <h2>Log-in form</h2>
         <div class="grid-containerStep">
           <div>
             <i class="fa-regular fa-circle-user"></i>
-        <label for="username" >Username</label>
-        
+            <label for="username">Username</label>
+
           </div>
-          <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
+          <input type="text" maxlength="40" placeholder="for example: imina" id="username" required>
         </div>
-        
+
         <div class="grid-containerStep">
           <div>
             <i class="fa-solid fa-key"></i>
-            <label for="password" >Password</label>
-        
+            <label for="password">Password</label>
+
           </div>
-        <input type="password" maxlength="40" placeholder="your password" id="password" required>
+          <input type="password" maxlength="40" placeholder="your password" id="password" required>
         </div>
         <br>
-      
-          <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
-        <div class="wrongpass">
-        <label id="wrongpass" for="wrongpass"></label>
-        </div></div>
- 
-    <!---------------------------- end OF Login ---------------------------->
- 
-  </div>
-    </section>
-    <!---------------------------- START OF Footer ---------------------------->
-    <footer class="sticky" id="sticky">
-      <button class="foot_btn" id="hidefoot">hide</button>
-      <div class="footer-col" id="hidethis">
-        <h4>States</h4>
-        <ul>
-          <li>
-            <label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label>
-          </li>
-          <li>
-            <label for="">Visible Lamp Status:
-              <span id="VIstateBar">"loading"</span></label>
-          </li>
-          <li>
-            <label for="">Current Wavelength: <span id="WLstateBar">"loading"</span>
-            </label>
-          </li>
-          <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
-          <li>
-            <label for="" class="DateTime" style="position: absolute; right: 0; margin-right: 30px">
-              <span id="DateTime"></span></label>
-          </li>
-        </ul>
+
+        <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>
       </div>
-    </footer>
-    <!---------------------------- END OF Footer ---------------------------->
+      <div class="wrongpass">
+        <label id="wrongpass" for="wrongpass"></label>
+      </div>
+    </div>
+
+    <!---------------------------- end OF Login ---------------------------->
+
+    </div>
   </main>
+  <!---------------------------- START OF Footer ---------------------------->
+  <footer class="sticky" id="sticky">
+    <button class="foot_btn" id="hidefoot">hide</button>
+    <div class="footer-col" id="hidethis">
+      <h4>States</h4>
+      <ul>
+        <li>
+          <label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label>
+        </li>
+        <li>
+          <label for="">Visible Lamp Status:
+            <span id="VIstateBar">"loading"</span></label>
+        </li>
+        <li>
+          <label for="">Current Wavelength: <span id="WLstateBar">"loading"</span>
+          </label>
+        </li>
+        <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+        <li>
+          <label for="" class="DateTime" style="position: absolute; right: 0; margin-right: 30px">
+            <span id="DateTime"></span></label>
+        </li>
+      </ul>
+    </div>
+  </footer>
+  <!---------------------------- END OF Footer ---------------------------->
+
   <script src="JavaScript/chart.js"></script>
   <script src="JavaScript/main.js"></script>
-  <script>
-    
 
-  </script>
 </body>
 
 </html>
