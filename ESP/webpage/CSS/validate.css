@@ -1,5 +1,5 @@
 body{
-  background-color: lightgray;
+  background-color: white;
   margin-bottom: 5%;
 }
 
@@ -287,6 +287,7 @@ border: 0ch;
 cursor: pointer;
 font-size: 18px;
 font-weight: 600;
+border: 2px solid lightgray; /* Set border to gray with 2px width */
 }
 
 .button12 {
@@ -301,6 +302,7 @@ font-weight: 600;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
+  border: 2px solid lightgray; /* Set border to gray with 2px width */
   }
 
 .button13 {
@@ -315,6 +317,7 @@ border: 0ch;
 cursor: pointer;
 font-size: 18px;
 font-weight: 600;
+border: 2px solid lightgray; /* Set border to gray with 2px width */
 }
 
 .button14 {
@@ -329,6 +332,7 @@ font-weight: 600;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
+  border: 2px solid lightgray; /* Set border to gray with 2px width */
   }
 
   .button11 {
@@ -343,6 +347,7 @@ font-weight: 600;
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
+    border: 2px solid lightgray; /* Set border to gray with 2px width */
     }
 
 
@@ -357,6 +362,7 @@ font-weight: 600;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  border: 2px solid lightgray; /* Set border to gray with 2px width */
   }
 
 main{
@@ -372,7 +378,7 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
@@ -389,7 +395,7 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
@@ -407,7 +413,7 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 

@@ -368,8 +368,106 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     /**========================================================================
  *                           common functions
  *========================================================================**/
+    function updateChart() {
+      if (chart) {
+        chart.destroy(); // Destroy the existing chart to update with new data
+      }
+      var ctx = document.getElementById('myChart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Data Points',
+            data: getScatterData(),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 1)',
+            pointRadius: 5,
+            showLine: false
+          }, {
+            label: 'Regression Line',
+            data: calculateRegressionLine(),
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderWidth: 2,
+            pointRadius: 0,
+            showLine: true
+          }]
+        },
+       options: {
+        tooltips: {
+          enabled: false
+        },
+        animation: {
+          duration: 0
+        },
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          crosshair: {
+            tooltips: {
+              enabled: false // Disable tooltips for the crosshair
+          },
+            sync: {
+              enabled: true // Enable crosshair synchronization between multiple charts
+            },
+            zoom: {
+              enabled: true // Enable crosshair zooming along the axis
+            },
+            line: {
+              color: 'blue', // Crosshair line color
+              width: 1 // Crosshair line width
+            }
+          },
+         
+        },
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        },
+        onHover: null // Disable the default onHover behavior
+      }
+      });
+    }
 
 
+
+    
+    var absorptionData = [];
+    var concentrationData = [];
+    var chart;
+    updateChart();
+    
+    function addPoint() {
+      var absorptionValue;
+      var concentrationValue = parseFloat(document.getElementById("concentration").value);
+      var WLine = document.getElementById("WLine").value; // get wavelength
+      const message = { // message for websocket
+        command: 'Scan',
+        startInput: 100,
+        stopInput: 200,
+        stepInput: 2
+      };
+      websocket.send(JSON.stringify(message)); // websocket sent
+      websocket.onmessage = function (event) { // WebSocket onmessage event
+        const data = JSON.parse(event.data);
+        console.log(event.data); // for test
+        const currentTime = data.currentTime;
+        const wavelength = data.wavelength;
+        const intensityReference = data.intensityReference;
+        const intensitySample = data.intensitySample;
+        absorptionValue = Math.log10(intensityReference / intensitySample);
+        addCurve(wavelength, intensitySample, black, Intensity, fillCurve = false, drawMode = 'curve');
+      };
+    }
+
+
+    
 function showMessage(message,option1Text,ContainerID) {
   // respond of data entered
   var messageContainer = document.getElementById(ContainerID);
@@ -453,13 +551,6 @@ function showMessage3(message, option1Text, containerId, numFilters) {
 }
 
 
-
-
-
-
-
-
-
 function showMessaget(message, option1Text,ContainerID) {
   var messageContainer = document.getElementById(ContainerID);
   messageContainer.style.display = 'block';
@@ -476,6 +567,7 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.onclick = function() {
       // Logic for option 1
       console.log("Option 1 clicked");
+      addPoint();
       window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";// Redirect if user chooses not to continue
   };
     // Append message and options to the container
