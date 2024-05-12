@@ -121,6 +121,32 @@ document.addEventListener("DOMContentLoaded", function() {
           wavelengthsContainer.appendChild(label2);
           wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
       }
+       var submitButton = document.querySelector('.button11');
+        submitButton.addEventListener('click', function() {
+                // Get all input elements with class .numbers2
+    var inputs = document.querySelectorAll('.numbers2');
+
+    // Initialize an array to store input values
+    var inputValues = [];
+
+    // Iterate through each input and push its value to the array
+    inputs.forEach(function(input) {
+        inputValues.push(parseFloat(input.value)); // Convert value to float and push to array
+    });
+
+    // Find the maximum value using Math.max
+    var maximumValue = Math.max(...inputValues);
+    var minimumValue = Math.min(...inputValues);
+    var start = minimumValue - 100;
+    var end   = maximumValue +100;
+    addPoint1(start, end);
+
+    // Display the maximum value
+    console.log("The maximum value is: " + maximumValue);
+    console.log("The minimum value is: " + minimumValue);
+
+        }); 
+
   }
 
   var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
@@ -437,21 +463,18 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
 
 
 
-    
+
     var absorptionData = [];
     var concentrationData = [];
     var chart;
     updateChart();
     
-    function addPoint() {
-      var absorptionValue;
-      var concentrationValue = parseFloat(document.getElementById("concentration").value);
-      var WLine = document.getElementById("WLine").value; // get wavelength
+    function addPoint1(start, end) {
       const message = { // message for websocket
         command: 'Scan',
-        startInput: 100,
-        stopInput: 200,
-        stepInput: 2
+        startInput: start,
+        stopInput: end,
+        stepInput: 1
       };
       websocket.send(JSON.stringify(message)); // websocket sent
       websocket.onmessage = function (event) { // WebSocket onmessage event
@@ -567,7 +590,7 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.onclick = function() {
       // Logic for option 1
       console.log("Option 1 clicked");
-      addPoint();
+      addPoint1();
       window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";// Redirect if user chooses not to continue
   };
     // Append message and options to the container
@@ -601,6 +624,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option2Button.onclick = function() {
       // Logic for option 2
       console.log("Option 2 clicked");
+      addPoint1();
       window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html"; // Redirect if user chooses not to continue  
     };
   // Append message and options to the container
