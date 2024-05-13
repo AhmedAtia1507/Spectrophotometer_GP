@@ -1,7 +1,7 @@
 #include "HandleMessage.h"
 #include "MyInitialization.h"
 #include "MySDFunctions.h"
-
+//
 const unsigned long interval = 600000; // 10 minutes in milliseconds works as a session for the control page
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
