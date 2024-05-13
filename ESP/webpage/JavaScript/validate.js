@@ -39,14 +39,18 @@ function initWebSocket() {
 // use event listener  
 function onOpen(event) {
   console.log('Connection opened');
+  updateWifiStutus('connected','green');
 }
 
 function onClose(event) {
   // in case connection down
   // try again after 2 sec
+  updateWifiStutus('disconnected','red');
   console.log('Connection closed');
   setTimeout(initWebSocket, 20000);
+
 }
+
 function onMessage(event) {
   var myObj = JSON.parse(event.data);
   console.log(myObj);
