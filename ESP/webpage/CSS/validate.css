@@ -81,7 +81,7 @@ border: 0ch;
 /* Style the dropdown button */
 .dropdown-button {
   width: 190px; 
-  height: 30px;
+  height: 35px;
   background-color: white;
   color: black;
   font-weight: bold;
@@ -93,6 +93,7 @@ border: 0ch;
   margin-top: 1%; 
   border-radius: 5px;
   border: 0ch;
+  border: 2px solid lightgray;
 
 }
 
@@ -115,6 +116,7 @@ border: 0ch;
   border-radius: 5px;
   border: 0ch;
   z-index: 1;
+  border: 2px solid lightgray;
   
 }
 
@@ -169,10 +171,11 @@ font-family: 'Times new roman', Courier, monospace;
   margin-left:1%;
   margin-top: 1%;
   margin-bottom: 0.3%;
-  padding-left: 1%;
+  padding-left: 0.9%;
   border-radius: 5px;
   border: 0ch;
   font-family: 'Times new roman', Courier, monospace;
+  border: 2px solid lightgray;
 }
 
 .numbers12 {
@@ -183,10 +186,11 @@ color: black;
 margin-left:1%;
 margin-top: 1%;
 margin-bottom: 0.3%;
-padding-left: 1%;
+padding-left: 0.9%;
 border-radius: 5px;
 border: 0ch;
 font-family: 'Times new roman', Courier, monospace;
+border: 2px solid lightgray;
 }
 
 .numbers14 {
@@ -197,11 +201,13 @@ color: black;
 margin-left:1%;
 margin-top: 1%;
 margin-bottom: 0.3%;
-padding-left: 1%;
+padding-left: 0.9%;
 border-radius: 5px;
 border: 0ch;
 font-family: 'Times new roman', Courier, monospace;
+border: 2px solid lightgray;
 }
+
 
 
 
@@ -213,10 +219,11 @@ font-family: 'Times new roman', Courier, monospace;
   margin-top: 2%;
   margin-bottom: 5%;
   margin-right:0.00005%;
-  padding-left: 2.5%;
+  padding-left: 2.6%;
   border-radius: 5px;
   border: 0ch;
   font-family: 'Times new roman', Courier, monospace;
+  border: 2px solid lightgray;
 }
 
 .error {
@@ -227,10 +234,11 @@ font-family: 'Times new roman', Courier, monospace;
   margin-left: 5%;
   margin-top: 2%;
   margin-right:0.00005%;
-  padding: 1.7%;
+  padding: 1.5%;
   border-radius: 5px;
   border: 0ch;
   font-family: 'Times new roman', Courier, monospace;
+  border: 2px solid lightgray;
 }
 
 .error2 {
@@ -241,10 +249,11 @@ color: black;
 margin-left: 5%;
 margin-top: 2%;
 margin-right:0.00005%;
-padding: 1.7%;
+padding: 1.5%;
 border-radius: 5px;
 border: 0ch;
 font-family: 'Times new roman', Courier, monospace;
+border: 2px solid lightgray;
 }
 
 .error3 {
@@ -255,10 +264,11 @@ color: black;
 margin-left: 5%;
 margin-top: 2%;
 margin-right:0.00005%;
-padding: 1.7%;
+padding: 1.5%;
 border-radius: 5px;
 border: 0ch;
 font-family: 'Times new roman', Courier, monospace;
+border: 2px solid lightgray;
 }
 
 .error4 {
@@ -269,10 +279,11 @@ color: black;
 margin-left: 5%;
 margin-top: 2%;
 margin-right:0.00005%;
-padding: 1.7%;
+padding: 1.5%;
 border-radius: 5px;
 border: 0ch;
 font-family: 'Times new roman', Courier, monospace;
+border: 2px solid lightgray;
 }
 
 .button1 {
@@ -378,12 +389,13 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: red; /* Text color */
   font-weight: bold;
+  border: 2px solid lightgray;
 
 }
 
@@ -395,12 +407,13 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: green; /* Text color */
   font-weight: bold;
+  border: 2px solid lightgray;
 
 }
 
@@ -413,24 +426,26 @@ main{
   padding-left: 8%;
   display: none;
   background:-o-linea;
-  background: whitesmoke;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
+  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: black; /* Text color */
   font-weight: bold;
+  border: 2px solid lightgray;
 
 }
 
 .optionButton {
   width: 90px; 
   height: 30px;
-  background-color: lightgray;
+  background-color: white;
   color: black;
   margin-top: 5%;
   margin-left: 15%;
   border-radius: 5px;
   border: 0ch;
+  border: 2px solid lightgray;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -439,12 +454,13 @@ main{
 .optionButtont {
   width: 90px; 
   height: 30px;
-  background-color: lightgray;
+  background-color: white;
   color: black;
   margin-top: 5%;
   margin-left: 34%;
   border-radius: 5px;
   border: 0ch;
+  border: 2px solid lightgray;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;

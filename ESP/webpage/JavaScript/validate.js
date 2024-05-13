@@ -169,6 +169,9 @@ function compareValues() {
 
   // Check if a valid option is selected
   if (selectedOption === "" || selectedOption === "disabled"  ) {
+    if (document.getElementById('messageContainer1')) {
+      document.getElementById('messageContainer1').textContent = '';
+    }
     showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1" );
       return; // Exit the function if no valid option is selected
   }
@@ -631,4 +634,15 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   messageContainer.appendChild(messageDiv);
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
+}
+
+
+
+/**========================================================================
+ *                           NABIL EDITS - NEVER THINK TO TOUCH
+ *========================================================================**/
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
 }
