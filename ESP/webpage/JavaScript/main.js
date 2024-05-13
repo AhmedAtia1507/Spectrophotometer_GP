@@ -292,6 +292,11 @@ function clearInputs() {
  *                           SCAN T_T
  *========================================================================**/
 // Initial chart setup
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
+}
 
 let isScanning = false;
 var intensityData = [];

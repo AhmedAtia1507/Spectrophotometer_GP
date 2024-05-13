@@ -121,6 +121,32 @@ document.addEventListener("DOMContentLoaded", function() {
           wavelengthsContainer.appendChild(label2);
           wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
       }
+       var submitButton = document.querySelector('.button11');
+        submitButton.addEventListener('click', function() {
+                // Get all input elements with class .numbers2
+    var inputs = document.querySelectorAll('.numbers2');
+
+    // Initialize an array to store input values
+    var inputValues = [];
+
+    // Iterate through each input and push its value to the array
+    inputs.forEach(function(input) {
+        inputValues.push(parseFloat(input.value)); // Convert value to float and push to array
+    });
+
+    // Find the maximum value using Math.max
+    var maximumValue = Math.max(...inputValues);
+    var minimumValue = Math.min(...inputValues);
+    var start = minimumValue - 100;
+    var end   = maximumValue +100;
+    addPoint1(start, end);
+
+    // Display the maximum value
+    console.log("The maximum value is: " + maximumValue);
+    console.log("The minimum value is: " + minimumValue);
+
+        }); 
+
   }
 
   var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
@@ -143,6 +169,9 @@ function compareValues() {
 
   // Check if a valid option is selected
   if (selectedOption === "" || selectedOption === "disabled"  ) {
+    if (document.getElementById('messageContainer1')) {
+      document.getElementById('messageContainer1').textContent = '';
+    }
     showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1" );
       return; // Exit the function if no valid option is selected
   }
@@ -368,8 +397,103 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     /**========================================================================
  *                           common functions
  *========================================================================**/
+    function updateChart() {
+      if (chart) {
+        chart.destroy(); // Destroy the existing chart to update with new data
+      }
+      var ctx = document.getElementById('myChart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Data Points',
+            data: getScatterData(),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 1)',
+            pointRadius: 5,
+            showLine: false
+          }, {
+            label: 'Regression Line',
+            data: calculateRegressionLine(),
+            borderColor: 'rgba(255, 0, 0, 1)',
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderWidth: 2,
+            pointRadius: 0,
+            showLine: true
+          }]
+        },
+       options: {
+        tooltips: {
+          enabled: false
+        },
+        animation: {
+          duration: 0
+        },
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          crosshair: {
+            tooltips: {
+              enabled: false // Disable tooltips for the crosshair
+          },
+            sync: {
+              enabled: true // Enable crosshair synchronization between multiple charts
+            },
+            zoom: {
+              enabled: true // Enable crosshair zooming along the axis
+            },
+            line: {
+              color: 'blue', // Crosshair line color
+              width: 1 // Crosshair line width
+            }
+          },
+         
+        },
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            type: 'linear',
+            position: 'left'
+          }
+        },
+        onHover: null // Disable the default onHover behavior
+      }
+      });
+    }
 
 
+
+
+    var absorptionData = [];
+    var concentrationData = [];
+    var chart;
+    updateChart();
+    
+    function addPoint1(start, end) {
+      const message = { // message for websocket
+        command: 'Scan',
+        startInput: start,
+        stopInput: end,
+        stepInput: 1
+      };
+      websocket.send(JSON.stringify(message)); // websocket sent
+      websocket.onmessage = function (event) { // WebSocket onmessage event
+        const data = JSON.parse(event.data);
+        console.log(event.data); // for test
+        const currentTime = data.currentTime;
+        const wavelength = data.wavelength;
+        const intensityReference = data.intensityReference;
+        const intensitySample = data.intensitySample;
+        absorptionValue = Math.log10(intensityReference / intensitySample);
+        addCurve(wavelength, intensitySample, black, Intensity, fillCurve = false, drawMode = 'curve');
+      };
+    }
+
+
+    
 function showMessage(message,option1Text,ContainerID) {
   // respond of data entered
   var messageContainer = document.getElementById(ContainerID);
@@ -453,13 +577,6 @@ function showMessage3(message, option1Text, containerId, numFilters) {
 }
 
 
-
-
-
-
-
-
-
 function showMessaget(message, option1Text,ContainerID) {
   var messageContainer = document.getElementById(ContainerID);
   messageContainer.style.display = 'block';
@@ -476,6 +593,7 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.onclick = function() {
       // Logic for option 1
       console.log("Option 1 clicked");
+      addPoint1();
       window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";// Redirect if user chooses not to continue
   };
     // Append message and options to the container
@@ -509,10 +627,22 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option2Button.onclick = function() {
       // Logic for option 2
       console.log("Option 2 clicked");
+      addPoint1();
       window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html"; // Redirect if user chooses not to continue  
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
+}
+
+
+
+/**========================================================================
+ *                           NABIL EDITS - NEVER THINK TO TOUCH
+ *========================================================================**/
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
 }
