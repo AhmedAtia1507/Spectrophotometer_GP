@@ -38,13 +38,16 @@ function initWebSocket() {
 // use event listener  
 function onOpen(event) {
   console.log('Connection opened');
+  updateWifiStutus('connected','green');
 }
 
 function onClose(event) {
   // in case connection down
   // try again after 2 sec
+  updateWifiStutus('disconnected','red');
   console.log('Connection closed');
   setTimeout(initWebSocket, 20000);
+
 }
 function onMessage(event) {
   var myObj = JSON.parse(event.data);
@@ -54,7 +57,6 @@ function onMessage(event) {
   }
 
 }
-
 
 
 
@@ -77,6 +79,26 @@ function openTab(evt, Control) {
 /**========================================================================
  *                           STATE BAR
  *========================================================================**/
+function updateWifiStutus(connectedStutus,color){
+  var wifi_stutus = document.getElementById('WifiStutus');
+  wifi_stutus.textContent=connectedStutus;
+  wifi_stutus.style.color=color ;
+}
+function toggleInteractiveElements() {
+  // Get all interactive elements
+  var interactiveElements = document.querySelectorAll('button, input, select');
+  // Loop through each element and toggle its disabled attribute
+  interactiveElements.forEach(function(element) {
+    element.disabled = !element.disabled;
+    // Add or remove 'disabled' class based on the disabled state
+    if (element.disabled) {
+      element.classList.add('disabled');
+    } else {
+      element.classList.remove('disabled');
+    }
+  });
+}
+
 document.getElementById('sBarBtn').addEventListener('click', function () {
 
   const message = {
@@ -514,7 +536,7 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
-
+  toggleInteractiveElements();
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
   var time= time.replaceAll(","," ");  //because file name can't contain ,
@@ -1035,11 +1057,15 @@ document.getElementById('hidefoot').addEventListener('click', showfoot)
 function showfoot() {
   var but = document.getElementById('hidefoot');
   var foot = document.getElementById('hidethis');
+  var footer = document.getElementById('sticky');
+
   if (but.innerHTML === 'hide') {
     but.innerHTML = 'show';
+    footer.style.backgroundColor='transparent';    
   }
   else {
     but.innerHTML = 'hide';
+    footer.style.backgroundColor='#2d2e33';
   }
   foot.classList.toggle('inactive');
 }
@@ -1217,7 +1243,9 @@ function changeState(rowIndex, newState, progress) {
   if (progress == 100) {
       stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
       stateSpan.style.color = "green";
+      toggleInteractiveElements();  
       toggleLoginContainer('NextSample');
+
   }
 }
 
