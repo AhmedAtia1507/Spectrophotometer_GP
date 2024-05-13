@@ -635,3 +635,14 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
 }
+
+
+
+/**========================================================================
+ *                           NABIL EDITS - NEVER THINK TO TOUCH
+ *========================================================================**/
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
+}
