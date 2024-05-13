@@ -121,25 +121,25 @@ document.addEventListener("DOMContentLoaded", function() {
           wavelengthsContainer.appendChild(label2);
           wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
       }
-       var submitButton = document.querySelector('.button11');
+        var submitButton = document.querySelector('.button11');
         submitButton.addEventListener('click', function() {
                 // Get all input elements with class .numbers2
-    var inputs = document.querySelectorAll('.numbers2');
+        var inputs = document.querySelectorAll('.numbers2');
 
-    // Initialize an array to store input values
-    var inputValues = [];
+        // Initialize an array to store input values
+        var inputValues = [];
 
-    // Iterate through each input and push its value to the array
-    inputs.forEach(function(input) {
-        inputValues.push(parseFloat(input.value)); // Convert value to float and push to array
-    });
+        // Iterate through each input and push its value to the array
+        inputs.forEach(function(input) {
+          inputValues.push(parseFloat(input.value)); // Convert value to float and push to array
+        });
 
-    // Find the maximum value using Math.max
-    var maximumValue = Math.max(...inputValues);
-    var minimumValue = Math.min(...inputValues);
-    var start = minimumValue - 100;
-    var end   = maximumValue +100;
-    addPoint1(start, end);
+        // Find the maximum value using Math.max
+        var maximumValue = Math.max(...inputValues);
+        var minimumValue = Math.min(...inputValues);
+        var start = minimumValue - 100;
+        var end   = maximumValue +100;
+       // addPoint1(start, end);
 
     // Display the maximum value
     console.log("The maximum value is: " + maximumValue);
