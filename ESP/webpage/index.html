@@ -21,7 +21,7 @@
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a onclick="toggleLoginContainer('login')"> <i class="fas fa-gear"></i>Direct Control</a></li>
       <li><a href="team.html"><i class="fas fa-users"></i>
           <p>Team</p>
         </a></li>
@@ -29,7 +29,7 @@
       <li><a href="validate.html"><i class="fa-solid fa-list-check"></i>
           <p>Validate</p>
         </a></li>
-
+        
     </ul>
     <ul>
       <li class="logo">
@@ -38,12 +38,17 @@
             <path
               d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
           </svg>
-          <span>SpectroPhotometer</span></a>
+          <span>SpectroPhotometer</span>
+          <span style="font-size: 12px;" id="WifiStutus"></span>
+        </a>
+        
+
+
       </li>
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
           <p>Home</p>
         </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer('login')"><i class="fas fa-gear"></i>
           <p>Direct Control</p>
         </a></li>
       <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
@@ -109,15 +114,18 @@
           </fieldset>
         </div>
 
-
-
-
+        <!-- next sample div -->
+<div id="NextSample">
+  Insert Sample please
+  <br>
+  <button onclick="toggleLoginContainer('NextSample')" style="margin-left: 30px;" title="when you finished to insert the sample click done"> done <i style="padding: 0px 5px;" class="fa-solid fa-check"></i></button> 
+</div>
 
         <div class="row">
 
           <fieldset class="ftable">
             <legend>Scan Table</legend>
-            <div class="commandTable" >
+            <div id="commandTable" class="commandTable" >
               <table>
                 <tr>
                   <th>Funcation</th>
@@ -154,6 +162,7 @@
             </div>
             <div class="TwoBtn">
               <button class="SampleNumBTN" id="deleteBTN"> Delete All</button>
+              <button class="SampleNumBTN" onclick="toggleLoginContainer('commandTable')">toggle commands</button>
             </div>
             <table id="myTable">
               <tr>
@@ -242,7 +251,7 @@
     <!--- this is a code for the login elements don't change-->
     <div class="login-container" id="login">
       <div class="login_form_box">
-        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()"
+        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer('login')"
           class="fa-regular fa-circle-xmark"></i>
         <h2>Log-in form</h2>
         <div class="grid-containerStep">
