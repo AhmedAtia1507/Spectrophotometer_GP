@@ -318,7 +318,7 @@ legend{
   margin-right: 20px;
 }
 
-.TwoBtn button,.reset-zoom {
+.TwoBtn button,.reset-zoom,#NextSample button {
   background-color: white;
   color: #3498db;
   margin: 10px;
@@ -897,8 +897,8 @@ li:hover{
 }
 
 #NextSample{
-display: none;
-padding: 30px;
+display:none;
+padding: 40px;
 border: 2px solid black;
 position: fixed;
 top: 50%;

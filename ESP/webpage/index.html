@@ -21,7 +21,7 @@
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
       <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a onclick="toggleLoginContainer('login')"> <i class="fas fa-gear"></i>Direct Control</a></li>
       <li><a href="team.html"><i class="fas fa-users"></i>
           <p>Team</p>
         </a></li>
@@ -43,7 +43,7 @@
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
           <p>Home</p>
         </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer('login')"><i class="fas fa-gear"></i>
           <p>Direct Control</p>
         </a></li>
       <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
@@ -111,7 +111,9 @@
 
         <!-- next sample div -->
 <div id="NextSample">
-  <p>Insert next sample</p>
+  Insert Sample please
+  <br>
+  <button onclick="toggleLoginContainer('NextSample')" style="margin-left: 30px;" title="when you finished to insert the sample click done"> done <i style="padding: 0px 5px;" class="fa-solid fa-check"></i></button> 
 </div>
 
         <div class="row">
@@ -243,7 +245,7 @@
     <!--- this is a code for the login elements don't change-->
     <div class="login-container" id="login">
       <div class="login_form_box">
-        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()"
+        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer('login')"
           class="fa-regular fa-circle-xmark"></i>
         <h2>Log-in form</h2>
         <div class="grid-containerStep">

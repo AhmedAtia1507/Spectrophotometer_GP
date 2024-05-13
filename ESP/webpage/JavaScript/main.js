@@ -514,10 +514,10 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
+
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
   var time= time.replaceAll(","," ");  //because file name can't contain ,
-  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
@@ -1166,7 +1166,16 @@ function constructtable(num){
 
 document.getElementById('SampleNumBTN').addEventListener('click', function(){
   var num = document.getElementById('SampleNum').value; // Enclosed 'SampleNum' in quotes
- constructtable(num);
+
+ if(num>0){
+  
+  toggleLoginContainer('NextSample');
+  constructtable(num);
+}
+
+ else{
+  alert('please insert the number of samples')
+ }
 });
 // remove all rows
 document.getElementById('deleteBTN').addEventListener('click', function(){
@@ -1208,6 +1217,7 @@ function changeState(rowIndex, newState, progress) {
   if (progress == 100) {
       stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
       stateSpan.style.color = "green";
+      toggleLoginContainer('NextSample');
   }
 }
 
@@ -1708,10 +1718,10 @@ function createListItem(itemName, myList, names, messageType) {
 
 
 /*============================ Login ============================*/
-function toggleLoginContainer(){
-  var login = document.getElementById("login");
-  if(login.style.display=="none"){
-    login.style.display="block";
+function toggleLoginContainer(id="login"){
+  var login = document.getElementById(id);
+  if(!login.style.display || login.style.display === "none"){
+    login.style.display="block"; 
   }
   else{
     login.style.display="none";
