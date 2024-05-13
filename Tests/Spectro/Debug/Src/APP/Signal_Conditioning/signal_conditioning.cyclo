@@ -1,0 +1,2 @@
+../Src/APP/Signal_Conditioning/signal_conditioning.c:13:6:read_reference_voltage	4
+../Src/APP/Signal_Conditioning/signal_conditioning.c:68:6:read_sample_voltage	4
