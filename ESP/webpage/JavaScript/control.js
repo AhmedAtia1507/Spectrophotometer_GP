@@ -30,6 +30,7 @@ function initWebSocket() {
 }
 
 function onOpen(event) {
+  updateWifiStutus('connected','green');
   console.log("Connection opened");
   // sendCurrentLoginFlag();                // asks the server if the user have logged in or not
   // senduvStatus();                        // send us lamp stutus to diplay it on open 
@@ -42,8 +43,15 @@ function onOpen(event) {
 }
 
 function onClose(event) {
+  updateWifiStutus('disconnected','red');
   console.log("Connection closed");
   setTimeout(initWebSocket, 2000);  //try to connect every 2 sec
+  
+}
+function updateWifiStutus(connectedStutus,color){
+  var wifi_stutus = document.getElementById('WifiStutus');
+  wifi_stutus.textContent=connectedStutus;
+  wifi_stutus.style.color=color ;
 }
 /*===========================================================end of section 1===========================================================================*/
 
