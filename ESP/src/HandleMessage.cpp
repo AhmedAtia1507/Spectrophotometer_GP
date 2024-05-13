@@ -357,7 +357,8 @@ void handleScanTask(void *pvParameters)
     // float x[]={250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300};
     // float y[]={0.79345, 0.75808, 0.72395, 0.69756, 0.67347, 0.65129, 0.62944, 0.60936, 0.59192, 0.58464, 0.56991, 0.556, 0.53878, 0.50347, 0.48214, 0.46173, 0.44379, 0.42682, 0.41183, 0.39886, 0.38637, 0.37066, 0.3595, 0.35018, 0.34142, 0.33042, 0.32363, 0.32548, 0.40237, 0.39305, 0.28955, 0.26148, 0.24206, 0.23069, 0.22278, 0.22248, 0.28155, 0.32932, 0.24429, 0.25164, 0.22734, 0.1903, 0.18143, 0.17317, 0.1626, 0.15239, 0.14342, 0.13418, 0.12678, 0.11987};
 
-    for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt())
+    // for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt())
+    for (int i = stopInput.toInt(); i >= startInput.toInt(); i -= stepInput.toInt())
     {
       vTaskDelay(pdMS_TO_TICKS(100));
       int startTime = millis();
@@ -389,7 +390,7 @@ void handleScanTask(void *pvParameters)
       }
    
       scanData["currentTime"] = Time;
-      scanData["wavelength"] = i;
+      scanData["wavelength"] = wavelength;
       scanData["intensityReference"] = reference.toFloat();
       scanData["intensitySample"] = sample.toFloat();
       scanData["scanning"] = scanning;

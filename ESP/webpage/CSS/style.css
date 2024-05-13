@@ -895,3 +895,14 @@ li:hover{
   margin: 0 0;
 }
 }
+
+#NextSample{
+display: none;
+padding: 30px;
+border: 2px solid black;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #ddd;
+}
