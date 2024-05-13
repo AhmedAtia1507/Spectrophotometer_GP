@@ -59,6 +59,11 @@ function onMessage(event) {
   }
 
 }
+function updateWifiStutus(connectedStutus,color){
+  var wifi_stutus = document.getElementById('WifiStutus');
+  wifi_stutus.textContent=connectedStutus;
+  wifi_stutus.style.color=color ;
+}
 /**========================================================================
  *                           footer
  *========================================================================**/
