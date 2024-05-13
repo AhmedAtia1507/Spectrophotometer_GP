@@ -301,57 +301,6 @@ function toggleVisibility() {
 let isScanning = false;
 var intensityData = [];
 var wavelengthData = [];
-var chartScan;
-let chartData;
-
-
-const ctxScan = document.getElementById('chartScan').getContext('2d');
-chartScan = new Chart(ctxScan, {
-  type: 'line',
-  data: chartData,
-  options: {
-    tooltips: {
-      enabled: false
-    },
-    animation: {
-      duration: 0
-    },
-    responsive: false,
-    maintainAspectRatio: false,
-    plugins: {
-      crosshair: {
-        tooltips: {
-          enabled: false // Disable tooltips for the crosshair
-      },
-        sync: {
-          enabled: true // Enable crosshair synchronization between multiple charts
-        },
-        zoom: {
-          enabled: true // Enable crosshair zooming along the axis
-        },
-        line: {
-          color: 'blue', // Crosshair line color
-          width: 1 // Crosshair line width
-        }
-      },
-     
-    },
-    scales: {
-      x: {
-        min: 190,
-        max: 1100,
-        type: 'linear',
-        position: 'bottom'
-      },
-      y: {
-        type: 'linear',
-        position: 'left'
-      }
-    },
-    onHover: null // Disable the default onHover behavior
-  }
-});
-
 
 // Create a div dynamically
 const infoDiv = document.createElement('div');

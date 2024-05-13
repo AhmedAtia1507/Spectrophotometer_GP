@@ -1,4 +1,54 @@
 
+function showMessaget(message, option1Text,ContainerID) {
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  // Create buttons for the options
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+   option1Button.onclick = function() {
+      // Logic for option 1
+      console.log("Option 1 clicked");
+      addPoint1();
+      window.open("chart.html", "_blank");
+  };
+    // Append message and options to the container
+    messageContainer.appendChild(messageDiv);
+    messageContainer.appendChild(option1Button);
+}
+
+let data = {
+};
+
+function addPoint1(start, end) {
+  data = {
+    wavelength:"250",
+    Abs:"0.6"
+  };
+  // const message = { // message for websocket
+  //   command: 'Scan',
+  //   startInput: start,
+  //   stopInput: end,
+  //   stepInput: 1
+  // };
+  // websocket.send(JSON.stringify(message)); // websocket sent
+  // websocket.onmessage = function (event) { // WebSocket onmessage event
+  //   const data = JSON.parse(event.data);
+  //   console.log(event.data); // for test
+  //   const currentTime = data.currentTime;
+  //   const wavelength = data.wavelength;
+  //   const intensityReference = data.intensityReference;
+  //   const intensitySample = data.intensitySample;
+  //   absorptionValue = Math.log10(intensityReference / intensitySample);
+  // };
+
+}
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -268,38 +318,122 @@ checkbox2.addEventListener('change', function() {
 document.addEventListener("DOMContentLoaded", function() {
   var submitButton1 = document.querySelector('.button12');
   submitButton1.addEventListener('click', function() {
-
+    
     var numfilrters = parseInt(document.querySelector('.numbers12').value);
     var messageContainer12 = document.getElementById('messageContainer12');
     if (messageContainer12) {
       messageContainer12.textContent = '';
     }
-
     var messageContainer22 = document.getElementById('messageContainer22');
     if (messageContainer22) {
       messageContainer22.textContent = '';
     }
-
     var messageContainer31 = document.getElementById('messageContainer31');
     if (messageContainer31) {
       messageContainer31.textContent = '';
     }
-
-    var localCounter = 1;
-
     if (numfilrters === 0 || numfilrters === "") {
       showMessage("Please Enter the number of filters first","ok","messageContainer12");
     } 
     else {
+      generateInputs1();
       showMessage3("Start placing filters", "Done", "messageContainer31",numfilrters); 
     };
   });
 });
 
 
+function generateInputs1() {
+  var numfilterslengths = parseInt(document.querySelector('.numbers12').value);
+  var filtersContainer = document.querySelector('.filters-container');
+  
+  // Clear previous inputs
+  filtersContainer.innerHTML = '';
+
+  // Generate new inputs
+  for (var i = 0; i < numfilterslengths; i++) {
+      var label1 = document.createElement('label');
+      label1.textContent = 'Filters ' + (i + 1) + ' wavelength: ';
+      label1.className = 'label1';
+      filtersContainer.appendChild(label1);
+    
+      var input1 = document.createElement('input');
+      input1.type = 'number';
+      input1.className = 'numbers2'; // Add class for identification
+      input1.placeholder = '  0';
+      input1.id = 'filter_' + i;
+
+      filtersContainer.appendChild(input1);
+      filtersContainer.appendChild(input1);
+    
+      var label21 = document.createElement('label');
+      label21.textContent = '      nm';
+      filtersContainer.appendChild(label21);
+      filtersContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+  } 
+}
 
 
-/*if (passesTest2){
+function getPredefinedValues1() {
+
+      var predefinedValues = [100, 200, 300];
+
+      // Get user input values for wavelengths (assuming class 'wavelength-input')
+      var userInputValues = [];
+      var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+      inputs.forEach(function(input) {
+      var inputValue = parseFloat(input.value);
+      userInputValues.push(inputValue);
+  });
+}
+
+function CompareValues1() {
+  getPredefinedValues1();
+  var errorLimit= parseInt(document.querySelector('.error2').value);
+
+      for (i = 0; i < 3; i++) {
+        var filterId = 'filter_' + i;
+        var filterInput = document.getElementById(filterId).value;
+        var filterInput2 = filterInput.value;          
+      }
+
+      var passesTest = compareWithPredefinedValues2(userInputValues, filterInput2, errorLimit);
+ if (passesTest){
+    
+    messageContainer1.style.display = 'none';
+    if (messageContainer2) {
+      messageContainer2.textContent = '';
+    }
+    showMessaget("Test passes! " , "Show curve","messageContainer2" );
+    
+ }
+ else{
+
+  messageContainer2.style.display = 'none';
+  if (messageContainer1) {
+    messageContainer1.textContent = '';
+  }
+  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer1" );
+ 
+ }
+}
+
+
+
+function compareWithPredefinedValues2(userInputValues, predefinedValues, errorLimit) {
+  // Compare user input values with predefined values
+  for (var i = 0; i < userInputValues.length; i++) {
+      var difference = userInputValues[i] - predefinedValues[i];
+      if (Math.abs(difference) > errorLimit) {
+          return false;
+      }
+  }
+  return true;
+}
+/*
+var passesTest2 = 
+*/
+if (passesTest2){
     
    messageContainer1.style.display = 'none';
     if (messageContainer2) {
@@ -318,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function() {
  
  }
 
-*/
+
 
 
 /*
@@ -401,69 +535,59 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
       if (chart) {
         chart.destroy(); // Destroy the existing chart to update with new data
       }
-      var ctx = document.getElementById('myChart').getContext('2d');
-      chart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-          datasets: [{
-            label: 'Data Points',
-            data: getScatterData(),
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 1)',
-            pointRadius: 5,
-            showLine: false
-          }, {
-            label: 'Regression Line',
-            data: calculateRegressionLine(),
-            borderColor: 'rgba(255, 0, 0, 1)',
-            backgroundColor: 'rgba(255, 0, 0, 0.2)',
-            borderWidth: 2,
-            pointRadius: 0,
-            showLine: true
-          }]
-        },
-       options: {
-        tooltips: {
-          enabled: false
-        },
-        animation: {
-          duration: 0
-        },
-        responsive: false,
-        maintainAspectRatio: false,
-        plugins: {
-          crosshair: {
-            tooltips: {
-              enabled: false // Disable tooltips for the crosshair
+
+      var chartScan;
+      let chartData;
+      
+      
+      const ctxScan = document.getElementById('chartScan').getContext('2d');
+      chartScan = new Chart(ctxScan, {
+        type: 'line',
+        data: chartData,
+        options: {
+          tooltips: {
+            enabled: false
           },
-            sync: {
-              enabled: true // Enable crosshair synchronization between multiple charts
+          animation: {
+            duration: 0
+          },
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            crosshair: {
+              tooltips: {
+                enabled: false // Disable tooltips for the crosshair
             },
-            zoom: {
-              enabled: true // Enable crosshair zooming along the axis
+              sync: {
+                enabled: true // Enable crosshair synchronization between multiple charts
+              },
+              zoom: {
+                enabled: true // Enable crosshair zooming along the axis
+              },
+              line: {
+                color: 'blue', // Crosshair line color
+                width: 1 // Crosshair line width
+              }
             },
-            line: {
-              color: 'blue', // Crosshair line color
-              width: 1 // Crosshair line width
+           
+          },
+          scales: {
+            x: {
+              min: 190,
+              max: 1100,
+              type: 'linear',
+              position: 'bottom'
+            },
+            y: {
+              type: 'linear',
+              position: 'left'
             }
           },
-         
-        },
-        scales: {
-          x: {
-            type: 'linear',
-            position: 'bottom'
-          },
-          y: {
-            type: 'linear',
-            position: 'left'
-          }
-        },
-        onHover: null // Disable the default onHover behavior
-      }
+          onHover: null // Disable the default onHover behavior
+        }
       });
-    }
-
+      
+      
 
 
 
@@ -472,25 +596,7 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     var chart;
     updateChart();
     
-    function addPoint1(start, end) {
-      const message = { // message for websocket
-        command: 'Scan',
-        startInput: start,
-        stopInput: end,
-        stepInput: 1
-      };
-      websocket.send(JSON.stringify(message)); // websocket sent
-      websocket.onmessage = function (event) { // WebSocket onmessage event
-        const data = JSON.parse(event.data);
-        console.log(event.data); // for test
-        const currentTime = data.currentTime;
-        const wavelength = data.wavelength;
-        const intensityReference = data.intensityReference;
-        const intensitySample = data.intensitySample;
-        absorptionValue = Math.log10(intensityReference / intensitySample);
-        addCurve(wavelength, intensitySample, black, Intensity, fillCurve = false, drawMode = 'curve');
-      };
-    }
+    
 
 
     
@@ -549,16 +655,20 @@ function showMessage3(message, option1Text, containerId, numFilters) {
       return; // Exit the function after completing all filters
     }
 
-    // Update the message content (without overwriting button)
-    var messageNode = messageContainer.querySelector('div'); // Select the existing message element
-    if (messageNode) {
-      messageNode.textContent = "Place filter number " + (currentFilter + 1);
-    } else {
-      // Create a message element if it doesn't exist
-      messageNode = document.createElement('div');
-      messageNode.textContent = "Place filter number " + (currentFilter + 1);
-      messageContainer.appendChild(messageNode);
-    }
+      var messageNode = messageContainer.querySelector('div'); // Select the existing message element
+      if (messageNode) {
+        messageNode.textContent = "Place filter number " + (currentFilter + 1);
+
+      } else {
+        // Create a message element if it doesn't exist
+        messageNode = document.createElement('div');
+        messageNode.textContent = "Place filter number " + (currentFilter + 1);
+        messageContainer.appendChild(messageNode);
+      } 
+
+
+    //Update the message content (without overwriting button)
+
   };
 
   // Create the "Done" button and attach click handler
@@ -577,29 +687,7 @@ function showMessage3(message, option1Text, containerId, numFilters) {
 }
 
 
-function showMessaget(message, option1Text,ContainerID) {
-  var messageContainer = document.getElementById(ContainerID);
-  messageContainer.style.display = 'block';
-  // Store in session storage
-  sessionStorage.setItem('message', message);
-  sessionStorage.setItem('option1Text', option1Text);
-  // Create a div for the message text
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-  // Create buttons for the options
-  var option1Button = document.createElement('button');
-  option1Button.textContent = option1Text;
-  option1Button.className = 'optionButtont'; // Apply custom CSS class
-  option1Button.onclick = function() {
-      // Logic for option 1
-      console.log("Option 1 clicked");
-      addPoint1();
-      window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html";// Redirect if user chooses not to continue
-  };
-    // Append message and options to the container
-    messageContainer.appendChild(messageDiv);
-    messageContainer.appendChild(option1Button);
-}
+
 
 
 
@@ -619,7 +707,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option1Button.onclick = function() {
       // Logic for option 1
       console.log("Option 1 clicked");
-      window.location.href = "http://127.0.0.1:5500/ESP/webpage/temp.html"; // Redirect if user chooses not to continue
+      window.open("temp.html", "_blank");
     };
   var option2Button = document.createElement('button');
   option2Button.textContent = option2Text;
@@ -628,21 +716,11 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
       // Logic for option 2
       console.log("Option 2 clicked");
       addPoint1();
-      window.location.href = "http://127.0.0.1:5500/ESP/webpage/chart.html"; // Redirect if user chooses not to continue  
+      window.open("chart.html", "_blank");
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
 }
-
-
-
-/**========================================================================
- *                           NABIL EDITS - NEVER THINK TO TOUCH
- *========================================================================**/
-function toggleVisibility() {
-  var checkbox = document.getElementById("toggleCheckbox");
-  var div = document.getElementById("MagicDiv");
-  div.style.display = checkbox.checked ? "block" : "none";
-}
+    }

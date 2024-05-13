@@ -52,9 +52,8 @@
 <h1 class="ValidationTitle1">Validation Tests <i class="fa-solid fa-list-check" style="font-size: 40px;"></i></h1>
 
 <fieldset class="fsetup1">
-  <legend><input class="checkboxes1" id="toggleCheckbox" type="checkbox" onchange="toggleVisibility()"> Wavelength Accuracy</legend>
+  <legend><input class="checkboxes1" type="checkbox"> Wavelength Accuracy</legend>
 
-<div id="MagicDiv" style="display: none;">
   <select class="dropdown-button" name="Sample" id="Sampleselector"disabled>
     <option value="" disabled selected>Select the Sample</option>
     <option value="Holmium oxide1">Holmium oxide</option>
@@ -77,7 +76,6 @@
  
   <div class="messageContainerf" id="messageContainer1" ></div>
   <div class="messageContainert" id="messageContainer2" ></div>
-</div>
 
 </fieldset>
 
@@ -86,10 +84,11 @@
 <fieldset class="fsetup1">
   <legend><input class="checkboxes2" type="checkbox"> Photometric Accuracy</legend>
   <label class="labels"> Enter the number of filters </label>
-  <input class="numbers12" type="number" placeholder="0"disabled>
+  <input class="numbers12" type="number"  placeholder="0"disabled>
    <label class="labels"> Enter the error limit </label>
   <input class="error2" type="number" placeholder="&plusmn;1"disabled > 
   <br>
+  <div class="filters-container"></div>
   <input class="button12" type="button"  value="Submit"disabled>
   <div class="messageContainerf" id="messageContainer12" ></div>
   <div class="messageContainerfilter" id="messageContainer31"></div>
@@ -154,7 +153,13 @@
    
       <!---------------------------- end OF Login ---------------------------->
    
+<div id="chartdiv">
+  <h1 class="ValidationTitle1">Validation Tests <i class="fa-solid fa-list-check" style="font-size: 40px;"></i></h1>
 
+<canvas id="chartScan" style="height: 750px; width: 95%; margin-top :2%; margin-left: 1%; margin-bottom: 1%;"></canvas>
+
+
+</div>
          <!---------------------------- START OF Footer ---------------------------->
     <footer class="sticky" id="sticky">
       <button class="foot_btn" id="hidefoot">hide</button>
@@ -186,7 +191,6 @@
 </main>
 <script src="JavaScript/chart.js"></script>
 <script src="JavaScript/validate.js"></script>
-<script src="JavaScript/chart.js"></script>
 
 
 

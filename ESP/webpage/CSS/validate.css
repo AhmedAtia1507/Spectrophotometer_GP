@@ -430,7 +430,7 @@ main{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
-  color: black; /* Text color */
+  color: red; /* Text color */
   font-weight: bold;
   border: 2px solid lightgray;
 
@@ -481,4 +481,13 @@ main{
   outline: none;
   border: 1px solid #3498db;
   transform: scale(1.05);
+}
+
+/* .filters-container{
+  
+} */
+#chartdiv{
+  display: block;
+  z-index: 1;
+  
 }
