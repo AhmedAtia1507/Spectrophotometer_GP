@@ -17,6 +17,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+input,select{
+  background-color: var(--input-background-color);
+  color: var(--input-color);
+}
 
 * {
   margin: 0;
@@ -26,7 +30,9 @@ input::-webkit-inner-spin-button {
 body {
   display: flex;
   flex-direction: column;
-  background-color: #bbbbbb;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
@@ -60,10 +66,10 @@ section h2 {
   margin: 5px;
   padding: 10px;
   height: 90vh;
-  border: #000000 1px solid;
-
+  border: 1px solid var(--border-color); /* Use CSS variable for border color */
+  background-color: var(--background-color); /* Use CSS variable for background color */
+  color: var(--text-color-light); /* Use CSS variable for text color */
 }
-
 
 
 
@@ -76,7 +82,9 @@ section h2 {
 *========================================================================**/
 
 nav {
-  background-color: white;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.1);
 }
 
@@ -99,21 +107,27 @@ nav li a {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: black;
+  color: var(--text-color); /* Use CSS variable for text color */
   font-size: 19px;
   font-weight: 500;
 }
-i{
-  color: #000;
+
+i {
+  color: var(--icon-color); /* Use CSS variable for icon color */
   font-size: 22px;
 }
+
 nav a:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-background-color); /* Use CSS variable for hover background color */
+  color:var(--hover--color);
 }
+
 
 nav li:first-child {
   margin-right: auto;
 }
+
+
 
 .sidebar {
   position: fixed;
@@ -122,7 +136,7 @@ nav li:first-child {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--sidebar-background); /* Use CSS variable for background color */
   backdrop-filter: blur(10px);
   box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
   display: none;
@@ -149,11 +163,13 @@ nav li:first-child {
 }
 
 .logo span {
-  color: green;
+  color: var(--logo-color); /* Use CSS variable for logo color */
   margin: 0 20px;
   font-size: x-large;
   font-weight: bolder;
 }
+
+
 
 @media (max-width: 740px) {
   .hideOnMobile {
@@ -257,7 +273,9 @@ nav li:first-child {
 *========================================================================**/
 
 .tabcontent {
-  background-color: #fff;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -310,20 +328,38 @@ legend{
 .ftable .TwoBtn{
   margin: 0px 41%;
 }
-.TwoBtn i{
-  margin-left: 10px;
-  color: #3498db;
+/* Define CSS variables with the existing colors */
+:root {
+  --primary-color-light: #3498db; /* Light mode primary color */
+  --secondary-color-light: #ffffff; /* Light mode secondary color */
+  --button-background-light: #ffffff; /* Light mode button background color */
+  --button-text-color-light: #3498db; /* Light mode button text color */
+  --button-border-color-light: #3498db; /* Light mode button border color */
+  --button-hover-background-light: #3498db; /* Light mode button hover background color */
+  --button-hover-text-color-light: #ffffff; /* Light mode button hover text color */
+  --delete-text-color-light: red; /* Light mode delete text color */
+  --input-background-color:white;
+  --input-color:black;
 }
+
+.TwoBtn i {
+  margin-left: 10px;
+  color: inherit /* Use CSS variable for primary color */
+}
+
+
 .TwoBtn div {
   margin-right: 20px;
 }
 
-.TwoBtn button,.reset-zoom {
-  background-color: white;
-  color: #3498db;
+.TwoBtn button,
+.reset-zoom,
+#NextSample button {
+  background-color: var(--button-background-light); /* Use CSS variable for button background color */
+  color: var(--button-text-color-light); /* Use CSS variable for button text color */
   margin: 10px;
   padding: 5px;
-  border: 1px solid #3498db;
+  border: 1px solid var(--button-border-color-light); /* Use CSS variable for button border color */
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
@@ -331,26 +367,30 @@ legend{
   display: flex;
   align-items: center;
 }
-.TwoBtn button:hover{
-  color:white;
-  background-color:#3498db; 
+
+.TwoBtn button:hover {
+  color: var(--button-hover-text-color-light); /* Use CSS variable for button hover text color */
+  background-color: var(--button-hover-background-light); /* Use CSS variable for button hover background color */
   transition: all 0.2s;
 }
 
-#DeleteRows{
-  color: red;
-
+#DeleteRows {
+  color: var(--delete-text-color-light); /* Use CSS variable for delete text color */
 }
+
+
 .ftable table{
   width: 90%;
   margin: 0px 5%;
   margin-bottom: 80px;
 }
 
+
+
 .headfont {
   font-size: 20px;
   font-weight: bold;
-  color: #3498db;
+  color: var(--headfont-color-light); /* Use CSS variable for heading font color */
 }
 
 .TableContent {
@@ -362,34 +402,62 @@ legend{
 }
 
 #scanReadings,
-#messageBox,#CMDMB {
-  background-color: whitesmoke;
-  color: black;
+#messageBox,
+#CMDMB {
+  background-color: var(--background-color-light); /* Use CSS variable for background color */
+  color: var(--text-color-light); /* Use CSS variable for text color */
   width: 90%;
   height: 300px;
   margin: 10px auto;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color-light); /* Use CSS variable for border color */
   max-height: 200px;
   overflow-y: auto;
 }
-#messageBox{
+
+#messageBox {
   height: 200px;
   margin-top: -35px;
 }
 
+/* Dark mode styles */
+body.dark-mode {
+  --headfont-color-dark: #3498db; /* Dark mode heading font color */
+  --background-color-dark: #333333; /* Dark mode background color */
+  --text-color-dark: #ffffff; /* Dark mode text color */
+  --border-color-dark: #fff; /* Dark mode border color */
+}
+
+/* Apply dark mode styles using the corresponding CSS variables */
+body.dark-mode .headfont {
+  color: var(--headfont-color-dark);
+}
+
+body.dark-mode #scanReadings,
+body.dark-mode #messageBox,
+body.dark-mode #CMDMB {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+  border-color: var(--border-color-dark);
+}
 
 
 
-/* preset css */
+/* Light mode variables */
+:root {
+  --preset-background-light: rgba(5, 5, 33, 0.565); /* Light mode preset background */
+  --preset-text-light: #ffffff; /* Light mode preset text color */
+  --preset-blur-light: blur(9px); /* Light mode blur effect */
+  --preset-border-light: #000; /* Light mode preset border color */
+}
 
+/* Styles for presets */
 .presets {
   display: none;
   overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
-  
 }
 
 .blurred-list {
@@ -398,10 +466,10 @@ legend{
   min-width: 300px;
   padding: 15px;
   margin: 0;
-  backdrop-filter: blur(9px);
+  backdrop-filter: var(--preset-blur-light); /* Use CSS variable for blur effect */
   max-height: 100vh;
-  color: #ffffff;
-  background: rgba(5, 5, 33, 0.565);
+  color: var(--preset-text-light); /* Use CSS variable for text color */
+  background: var(--preset-background-light); /* Use CSS variable for background color */
   overflow-y: auto;
 }
 
@@ -409,7 +477,7 @@ legend{
   width: 100%;
   margin-bottom: 9px;
   cursor: pointer;
-  border: #000 1px solid;
+  border: var(--preset-border-light) 1px solid; /* Use CSS variable for border color */
 }
 
 .presets li > * {
@@ -419,15 +487,17 @@ legend{
 .presets li > *:not(:last-child) {
   margin-right: 15px; /* Adjust this value as needed */
 }
-#search{
-  width: 100%;
-}
 
+#search {
+  width: 100%;
+  padding: 2px;
+  border-radius: 2px;
+  text-align: center;
+}
 
 .delete-button {
   padding: 3px;
   background: inherit;
-  
 }
 
 .presets.active {
@@ -444,32 +514,21 @@ legend{
   z-index: 6;
 }
 
-#search {
-  padding: 2px;
-  border-radius: 2px;
-  text-align: center;
-}
-
-
 .blurred-name {
   position: relative;
   z-index: 1;
-  padding: 30px 30px;
+  padding: 30px;
   height: 200px;
   width: 250px;
-  backdrop-filter: blur(5px);
-  background: rgba(5, 5, 33, 0.565);
+  backdrop-filter: var(--preset-blur-light); /* Use CSS variable for blur effect */
+  background: var(--preset-background-light); /* Use CSS variable for background color */
   border-radius: 3px;
-  color: #ffffff;
+  color: var(--preset-text-light); /* Use CSS variable for text color */
   align-content: center;
-  
-  
 }
 
-
-.presetbtn:hover{
+.presetbtn:hover {
   background-color: transparent;
-  
 }
 
 .presetname .presetinput {
@@ -481,7 +540,6 @@ legend{
   background-color: white;
   color: #000;
 }
-
 
 .presetname #nameexist {
   color: #b30000;
@@ -522,7 +580,11 @@ legend{
 table{
   table-layout: fixed;
 }
+.disabled {
+  color: grey !important; 
+  cursor:not-allowed !important;
 
+}
 /*---------------------------- END OF SCAN ----------------------------*/
 
 /**------------------------------------------------------------------------
@@ -642,6 +704,7 @@ ul li label {
 
 .footer-col.inactive {
   display: none;
+  background-color: none;
 }
 
 /*---------------------------- END OF Footer ----------------------------*/
@@ -649,48 +712,78 @@ ul li label {
 /**------------------------------------------------------------------------
  *                           TABLE CONTENT
  *------------------------------------------------------------------------**/
+/* Light mode variables */
+:root {
+  --table-border-light: 1px solid black; /* Light mode table border */
+  --table-background-light: #ffffff; /* Light mode table background color */
+  --table-text-light: #000000; /* Light mode table text color */
+  --table-header-background-light: #3498db; /* Light mode table header background color */
+  --table-header-text-light: #ffffff; /* Light mode table header text color */
+}
 
-th,td {
-  border: 1px solid black;
+/* Dark mode variables */
+.dark-mode {
+  --table-border-dark: 1px solid white; /* Dark mode table border */
+  --table-background-dark: #333333; /* Dark mode table background color */
+  --table-text-dark: #ffffff; /* Dark mode table text color */
+  --table-header-background-dark: #08425e; /* Dark mode table header background color */
+  --table-header-text-dark: #ffffff; /* Dark mode table header text color */
+}
+
+/* Table styles */
+th, td {
+  border: var(--table-border-light); /* Default to light mode border */
   border-collapse: collapse;
   padding: 5px;
   text-align: center;
+  color: var(--table-text-light); /* Default to light mode text color */
 }
 
-table{
+table {
   margin-right: 10px;
   margin-left: 10px;
-  border: 1px solid black;
+  border: var(--table-border-light); /* Default to light mode border */
   border-collapse: collapse;
   padding: 5px;
   text-align: center;
-}
-.tab-1 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  align-items: center;
+  background-color: var(--table-background-light); /* Default to light mode background color */
 }
 
-th {
-  background-color: #3498db;
-  color: white;
+.th {
+  background-color: var(--table-header-background-light); /* Default to light mode header background color */
+  color: var(--table-header-text-light); /* Default to light mode header text color */
   font-size: 12px;
   padding: 10px;
   margin: 5px;
 }
 
-
-
-.heading{
+.heading {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  color: var(--table-text-light); /* Default to light mode text color */
   text-decoration: underline;
   margin-bottom: 20px;
 }
 
+/* Dark mode styles */
+.dark-mode th, .dark-mode td {
+  border: var(--table-border-dark); /* Override border in dark mode */
+  color: var(--table-text-dark); /* Override text color in dark mode */
+}
+
+.dark-mode table {
+  border: var(--table-border-dark); /* Override border in dark mode */
+  background-color: var(--table-background-dark); /* Override background color in dark mode */
+}
+
+.dark-mode .th {
+  background-color: var(--table-header-background-dark); /* Override header background color in dark mode */
+  color: var(--table-header-text-dark); /* Override header text color in dark mode */
+}
+.dark-mode tr:nth-child(even) {
+  background-color: var(--table-background-dark);
+}
 /**------------------------------------------------------------------------
  *                           Reading Table
  *------------------------------------------------------------------------**/
@@ -706,7 +799,7 @@ th {
   width: 100%;
  }  
  tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #d6deec;
 }
 
 
@@ -867,6 +960,7 @@ li:hover{
 
 
    .commandTable{
+    display: none;
     width: 70%;
     margin: 0 15%;
     table-layout: fixed;
@@ -894,4 +988,66 @@ li:hover{
   width: 100%;  
   margin: 0 0;
 }
+}
+
+#NextSample{
+display:none;
+padding: 40px;
+border: 2px solid black;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #ddd;
+color: #3498db;
+
+}
+
+
+
+
+
+/* Dark mode styles */
+body.dark-mode {
+  --background-color: #333333; /* Dark mode background color */
+  --text-color: #dbd9d9; /* Dark mode text color */
+  --sidebar-background: rgba(0, 0, 0, 0.5); /* Dark mode background color for sidebar */
+  --logo-color: #00ff00; /* Dark mode logo color */
+  --text-color-light: #dbd9d9; /* Dark mode text color */
+  --icon-color: #ffffff; /* Dark mode icon color */
+  --hover-background-color:rgba(255, 255, 255, 0.514); /* Dark mode hover background color */
+  --hover--color:black; /* Dark mode hover background color */
+  --primary-color-light: #3498db; /* Dark mode primary color */
+  --secondary-color-light: #dbd9d9; /* Dark mode secondary color */
+  --button-background-light: #dbd9d9; /* Dark mode button background color */
+  --button-text-color-light: #3498db; /* Dark mode button text color */
+  --button-border-color-light: #3498db; /* Dark mode button border color */
+  --button-hover-background-light: #3498db; /* Dark mode button hover background color */
+  --button-hover-text-color-light: #c7cddfbe; /* Dark mode button hover text color */
+  --delete-text-color-light: red; /* Dark mode delete text color */
+  --input-background-color:rgba(206, 205, 205, 0.068);
+  --input-color:white;
+  
+}
+
+/* Define CSS variables with the existing colors */
+:root {
+  --background-color: #ffffff; /* Default light mode background color */
+  --text-color: #000000; /* Default light mode text color */
+  --background-color: #ffffff; /* Light mode background color */
+  --text-color: #000000; /* Light mode text color */
+  --border-color: #000000; /* Light mode border color */
+  --text-color-icon: #000000; /* Light mode icon color */
+  --hover-background-color: #5c5656; /* Light mode hover background color */
+  --sidebar-background: rgba(255, 255, 255, 0.2); /* Light mode sidebar background color */
+  --logo-color: green; /* Light mode logo color */
+  --headfont-color-light: #3498db; /* Light mode heading font color */
+  --background-color-light: whitesmoke; /* Light mode background color */
+  --text-color-light: #000000; /* Light mode text color */
+  --border-color-light: #ccc; /* Light mode border color */
+  --table-border-light: 1px solid black; /* Light mode table border color */
+  --table-bg-light: #ffffff; /* Light mode table background color */
+  --table-text-light: black; /* Light mode table text color */
+  --table-header-bg-light: #3498db; /* Light mode table header background color */
+  --table-header-text-light: white; /* Light mode table header text color */
 }

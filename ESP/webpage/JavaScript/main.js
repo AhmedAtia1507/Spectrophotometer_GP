@@ -38,13 +38,16 @@ function initWebSocket() {
 // use event listener  
 function onOpen(event) {
   console.log('Connection opened');
+  updateWifiStutus('connected','green');
 }
 
 function onClose(event) {
   // in case connection down
   // try again after 2 sec
+  updateWifiStutus('disconnected','red');
   console.log('Connection closed');
   setTimeout(initWebSocket, 20000);
+
 }
 function onMessage(event) {
   var myObj = JSON.parse(event.data);
@@ -54,8 +57,9 @@ function onMessage(event) {
   }
 
 }
-
-
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
 
 
 /**========================================================================
@@ -77,6 +81,26 @@ function openTab(evt, Control) {
 /**========================================================================
  *                           STATE BAR
  *========================================================================**/
+function updateWifiStutus(connectedStutus,color){
+  var wifi_stutus = document.getElementById('WifiStutus');
+  wifi_stutus.textContent=connectedStutus;
+  wifi_stutus.style.color=color ;
+}
+function toggleInteractiveElements() {
+  // Get all interactive elements
+  var interactiveElements = document.querySelectorAll('button, input, select');
+  // Loop through each element and toggle its disabled attribute
+  interactiveElements.forEach(function(element) {
+    element.disabled = !element.disabled;
+    // Add or remove 'disabled' class based on the disabled state
+    if (element.disabled) {
+      element.classList.add('disabled');
+    } else {
+      element.classList.remove('disabled');
+    }
+  });
+}
+
 document.getElementById('sBarBtn').addEventListener('click', function () {
 
   const message = {
@@ -149,7 +173,7 @@ function updateChart() {
     chart.destroy(); // Destroy the existing chart to update with new data
   }
   var ctx = document.getElementById('myChart').getContext('2d');
-  chart = new Chart(ctx, {
+ chart = new Chart(ctx, {
     type: 'scatter',
     data: {
       datasets: [{
@@ -169,49 +193,54 @@ function updateChart() {
         showLine: true
       }]
     },
-   options: {
-    tooltips: {
-      enabled: false
-    },
-    animation: {
-      duration: 0
-    },
-    responsive: false,
-    maintainAspectRatio: false,
-    plugins: {
-      crosshair: {
-        tooltips: {
-          enabled: false // Disable tooltips for the crosshair
+    options: {
+      tooltips: {
+        enabled: false
       },
-        sync: {
-          enabled: true // Enable crosshair synchronization between multiple charts
+      animation: {
+        duration: 0
+      },
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        crosshair: {
+          tooltips: {
+            enabled: false // Disable tooltips for the crosshair
+          },
+          sync: {
+            enabled: true // Enable crosshair synchronization between multiple charts
+          },
+          zoom: {
+            enabled: true // Enable crosshair zooming along the axis
+          },
+          line: {
+            color: 'blue', // Crosshair line color
+            width: 1 // Crosshair line width
+          }
         },
-        zoom: {
-          enabled: true // Enable crosshair zooming along the axis
+       
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom',
+          ticks: {
+            color: 'red' // Change color of x-axis ticks
+          }
         },
-        line: {
-          color: 'blue', // Crosshair line color
-          width: 1 // Crosshair line width
+        y: {
+          type: 'linear',
+          position: 'left',
+          ticks: {
+            color: 'blue' // Change color of y-axis ticks
+          }
         }
       },
-     
-    },
-    scales: {
-      x: {
-        type: 'linear',
-        position: 'bottom'
-      },
-      y: {
-        type: 'linear',
-        position: 'left'
-      }
-    },
-    onHover: null // Disable the default onHover behavior
-  }
+      onHover: null // Disable the default onHover behavior
+    }
   });
+
 }
-
-
 
 function getScatterData() {
   var data = [];
@@ -341,11 +370,17 @@ chartScan = new Chart(ctxScan, {
         min: 190,
         max: 1100,
         type: 'linear',
-        position: 'bottom'
+        position: 'bottom',
+        ticks: {
+          color: 'black', // Change color of y-axis ticks
+        },
       },
       y: {
         type: 'linear',
-        position: 'left'
+        position: 'left',
+        ticks: {
+          color: 'black', // Change color of y-axis ticks
+        }
       }
     },
     onHover: null // Disable the default onHover behavior
@@ -514,10 +549,10 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
+  toggleInteractiveElements();
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
   var time= time.replaceAll(","," ");  //because file name can't contain ,
-  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
@@ -1035,11 +1070,15 @@ document.getElementById('hidefoot').addEventListener('click', showfoot)
 function showfoot() {
   var but = document.getElementById('hidefoot');
   var foot = document.getElementById('hidethis');
+  var footer = document.getElementById('sticky');
+
   if (but.innerHTML === 'hide') {
     but.innerHTML = 'show';
+    footer.style.backgroundColor='transparent';    
   }
   else {
     but.innerHTML = 'hide';
+    footer.style.backgroundColor='#2d2e33';
   }
   foot.classList.toggle('inactive');
 }
@@ -1166,7 +1205,16 @@ function constructtable(num){
 
 document.getElementById('SampleNumBTN').addEventListener('click', function(){
   var num = document.getElementById('SampleNum').value; // Enclosed 'SampleNum' in quotes
- constructtable(num);
+
+ if(num>0){
+  
+  toggleLoginContainer('NextSample');
+  constructtable(num);
+}
+
+ else{
+  alert('please insert the number of samples')
+ }
 });
 // remove all rows
 document.getElementById('deleteBTN').addEventListener('click', function(){
@@ -1208,6 +1256,9 @@ function changeState(rowIndex, newState, progress) {
   if (progress == 100) {
       stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
       stateSpan.style.color = "green";
+      toggleInteractiveElements();  
+      toggleLoginContainer('NextSample');
+
   }
 }
 
@@ -1708,10 +1759,10 @@ function createListItem(itemName, myList, names, messageType) {
 
 
 /*============================ Login ============================*/
-function toggleLoginContainer(){
-  var login = document.getElementById("login");
-  if(login.style.display=="none"){
-    login.style.display="block";
+function toggleLoginContainer(id="login"){
+  var login = document.getElementById(id);
+  if(!login.style.display || login.style.display === "none"){
+    login.style.display="block"; 
   }
   else{
     login.style.display="none";

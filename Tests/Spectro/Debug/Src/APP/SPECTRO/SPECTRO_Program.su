@@ -1,0 +1,5 @@
+../Src/APP/SPECTRO/SPECTRO_Program.c:36:16:SPECTRO_InitSystem	16	static
+../Src/APP/SPECTRO/SPECTRO_Program.c:60:16:SPECTRO_InitSoftware	16	static
+../Src/APP/SPECTRO/SPECTRO_Program.c:99:16:SPECTRO_InitHardware	16	static
+../Src/APP/SPECTRO/SPECTRO_Program.c:140:16:SPECTRO_InitCalibration	512	static
+../Src/APP/SPECTRO/SPECTRO_Program.c:234:15:Medium_Step_Index	40	static
