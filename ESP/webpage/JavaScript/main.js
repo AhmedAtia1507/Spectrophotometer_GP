@@ -57,7 +57,9 @@ function onMessage(event) {
   }
 
 }
-
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
 
 
 /**========================================================================
@@ -171,7 +173,7 @@ function updateChart() {
     chart.destroy(); // Destroy the existing chart to update with new data
   }
   var ctx = document.getElementById('myChart').getContext('2d');
-  chart = new Chart(ctx, {
+ chart = new Chart(ctx, {
     type: 'scatter',
     data: {
       datasets: [{
@@ -191,49 +193,54 @@ function updateChart() {
         showLine: true
       }]
     },
-   options: {
-    tooltips: {
-      enabled: false
-    },
-    animation: {
-      duration: 0
-    },
-    responsive: false,
-    maintainAspectRatio: false,
-    plugins: {
-      crosshair: {
-        tooltips: {
-          enabled: false // Disable tooltips for the crosshair
+    options: {
+      tooltips: {
+        enabled: false
       },
-        sync: {
-          enabled: true // Enable crosshair synchronization between multiple charts
+      animation: {
+        duration: 0
+      },
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        crosshair: {
+          tooltips: {
+            enabled: false // Disable tooltips for the crosshair
+          },
+          sync: {
+            enabled: true // Enable crosshair synchronization between multiple charts
+          },
+          zoom: {
+            enabled: true // Enable crosshair zooming along the axis
+          },
+          line: {
+            color: 'blue', // Crosshair line color
+            width: 1 // Crosshair line width
+          }
         },
-        zoom: {
-          enabled: true // Enable crosshair zooming along the axis
+       
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom',
+          ticks: {
+            color: 'red' // Change color of x-axis ticks
+          }
         },
-        line: {
-          color: 'blue', // Crosshair line color
-          width: 1 // Crosshair line width
+        y: {
+          type: 'linear',
+          position: 'left',
+          ticks: {
+            color: 'blue' // Change color of y-axis ticks
+          }
         }
       },
-     
-    },
-    scales: {
-      x: {
-        type: 'linear',
-        position: 'bottom'
-      },
-      y: {
-        type: 'linear',
-        position: 'left'
-      }
-    },
-    onHover: null // Disable the default onHover behavior
-  }
+      onHover: null // Disable the default onHover behavior
+    }
   });
+
 }
-
-
 
 function getScatterData() {
   var data = [];
@@ -363,11 +370,17 @@ chartScan = new Chart(ctxScan, {
         min: 190,
         max: 1100,
         type: 'linear',
-        position: 'bottom'
+        position: 'bottom',
+        ticks: {
+          color: 'black', // Change color of y-axis ticks
+        },
       },
       y: {
         type: 'linear',
-        position: 'left'
+        position: 'left',
+        ticks: {
+          color: 'black', // Change color of y-axis ticks
+        }
       }
     },
     onHover: null // Disable the default onHover behavior
