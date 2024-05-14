@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    gap: 80px;
+}
+
+.icon {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.icon i {
+    font-size: 3em;
+    color: #333;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.icon:hover {
+    transform: rotateY(180deg);
+}
+
+.icon::before {
+    content: attr(data-name);
+    position: absolute;
+    font-size: 1.2em;
+    color: #333;
+    opacity: 0;
+    transform: rotateY(180deg);
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.icon:hover i {
+    transform: rotateY(180deg);
+    opacity: 0;
+}
+
+.icon:hover::before {
+    opacity: 1;
+}
