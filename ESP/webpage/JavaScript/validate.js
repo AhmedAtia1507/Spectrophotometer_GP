@@ -227,6 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
   submitButton2.addEventListener('click', compareValues);
 });
 
+
 function compareValues() {
   var dropdown = document.getElementById('Sampleselector');
   var selectedOption = dropdown.options[dropdown.selectedIndex].value;
@@ -310,8 +311,46 @@ function compareWithPredefinedValues(userInputValues, predefinedValues, errorLim
   return true;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  var submitButton = document.getElementById('submitButton');
+  submitButton.addEventListener('click', function() {
+    generateTable();
+  });
+});
 
+function generateTable() {
+  var numRows = parseInt(document.querySelector('.numbers1').value);
+  var numColumns = 4; // Assuming a fixed number of columns for demonstration
+  var headerNames = ['Entered Wavelength', 'Thoretical Wavelength', 'Error', 'Status']; // Specify names for row 1 headers
+  var theoreticalvalues = [200, 300, 400, 500, 600, 700];
+  var tableContainer = document.getElementById('tableContainer');
 
+  // Clear previous table, if any
+  tableContainer.innerHTML = '';
+
+  // Create the table element
+  var table = document.createElement('table');
+
+  // Create the header row with four text headers
+  var headerRow = table.insertRow();
+  for (var i = 0; i < numColumns; i++) {
+    var headerCell = headerRow.insertCell();
+    headerCell.textContent = headerNames[i]; // Use the names from the array
+    headerCell.style = "font-weight: 600;"
+  }
+
+  // Insert numeric values in subsequent rows for each column
+  for (var i = 0; i < numRows; i++) {
+    var row = table.insertRow();
+    for (var j = 0; j < numColumns; j++) {
+      var cell = row.insertCell();
+      cell.textContent = theoreticalvalues[j]; // Example of numeric value generation
+    }
+  }
+
+  // Append the table to the container
+  tableContainer.appendChild(table);
+}
 
 /*
 
@@ -431,6 +470,7 @@ function CompareValues1() {
  
  }
 }
+
 
 
 

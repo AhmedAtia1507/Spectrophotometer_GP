@@ -511,3 +511,14 @@ main{
   padding: 5px;
   border: 2px solid lightgray; /* Set border to gray with 2px width */
   }
+
+  .table {
+    position: absolute;
+    top: 35%;
+    margin-bottom:20% ;
+    left: 50%; /* Place the table horizontally centered */
+    transform: translateX(-50%); /* Adjust to horizontally center the table */
+    margin-top: 1%;
+    margin-bottom: 100%; /* Add margin at the bottom of the text */
+    width:5px;
+} 
