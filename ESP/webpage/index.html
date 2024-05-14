@@ -30,6 +30,7 @@
           <p>Validate</p>
         </a></li>
         
+        
     </ul>
     <ul>
       <li class="logo">
@@ -42,9 +43,11 @@
           <span style="font-size: 12px;" id="WifiStutus"></span>
         </a>
         
+        
 
 
       </li>
+     
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
           <p>Home</p>
         </a></li>
@@ -61,6 +64,8 @@
       <li class="menu-button" onclick="showSidebar()">
         <a href="#"><i class="fas fa-bars"></i></a>
       </li>
+      <li class="hideOnMobile"><button style="background-color: transparent !important ;border: none;" onclick="toggleDarkMode()"><i class="fa-solid fa-circle-half-stroke"></i></button></li>
+     
     </ul>
   </nav>
   <!---------------------------- END OF Navbar ---------------------------->
@@ -83,13 +88,17 @@
         <div class="row" style="height: 70vh;">
           <fieldset class="fchart">
             <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
-            <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
+            <canvas id="chartScan" style="height: 95%; width: 95%; "></canvas>
           </fieldset>
 
 
           <fieldset class="fsetup">
             <legend>Setup <i class="fa-solid fa-gear"></i></legend>    
-              <input class="Scanin" id="SampleNum" class="SampleNum" placeholder="Number of Samples">
+            <div class="TwoBtn">
+              <button id="savepreset" onclick="savepreset()">Save Method <i class="fa-solid fa-floppy-disk"></i></button>
+              <button id="loadpreset" onclick="showpreset()">Load Method <i class="fa-solid fa-upload"></i></button>
+            </div>
+            <input class="Scanin" id="SampleNum" class="SampleNum" placeholder="Number of Samples">
             <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100">
             <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900">
             <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20">
@@ -105,11 +114,7 @@
               <button id="SampleNumBTN">Start<i class="fa-solid fa-play"></i></button>
               <button onclick="pauseScan()">Pause <i class="fa-solid fa-pause"></i></button>
             </div>
-            <div class="TwoBtn">
-              <button id="savepreset" onclick="savepreset()">Save Preset <i class="fa-solid fa-floppy-disk"></i></button>
-              <button id="loadpreset" onclick="showpreset()">Load Preset <i class="fa-solid fa-upload"></i></button>
-            </div>
-
+   
 
           </fieldset>
         </div>
@@ -211,7 +216,7 @@
             <input id="prestinput" class="presetinput" maxlength="17" autocomplete="off" />
             <div class="TwoBtn">
               <button class="presetbtn" id="savebtn" onclick="addtolist()">save</button>
-              <button class="presetbtn" id="savecancel" onclick="cancelpreset()">cancel</button>
+              <button class="presetbtn" id="savecancel" onclick="toggleLoginContainer('presetname')">cancel</button>
             </div>
             <div id="nameexist"></div>
           </div>

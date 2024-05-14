@@ -14,23 +14,28 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.className = 'optionButtont'; // Apply custom CSS class
    option1Button.onclick = function() {
       // Logic for option 1
-      console.log("Option 1 clicked");
       addPoint1();
-      window.open("chart.html", "_blank");
   };
     // Append message and options to the container
     messageContainer.appendChild(messageDiv);
     messageContainer.appendChild(option1Button);
 }
-
-let data = {
-};
+function toggleLoginContainer(id="chartScan"){
+  var login = document.getElementById(id);
+  if(!login.style.display || login.style.display === "none"){
+    login.style.display="block"; 
+  }
+  else{
+    login.style.display="none";
+  }
+}
 
 function addPoint1(start, end) {
-  data = {
-    wavelength:"250",
-    Abs:"0.6"
-  };
+  let xtest = [700,699,698,697,696,695,694,693,692,691,690,689,688];
+  let ytest = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253,0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
+  toggleLoginContainer(id="chartdiv");
+  addCurve(xtest, ytest, 'black', "Intensity");
+
   // const message = { // message for websocket
   //   command: 'Scan',
   //   startInput: start,
@@ -429,37 +434,37 @@ function CompareValues1() {
 
 
 
-function compareWithPredefinedValues2(userInputValues, predefinedValues, errorLimit) {
-  // Compare user input values with predefined values
-  for (var i = 0; i < userInputValues.length; i++) {
-      var difference = userInputValues[i] - predefinedValues[i];
-      if (Math.abs(difference) > errorLimit) {
-          return false;
-      }
-  }
-  return true;
-}
-/*
-var passesTest2 = 
-*/
-if (passesTest2){
-    
-   messageContainer1.style.display = 'none';
-    if (messageContainer2) {
-      messageContainer2.textContent = '';
-    }
-    showMessaget("Test passes! " , "Show curve","messageContainer22" );
-    
- }
- else{
+// function compareWithPredefinedValues2(userInputValues, predefinedValues, errorLimit) {
+//   // Compare user input values with predefined values
+//   for (var i = 0; i < userInputValues.length; i++) {
+//       var difference = userInputValues[i] - predefinedValues[i];
+//       if (Math.abs(difference) > errorLimit) {
+//           return false;
+//       }
+//   }
+//   return true;
+// }
 
-  messageContainer2.style.display = 'none';
-  if (messageContainer1) {
-    messageContainer1.textContent = '';
-  }
-  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer12" );
+// var passesTest2 = 
+
+// if (passesTest2){
+    
+//    messageContainer1.style.display = 'none';
+//     if (messageContainer2) {
+//       messageContainer2.textContent = '';
+//     }
+//     showMessaget("Test passes! " , "Show curve","messageContainer22" );
+    
+//  }
+//  else{
+
+//   messageContainer2.style.display = 'none';
+//   if (messageContainer1) {
+//     messageContainer1.textContent = '';
+//   }
+//   showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer12" );
  
- }
+//  }
 
 
 
@@ -540,70 +545,67 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     /**========================================================================
  *                           common functions
  *========================================================================**/
-    function updateChart() {
-      if (chart) {
-        chart.destroy(); // Destroy the existing chart to update with new data
-      }
+ 
 
-      var chartScan;
-      let chartData;
+    //   var chartScan;
+    //   let chartData;
       
       
-      const ctxScan = document.getElementById('chartScan').getContext('2d');
-      chartScan = new Chart(ctxScan, {
-        type: 'line',
-        data: chartData,
-        options: {
-          tooltips: {
-            enabled: false
-          },
-          animation: {
-            duration: 0
-          },
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            crosshair: {
-              tooltips: {
-                enabled: false // Disable tooltips for the crosshair
-            },
-              sync: {
-                enabled: true // Enable crosshair synchronization between multiple charts
-              },
-              zoom: {
-                enabled: true // Enable crosshair zooming along the axis
-              },
-              line: {
-                color: 'blue', // Crosshair line color
-                width: 1 // Crosshair line width
-              }
-            },
+    //   const ctxScan = document.getElementById('chartScan').getContext('2d');
+    //   chartScan = new Chart(ctxScan, {
+    //     type: 'line',
+    //     data: chartData,
+    //     options: {
+    //       tooltips: {
+    //         enabled: false
+    //       },
+    //       animation: {
+    //         duration: 0
+    //       },
+    //       responsive: false,
+    //       maintainAspectRatio: false,
+    //       plugins: {
+    //         crosshair: {
+    //           tooltips: {
+    //             enabled: false // Disable tooltips for the crosshair
+    //         },
+    //           sync: {
+    //             enabled: true // Enable crosshair synchronization between multiple charts
+    //           },
+    //           zoom: {
+    //             enabled: true // Enable crosshair zooming along the axis
+    //           },
+    //           line: {
+    //             color: 'blue', // Crosshair line color
+    //             width: 1 // Crosshair line width
+    //           }
+    //         },
            
-          },
-          scales: {
-            x: {
-              min: 190,
-              max: 1100,
-              type: 'linear',
-              position: 'bottom'
-            },
-            y: {
-              type: 'linear',
-              position: 'left'
-            }
-          },
-          onHover: null // Disable the default onHover behavior
-        }
-      });
+    //       },
+    //       scales: {
+    //         x: {
+    //           min: 190,
+    //           max: 1100,
+    //           type: 'linear',
+    //           position: 'bottom'
+    //         },
+    //         y: {
+    //           type: 'linear',
+    //           position: 'left'
+    //         }
+    //       },
+    //       onHover: null // Disable the default onHover behavior
+    //     }
+    //   });
       
       
 
 
 
-    var absorptionData = [];
-    var concentrationData = [];
-    var chart;
-    updateChart();
+    // var absorptionData = [];
+    // var concentrationData = [];
+    // var chart;
+  
     
     
 
@@ -725,11 +727,122 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
       // Logic for option 2
       console.log("Option 2 clicked");
       addPoint1();
-      window.open("chart.html", "_blank");
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
 }
+    
+
+
+// // SCAN
+// /**========================================================================
+//  *                           Chart
+//  *========================================================================**/
+// /* 
+// PUT THIS IN HTML : <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
+// */
+var chartScan;
+let chartData;
+const ctxVal = document.getElementById('chartScan').getContext('2d');
+chartScan = new Chart(ctxVal, {
+  type: 'line',
+  data: chartData,
+  options: {
+    tooltips: {
+      enabled: false
+    },
+    animation: {
+      duration: 0
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      crosshair: {
+        tooltips: {
+          enabled: false // Disable tooltips for the crosshair
+      },
+        sync: {
+          enabled: true // Enable crosshair synchronization between multiple charts
+        },
+        zoom: {
+          enabled: true // Enable crosshair zooming along the axis
+        },
+        line: {
+          color: 'blue', // Crosshair line color
+          width: 1 // Crosshair line width
+        }
+      },
+     
+    },
+    scales: {
+      x: {
+        // min: 190,
+        // max: 1100,
+        type: 'linear',
+        position: 'bottom'
+      },
+      y: {
+        type: 'linear',
+        position: 'left'
+      }
+    },
+    onHover: null // Disable the default onHover behavior
+  }
+});
+function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 'curve') {
+  // Check if the curve already exists
+  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
+
+  // If the curve exists, update its data
+  if (existingCurveIndex !== -1) {
+    chartScan.data.datasets[existingCurveIndex].data = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
+    chartScan.data.datasets[existingCurveIndex].borderColor = color;
+    chartScan.data.datasets[existingCurveIndex].backgroundColor = fillCurve ? 'rgba(255, 0, 0, 0.3)' : undefined;
+    chartScan.data.datasets[existingCurveIndex].showLine = drawMode !== 'points'; // Don't connect points if drawing separate points
+  } else { // If the curve does't exist, add it
+    var curveData = drawMode === 'curve' ? 
+      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
+      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
+    
+    var dataset = {
+      label: curveName,
+      data: curveData,
+      borderColor: color,
+      borderWidth: 2,
+      pointRadius: drawMode === 'points' ? 5 : 0, // Set point radius if drawing points
+      lineTension: drawMode === 'points' ? 0 : 0.4, // Set line tension if drawing points
+      showLine: drawMode !== 'points' // Don't connect points if drawing separate points
+    };
+
+    if (fillCurve) {
+      dataset.fill = 'origin';
+      dataset.backgroundColor = 'rgba(255, 0, 0, 0.3)';
     }
+
+    chartScan.data.datasets.push(dataset);
+  }
+
+  chartScan.update(); // Update the chart
+}
+
+
+
+
+// funcation to remove all curves in chart js
+function removeAllCurves() {
+  chartScan.data.datasets = [];
+  chartScan.update();
+}
+
+// ////////////////////////////////scan///////////////
+var absorptionData = [];
+var concentrationData = [];
+var chart;
+
+
+

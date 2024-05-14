@@ -483,11 +483,31 @@ main{
   transform: scale(1.05);
 }
 
-/* .filters-container{
-  
-} */
 #chartdiv{
-  display: block;
-  z-index: 1;
-  
+  display:none;
+  padding: 10px;
+  border: 2px solid black;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 1200px;
+  height: 80vh;
+
+
 }
+.button3 {
+  width: 90px; 
+  height: 40px;
+  background-color: white;
+  color: green;
+  margin-left: 88%;
+  margin-bottom: 0%;
+  border-radius: 5px;
+  border: 0ch;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px;
+  border: 2px solid lightgray; /* Set border to gray with 2px width */
+  }
