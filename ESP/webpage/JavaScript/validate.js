@@ -320,38 +320,70 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function generateTable() {
   var numRows = parseInt(document.querySelector('.numbers1').value);
-  var numColumns = 4; // Assuming a fixed number of columns for demonstration
-  var headerNames = ['Entered Wavelength', 'Thoretical Wavelength', 'Error', 'Status']; // Specify names for row 1 headers
-  var theoreticalvalues = [200, 300, 400, 500, 600, 700];
+  var numColumns = 4; 
+  var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
+
+  var userInputValues = [];
+  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+  inputs.forEach(function(input) {
+      var inputValue = parseFloat(input.value);
+      userInputValues.push(inputValue);
+  });
+
+  var predefined = [200, 300, 400, 500, 600, 700];
+  var errorLimit= parseInt(document.querySelector('.error').value);
+  var column1Values = [], column2Values = [], column3Values = [], column4Values = [];
+
+  if (compareWithPredefinedValues(userInputValues, predefined, errorLimit) == true){
+    var state = 'Done';
+  }
+  else{
+    var state = 'Failed';
+  }
+
+  for (var i = 0; i < numRows; i++) {
+    column1Values.push(userInputValues[i % userInputValues.length]); // Cycle through user input values
+    column2Values.push(predefined[i % predefined.length]);  // Cycle through predefined values
+    column3Values.push(Math.abs(column1Values[i] - column2Values[i]));
+    column4Values.push(state);  // Set a default status
+  }
+
   var tableContainer = document.getElementById('tableContainer');
+  tableContainer.innerHTML = '';  // Clear previous table
 
-  // Clear previous table, if any
-  tableContainer.innerHTML = '';
-
-  // Create the table element
   var table = document.createElement('table');
-
-  // Create the header row with four text headers
   var headerRow = table.insertRow();
   for (var i = 0; i < numColumns; i++) {
     var headerCell = headerRow.insertCell();
-    headerCell.textContent = headerNames[i]; // Use the names from the array
-    headerCell.style = "font-weight: 600;"
+    headerCell.textContent = headerNames[i];
+    headerCell.style = "font-weight: 600;";
   }
 
-  // Insert numeric values in subsequent rows for each column
   for (var i = 0; i < numRows; i++) {
     var row = table.insertRow();
     for (var j = 0; j < numColumns; j++) {
       var cell = row.insertCell();
-      cell.textContent = theoreticalvalues[j]; // Example of numeric value generation
+      switch (j) {
+        case 0:
+          cell.textContent = column1Values[i];
+          break;
+        case 1:
+          cell.textContent = column2Values[i];
+          break;
+        case 2:
+          cell.textContent = column3Values[i];
+          break;
+        case 3:
+          cell.textContent = column4Values[i];
+          break;
+        default:
+          cell.textContent = '';
+      }
     }
   }
 
-  // Append the table to the container
   tableContainer.appendChild(table);
 }
-
 /*
 
 ****************************Photometric Accuracy********************************
