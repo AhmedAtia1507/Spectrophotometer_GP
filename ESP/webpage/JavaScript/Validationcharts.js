@@ -125,7 +125,10 @@ function addPoint() {
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     absorptionValue = Math.log10(intensityReference / intensitySample);
-    addCurve(wavelength, intensitySample, black, Intensity, fillCurve = false, drawMode = 'curve');
   };
 }
+import { data, addPoint1 } from './validate.js';
+addPoint1();
+console.log(data); // Output: Some data
 
+addCurve(data.wavelength, data.Abs, 'black', "Intensity");

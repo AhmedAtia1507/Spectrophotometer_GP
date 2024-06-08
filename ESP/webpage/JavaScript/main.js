@@ -330,6 +330,8 @@ function toggleVisibility() {
 let isScanning = false;
 var intensityData = [];
 var wavelengthData = [];
+<<<<<<< HEAD
+=======
 var chartScan;
 let chartData;
 
@@ -387,6 +389,7 @@ chartScan = new Chart(ctxScan, {
   }
 });
 
+>>>>>>> 9b157b7dc8aa7c027ca59d8b52631f1650bdda6b
 
 // Create a div dynamically
 const infoDiv = document.createElement('div');
