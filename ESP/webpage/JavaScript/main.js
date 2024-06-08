@@ -848,6 +848,214 @@ function processReadingsData(data) {
   });
 }
 
+/*====================================preset/readings section====================================*/
+
+// function to display the preset name container 
+function savepreset() {
+  const flyoutMenu = document.getElementById('presetname');
+  flyoutMenu.classList.toggle('active');
+}
+
+// when user click save it add it to list saving preset data in sd
+function addtolist() {
+  var itemName = document.getElementById("prestinput").value;
+  if (itemName.trim() !== "") {
+      let startInput = parseFloat(document.getElementById('start').value);
+      let stopInput = parseFloat(document.getElementById('stop').value);
+      let stepInput = parseFloat(document.getElementById('step').value);
+      let initTimeInput = parseFloat(document.getElementById('initTime').value);
+      let modeInput = document.getElementById('mySelect').value;
+      let temp=document.getElementById('DateTime').textContent;
+      var time= temp.replaceAll(":"," "); //file name can't contain : or ,
+      var time= time.replaceAll(","," ");
+      var message = {
+        savepreset: 'savepreset',
+        name: itemName,
+        time:time,
+        start: startInput,
+        stop: stopInput,
+        step: stepInput,
+        inittime: initTimeInput,
+        mode: modeInput,
+      };
+      websocket.send(JSON.stringify(message));
+      savepreset();
+    } else {
+      document.getElementById('nameexist').innerHTML = 'preset name required';
+    }
+  }
+
+var myList = document.getElementById("presetlist");
+
+//function to select transmission or absorbtion when laod an preset from sd
+function selectMode(mode) {
+  var selectElement = document.getElementById("mySelect");
+  var modeIndex = Array.from(selectElement.options).findIndex(option => option.value === mode);
+  if (modeIndex !== -1) {
+    selectElement.selectedIndex = modeIndex;
+  } else {
+    console.error("Mode not found: " + mode);
+  }
+}
+
+//function to delete item from sd and  the preset list
+function deleteItem(myList, names, newItem, action) {
+  var deleteButton = document.createElement("div");
+  deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", function (event) {
+  event.stopPropagation(); // Stop event propagation to prevent parent element click event
+  myList.removeChild(newItem);
+    var message = {
+      [action]: action,
+      name: names,
+    };
+    websocket.send(JSON.stringify(message));
+    var type= action.replaceAll("delete","")
+      showItems(type);
+  });
+  // Append the delete button to the new list item
+  newItem.appendChild(deleteButton);
+}
+
+
+// a function that dynamically show the files in sd card into web list
+function showItems(type) {
+  var myList = document.getElementById("presetlist");
+  var action = "show"+type ;
+  var message = {
+    [action]: action
+  };
+  const flyoutMenu = document.getElementById('presets');
+  const computedStyle = window.getComputedStyle(flyoutMenu);
+  if (computedStyle.display === 'none') {
+    console.log(message);
+    websocket.send(JSON.stringify(message));
+
+    for (var j = myList.children.length - 1; j >= 0; j--) {
+      var child = myList.children[j];
+      if (child.id !== 'nopresets' && child.id !== 'search') {
+        myList.removeChild(child);
+      }
+    }
+  }
+
+  websocket.onmessage = function (event) {
+    var myObj = JSON.parse(event.data);
+    console.log(event.data); // for test 
+    if (myObj.hasOwnProperty(type + 'no')) {
+      let i = myObj[type + 'no'];
+      var nopresetsDiv = document.getElementById('nopresets');
+      if (i == 0) {
+        nopresetsDiv.innerHTML = `No ${type} available`;
+        for (var j = myList.children.length - 1; j >= 0; j--) {
+          var child = myList.children[j];
+          if (child.id !== 'nopresets' && child.id !== 'search') {
+            myList.removeChild(child);
+          }
+        }
+      } else {
+        nopresetsDiv.innerHTML = '';
+        for (i; i > 0; i--) {
+          (function (i) {
+            let file = 'file' + i;
+            var newItem = document.createElement("li");
+            var itemName = myObj[file];
+            var textSpan = document.createElement("span");
+            var textNode = document.createTextNode(itemName);
+            textSpan.appendChild(textNode);
+            newItem.appendChild(textSpan);
+            myList.insertBefore(newItem, myList.lastChild);
+              deleteItem(myList, itemName, newItem, "delete"+type);
+            newItem.addEventListener("click", function () {
+              console.log("Clicked on item: " + itemName);
+              // Handle item click based on type
+              loadItem(type,itemName);
+            });
+          })(i);
+        }
+      }
+    }
+    openlist();
+  };
+}
+
+// a function that shows the presets or readings list
+function openlist() {
+  const flyoutMenu = document.getElementById('presets');
+  flyoutMenu.classList.toggle('active');
+}
+
+// a function that shows the presets or readings items when i click one of them
+function loadItem(dictionary, itemName) {
+  var message = {
+    Dictionary: dictionary,
+    loadthis: itemName
+  };
+  console.log(message);
+  websocket.send(JSON.stringify(message));
+  websocket.onmessage = function (event) {
+    if (dictionary === "presets") {//it is a preset
+    processPresetData(event.data)  
+    }
+    // Handle specific actions based on dictionary
+    if (dictionary === "readings") {
+      processReadingsData(event.data);
+    }
+  };
+}
+
+// a function that load the preset data into the inputs 
+function processPresetData(data){
+      var myObj = JSON.parse(data);
+      var startValue = parseInt(myObj.start, 10);
+      var stopValue = parseInt(myObj.stop, 10);
+      var stepValue = parseInt(myObj.step, 10);
+      var initTimeValue = parseInt(myObj.inittime, 10);
+      document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
+      document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
+      document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
+      document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
+      selectMode(myObj.mode.trim());  
+}
+var samplename="";
+// a function that load the readings data into the curve and CMD
+function processReadingsData(data) {
+  var x = []; // wavelength
+  var y = []; // intensity
+  var lines = data.split('\n');
+  lines.forEach(function (line) {
+    if (line.trim() === '') {
+      return;
+    }
+    try {
+      var myObj = JSON.parse(line);
+      if (myObj.hasOwnProperty('isFirst')) {
+        if (myObj.isFirst == "true") {
+          samplename = myObj.SampleID;
+          displayCMD(samplename + "  ===> " + myObj.SampleDescribe, "red", "SD O");
+          displayCMD(myObj.time, "green", "SD");
+          displayCMD(myObj.modeInput, "blue", "SD");
+          displayCMD(myObj.wavelength + "," + myObj.transmission + "," + myObj.absorption, "black", "SD");
+          //displayCMD(line,'blue','SD')
+          x.push(myObj.wavelength);
+          y.push(myObj.absorption);
+          addCurve(x, y, "blue", myObj.SampleID);
+        } else if (myObj.isFirst == "false") {
+          displayCMD(myObj.wavelength + "," + myObj.transmission + "," + myObj.absorption, "black", "SD");
+          x.push(myObj.wavelength);
+          y.push(myObj.absorption);
+          addCurve(x, y, "blue", samplename);
+        } else if (myObj.isFirst == "last") {
+          // it is an empty message to indicate the last message
+        }
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+    }
+  });
+}
+
 
 
 // function showpreset() {

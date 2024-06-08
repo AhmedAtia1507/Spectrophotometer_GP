@@ -96,7 +96,7 @@
             <legend>Setup <i class="fa-solid fa-gear"></i></legend>    
             <div class="TwoBtn">
               <button id="savepreset" onclick="savepreset()">Save Method <i class="fa-solid fa-floppy-disk"></i></button>
-              <button id="loadpreset" onclick="showpreset()">Load Method <i class="fa-solid fa-upload"></i></button>
+              <button id="loadpreset" onclick="showItems('presets')">Load Method <i class="fa-solid fa-upload"></i></button>
             </div>
             <input class="Scanin" id="SampleNum" class="SampleNum" placeholder="Number of Samples">
             <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100">
@@ -187,7 +187,7 @@
               <!-- Messages will be displayed here -->
             </div>
             <div class="TwoBtn">
-              <button onclick="showreadings()" id="loadreadings">load Readings</button>
+              <button onclick="showItems('readings')" id="loadreadings">load Readings</button>
             </div>
           </fieldset>
         </div>
