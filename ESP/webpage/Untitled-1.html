@@ -1,0 +1,12 @@
+<legend><input class="checkboxes1" id="toggleCheckbox" type="checkbox" onchange="toggleVisibility()"> Wavelength Accuracy</legend>
+
+
+
+/**========================================================================
+ *                           NABIL EDITS - NEVER THINK TO TOUCH
+ *========================================================================**/
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
+}

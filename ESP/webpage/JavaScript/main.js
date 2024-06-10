@@ -10,6 +10,7 @@ function hideSidebar() {
   const sidebar = document.querySelector('.sidebar');
   sidebar.style.display = 'none';
 }
+
 /*============================ END OF Nabbar ============================*/
 
 /**========================================================================
@@ -38,13 +39,16 @@ function initWebSocket() {
 // use event listener  
 function onOpen(event) {
   console.log('Connection opened');
+  updateWifiStutus('connected','green');
 }
 
 function onClose(event) {
   // in case connection down
   // try again after 2 sec
+  updateWifiStutus('disconnected','red');
   console.log('Connection closed');
   setTimeout(initWebSocket, 20000);
+
 }
 function onMessage(event) {
   var myObj = JSON.parse(event.data);
@@ -54,22 +58,37 @@ function onMessage(event) {
   }
 
 }
-
-
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
 
 
 /**========================================================================
  *                           Tabs control
  *========================================================================**/
-
 function openTab(evt, Control) {
-  var i, tabcontent
+  var i, tabcontent, tablinks;
+
+  // Hide all tab content
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  document.getElementById(Control).style.display = "block";
-  //evt.currentTarget.ClassName += "active";
+
+  // Remove active class from all tab links
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+
+  var currentTab = document.getElementById(Control);
+  currentTab.style.display = "block";
+  evt.currentTarget.classList.add("active");
+   // Toggle the height of the tab container
+   var tabContainer = document.getElementById("tab");
+   tabContainer.classList.add("reduced-height");
+
+ 
 }
 
 /*============================ END OF Tabs ============================*/
@@ -77,6 +96,26 @@ function openTab(evt, Control) {
 /**========================================================================
  *                           STATE BAR
  *========================================================================**/
+function updateWifiStutus(connectedStutus,color){
+  var wifi_stutus = document.getElementById('WifiStutus');
+  wifi_stutus.textContent=connectedStutus;
+  wifi_stutus.style.color=color ;
+}
+function toggleInteractiveElements() {
+  // Get all interactive elements
+  var interactiveElements = document.querySelectorAll('button, input, select');
+  // Loop through each element and toggle its disabled attribute
+  interactiveElements.forEach(function(element) {
+    element.disabled = !element.disabled;
+    // Add or remove 'disabled' class based on the disabled state
+    if (element.disabled) {
+      element.classList.add('disabled');
+    } else {
+      element.classList.remove('disabled');
+    }
+  });
+}
+
 document.getElementById('sBarBtn').addEventListener('click', function () {
 
   const message = {
@@ -100,292 +139,139 @@ document.getElementById('sBarBtn').addEventListener('click', function () {
   }
 });
 
-/**------------------------------------------------------------------------
- *                           FLC
- *------------------------------------------------------------------------**/
-
-var absorptionData = [];
-var concentrationData = [];
-var chart;
-updateChart();
-function addPoint() {
-  var absorptionValue;
-  var concentrationValue = parseFloat(document.getElementById("concentration").value);
-  var WLine = document.getElementById("WLine").value; // get wavelength
-  const message = { // message for websocket
-    command: 'Scan',
-    startInput: WLine,
-    stopInput: WLine,
-    stepInput: 0
-  };
-  websocket.send(JSON.stringify(message)); // websocket sent
-  websocket.onmessage = function (event) { // WebSocket onmessage event
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const currentTime = data.currentTime;
-    const wavelength = data.wavelength;
-    const intensityReference = data.intensityReference;
-    const intensitySample = data.intensitySample;
-    absorptionValue = Math.log10(intensityReference / intensitySample);
-    
-  };
-
-
-  if (!isNaN(absorptionValue) && !isNaN(concentrationValue)) {
-    absorptionData.push(absorptionValue);
-    concentrationData.push(concentrationValue);
-
-    displayMessage(`Point added - Absorption:  ${absorptionValue} , Concentration:  ${concentrationValue}`, 'blue');
-    clearInputs(); updateChart();
-  } else {
-    alert("Please enter valid numerical values for absorption and concentration.");
-  }
-}
-
-
-
-function updateChart() {
-  if (chart) {
-    chart.destroy(); // Destroy the existing chart to update with new data
-  }
-  var ctx = document.getElementById('myChart').getContext('2d');
-  chart = new Chart(ctx, {
-    type: 'scatter',
-    data: {
-      datasets: [{
-        label: 'Data Points',
-        data: getScatterData(),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 1)',
-        pointRadius: 5,
-        showLine: false
-      }, {
-        label: 'Regression Line',
-        data: calculateRegressionLine(),
-        borderColor: 'rgba(255, 0, 0, 1)',
-        backgroundColor: 'rgba(255, 0, 0, 0.2)',
-        borderWidth: 2,
-        pointRadius: 0,
-        showLine: true
-      }]
-    },
-   options: {
-    tooltips: {
-      enabled: false
-    },
-    animation: {
-      duration: 0
-    },
-    responsive: false,
-    maintainAspectRatio: false,
-    plugins: {
-      crosshair: {
-        tooltips: {
-          enabled: false // Disable tooltips for the crosshair
-      },
-        sync: {
-          enabled: true // Enable crosshair synchronization between multiple charts
-        },
-        zoom: {
-          enabled: true // Enable crosshair zooming along the axis
-        },
-        line: {
-          color: 'blue', // Crosshair line color
-          width: 1 // Crosshair line width
-        }
-      },
-     
-    },
-    scales: {
-      x: {
-        type: 'linear',
-        position: 'bottom'
-      },
-      y: {
-        type: 'linear',
-        position: 'left'
-      }
-    },
-    onHover: null // Disable the default onHover behavior
-  }
-  });
-}
-
-
-
-function getScatterData() {
-  var data = [];
-  for (var i = 0; i < absorptionData.length; i++) {
-    data.push({ x: absorptionData[i], y: concentrationData[i] });
-  }
-  return data;
-}
-
-function calculateRegressionLine() {
-  var N = absorptionData.length;
-
-  // Check if there are enough data points
-  if (N < 2) {
-    console.error("Insufficient data points for regression analysis.");
-    return [];
-  }
-
-  var sumX = absorptionData.reduce((acc, x) => acc + x, 0);
-  var sumY = concentrationData.reduce((acc, y) => acc + y, 0);
-  var sumXY = 0;
-  var sumX2 = 0;
-
-  for (var i = 0; i < N; i++) {
-    sumXY += absorptionData[i] * concentrationData[i];
-    sumX2 += Math.pow(absorptionData[i], 2);
-  }
-
-  var numerator = N * sumXY - sumX * sumY;
-  var denominator = N * sumX2 - Math.pow(sumX, 2);
-
-  // Check if the denominator is zero
-  if (denominator === 0) {
-    console.error("Denominator is zero. Unable to calculate regression line.");
-    return [];
-  }
-
-  var slope = numerator / denominator;
-  var intercept = (sumY - slope * sumX) / N;
-
-  // Check if slope and intercept are valid numbers
-  if (isNaN(slope) || isNaN(intercept)) {
-    console.error("Invalid slope or intercept. Unable to calculate regression line.");
-    return [];
-  }
-
-  // Display the slope and intercept in the message box
-  displayMessage(`Slope: ${slope.toFixed(2)}, Intercept: ${intercept.toFixed(2)}`, 'green');
-
-  return [
-    // ... because it array
-    { x: Math.min(...absorptionData), y: slope * Math.min(...absorptionData) + intercept },
-    { x: Math.max(...absorptionData), y: slope * Math.max(...absorptionData) + intercept }
-  ];
-}
-
-
-function displayMessage(message, color) {
-  var messageBox = document.getElementById("messageBox");
-  var messageElement = document.createElement("p");
-  messageElement.textContent = message;
-  messageElement.style.color = color; // Set the text color
-  messageBox.appendChild(messageElement);
-}
-
-function clearAll() {
-  absorptionData = [];
-  document.getElementById("messageBox").innerHTML = "";
-  concentrationData = [];
-  updateChart();
-  clearMessage();
-}
-function clearInputs() {
-  document.getElementById("absorption").value = "";
-  document.getElementById("concentration").value = "";
-}
 /**========================================================================
  *                           SCAN T_T
  *========================================================================**/
 // Initial chart setup
+function toggleVisibility() {
+  var checkbox = document.getElementById("toggleCheckbox");
+  var div = document.getElementById("MagicDiv");
+  div.style.display = checkbox.checked ? "block" : "none";
+}
 
 let isScanning = false;
 var intensityData = [];
 var wavelengthData = [];
-var chartScan;
+let chartScan, chartScanTime, chartScanFilter;
+
 let chartData;
 
-
 const ctxScan = document.getElementById('chartScan').getContext('2d');
-chartScan = new Chart(ctxScan, {
-  type: 'line',
-  data: chartData,
-  options: {
-    tooltips: {
-      enabled: false
-    },
-    animation: {
-      duration: 0
-    },
-    responsive: false,
-    maintainAspectRatio: false,
-    plugins: {
-      crosshair: {
-        tooltips: {
-          enabled: false // Disable tooltips for the crosshair
+const ctxScanTime = document.getElementById('TimeChart').getContext('2d');
+//const ctxScanFilter = document.getElementById('FilterChart').getContext('2d');
+
+createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
+createChart(ctxScanTime, 0, 100, 'Time (s)', 'chartScanTime');
+//createChart(ctxScanFilter, 0, 50, 'Filter (units)', 'chartScanFilter');
+
+function createChart(ctx, xMin, xMax, xLabel, chartType) {
+  const chartConfig = {
+    type: 'line',
+    data: chartData,
+    options: {
+      plugins: {
+        crosshair: {
+          tooltips: {
+            enabled: false // Disable tooltips for the crosshair
+          },
+          sync: {
+            enabled: true // Enable crosshair synchronization between multiple charts
+          },
+          zoom: {
+            enabled: true // Enable crosshair zooming along the axis
+          },
+          line: {
+            color: 'blue', // Crosshair line color
+            width: 1 // Crosshair line width
+          }
+        },
       },
-        sync: {
-          enabled: true // Enable crosshair synchronization between multiple charts
+      scales: {
+        x: {
+          min: xMin,
+          max: xMax,
+          type: 'linear',
+          position: 'bottom',
+          title: {
+            display: true,
+            text: xLabel,
+            color: 'black' // Change color of the x-axis label
+          },
+          ticks: {
+            color: 'black' // Change color of x-axis ticks
+          }
         },
-        zoom: {
-          enabled: true // Enable crosshair zooming along the axis
-        },
-        line: {
-          color: 'blue', // Crosshair line color
-          width: 1 // Crosshair line width
+        y: {
+          type: 'linear',
+          position: 'left',
+          ticks: {
+            color: 'black' // Change color of y-axis ticks
+          }
         }
       },
-     
-    },
-    scales: {
-      x: {
-        min: 190,
-        max: 1100,
-        type: 'linear',
-        position: 'bottom'
+      tooltips: {
+        enabled: false
       },
-      y: {
-        type: 'linear',
-        position: 'left'
-      }
-    },
-    onHover: null // Disable the default onHover behavior
+      animation: {
+        duration: 0
+      },
+      responsive: true, // Make the chart responsive
+      maintainAspectRatio: true, // Maintain aspect ratio
+      onHover: null // Disable the default onHover behavior
+    }
+  };
+
+  // Assign the chart to the appropriate global variable
+  if (chartType === 'chartScan') {
+    chartScan = new Chart(ctx, chartConfig);
+  } else if (chartType === 'chartScanTime') {
+    chartScanTime = new Chart(ctx, chartConfig);
+  } else if (chartType === 'chartScanFilter') {
+    chartScanFilter = new Chart(ctx, chartConfig);
   }
-});
 
+  // Create a div dynamically
+  const infoDiv = document.createElement('div');
 
-// Create a div dynamically
-const infoDiv = document.createElement('div');
+  // Style the div
+  infoDiv.style.position = 'absolute';
+  infoDiv.style.background = 'rgba(255, 255, 255, 0.8)';
+  infoDiv.style.padding = '5px';
+  infoDiv.style.border = '1px solid #ccc';
+  infoDiv.style.borderRadius = '5px';
+  infoDiv.style.pointerEvents = 'none'; // To prevent the div from interfering with mouse events on underlying elements
 
-// Style the div
-infoDiv.style.position = 'absolute';
-infoDiv.style.background = 'rgba(255, 255, 255, 0.8)';
-infoDiv.style.padding = '5px';
-infoDiv.style.border = '1px solid #ccc';
-infoDiv.style.borderRadius = '5px';
-infoDiv.style.pointerEvents = 'none'; // To prevent the div from interfering with mouse events on underlying elements
+  // Add the div to the body
+  document.body.appendChild(infoDiv);
 
-// Add the div to the body
-document.body.appendChild(infoDiv);
+  // Add mousemove event listener to the canvas
+  ctx.canvas.addEventListener('mousemove', function(event) {
+    infoDiv.style.display = 'block';
+    const canvasPosition = ctx.canvas.getBoundingClientRect();
+    const mouseX = event.clientX - canvasPosition.left;
+    const mouseY = event.clientY - canvasPosition.top;
 
-// Add mousemove event listener to the canvas
-chartScan.canvas.addEventListener('mousemove', function(event) {
-  infoDiv.style.display = 'block';
-  const canvasPosition = chartScan.canvas.getBoundingClientRect();
-  const mouseX = event.clientX - canvasPosition.left;
-  const mouseY = event.clientY - canvasPosition.top;
+    const xValue = chartType === 'chartScan' ? chartScan.scales['x'].getValueForPixel(mouseX) :
+                  chartType === 'chartScanTime' ? chartScanTime.scales['x'].getValueForPixel(mouseX) :
+                  chartScanFilter.scales['x'].getValueForPixel(mouseX);
 
-  const xValue = chartScan.scales['x'].getValueForPixel(mouseX);
-  const yValue = chartScan.scales['y'].getValueForPixel(mouseY);
+    const yValue = chartType === 'chartScan' ? chartScan.scales['y'].getValueForPixel(mouseY) :
+                  chartType === 'chartScanTime' ? chartScanTime.scales['y'].getValueForPixel(mouseY) :
+                  chartScanFilter.scales['y'].getValueForPixel(mouseY);
 
-  // Update the content of the div with x and y values
-  infoDiv.innerHTML = `X: ${xValue.toFixed(2)}, Y: ${yValue.toFixed(2)}`;
+    // Update the content of the div with x and y values
+    infoDiv.innerHTML = `X: ${xValue.toFixed(2)}, Y: ${yValue.toFixed(2)}`;
 
-  // Position the div near the mouse pointer
-  infoDiv.style.left = `${event.clientX + 10}px`; // Adding 10px offset to the right
-  infoDiv.style.top = `${event.clientY + 10}px`; // Adding 10px offset to the bottom
-  // hide the div when the mouse leaves the canvas
-  chartScan.canvas.addEventListener('mouseleave', function() {
-    infoDiv.style.display = 'none';});
-});
+    // Position the div near the mouse pointer
+    infoDiv.style.left = `${event.clientX + 10}px`; // Adding 10px offset to the right
+    infoDiv.style.top = `${event.clientY + 10}px`; // Adding 10px offset to the bottom
+  });
 
-
-
-
+  // Hide the div when the mouse leaves the canvas
+  ctx.canvas.addEventListener('mouseleave', function() {
+    infoDiv.style.display = 'none';
+  });
+}
 
 
 
@@ -509,10 +395,10 @@ function pauseScan() {
 
 
 function scan(index,SampleID,SampleDecribe) {
+  toggleInteractiveElements();
   let temp=document.getElementById('DateTime').textContent;
   var time= temp.replaceAll(":"," ");  //because file name can't contain :
   var time= time.replaceAll(","," ");  //because file name can't contain ,
-  
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
@@ -808,6 +694,214 @@ function processReadingsData(data) {
   });
 }
 
+/*====================================preset/readings section====================================*/
+
+// function to display the preset name container 
+function savepreset() {
+  const flyoutMenu = document.getElementById('presetname');
+  flyoutMenu.classList.toggle('active');
+}
+
+// when user click save it add it to list saving preset data in sd
+function addtolist() {
+  var itemName = document.getElementById("prestinput").value;
+  if (itemName.trim() !== "") {
+      let startInput = parseFloat(document.getElementById('start').value);
+      let stopInput = parseFloat(document.getElementById('stop').value);
+      let stepInput = parseFloat(document.getElementById('step').value);
+      let initTimeInput = parseFloat(document.getElementById('initTime').value);
+      let modeInput = document.getElementById('mySelect').value;
+      let temp=document.getElementById('DateTime').textContent;
+      var time= temp.replaceAll(":"," "); //file name can't contain : or ,
+      var time= time.replaceAll(","," ");
+      var message = {
+        savepreset: 'savepreset',
+        name: itemName,
+        time:time,
+        start: startInput,
+        stop: stopInput,
+        step: stepInput,
+        inittime: initTimeInput,
+        mode: modeInput,
+      };
+      websocket.send(JSON.stringify(message));
+      savepreset();
+    } else {
+      document.getElementById('nameexist').innerHTML = 'preset name required';
+    }
+  }
+
+var myList = document.getElementById("presetlist");
+
+//function to select transmission or absorbtion when laod an preset from sd
+function selectMode(mode) {
+  var selectElement = document.getElementById("mySelect");
+  var modeIndex = Array.from(selectElement.options).findIndex(option => option.value === mode);
+  if (modeIndex !== -1) {
+    selectElement.selectedIndex = modeIndex;
+  } else {
+    console.error("Mode not found: " + mode);
+  }
+}
+
+//function to delete item from sd and  the preset list
+function deleteItem(myList, names, newItem, action) {
+  var deleteButton = document.createElement("div");
+  deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", function (event) {
+  event.stopPropagation(); // Stop event propagation to prevent parent element click event
+  myList.removeChild(newItem);
+    var message = {
+      [action]: action,
+      name: names,
+    };
+    websocket.send(JSON.stringify(message));
+    var type= action.replaceAll("delete","")
+      showItems(type);
+  });
+  // Append the delete button to the new list item
+  newItem.appendChild(deleteButton);
+}
+
+
+// a function that dynamically show the files in sd card into web list
+function showItems(type) {
+  var myList = document.getElementById("presetlist");
+  var action = "show"+type ;
+  var message = {
+    [action]: action
+  };
+  const flyoutMenu = document.getElementById('presets');
+  const computedStyle = window.getComputedStyle(flyoutMenu);
+  if (computedStyle.display === 'none') {
+    console.log(message);
+    websocket.send(JSON.stringify(message));
+
+    for (var j = myList.children.length - 1; j >= 0; j--) {
+      var child = myList.children[j];
+      if (child.id !== 'nopresets' && child.id !== 'search') {
+        myList.removeChild(child);
+      }
+    }
+  }
+
+  websocket.onmessage = function (event) {
+    var myObj = JSON.parse(event.data);
+    console.log(event.data); // for test 
+    if (myObj.hasOwnProperty(type + 'no')) {
+      let i = myObj[type + 'no'];
+      var nopresetsDiv = document.getElementById('nopresets');
+      if (i == 0) {
+        nopresetsDiv.innerHTML = `No ${type} available`;
+        for (var j = myList.children.length - 1; j >= 0; j--) {
+          var child = myList.children[j];
+          if (child.id !== 'nopresets' && child.id !== 'search') {
+            myList.removeChild(child);
+          }
+        }
+      } else {
+        nopresetsDiv.innerHTML = '';
+        for (i; i > 0; i--) {
+          (function (i) {
+            let file = 'file' + i;
+            var newItem = document.createElement("li");
+            var itemName = myObj[file];
+            var textSpan = document.createElement("span");
+            var textNode = document.createTextNode(itemName);
+            textSpan.appendChild(textNode);
+            newItem.appendChild(textSpan);
+            myList.insertBefore(newItem, myList.lastChild);
+              deleteItem(myList, itemName, newItem, "delete"+type);
+            newItem.addEventListener("click", function () {
+              console.log("Clicked on item: " + itemName);
+              // Handle item click based on type
+              loadItem(type,itemName);
+            });
+          })(i);
+        }
+      }
+    }
+    openlist();
+  };
+}
+
+// a function that shows the presets or readings list
+function openlist() {
+  const flyoutMenu = document.getElementById('presets');
+  flyoutMenu.classList.toggle('active');
+}
+
+// a function that shows the presets or readings items when i click one of them
+function loadItem(dictionary, itemName) {
+  var message = {
+    Dictionary: dictionary,
+    loadthis: itemName
+  };
+  console.log(message);
+  websocket.send(JSON.stringify(message));
+  websocket.onmessage = function (event) {
+    if (dictionary === "presets") {//it is a preset
+    processPresetData(event.data)  
+    }
+    // Handle specific actions based on dictionary
+    if (dictionary === "readings") {
+      processReadingsData(event.data);
+    }
+  };
+}
+
+// a function that load the preset data into the inputs 
+function processPresetData(data){
+      var myObj = JSON.parse(data);
+      var startValue = parseInt(myObj.start, 10);
+      var stopValue = parseInt(myObj.stop, 10);
+      var stepValue = parseInt(myObj.step, 10);
+      var initTimeValue = parseInt(myObj.inittime, 10);
+      document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
+      document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
+      document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
+      document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
+      selectMode(myObj.mode.trim());  
+}
+var samplename="";
+// a function that load the readings data into the curve and CMD
+function processReadingsData(data) {
+  var x = []; // wavelength
+  var y = []; // intensity
+  var lines = data.split('\n');
+  lines.forEach(function (line) {
+    if (line.trim() === '') {
+      return;
+    }
+    try {
+      var myObj = JSON.parse(line);
+      if (myObj.hasOwnProperty('isFirst')) {
+        if (myObj.isFirst == "true") {
+          samplename = myObj.SampleID;
+          displayCMD(samplename + "  ===> " + myObj.SampleDescribe, "red", "SD O");
+          displayCMD(myObj.time, "green", "SD");
+          displayCMD(myObj.modeInput, "blue", "SD");
+          displayCMD(myObj.wavelength + "," + myObj.transmission + "," + myObj.absorption, "black", "SD");
+          //displayCMD(line,'blue','SD')
+          x.push(myObj.wavelength);
+          y.push(myObj.absorption);
+          addCurve(x, y, "blue", myObj.SampleID);
+        } else if (myObj.isFirst == "false") {
+          displayCMD(myObj.wavelength + "," + myObj.transmission + "," + myObj.absorption, "black", "SD");
+          x.push(myObj.wavelength);
+          y.push(myObj.absorption);
+          addCurve(x, y, "blue", samplename);
+        } else if (myObj.isFirst == "last") {
+          // it is an empty message to indicate the last message
+        }
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+    }
+  });
+}
+
 
 
 // function showpreset() {
@@ -1030,11 +1124,15 @@ document.getElementById('hidefoot').addEventListener('click', showfoot)
 function showfoot() {
   var but = document.getElementById('hidefoot');
   var foot = document.getElementById('hidethis');
+  var footer = document.getElementById('sticky');
+
   if (but.innerHTML === 'hide') {
     but.innerHTML = 'show';
+    footer.style.backgroundColor='transparent';    
   }
   else {
     but.innerHTML = 'hide';
+    footer.style.backgroundColor='#2d2e33';
   }
   foot.classList.toggle('inactive');
 }
@@ -1161,7 +1259,16 @@ function constructtable(num){
 
 document.getElementById('SampleNumBTN').addEventListener('click', function(){
   var num = document.getElementById('SampleNum').value; // Enclosed 'SampleNum' in quotes
- constructtable(num);
+
+ if(num>0){
+  
+  toggleLoginContainer('NextSample');
+  constructtable(num);
+}
+
+ else{
+  alert('please insert the number of samples')
+ }
 });
 // remove all rows
 document.getElementById('deleteBTN').addEventListener('click', function(){
@@ -1203,6 +1310,9 @@ function changeState(rowIndex, newState, progress) {
   if (progress == 100) {
       stateSpan.innerHTML = "✓"; // Displaying the check mark symbol when progress is 100
       stateSpan.style.color = "green";
+      toggleInteractiveElements();  
+      toggleLoginContainer('NextSample');
+
   }
 }
 
@@ -1703,10 +1813,10 @@ function createListItem(itemName, myList, names, messageType) {
 
 
 /*============================ Login ============================*/
-function toggleLoginContainer(){
-  var login = document.getElementById("login");
-  if(login.style.display=="none"){
-    login.style.display="block";
+function toggleLoginContainer(id="login"){
+  var login = document.getElementById(id);
+  if(!login.style.display || login.style.display === "none"){
+    login.style.display="block"; 
   }
   else{
     login.style.display="none";

@@ -32,7 +32,9 @@
             <path
               d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
           </svg>
-          <span>SpectroPhotometer</span></a>
+          <span>SpectroPhotometer</span>
+          <span style="font-size: 12px;" id="WifiStutus"></span>
+        </a>
       </li>
       <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
       <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
@@ -77,6 +79,9 @@
   <div class="messageContainerf" id="messageContainer1" ></div>
   <div class="messageContainert" id="messageContainer2" ></div>
 
+<div class="table" id="tableContainer"></div>
+
+
 </fieldset>
 
 
@@ -84,10 +89,11 @@
 <fieldset class="fsetup1">
   <legend><input class="checkboxes2" type="checkbox"> Photometric Accuracy</legend>
   <label class="labels"> Enter the number of filters </label>
-  <input class="numbers12" type="number" placeholder="0"disabled>
+  <input class="numbers12" type="number"  placeholder="0"disabled>
    <label class="labels"> Enter the error limit </label>
   <input class="error2" type="number" placeholder="&plusmn;1"disabled > 
   <br>
+  <div class="filters-container"></div>
   <input class="button12" type="button"  value="Submit"disabled>
   <div class="messageContainerf" id="messageContainer12" ></div>
   <div class="messageContainerfilter" id="messageContainer31"></div>
@@ -121,38 +127,33 @@
 
 
 
-<!--- this is a code for the login elements don't change-->
 <div class="login-container" id="login">
-    <div class="login_form_box" > 
-      <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer()" class="fa-regular fa-circle-xmark"></i>   
-      <h2>Log-in form</h2>
-          <div class="grid-containerStep">
-            <div>
-              <i class="fa-regular fa-circle-user"></i>
-          <label for="username" >Username</label>
-          
-            </div>
-            <input type="text" maxlength="40"  placeholder="for example: imina" id="username" required> 
-          </div>
-          
-          <div class="grid-containerStep">
-            <div>
-              <i class="fa-solid fa-key"></i>
-              <label for="password" >Password</label>
-          
-            </div>
-          <input type="password" maxlength="40" placeholder="your password" id="password" required>
-          </div>
-          <br>
-        
-            <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>              </div>
-          <div class="wrongpass">
+  <div class="login-form-box">
+      <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('login')"></i>
+      <h2>Log-in Form</h2>
+      <div class="input-container">
+          <i class="input-icon fas fa-user"></i>
+          <input type="text" maxlength="40" placeholder="Username" id="username" required>
+      </div>
+      <div class="input-container">
+          <i class="input-icon fas fa-lock"></i>
+          <input type="password" maxlength="40" placeholder="Password" id="password" required>
+      </div>
+      <button id="submit" onclick="login()">Login</button>
+      <div class="wrong-pass">
           <label id="wrongpass" for="wrongpass"></label>
-          </div></div>
-   
-      <!---------------------------- end OF Login ---------------------------->
-   
+      </div>
+  </div>
+</div>
 
+<!---------------------------- end OF Login ---------------------------->   
+<div id="chartdiv">
+  <h1 class="ValidationTitle1">Validation Tests <i class="fa-solid fa-list-check" style="font-size: 40px;"></i></h1>
+  <button class="button3" onclick="toggleLoginContainer('chartdiv')"  title="when you finished to insert the sample click done"> Exit <i class="fa-solid fa-check"></i></button> 
+<canvas id="chartScan" style=" margin-top :2%; margin-left: 1%; margin-bottom: 1%;"></canvas>
+
+
+</div>
          <!---------------------------- START OF Footer ---------------------------->
     <footer class="sticky" id="sticky">
       <button class="foot_btn" id="hidefoot">hide</button>
@@ -184,7 +185,6 @@
 </main>
 <script src="JavaScript/chart.js"></script>
 <script src="JavaScript/validate.js"></script>
-<script src="JavaScript/chart.js"></script>
 
 
 

@@ -1,0 +1,222 @@
+
+body {
+    height: 100%;
+    margin: 0;
+    z-index: -99;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/1.jpg'); /* Replace 'your-image-url.jpg' with your image URL */
+    background-size: cover; /* Ensure the background image covers the entire viewport */
+    filter: blur(5px); /* Apply a blur effect to the background image */
+    z-index: -1; /* Place the background behind other content */
+}
+
+.container {
+    position: absolute; /* Make the container position absolute */
+    display: grid;
+    margin:10%;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 30px;
+    width: 80%; 
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    justify-content: space-evenly; /* Align items horizontally */
+    align-content: center; /* Align items vertically */
+}
+
+.icon {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    
+}
+.icon:hover{
+    transform: scale(1.04);
+    transition: all 0.3s;
+
+}
+
+
+.icon i {
+    font-size: 4em;
+    color: #333;
+   
+}
+
+.icon:hover i {
+    animation: rotateOut 0.3s forwards 0.2s, fadeOut 0.3s forwards 0.2s; /* Apply animation with delay */
+}
+
+.icon::before {
+    position: absolute;
+    font-size: 1.2em;
+    color: #333;
+    opacity: 0;
+    transition: none; /* Remove previous transition */
+}
+
+.icon:hover::before {
+    content: attr(data-name);
+    white-space: pre-line; /* Preserve line breaks */
+    white-space: pre-wrap; /* Preserve line breaks */
+    animation: rotateIn 0.3s forwards 0.2s, fadeIn 0.3s forwards 0.2s; /* Apply animation with delay */
+}
+
+/* Define keyframes for rotate and fade animations */
+@keyframes rotateOut {
+    from {
+        transform: rotateY(0);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+  
+.top-bar a {
+    height: 40px;
+    width: 35px;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+    
+}
+.icon a{
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+  
+span {
+    color: green;
+    margin: 0 10px;
+    font-size: x-large;
+    font-weight: bolder;
+    text-decoration: none;  
+
+}
+.login-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(9px);
+    background: rgba(5, 5, 33, 0.565);
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-form-box {
+    text-align: center;
+  }
+  
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+  }
+  
+  input {
+    width: calc(100% - 90px);
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    color: #333;
+  }
+  
+  button {
+    width: fit-content;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .wrong-pass {
+    margin-top: 10px;
+  }
+  
+  .wrong-pass label {
+    color: red;
+    text-decoration: underline;
+  }
+  

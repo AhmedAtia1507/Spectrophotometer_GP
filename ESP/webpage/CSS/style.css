@@ -17,6 +17,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+input,select{
+  background-color: var(--input-background-color);
+  color: var(--input-color);
+}
 
 * {
   margin: 0;
@@ -26,7 +30,9 @@ input::-webkit-inner-spin-button {
 body {
   display: flex;
   flex-direction: column;
-  background-color: #bbbbbb;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
@@ -45,6 +51,7 @@ section {
   padding: 20px;
   margin: 6px;
   display: flex;
+  
   justify-content: center;
   
   /* Takes up remaining space (100% - 50% = 50%) */
@@ -53,17 +60,6 @@ section h2 {
   text-align: center;
   margin-bottom: 2rem;
 }
-
-
-
-.setup {
-  margin: 5px;
-  padding: 10px;
-  height: 90vh;
-  border: #000000 1px solid;
-
-}
-
 
 
 
@@ -76,7 +72,9 @@ section h2 {
 *========================================================================**/
 
 nav {
-  background-color: white;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.1);
 }
 
@@ -99,21 +97,27 @@ nav li a {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: black;
+  color: var(--text-color); /* Use CSS variable for text color */
   font-size: 19px;
   font-weight: 500;
 }
-i{
-  color: #000;
+
+i {
+  color: var(--icon-color); /* Use CSS variable for icon color */
   font-size: 22px;
 }
+
 nav a:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-background-color); /* Use CSS variable for hover background color */
+  color:var(--hover--color);
 }
+
 
 nav li:first-child {
   margin-right: auto;
 }
+
+
 
 .sidebar {
   position: fixed;
@@ -122,7 +126,7 @@ nav li:first-child {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--sidebar-background); /* Use CSS variable for background color */
   backdrop-filter: blur(10px);
   box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
   display: none;
@@ -149,11 +153,13 @@ nav li:first-child {
 }
 
 .logo span {
-  color: green;
+  color: var(--logo-color); /* Use CSS variable for logo color */
   margin: 0 20px;
   font-size: x-large;
   font-weight: bolder;
 }
+
+
 
 @media (max-width: 740px) {
   .hideOnMobile {
@@ -183,88 +189,153 @@ nav li:first-child {
 .tab {
   transition: all 0.5s;
   display: flex;
-  background-color: #2d2e33;
-  border-radius: 8px;
-  padding: 2px;
   width: 100%;
-  height: 37px;
+  height: 400px;
+  justify-content: space-between; /* Add space between buttons */
+  gap: 3px; /* Optional: adjust spacing between buttons */
 }
+.tab.reduced-height {
+  height: 35px;
+}
+
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
+  border-radius: 0;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  align-content: center;
   background-color: inherit;
   color: white;
   padding: 8px 20px;
   width: 100%;
-  height: 37px;
   font-weight: 600;
   font-size: 18px;
   cursor: pointer;
   transition: all 0.2s;
+  background-color: #2d2e33;
 }
+
+
 .tab button i{
   margin-left: 10px;
 }
 .tab button:hover {
-  background-color: #506370;
-}
-.tab button.active {
-  background-color: #234f68;
+  background-color: #50637079;
 }
 
-.tablinks.inactive {
-  background-color: transparent;
+.tablinks.active {
+  background-color: #5c637a;
+  color: #fff;
+  
 }
-
 /* Style the tab content */
 .tabcontent {
   display: none;
   padding: 0px 12px;
   float: none;
-  border: 1px solid #ccc;
   width: 100%;
   border-left: none;
   height: auto;
 }
-
-/* Media query for responsiveness */
-@media (max-width: 1023px) {
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
   .tab {
-    float: none;
-    width: 100%;
-    height: 37px;
+    flex-direction: column;
+    height: 600px;
   }
 
   .tab button {
-    width: 100%;
-    padding: 10px 15px;
-    float: left;
-    min-width: fit-content;
+    width: 100%; /* Buttons take full width in column layout */
+    height: 100%; /* Adjust height automatically */
+    font-size: 16px; /* Adjust font size */
+    padding: 10px; /* Adjust padding */
   }
 
+  .tab.reduced-height {
+    height: auto; /* Adjust height automatically */
+  }
+  
   .tabcontent {
-    width: 100%;
-    float: none;
+    padding: 10px; /* Reduce padding for smaller screens */
   }
 }
 
+@media screen and (max-width: 480px) {
+  .tab button {
+    font-size: 14px; /* Further adjust font size for smaller screens */
+    padding: 8px; /* Further adjust padding */
+  }
+
+  .tabcontent {
+    padding: 8px; /* Further reduce padding for smaller screens */
+  }
+}
 /*---------------------------- END OF SIDEBAR ----------------------------*/
 
 /**========================================================================
 *                           SCAN Tab
 *========================================================================**/
 
-.tabcontent {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+
+/* Base styles for the fieldset */
+.fsetup {
+  margin: 5px 5px;
+  height: fit-content;
+  position: relative;
+  display: grid;
   width: 100%;
-  box-sizing: border-box;
-  /* Center the #scan div */
-  margin-bottom: 100px;
+  grid-template-columns: repeat(4,minmax(20px, 30px)) repeat(auto-fit, minmax(100px, 1fr));
+  gap: 4px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.fsetup input{
+  width: 100%;
+  height: 30px;
+  padding: 3px;
+
+}
+
+
+
+/* Style for buttons */
+.fsetup button {
+  background-color: #094a8f;
+  color: white;
+  border: none;
+  padding: 3px;
+  height: 30px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.fsetup button:hover {
+  background-color: #194e80;
+}
+
+@media screen and (max-width: 1024px) {
+  .fsetup {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+  
+  }
+}
+@media screen and (max-width: 580px) {
+  .fsetup {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  
+  }
+}
+@media screen and (max-width: 200px) {
+  .fsetup {
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
+  
+  }
 }
 
 strong{
@@ -280,27 +351,6 @@ legend{
   padding-right: 20px;
 }
 
-.tabcontent .Scanin
-{
-  padding: 10px;
-  margin:5px 15%;
-  box-sizing: border-box;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  font-size: 12px;
-  width: 70%;
-}
-.Scanin:focus{
-  outline: none;
-  border: 1px solid #3498db;
-  transform: scale(1.05);
-}
-
-
-.selectScan{
-  display: flex;
-  margin: 5px 13%;
-}
 .TwoBtn {
   display: flex;
   flex-direction: row;
@@ -310,20 +360,25 @@ legend{
 .ftable .TwoBtn{
   margin: 0px 41%;
 }
-.TwoBtn i{
+
+.TwoBtn i {
   margin-left: 10px;
-  color: #3498db;
+  color: inherit /* Use CSS variable for primary color */
 }
+
+
 .TwoBtn div {
   margin-right: 20px;
 }
 
-.TwoBtn button,.reset-zoom {
-  background-color: white;
-  color: #3498db;
+.TwoBtn button,
+.reset-zoom,
+#NextSample button {
+  background-color: var(--button-background-light); /* Use CSS variable for button background color */
+  color: var(--button-text-color-light); /* Use CSS variable for button text color */
   margin: 10px;
   padding: 5px;
-  border: 1px solid #3498db;
+  border: 1px solid var(--button-border-color-light); /* Use CSS variable for button border color */
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
@@ -331,26 +386,30 @@ legend{
   display: flex;
   align-items: center;
 }
-.TwoBtn button:hover{
-  color:white;
-  background-color:#3498db; 
+
+.TwoBtn button:hover {
+  color: var(--button-hover-text-color-light); /* Use CSS variable for button hover text color */
+  background-color: var(--button-hover-background-light); /* Use CSS variable for button hover background color */
   transition: all 0.2s;
 }
 
-#DeleteRows{
-  color: red;
-
+#DeleteRows {
+  color: var(--delete-text-color-light); /* Use CSS variable for delete text color */
 }
+
+
 .ftable table{
   width: 90%;
   margin: 0px 5%;
   margin-bottom: 80px;
 }
 
+
+
 .headfont {
   font-size: 20px;
   font-weight: bold;
-  color: #3498db;
+  color: var(--headfont-color-light); /* Use CSS variable for heading font color */
 }
 
 .TableContent {
@@ -362,34 +421,56 @@ legend{
 }
 
 #scanReadings,
-#messageBox,#CMDMB {
-  background-color: whitesmoke;
-  color: black;
+#messageBox,
+#CMDMB {
+  background-color: var(--background-color-light); /* Use CSS variable for background color */
+  color: var(--text-color-light); /* Use CSS variable for text color */
   width: 90%;
   height: 300px;
   margin: 10px auto;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color-light); /* Use CSS variable for border color */
   max-height: 200px;
   overflow-y: auto;
 }
-#messageBox{
+
+#messageBox {
   height: 200px;
   margin-top: -35px;
 }
 
+/* Dark mode styles */
+body.dark-mode {
+  --headfont-color-dark: #3498db; /* Dark mode heading font color */
+  --background-color-dark: #333333; /* Dark mode background color */
+  --text-color-dark: #ffffff; /* Dark mode text color */
+  --border-color-dark: #fff; /* Dark mode border color */
+}
+
+/* Apply dark mode styles using the corresponding CSS variables */
+body.dark-mode .headfont {
+  color: var(--headfont-color-dark);
+}
+
+body.dark-mode #scanReadings,
+body.dark-mode #messageBox,
+body.dark-mode #CMDMB {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+  border-color: var(--border-color-dark);
+}
 
 
 
-/* preset css */
 
+
+/* Styles for presets */
 .presets {
   display: none;
   overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
-  
 }
 
 .blurred-list {
@@ -398,10 +479,10 @@ legend{
   min-width: 300px;
   padding: 15px;
   margin: 0;
-  backdrop-filter: blur(9px);
+  backdrop-filter: var(--preset-blur-light); /* Use CSS variable for blur effect */
   max-height: 100vh;
-  color: #ffffff;
-  background: rgba(5, 5, 33, 0.565);
+  color: var(--preset-text-light); /* Use CSS variable for text color */
+  background: var(--preset-background-light); /* Use CSS variable for background color */
   overflow-y: auto;
 }
 
@@ -409,7 +490,7 @@ legend{
   width: 100%;
   margin-bottom: 9px;
   cursor: pointer;
-  border: #000 1px solid;
+  border: var(--preset-border-light) 1px solid; /* Use CSS variable for border color */
 }
 
 .presets li > * {
@@ -419,15 +500,17 @@ legend{
 .presets li > *:not(:last-child) {
   margin-right: 15px; /* Adjust this value as needed */
 }
-#search{
-  width: 100%;
-}
 
+#search {
+  width: 100%;
+  padding: 2px;
+  border-radius: 2px;
+  text-align: center;
+}
 
 .delete-button {
   padding: 3px;
   background: inherit;
-  
 }
 
 .presets.active {
@@ -444,32 +527,21 @@ legend{
   z-index: 6;
 }
 
-#search {
-  padding: 2px;
-  border-radius: 2px;
-  text-align: center;
-}
-
-
 .blurred-name {
   position: relative;
   z-index: 1;
-  padding: 30px 30px;
+  padding: 30px;
   height: 200px;
   width: 250px;
-  backdrop-filter: blur(5px);
-  background: rgba(5, 5, 33, 0.565);
+  backdrop-filter: var(--preset-blur-light); /* Use CSS variable for blur effect */
+  background: var(--preset-background-light); /* Use CSS variable for background color */
   border-radius: 3px;
-  color: #ffffff;
+  color: var(--preset-text-light); /* Use CSS variable for text color */
   align-content: center;
-  
-  
 }
 
-
-.presetbtn:hover{
+.presetbtn:hover {
   background-color: transparent;
-  
 }
 
 .presetname .presetinput {
@@ -481,7 +553,6 @@ legend{
   background-color: white;
   color: #000;
 }
-
 
 .presetname #nameexist {
   color: #b30000;
@@ -496,15 +567,25 @@ legend{
   width: 60px;
 }
 
-.fsetup {
-  width: 30%;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  padding: 10px 10px 10px 20px;
-  margin-left: 10px;
+.chart-container {
+  width: 100%;
+  height: 500px; /* Default height */
+  position: relative; /* To ensure proper positioning of the canvas */
+}
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px; /* Reduce height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    height: 160px; /* Further reduce height for very small screens */
+  }
 }
 .fchart, .myChart{
-  width: 70%;
+  width: 66%;
   display: block;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -522,7 +603,11 @@ legend{
 table{
   table-layout: fixed;
 }
+.disabled {
+  color: grey !important; 
+  cursor:not-allowed !important;
 
+}
 /*---------------------------- END OF SCAN ----------------------------*/
 
 /**------------------------------------------------------------------------
@@ -642,6 +727,7 @@ ul li label {
 
 .footer-col.inactive {
   display: none;
+  background-color: none;
 }
 
 /*---------------------------- END OF Footer ----------------------------*/
@@ -650,47 +736,69 @@ ul li label {
  *                           TABLE CONTENT
  *------------------------------------------------------------------------**/
 
-th,td {
-  border: 1px solid black;
+/* Dark mode variables */
+.dark-mode {
+  --table-border-dark: 1px solid white; /* Dark mode table border */
+  --table-background-dark: #333333; /* Dark mode table background color */
+  --table-text-dark: #ffffff; /* Dark mode table text color */
+  --table-header-background-dark: #08425e; /* Dark mode table header background color */
+  --table-header-text-dark: #ffffff; /* Dark mode table header text color */
+}
+
+/* Table styles */
+th, td {
+  border: var(--table-border-light); /* Default to light mode border */
   border-collapse: collapse;
   padding: 5px;
   text-align: center;
+  color: var(--table-text-light); /* Default to light mode text color */
 }
 
-table{
+table {
   margin-right: 10px;
   margin-left: 10px;
-  border: 1px solid black;
+  border: var(--table-border-light); /* Default to light mode border */
   border-collapse: collapse;
   padding: 5px;
   text-align: center;
-}
-.tab-1 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  align-items: center;
+  background-color: var(--table-background-light); /* Default to light mode background color */
 }
 
-th {
-  background-color: #3498db;
-  color: white;
+.th {
+  background-color: var(--table-header-background-light); /* Default to light mode header background color */
+  color: var(--table-header-text-light); /* Default to light mode header text color */
   font-size: 12px;
   padding: 10px;
   margin: 5px;
 }
 
-
-
-.heading{
+.heading {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  color: var(--table-text-light); /* Default to light mode text color */
   text-decoration: underline;
   margin-bottom: 20px;
 }
 
+/* Dark mode styles */
+.dark-mode th, .dark-mode td {
+  border: var(--table-border-dark); /* Override border in dark mode */
+  color: var(--table-text-dark); /* Override text color in dark mode */
+}
+
+.dark-mode table {
+  border: var(--table-border-dark); /* Override border in dark mode */
+  background-color: var(--table-background-dark); /* Override background color in dark mode */
+}
+
+.dark-mode .th {
+  background-color: var(--table-header-background-dark); /* Override header background color in dark mode */
+  color: var(--table-header-text-dark); /* Override header text color in dark mode */
+}
+.dark-mode tr:nth-child(even) {
+  background-color: var(--table-background-dark);
+}
 /**------------------------------------------------------------------------
  *                           Reading Table
  *------------------------------------------------------------------------**/
@@ -706,7 +814,7 @@ th {
   width: 100%;
  }  
  tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #d6deec;
 }
 
 
@@ -817,61 +925,95 @@ label,.currentstep{
   font-size: 15px;  
 }
 
-/**------------------------------------------------------------------------
- *                           login page css
- *------------------------------------------------------------------------**/
-li:hover{
-  cursor: pointer;
-}
- .login-container{
+.login-container {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5); /* horizontal-offset vertical-offset blur spread color */
   transform: translate(-50%, -50%);
   min-width: 300px;
   border-radius: 10px;
-  padding: 20px 30px 30px 20px;
+  padding: 20px;
   backdrop-filter: blur(9px);
   background: rgba(5, 5, 33, 0.565);
   color: white;
-
-
-  }
-  
-  .login_form_box input{
-  width: 150px;
-  padding: 5px 5px;    
-  color: black;
-  }
- 
-  .login_form_box #submit{
-      margin-left: 90%;  
-      transform: scale(3); 
-      cursor: pointer;
-  }
-  .login_form_box #submit:hover{
-    cursor: pointer;
-    transform: scale(3.1);
-    transition: all 0.2s;
+  z-index: 1000;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
-  .login_form_box  label[for="wrongpass"] {
-      text-align: center;
-      color: red;
-      text-decoration: underline;
-   }
 
+.login-form-box {
+  text-align: center;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+input {
+  width: calc(100% - 90px);
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  color: #333;
+}
+
+button {
+  width: fit-content;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.wrong-pass {
+  margin-top: 10px;
+}
+
+.wrong-pass label {
+  color: red;
+  text-decoration: underline;
+}
 
 
 
 
    .commandTable{
+    display: none;
     width: 70%;
     margin: 0 15%;
     table-layout: fixed;
    }
-   #FLC .fsetup{
+   #FLC {
     margin-top: 15px;
     width: 50%;
    }
@@ -894,4 +1036,86 @@ li:hover{
   width: 100%;  
   margin: 0 0;
 }
+}
+
+#NextSample{
+display:none;
+padding: 40px;
+border: 2px solid black;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #ddd;
+color: #3498db;
+
+}
+
+
+
+
+
+/* Dark mode styles */
+body.dark-mode {
+  --background-color: #333333; /* Dark mode background color */
+  --text-color: #dbd9d9; /* Dark mode text color */
+  --sidebar-background: rgba(0, 0, 0, 0.5); /* Dark mode background color for sidebar */
+  --logo-color: #00ff00; /* Dark mode logo color */
+  --text-color-light: #dbd9d9; /* Dark mode text color */
+  --icon-color: #ffffff; /* Dark mode icon color */
+  --hover-background-color:rgba(255, 255, 255, 0.514); /* Dark mode hover background color */
+  --hover--color:black; /* Dark mode hover background color */
+  --primary-color-light: #3498db; /* Dark mode primary color */
+  --secondary-color-light: #dbd9d9; /* Dark mode secondary color */
+  --button-background-light: #dbd9d9; /* Dark mode button background color */
+  --button-text-color-light: #3498db; /* Dark mode button text color */
+  --button-border-color-light: #3498db; /* Dark mode button border color */
+  --button-hover-background-light: #3498db; /* Dark mode button hover background color */
+  --button-hover-text-color-light: #c7cddfbe; /* Dark mode button hover text color */
+  --delete-text-color-light: red; /* Dark mode delete text color */
+  --input-background-color:rgba(206, 205, 205, 0.068);
+  --input-color:white;
+  
+}
+
+/* Define CSS variables with the existing colors */
+:root {
+  --background-color: #ffffff; /* Default light mode background color */
+  --text-color: #000000; /* Default light mode text color */
+  --background-color: #ffffff; /* Light mode background color */
+  --text-color: #000000; /* Light mode text color */
+  --border-color: #000000; /* Light mode border color */
+  --text-color-icon: #000000; /* Light mode icon color */
+  --hover-background-color: #5c5656; /* Light mode hover background color */
+  --sidebar-background: rgba(255, 255, 255, 0.2); /* Light mode sidebar background color */
+  --logo-color: green; /* Light mode logo color */
+  --headfont-color-light: #3498db; /* Light mode heading font color */
+  --background-color-light: whitesmoke; /* Light mode background color */
+  --text-color-light: #000000; /* Light mode text color */
+  --border-color-light: #ccc; /* Light mode border color */
+  --table-border-light: 1px solid black; /* Light mode table border color */
+  --table-bg-light: #ffffff; /* Light mode table background color */
+  --table-text-light: black; /* Light mode table text color */
+  --table-header-bg-light: #3498db; /* Light mode table header background color */
+  --table-header-text-light: white; /* Light mode table header text color */
+  --table-border-light: 1px solid black; /* Light mode table border */
+  --table-background-light: #ffffff; /* Light mode table background color */
+  --table-text-light: #000000; /* Light mode table text color */
+  --table-header-background-light: #3498db; /* Light mode table header background color */
+  --table-header-text-light: #ffffff; /* Light mode table header text color */
+  --preset-background-light: rgba(5, 5, 33, 0.565); /* Light mode preset background */
+  --preset-text-light: #ffffff; /* Light mode preset text color */
+  --preset-blur-light: blur(9px); /* Light mode blur effect */
+  --preset-border-light: #000; /* Light mode preset border color */
+  --primary-color-light: #3498db; /* Light mode primary color */
+  --secondary-color-light: #ffffff; /* Light mode secondary color */
+  --button-background-light: #ffffff; /* Light mode button background color */
+  --button-text-color-light: #3498db; /* Light mode button text color */
+  --button-border-color-light: #3498db; /* Light mode button border color */
+  --button-hover-background-light: #3498db; /* Light mode button hover background color */
+  --button-hover-text-color-light: #ffffff; /* Light mode button hover text color */
+  --delete-text-color-light: red; /* Light mode delete text color */
+  --input-background-color:white;
+  --input-color:black;
+
 }
