@@ -150,76 +150,50 @@ function showfoot() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  var submitButton = document.querySelector('.button1');
-  submitButton.addEventListener('click', function() {
-      generateInputs();
+  var submitButton1 = document.querySelector('.button1');
+  submitButton1.addEventListener('click', function() {
+    generateInputs();
+    document.getElementById('tableContainer').style.display = 'none';
   });
 
   function generateInputs() {
-      var numWavelengths = parseInt(document.querySelector('.numbers1').value);
-      var wavelengthsContainer = document.querySelector('.wavelengths-container');
-      
-      // Clear previous inputs
-      wavelengthsContainer.innerHTML = '';
-    
-      // Generate new inputs
-      for (var i = 0; i < numWavelengths; i++) {
-          var label = document.createElement('label');
-          label.textContent = 'Wavelength ' + (i + 1) + ': ';
-          label.className = 'label1';
-          wavelengthsContainer.appendChild(label);
-        
-          var input = document.createElement('input');
-          input.type = 'number';
-          input.className = 'numbers2'; // Add class for identification
-          input.placeholder = '  0';
-          // Set disabled state based on checkbox (optional)
-          if (!checkbox.checked) {
-              input.disabled = true;
-          }
-          wavelengthsContainer.appendChild(input);
-          wavelengthsContainer.appendChild(input);
-        
-          var label2 = document.createElement('label');
-          label2.textContent = '      nm';
-          wavelengthsContainer.appendChild(label2);
-          wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+    var numWavelengths = parseInt(document.querySelector('.numbers1').value);
+    var wavelengthsContainer = document.querySelector('.wavelengths-container');
+
+    // Clear previous inputs
+    wavelengthsContainer.innerHTML = '';
+
+    // Generate new inputs
+    for (var i = 0; i < numWavelengths; i++) {
+      var label = document.createElement('label');
+      label.textContent = 'Wavelength ' + (i + 1) + ': ';
+      label.className = 'label1';
+      wavelengthsContainer.appendChild(label);
+
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'numbers2'; // Add class for identification
+      input.placeholder = '0';
+      // Set disabled state based on checkbox (optional)
+      if (!checkbox.checked) {
+        input.disabled = true;
       }
-        var submitButton = document.querySelector('.button11');
-        submitButton.addEventListener('click', function() {
-                // Get all input elements with class .numbers2
-        var inputs = document.querySelectorAll('.numbers2');
+      wavelengthsContainer.appendChild(input);
 
-        // Initialize an array to store input values
-        var inputValues = [];
-
-        // Iterate through each input and push its value to the array
-        inputs.forEach(function(input) {
-          inputValues.push(parseFloat(input.value)); // Convert value to float and push to array
-        });
-
-        // Find the maximum value using Math.max
-        var maximumValue = Math.max(...inputValues);
-        var minimumValue = Math.min(...inputValues);
-        var start = minimumValue - 100;
-        var end   = maximumValue +100;
-       // addPoint1(start, end);
-
-    // Display the maximum value
-    console.log("The maximum value is: " + maximumValue);
-    console.log("The minimum value is: " + minimumValue);
-
-        }); 
-
+      var label2 = document.createElement('label');
+      label2.textContent = ' nm';
+      wavelengthsContainer.appendChild(label2);
+      wavelengthsContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+    }
   }
 
   var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
   var checkbox = document.querySelector('.checkboxes1'); // Get the checkbox element
 
   checkbox.addEventListener('change', function() {
-      for (var element of formElements) {
-          element.disabled = !this.checked; // Toggle disabled based on checkbox state
-      }
+    for (var element of formElements) {
+      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+    }
   });
 
   document.getElementById('submitButton').addEventListener('click', compareValues);
@@ -227,18 +201,17 @@ document.addEventListener("DOMContentLoaded", function() {
   submitButton2.addEventListener('click', compareValues);
 });
 
-
 function compareValues() {
   var dropdown = document.getElementById('Sampleselector');
   var selectedOption = dropdown.options[dropdown.selectedIndex].value;
 
   // Check if a valid option is selected
-  if (selectedOption === "" || selectedOption === "disabled"  ) {
+  if (selectedOption === "" || selectedOption === "disabled") {
     if (document.getElementById('messageContainer1')) {
       document.getElementById('messageContainer1').textContent = '';
     }
-    showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1" );
-      return; // Exit the function if no valid option is selected
+    showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1");
+    return; // Exit the function if no valid option is selected
   }
 
   // Get predefined values based on selected option
@@ -248,108 +221,90 @@ function compareValues() {
   var userInputValues = [];
   var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
   inputs.forEach(function(input) {
-      var inputValue = parseFloat(input.value);
-      userInputValues.push(inputValue);
+    var inputValue = parseFloat(input.value);
+    userInputValues.push(inputValue);
   });
 
-  var errorLimit= parseInt(document.querySelector('.error').value);
+  var errorLimit = parseInt(document.querySelector('.error').value);
 
   // Compare user input values with predefined values
   var passesTest = compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit);
 
   // Display the comparison result
- // showMessage(passesTest ? "Test passes!" : "Test fails. Do you want to continue the test?");
+  var messageContainer1 = document.getElementById('messageContainer1');
+  var messageContainer2 = document.getElementById('messageContainer2');
 
- var messageContainer1 = document.getElementById('messageContainer1');
- var messageContainer2 = document.getElementById('messageContainer2');
-
- if (passesTest){
-    
+  if (passesTest) {
     messageContainer1.style.display = 'none';
     if (messageContainer2) {
       messageContainer2.textContent = '';
     }
-    showMessaget("Test passes! " , "Show curve","messageContainer2" );
-    
- }
- else{
-
-  messageContainer2.style.display = 'none';
-  if (messageContainer1) {
-    messageContainer1.textContent = '';
+    showMessaget("Test passes!", "Show curve", "messageContainer2");
+  } else {
+    messageContainer2.style.display = 'none';
+    if (messageContainer1) {
+      messageContainer1.textContent = '';
+    }
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1");
   }
-  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer1" );
- 
- }
-}
 
+  // Show the table with the results
+  document.getElementById('tableContainer').style.display = 'block';
+  generateTable(predefinedValues);
+}
 
 function getPredefinedValues(option) {
   // Define predefined values for each option
   var predefinedValuesMap = {
-      "Holmium oxide1": [200, 300, 400, 500, 600, 700],
-      "Holmium oxide2": [100, 200, 300, 400, 500, 600],
-      "Holmium oxide3": [30, 40, 50, 60, 70, 80]
+    "Holmium oxide1": [200, 300, 400, 500, 600, 700],
+    "Holmium oxide2": [100, 200, 300, 400, 500, 600],
+    "Holmium oxide3": [30, 40, 50, 60, 70, 80]
   };
 
   // Get predefined values for the selected option
-  var values = predefinedValuesMap[option] || [];
-
-  return values;
+  return predefinedValuesMap[option] || [];
 }
-
-
 
 function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
   // Compare user input values with predefined values
   for (var i = 0; i < userInputValues.length; i++) {
-      var difference = userInputValues[i] - predefinedValues[i];
-      if (Math.abs(difference) > errorLimit) {
-          return false;
-      }
+    var difference = userInputValues[i] - predefinedValues[i];
+    if (Math.abs(difference) > errorLimit) {
+      return false;
+    }
   }
   return true;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  var submitButton = document.getElementById('submitButton');
-  submitButton.addEventListener('click', function() {
-    generateTable();
-  });
-});
-
-function generateTable() {
+function generateTable(predefinedValues) {
   var numRows = parseInt(document.querySelector('.numbers1').value);
-  var numColumns = 4; 
+  var numColumns = 4;
   var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
 
   var userInputValues = [];
   var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
   inputs.forEach(function(input) {
-      var inputValue = parseFloat(input.value);
-      userInputValues.push(inputValue);
+    var inputValue = parseFloat(input.value);
+    userInputValues.push(inputValue);
   });
 
-  var predefined = [200, 300, 400, 500, 600, 700];
-  var errorLimit= parseInt(document.querySelector('.error').value);
+  var errorLimit = parseInt(document.querySelector('.error').value);
   var column1Values = [], column2Values = [], column3Values = [], column4Values = [];
 
-  if (compareWithPredefinedValues(userInputValues, predefined, errorLimit) == true){
-    var state = 'Done';
-  }
-  else{
-    var state = 'Failed';
-  }
-
   for (var i = 0; i < numRows; i++) {
-    column1Values.push(userInputValues[i % userInputValues.length]); // Cycle through user input values
-    column2Values.push(predefined[i % predefined.length]);  // Cycle through predefined values
-    column3Values.push(Math.abs(column1Values[i] - column2Values[i]));
-    column4Values.push(state);  // Set a default status
+    var userValue = userInputValues[i % userInputValues.length];
+    var predefinedValue = predefinedValues[i % predefinedValues.length];
+    var error = Math.abs(userValue - predefinedValue);
+    var state = compareWithPredefinedValues([userValue], [predefinedValue], errorLimit) ? 'Done' : 'Failed';
+
+    column1Values.push(userValue); // Cycle through user input values
+    column2Values.push(predefinedValue); // Cycle through predefined values
+    column3Values.push(error);
+    column4Values.push(state); // Set the status based on comparison
   }
 
   var tableContainer = document.getElementById('tableContainer');
-  tableContainer.innerHTML = '';  // Clear previous table
+  tableContainer.innerHTML = ''; // Clear previous table
 
   var table = document.createElement('table');
   var headerRow = table.insertRow();
@@ -375,6 +330,7 @@ function generateTable() {
           break;
         case 3:
           cell.textContent = column4Values[i];
+          cell.style.color = column4Values[i] === 'Done' ? 'green' : 'red'; // Set color based on status
           break;
         default:
           cell.textContent = '';
@@ -384,6 +340,7 @@ function generateTable() {
 
   tableContainer.appendChild(table);
 }
+
 /*
 
 ****************************Photometric Accuracy********************************
@@ -842,7 +799,7 @@ chartScan = new Chart(ctxVal, {
           enabled: true // Enable crosshair zooming along the axis
         },
         line: {
-          color: 'blue', // Crosshair line color
+          color: 'light_gray', // Crosshair line color
           width: 1 // Crosshair line width
         }
       },
