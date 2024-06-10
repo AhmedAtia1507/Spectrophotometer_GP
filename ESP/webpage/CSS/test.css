@@ -1,0 +1,154 @@
+/* General Styles and Variables */
+:root {
+    /* Light Mode Variables */
+    --background-color-light: #f0f0f0;
+    --text-color-light: #333;
+    --border-color-light: #ccc;
+    --button-background-light: #3498db;
+    --button-text-color-light: #fff;
+    --hover-background-color-light: #2980b9;
+    --input-background-light: #fff;
+    --input-text-light: #333;
+  
+    /* Dark Mode Variables */
+    --background-color-dark: #333;
+    --text-color-dark: #f0f0f0;
+    --border-color-dark: #444;
+    --button-background-dark: #3498db;
+    --button-text-color-dark: #fff;
+    --hover-background-color-dark: #2980b9;
+    --input-background-dark: #444;
+    --input-text-dark: #f0f0f0;
+  }
+  
+  body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  input, select {
+    background-color: var(--input-background-light);
+    color: var(--input-text-light);
+    border: 1px solid var(--border-color-light);
+  }
+  
+  body.dark-mode input, body.dark-mode select {
+    background-color: var(--input-background-dark);
+    color: var(--input-text-dark);
+    border: 1px solid var(--border-color-dark);
+  }
+/* Layout and Navigation */
+nav {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.dark-mode nav {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+  
+  nav li {
+    margin: 0 1rem;
+  }
+  
+  nav a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  nav a:hover {
+    color: var(--hover-background-color-light);
+  }
+  
+  body.dark-mode nav a {
+    color: var(--text-color-dark);
+  }
+  
+  body.dark-mode nav a:hover {
+    color: var(--hover-background-color-dark);
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .container > div {
+    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color-light);
+    padding: 1rem;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  body.dark-mode .container > div {
+    background-color: var(--background-color-dark);
+    border: 1px solid var(--border-color-dark);
+  }
+/* Buttons and Forms */
+button, .btn {
+    background-color: var(--button-background-light);
+    color: var(--button-text-color-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  button:hover, .btn:hover {
+    background-color: var(--hover-background-color-light);
+  }
+  
+  body.dark-mode button, body.dark-mode .btn {
+    background-color: var(--button-background-dark);
+    color: var(--button-text-color-dark);
+  }
+  
+  body.dark-mode button:hover, body.dark-mode .btn:hover {
+    background-color: var(--hover-background-color-dark);
+  }
+  
+  input, select {
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--hover-background-color-light);
+  }
+  
+  body.dark-mode input:focus, body.dark-mode select:focus {
+    border-color: var(--hover-background-color-dark);
+  }
+      

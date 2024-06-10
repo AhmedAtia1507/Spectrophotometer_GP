@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="css/all.min.css">
+
+
+
+</head>
+
+<body>
+  <!---------------------------- Start of Nabber ---------------------------->
+  <nav>
+    <ul class="sidebar">
+      <li onclick="hideSidebar()">
+        <a href="#"><i class="fas fa-close"></i></a>
+      </li>
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a onclick="toggleLoginContainer('login')"> <i class="fas fa-gear"></i>Direct Control</a></li>
+      <li><a href="team.html"><i class="fas fa-users"></i>
+          <p>Team</p>
+        </a></li>
+      <li><a href="temp.html">temp</a></li>
+      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i>
+          <p>Validate</p>
+        </a></li>
+        
+        
+    </ul>
+    <ul>
+      <li class="logo">
+        <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+            width="24">
+            <path
+              d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+          </svg>
+          <span>SpectroPhotometer</span>
+          <span style="font-size: 12px;" id="WifiStutus"></span>
+        </a>
+        
+        
+
+
+      </li>
+     
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
+          <p>Home</p>
+        </a></li>
+      <li class="hideOnMobile"><a onclick="toggleLoginContainer('login')"><i class="fas fa-gear"></i>
+          <p>Direct Control</p>
+        </a></li>
+      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i>
+          <p>validate</p>
+        </a></li>
+      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i>
+          <p>Team</p>
+        </a></li>
+      <li class="menu-button" onclick="showSidebar()">
+        <a href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <!-- <li class="hideOnMobile"><button style="background-color: transparent !important ;border: none;" onclick="toggleDarkMode()"><i class="fa-solid fa-circle-half-stroke"></i></button></li> -->
+     
+    </ul>
+  </nav>
+  <!---------------------------- END OF Navbar ---------------------------->
+  <main>
+    <section>
+        <div id="FLC" class="tabcontent">
+
+            <div class="row" style="height: 70vh;">
+              <fieldset class="fchart">
+                <legend>Chart</legend>
+                <canvas id="myChart" style="height: 95%;width: 95%;"></canvas>
+              </fieldset>
+          
+              <fieldset class="fsetup" >
+           
+                  <h3 style="text-align: center;"> Lambert Abs = K C </h3>
+          
+                  <input class="Scanin" type="text" id="WLine" placeholder="Enter Wavelength" />
+                  <input class="Scanin" type="text" id="concentration" placeholder="Enter concentration" />
+          
+                
+                  <div class="TwoBtn" style="margin-bottom: 40px;">
+                    <button onclick="addPoint()">Add Point</button>
+                    <button onclick="clearAll()">Clear All</button>
+                  </div>
+          
+                  <div id="messageBox">
+                    <!-- Messages will be displayed here -->
+                  </div>
+          
+            </fieldset>
+          </div>
+              </section>
+          
+              <div class="login-container" id="login">
+                <div class="login-form-box">
+                    <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('login')"></i>
+                    <h2>Log-in Form</h2>
+                    <div class="input-container">
+                        <i class="input-icon fas fa-user"></i>
+                        <input type="text" maxlength="40" placeholder="Username" id="username" required>
+                    </div>
+                    <div class="input-container">
+                        <i class="input-icon fas fa-lock"></i>
+                        <input type="password" maxlength="40" placeholder="Password" id="password" required>
+                    </div>
+                    <button id="submit" onclick="login()">Login</button>
+                    <div class="wrong-pass">
+                        <label id="wrongpass" for="wrongpass"></label>
+                    </div>
+                </div>
+            </div>
+            
+              <!---------------------------- end OF Login ---------------------------->
+        </main>
+        <!---------------------------- START OF Footer ---------------------------->
+        <footer class="sticky" id="sticky">
+          <button class="foot_btn" id="hidefoot">hide</button>
+          <div class="footer-col" id="hidethis">
+            <h4>States</h4>
+            <ul>
+              <li>
+                <label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label>
+              </li>
+              <li>
+                <label for="">Visible Lamp Status:
+                  <span id="VIstateBar">"loading"</span></label>
+              </li>
+              <li>
+                <label for="">Current Wavelength: <span id="WLstateBar">"loading"</span>
+                </label>
+              </li>
+              <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+              <li>
+                <label for="" class="DateTime" style="position: absolute; right: 0; margin-right: 30px">
+                  <span id="DateTime"></span></label>
+              </li>
+            </ul>
+          </div>
+        </footer>
+        <!---------------------------- END OF Footer ---------------------------->
+      
+        <script src="JavaScript/chart.js"></script>
+        <script src="JavaScript/fit-line.js"></script>
+      
+      </body>
+      
+      </html>

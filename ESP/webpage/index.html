@@ -64,60 +64,79 @@
       <li class="menu-button" onclick="showSidebar()">
         <a href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="hideOnMobile"><button style="background-color: transparent !important ;border: none;" onclick="toggleDarkMode()"><i class="fa-solid fa-circle-half-stroke"></i></button></li>
+      <!-- <li class="hideOnMobile"><button style="background-color: transparent !important ;border: none;" onclick="toggleDarkMode()"><i class="fa-solid fa-circle-half-stroke"></i></button></li> -->
      
     </ul>
   </nav>
   <!---------------------------- END OF Navbar ---------------------------->
   <main>
     <section>
-
+      <!-- Common content -->
       <!-- Tab button  -->
       <div id="tab" class="tab">
-        <button class="tablinks" onclick="openTab(event, 'scan')">
-          <p>Scan</p> <i class="fas fa-play" style="color: white;"></i>
+        <button class="tablinks" onclick="openTab(event, 'ScanVsWL')">
+          <p>Scan vs WL</p> <i class="fa-solid fa-chart-line"></i>
         </button>
-        <button class="tablinks" onclick="openTab(event, 'FLC')">
-          <p> Fit Line</p> <i class="fa-solid fa-chart-line" style="color: white;"></i>
+        <button class="tablinks" onclick="openTab(event, 'ScanVsTime')">
+          <p> Scan Vs Time</p> <i class="fa-regular fa-clock"></i>
         </button>
+        <button class="tablinks" onclick="openTab(event, 'ScanVsFilter')">
+          <p> Scan Vs Filter</p> <i class="fa-solid fa-filter-circle-xmark"></i>
+        </button>
+
       </div>
       <!-- End of Tab button -->
       <!-- Scan Tab  -->
-      <div id="scan" class="tabcontent" style="display: block;">
+      <div id="ScanVsWL" class="tabcontent">
+       
 
-        <div class="row" style="height: 70vh;">
+          
+          <div class="fsetup" >
+
+          
+            
+            <button id="savepreset" onclick="savepreset()" title="Save Current Method"> <i class="fa-solid fa-floppy-disk"></i> </button>
+            <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> <i class="fa-solid fa-upload"></i></button>
+            <button id="SampleNumBTN" title="add columns to start "><i class="fa-solid fa-play"></i></button>
+            <button onclick="pauseScan()" title="stop the scan"> <i class="fa-solid fa-pause"></i></button>
+            
+            <div>
+              <strong>Lamps</strong>
+                <select name="lamps condition" id="LampsOFF">
+                  <option value="both-on">Both On</option>
+                  <option value="both-off">Both OFF</option>
+                  <option value="uv-off">UV Off</option>
+                  <option value="vi-off">VI Off</option>
+                </select>
+  
+              
+              </div>
+                <strong>Mode</strong>
+                <select id="mySelect" name="mode">
+                  <option value="absorption">Absorption</option>
+                  <option value="transmission">Transmission</option>
+                </select>
+  
+            <input  id="SampleNum" class="SampleNum" placeholder="NO. of Samples" title="number of samples">
+            <input  type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
+            <input  type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
+            <input  type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
+            <input  type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
+                         
+            </div>
+          
+      
+  
           <fieldset class="fchart">
             <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
-            <canvas id="chartScan" style="height: 95%; width: 95%; "></canvas>
+            <div class="chart-container">
+              <canvas id="chartScan" style="height: 99%; width: 99%; "></canvas>
+            </div>
+            
           </fieldset>
 
 
-          <fieldset class="fsetup">
-            <legend>Setup <i class="fa-solid fa-gear"></i></legend>    
-            <div class="TwoBtn">
-              <button id="savepreset" onclick="savepreset()">Save Method <i class="fa-solid fa-floppy-disk"></i></button>
-              <button id="loadpreset" onclick="showItems('presets')">Load Method <i class="fa-solid fa-upload"></i></button>
-            </div>
-            <input class="Scanin" id="SampleNum" class="SampleNum" placeholder="Number of Samples">
-            <input class="Scanin" type="number" id="start" name="start" placeholder="Wavelength Start: 100">
-            <input class="Scanin" type="number" id="stop" name="stop" placeholder="Wavelength Stop: 900">
-            <input class="Scanin" type="number" id="step" name="step" placeholder="Wavelength Step: 20">
-            <input class="Scanin" type="number" id="initTime" name="initTime" placeholder="Integration Time: 0ms">
-            <div class="selectScan">
-              <strong>Measurment Mode: </strong><select id="mySelect" name="mode">
-                <option value="absorption">Absorption</option>
-                <option value="transmission">Transmission</option>
-              </select>
-            </div>
-
-            <div class="TwoBtn">
-              <button id="SampleNumBTN">Start<i class="fa-solid fa-play"></i></button>
-              <button onclick="pauseScan()">Pause <i class="fa-solid fa-pause"></i></button>
-            </div>
-   
-
-          </fieldset>
-        </div>
+        
 
         <!-- next sample div -->
 <div id="NextSample">
@@ -223,68 +242,73 @@
         </div>
       </div>
 
-<div id="FLC" class="tabcontent">
+      <div id="ScanVsTime" class="tabcontent">
+        <div class="row" style="height: 70vh;">
+          <fieldset class="fchart">
+            <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
+            <canvas id="TimeChart" style="height: 95%; width: 95%; "></canvas>
+          </fieldset>
 
-  <div class="row" style="height: 70vh;">
-    <fieldset class="fchart">
-      <legend>Chart</legend>
-      <canvas id="myChart" style="height: 95%;width: 95%;"></canvas>
-    </fieldset>
 
-    <fieldset class="fsetup" >
- 
-        <h3 style="text-align: center;"> Lambert Abs = K C </h3>
+          <fieldset class="fsetup">
+            <legend>Setup <i class="fa-solid fa-gear"></i></legend>
+            <input class="Scanin" type="number" id="Period" name="period" placeholder="Period of Scan: 3s">
+            <input class="Scanin" type="number" id="PeriodStep" name="step" placeholder="Time Step: 0.1s">
+            <input class="Scanin" type="number" id="TimeWavelength" placeholder="the wavelength : 200">
+            <div class="selectScan">
+              <strong>Measurment Mode: </strong><select id="mySelectTime" name="mode">
+                <option value="absorption">Absorption</option>
+                <option value="transmission">Transmission</option>
+              </select>
+            </div>
 
-        <input class="Scanin" type="text" id="WLine" placeholder="Enter Wavelength" />
-        <input class="Scanin" type="text" id="concentration" placeholder="Enter concentration" />
-
-      
-        <div class="TwoBtn" style="margin-bottom: 40px;">
-          <button onclick="addPoint()">Add Point</button>
-          <button onclick="clearAll()">Clear All</button>
+            <div class="TwoBtn">
+              <button onclick="">Start<i class="fa-solid fa-play"></i></button>
+              <button onclick="pauseScan()">Pause <i class="fa-solid fa-pause"></i></button>
+            </div>
+          </fieldset>
         </div>
 
-        <div id="messageBox">
-          <!-- Messages will be displayed here -->
+            <h2>Command Terminal</h2>
+            <div id="CMDMB">
+              <!-- Messages will be displayed here -->
+            </div>
+          </fieldset>
         </div>
 
-  </fieldset>
-</div>
-</div>
+        
+      </div>
+      <div id="ScanVsFilter" class="tabcontent">
+        
+      </div>
+
+
+
+
+
     </section>
 
     <!--- this is a code for the login elements don't change-->
     <div class="login-container" id="login">
-      <div class="login_form_box">
-        <i style="position: absolute;top: 0; right: 0; cursor: pointer;" onclick="toggleLoginContainer('login')"
-          class="fa-regular fa-circle-xmark"></i>
-        <h2>Log-in form</h2>
-        <div class="grid-containerStep">
-          <div>
-            <i class="fa-regular fa-circle-user"></i>
-            <label for="username">Username</label>
-
+      <div class="login-form-box">
+          <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('login')"></i>
+          <h2>Log-in Form</h2>
+          <div class="input-container">
+              <i class="input-icon fas fa-user"></i>
+              <input type="text" maxlength="40" placeholder="Username" id="username" required>
           </div>
-          <input type="text" maxlength="40" placeholder="for example: imina" id="username" required>
-        </div>
-
-        <div class="grid-containerStep">
-          <div>
-            <i class="fa-solid fa-key"></i>
-            <label for="password">Password</label>
-
+          <div class="input-container">
+              <i class="input-icon fas fa-lock"></i>
+              <input type="password" maxlength="40" placeholder="Password" id="password" required>
           </div>
-          <input type="password" maxlength="40" placeholder="your password" id="password" required>
-        </div>
-        <br>
-
-        <i id="submit" onclick="login()" class="fa-solid fa-right-to-bracket fa-2xs"></i>
+          <button id="submit" onclick="login()">Login</button>
+          <div class="wrong-pass">
+              <label id="wrongpass" for="wrongpass"></label>
+          </div>
       </div>
-      <div class="wrongpass">
-        <label id="wrongpass" for="wrongpass"></label>
-      </div>
-    </div>
-
+  </div>
+  
+    <!---------------------------- end OF Login ---------------------------->
     <!---------------------------- end OF Login ---------------------------->
 
     </div>

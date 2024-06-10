@@ -3,36 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Icon Hover Effects</title>
+    <title>Home</title>
     <link rel="stylesheet" href="CSS/all.min.css">
     <link rel="stylesheet" href="CSS/Home.css">
 </head>
 <body>
+    <div class="background"></div>
+    
+<div class="top-bar">
+    <a href="#">
+        <i class="fa-solid fa-vials fa-xl"></i>
+        <span >SpectroPhotometer</span>
+        <span style="font-size: 12px;" id="WifiStutus"></span>
+      
+        </a>
+</div>
+        
+
+
+     
     <div class="container">
-        <div class="icon" data-name="Home">
+        <!-- <div class="icon" data-name="Home">
             <i class="fas fa-home"></i>
+        </div> -->
+        <div class="icon" data-name="Scan Methods" title="it contains the three differnt scan methods 1-absorption vs time 2-absorbtion vs Wavelength 3- absorption vs a filter">
+            <a href="index.html">
+            </a>
+            <i class="fas fa-qrcode"> </i>
         </div>
-        <div class="icon" data-name="Scan Methods">
-            <i class="fas fa-qrcode"></i>
-        </div>
+
         <div class="icon" data-name="Line Analysis">
+            <a href="fit-line.html"></a>
             <i class="fas fa-chart-line"></i>
         </div>
         <div class="icon" data-name="Control">
+            <a onclick="toggleLoginContainer()"></a>
             <i class="fas fa-cogs"></i>
         </div>
         <div class="icon" data-name="Validations">
+            <a href="validate.html"></a>
             <i class="fas fa-check-circle"></i>
         </div>
         <div class="icon" data-name="Team">
+            <a href="team.html"></a>
             <i class="fas fa-users"></i>
         </div>
         <div class="icon" data-name="About">
             <i class="fas fa-info-circle"></i>
         </div>
-        <div class="icon" data-name="Temp1">
+        <!-- <div class="icon" data-name="Temp1">
             <i class="fas fa-thermometer-half"></i>
+        </div> -->
+    </div>
+    <div class="login-container" id="login">
+        <div class="login-form-box">
+            <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('login')"></i>
+            <h2>Log-in Form</h2>
+            <div class="input-container">
+                <i class="input-icon fas fa-user"></i>
+                <input type="text" maxlength="40" placeholder="Username" id="username" required>
+            </div>
+            <div class="input-container">
+                <i class="input-icon fas fa-lock"></i>
+                <input type="password" maxlength="40" placeholder="Password" id="password" required>
+            </div>
+            <button id="submit" onclick="login()">Login</button>
+            <div class="wrong-pass">
+                <label id="wrongpass" for="wrongpass"></label>
+            </div>
         </div>
     </div>
+    <script src="JavaScript/home.js"></script>
+      <!---------------------------- end OF Login ---------------------------->
 </body>
 </html>
