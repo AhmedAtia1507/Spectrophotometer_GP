@@ -1,3 +1,5 @@
+/* */
+
 body{
   background-color: white;
   margin-bottom: 5%;
@@ -376,6 +378,17 @@ border: 2px solid lightgray; /* Set border to gray with 2px width */
   border: 2px solid lightgray; /* Set border to gray with 2px width */
   }
 
+.dropdown-button:hover,
+.button1:hover,
+.button12:hover,
+.button13:hover,
+.button14:hover,
+.button11:hover{
+  background-color: lightgray; /* Set background color to lightgray on click */
+}
+
+
+
 main{
   margin-bottom: 100px;
 }
@@ -390,7 +403,7 @@ main{
   display: none;
   background:-o-linea;
   background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: red; /* Text color */
@@ -408,7 +421,7 @@ main{
   display: none;
   background:-o-linea;
   background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: green; /* Text color */
@@ -427,7 +440,7 @@ main{
   display: none;
   background:-o-linea;
   background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
   font-family: Times_new_roman, sans-serif; 
   font-size: 16px; 
   color: red; /* Text color */
@@ -438,7 +451,7 @@ main{
 
 .optionButton {
   width: 90px; 
-  height: 30px;
+  height: 52px;
   background-color: white;
   color: black;
   margin-top: 5%;
@@ -453,7 +466,7 @@ main{
 
 .optionButtont {
   width: 90px; 
-  height: 30px;
+  height: 52px;
   background-color: white;
   color: black;
   margin-top: 5%;
@@ -476,10 +489,11 @@ main{
   border-radius: 5px;
   font-size: 12px;
   width: 70%;
+  background-color: white;
 }
 .Scanin:focus{
   outline: none;
-  border: 1px solid #3498db;
+  border: 1px solid lightgray;
   transform: scale(1.05);
 }
 
@@ -510,15 +524,24 @@ main{
   font-weight: 600;
   padding: 5px;
   border: 2px solid lightgray; /* Set border to gray with 2px width */
+  
   }
 
   .table {
-    position: absolute;
-    top: 35%;
-    margin-bottom:20% ;
-    left: 50%; /* Place the table horizontally centered */
-    transform: translateX(-50%); /* Adjust to horizontally center the table */
-    margin-top: 1%;
-    margin-bottom: 100%; /* Add margin at the bottom of the text */
-    width:5px;
-} 
+    position: absolute;  
+    top: 14%; 
+    margin-top: 15%;
+    margin-bottom: 15%;
+    margin-left: 25%; 
+    border: #000000;
+
+  }
+  
+  .table td,
+  .table th { /* Target both table cells (td) and headers (th) */
+    width: 120px;
+    height: 50px; /* Adjust height as needed */
+    background-color: white;
+    border-radius: 5px; 
+  }
+  

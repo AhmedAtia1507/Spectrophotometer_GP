@@ -25,18 +25,30 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
+<<<<<<< HEAD
             "executable": "F:/ASU/ECE-senior- 2/GP/github/Spectrophotometer_GP/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
             "projectEnvName": "esp32doit-devkit-v1",
             "toolchainBinDir": "C:/Users/Administrator/.platformio/packages/toolchain-xtensa-esp32/bin",
+=======
+            "executable": "C:/Users/menna/OneDrive/Desktop/GP/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
+            "projectEnvName": "esp32doit-devkit-v1",
+            "toolchainBinDir": "C:/Users/menna/.platformio/packages/toolchain-xtensa-esp32/bin",
+>>>>>>> ed3cde18164ebf37bb3fe5349cfdfedcaac16f5e
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
+<<<<<<< HEAD
             "executable": "F:/ASU/ECE-senior- 2/GP/github/Spectrophotometer_GP/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
             "projectEnvName": "esp32doit-devkit-v1",
             "toolchainBinDir": "C:/Users/Administrator/.platformio/packages/toolchain-xtensa-esp32/bin",
+=======
+            "executable": "C:/Users/menna/OneDrive/Desktop/GP/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
+            "projectEnvName": "esp32doit-devkit-v1",
+            "toolchainBinDir": "C:/Users/menna/.platformio/packages/toolchain-xtensa-esp32/bin",
+>>>>>>> ed3cde18164ebf37bb3fe5349cfdfedcaac16f5e
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"
         }
