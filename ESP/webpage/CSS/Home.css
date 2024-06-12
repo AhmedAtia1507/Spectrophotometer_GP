@@ -255,9 +255,7 @@ span {
     display: block;
 }
 
-.icon:hover i {
 
-}
 
 .icon:hover::before {
     content: attr(data-name);
