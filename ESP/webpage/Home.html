@@ -10,11 +10,10 @@
 <body>
     <div class="background"></div>
     
-<div class="top-bar">
+<div class=" top-bar">
     <a href="#">
-        <i class="fa-solid fa-vials fa-xl"></i>
         <span >SpectroPhotometer</span>
-        <span style="font-size: 12px;" id="WifiStutus"></span>
+        <span style="font-size: 22px;" id="WifiStutus"></span>
       
         </a>
 </div>
@@ -26,10 +25,15 @@
         <!-- <div class="icon" data-name="Home">
             <i class="fas fa-home"></i>
         </div> -->
-        <div class="icon" data-name="Scan Methods" title="it contains the three differnt scan methods 1-absorption vs time 2-absorbtion vs Wavelength 3- absorption vs a filter">
-            <a href="index.html">
-            </a>
+        <div class="icon" data-name="" title="it contains the three differnt scan methods 1-absorption vs time 2-absorbtion vs Wavelength 3- absorption vs a filter">
             <i class="fas fa-qrcode"> </i>
+            <div class="flip-content">
+                <button class="flip-button" onclick="performScan()"><a href="index.html">scan </a></button>
+                <button class="flip-button" onclick="performScan()"><a href="index.html">scan 1 </a></button>
+                <button class="flip-button" onclick="performScan()"><a href="index.html">scan 2 </a></button>
+            </div>
+
+            
         </div>
 
         <div class="icon" data-name="Line Analysis">
