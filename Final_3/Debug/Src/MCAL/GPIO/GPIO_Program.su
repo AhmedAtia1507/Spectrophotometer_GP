@@ -1,0 +1,6 @@
+../Src/MCAL/GPIO/GPIO_Program.c:28:16:MGPIO_SetPinMode	24	static
+../Src/MCAL/GPIO/GPIO_Program.c:101:16:MGPIO_SetPinValue	24	static
+../Src/MCAL/GPIO/GPIO_Program.c:185:16:MGPIO_GetPinValue	24	static
+../Src/MCAL/GPIO/GPIO_Program.c:234:16:MGPIO_TogglePinValue	24	static
+../Src/MCAL/GPIO/GPIO_Program.c:282:16:MGPIO_ActivatePullUp	24	static
+../Src/MCAL/GPIO/GPIO_Program.c:332:16:MGPIO_SetNibbleValue	32	static

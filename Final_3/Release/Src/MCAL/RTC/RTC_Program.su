@@ -1,0 +1,7 @@
+../Src/MCAL/RTC/RTC_Program.c:25:16:MRTC_CalculateSeconds	64	static
+../Src/MCAL/RTC/RTC_Program.c:52:16:MRTC_CalculateDateTime	72	static
+../Src/MCAL/RTC/RTC_Program.c:94:16:MRTC_Init	8	static
+../Src/MCAL/RTC/RTC_Program.c:159:16:MRTC_SetDateAndTime	16	static
+../Src/MCAL/RTC/RTC_Program.c:202:16:MRTC_GetDateAndTime	16	static
+../Src/MCAL/RTC/RTC_Program.c:226:16:MRTC_SetSecondIntCallbackFunc	0	static
+../Src/MCAL/RTC/RTC_Program.c:242:6:RTC_IRQHandler	8	static
