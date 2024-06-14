@@ -158,11 +158,11 @@ let chartData;
 
 const ctxScan = document.getElementById('chartScan').getContext('2d');
 const ctxScanTime = document.getElementById('TimeChart').getContext('2d');
-//const ctxScanFilter = document.getElementById('FilterChart').getContext('2d');
+const ctxScanFilter = document.getElementById('FilterChart').getContext('2d');
 
 createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
 createChart(ctxScanTime, 0, 100, 'Time (s)', 'chartScanTime');
-//createChart(ctxScanFilter, 0, 50, 'Filter (units)', 'chartScanFilter');
+createChart(ctxScanFilter, 0, 50, 'Filter (units)', 'chartScanFilter');
 
 function createChart(ctx, xMin, xMax, xLabel, chartType) {
   const chartConfig = {
@@ -1886,3 +1886,15 @@ function handleLogin(myObj) {
   }
 }
 /*============================ END OF LOGIN ============================*/
+
+/*============================ Time Scan ============================*/
+function startTimeScan(target){
+if(target.innerHTML==='<i class="fa-solid fa-stop"></i>'){
+  
+  target.innerHTML='<i class="fa-solid fa-play"></i>';
+}
+else{
+  target.innerHTML='<i class="fa-solid fa-stop"></i>';
+
+}
+}

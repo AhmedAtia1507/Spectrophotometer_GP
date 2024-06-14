@@ -309,6 +309,7 @@ nav li:first-child {
   display: inline-block;
   height: 30px;
   padding: 3px;
+  margin: 0 10px;
   border: solid 1px black;
   border-radius: 0%;
 }
@@ -580,8 +581,7 @@ body.dark-mode #CMDMB {
 }
 
 .chart-container {
-  width: 100%;
-  height: 100%; /* Default height */
+  height: 94%; /* Default height */
   position: relative; /* To ensure proper positioning of the canvas */
 }
 

@@ -238,44 +238,90 @@
       </div>
 
       <div id="ScanVsTime" class="tabcontent">
-        <div class="row" style="height: 70vh;">
+
+          <fieldset>
+            <legend>Setup <i class="fa-solid fa-gear"></i></legend>
+            <div class="fsetup" >
+            <input class="Scanin" type="number" id="Period" name="period" placeholder="Period of Scan: 3s" title="the period of scanning in seconds">
+            <input class="Scanin" type="number" id="PeriodStep" name="step" placeholder="Time Step: 0.1s" title="the period of time step in seconds">
+            <input class="Scanin" type="number" id="TimeWavelength" placeholder="the wavelength : 200" title="the wavelength at which scan is happening">
+          </div>
+          <div class="buttonsAndSelectors">
+            <div class="selectors">
+              <strong>Lamps</strong>
+              <select name="lamps condition" id="LampsOFFTime">
+                <option value="both-on">Both On</option>
+                <option value="uv-off">UV Off</option>
+                <option value="vi-off">VI Off</option>
+              </select>
+              <strong>Mode</strong><select id="mySelectTime" name="mode">
+                <option value="absorption">Absorption</option>
+                <option value="transmission">Transmission</option>
+              </select>
+        
+            </div>
+            <div class="setupButtons">
+              <button  onclick="startTimeScan(this)"><i class="fa-solid fa-play"></i></button>
+        </div>
+                      
+          </fieldset>
+
           <fieldset class="fchart">
             <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
             <canvas id="TimeChart" style="height: 95%; width: 95%; "></canvas>
           </fieldset>
 
 
-          <fieldset class="fsetup">
-            <legend>Setup <i class="fa-solid fa-gear"></i></legend>
-            <input class="Scanin" type="number" id="Period" name="period" placeholder="Period of Scan: 3s">
-            <input class="Scanin" type="number" id="PeriodStep" name="step" placeholder="Time Step: 0.1s">
-            <input class="Scanin" type="number" id="TimeWavelength" placeholder="the wavelength : 200">
-            <div class="selectScan">
-              <strong>Measurment Mode: </strong><select id="mySelectTime" name="mode">
-                <option value="absorption">Absorption</option>
-                <option value="transmission">Transmission</option>
-              </select>
-            </div>
-
-            <div class="TwoBtn">
-              <button onclick="">Start<i class="fa-solid fa-play"></i></button>
-              <button onclick="pauseScan()">Pause <i class="fa-solid fa-pause"></i></button>
-            </div>
-          </fieldset>
-        </div>
 
             <h2>Command Terminal</h2>
             <div id="CMDMB">
               <!-- Messages will be displayed here -->
             </div>
-          </fieldset>
         </div>
 
         
-      </div>
+    
       <div id="ScanVsFilter" class="tabcontent">
-        
+        <fieldset>
+          <legend>Setup <i class="fa-solid fa-gear"></i></legend>
+          <div class="fsetup" >
+          <input class="Scanin" type="number" id="Period" name="period" placeholder="Period of Scan: 3s" title="the period of scanning in seconds">
+          <input class="Scanin" type="number" id="PeriodStep" name="step" placeholder="Time Step: 0.1s" title="the period of time step in seconds">
+          <input class="Scanin" type="number" id="TimeWavelength" placeholder="the wavelength : 200" title="the wavelength at which scan is happening">
+        </div>
+        <div class="buttonsAndSelectors">
+          <div class="selectors">
+            <strong>Lamps</strong>
+            <select name="lamps condition" id="LampsOFFTime">
+              <option value="both-on">Both On</option>
+              <option value="uv-off">UV Off</option>
+              <option value="vi-off">VI Off</option>
+            </select>
+            <strong>Mode</strong><select id="mySelectFilter" name="mode">
+              <option value="absorption">Absorption</option>
+              <option value="transmission">Transmission</option>
+            </select>
+      
+          </div>
+          <div class="setupButtons">
+            <button onclick="startFilterScan()"><i class="fa-solid fa-play"></i></button>
       </div>
+                    
+        </fieldset>
+
+        <fieldset class="fchart">
+          <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
+          <canvas id="FilterChart" style="height: 95%; width: 95%; "></canvas>
+        </fieldset>
+
+
+
+          <h2>Command Terminal</h2>
+          <div id="CMDMB">
+            <!-- Messages will be displayed here -->
+          </div>
+      </div>
+     
 
 
 
