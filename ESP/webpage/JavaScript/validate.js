@@ -250,7 +250,7 @@ function compareValues() {
 
   // Show the table with the results
   document.getElementById('tableContainer').style.display = 'block';
-  generateTable(predefinedValues);
+  generateTable(predefinedValues, 'numbers1', 'error', 'tableContainer');
 }
 
 function getPredefinedValues(option) {
@@ -276,92 +276,26 @@ function compareWithPredefinedValues(userInputValues, predefinedValues, errorLim
   return true;
 }
 
-function generateTable(predefinedValues) {
-  var numRows = parseInt(document.querySelector('.numbers1').value);
-  var numColumns = 4;
-  var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
-
-  var userInputValues = [];
-  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
-  inputs.forEach(function(input) {
-    var inputValue = parseFloat(input.value);
-    userInputValues.push(inputValue);
-  });
-
-  var errorLimit = parseInt(document.querySelector('.error').value);
-  var column1Values = [], column2Values = [], column3Values = [], column4Values = [];
-
-  for (var i = 0; i < numRows; i++) {
-    var userValue = userInputValues[i % userInputValues.length];
-    var predefinedValue = predefinedValues[i % predefinedValues.length];
-    var error = Math.abs(userValue - predefinedValue);
-    var state = compareWithPredefinedValues([userValue], [predefinedValue], errorLimit) ? 'Done' : 'Failed';
-
-    column1Values.push(userValue); // Cycle through user input values
-    column2Values.push(predefinedValue); // Cycle through predefined values
-    column3Values.push(error);
-    column4Values.push(state); // Set the status based on comparison
-  }
-
-  var tableContainer = document.getElementById('tableContainer');
-  tableContainer.innerHTML = ''; // Clear previous table
-
-  var table = document.createElement('table');
-  var headerRow = table.insertRow();
-  for (var i = 0; i < numColumns; i++) {
-    var headerCell = headerRow.insertCell();
-    headerCell.textContent = headerNames[i];
-    headerCell.style = "font-weight: 600;";
-  }
-
-  for (var i = 0; i < numRows; i++) {
-    var row = table.insertRow();
-    for (var j = 0; j < numColumns; j++) {
-      var cell = row.insertCell();
-      switch (j) {
-        case 0:
-          cell.textContent = column1Values[i];
-          break;
-        case 1:
-          cell.textContent = column2Values[i];
-          break;
-        case 2:
-          cell.textContent = column3Values[i];
-          break;
-        case 3:
-          cell.textContent = column4Values[i];
-          cell.style.color = column4Values[i] === 'Done' ? 'green' : 'red'; // Set color based on status
-          break;
-        default:
-          cell.textContent = '';
-      }
-    }
-  }
-
-  tableContainer.appendChild(table);
-}
 
 /*
 
 ****************************Photometric Accuracy********************************
 
 */
-var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2');
-var checkbox2 = document.querySelector('.checkboxes2');
-
-checkbox2.addEventListener('change', function() {
-  for (var element of formElements2) {
-    element.disabled = !this.checked; // Toggle disabled based on checkbox state
-  }
-});
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
+  var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2');
+  var checkbox2 = document.querySelector('.checkboxes2');
+
+  checkbox2.addEventListener('change', function() {
+    for (var element of formElements2) {
+      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+    }
+  });
+
   var submitButton1 = document.querySelector('.button12');
   submitButton1.addEventListener('click', function() {
-    
-    var numfilrters = parseInt(document.querySelector('.numbers12').value);
+    document.getElementById('tableContainer').style.display = 'none';
+    var numfilters = parseInt(document.querySelector('.numbers12').value);
     var messageContainer12 = document.getElementById('messageContainer12');
     if (messageContainer12) {
       messageContainer12.textContent = '';
@@ -374,16 +308,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (messageContainer31) {
       messageContainer31.textContent = '';
     }
-    if (numfilrters === 0 || numfilrters === "") {
-      showMessage("Please Enter the number of filters first","ok","messageContainer12");
-    } 
-    else {
+    if (numfilters === 0 || isNaN(numfilters)) {
+      showMessage("Please Enter the number of filters first", "ok", "messageContainer12");
+    } else {
       generateInputs1();
-      showMessage3("Start placing filters", "Done", "messageContainer31",numfilrters); 
-    };
+      showMessage3("Start placing filters", "Done", "messageContainer31", numfilters);
+    }
   });
 });
-
 
 function generateInputs1() {
   var numfilterslengths = parseInt(document.querySelector('.numbers12').value);
@@ -402,101 +334,52 @@ function generateInputs1() {
       var input1 = document.createElement('input');
       input1.type = 'number';
       input1.className = 'numbers2'; // Add class for identification
-      input1.placeholder = '  0';
+      input1.placeholder = '0';
       input1.id = 'filter_' + i;
 
       filtersContainer.appendChild(input1);
-      filtersContainer.appendChild(input1);
     
       var label21 = document.createElement('label');
-      label21.textContent = '      nm';
+      label21.textContent = ' nm';
       filtersContainer.appendChild(label21);
       filtersContainer.appendChild(document.createElement("br")); // Add a line break for spacing
-  } 
+  }
 }
 
-
 function getPredefinedValues1() {
-
-      var predefinedValues = [100, 200, 300];
-
-      // Get user input values for wavelengths (assuming class 'wavelength-input')
-      var userInputValues = [];
-      var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
-      inputs.forEach(function(input) {
-      var inputValue = parseFloat(input.value);
-      userInputValues.push(inputValue);
-  });
+  return [100, 200, 300];
 }
 
 function CompareValues1() {
-  getPredefinedValues1();
-  var errorLimit= parseInt(document.querySelector('.error2').value);
+  var predefinedValues = getPredefinedValues1();
+  var errorLimit = parseInt(document.querySelector('.error2').value);
+  var userInputValues = [];
+  var numfilters = predefinedValues.length;
 
-      for (i = 0; i < 3; i++) {
-        var filterId = 'filter_' + i;
-        var filterInput = document.getElementById(filterId).value;
-        var filterInput2 = filterInput.value;          
-      }
+  for (var i = 0; i < numfilters; i++) {
+    var filterId = 'filter_' + i;
+    var filterInput = document.getElementById(filterId).value;
+    userInputValues.push(parseFloat(filterInput));
+  }
 
-      var passesTest = compareWithPredefinedValues2(userInputValues, filterInput2, errorLimit);
- if (passesTest){
-    
+  var passesTest2 = compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit);
+  var messageContainer1 = document.getElementById('messageContainer12'); // Updated ID
+  var messageContainer2 = document.getElementById('messageContainer31'); // Updated ID
+
+  if (passesTest2) {
     messageContainer1.style.display = 'none';
     if (messageContainer2) {
       messageContainer2.textContent = '';
     }
-    showMessaget("Test passes! " , "Show curve","messageContainer2" );
-    
- }
- else{
-
-  messageContainer2.style.display = 'none';
-  if (messageContainer1) {
-    messageContainer1.textContent = '';
+    showMessaget("Test passes!", "Show curve", "messageContainer31"); // Updated ID
+  } else {
+    messageContainer2.style.display = 'none';
+    if (messageContainer1) {
+      messageContainer1.textContent = '';
+    }
+    showMessage("Test fails. Do you want to continue the test?", "Cancel", "messageContainer12"); // Updated ID
   }
-  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer1" );
- 
- }
 }
-
-
-
-
-// function compareWithPredefinedValues2(userInputValues, predefinedValues, errorLimit) {
-//   // Compare user input values with predefined values
-//   for (var i = 0; i < userInputValues.length; i++) {
-//       var difference = userInputValues[i] - predefinedValues[i];
-//       if (Math.abs(difference) > errorLimit) {
-//           return false;
-//       }
-//   }
-//   return true;
-// }
-
-// var passesTest2 = 
-
-// if (passesTest2){
-    
-//    messageContainer1.style.display = 'none';
-//     if (messageContainer2) {
-//       messageContainer2.textContent = '';
-//     }
-//     showMessaget("Test passes! " , "Show curve","messageContainer22" );
-    
-//  }
-//  else{
-
-//   messageContainer2.style.display = 'none';
-//   if (messageContainer1) {
-//     messageContainer1.textContent = '';
-//   }
-//   showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer12" );
- 
-//  }
-
-
-
 
 /*
 
@@ -513,26 +396,41 @@ var formElements3 = document.querySelectorAll(' .numbers13, .button13, .error3 '
     }
   });
   
-  /* if (passesTest3){
-    
-     messageContainer1.style.display = 'none';
-    if (messageContainer2) {
-      messageContainer2.textContent = '';
+
+  function compareWithzero(userInputValues, errorLimit) {
+    for (var i = 0; i < userInputValues.length; i++) {
+      var difference = userInputValues[i] - predefinedValues[i];
+      if (Math.abs(difference) > errorLimit) {
+        return false;
+      }
     }
-    showMessaget("Test passes! " , "Show curve","messageContainer23" );
-    
- }
- else{
-
-  messageContainer2.style.display = 'none';
-  if (messageContainer1) {
-    messageContainer1.textContent = '';
+    return true;
   }
-  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer13" );
- 
- }
 
-*/
+  function CompareValues2() {
+    var errorLimit = parseInt(document.querySelector('.error3').value);
+    var userInputValues = [];
+  
+    var passesTest3 = compareWithzero(userInputValues, errorLimit);
+    var messageContainer1 = document.getElementById('messageContainer13'); // Updated ID
+    var messageContainer2 = document.getElementById('messageContainer23'); // Updated ID
+  
+    if (passesTest3) {
+      messageContainer1.style.display = 'none';
+      if (messageContainer2) {
+        messageContainer2.textContent = '';
+      }
+      showMessaget("Test passes!", "Show curve", "messageContainer23"); // Updated ID
+    } else {
+      messageContainer2.style.display = 'none';
+      if (messageContainer1) {
+        messageContainer1.textContent = '';
+      }
+      showMessage("Test fails. Do you want to continue the test?", "Cancel", "messageContainer12"); // Updated ID
+    }
+  }
+
+  
 
 /*
 
@@ -673,12 +571,12 @@ function showMessage3(message, option1Text, containerId, numFilters) {
   var messageContainer = document.getElementById(containerId);
 
   // Validate numFilters input
-  if (numFilters === 0 || numFilters === "") {
+  if (numFilters === 0 || isNaN(numFilters)) {
     showMessage("Please Enter the number of filters first", "ok", "messageContainer12");
     return; // Exit the function if validation fails
   }
 
-  // Create a local variable to track current filter placement (outside the function)
+  // Create a local variable to track current filter placement
   var currentFilter = 0;
 
   messageContainer.style.display = 'block';
@@ -689,26 +587,25 @@ function showMessage3(message, option1Text, containerId, numFilters) {
 
     // Check if all filters have been placed
     if (currentFilter === numFilters) {
-      showMessage("All filters placed!", "", containerId); // Display completion message
       messageContainer.style.display = 'none'; // Hide container after completion
+        // Show the table with the results
+      document.getElementById('tableContainer').style.display = 'block';
+      generateTable(getPredefinedValues1(), 'numbers12', 'error2','tableContainer1');
+      CompareValues1();
+
       currentFilter = 0; // Reset filter counter for next sequence (optional)
       return; // Exit the function after completing all filters
     }
 
-      var messageNode = messageContainer.querySelector('div'); // Select the existing message element
-      if (messageNode) {
-        messageNode.textContent = "Place filter number " + (currentFilter + 1);
-
-      } else {
-        // Create a message element if it doesn't exist
-        messageNode = document.createElement('div');
-        messageNode.textContent = "Place filter number " + (currentFilter + 1);
-        messageContainer.appendChild(messageNode);
-      } 
-
-
-    //Update the message content (without overwriting button)
-
+    var messageNode = messageContainer.querySelector('div'); // Select the existing message element
+    if (messageNode) {
+      messageNode.textContent = "Place filter number " + (currentFilter + 1);
+    } else {
+      // Create a message element if it doesn't exist
+      messageNode = document.createElement('div');
+      messageNode.textContent = "Place filter number " + (currentFilter + 1);
+      messageContainer.appendChild(messageNode);
+    }
   };
 
   // Create the "Done" button and attach click handler
@@ -762,7 +659,82 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
 }
-    
+
+
+function generateTable(predefinedValues, numClass, errorClass, tableid) {
+  var numRows = parseInt(document.querySelector(`.${numClass}`).value);
+  var numColumns = 4;
+  var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
+
+  var userInputValues = [];
+  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+  inputs.forEach(function(input) {
+      var inputValue = parseFloat(input.value);
+      userInputValues.push(inputValue);
+  });
+
+  var errorLimit = parseInt(document.querySelector(`.${errorClass}`).value);
+  var column1Values = [], column2Values = [], column3Values = [], column4Values = [];
+
+  for (var i = 0; i < numRows; i++) {
+      var userValue = userInputValues[i % userInputValues.length];
+      var predefinedValue = predefinedValues[i % predefinedValues.length];
+      var error = Math.abs(userValue - predefinedValue);
+      var state = compareWithPredefinedValues([userValue], [predefinedValue], errorLimit) ? 'Done' : 'Failed';
+
+      column1Values.push(userValue); // Cycle through user input values
+      column2Values.push(predefinedValue); // Cycle through predefined values
+      column3Values.push(error);
+      column4Values.push(state); // Set the status based on comparison
+  }
+
+  var tableContainer = document.getElementById(tableid);
+  if (!tableContainer) {
+      console.error(`Table container with id "${tableid}" not found.`);
+      return;
+  }
+
+  console.log("Clearing previous table content.");
+  tableContainer.innerHTML = ''; // Clear previous table
+
+  var table = document.createElement('table');
+  var headerRow = table.insertRow();
+  for (var i = 0; i < numColumns; i++) {
+      var headerCell = headerRow.insertCell();
+      headerCell.textContent = headerNames[i];
+      headerCell.style = "font-weight: 600;";
+  }
+
+  for (var i = 0; i < numRows; i++) {
+      var row = table.insertRow();
+      for (var j = 0; j < numColumns; j++) {
+          var cell = row.insertCell();
+          switch (j) {
+              case 0:
+                  cell.textContent = column1Values[i];
+                  break;
+              case 1:
+                  cell.textContent = column2Values[i];
+                  break;
+              case 2:
+                  cell.textContent = column3Values[i];
+                  break;
+              case 3:
+                  cell.textContent = column4Values[i];
+                  cell.style.color = column4Values[i] === 'Done' ? 'green' : 'red'; // Set color based on status
+                  break;
+              default:
+                  cell.textContent = '';
+          }
+      }
+  }
+
+  console.log("Appending new table to container.");
+  tableContainer.appendChild(table);
+}
+
+
+
 
 
 // // SCAN
