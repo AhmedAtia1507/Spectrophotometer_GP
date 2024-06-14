@@ -41,7 +41,7 @@
               d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
           </svg>
           <span>SpectroPhotometer</span>
-          <span style="font-size: 12px;" id="WifiStutus"></span>
+          <span style="font-size: 18px; font-weight: 600;" id="WifiStutus"></span>
         </a>
         
         
@@ -74,21 +74,10 @@
     <section>
       <!-- Common content -->
       <!-- Tab button  -->
-      <div id="tab" class="tab">
-        <button class="tablinks" onclick="openTab(event, 'ScanVsWL')">
-          <p>Scan vs WL</p> <i class="fa-solid fa-chart-line"></i>
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'ScanVsTime')">
-          <p> Scan Vs Time</p> <i class="fa-regular fa-clock"></i>
-        </button>
-        <button class="tablinks" onclick="openTab(event, 'ScanVsFilter')">
-          <p> Scan Vs Filter</p> <i class="fa-solid fa-filter-circle-xmark"></i>
-        </button>
 
-      </div>
       <!-- End of Tab button -->
       <!-- Scan Tab  -->
-      <div id="ScanVsWL" class="tabcontent">
+      <div id="ScanVsWL" class="tabcontent" style="display: block;">
        
 
         <fieldset >  
@@ -121,8 +110,9 @@
               
                 <strong>Mode</strong>
                 <select id="mySelect" name="mode" >
-                  <option value="absorption">Absorption</option>
-                  <option value="transmission">Transmission</option>
+                  <option value="absorption"> Absorption</option>
+                  <option value="transmission"> Transmission</option>
+                  <option value="Intensity"> Intensity</option>
                 </select>
               </div>
               <div class="setupButtons">
@@ -138,7 +128,7 @@
             <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
             <div class="chart-container">
               <canvas id="chartScan"></canvas>  
-            </div>
+            </div> 
             </fieldset>
      
 

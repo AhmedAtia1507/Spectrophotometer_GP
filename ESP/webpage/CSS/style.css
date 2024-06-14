@@ -597,7 +597,7 @@ body.dark-mode #CMDMB {
 }
 
 .ftable{
-  width: 100%;
+  width: 100%;  
   overflow-x: auto;
   border: 1px solid #000000;
   border-radius: 5px;
