@@ -27,7 +27,7 @@ void MyInitialization::sdInit() {
 void MyInitialization::initWeb(AsyncWebServer& server) {
   
  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(SD, "/webpage/index.html", "text/html");});
+            { request->send(SD, "/webpage/Home.html", "text/html");});
   
     // Serve JS files from the "js" folder
     server.serveStatic("/", SD, "/webpage");
