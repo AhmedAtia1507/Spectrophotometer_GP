@@ -230,7 +230,7 @@ span {
   .icon .flip-button {
     display: none;
     transform: translateX(-50%);
-    width: 100px;
+    width: 250px;
     height: 40px;
     background-color: #007bff;
     color: white;
@@ -246,10 +246,10 @@ span {
 .icon .flip-button a{
     color: white;
     text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 600;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 8px;
 }
 .icon:hover .flip-button {
     display: block;
