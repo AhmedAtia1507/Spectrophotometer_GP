@@ -91,50 +91,56 @@
       <div id="ScanVsWL" class="tabcontent">
        
 
-          
-          <div class="fsetup" >
-
-          
-            
+        <fieldset >  
+          <legend>Setup 
             <button id="savepreset" onclick="savepreset()" title="Save Current Method"> <i class="fa-solid fa-floppy-disk"></i> </button>
             <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> <i class="fa-solid fa-upload"></i></button>
-            <button id="SampleNumBTN" title="add columns to start "><i class="fa-solid fa-play"></i></button>
-            <button onclick="pauseScan()" title="stop the scan"> <i class="fa-solid fa-pause"></i></button>
-            
-            <div>
-              <strong>Lamps</strong>
-                <select name="lamps condition" id="LampsOFF">
-                  <option value="both-on">Both On</option>
-                  <option value="both-off">Both OFF</option>
-                  <option value="uv-off">UV Off</option>
-                  <option value="vi-off">VI Off</option>
-                </select>
-  
+          </legend>
+          
+          <div class="fsetup" >
               
-              </div>
-                <strong>Mode</strong>
-                <select id="mySelect" name="mode">
-                  <option value="absorption">Absorption</option>
-                  <option value="transmission">Transmission</option>
-                </select>
   
             <input  id="SampleNum" class="SampleNum" placeholder="NO. of Samples" title="number of samples">
             <input  type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
             <input  type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
             <input  type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
             <input  type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
-                         
+                  
+            
             </div>
+              <div class="buttonsAndSelectors">
+              <div class="selectors">
+                <strong>Lamps</strong>
+                <select name="lamps condition" id="LampsOFF">
+                  <option value="both-on">Both On</option>
+                  <option value="uv-off">UV Off</option>
+                  <option value="vi-off">VI Off</option>
+                </select>
+  
+              
+              
+                <strong>Mode</strong>
+                <select id="mySelect" name="mode" >
+                  <option value="absorption">Absorption</option>
+                  <option value="transmission">Transmission</option>
+                </select>
+              </div>
+              <div class="setupButtons">
+              <button id="SampleNumBTN" title="add columns to start "><i class="fa-solid fa-square-plus"></i></button>
+            </div>
+          </div>
+          </fieldset>
+        
           
       
   
-          <fieldset class="fchart">
+          <fieldset class="fchart" >
             <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
             <div class="chart-container">
-              <canvas id="chartScan" style="height: 99%; width: 99%; "></canvas>
+              <canvas id="chartScan"></canvas>  
             </div>
-            
-          </fieldset>
+            </fieldset>
+     
 
 
         
@@ -145,8 +151,6 @@
   <br>
   <button onclick="toggleLoginContainer('NextSample')" style="margin-left: 30px;" title="when you finished to insert the sample click done"> done <i style="padding: 0px 5px;" class="fa-solid fa-check"></i></button> 
 </div>
-
-        <div class="row">
 
           <fieldset class="ftable">
             <legend>Scan Table</legend>

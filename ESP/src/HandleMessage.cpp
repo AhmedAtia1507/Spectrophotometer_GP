@@ -5,7 +5,7 @@
 const unsigned long interval = 600000; // 10 minutes in milliseconds works as a session for the control page
 unsigned long previousMillis;
 bool loginflag = false; // to check if the user logged in before accessing the control page
-
+bool StopScan = false;
 void startCountdown()
 {
   // Call this function to start the countdown
@@ -361,14 +361,20 @@ void handleScanTask(void *pvParameters)
     for (int i = stopInput.toInt(); i >= startInput.toInt(); i -= stepInput.toInt())
     {
       vTaskDelay(pdMS_TO_TICKS(100));
+        if (StopScan) {
+            StopScan = false;
+            // Break out of the loop to stop the task
+            break;
+        }
+
       int startTime = millis();
       while (Serial2.available() == 0 && millis() - startTime < 2000)
       {
         delay(1);
       }
-      String response = Serial2.readStringUntil('\n');
+      // String response = Serial2.readStringUntil('\n');
 
-      //String response ="23/3||1:30 200 10 10.5";
+      String response ="23/3||1:30 200 10 10.5";
       Serial.println(response); // debug
 
       // Split the response into components
@@ -573,6 +579,13 @@ void handleifelse(const DynamicJsonDocument &doc)
     Serial.println("command is scan");
     handleScan(doc);
   }
+  else if (doc["command"] == "ScanStop")
+  {
+    Serial.println("command is ScanStop");
+    StopScan=true;
+    String response= sendCMD("stop-scan");
+  }
+  
   else if (doc["command"] == "StateBar")
   {
     handleSB(doc);
