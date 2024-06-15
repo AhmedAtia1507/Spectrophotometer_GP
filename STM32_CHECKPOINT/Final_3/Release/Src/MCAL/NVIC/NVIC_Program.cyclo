@@ -1,0 +1,6 @@
+../Src/MCAL/NVIC/NVIC_Program.c:27:16:MNVIC_EnableInterrupt	3
+../Src/MCAL/NVIC/NVIC_Program.c:55:16:MNVIC_DisableInterrupt	3
+../Src/MCAL/NVIC/NVIC_Program.c:83:16:MNVIC_SetPendingFlag	3
+../Src/MCAL/NVIC/NVIC_Program.c:111:16:MNVIC_ClearPendingFlag	3
+../Src/MCAL/NVIC/NVIC_Program.c:140:16:MNVIC_GetActiveFlag	4
+../Src/MCAL/NVIC/NVIC_Program.c:178:16:MNVIC_SetInterruptPriority	8

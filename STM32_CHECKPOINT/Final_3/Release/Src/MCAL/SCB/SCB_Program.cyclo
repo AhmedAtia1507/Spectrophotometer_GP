@@ -1,0 +1,12 @@
+../Src/MCAL/SCB/SCB_Program.c:21:6:MSCB_SystemReset	1
+../Src/MCAL/SCB/SCB_Program.c:37:16:MSCB_SetPriorityGrouping	6
+../Src/MCAL/SCB/SCB_Program.c:71:16:MSCB_SetNMIPendingFlag	1
+../Src/MCAL/SCB/SCB_Program.c:85:16:MSCB_SetSysTickPendingFlag	1
+../Src/MCAL/SCB/SCB_Program.c:99:16:MSCB_ClearSysTickPendingFlag	1
+../Src/MCAL/SCB/SCB_Program.c:113:16:MSCB_SetPendSVPendingFlag	1
+../Src/MCAL/SCB/SCB_Program.c:127:16:MSCB_ClearPendSVPendingFlag	1
+../Src/MCAL/SCB/SCB_Program.c:143:16:MSCB_GetActiveIRQ	2
+../Src/MCAL/SCB/SCB_Program.c:174:16:MSCB_SetSystemHandlerPriority	4
+../Src/MCAL/SCB/SCB_Program.c:214:16:MSCB_EnableMemFault	1
+../Src/MCAL/SCB/SCB_Program.c:230:16:MSCB_EnableBusFault	1
+../Src/MCAL/SCB/SCB_Program.c:246:16:MSCB_EnableUsageFault	1
