@@ -358,6 +358,17 @@ function hideSelectedCurve(){
   var curveName = document.getElementById('chart-select').value;
   hideCurve(curveName);
 }
+function deleteCurve(curveName){
+  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
+  if (existingCurveIndex !== -1) {
+    chartScan.data.datasets.splice(existingCurveIndex, 1);
+    chartScan.update();
+    
+}}
+function deleteSelectedCurve() {
+  var curveName = document.getElementById('chart-select').value;
+  deleteCurve(curveName);
+}
 
 // function changeColor() {
 //   var rIndex, table = document.getElementById('table');

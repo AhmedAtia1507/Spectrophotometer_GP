@@ -158,7 +158,9 @@ nav li:first-child {
   font-size: x-large;
   font-weight: bolder;
 }
-
+.logo a:hover{
+  color: none;
+}
 
 
 @media (max-width: 740px) {
