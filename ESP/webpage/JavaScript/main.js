@@ -222,6 +222,10 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
     }
   };
 
+  /**========================================================================
+   *                           Crouser - Never think to touch
+   *========================================================================**/
+
   // Assign the chart to the appropriate global variable
   if (chartType === 'chartScan') {
     chartScan = new Chart(ctx, chartConfig);
@@ -275,9 +279,9 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
 }
 
 
-
-
-
+/**========================================================================
+ *                           Chart Funcations
+ *========================================================================**/
 
 
 function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 'curve') {
@@ -317,9 +321,57 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
   }
 
   chartScan.update(); // Update the chart
+// add to select 
+const selectElement = document.getElementById('chart-select');
+      const option = document.createElement('option');
+      option.value = curveName;
+      option.text = curveName;
+      selectElement.appendChild(option);
+
 }
 
+/**------------------------------------------------------------------------
+ *                           COLOR CHANGE
+ *------------------------------------------------------------------------**/
+// Function to change the color of a curve
+function changeCurveColor(curveName, color) {
+  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
+  chartScan.data.datasets[existingCurveIndex].borderColor = color;
+  chartScan.update(); // test name of chart scanChart
+}
 
+function changeColor(){
+  var curveName = document.getElementById('chart-select').value;
+  var color = document.getElementById('color-picker').value;
+  changeCurveColor(curveName, color); 
+}
+
+function hideCurve(curveName) {
+  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
+  if (existingCurveIndex !== -1) {
+    const dataset = chartScan.data.datasets[existingCurveIndex];
+    dataset.hidden = !dataset.hidden;
+    chartScan.update();
+  }
+}
+function hideSelectedCurve(){
+  var curveName = document.getElementById('chart-select').value;
+  hideCurve(curveName);
+}
+
+// function changeColor() {
+//   var rIndex, table = document.getElementById('table');
+//   checkboxes = document.getElementsByName("check-tab1");
+//   for (var i = 1; i < table.rows.length; i++) {
+//     table.rows[i].onclick = function () {
+//       if (this.cells[7].querySelector('input').checked) {
+//         rIndex = this.rowIndex;
+//         var color = this.cells[6].querySelector('select').value;
+//         changeCurveColor(rIndex - 1, color);
+//       }
+//     }
+//   }
+// }
 
 
 // funcation to remove all curves in chart js
@@ -1118,28 +1170,12 @@ function filter() {
 
 
 
-/**------------------------------------------------------------------------
- *                           COLOR CHANGE
- *------------------------------------------------------------------------**/
-// Function to change the color of a curve
-function changeCurveColor(index, color) {
-  chartScan.data.datasets[index].borderColor = color;
-  chartScan.update(); // test name of chart scanChart
-}
 
-function changeColor() {
-  var rIndex, table = document.getElementById('table');
-  checkboxes = document.getElementsByName("check-tab1");
-  for (var i = 1; i < table.rows.length; i++) {
-    table.rows[i].onclick = function () {
-      if (this.cells[7].querySelector('input').checked) {
-        rIndex = this.rowIndex;
-        var color = this.cells[6].querySelector('select').value;
-        changeCurveColor(rIndex - 1, color);
-      }
-    }
-  }
-}
+
+
+
+
+
 
 setTimeout(showfoot, 1000); //autohide foot in 1sec
 

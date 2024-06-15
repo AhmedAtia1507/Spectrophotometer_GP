@@ -122,14 +122,32 @@
           </fieldset>
         
           
-      
+          <div class="container">
+            <div class="first-div">
+              <fieldset class="fchart" >
+                <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
+   
+                  <canvas id="chartScan"></canvas>  
+                
+                </fieldset>
+            </div>
+            <div class="second-div">
+              <label for="chart-select">Select the chart:</label>
+              <select id="chart-select">
+                  <!-- <option value="line">Line Chart</option>
+                  <option value="bar">Bar Chart</option>
+                  <option value="pie">Pie Chart</option> -->
+              </select>
   
-          <fieldset class="fchart" >
-            <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
-            <div class="chart-container">
-              <canvas id="chartScan"></canvas>  
-            </div> 
-            </fieldset>
+              <label for="color-picker">Change color:</label>
+              <input type="color" id="color-picker" name="color-picker">
+              <button id="change-color-btn" onclick="changeColor()"><i class="fas fa-paint-brush"></i> Change Color</button>
+              <button id="show-hide-btn" onclick="hideSelectedCurve()"><i class="fas fa-eye"></i> Show/Hide</button>
+              <button id="delete-btn"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+        </div>
+  
+
      
 
 
@@ -142,68 +160,70 @@
   <button onclick="toggleLoginContainer('NextSample')" style="margin-left: 30px;" title="when you finished to insert the sample click done"> done <i style="padding: 0px 5px;" class="fa-solid fa-check"></i></button> 
 </div>
 
-          <fieldset class="ftable">
-            <legend>Scan Table</legend>
-            <div id="commandTable" class="commandTable" >
-              <table>
-                <tr>
-                  <th>Funcation</th>
-                  <th>Command</th>
-                  <th>Example</th>
-                </tr>
-                <tr>
-                  <td>Add Rows</td>
-                  <td>t + Num of rows</td>
-                  <td> T5 contrauct 5 rows</td>
-                </tr>
-                <tr>
-                  <td> get Area for specific</td>
-                  <td>A + index of row</td>
-                  <td> A3 get Area for sample 3</td>
-                </tr>
-                <tr>
-                  <td> get Area for all samples</td>
-                  <td>AA0</td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <td>get Peak for sample</td>
-                  <td>P + index of row</td>
-                  <td> P3 get Peak for sample 3</td>
-                </tr>
-                <tr>
-                  <td>get specific Area for sample</td>
-                  <td>AS + index of row</td>
-                  <td> AS3</td>
-                </tr>
-              </table>
+<div class="container" style="grid-template-columns: 100%">
+  <fieldset class="ftable">
+    <legend>Scan Table</legend>
+    <div id="commandTable" class="commandTable" >
+      <table>
+        <tr>
+          <th>Funcation</th>
+          <th>Command</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td>Add Rows</td>
+          <td>t + Num of rows</td>
+          <td> T5 contrauct 5 rows</td>
+        </tr>
+        <tr>
+          <td> get Area for specific</td>
+          <td>A + index of row</td>
+          <td> A3 get Area for sample 3</td>
+        </tr>
+        <tr>
+          <td> get Area for all samples</td>
+          <td>AA0</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>get Peak for sample</td>
+          <td>P + index of row</td>
+          <td> P3 get Peak for sample 3</td>
+        </tr>
+        <tr>
+          <td>get specific Area for sample</td>
+          <td>AS + index of row</td>
+          <td> AS3</td>
+        </tr>
+      </table>
 
-            </div>
-            <div class="TwoBtn">
-              <button class="SampleNumBTN" id="deleteBTN"> Delete All</button>
-              <button class="SampleNumBTN" onclick="toggleLoginContainer('commandTable')">toggle commands</button>
-            </div>
-            <table id="myTable">
-              <tr>
-                <th style="width: 5%;">#</th>
-                <th style="width: 17.5%;">State</th>
-                <th style="width: 26%;">Name</th>
-                <th style="width: 52%;">Description</th>
-                <th style="width: 17.5%;">Action</th>
-                <th style="width: 28%;"><input type='text' class='cmd' id='cmd' placeholder='Command'
-                    style="width: 80%;"></th>
-              </tr>
-            </table>
+    </div>
+    <div class="TwoBtn">
+      <button class="SampleNumBTN" id="deleteBTN"> Delete All</button>
+      <button class="SampleNumBTN" onclick="toggleLoginContainer('commandTable')">toggle commands</button>
+    </div>
+    <table id="myTable">
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 17.5%;">State</th>
+        <th style="width: 26%;">Name</th>
+        <th style="width: 52%;">Description</th>
+        <th style="width: 17.5%;">Action</th>
+        <th style="width: 28%;"><input type='text' class='cmd' id='cmd' placeholder='Command'
+            style="width: 80%;"></th>
+      </tr>
+    </table>
 
-            <h2>Command Terminal</h2>
-            <div id="CMDMB">
+    <h2>Command Terminal</h2>
+    <div id="CMDMB">
 
-              <!-- Messages will be displayed here -->
-            </div>
-            <div class="TwoBtn">
-              <button onclick="showItems('readings')" id="loadreadings">load Readings</button>
-            </div>
-          </fieldset>
+      <!-- Messages will be displayed here -->
+    </div>
+    <div class="TwoBtn">
+      <button onclick="showItems('readings')" id="loadreadings">load Readings</button>
+    </div>
+  </fieldset>
+</div>
         </div>
 
 
