@@ -1152,7 +1152,15 @@ body.dark-mode {
   padding: 50px;
   gap: 10px;
 }
-
+.second-div button{
+  background-color: lightblue;
+}
+#change-color-btn{
+  background-color: lightcoral;
+}
+#delete-btn{
+  background-color: rosybrown;
+}
 label {
   margin-bottom: 5px;
 }
