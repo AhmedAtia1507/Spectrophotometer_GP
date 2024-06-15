@@ -1,489 +1,231 @@
-/* */
-
-body{
+body {
   background-color: white;
   margin-bottom: 5%;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-
+  margin: 0 auto;
+  width: 100%;
 }
+
 .fsetup1 {
-  width: 1000px;
+  width: 70%;
+  max-width: 30000px;
+  min-width: 1000px;
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
-  margin-left: 28%;
-  margin-bottom: 2%;
+  margin: 0 auto 2%;
 }
 
 legend {
   font-size: 30px;
-  font-weight:bolder;
-  font-family:Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .ValidationTitle1 {
   font-size: 3.5rem;
   color: black;
-  margin-left: 2%;
-  margin-top: 2%;
-  margin-bottom: 1%;
+  margin: 2% 2% 1% 2%;
   font-family: 'Times new roman', Courier, monospace;
 }
-
 
 .tests {
   font-size: 1rem;
   color: black;
-  margin-left: 1%;
-  margin-top: 3%;
+  margin: 3% 1% 0 1%;
   font-family: 'Times new roman', Courier, monospace;
 }
 
-.checkboxes1 {
-  width: 23px; 
+.checkboxes1, .checkboxes2, .checkboxes3, .checkboxes4 {
+  width: 23px;
   height: 23px;
-  margin-left: 0%; 
-  margin-top: 3%; 
+  margin-top: 3%;
   border-radius: 5px;
-  border: 0ch;    
+  border: 0;
 }
 
-.checkboxes2 {
-width: 23px; 
-height: 23px;
-margin-left: 0%; 
-margin-top: 3%; 
-border-radius: 5px;
-border: 0ch;    
-}
-
-.checkboxes3 {
-width: 23px; 
-height: 23px;
-margin-left: 0%; 
-margin-top: 3%; 
-border-radius: 5px;
-border: 0ch;    
-}
-
-.checkboxes4 {
-width: 23px; 
-height: 23px;
-margin-left: 0%; 
-margin-top: 3%; 
-border-radius: 5px;
-border: 0ch;    
-}
-
-
-
-/* Style the dropdown button */
 .dropdown-button {
-  width: 190px; 
+  width: 190px;
   height: 35px;
   background-color: white;
   color: black;
   font-weight: bold;
   cursor: pointer;
-  padding-bottom: 7.5px;
-  padding-top: 5px;
+  padding: 5px 0 7.5px;
   font-size: 18px;
-  margin-left: 10%; 
-  margin-top: 1%; 
+  margin: 1% 10% 0 10%;
   border-radius: 5px;
-  border: 0ch;
   border: 2px solid lightgray;
-
 }
 
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropdown-button {
   background-color: white;
 }
 
-/* Style the dropdown content (hidden by default) */
 .dropdown-content {
-  display:none;
+  display: none;
   background-color: whitesmoke;
-  min-width: 10px;
-  width: 150px; 
+  width: 150px;
   height: 95px;
-  margin-left: 10%; 
-  margin-top: 1%; 
-  margin-bottom: 0%;
+  margin: 1% 0 0 10%;
   border-radius: 5px;
-  border: 0ch;
-  z-index: 1;
   border: 2px solid lightgray;
-  
+  z-index: 1;
 }
 
-/* Style the links inside the dropdown */
 .dropdown-content a {
   font-size: 0.7rem;
   font-weight: bold;
   color: black;
-  padding: 5px ;
-  text-decoration:solid;
+  padding: 8px 8px 8px 35px;
+  text-decoration: none;
   display: block;
-  padding-bottom: 8px;
-  padding-left:35px;
-  padding-right: 8px;
-  padding-top: 8px;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: gainsboro;
-  
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.labels {
+.labels, .label1 {
   font-size: 20px;
   color: black;
-  margin-left: 10%;
-  margin-top: 0.3%;
-  margin-bottom:5%;
+  margin: 5% 0 0.3% 10%;
   font-family: 'Times new roman', Courier, monospace;
 }
 
-
-.label1 {
-font-size: 18px;
-color: black;
-margin-left: 20%;
-font-family: 'Times new roman', Courier, monospace;
-}
-
-
-.numbers1 {
-  width: 30px; 
+.numbers1, .numbers12, .numbers14 {
+  width: 30px;
   height: 30px;
   font-size: 1rem;
   color: black;
-  margin-left:1%;
-  margin-top: 1%;
-  margin-bottom: 0.3%;
-  padding-left: 0.9%;
+  margin: 1% 1% 0.3% 1%;
+  padding-left: 0.6%;
   border-radius: 5px;
-  border: 0ch;
-  font-family: 'Times new roman', Courier, monospace;
   border: 2px solid lightgray;
+  font-family: 'Times new roman', Courier, monospace;
 }
-
-.numbers12 {
-width: 30px; 
-height: 30px;
-font-size: 1rem;
-color: black;
-margin-left:1%;
-margin-top: 1%;
-margin-bottom: 0.3%;
-padding-left: 0.9%;
-border-radius: 5px;
-border: 0ch;
-font-family: 'Times new roman', Courier, monospace;
-border: 2px solid lightgray;
-}
-
-.numbers14 {
-width: 30px; 
-height: 30px;
-font-size: 1rem;
-color: black;
-margin-left:1%;
-margin-top: 1%;
-margin-bottom: 0.3%;
-padding-left: 0.9%;
-border-radius: 5px;
-border: 0ch;
-font-family: 'Times new roman', Courier, monospace;
-border: 2px solid lightgray;
-}
-
-
-
 
 .numbers2 {
-  width: 70px; 
+  width: 70px;
   height: 30px;
   font-size: 1rem;
   color: black;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  margin-right:0.00005%;
-  padding-left: 2.6%;
+  margin: 2% 0.00005% 5% 0;
+  padding-left: 1.6%;
   border-radius: 5px;
-  border: 0ch;
-  font-family: 'Times new roman', Courier, monospace;
   border: 2px solid lightgray;
+  font-family: 'Times new roman', Courier, monospace;
 }
 
-.error {
-  width: 50px; 
+.error, .error2, .error3, .error4 {
+  width: 50px;
   height: 28px;
   font-size: 1rem;
   color: black;
-  margin-left: 5%;
-  margin-top: 2%;
-  margin-right:0.00005%;
-  padding: 1.5%;
+  margin: 2% 0% 0 0%;
+  padding: 1.2%;
   border-radius: 5px;
-  border: 0ch;
-  font-family: 'Times new roman', Courier, monospace;
   border: 2px solid lightgray;
+  font-family: 'Times new roman', Courier, monospace;
 }
 
-.error2 {
-width: 50px; 
-height: 28px;
-font-size: 1rem;
-color: black;
-margin-left: 5%;
-margin-top: 2%;
-margin-right:0.00005%;
-padding: 1.5%;
-border-radius: 5px;
-border: 0ch;
-font-family: 'Times new roman', Courier, monospace;
-border: 2px solid lightgray;
-}
-
-.error3 {
-width: 50px; 
-height: 28px;
-font-size: 1rem;
-color: black;
-margin-left: 5%;
-margin-top: 2%;
-margin-right:0.00005%;
-padding: 1.5%;
-border-radius: 5px;
-border: 0ch;
-font-family: 'Times new roman', Courier, monospace;
-border: 2px solid lightgray;
-}
-
-.error4 {
-width: 50px; 
-height: 28px;
-font-size: 1rem;
-color: black;
-margin-left: 5%;
-margin-top: 2%;
-margin-right:0.00005%;
-padding: 1.5%;
-border-radius: 5px;
-border: 0ch;
-font-family: 'Times new roman', Courier, monospace;
-border: 2px solid lightgray;
-}
-
-.button1 {
-width: 80px; 
-height: 40px;
-background-color: white;
-color: green;
-margin-left: 88%;
-margin-bottom: 2%;
-border-radius: 5px;
-border: 0ch;
-cursor: pointer;
-font-size: 18px;
-font-weight: 600;
-border: 2px solid lightgray; /* Set border to gray with 2px width */
-}
-
-.button12 {
-  width: 80px; 
+.button1, .button12, .button13, .button14, .button11 {
+  width: 80px;
   height: 40px;
   background-color: white;
   color: green;
   margin-left: 88%;
-  margin-bottom: 2%;
+  margin-bottom: 0%;
   border-radius: 5px;
-  border: 0ch;
+  border: 2px solid lightgray;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
-  border: 2px solid lightgray; /* Set border to gray with 2px width */
-  }
-
-.button13 {
-width: 80px; 
-height: 40px;
-background-color: white;
-color: green;
-margin-left: 88%;
-margin-bottom: 2%;
-border-radius: 5px;
-border: 0ch;
-cursor: pointer;
-font-size: 18px;
-font-weight: 600;
-border: 2px solid lightgray; /* Set border to gray with 2px width */
+  max-width: 80px;
 }
-
-.button14 {
-  width: 80px; 
-  height: 40px;
-  background-color: white;
-  color: green;
-  margin-left: 88%;
-  margin-bottom: 2%;
-  border-radius: 5px;
-  border: 0ch;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  border: 2px solid lightgray; /* Set border to gray with 2px width */
-  }
-
-  .button11 {
-    width: 80px; 
-    height: 40px;
-    background-color: white;
-    color: green;
-    margin-left: 88%;
-    margin-bottom: 2%;
-    border-radius: 5px;
-    border: 0ch;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    border: 2px solid lightgray; /* Set border to gray with 2px width */
-    }
-
 
 .button2 {
-  width: 70px; 
+  width: 70px;
   height: 30px;
   background-color: white;
   color: green;
   margin-left: 50%;
   border-radius: 5px;
-  border: 0ch;
+  border: 2px solid lightgray;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  border: 2px solid lightgray; /* Set border to gray with 2px width */
-  }
+}
 
 .dropdown-button:hover,
 .button1:hover,
 .button12:hover,
 .button13:hover,
 .button14:hover,
-.button11:hover{
-  background-color: lightgray; /* Set background color to lightgray on click */
+.button11:hover {
+  background-color: lightgray;
 }
 
-
-
-main{
+main {
   margin-bottom: 100px;
 }
 
-
-.messageContainerf{
-  width: 500px;
-  padding: 20px; /* Padding around the message content */
-  border-radius: 20px; /* Rounded corners */
-  margin-left: 25%;
-  padding-left: 8%;
+.messageContainerf, .messageContainert, .messageContainerfilter {
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 3%;
   display: none;
-  background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
-  font-family: Times_new_roman, sans-serif; 
-  font-size: 16px; 
-  color: red; /* Text color */
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  font-family: Times_new_roman, sans-serif;
+  font-size: 16px;
+  color: red;
   font-weight: bold;
   border: 2px solid lightgray;
-
+  margin-left: 35%;
 }
 
-.messageContainert{
-  width: 500px;
-  padding: 20px; /* Padding around the message content */
-  border-radius: 20px; /* Rounded corners */
-  margin-left: 25%;
-  padding-left: 8%;
-  display: none;
-  background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
-  font-family: Times_new_roman, sans-serif; 
-  font-size: 16px; 
-  color: green; /* Text color */
-  font-weight: bold;
-  border: 2px solid lightgray;
-
+.messageContainert {
+  color: green;
 }
 
-
-.messageContainerfilter{
-  width: 500px;
-  padding: 20px; /* Padding around the message content */
-  border-radius: 20px; /* Rounded corners */
-  margin-left: 25%;
-  padding-left: 8%;
-  display: none;
-  background:-o-linea;
-  background: white;/*(45deg, lightgray 30%, lightgray 90%); /* Gradient background */
-  box-shadow: 0 4px 8px 0 lightgray(0,0,0,0.2); /* Shadow effect */
-  font-family: Times_new_roman, sans-serif; 
-  font-size: 16px; 
-  color: red; /* Text color */
-  font-weight: bold;
+.optionButton, .optionButtont {
+  width: 100px;
+  height: 52px;
+ 
+  background-color: white;
+  color: black;
+  border-radius: 5px;
   border: 2px solid lightgray;
-
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .optionButton {
-  width: 90px; 
-  height: 52px;
-  background-color: white;
-  color: black;
-  margin-top: 5%;
-  margin-left: 15%;
-  border-radius: 5px;
-  border: 0ch;
-  border: 2px solid lightgray;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
+  margin: 5% 0 0 20%;
 }
 
 .optionButtont {
-  width: 90px; 
-  height: 52px;
-  background-color: white;
-  color: black;
-  margin-top: 5%;
-  margin-left: 34%;
-  border-radius: 5px;
-  border: 0ch;
-  border: 2px solid lightgray;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
+  margin: 5% 0 0 39%;
 }
 
-
-.tabcontent .Scanin
-{
+.tabcontent .Scanin {
   padding: 10px;
-  margin:5px 15%;
+  margin: 5px 15%;
   box-sizing: border-box;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -491,7 +233,8 @@ main{
   width: 70%;
   background-color: white;
 }
-.Scanin:focus{
+
+.Scanin:focus {
   outline: none;
   border: 1px solid lightgray;
   transform: scale(1.05);
@@ -503,7 +246,7 @@ main{
   border: 2px solid black;
   position: fixed;
   top: 50%;
-  left: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
   width: 1200px;
@@ -511,37 +254,81 @@ main{
 
 
 }
+
+
+
 .button3 {
-  width: 90px; 
+  width: 90px;
   height: 40px;
   background-color: white;
   color: green;
   margin-left: 88%;
-  margin-bottom: 0%;
+  margin-bottom: 0;
   border-radius: 5px;
-  border: 0ch;
   font-size: 18px;
   font-weight: 600;
   padding: 5px;
-  border: 2px solid lightgray; /* Set border to gray with 2px width */
-  
+  border: 2px solid lightgray;
+}
+
+.table {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 35%;
+  margin-right: 35%;
+  border: #000000;
+  width: 100%;
+  max-width: 500px;
+}
+
+.table td, .table th {
+  width: 120px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* Ensure the buttons stay on the same line and the layout is responsive */
+.optionButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+}
+
+.messageButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.messageButtonContainer .optionButton, .messageButtonContainer .optionButtont {
+  margin: 0 2%;
+}
+
+@media (max-width: 768px) {
+  .optionButtonContainer {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .table {
-    position: absolute;  
-    top: 14%; 
-    margin-top: 15%;
-    margin-bottom: 15%;
-    margin-left: 25%; 
-    border: #000000;
+  .messageButtonContainer {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .optionButton, .optionButtont, .messageButtonContainer .optionButton, .messageButtonContainer .optionButtont {
+    margin: 5% 0;
+    width: 70%;
   }
-  
-  .table td,
-  .table th { /* Target both table cells (td) and headers (th) */
-    width: 120px;
-    height: 50px; /* Adjust height as needed */
-    background-color: white;
-    border-radius: 5px; 
+
+  .table, .messageContainerf, .messageContainert, .messageContainerfilter {
+    margin-left: 10%;
+    margin-right: 10%;
   }
-  
+
+  .button1, .button12, .button13, .button14, .button11, .button2, .button3 {
+    width: 70%;
+    font-size: 16px;
+  }
+}
+
