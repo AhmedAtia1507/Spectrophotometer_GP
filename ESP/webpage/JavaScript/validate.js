@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var input = document.createElement('input');
       input.type = 'number';
       input.className = 'numbers2'; // Add class for identification
-      input.placeholder = '0';
+      input.placeholder = '   0';
       // Set disabled state based on checkbox (optional)
       if (!checkbox.checked) {
         input.disabled = true;
@@ -204,7 +204,6 @@ document.addEventListener("DOMContentLoaded", function() {
 function compareValues() {
   var dropdown = document.getElementById('Sampleselector');
   var selectedOption = dropdown.options[dropdown.selectedIndex].value;
-
   // Check if a valid option is selected
   if (selectedOption === "" || selectedOption === "disabled") {
     if (document.getElementById('messageContainer1')) {
@@ -226,10 +225,8 @@ function compareValues() {
   });
 
   var errorLimit = parseInt(document.querySelector('.error').value);
-
   // Compare user input values with predefined values
   var passesTest = compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit);
-
   // Display the comparison result
   var messageContainer1 = document.getElementById('messageContainer1');
   var messageContainer2 = document.getElementById('messageContainer2');
@@ -247,7 +244,6 @@ function compareValues() {
     }
     showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1");
   }
-
   // Show the table with the results
   document.getElementById('tableContainer').style.display = 'block';
   generateTable(predefinedValues, 'numbers1', 'error', 'tableContainer');
@@ -265,23 +261,13 @@ function getPredefinedValues(option) {
   return predefinedValuesMap[option] || [];
 }
 
-function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
-  // Compare user input values with predefined values
-  for (var i = 0; i < userInputValues.length; i++) {
-    var difference = userInputValues[i] - predefinedValues[i];
-    if (Math.abs(difference) > errorLimit) {
-      return false;
-    }
-  }
-  return true;
-}
-
 
 /*
 
-****************************Photometric Accuracy********************************
+************************************photometric Accuracy***************************************************
 
 */
+
 document.addEventListener("DOMContentLoaded", function() {
   var formElements2 = document.querySelectorAll('.numbers12, .button12, .error2');
   var checkbox2 = document.querySelector('.checkboxes2');
@@ -294,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var submitButton1 = document.querySelector('.button12');
   submitButton1.addEventListener('click', function() {
-    document.getElementById('tableContainer').style.display = 'none';
+    document.getElementById('tableContainer1').style.display = 'none';
     var numfilters = parseInt(document.querySelector('.numbers12').value);
     var messageContainer12 = document.getElementById('messageContainer12');
     if (messageContainer12) {
@@ -315,6 +301,11 @@ document.addEventListener("DOMContentLoaded", function() {
       showMessage3("Start placing filters", "Done", "messageContainer31", numfilters);
     }
   });
+
+  // Attach event listener to button22 inside DOMContentLoaded
+  document.getElementById('button22').addEventListener('click', function() {
+    CompareValues1();
+  });
 });
 
 function generateInputs1() {
@@ -326,59 +317,62 @@ function generateInputs1() {
 
   // Generate new inputs
   for (var i = 0; i < numfilterslengths; i++) {
-      var label1 = document.createElement('label');
-      label1.textContent = 'Filters ' + (i + 1) + ' wavelength: ';
-      label1.className = 'label1';
-      filtersContainer.appendChild(label1);
-    
-      var input1 = document.createElement('input');
-      input1.type = 'number';
-      input1.className = 'numbers2'; // Add class for identification
-      input1.placeholder = '0';
-      input1.id = 'filter_' + i;
+    var label1 = document.createElement('label');
+    label1.textContent = 'Filters ' + (i + 1) + ' absorpation value: ';
+    label1.className = 'label1';
+    filtersContainer.appendChild(label1);
+  
+    var input1 = document.createElement('input');
+    input1.type = 'number';
+    input1.className = 'numbers3'; // Add class for identification
+    input1.placeholder = '  0';
+    input1.id = 'filter_' + i;
 
-      filtersContainer.appendChild(input1);
-    
-      var label21 = document.createElement('label');
-      label21.textContent = ' nm';
-      filtersContainer.appendChild(label21);
-      filtersContainer.appendChild(document.createElement("br")); // Add a line break for spacing
+    filtersContainer.appendChild(input1);
+  
+    var label21 = document.createElement('label');
+    label21.textContent = ' nm';
+    filtersContainer.appendChild(label21);
+    filtersContainer.appendChild(document.createElement("br")); // Add a line break for spacing
   }
 }
 
 function getPredefinedValues1() {
-  return [100, 200, 300];
+  return [100, 200, 300, 400];
 }
 
 function CompareValues1() {
   var predefinedValues = getPredefinedValues1();
   var errorLimit = parseInt(document.querySelector('.error2').value);
   var userInputValues = [];
-  var numfilters = predefinedValues.length;
 
-  for (var i = 0; i < numfilters; i++) {
-    var filterId = 'filter_' + i;
-    var filterInput = document.getElementById(filterId).value;
-    userInputValues.push(parseFloat(filterInput));
-  }
+  var inputs = document.querySelectorAll('.numbers3'); // Update class name if necessary
+  inputs.forEach(function(input) {
+    var inputValue = parseFloat(input.value);
+    userInputValues.push(inputValue);
+  });
 
   var passesTest2 = compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit);
-  var messageContainer1 = document.getElementById('messageContainer12'); // Updated ID
-  var messageContainer2 = document.getElementById('messageContainer31'); // Updated ID
+  var messageContainer12 = document.getElementById('messageContainer12'); // Updated ID
+  var messageContainer22 = document.getElementById('messageContainer22'); // Updated ID
 
   if (passesTest2) {
-    messageContainer1.style.display = 'none';
-    if (messageContainer2) {
-      messageContainer2.textContent = '';
+    messageContainer12.style.display = 'none';
+    if (messageContainer22) {
+      messageContainer22.textContent = '';
     }
-    showMessaget("Test passes!", "Show curve", "messageContainer31"); // Updated ID
+    showMessaget("Test passes!", "Show curve", "messageContainer22"); // Updated ID
   } else {
-    messageContainer2.style.display = 'none';
-    if (messageContainer1) {
-      messageContainer1.textContent = '';
+    messageContainer22.style.display = 'none';
+    if (messageContainer12) {
+      messageContainer12.textContent = '';
     }
-    showMessage("Test fails. Do you want to continue the test?", "Cancel", "messageContainer12"); // Updated ID
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer12");
   }
+
+  // Show the table with the results
+  document.getElementById('tableContainer1').style.display = 'block';
+  generateTable(predefinedValues, 'numbers12', 'error2', 'tableContainer1');
 }
 
 /*
@@ -588,9 +582,11 @@ function showMessage3(message, option1Text, containerId, numFilters) {
     // Check if all filters have been placed
     if (currentFilter === numFilters) {
       messageContainer.style.display = 'none'; // Hide container after completion
-        // Show the table with the results
-      document.getElementById('tableContainer').style.display = 'block';
-      generateTable(getPredefinedValues1(), 'numbers12', 'error2','tableContainer1');
+
+
+      var button22 = document.getElementById('button22');
+      button22.style.display = 'block';
+      
       CompareValues1();
 
       currentFilter = 0; // Reset filter counter for next sequence (optional)
@@ -622,6 +618,7 @@ function showMessage3(message, option1Text, containerId, numFilters) {
   // Append "Done" button to the container
   messageContainer.appendChild(option1Button);
 }
+
 
 
 
@@ -661,6 +658,8 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
 }
 
 
+
+
 function generateTable(predefinedValues, numClass, errorClass, tableid) {
   var numRows = parseInt(document.querySelector(`.${numClass}`).value);
   var numColumns = 4;
@@ -694,7 +693,6 @@ function generateTable(predefinedValues, numClass, errorClass, tableid) {
       return;
   }
 
-  console.log("Clearing previous table content.");
   tableContainer.innerHTML = ''; // Clear previous table
 
   var table = document.createElement('table');
@@ -847,3 +845,13 @@ var chart;
 
 
 
+function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
+  // Compare user input values with predefined values
+  for (var i = 0; i < userInputValues.length; i++) {
+    var difference = userInputValues[i] - predefinedValues[i];
+    if (Math.abs(difference) > errorLimit) {
+      return false;
+    }
+  }
+  return true;
+}
