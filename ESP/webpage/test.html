@@ -3,186 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .tabcontent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        fieldset {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        legend {
-            font-weight: bold;
-            padding: 0 10px;
-            width: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .legend-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .fsetup {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .fsetup-item {
-            display: flex;
-            flex-direction: column;
-            width: calc(50% - 10px);
-            min-width: 150px;
-        }
-
-        .fsetup-item label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .fsetup-item input,
-        .fsetup-item select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .setupButtons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            width: 100%;
-        }
-
-         button {
-            padding: 10px;
-            margin-left: 20px;
-            background-color: #0078d4;
-            border: none;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .setupButtons button:hover {
-            background-color: #005a9e;
-        }
-
-      
-    </style>
+    <title>Wavelength Input</title>
 </head>
 <body>
-    <div id="ScanVsWL" class="tabcontent">
-        <fieldset>
-            <legend>
-                Setup 
-                <div class="legend-buttons">
-                    <button id="savepreset" onclick="savepreset()" title="Save Current Method">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                    </button>
-                    <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd">
-                        <i class="fa-solid fa-upload"></i>
-                    </button>
-                </div>
-            </legend>
-            <div class="fsetup">
-                <div class="fsetup-item">
-                    <label for="LampsOFF">Lamps</label>
-                    <select name="lamps condition" id="LampsOFF">
-                        <option value="both-on">Both On</option>
-                        <option value="uv-off">UV Off</option>
-                        <option value="vi-off">VI Off</option>
-                    </select>
-                </div>
-                <div class="fsetup-item">
-                    <label for="mySelect">Mode</label>
-                    <select id="mySelect" name="mode">
-                        <option value="absorption">Absorption</option>
-                        <option value="transmission">Transmission</option>
-                    </select>
-                </div>
-                <div class="fsetup-item">
-                    <label for="SampleNum">NO. of Samples</label>
-                    <input id="SampleNum" class="SampleNum" placeholder="NO. of Samples" title="number of samples" type="number">
-                </div>
-                <div class="fsetup-item">
-                    <label for="start">WL Start</label>
-                    <input type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
-                </div>
-                <div class="fsetup-item">
-                    <label for="stop">WL Stop</label>
-                    <input type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
-                </div>
-                <div class="fsetup-item">
-                    <label for="step">WL Step</label>
-                    <input type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
-                </div>
-                <div class="fsetup-item">
-                    <label for="initTime">Integration Time</label>
-                    <input type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
-                </div>
-            </div>
-        </fieldset>
-        <div class="setupButtons">
-            <button id="SampleNumBTN" title="add columns to start">
-                <i class="fa-solid fa-square-plus"></i>
-            </button>
-            <button onclick="pauseScan()" title="stop the scan">
-                <i class="fa-solid fa-pause"></i>
-            </button>
-        </div>
-    </div>
+    <input type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value" value="0">
+    <input type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
+    <input type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
+    <button id="generate">Generate</button>
+    <div id="message"></div>
 
-    <script>
-        function savepreset() {
-            // Add your save preset logic here
-            alert('Save preset clicked');
-        }
+    <script >
+    document.getElementById('generate').addEventListener('click', function() {
+    const start = parseFloat(document.getElementById('start').value);
+    const stop  = parseFloat(document.getElementById('stop').value);
+    const step  = parseFloat(document.getElementById('step').value);
 
-        function showItems(item) {
-            // Add your load preset logic here
-            alert('Load preset clicked: ' + item);
-        }
+    if (isNaN(start) || isNaN(stop) || isNaN(step)) {
+        alert('Please enter valid numerical values.');
+        return;
+    }
 
-        function pauseScan() {
-            // Add your pause scan logic here
-            alert('Pause scan clicked');
+    const rangeKey = `range_${step}`;
+    console.log(rangeKey);
+    const storedData = localStorage.getItem(rangeKey);
+
+    let X = [], Y = [];
+    
+    for (let i = start; i <= stop; i += step) {
+        X.push(i);
+        Y.push(Math.random()); // Example Y values, replace with actual data generation
+    }
+
+    if (storedData) {
+        const { Xref, Yref } = JSON.parse(storedData);
+        console.log("X length : "+X.length)
+        console.log("Y length : "+Y.length)
+        console.log("Xref length : "+Xref.length)
+        console.log("Yref length : "+Yref.length)
+        console.log("Stop value : "+stop)
+        console.log("Xref last value : "+Xref[Xref.length-1])
+        
+        if (stop < Xref[Xref.length-1]) {
+            alert('Stored reference data length does not match the current data length. Please perform the zero method again.');
+            alert('no need to perfom zero method');
+            const Xadjusted = X.map((x, index) => x );
+            const Yadjusted = Y.map((y, index) => y - Yref[index]);
+            displayResults(Xadjusted, Yadjusted);    
         }
+            if(stop > Xref[Xref.length-1]){
+                alert('we need to perform zero method');
+                document.getElementById('start').value = Xref[Xref.length-1];
+                performZeroMethod(rangeKey, X, Y);
+            }
+        else {
+            const Xadjusted = X.map((x, index) => x );
+            const Yadjusted = Y.map((y, index) => y - Yref[index]);
+            displayResults(Xadjusted, Yadjusted);
+        }
+    } else {
+        performZeroMethod(rangeKey, X, Y);
+    }
+});
+
+function performZeroMethod(rangeKey, X, Y) {
+    // Implement zero method here. For now, using dummy Xref and Yref
+    const Xref = X.map(x => x); // Example Xref values
+    const Yref = Y.map(y => y * 0.5); // Example Yref values
+
+    localStorage.setItem(rangeKey, JSON.stringify({ Xref, Yref }));
+    alert('Zero method performed and reference data stored.');
+
+    const Xadjusted = X.map((x, index) => x);
+    const Yadjusted = Y.map((y, index) => y - Yref[index]);
+    displayResults(Xadjusted, Yadjusted);
+}
+
+function displayResults(X, Y) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerHTML = `<p>X: ${X.join(', ')}</p><p>Y: ${Y.join(', ')}</p>`;
+}
+
     </script>
 </body>
 </html>

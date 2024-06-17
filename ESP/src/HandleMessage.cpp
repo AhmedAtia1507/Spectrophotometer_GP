@@ -373,9 +373,15 @@ void handleScanTask(void *pvParameters)
         delay(1);
       }
       // String response = Serial2.readStringUntil('\n');
-
-      String response ="23/3||1:30 200 10 10.5";
-      Serial.println(response); // debug
+    // Generate random numbers in the range 1 to 1000
+    int num1 = rand() % 1000 + 1;
+    int num2 = rand() % 1000 + 1;
+    int num3 = rand() % 1000 + 1;
+      
+       // Create the response string
+    String response = "23/3||1:30 ";
+    response += String(num1) + " " + String(num2) + " " + String(num3);
+    Serial.println(response); // debug
 
       // Split the response into components
       int space1 = response.indexOf(' ');
@@ -383,7 +389,8 @@ void handleScanTask(void *pvParameters)
       int space3 = response.indexOf(' ', space2 + 1);
 
       String Time = response.substring(0, space1);
-      String wavelength = response.substring(space1 + 1, space2);
+//      String wavelength = response.substring(space1 + 1, space2);
+      String wavelength= String(i);
       String reference = response.substring(space2 + 1, space3);
       String sample = response.substring(space3 + 1);
       if (scanning)

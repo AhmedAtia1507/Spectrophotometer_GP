@@ -204,7 +204,7 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
         y: {
           type: 'linear',
           position: 'left',
-          
+
           ticks: {
             color: 'black' // Change color of y-axis ticks
           }
@@ -321,12 +321,12 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
   }
 
   chartScan.update(); // Update the chart
-// add to select 
-const selectElement = document.getElementById('chart-select');
-      const option = document.createElement('option');
-      option.value = curveName;
-      option.text = curveName;
-      selectElement.appendChild(option);
+  // add to select 
+  const selectElement = document.getElementById('chart-select');
+  const option = document.createElement('option');
+  option.value = curveName;
+  option.text = curveName;
+  selectElement.appendChild(option);
 
 }
 
@@ -340,10 +340,10 @@ function changeCurveColor(curveName, color) {
   chartScan.update(); // test name of chart scanChart
 }
 
-function changeColor(){
+function changeColor() {
   var curveName = document.getElementById('chart-select').value;
   var color = document.getElementById('color-picker').value;
-  changeCurveColor(curveName, color); 
+  changeCurveColor(curveName, color);
 }
 
 function hideCurve(curveName) {
@@ -354,25 +354,26 @@ function hideCurve(curveName) {
     chartScan.update();
   }
 }
-function hideSelectedCurve(){
+function hideSelectedCurve() {
   var curveName = document.getElementById('chart-select').value;
   hideCurve(curveName);
 }
-function deleteCurve(curveName){
+function deleteCurve(curveName) {
   const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
   if (existingCurveIndex !== -1) {
     chartScan.data.datasets.splice(existingCurveIndex, 1);
-    chartScan.update();   
-}
+    chartScan.update();
+  }
 
-const selectElement = document.getElementById('chart-select');
+  const selectElement = document.getElementById('chart-select');
 
-// Iterate through all options
-for (let i = 0; i < selectElement.options.length; i++) {
+  // Iterate through all options
+  for (let i = 0; i < selectElement.options.length; i++) {
     if (selectElement.options[i].value === curveName) {
-        selectElement.remove(i);
-        break; 
-    }}
+      selectElement.remove(i);
+      break;
+    }
+  }
 
 
 }
@@ -434,7 +435,6 @@ function startScan(btn) {
   var index = row.rowIndex;  // Get the row index
   var SampleID = row.cells[2].innerHTML;
   var SampleDecribe = row.cells[3].innerHTML;
-
   console.log("index0:" + index);
   console.log("sampleID0:" + SampleID);
 
@@ -446,11 +446,11 @@ function startScan(btn) {
     isScanning = true;
     scan(index, SampleID, SampleDecribe, btn); // send index to display message with index
   } else {
-    stopScan(btn,index);
+    stopScan(btn, index);
   }
 }
 
-function stopScan(btn) {
+function stopScan(btn, index) {
   // Add your stop scan logic here
   isScanning = false;
   btn.innerHTML = '<i class="fa-solid fa-play"></i>';
@@ -461,7 +461,7 @@ function stopScan(btn) {
   console.log(message);
   websocket.send(JSON.stringify(message));
   console.log("Scan stopped");
-  changeState(index,"Stopped !",12,btn);
+  changeState(index, "Stopped !", "##", btn);
 }
 
 
@@ -494,7 +494,13 @@ function enableInputs() {
 
 
 
+
 function scan(index, SampleID, SampleDecribe, btn) {
+  let x = []; // wavelength
+  let y = []; // intensity
+  let absorbtionAry = [];
+  let transmissionAry = [];
+
   // toggleInteractiveElements();
   let temp = document.getElementById('DateTime').textContent;
   var time = temp.replaceAll(":", " ");  //because file name can't contain :
@@ -504,25 +510,25 @@ function scan(index, SampleID, SampleDecribe, btn) {
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
-  let x = []; // wavelength
-  let y = []; // intensity
+
 
 
 
   function processScanData(data) {
     const currentTime = data.currentTime;
-    const wavelength = data.wavelength;
+    const wavelength = parseFloat(data.wavelength);
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference / intensitySample);
     let scanning = data.scanning; //check if the scan end or not
     const progress = data.current; //represent the progress to display the current progress
-    changeState(index, "...", progress, btn);
-
-
+    const rangeKey = `range_${stepInput}`;
+   
     // Update the chart data
     x.push(wavelength);
+    absorbtionAry.push(absorption);
+    transmissionAry.push(transmission);
 
     if (modeInput == "absorption") {
       y.push(absorption);
@@ -530,10 +536,78 @@ function scan(index, SampleID, SampleDecribe, btn) {
     else {
       y.push(transmission);
     }
-    const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
-    displayCMD(res, 'green', index);
-    addCurve(x, y, colorSelectArr[index], SampleID);
-    StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
+
+
+    // Extract globalXref, globalAbsorptionref, globalTransmissionref for addCurve function auto_zero
+    const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
+    if (storedData.length > 0) {
+      globalXref = storedData.map(item => item.x);
+      globalAbsorptionref = storedData.map(item => item.absorption);
+      globalTransmissionref = storedData.map(item => item.transmission);
+    }
+
+
+    if (index == 'autozero') {
+      
+      const newData = {
+        x: wavelength,
+        absorption: absorption,
+        transmission: transmission
+      }
+
+      // Retrieve existing data from local storage
+      const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
+      // Append new data to the existing data
+      storedData.push(newData);
+      // Sort the array in descending order based on the x value
+      storedData.sort((a, b) => b.x - a.x);
+
+      // Store the updated data in local storage
+      localStorage.setItem(rangeKey, JSON.stringify(storedData));
+      console.log(storedData);
+      disableInputs();
+      if (progress == 100 && index == 'autozero') {
+        document.getElementById('start').value = globalStart;
+        document.getElementById('stop').value = globalStop; 
+        console.log(AutoZeroResponse);
+        if(AutoZeroResponse=="not equal and we need to perform zero method twice"){
+          console.log(globalXref[globalXref.length - 1] - stepInput);
+          document.getElementById('stop').value = globalXref[globalXref.length - 1] - stepInput;
+          toggleLoginContainer('NextSample');
+          if(AutoZeroResponse){
+            document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+         
+          }
+          AutoZeroResponse = '' ;
+          
+        }
+        enableInputs();
+      }
+
+    }
+
+   
+
+
+    if (index !== 'autozero') {
+      const AbsorptionAdjusted = absorbtionAry.map((y, index) => y - globalAbsorptionref[index]);
+      const TransmissionAdjusted = transmissionAry.map((y, index) => y - globalTransmissionref[index]);
+      const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + AbsorptionAdjusted + " ||Transmission: " + TransmissionAdjusted;
+      changeState(index, "...", progress, btn);
+      displayCMD(res, 'green', index);
+      if (modeInput == "absorption") {
+        addCurve(x, globalAbsorptionref, colorSelectArr[index], "Ref");
+        addCurve(x, absorbtionAry, colorSelectArr[index], "befor adjust");
+        addCurve(x, AbsorptionAdjusted, colorSelectArr[index], SampleID);
+
+      }
+      else {
+        addCurve(x, TransmissionAdjusted, colorSelectArr[index], SampleID);
+      }
+
+
+      StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
+    }
     //  if(wavelength===stopInput){
     //   console.log("final wavelength is reached");
     //   savetosd(SampleID); 
@@ -585,6 +659,9 @@ function scan(index, SampleID, SampleDecribe, btn) {
   continueScanning(startInput);
 
 }
+
+
+
 /*====================================preset/readings section====================================*/
 
 // function to display the preset name container 
@@ -1003,144 +1080,6 @@ function processReadingsData(data) {
 
 
 
-// function showpreset() {
-//   var message = {
-//     showpreset: 'showpreset'
-//   };
-//   const flyoutMenu = document.getElementById('presets');
-//   const computedStyle = window.getComputedStyle(flyoutMenu);
-//   if (computedStyle.display === 'none') {
-//     websocket.send(JSON.stringify(message));
-
-//     for (var j = myList.children.length - 1; j >= 0; j--) {
-//       var child = myList.children[j];
-//       // Check if the element has an id and it is not "nopresets"
-//       if (child.id !== 'nopresets' && child.id !== 'search') {
-//         myList.removeChild(child);
-//       }
-//     }
-
-//   }
-//   websocket.onmessage = function (event) {
-
-//     var myObj = JSON.parse(event.data);
-//     console.log(myObj);
-//     if (myObj.hasOwnProperty('presetsno')) {
-
-//       let i = myObj.presetsno;
-//       if (i == 0) {
-//         console.log('iiiii b =0');
-//         var nopresetsDiv = document.getElementById('nopresets');
-//         nopresetsDiv.innerHTML = 'No Presets available';
-//       }
-
-
-//       else {
-//         console.log('iiiii mesh b =0');
-//         var nopresetsDiv = document.getElementById('nopresets');
-//         nopresetsDiv.innerHTML = '';
-
-//         for (i; i > 0; i--) {
-//           (function (i) {
-//             let file = 'file' + i;
-//             console.log(myObj[file] + ": ");
-//             var newItem = document.createElement("li");
-//             var itemName = myObj[file];
-//             var textSpan = document.createElement("span");
-//             var textNode = document.createTextNode(itemName);
-//             textSpan.appendChild(textNode);
-//             newItem.appendChild(textSpan);
-//             myList.insertBefore(newItem, myList.lastChild);
-//             deletepreset(myList, itemName, newItem,"deletepreset");
-
-
-//             newItem.addEventListener("click", function () {
-//               console.log("Clicked on item: " + itemName);
-//               var message = {
-//                 Dictionary:"presets",
-//                 loadthis: itemName
-//               };
-//               websocket.send(JSON.stringify(message));
-//               websocket.onmessage = function (event) {
-//                 var myObj = JSON.parse(event.data);
-//                 console.log(myObj);
-//                 var myreadings = document.getElementById("scanReadings");
-//                 var newItem = document.createElement("p");
-//                 var itemName = event.data;
-//                 var textNode = document.createTextNode(itemName);
-//                 newItem.appendChild(textNode);
-//                 //myreadings.insertBefore(newItem, myreadings.lastChild);
-//                 if (myObj.hasOwnProperty('loaded')&&myObj.hasOwnProperty('mode')) {
-//                   var startValue = parseInt(myObj.start, 10);
-//                   var stopValue = parseInt(myObj.stop, 10);
-//                   var stepValue = parseInt(myObj.step, 10);
-//                   //var nameValue = myObj.id;
-//                   //var discription = myObj.speed;
-//                   var initTimeValue = parseInt(myObj.inittime, 10);
-//                   document.getElementById('start').value = isNaN(startValue) ? '' : startValue;
-//                   document.getElementById('stop').value = isNaN(stopValue) ? '' : stopValue;
-//                   document.getElementById('step').value = isNaN(stepValue) ? '' : stepValue;
-//                   document.getElementById('initTime').value = isNaN(initTimeValue) ? '' : initTimeValue;
-//                   selectMode(myObj.mode.trim())
-
-//                 }
-
-
-//               }
-
-//             });
-
-//           })(i);
-//         }
-//       }
-
-
-
-//     }
-//   }
-//   openlist();
-
-// }
-
-
-
-// function deletepreset(myList, names, newItem) {
-//   var deleteButton = document.createElement("div");
-//   deleteButton.textContent = "🗑️";
-//   deleteButton.classList.add("delete-button");
-//   deleteButton.addEventListener("click", function () {
-//     myList.removeChild(newItem);
-//     var message = {
-//       deletepreset: 'deletepreset',
-//       name: names,
-//     };
-//     websocket.send(JSON.stringify(message));
-//     showpreset();
-//   });
-//   // Append the delete button to the new list item
-//   newItem.appendChild(deleteButton);
-// }
-
-
-
-
-// function nameExists(name, list) {
-//   // Check if the name already exists in the list
-//   var items = list.getElementsByTagName("li");
-
-//   for (var i = 0; i < items.length; i++) {
-//     var spans = items[i].getElementsByTagName("span");
-//     if (spans.length > 0) {
-//       var text = spans[0].textContent;
-//       if (text === name) {
-//         return true; // Name already exists
-//       }
-//     }
-//   }
-//   return false; // Name does not exist
-// }
-
-
 
 document.addEventListener('click', function (event) {
   const flyoutBtn = document.getElementById('loadpreset');
@@ -1158,8 +1097,7 @@ document.addEventListener('click', function (event) {
 
 
 
-var input = document.getElementById("search");
-
+const input = document.getElementById("search");
 input.addEventListener('input', filter);
 function filter() {
   var myList = document.getElementById("presetlist");
@@ -1339,13 +1277,19 @@ function constructtable(num) {
 
   }
 }
-
+let AutoZeroResponse;
 document.getElementById('SampleNumBTN').addEventListener('click', function () {
   var num = document.getElementById('SampleNum').value; // Enclosed 'SampleNum' in quotes
 
   if (num > 0) {
+    AutoZeroResponse = AutoZero(); //check the range if there is auto zero for it
+    console.log(AutoZeroResponse);
 
-    toggleLoginContainer('NextSample');
+    if (AutoZeroResponse == "not equal and we need to perform zero method" || AutoZeroResponse == "No Auto zero data for this range do you want to perform auto zero ?" || AutoZeroResponse == "not equal and we need to perform zero method twice") {
+      toggleLoginContainer('NextSample');
+      document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+    }
+
     constructtable(num);
     document.getElementById('myTable').scrollIntoView({ behavior: 'smooth' });
   }
@@ -1398,7 +1342,7 @@ function changeState(rowIndex, newState, progress, btn) {
     btn.innerHTML = '<i class="fa-solid fa-play"></i>';
     enableInputs();
     isScanning = false;
-    toggleLoginContainer('NextSample');
+    // toggleLoginContainer('NextSample');
 
   }
 }
@@ -1946,13 +1890,103 @@ function handleLogin(myObj) {
 /*============================ END OF LOGIN ============================*/
 
 /*============================ Time Scan ============================*/
-function startTimeScan(target){
-if(target.innerHTML==='<i class="fa-solid fa-stop"></i>'){
-  
-  target.innerHTML='<i class="fa-solid fa-play"></i>';
+function startTimeScan(target) {
+  if (target.innerHTML === '<i class="fa-solid fa-stop"></i>') {
+
+    target.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+  else {
+    target.innerHTML = '<i class="fa-solid fa-stop"></i>';
+
+  }
 }
-else{
-  target.innerHTML='<i class="fa-solid fa-stop"></i>';
+
+/**
+ * =================Auto-zero method===============
+ */
+
+// Define global variables
+let globalXref = [];
+let globalTransmissionref = [];
+let globalAbsorptionref = [];
+let globalStart;
+let globalStop;
+function AutoZero() {
+  const start = parseFloat(document.getElementById('start').value);
+  const stop = parseFloat(document.getElementById('stop').value);
+  const step = parseFloat(document.getElementById('step').value);
+  globalStart = start;
+  globalStop = stop;
+
+  if (isNaN(start) || isNaN(stop) || isNaN(step)) {
+    return 'Please enter valid numerical values.';
+  }
+
+  const rangeKey = `range_${step}`;
+  console.log(rangeKey);
+  const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
+
+
+  if (storedData) {
+    // const { Xref, absorptionref, Transmissionref } = JSON.parse(storedData);
+    // globalXref = Xref;
+    // globalAbsorptionref = absorptionref;
+    // globalTransmissionref = Transmissionref;
+    // // console.log("X length : "+X.length)
+    // console.log("Y length : "+Y.length)
+    // console.log("Xref  : "+Xref)
+    // console.log("Yref : "+Yref)
+
+    // console.log("Xref length : "+Xref.length)
+    // console.log("Yref length : "+Yref.length)
+    // console.log("Stop value : "+stop)
+    // console.log("Xref last value : "+Xref[Xref.length-1])
+    console.log(storedData)
+
+    
+    if (storedData.length > 0) {
+      globalXref = storedData.map(item => item.x);
+      
+
+      let needZeroMethod = 0;
+
+      if (stop > globalXref[0]) {
+        document.getElementById('start').value = globalXref[0] + step;
+        needZeroMethod++ ;
+      }
+
+      if ((start < (globalXref[globalXref.length - 1] - step ))) {
+        if(needZeroMethod==0){
+        document.getElementById('stop').value = globalXref[globalXref.length - 1] - step;
+        }
+        needZeroMethod++;
+      }
+
+      if (needZeroMethod) {
+        if (needZeroMethod==2){
+          return "not equal and we need to perform zero method twice";
+        }
+        // performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn);
+        return "not equal and we need to perform zero method";
+      }
+
+
+    }
+    else {
+      return "No Auto zero data for this range do you want to perform auto zero ?"
+    }
+
+
+  }
+
+  else {
+    // performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn);
+    return "No Auto zero data for this range do you want to perform auto zero ?"
+  }
+
 
 }
-}
+document.getElementById('clearStorage').addEventListener('click', function () {
+  localStorage.clear();
+  alert('Local storage cleared.');
+});
