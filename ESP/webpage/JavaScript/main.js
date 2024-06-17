@@ -204,7 +204,7 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
         y: {
           type: 'linear',
           position: 'left',
-          
+
           ticks: {
             color: 'black' // Change color of y-axis ticks
           }
@@ -321,12 +321,12 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
   }
 
   chartScan.update(); // Update the chart
-// add to select 
-const selectElement = document.getElementById('chart-select');
-      const option = document.createElement('option');
-      option.value = curveName;
-      option.text = curveName;
-      selectElement.appendChild(option);
+  // add to select 
+  const selectElement = document.getElementById('chart-select');
+  const option = document.createElement('option');
+  option.value = curveName;
+  option.text = curveName;
+  selectElement.appendChild(option);
 
 }
 
@@ -340,10 +340,10 @@ function changeCurveColor(curveName, color) {
   chartScan.update(); // test name of chart scanChart
 }
 
-function changeColor(){
+function changeColor() {
   var curveName = document.getElementById('chart-select').value;
   var color = document.getElementById('color-picker').value;
-  changeCurveColor(curveName, color); 
+  changeCurveColor(curveName, color);
 }
 
 function hideCurve(curveName) {
@@ -354,17 +354,18 @@ function hideCurve(curveName) {
     chartScan.update();
   }
 }
-function hideSelectedCurve(){
+function hideSelectedCurve() {
   var curveName = document.getElementById('chart-select').value;
   hideCurve(curveName);
 }
-function deleteCurve(curveName){
+function deleteCurve(curveName) {
   const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
   if (existingCurveIndex !== -1) {
     chartScan.data.datasets.splice(existingCurveIndex, 1);
     chartScan.update();
-    
-}}
+
+  }
+}
 function deleteSelectedCurve() {
   var curveName = document.getElementById('chart-select').value;
   deleteCurve(curveName);
@@ -423,7 +424,6 @@ function startScan(btn) {
   var index = row.rowIndex;  // Get the row index
   var SampleID = row.cells[2].innerHTML;
   var SampleDecribe = row.cells[3].innerHTML;
-
   console.log("index0:" + index);
   console.log("sampleID0:" + SampleID);
 
@@ -431,15 +431,16 @@ function startScan(btn) {
     if (!validateInputs()) return;
     document.getElementById("CMDMB").innerHTML = '';
     btn.innerHTML = '<i class="fa-solid fa-stop"></i>';
+    AutoZero(index, SampleID, SampleDecribe, btn); //check the range if there is auto zero for it
     disableInputs();
     isScanning = true;
     scan(index, SampleID, SampleDecribe, btn); // send index to display message with index
   } else {
-    stopScan(btn,index);
+    stopScan(btn, index);
   }
 }
 
-function stopScan(btn) {
+function stopScan(btn, index) {
   // Add your stop scan logic here
   isScanning = false;
   btn.innerHTML = '<i class="fa-solid fa-play"></i>';
@@ -450,7 +451,7 @@ function stopScan(btn) {
   console.log(message);
   websocket.send(JSON.stringify(message));
   console.log("Scan stopped");
-  changeState(index,"Stopped !",12,btn);
+  changeState(index, "Stopped !", 12, btn);
 }
 
 
@@ -482,7 +483,10 @@ function enableInputs() {
 
 
 
-
+let x = []; // wavelength
+let y = []; // intensity
+let absorbtionAry = [];
+let transmissionAry = [];
 function scan(index, SampleID, SampleDecribe, btn) {
   // toggleInteractiveElements();
   let temp = document.getElementById('DateTime').textContent;
@@ -493,8 +497,6 @@ function scan(index, SampleID, SampleDecribe, btn) {
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
-  let x = []; // wavelength
-  let y = []; // intensity
 
 
 
@@ -512,16 +514,21 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
     // Update the chart data
     x.push(wavelength);
-
+    absorbtionAry.push(absorption);
+    transmissionAry.push(transmission);
     if (modeInput == "absorption") {
       y.push(absorption);
     }
     else {
       y.push(transmission);
     }
+
+
+
     const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
     displayCMD(res, 'green', index);
     addCurve(x, y, colorSelectArr[index], SampleID);
+    
     StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
     //  if(wavelength===stopInput){
     //   console.log("final wavelength is reached");
@@ -1334,7 +1341,7 @@ document.getElementById('SampleNumBTN').addEventListener('click', function () {
 
   if (num > 0) {
 
-    toggleLoginContainer('NextSample');
+    // toggleLoginContainer('NextSample');
     constructtable(num);
     document.getElementById('myTable').scrollIntoView({ behavior: 'smooth' });
   }
@@ -1387,7 +1394,7 @@ function changeState(rowIndex, newState, progress, btn) {
     btn.innerHTML = '<i class="fa-solid fa-play"></i>';
     enableInputs();
     isScanning = false;
-    toggleLoginContainer('NextSample');
+    // toggleLoginContainer('NextSample');
 
   }
 }
@@ -1935,13 +1942,103 @@ function handleLogin(myObj) {
 /*============================ END OF LOGIN ============================*/
 
 /*============================ Time Scan ============================*/
-function startTimeScan(target){
-if(target.innerHTML==='<i class="fa-solid fa-stop"></i>'){
-  
-  target.innerHTML='<i class="fa-solid fa-play"></i>';
-}
-else{
-  target.innerHTML='<i class="fa-solid fa-stop"></i>';
+function startTimeScan(target) {
+  if (target.innerHTML === '<i class="fa-solid fa-stop"></i>') {
 
+    target.innerHTML = '<i class="fa-solid fa-play"></i>';
+  }
+  else {
+    target.innerHTML = '<i class="fa-solid fa-stop"></i>';
+
+  }
 }
+
+/**
+ * =================Auto-zero method===============
+ */
+
+// Define global variables
+let globalXref = [];
+let globalTransmissionref = [];
+let globalAbsorptionref = [];
+function AutoZero(index, SampleID, SampleDecribe, btn) {
+  const start = parseFloat(document.getElementById('start').value);
+  const stop = parseFloat(document.getElementById('stop').value);
+  const step = parseFloat(document.getElementById('step').value);
+
+  if (isNaN(start) || isNaN(stop) || isNaN(step)) {
+    alert('Please enter valid numerical values.');
+    return;
+  }
+
+  const rangeKey = `range_${step}`;
+  console.log(rangeKey);
+  const storedData = localStorage.getItem(rangeKey);
+  if (storedData) {
+    const { Xref, absorptionref, Transmissionref } = JSON.parse(storedData);
+    globalXref = Xref;
+    globalAbsorptionref = absorptionref;
+    globalTransmissionref = Transmissionref;
+    // console.log("X length : "+X.length)
+    // console.log("Y length : "+Y.length)
+    // console.log("Xref  : "+Xref)
+    // console.log("Yref : "+Yref)
+
+    // console.log("Xref length : "+Xref.length)
+    // console.log("Yref length : "+Yref.length)
+    // console.log("Stop value : "+stop)
+    // console.log("Xref last value : "+Xref[Xref.length-1])
+    if (x.length !== Xref.length) {
+      if (stop < Xref[Xref.length - 1] || start > Xref[0]) {
+        // alert('no need to perfom zero method');
+        // addCurve(x, y, 'green', 'AutoZeroBefore', false);
+        // addCurve(Xadjusted, Yadjusted, 'green', 'Zero', false);
+        return "not equal but no need to do an auto zero"
+      }
+
+      if (stop > Xref[Xref.length - 1]) {
+        document.getElementById('start').value = Xref[Xref.length - 1]+step;
+        if (start < Xref[0]) {
+          document.getElementById('stop').value = Xref[0]-step;
+        }
+        performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn);
+        document.getElementById('start').value = start;
+        document.getElementById('stop').value = stop;
+        return "not equal and we need to perform zero method"
+      }
+    }
+
+    else {
+      return "equal size"
+    }
+  }
+
+  else {
+    performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn);
+    return "Zero method performed and reference data stored"
+  }
+
+
+  // function performZeroMethod(rangeKey, X, Y,index, SampleID, SampleDecribe, btn) {
+
+  //   scan(index, SampleID, SampleDecribe, btn);
+
+  //   // Implement zero method here. For now, using dummy Xref and Yref
+  //   let Xref=[];
+  //   let Yref=[];
+  //   Xref = X.map(x => x); // Example Xref values
+  //   Yref =Y.map(y => 0.2); // Example Yref values
+  //   localStorage.setItem(rangeKey, JSON.stringify({ Xref, Yref }));
+  //   alert('Zero method performed and reference data stored.');
+  //   addCurve(Xref, Yref, 'red', 'performZeroMethod', false);
+  // }
+
+function performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn) {
+    scan(index, SampleID, SampleDecribe, btn);
+  }
 }
+
+document.getElementById('clearStorage').addEventListener('click', function () {
+  localStorage.clear();
+  alert('Local storage cleared.');
+});
