@@ -362,9 +362,19 @@ function deleteCurve(curveName) {
   const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
   if (existingCurveIndex !== -1) {
     chartScan.data.datasets.splice(existingCurveIndex, 1);
-    chartScan.update();
+    chartScan.update();   
+}
 
-  }
+const selectElement = document.getElementById('chart-select');
+
+// Iterate through all options
+for (let i = 0; i < selectElement.options.length; i++) {
+    if (selectElement.options[i].value === curveName) {
+        selectElement.remove(i);
+        break; 
+    }}
+
+
 }
 function deleteSelectedCurve() {
   var curveName = document.getElementById('chart-select').value;
