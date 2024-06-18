@@ -1,0 +1,11 @@
+../Src/MCAL/EXTI/EXTI_Program.c:19:16:MEXTI_EnableExternalInterrupt	7
+../Src/MCAL/EXTI/EXTI_Program.c:60:16:MEXTI_DisableExternalInterrupt	2
+../Src/MCAL/EXTI/EXTI_Program.c:74:16:MEXTI_SoftwareTrigger	2
+../Src/MCAL/EXTI/EXTI_Program.c:88:16:MEXTI_SetCallbackFunction	2
+../Src/MCAL/EXTI/EXTI_Program.c:101:6:EXTI0_IRQHandler	2
+../Src/MCAL/EXTI/EXTI_Program.c:113:6:EXTI1_IRQHandler	2
+../Src/MCAL/EXTI/EXTI_Program.c:125:6:EXTI2_IRQHandler	2
+../Src/MCAL/EXTI/EXTI_Program.c:137:6:EXTI3_IRQHandler	2
+../Src/MCAL/EXTI/EXTI_Program.c:149:6:EXTI4_IRQHandler	2
+../Src/MCAL/EXTI/EXTI_Program.c:161:6:EXTI9_5_IRQHandler	11
+../Src/MCAL/EXTI/EXTI_Program.c:228:6:EXTI15_10_IRQHandler	13

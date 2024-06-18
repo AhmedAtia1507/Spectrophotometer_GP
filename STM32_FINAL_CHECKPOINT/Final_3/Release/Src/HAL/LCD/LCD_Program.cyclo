@@ -1,0 +1,8 @@
+../Src/HAL/LCD/LCD_Program.c:222:16:LCD_Peek	1
+../Src/HAL/LCD/LCD_Program.c:61:16:LCD_WriteCommand4Bit	1
+../Src/HAL/LCD/LCD_Program.c:114:16:LCD_SetCursorPosition	4
+../Src/HAL/LCD/LCD_Program.c:87:16:LCD_WriteChar4Bit	1
+../Src/HAL/LCD/LCD_Program.c:164:16:LCD_WriteString	3
+../Src/HAL/LCD/LCD_Program.c:190:16:LCD_WriteIntegerValue	4
+../Src/HAL/LCD/LCD_Program.c:237:16:LCD_ClearDisplay	1
+../Src/HAL/LCD/LCD_Program.c:25:16:LCD_Init	1

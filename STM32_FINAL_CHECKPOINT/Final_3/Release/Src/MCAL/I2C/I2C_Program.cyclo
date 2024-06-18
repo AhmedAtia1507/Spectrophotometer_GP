@@ -1,0 +1,11 @@
+../Src/MCAL/I2C/I2C_Program.c:146:6:MCAL_I2C_RESET	1
+../Src/MCAL/I2C/I2C_Program.c:39:6:MCAL_I2C_Init	6
+../Src/MCAL/I2C/I2C_Program.c:156:6:MCAL_I2C_DInit	3
+../Src/MCAL/I2C/I2C_Program.c:170:6:MCAL_I2C_GPIO_Set_Pins	3
+../Src/MCAL/I2C/I2C_Program.c:279:6:I2C_GenerateSTART	4
+../Src/MCAL/I2C/I2C_Program.c:227:6:MCAL_I2C_MASTER_RX	9
+../Src/MCAL/I2C/I2C_Program.c:308:12:I2C_GetFlagStatus	7
+../Src/MCAL/I2C/I2C_Program.c:188:6:MCAL_I2C_MASTER_TX	8
+../Src/MCAL/I2C/I2C_Program.c:400:6:I2C_SendAddress	2
+../Src/MCAL/I2C/I2C_Program.c:418:6:I2C_GenerateSTOP	2
+../Src/MCAL/I2C/I2C_Program.c:432:6:I2C_ACKnowledgeConfig	2

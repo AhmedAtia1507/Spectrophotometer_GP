@@ -1,0 +1,12 @@
+../Src/MCAL/SCB/SCB_Program.c:21:6:MSCB_SystemReset	0	static
+../Src/MCAL/SCB/SCB_Program.c:37:16:MSCB_SetPriorityGrouping	0	static
+../Src/MCAL/SCB/SCB_Program.c:71:16:MSCB_SetNMIPendingFlag	0	static
+../Src/MCAL/SCB/SCB_Program.c:85:16:MSCB_SetSysTickPendingFlag	0	static
+../Src/MCAL/SCB/SCB_Program.c:99:16:MSCB_ClearSysTickPendingFlag	0	static
+../Src/MCAL/SCB/SCB_Program.c:113:16:MSCB_SetPendSVPendingFlag	0	static
+../Src/MCAL/SCB/SCB_Program.c:127:16:MSCB_ClearPendSVPendingFlag	0	static
+../Src/MCAL/SCB/SCB_Program.c:143:16:MSCB_GetActiveIRQ	0	static
+../Src/MCAL/SCB/SCB_Program.c:174:16:MSCB_SetSystemHandlerPriority	0	static
+../Src/MCAL/SCB/SCB_Program.c:214:16:MSCB_EnableMemFault	0	static
+../Src/MCAL/SCB/SCB_Program.c:230:16:MSCB_EnableBusFault	0	static
+../Src/MCAL/SCB/SCB_Program.c:246:16:MSCB_EnableUsageFault	0	static
