@@ -340,7 +340,7 @@ button[disabled],input[disabled] {
 }
 
 /* Style for buttons */
-.setupButtons button,legend button,table button {
+.setupButtons button,legend button,table button,#NextSample button {
   background-color: #094a8f;
   color: white;
   border: none;
@@ -388,8 +388,7 @@ legend{
 }
 
 .TwoBtn button,
-.reset-zoom,
-#NextSample button {
+.reset-zoom{
   background-color: var(--button-background-light); /* Use CSS variable for button background color */
   color: var(--button-text-color-light); /* Use CSS variable for button text color */
   margin: 10px;
@@ -532,7 +531,7 @@ body.dark-mode #CMDMB {
   display: flex;
 }
 
-.presetname {
+.presetname,#NextSample {
   display: none;
   position: fixed;
   width: max-content;
@@ -541,6 +540,7 @@ body.dark-mode #CMDMB {
   transform: translate(-50%, -50%);
   z-index: 6;
 }
+
 
 .blurred-name {
   position: relative;
@@ -1047,18 +1047,6 @@ button:hover {
 }
 }
 
-#NextSample{
-display:none;
-padding: 40px;
-border: 2px solid black;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-color: #ddd;
-color: #3498db;
-
-}
 
 
 
