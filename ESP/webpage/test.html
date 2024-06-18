@@ -3,86 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wavelength Input</title>
+    <title>Spectrophotometer Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .spectrophotometer-container {
+            position: relative;
+            width: 500px;
+            height: 250px; /* Increased height to accommodate source and animation */
+            background: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: none; /* Initially hidden */
+            margin: 20px auto;
+            padding-bottom: 40px; /* Space for the buttons */
+        }
+
+        .light-beam {
+            position: absolute;
+            width: 0;
+            height: 8px;
+            background: linear-gradient(to right, rgba(255, 255, 0, 0) 0%, rgba(255, 255, 0, 1) 50%, rgba(255, 255, 0, 0) 100%);
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            animation: beam 1s infinite;
+        }
+
+        .cuvette {
+            position: absolute;
+            width: 40px;
+            height: 80px;
+            background: rgba(0, 123, 255, 0.3);
+            border: 2px solid #007bff;
+            top: 50%;
+            left: 220px;
+            transform: translateY(-50%);
+            border-radius: 5px;
+        }
+
+        .detector {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #ccc;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            border-radius: 5px;
+        }
+
+        .source {
+            position: absolute;
+            width: 80px;
+            height: 20px;
+            background: #ffd700;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            border-radius: 10px;
+            animation: sourceBlink 1s infinite alternate;
+        }
+
+        @keyframes sourceBlink {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes beam {
+            0% {
+                width: 0;
+                left: 20px;
+            }
+            50% {
+                width: 260px;
+                left:200px;
+            }
+            100% {
+                width: 0;
+                left: 440px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .stop-button-container {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
 </head>
 <body>
-    <input type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value" value="0">
-    <input type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
-    <input type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
-    <button id="generate">Generate</button>
-    <div id="message"></div>
+    <div class="container">
+        <div class="button-container">
+            <button class="button" onclick="runSpectrophotometer()">Run Spectrophotometer</button>
+            <button class="button" onclick="stopSpectrophotometer()">Stop</button>
+        </div>
+        <div class="spectrophotometer-container" id="animation">
+            <div class="source"></div> <!-- Light source div -->
+            <div class="light-beam"></div>
+            <div class="cuvette"></div>
+            <div class="detector"></div>
+        </div>
+    </div>
 
-    <script >
-    document.getElementById('generate').addEventListener('click', function() {
-    const start = parseFloat(document.getElementById('start').value);
-    const stop  = parseFloat(document.getElementById('stop').value);
-    const step  = parseFloat(document.getElementById('step').value);
+    <script>
+        let timeout;
 
-    if (isNaN(start) || isNaN(stop) || isNaN(step)) {
-        alert('Please enter valid numerical values.');
-        return;
-    }
+        function runSpectrophotometer() {
+            var animation = document.getElementById('animation');
+            animation.classList.add('visible');
+            animation.classList.remove('hidden');
 
-    const rangeKey = `range_${step}`;
-    console.log(rangeKey);
-    const storedData = localStorage.getItem(rangeKey);
-
-    let X = [], Y = [];
-    
-    for (let i = start; i <= stop; i += step) {
-        X.push(i);
-        Y.push(Math.random()); // Example Y values, replace with actual data generation
-    }
-
-    if (storedData) {
-        const { Xref, Yref } = JSON.parse(storedData);
-        console.log("X length : "+X.length)
-        console.log("Y length : "+Y.length)
-        console.log("Xref length : "+Xref.length)
-        console.log("Yref length : "+Yref.length)
-        console.log("Stop value : "+stop)
-        console.log("Xref last value : "+Xref[Xref.length-1])
-        
-        if (stop < Xref[Xref.length-1]) {
-            alert('Stored reference data length does not match the current data length. Please perform the zero method again.');
-            alert('no need to perfom zero method');
-            const Xadjusted = X.map((x, index) => x );
-            const Yadjusted = Y.map((y, index) => y - Yref[index]);
-            displayResults(Xadjusted, Yadjusted);    
+            // Simulating function completion after 5 seconds
+            timeout = setTimeout(function() {
+                console.log('Function is done!');
+                animation.classList.add('hidden');
+                animation.classList.remove('visible');
+                playSound(); // Play sound when function is done
+            }, 200000);
         }
-            if(stop > Xref[Xref.length-1]){
-                alert('we need to perform zero method');
-                document.getElementById('start').value = Xref[Xref.length-1];
-                performZeroMethod(rangeKey, X, Y);
-            }
-        else {
-            const Xadjusted = X.map((x, index) => x );
-            const Yadjusted = Y.map((y, index) => y - Yref[index]);
-            displayResults(Xadjusted, Yadjusted);
+
+        function stopSpectrophotometer() {
+            clearTimeout(timeout);
+            var animation = document.getElementById('animation');
+            animation.classList.add('hidden');
+            animation.classList.remove('visible');
+            console.log('Function is stopped!');
         }
-    } else {
-        performZeroMethod(rangeKey, X, Y);
-    }
-});
 
-function performZeroMethod(rangeKey, X, Y) {
-    // Implement zero method here. For now, using dummy Xref and Yref
-    const Xref = X.map(x => x); // Example Xref values
-    const Yref = Y.map(y => y * 0.5); // Example Yref values
-
-    localStorage.setItem(rangeKey, JSON.stringify({ Xref, Yref }));
-    alert('Zero method performed and reference data stored.');
-
-    const Xadjusted = X.map((x, index) => x);
-    const Yadjusted = Y.map((y, index) => y - Yref[index]);
-    displayResults(Xadjusted, Yadjusted);
-}
-
-function displayResults(X, Y) {
-    const messageDiv = document.getElementById('message');
-    messageDiv.innerHTML = `<p>X: ${X.join(', ')}</p><p>Y: ${Y.join(', ')}</p>`;
-}
-
+        function playSound() {
+            var audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-61905/zapsplat_magic_spell_wand_cast_001_61907.mp3');
+            audio.play();
+        }
     </script>
 </body>
 </html>

@@ -109,7 +109,8 @@ i {
 
 nav a:hover {
   background-color: var(--hover-background-color); /* Use CSS variable for hover background color */
-  color:var(--hover--color);
+  color:white;
+  cursor: pointer;
 }
 
 
@@ -480,11 +481,12 @@ body.dark-mode #CMDMB {
 
 /* Styles for presets */
 .presets {
-  display: none;
+  display: block;
   overflow-y: auto;
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .blurred-list {
@@ -517,7 +519,7 @@ body.dark-mode #CMDMB {
 
 #search {
   width: 100%;
-  padding: 2px;
+  padding: 3px;
   border-radius: 2px;
   text-align: center;
 }
@@ -546,8 +548,8 @@ body.dark-mode #CMDMB {
   position: relative;
   z-index: 1;
   padding: 30px;
-  height: 200px;
-  width: 250px;
+  height: fit-content;
+  width: 300px;
   backdrop-filter: var(--preset-blur-light); /* Use CSS variable for blur effect */
   background: var(--preset-background-light); /* Use CSS variable for background color */
   border-radius: 3px;
@@ -956,11 +958,12 @@ label,.currentstep{
 
 .close-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: 0px;
   font-size: 24px;
   cursor: pointer;
   color: white;
+  z-index: 100;
 }
 
 h2 {
@@ -1156,5 +1159,125 @@ label {
 select, input[type="color"], button {
   padding: 5px;
   margin-bottom: 10px;
+}
+
+/* animation container */
+.spectrophotometer-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none; /* Initially hidden */
+  padding-bottom: 40px; /* Space for the button */
+}
+.spectrophotometer-container button{
+  align-self: center;
+  position: absolute;
+  right: 50%;
+  transform: translate(50%);
+  background-color: #094a8f;
+  color: white;
+  border: none;
+  padding: 3px;
+  height: 30px;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.source {
+  position: absolute;
+  display: flex;
+  justify-content: center;  /* Horizontally centers the content */
+  align-items: center;      /* Vertically centers the content */
+  align-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background: #ffd700;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  animation: sourceBlink 0.5s infinite alternate;
+}
+.light-beam {
+  position: absolute;
+  width: 0;
+  height: 8px;
+  background: linear-gradient(to right, rgba(255, 255, 0, 0) 0%, rgba(255, 255, 0, 1) 50%, rgba(255, 255, 0, 0) 100%);
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  animation: beam 1s infinite;
+}
+
+.cuvette {
+  position: absolute;
+  display: flex;
+  justify-content: center;  /* Horizontally centers the content */
+  align-items: center;      /* Vertically centers the content */
+  align-content: center;
+  height: 80px;
+  background: rgba(0, 123, 255, 0.3);
+  border: 2px solid #007bff;
+  border-radius: 5px;  
+  right: 50%;
+  top: 50%;
+  transform: translate(50%,-50%);
+  background-color: #094a8f;
+  color: white;
+  width: 50px;
+  transition: background-color 0.3s;
+
+}
+
+.detector {
+  position: absolute;
+  display: flex;
+  justify-content: center;  /* Horizontally centers the content */
+  align-items: center;      /* Vertically centers the content */
+  align-content: center;
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  border-radius: 5px;
+}
+
+@keyframes sourceBlink {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0.5;
+  }
+}
+
+@keyframes beam {
+  0% {
+      width: 0;
+      left: 20px;
+  }
+  50% {
+      width: 260px;
+      left:200px;
+  }
+  100% {
+      width: 0;
+      left: 440px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 

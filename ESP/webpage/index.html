@@ -148,8 +148,25 @@
               <button id="delete-btn" onclick="deleteSelectedCurve()"><i class="fas fa-trash"></i> Delete</button>
             </div>
         </div>
+         <!-- Hidden audio element -->
+    <audio id="completion-sound" src="CSS/sound/Football Commentator Screams _He_s Done It_ - Sound Effect(MP3_160K).mp3" style="display: none;"></audio>
+    <audio id="Stop-sound" src="CSS/sound/IM JOKING STOP STOP STOP - Sound Effect(MP3_160K).mp3" style="display: none;"></audio>
+    
+    <div class="spectrophotometer-container" id="animation">
+      <div class="blurred-name" >
+        
+        <div class="source"><i class="fa-regular fa-lightbulb"></i></div> <!-- Light source div -->
+        <div class="light-beam"></div>
+        <div class="cuvette"> <i class="fa-solid fa-flask"></i></div>
+        <div class="detector"><i class="fa-solid fa-desktop"></i></div>
+        <br><br><br><br><br><br><br><hr><br>
+        <button  id="StopScanButton" onclick="stopScan()">Stop</button>  
+        <br>
+      </div>
+        
   
-
+    </div>  
+    
      
 
 
@@ -211,8 +228,8 @@
 
     </div>
     <div class="TwoBtn">
-      <button class="SampleNumBTN" id="deleteBTN"> Delete All</button>
-      <button class="SampleNumBTN" onclick="toggleLoginContainer('commandTable')">toggle commands</button>
+      <button class="SampleNumBTN" id="deleteBTN" title="this will delete all curves and scan tables"> Delete All</button>
+      <button class="SampleNumBTN" onclick="toggleLoginContainer('commandTable')" title="this will show the table commands">toggle commands</button>
     </div>
     <table id="myTable">
       <tr>
@@ -232,7 +249,7 @@
       <!-- Messages will be displayed here -->
     </div>
     <div class="TwoBtn">
-      <button onclick="showItems('readings')" id="loadreadings">load Readings</button>
+      <button onclick="showItems('readings')" id="loadreadings" title="click to load readings archieve">load Readings</button>
     </div>
   </fieldset>
 </div>
@@ -251,11 +268,19 @@
 
 
         <div id="presets" class="presets">
-          <ul class="blurred-list" id="presetlist">
+         <div class="blurred-list">
+         <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('presets')"></i>
+            <br>
             <input type="text" id="search" placeholder="search &#128269;" />
-            <div id="nopresets"></div>
+          </div>
+
+          <ul class="blurred-list" id="presetlist">            
+            <div id="nopresets">
+            </div>
           </ul>
-        </div>
+        
+      </div>
+  
         <div class="presetname" id="presetname">
           <div class="blurred-name">
             <label class="presetlabel" for="name">Enter preset name:</label>
@@ -388,29 +413,26 @@
   </main>
   <!---------------------------- START OF Footer ---------------------------->
   <footer class="sticky" id="sticky">
-    <button class="foot_btn" id="hidefoot">hide</button>
+    <button class="foot_btn" id="hidefoot"><i class="fas fa-arrow-down-short-wide"></i></button>
     <div class="footer-col" id="hidethis">
-      <h4>States</h4>
-      <ul>
-        <li>
-          <label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label>
-        </li>
-        <li>
-          <label for="">Visible Lamp Status:
-            <span id="VIstateBar">"loading"</span></label>
-        </li>
-        <li>
-          <label for="">Current Wavelength: <span id="WLstateBar">"loading"</span>
-          </label>
-        </li>
-        <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
-        <li>
-          <label for="" class="DateTime" style="position: absolute; right: 0; margin-right: 30px">
-            <span id="DateTime"></span></label>
-        </li>
-      </ul>
+        <h4>States</h4>
+        <ul>
+            <li>
+                <label for="">UV Lamp :<span id="UVstateBar">"loading"</span></label>
+            </li>
+            <li>
+                <label for="">Visible Lamp: <span id="VIstateBar">"loading"</span></label>
+            </li>
+            <li>
+                <label for="">Current W.L <span id="WLstateBar">"loading"</span></label>
+            </li>
+            <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+            <li>
+                <label for="" class="DateTime" id="DateTime"></label>
+            </li>
+        </ul>
     </div>
-  </footer>
+</footer>
   <!---------------------------- END OF Footer ---------------------------->
 
   <script src="JavaScript/chart.js"></script>

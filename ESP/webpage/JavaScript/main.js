@@ -431,6 +431,7 @@ function validateInputs() {
 }
 
 function startScan(btn) {
+  document.getElementById('chartScan').scrollIntoView({ behavior: 'smooth' });
   var row = btn.parentNode.parentNode; // Get the parent row of the button
   var index = row.rowIndex;  // Get the row index
   var SampleID = row.cells[2].innerHTML;
@@ -453,15 +454,20 @@ function startScan(btn) {
 function stopScan(btn, index) {
   // Add your stop scan logic here
   isScanning = false;
-  btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  if (btn && index) {
+    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    changeState(index, "Stopped !", "##", btn);
+  }
   enableInputs();
   const message = {
     command: 'ScanStop',
   };
   console.log(message);
   websocket.send(JSON.stringify(message));
-  console.log("Scan stopped");
-  changeState(index, "Stopped !", "##", btn);
+  console.log('Function is stopped!');
+  animation.classList.add('hidden');
+  animation.classList.remove('visible');
+  playSound('Stop-sound'); // Play sound when function is done
 }
 
 
@@ -469,19 +475,31 @@ function stopScan(btn, index) {
 function toggleInputs(disabled) {
   const inputs = document.querySelectorAll('#ScanVsWL input, #ScanVsWL select');
   const buttons = document.querySelectorAll('#ScanVsWL button');
+  const NoDisable = document.getElementById('StopScanButton');
+  inputs.forEach(input => (input.disabled = disabled)); //disable all inputs
 
-  inputs.forEach(input => (input.disabled = disabled));
-
+  //disable(toggle) all button execpt the one that is used for stop
   buttons.forEach(button => {
     const icon = button.querySelector('i');
     if (icon && icon.classList.contains('fa-stop')) {
       button.disabled = false; // Enable the button with the stop icon
-      console.log('enable this')
     } else {
       button.disabled = disabled;
     }
   });
+
+  //sync the stop button from div to that from table
+  NoDisable.addEventListener('click', function () {
+    buttons.forEach(button => {
+      const icon = button.querySelector('i');
+      if (icon && icon.classList.contains('fa-stop')) {
+        button.innerHTML = '<i class="fa-solid fa-play"></i>'
+      }
+    });
+  })
+  NoDisable.disabled = false;
 }
+
 
 function disableInputs() {
   toggleInputs(true);
@@ -500,8 +518,6 @@ function scan(index, SampleID, SampleDecribe, btn) {
   let y = []; // intensity
   let absorbtionAry = [];
   let transmissionAry = [];
-
-  // toggleInteractiveElements();
   let temp = document.getElementById('DateTime').textContent;
   var time = temp.replaceAll(":", " ");  //because file name can't contain :
   var time = time.replaceAll(",", " ");  //because file name can't contain ,
@@ -510,8 +526,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
-
-
+  runSpectrophotometer();             //play animation
 
 
   function processScanData(data) {
@@ -523,8 +538,9 @@ function scan(index, SampleID, SampleDecribe, btn) {
     const absorption = Math.log10(intensityReference / intensitySample);
     let scanning = data.scanning; //check if the scan end or not
     const progress = data.current; //represent the progress to display the current progress
-    const rangeKey = `range_${stepInput}`;
-   
+    const rangeKey = `range_${stepInput}`; // to store the ref data on local storage
+
+
     // Update the chart data
     x.push(wavelength);
     absorbtionAry.push(absorption);
@@ -548,7 +564,6 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
 
     if (index == 'autozero') {
-      
       const newData = {
         x: wavelength,
         absorption: absorption,
@@ -561,32 +576,28 @@ function scan(index, SampleID, SampleDecribe, btn) {
       storedData.push(newData);
       // Sort the array in descending order based on the x value
       storedData.sort((a, b) => b.x - a.x);
-
       // Store the updated data in local storage
       localStorage.setItem(rangeKey, JSON.stringify(storedData));
-      console.log(storedData);
       disableInputs();
       if (progress == 100 && index == 'autozero') {
         document.getElementById('start').value = globalStart;
-        document.getElementById('stop').value = globalStop; 
+        document.getElementById('stop').value = globalStop;
         console.log(AutoZeroResponse);
-        if(AutoZeroResponse=="not equal and we need to perform zero method twice"){
+        if (AutoZeroResponse == "not equal and we need to perform zero method twice") {
           console.log(globalXref[globalXref.length - 1] - stepInput);
           document.getElementById('stop').value = globalXref[globalXref.length - 1] - stepInput;
           toggleLoginContainer('NextSample');
-          if(AutoZeroResponse){
+          if (AutoZeroResponse) {
             document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
-         
+
           }
-          AutoZeroResponse = '' ;
-          
+          AutoZeroResponse = '';
+
         }
         enableInputs();
       }
 
     }
-
-   
 
 
     if (index !== 'autozero') {
@@ -608,14 +619,19 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
       StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
     }
+
+    // Play sound when function is done
+    if (progress == 100) {
+      playSound('completion-sound');
+      animation.classList.add('hidden');
+      animation.classList.remove('visible');
+    }
     //  if(wavelength===stopInput){
     //   console.log("final wavelength is reached");
     //   savetosd(SampleID); 
     //  }
 
   }
-
-
 
   let isFirstTime = true;
 
@@ -661,7 +677,17 @@ function scan(index, SampleID, SampleDecribe, btn) {
 }
 
 
+function runSpectrophotometer() {
+  var animation = document.getElementById('animation');
+  animation.classList.add('visible');
+  animation.classList.remove('hidden');
+}
 
+
+function playSound(id) {
+  var audio = document.getElementById(id);
+  audio.play();
+}
 /*====================================preset/readings section====================================*/
 
 // function to display the preset name container 
@@ -1139,25 +1165,23 @@ function filter() {
 
 setTimeout(showfoot, 1000); //autohide foot in 1sec
 
-document.getElementById('hidefoot').addEventListener('click', showfoot)
-
+document.getElementById('hidefoot').addEventListener('click', showfoot);
 
 function showfoot() {
   var but = document.getElementById('hidefoot');
   var foot = document.getElementById('hidethis');
   var footer = document.getElementById('sticky');
 
-  if (but.innerHTML === 'hide') {
-    but.innerHTML = 'show';
+  foot.classList.toggle('inactive');
+
+  if (foot.classList.contains('inactive')) {
+    but.innerHTML = '<i class="fas fa-arrow-up-short-wide"></i>';
     footer.style.backgroundColor = 'transparent';
-  }
-  else {
-    but.innerHTML = 'hide';
+  } else {
+    but.innerHTML = '<i class="fas fa-arrow-down-short-wide"></i>';
     footer.style.backgroundColor = '#2d2e33';
   }
-  foot.classList.toggle('inactive');
 }
-
 
 function validateInput(input, max) {
   if (parseInt(input.value) > max) {
@@ -1943,27 +1967,27 @@ function AutoZero() {
     // console.log("Xref last value : "+Xref[Xref.length-1])
     console.log(storedData)
 
-    
+
     if (storedData.length > 0) {
       globalXref = storedData.map(item => item.x);
-      
+
 
       let needZeroMethod = 0;
 
       if (stop > globalXref[0]) {
         document.getElementById('start').value = globalXref[0] + step;
-        needZeroMethod++ ;
+        needZeroMethod++;
       }
 
-      if ((start < (globalXref[globalXref.length - 1] - step ))) {
-        if(needZeroMethod==0){
-        document.getElementById('stop').value = globalXref[globalXref.length - 1] - step;
+      if ((start < (globalXref[globalXref.length - 1] - step))) {
+        if (needZeroMethod == 0) {
+          document.getElementById('stop').value = globalXref[globalXref.length - 1] - step;
         }
         needZeroMethod++;
       }
 
       if (needZeroMethod) {
-        if (needZeroMethod==2){
+        if (needZeroMethod == 2) {
           return "not equal and we need to perform zero method twice";
         }
         // performPartialZeroMethod(rangeKey, index, SampleID, SampleDecribe, btn);
