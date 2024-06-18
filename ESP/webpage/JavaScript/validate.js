@@ -14,7 +14,7 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.className = 'optionButtont'; // Apply custom CSS class
    option1Button.onclick = function() {
       // Logic for option 1
-      addPoint1();
+      addPoint1(700, 688, 1);
   };
     // Append message and options to the container
     messageContainer.appendChild(messageDiv);
@@ -30,30 +30,7 @@ function toggleLoginContainer(id="chartScan"){
   }
 }
 
-function addPoint1(start, end) {
-  let xtest = [700,699,698,697,696,695,694,693,692,691,690,689,688];
-  let ytest = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253,0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
-  toggleLoginContainer(id="chartdiv");
-  addCurve(xtest, ytest, 'black', "Intensity");
 
-  // const message = { // message for websocket
-  //   command: 'Scan',
-  //   startInput: start,
-  //   stopInput: end,
-  //   stepInput: 1
-  // };
-  // websocket.send(JSON.stringify(message)); // websocket sent
-  // websocket.onmessage = function (event) { // WebSocket onmessage event
-  //   const data = JSON.parse(event.data);
-  //   console.log(event.data); // for test
-  //   const currentTime = data.currentTime;
-  //   const wavelength = data.wavelength;
-  //   const intensityReference = data.intensityReference;
-  //   const intensitySample = data.intensitySample;
-  //   absorptionValue = Math.log10(intensityReference / intensitySample);
-  // };
-
-}
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -246,7 +223,7 @@ function compareValues() {
   }
   // Show the table with the results
   document.getElementById('tableContainer').style.display = 'block';
-  generateTable(predefinedValues, 'numbers1', 'error', 'tableContainer');
+  generateTable(predefinedValues, 'numbers1', 'numbers2', 'error', 'tableContainer');
 }
 
 function getPredefinedValues(option) {
@@ -372,7 +349,7 @@ function CompareValues1() {
 
   // Show the table with the results
   document.getElementById('tableContainer1').style.display = 'block';
-  generateTable(predefinedValues, 'numbers12', 'error2', 'tableContainer1');
+  generateTable(predefinedValues, 'numbers12', 'numbers3', 'error2', 'tableContainer1');
 }
 
 /*
@@ -442,90 +419,6 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     }
   });
 
-  /*if (passesTest4){
-    
-     messageContainer1.style.display = 'none';
-    if (messageContainer2) {
-      messageContainer2.textContent = '';
-    }
-    showMessaget("Test passes! " , "Show curve","messageContainer24" );
-    
- }
- else{
-
-  messageContainer2.style.display = 'none';
-  if (messageContainer1) {
-    messageContainer1.textContent = '';
-  }
-  showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve","messageContainer14" );
- 
- }
-*/
-
-
-    /**========================================================================
- *                           common functions
- *========================================================================**/
- 
-
-    //   var chartScan;
-    //   let chartData;
-      
-      
-    //   const ctxScan = document.getElementById('chartScan').getContext('2d');
-    //   chartScan = new Chart(ctxScan, {
-    //     type: 'line',
-    //     data: chartData,
-    //     options: {
-    //       tooltips: {
-    //         enabled: false
-    //       },
-    //       animation: {
-    //         duration: 0
-    //       },
-    //       responsive: false,
-    //       maintainAspectRatio: false,
-    //       plugins: {
-    //         crosshair: {
-    //           tooltips: {
-    //             enabled: false // Disable tooltips for the crosshair
-    //         },
-    //           sync: {
-    //             enabled: true // Enable crosshair synchronization between multiple charts
-    //           },
-    //           zoom: {
-    //             enabled: true // Enable crosshair zooming along the axis
-    //           },
-    //           line: {
-    //             color: 'blue', // Crosshair line color
-    //             width: 1 // Crosshair line width
-    //           }
-    //         },
-           
-    //       },
-    //       scales: {
-    //         x: {
-    //           min: 190,
-    //           max: 1100,
-    //           type: 'linear',
-    //           position: 'bottom'
-    //         },
-    //         y: {
-    //           type: 'linear',
-    //           position: 'left'
-    //         }
-    //       },
-    //       onHover: null // Disable the default onHover behavior
-    //     }
-    //   });
-      
-      
-
-
-
-    // var absorptionData = [];
-    // var concentrationData = [];
-    // var chart;
   
     
     
@@ -649,7 +542,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option2Button.onclick = function() {
       // Logic for option 2
       console.log("Option 2 clicked");
-      addPoint1();
+      addPoint1(700, 688, 1);
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
@@ -660,13 +553,13 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
 
 
 
-function generateTable(predefinedValues, numClass, errorClass, tableid) {
+function generateTable(predefinedValues, numClass, inputClass, errorClass, tableid) {
   var numRows = parseInt(document.querySelector(`.${numClass}`).value);
   var numColumns = 4;
   var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
 
   var userInputValues = [];
-  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+  var inputs = document.querySelectorAll(`.${numClass}`); // Update class name if necessary
   inputs.forEach(function(input) {
       var inputValue = parseFloat(input.value);
       userInputValues.push(inputValue);
@@ -732,6 +625,16 @@ function generateTable(predefinedValues, numClass, errorClass, tableid) {
 }
 
 
+function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
+  // Compare user input values with predefined values
+  for (var i = 0; i < userInputValues.length; i++) {
+    var difference = userInputValues[i] - predefinedValues[i];
+    if (Math.abs(difference) > errorLimit) {
+      return false;
+    }
+  }
+  return true;
+}
 
 
 
@@ -740,8 +643,12 @@ function generateTable(predefinedValues, numClass, errorClass, tableid) {
 //  *                           Chart
 //  *========================================================================**/
 // /* 
-// PUT THIS IN HTML : <canvas id="chartScan" style="height: 95%; width: 95%;"></canvas>
 // */
+
+var absorptionData = [];
+var concentrationData = [];
+var chart;
+
 var chartScan;
 let chartData;
 const ctxVal = document.getElementById('chartScan').getContext('2d');
@@ -790,45 +697,77 @@ chartScan = new Chart(ctxVal, {
     onHover: null // Disable the default onHover behavior
   }
 });
-function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 'curve') {
-  // Check if the curve already exists
-  const existingCurveIndex = chartScan.data.datasets.findIndex(dataset => dataset.label === curveName);
 
-  // If the curve exists, update its data
-  if (existingCurveIndex !== -1) {
-    chartScan.data.datasets[existingCurveIndex].data = drawMode === 'curve' ? 
-      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
-      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
-    
-    chartScan.data.datasets[existingCurveIndex].borderColor = color;
-    chartScan.data.datasets[existingCurveIndex].backgroundColor = fillCurve ? 'rgba(255, 0, 0, 0.3)' : undefined;
-    chartScan.data.datasets[existingCurveIndex].showLine = drawMode !== 'points'; // Don't connect points if drawing separate points
-  } else { // If the curve does't exist, add it
-    var curveData = drawMode === 'curve' ? 
-      xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
-      xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
-    
-    var dataset = {
-      label: curveName,
-      data: curveData,
-      borderColor: color,
-      borderWidth: 2,
-      pointRadius: drawMode === 'points' ? 5 : 0, // Set point radius if drawing points
-      lineTension: drawMode === 'points' ? 0 : 0.4, // Set line tension if drawing points
-      showLine: drawMode !== 'points' // Don't connect points if drawing separate points
-    };
 
-    if (fillCurve) {
-      dataset.fill = 'origin';
-      dataset.backgroundColor = 'rgba(255, 0, 0, 0.3)';
-    }
+function openChartInNewTab(xData, yData, color, curveName) {
+  // Create a new window
+  const newWindow = window.open('', '_blank');
 
-    chartScan.data.datasets.push(dataset);
+  // Check if the new window opened successfully
+  if (newWindow) {
+    // Write the HTML structure for the new window
+    newWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chart</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 1;
+          }
+          canvas {
+            width: 90%;
+            max-width: 800px;
+            height: 50%;
+          }
+        </style>
+      </head>
+      <body>
+        <canvas id="chartCanvas"></canvas>
+        <script>
+          // Function to add the curve
+          function addCurve(xData, yData, color, curveName) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            const chart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: xData,
+                datasets: [{
+                  label: curveName,
+                  data: yData,
+                  borderColor: color,
+                  fill: false
+                }]
+              },
+              options: {
+                scales: {
+                  x: {
+                    type: 'linear',
+                    position: 'bottom'
+                  }
+                },
+                animation: false // Disable animations
+              }
+            });
+          }
+
+          // Call the function to add the curve
+          addCurve(${JSON.stringify(xData)}, ${JSON.stringify(yData)}, "${color}", "${curveName}");
+        </script>
+      </body>
+      </html>
+    `);
+  } else {
+    alert('Failed to open new window. Please allow pop-ups for this website.');
   }
-
-  chartScan.update(); // Update the chart
 }
-
 
 
 
@@ -838,20 +777,34 @@ function removeAllCurves() {
   chartScan.update();
 }
 
-// ////////////////////////////////scan///////////////
-var absorptionData = [];
-var concentrationData = [];
-var chart;
 
-
-
-function compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit) {
-  // Compare user input values with predefined values
-  for (var i = 0; i < userInputValues.length; i++) {
-    var difference = userInputValues[i] - predefinedValues[i];
-    if (Math.abs(difference) > errorLimit) {
-      return false;
+function addPoint1(start, end, step) {
+  let xData = [];
+    for (let value = start; value >= end; value -= step) {
+      xData.push(value);
     }
-  }
-  return true;
+  let yData = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253, 0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
+  let color = 'cadetblue';
+  let curveName = 'Absrbtion Curve';
+  toggleLoginContainer(id="chartdiv");
+  openChartInNewTab(xData, yData, color, curveName);
+
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: start,
+    stopInput: end,
+    stepInput: step
+  };
+  websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    absorptionValue = Math.log10(intensityReference / intensitySample);
+  };
+
 }
+
+
+
