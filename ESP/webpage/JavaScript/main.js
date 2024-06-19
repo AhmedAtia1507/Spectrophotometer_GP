@@ -143,6 +143,17 @@ document.getElementById('sBarBtn').addEventListener('click', function () {
  *                           SCAN T_T
  *========================================================================**/
 // Initial chart setup
+let PageIndecator;
+
+  let indicatorElement = document.getElementById('indecatorPage');
+  if (indicatorElement) {
+    // PageIndecator = indicatorElement.textContent;
+    PageIndecator = indicatorElement.value;
+    console.log(PageIndecator); 
+  }
+
+
+
 function toggleVisibility() {
   var checkbox = document.getElementById("toggleCheckbox");
   var div = document.getElementById("MagicDiv");
@@ -155,15 +166,22 @@ var wavelengthData = [];
 let chartScan, chartScanTime, chartScanFilter;
 
 let chartData;
-
-const ctxScan = document.getElementById('chartScan').getContext('2d');
-const ctxScanTime = document.getElementById('TimeChart').getContext('2d');
-const ctxScanFilter = document.getElementById('FilterChart').getContext('2d');
-
-createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
-createChart(ctxScanTime, 0, 100, 'Time (s)', 'chartScanTime');
-createChart(ctxScanFilter, 0, 50, 'Filter (units)', 'chartScanFilter');
-
+if (PageIndecator==='Wavelength') {
+  const ctxScan = document.getElementById('chartScan').getContext('2d');
+  createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
+  }
+  else if (PageIndecator==='Time') {
+  const ctxScan = document.getElementById('chartScan').getContext('2d');
+  createChart(ctxScan, 0, 1100, 'Time (s)', 'chartScanTime');
+  
+  }
+  else if (PageIndecator==='Filter') {
+  const ctxScan = document.getElementById('chartScan').getContext('2d');
+  createChart(ctxScan, 0, 50, 'Filter (units)', 'chartScanFilter');
+  }
+  else {
+  alert('error in page indecator');
+  }
 function createChart(ctx, xMin, xMax, xLabel, chartType) {
   const chartConfig = {
     type: 'line',
@@ -221,7 +239,18 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
       onHover: null // Disable the default onHover behavior
     }
   };
-
+   // Set x-axis min and max based on chartType
+   if (chartType === 'chartScan') {
+    chartConfig.options.scales.x.min = xMin;
+    chartConfig.options.scales.x.max = xMax;
+  } else if (chartType === 'chartScanTime') {
+    // Do not set x-axis min and max for Time chart
+    chartConfig.options.scales.x.min = undefined;
+    chartConfig.options.scales.x.max = undefined;
+  } else if (chartType === 'chartScanFilter') {
+    chartConfig.options.scales.x.min = xMin;
+    chartConfig.options.scales.x.max = xMax;
+  }
   /**========================================================================
    *                           Crouser - Never think to touch
    *========================================================================**/
@@ -230,9 +259,10 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
   if (chartType === 'chartScan') {
     chartScan = new Chart(ctx, chartConfig);
   } else if (chartType === 'chartScanTime') {
-    chartScanTime = new Chart(ctx, chartConfig);
+    chartScan = new Chart(ctx, chartConfig);
+    console.log("333");
   } else if (chartType === 'chartScanFilter') {
-    chartScanFilter = new Chart(ctx, chartConfig);
+    chartScan = new Chart(ctx, chartConfig);
   }
 
   // Create a div dynamically

@@ -14,7 +14,12 @@ function showMessaget(message, option1Text,ContainerID) {
   option1Button.className = 'optionButtont'; // Apply custom CSS class
    option1Button.onclick = function() {
       // Logic for option 1
-      addPoint1(700, 688, 1);
+
+      var inputs = document.querySelectorAll('.numbers2');
+      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
+      var max = Math.max(...values);
+      var min = Math.min(...values);
+      addPoint1(max, min, 1);
   };
     // Append message and options to the container
     messageContainer.appendChild(messageDiv);
@@ -541,8 +546,11 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option2Button.className = 'optionButton'; // Apply custom CSS class
   option2Button.onclick = function() {
       // Logic for option 2
-      console.log("Option 2 clicked");
-      addPoint1(700, 688, 1);
+      var inputs = document.querySelectorAll('.numbers2');
+      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
+      var max = Math.max(...values);
+      var min = Math.min(...values);
+      addPoint1(max, min, 1);
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
@@ -559,7 +567,7 @@ function generateTable(predefinedValues, numClass, inputClass, errorClass, table
   var headerNames = ['Entered Wavelength', 'Theoretical Wavelength', 'Error', 'Status'];
 
   var userInputValues = [];
-  var inputs = document.querySelectorAll(`.${numClass}`); // Update class name if necessary
+  var inputs = document.querySelectorAll(`.${inputClass}`); // Update class name if necessary
   inputs.forEach(function(input) {
       var inputValue = parseFloat(input.value);
       userInputValues.push(inputValue);
@@ -635,6 +643,7 @@ function compareWithPredefinedValues(userInputValues, predefinedValues, errorLim
   }
   return true;
 }
+
 
 
 
