@@ -5,6 +5,7 @@ commands:
 3-time commands
 4- motors
 5-photodetector
+6-scan
 
 //add new commands titles here to make it easy to find
 ===============================================================================================================
@@ -80,3 +81,17 @@ set-gratingmoter-to-R-(value) like set-gratingmoter-to-R-100   //send the gratin
 get-det-readings //send the current detector readings ==>replay with refernce small signal - refernce amplified signal- sample small signal-sample amplified signal-current ref digital pot gain - current sample digital pot gain like 1-9-2-18-9-20
 set-ref-newgain-to-(value)  like set-ref-newgain-to-12 //apply the refernce new gain then reply replay with "applied" or "not applied"
 set-sample-newgain-to-(value)  like set-sample-newgain-to-20 //apply the sample new gain then reply replay with "applied" or "not applied"
+
+
+
+
+
+=====================================================================================================================================================================
+6- scan
+
+scan-stop //stop scan task
+scan both 100 900 1  //both on
+scan uv 100 900 1    //scan with uv only
+scan vi 100 900 1    //scan with vi only
+
+
