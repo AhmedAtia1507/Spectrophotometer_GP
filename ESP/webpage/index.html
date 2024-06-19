@@ -87,7 +87,11 @@
           </legend>
           
           <div class="fsetup" >
-              
+            <label>Scan with <select name="" id="indecatorPage">
+              <!-- <option value="Wavelength">Wavelength</option> -->
+              <option value="Time">Time</option>
+              <option value="Filter">Filter</option>
+            </select></label>
   
             <input  id="SampleNum" class="SampleNum" placeholder="NO. of Samples" title="number of samples">
             <input  type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
@@ -134,11 +138,12 @@
                 </fieldset>
             </div>
             <div class="second-div">
+
+              <!-- <h2>Scan with <span id="indecatorPage">Wavelength</span></h2> -->
+              <!-- <h2>Scan with <span id="indecatorPage">Time</span></h2> -->
+              <!-- <h2>Scan with <span id="indecatorPage">Filter</span></h2> -->
               <label for="chart-select">Select the chart:</label>
               <select id="chart-select">
-                  <!-- <option value="line">Line Chart</option>
-                  <option value="bar">Bar Chart</option>
-                  <option value="pie">Pie Chart</option> -->
               </select>
   
               <label for="color-picker">Change color:</label>
@@ -149,8 +154,8 @@
             </div>
         </div>
          <!-- Hidden audio element -->
-    <audio id="completion-sound" src="CSS/sound/foot.mp3" style="display: none;"></audio>
-    <audio id="Stop-sound" src="CSS/sound/stop.mp3" style="display: none;"></audio>
+    <audio id="completion-sound" src="CSS/sound/Football Commentator Screams _He_s Done It_ - Sound Effect(MP3_160K).mp3" style="display: none;"></audio>
+    <audio id="Stop-sound" src="CSS/sound/IM JOKING STOP STOP STOP - Sound Effect(MP3_160K).mp3" style="display: none;"></audio>
     
     <div class="spectrophotometer-container" id="animation">
       <div class="blurred-name" >
@@ -267,7 +272,7 @@
 
 
 
-        <div id="presets" class="presets">
+        <div id="presets" class="presets" style="display: none;">
          <div class="blurred-list">
          <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('presets')"></i>
             <br>
