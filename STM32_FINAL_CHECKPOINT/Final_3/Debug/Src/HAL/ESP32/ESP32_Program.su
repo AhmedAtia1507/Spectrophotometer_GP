@@ -1,0 +1,12 @@
+../Src/HAL/ESP32/ESP32_Program.c:42:6:float_to_string_manual	80	static
+../Src/HAL/ESP32/ESP32_Program.c:99:6:HESP32_ParseReceivedCommand	24	static
+../Src/HAL/ESP32/ESP32_Program.c:181:16:HESP32_InitInterface	16	static
+../Src/HAL/ESP32/ESP32_Program.c:244:16:HESP32_SendCommand	24	static
+../Src/HAL/ESP32/ESP32_Program.c:260:16:HESP32_SetCommandCallbackFunction	24	static
+../Src/HAL/ESP32/ESP32_Program.c:275:16:HESP32_SetCommandCallbackArgFunction	24	static
+../Src/HAL/ESP32/ESP32_Program.c:296:16:HESP32_SendMotorStatus	32	static
+../Src/HAL/ESP32/ESP32_Program.c:328:16:HESP32_SendDateTime	24	static
+../Src/HAL/ESP32/ESP32_Program.c:358:16:HESP32_SendIntensities	48	static
+../Src/HAL/ESP32/ESP32_Program.c:375:16:HESP32_SendVoltages	24	static
+../Src/HAL/ESP32/ESP32_Program.c:398:16:HESP32_SendDetectorValues	56	static
+../Src/HAL/ESP32/ESP32_Program.c:428:16:HESP32_SendAllDetectorValues	56	static

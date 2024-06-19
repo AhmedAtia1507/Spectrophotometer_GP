@@ -1,0 +1,2 @@
+../Src/APP/Signal_Conditioning/signal_conditioning.c:20:6:read_reference_voltage	24	static
+../Src/APP/Signal_Conditioning/signal_conditioning.c:99:6:read_sample_voltage	24	static
