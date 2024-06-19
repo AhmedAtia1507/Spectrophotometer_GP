@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncWebSocket.h>
 #include <ArduinoJson.h>
@@ -76,7 +75,7 @@ void initWebSocket()
 void setup()
 {
   Serial.begin(115200);
-  Serial2.begin(115200);
+  Serial2.begin(500000);
   MyInitialization::initAP();
   initWebSocket();
   MyInitialization::sdInit();
@@ -90,4 +89,6 @@ void loop()
   // Check for new WebSocket messages
   ws.cleanupClients();
   delay(1000); // Delay before sending the next command
+
+
 }

@@ -1,190 +1,87 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectrophotometer Animation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        .spectrophotometer-container {
-            position: relative;
-            width: 500px;
-            height: 250px; /* Increased height to accommodate source and animation */
-            background: #fff;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: none; /* Initially hidden */
-            margin: 20px auto;
-            padding-bottom: 40px; /* Space for the buttons */
-        }
-
-        .light-beam {
-            position: absolute;
-            width: 0;
-            height: 8px;
-            background: linear-gradient(to right, rgba(255, 255, 0, 0) 0%, rgba(255, 255, 0, 1) 50%, rgba(255, 255, 0, 0) 100%);
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            animation: beam 1s infinite;
-        }
-
-        .cuvette {
-            position: absolute;
-            width: 40px;
-            height: 80px;
-            background: rgba(0, 123, 255, 0.3);
-            border: 2px solid #007bff;
-            top: 50%;
-            left: 220px;
-            transform: translateY(-50%);
-            border-radius: 5px;
-        }
-
-        .detector {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #ccc;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            border-radius: 5px;
-        }
-
-        .source {
-            position: absolute;
-            width: 80px;
-            height: 20px;
-            background: #ffd700;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            border-radius: 10px;
-            animation: sourceBlink 1s infinite alternate;
-        }
-
-        @keyframes sourceBlink {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes beam {
-            0% {
-                width: 0;
-                left: 20px;
-            }
-            50% {
-                width: 260px;
-                left:200px;
-            }
-            100% {
-                width: 0;
-                left: 440px;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .visible {
-            display: block;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-            margin: 5px;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .stop-button-container {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic File Loading</title>
 </head>
 <body>
-    <div class="container">
-        <div class="button-container">
-            <button class="button" onclick="runSpectrophotometer()">Run Spectrophotometer</button>
-            <button class="button" onclick="stopSpectrophotometer()">Stop</button>
-        </div>
-        <div class="spectrophotometer-container" id="animation">
-            <div class="source"></div> <!-- Light source div -->
-            <div class="light-beam"></div>
-            <div class="cuvette"></div>
-            <div class="detector"></div>
-        </div>
-    </div>
 
-    <script>
-        let timeout;
+<!-- Example of loading home.html -->
+<a href="#" onclick="loadPage('/home.html')">Load Home Page</a>
 
-        function runSpectrophotometer() {
-            var animation = document.getElementById('animation');
-            animation.classList.add('visible');
-            animation.classList.remove('hidden');
+<script>
+    
+function loadPage(page) {
+  // Check if the file exists locally
+  if (localStorage.getItem(page)) {
+    // File exists locally, load it
+    loadLocalFile(page);
+  } else {
+    // File doesn't exist locally, fetch it from ESP32
+    fetch(page)
+      .then(response => response.text())
+      .then(data => {
+        // Store the file in local storage
+        localStorage.setItem(page, data);
+        // Load the file
+        loadLocalFile(page);
+      })
+      .catch(error => console.error('Error loading file:', error));
+  }
+}
 
-            // Simulating function completion after 5 seconds
-            timeout = setTimeout(function() {
-                console.log('Function is done!');
-                animation.classList.add('hidden');
-                animation.classList.remove('visible');
-                playSound(); // Play sound when function is done
-            }, 200000);
-        }
+function loadLocalFile(page) {
+  // Get the file content from local storage
+  const content = localStorage.getItem(page);
+  
+  // Display the content on the page
+  document.body.innerHTML = content;
+  
+  // Optionally, you can append any CSS or JS files referenced by the page
+  appendStylesAndScripts(page);
+}
 
-        function stopSpectrophotometer() {
-            clearTimeout(timeout);
-            var animation = document.getElementById('animation');
-            animation.classList.add('hidden');
-            animation.classList.remove('visible');
-            console.log('Function is stopped!');
-        }
+function appendStylesAndScripts(page) {
+  // Example: Extract CSS and JS files from the page content and append them dynamically
+  // This part depends on how your pages are structured and what dependencies they have
+  
+  // Example: Extracting CSS file
+  const cssRegex = /<link rel="stylesheet" href="(.*)">/g;
+  let match;
+  while ((match = cssRegex.exec(localStorage.getItem(page))) !== null) {
+    const cssFile = match[1];
+    fetch(cssFile)
+      .then(response => response.text())
+      .then(cssContent => {
+        const style = document.createElement('style');
+        style.innerHTML = cssContent;
+        document.head.appendChild(style);
+      })
+      .catch(error => console.error('Error loading CSS:', error));
+  }
+  
+  // Example: Extracting JS file
+  const jsRegex = /<script src="(.*)"><\/script>/g;
+  while ((match = jsRegex.exec(localStorage.getItem(page))) !== null) {
+    const jsFile = match[1];
+    fetch(jsFile)
+      .then(response => response.text())
+      .then(jsContent => {
+        const script = document.createElement('script');
+        script.innerHTML = jsContent;
+        document.body.appendChild(script);
+      })
+      .catch(error => console.error('Error loading JS:', error));
+  }
+}
 
-        function playSound() {
-            var audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-61905/zapsplat_magic_spell_wand_cast_001_61907.mp3');
-            audio.play();
-        }
-    </script>
+// Initial load of home.html
+loadPage('/home.html');
+
+</script>
+
 </body>
 </html>

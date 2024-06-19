@@ -409,7 +409,12 @@ void handleScanTask(void *pvParameters)
       scanData["scanning"] = scanning;
 
       j++;
-
+      
+      if (startInput==stopInput)
+      {
+        scanData["current"] = 100; // to help display the % progress
+      }
+      
       String jsonString;
       serializeJson(scanData, jsonString);
       notifyClients(jsonString);
