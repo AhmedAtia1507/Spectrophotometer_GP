@@ -26,40 +26,61 @@ void checkCountdown()
 
 // Define a task handle
 TaskHandle_t cmdTask;
+
 // Function to handle sending commands to STM32
 void sendCMDTask(void *parameter)
 {
-  String input = *((String *)parameter);
+  DynamicJsonDocument *doc = (DynamicJsonDocument *)parameter;
+  String input = (*doc)["input"].as<String>();
   String response = "";
+
   // Send the command to the STM32 via UART if UART is connected
   Serial2.println(input);
   Serial.println(input);
+  
   int startTime = millis();
-  while (Serial2.available() && millis() - startTime < 2000)
-  {
-    response = Serial2.readStringUntil('\n');
-    Serial.println("Response received: " + response);
+  while (millis() - startTime < 2000) {
+    if (Serial2.available()) {
+      response = Serial2.readStringUntil('\n');
+      Serial.println("Response received: " + response);
+      break; // Exit loop once response is received
+    }
+    vTaskDelay(pdMS_TO_TICKS(1)); // Delay to yield to other tasks
   }
-  // Return the response string
-  *((String *)parameter) = response;
+
+  // Store the response in the task parameters
+  (*doc)["response"] = response;
+
+  // Delete the task when done
+  vTaskDelete(NULL);
 }
 
 // Function to send a command to STM32 and get the response
 String sendCMD(const String &input)
 {
-  // Create a String to store the response
-  String response = "";
+  // Create a JSON document to store the input and response
+  DynamicJsonDocument *doc = new DynamicJsonDocument(1024);
+  (*doc)["input"] = input;
 
   // Create the task to send the command
   xTaskCreatePinnedToCore(
       sendCMDTask,    // Task function
       "sendCMDTask",  // Task name
       4096,           // Stack size (bytes)
-      (void *)&input, // Parameter to pass to the task
+      (void *)doc,    // Parameter to pass to the task
       1,              // Task priority
-      NULL,           // Task handle (not needed)
-      0               // Core (0 or 1, depending on your setup)
+      &cmdTask,       // Task handle
+      1               // Core (0 or 1, depending on your setup)
   );
+
+  // Wait for the task to complete
+  while (eTaskGetState(cmdTask) != eDeleted) {
+    vTaskDelay(pdMS_TO_TICKS(1)); // Delay to yield to the task
+  }
+
+  // Get the response and clean up
+  String response = (*doc)["response"].as<String>();
+  delete doc;
 
   // Return the response string
   return response;

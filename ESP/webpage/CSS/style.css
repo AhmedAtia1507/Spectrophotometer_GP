@@ -481,7 +481,7 @@ body.dark-mode #CMDMB {
 
 /* Styles for presets */
 .presets {
-  display: block;
+  display: none;
   overflow-y: auto;
   position: fixed;
   top: 0%;

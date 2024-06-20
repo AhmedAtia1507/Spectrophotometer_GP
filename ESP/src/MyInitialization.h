@@ -5,6 +5,8 @@
 #include <SD.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
+#include <ArduinoJson.h>
+#include <map>
 
 class MyInitialization {
 public:

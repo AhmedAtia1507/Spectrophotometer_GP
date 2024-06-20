@@ -1,122 +1,167 @@
 #include "MyInitialization.h"
 
-
-void MyInitialization::initAP() {
+void MyInitialization::initAP()
+{
   const char *ssid = "SPECTRO";
   const char *password = "123456789";
   WiFi.mode(WIFI_AP);
   WiFi.softAP(ssid, password);
 }
 
-String getContentType(String filename) {
-  if (filename.endsWith(".html")) return "text/html";
-  else if (filename.endsWith(".css")) return "text/css";
-  else if (filename.endsWith(".js")) return "application/javascript";
-  else if (filename.endsWith(".png")) return "image/png";
-  else if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) return "image/jpeg";
-  else if (filename.endsWith(".gif")) return "image/gif";
-  else if (filename.endsWith(".ico")) return "image/x-icon";
-  else if (filename.endsWith(".xml")) return "text/xml";
-  else if (filename.endsWith(".pdf")) return "application/pdf";
-  else if (filename.endsWith(".zip")) return "application/zip";
-  else if (filename.endsWith(".json")) return "application/json";
-  else if (filename.endsWith(".svg")) return "image/svg+xml";
-  else if (filename.endsWith(".mp3")) return "audio/mpeg";
-  else if (filename.endsWith(".ttf")) return "font/ttf";
-  else if (filename.endsWith(".woff2")) return "font/woff2";  // Add this line for WOFF2 font files
+String getContentType(String filename)
+{
+  if (filename.endsWith(".html"))
+    return "text/html";
+  else if (filename.endsWith(".css"))
+    return "text/css";
+  else if (filename.endsWith(".js"))
+    return "application/javascript";
+  else if (filename.endsWith(".png"))
+    return "image/png";
+  else if (filename.endsWith(".jpg") || filename.endsWith(".jpeg"))
+    return "image/jpeg";
+  else if (filename.endsWith(".gif"))
+    return "image/gif";
+  else if (filename.endsWith(".ico"))
+    return "image/x-icon";
+  else if (filename.endsWith(".xml"))
+    return "text/xml";
+  else if (filename.endsWith(".pdf"))
+    return "application/pdf";
+  else if (filename.endsWith(".zip"))
+    return "application/zip";
+  else if (filename.endsWith(".json"))
+    return "application/json";
+  else if (filename.endsWith(".svg"))
+    return "image/svg+xml";
+  else if (filename.endsWith(".mp3"))
+    return "audio/mpeg";
+  else if (filename.endsWith(".ttf"))
+    return "font/ttf";
+  else if (filename.endsWith(".woff2"))
+    return "font/woff2"; // Add this line for WOFF2 font files
 
-  return "text/plain";  // Default to plain text if type is unknown
+  return "text/plain"; // Default to plain text if type is unknown
 }
-
-
-
-struct FileRequest {
-  AsyncWebServerRequest *request;
-  String path;
-};
 
 QueueHandle_t fileRequestQueue;
+std::map<int, AsyncWebServerRequest *> requestMap;
+int requestIdCounter = 0;                // Unique ID counter
+const uint32_t idleTimeoutMs = 3000;    // Idle timeout in milliseconds
+TaskHandle_t serveFileTaskHandle = NULL; // Global task handle
+SemaphoreHandle_t fileSemaphore;
 
-void serveFileTask(void *parameter) {
-  FileRequest fileRequest;
+void serveFileTask(void *parameter)
+{
+  StaticJsonDocument<256> jsonDoc;
+  uint32_t lastActivityTime = millis();
+  while (true)
+  {
+    char jsonBuffer[256];
 
-  while (true) {
-    // Check if the queue handle is null and exit the task if it is
-    if (fileRequestQueue == NULL) {
-      Serial.println("File request queue is NULL, ending task.");
-      vTaskDelete(NULL);  // Delete the current task
-    }
+    if (xQueueReceive(fileRequestQueue, &jsonBuffer, 1000 / portTICK_PERIOD_MS) == pdPASS)
+    {
+      lastActivityTime = millis(); // Reset the idle timer
 
-    // Wait for a file request from the queue
-    if (xQueueReceive(fileRequestQueue, &fileRequest, portMAX_DELAY) == pdPASS) {
-      // Open requested file from SD card
-      Serial.println("/webpage" + fileRequest.path);
-      File file = SD.open("/webpage" + fileRequest.path, "r");  // Adjust base directory as needed
+      DeserializationError error = deserializeJson(jsonDoc, jsonBuffer);
+      if (error)
+      {
+        Serial.println("Failed to parse JSON request");
+        continue;
+      }
 
-      if (file) {
-        // Get file size
-        size_t fileSize = file.size();
-        Serial.println(fileSize);
+      int requestId = jsonDoc["requestId"];
+      String path = jsonDoc["path"].as<String>();
 
-        // Set content type based on file extension or type
-        String contentType = getContentType(fileRequest.path);
-        Serial.println(contentType);
+      // Retrieve the request pointer from the map
+      AsyncWebServerRequest *request = requestMap[requestId];
+      requestMap.erase(requestId); // Remove the entry from the map
 
-        // Buffer size for reading chunks
-        const size_t bufferSize = 1024;
-        uint8_t buffer[bufferSize];
+      // Acquire the semaphore before opening the file
+      if (xSemaphoreTake(fileSemaphore, portMAX_DELAY) == pdTRUE)
+      {
+        File file = SD.open("/webpage" + path, "r");
 
-        AsyncWebServerResponse *response = fileRequest.request->beginChunkedResponse(contentType, [file, bufferSize, buffer](uint8_t *chunkBuffer, size_t maxLen, size_t index) mutable -> size_t {
-          if (!file.available()) {
-            file.close();
-            return 0;
+           if (file) {
+          String contentType = getContentType(path);
+
+          AsyncWebServerResponse *response = request->beginChunkedResponse(contentType, [file](uint8_t *buffer, size_t maxLen, size_t index) mutable -> size_t {
+            size_t bytesRead = file.read(buffer, maxLen);
+            if (bytesRead == 0) {
+              file.close();
+              xSemaphoreGive(fileSemaphore);
+            }
+            return bytesRead;
+          });
+         
+          // Add cache control headers for certain file types
+          if (contentType.startsWith("image/") || contentType == "font/woff2" || contentType == "audio/mpeg" || path == "/css/all.min.css" || path =="/JavaScript/chart.js")  {
+            response->addHeader("Cache-Control", "max-age=31536000"); // Cache for 1 year 
           }
-
-          size_t bytesRead = file.read(buffer, min(bufferSize, maxLen));
-          memcpy(chunkBuffer, buffer, bytesRead);
-          return bytesRead;
-        });
-
-        // Add cache control headers
-       // response->addHeader("Cache-Control", "max-age=31536000, public");
-        
-        response->addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response->addHeader("Pragma", "no-cache");
-        response->addHeader("Expires", "0");
-
-        // Send the response
-        fileRequest.request->send(response);
-      } else {
-        // File not found
-        fileRequest.request->send(404, "text/plain", "File not found");
+          request->send(response);
+        }
+        else
+        {
+          // Release the semaphore if the file cannot be opened
+          xSemaphoreGive(fileSemaphore);
+          request->send(404, "text/plain", "File not found");
+        }
+      }
+      else
+      {
+        request->send(500, "text/plain", "Failed to acquire file semaphore");
       }
     }
+
+    // Check for idle timeout
+    if (millis() - lastActivityTime > idleTimeoutMs||fileRequestQueue==NULL)
+    {
+      Serial.println("File serving task idle timeout, terminating task.");
+      break;
+    }
   }
+  // Clear the task handle before deleting the task
+  serveFileTaskHandle = NULL;
+  vTaskDelete(NULL);
 }
 
-void serveStaticFile(AsyncWebServerRequest *request) {
-  if (fileRequestQueue == NULL) {
-    request->send(500, "text/plain", "Server is not ready, please try again later.");
+void serveStaticFile(AsyncWebServerRequest *request)
+{
+  StaticJsonDocument<256> jsonDoc;
+  int requestId = requestIdCounter++;
+
+  jsonDoc["requestId"] = requestId; // Store the unique request ID
+  jsonDoc["path"] = request->url();
+
+  char jsonBuffer[256];
+  serializeJson(jsonDoc, jsonBuffer);
+
+  // Store the request pointer in the map with the unique ID
+  requestMap[requestId] = request;
+
+  if (xQueueSend(fileRequestQueue, &jsonBuffer, portMAX_DELAY) != pdPASS)
+  {
+    request->send(500, "text/plain", "Server is busy, please try again later.");
     return;
   }
-
-  FileRequest fileRequest;
-  fileRequest.request = request;
-  fileRequest.path = request->url();
-
-
-  // Send the file request to the queue
-  if (xQueueSend(fileRequestQueue, &fileRequest, portMAX_DELAY) != pdPASS) {
-    request->send(500, "text/plain", "Server is busy, please try again later.");
+  if (serveFileTaskHandle == NULL)
+  {
+    BaseType_t taskCreated = xTaskCreate(serveFileTask, "serveFileTask", 8192, NULL, 1, &serveFileTaskHandle);
+    if (taskCreated != pdPASS)
+    {
+      request->send(500, "text/plain", "Failed to create file serving task.");
+      return;
+    }
+    Serial.println("File serving task created.");
   }
+
+  Serial.println("File request added to queue for: " + request->url());
 }
 
-
-
-
-
-void MyInitialization::sdInit() {
-  if (!SD.begin(5)) {
+void MyInitialization::sdInit()
+{
+  if (!SD.begin(5))
+  {
     Serial.println("Card Mount Failed");
     return;
   }
@@ -124,47 +169,32 @@ void MyInitialization::sdInit() {
   Serial.printf("SD Card Size: %lluMB\n", cardSize);
   Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
   Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
-
-  
 }
 
-void MyInitialization::initWeb(AsyncWebServer& server) {
-  // Create a queue to handle file requests
-  fileRequestQueue = xQueueCreate(20, sizeof(FileRequest));
-  if (fileRequestQueue == NULL) {
-    Serial.println("Failed to create file request queue!");
+void MyInitialization::initWeb(AsyncWebServer &server)
+{
+  fileRequestQueue = xQueueCreate(20, sizeof(char[256]));
+  // Initialize the semaphore with a maximum count of 5
+  fileSemaphore = xSemaphoreCreateCounting(2, 2);
+  if (fileSemaphore == NULL)
+  {
+    Serial.println("Failed to create file semaphore!");
     return;
-  } else {
-    Serial.println("File request queue created successfully.");
   }
 
-  // Create a task to serve files
-  BaseType_t taskCreated = xTaskCreate(serveFileTask, "serveFileTask", 8192, NULL, 1, NULL);
-  if (taskCreated != pdPASS) {
-    Serial.println("Failed to create file serving task!");
-    return;
-  } else {
-    Serial.println("File serving task created successfully.");
-  }
-
- // Route to serve specific HTML file
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+            {
     File file = SD.open("/webpage/Home.html");
-    if (!file || file.isDirectory()){
+    if (!file || file.isDirectory()) {
       request->send(404, "text/plain", "File not found");
       return;
     }
     request->send(file, "/webpage/Home.html", "text/html");
-    file.close(); // Close the file after sending
-  });
+    file.close(); });
 
+  server.onNotFound([](AsyncWebServerRequest *request)
+                    { serveStaticFile(request); });
 
-// Route to serve static files from SD card
-  server.onNotFound([](AsyncWebServerRequest *request){
-    serveStaticFile(request);
-  });
-
-  
   AsyncElegantOTA.begin(&server);
   server.begin();
 }

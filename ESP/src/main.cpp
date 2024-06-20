@@ -2,7 +2,6 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncWebSocket.h>
-#include <ArduinoJson.h>
 #include <AsyncTCP.h>
 #include <AsyncElegantOTA.h>
 #include "FS.h"
