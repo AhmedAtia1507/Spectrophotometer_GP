@@ -368,7 +368,7 @@ void handleScanTask(void *pvParameters)
   bool scanning = true;
   DynamicJsonDocument scanData(256);
 
-  if (command == "Scan")
+  if (command == "scan")
   {
     String scancmd = command + " "+lampmode+" "+ startInput + " " + stopInput + " " + stepInput;
     Serial.println(scancmd);
@@ -606,7 +606,7 @@ void handleifelse(const DynamicJsonDocument &doc)
     handleDirectCommand(doc);
   }
 
-  else if (doc["command"] == "Scan")
+  else if (doc["command"] == "scan")
   {
     Serial.println("command is scan");
     handleScan(doc);
@@ -615,7 +615,7 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     Serial.println("command is ScanStop");
     StopScan=true;
-    String response= sendCMD("stop-scan");
+    String response= sendCMD("scan-stop");
   }
   
   else if (doc["command"] == "StateBar")
