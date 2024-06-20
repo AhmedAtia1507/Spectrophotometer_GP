@@ -555,6 +555,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
   const stopInput = parseFloat(document.getElementById('stop').value);
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
+  const lampmode = document.getElementById('LampsOFF').value;
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
   runSpectrophotometer();             //play animation
 
@@ -597,7 +598,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
       const newData = {
         x: wavelength,
         absorption: absorption,
-        transmission: transmission
+        transmission: transmission,
       }
 
       // Retrieve existing data from local storage
@@ -668,10 +669,11 @@ function scan(index, SampleID, SampleDecribe, btn) {
   function continueScanning(wavelength) {
     if (isFirstTime) {
       const message = {
-        command: 'Scan',
+        command: 'scan',
         startInput: startInput,
         stopInput: stopInput,
-        stepInput: stepInput
+        stepInput: stepInput,
+        lampmode: lampmode,
         // modeInput: modeInput
       };
       websocket.send(JSON.stringify(message));

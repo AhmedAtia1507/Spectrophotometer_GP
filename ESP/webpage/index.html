@@ -105,9 +105,9 @@
               <div class="selectors">
                 <strong>Lamps</strong>
                 <select name="lamps condition" id="LampsOFF">
-                  <option value="both-on">Both On</option>
-                  <option value="uv-off">UV Off</option>
-                  <option value="vi-off">VI Off</option>
+                  <option value="both">Both On</option>
+                  <option value="uv">UV only</option>
+                  <option value="vi">VI only</option>
                 </select>
   
               
@@ -118,11 +118,11 @@
                   <option value="transmission"> Transmission</option>
                   <option value="Intensity"> Intensity</option>
                 </select>
-                <button id="clearStorage">Clear Storage</button>
-             
+                
               </div>
               <div class="setupButtons">
-              <button id="SampleNumBTN" title="add columns to start "><i class="fa-solid fa-square-plus"></i></button>
+                <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom"></i></button>
+                <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button>
             </div>
           </div>
           </fieldset>
@@ -274,12 +274,13 @@
 
         <div id="presets" class="presets" >
          <div class="blurred-list">
-         <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('presets')"></i>
+
+          <ul class="blurred-list" id="presetlist">            
+            <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('presets')"></i>
             <br>
             <input type="text" id="search" placeholder="search &#128269;" />
           </div>
 
-          <ul class="blurred-list" id="presetlist">            
             <div id="nopresets">
             </div>
           </ul>
