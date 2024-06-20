@@ -19,7 +19,9 @@ function showMessaget(message, option1Text,ContainerID) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
-      addPoint1(max, min, 1);
+      var start = max +100;
+      var end = min - 100;
+      addPoint1(start, end, 1);
   };
     // Append message and options to the container
     messageContainer.appendChild(messageDiv);
@@ -550,7 +552,9 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
-      addPoint1(max, min, 1);
+      var start = max +100;
+      var end = min - 100;
+      addPoint1(start, end, 1);
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
