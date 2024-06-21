@@ -1,6 +1,5 @@
 
-<<<<<<< HEAD
-=======
+
 function showMessaget(message, option1Text,ContainerID) {
   var messageContainer = document.getElementById(ContainerID);
   messageContainer.style.display = 'block';
@@ -39,7 +38,6 @@ function toggleLoginContainer(id="chartScan"){
   }
 }
 
->>>>>>> 33b6f01192939a8332cfb415323a0ff70282c0b3
 
 /**========================================================================
  *                           Navbar
@@ -698,7 +696,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
-<<<<<<< HEAD
+
       if (functions==1) {
         addPoint1(max, min, 1);
       }
@@ -714,11 +712,10 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
         {
           addPoint4(max, min, 1);
         }
-=======
+
       var start = max +100;
       var end = min - 100;
       addPoint1(start, end, 1);
->>>>>>> 33b6f01192939a8332cfb415323a0ff70282c0b3
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
