@@ -21,6 +21,8 @@ AsyncWebSocket ws("/ws");  // Create a WebSocket object
 bool notifyClients(String state)
 {
   ws.textAll(state); // send data to the connected webpage
+  String LogPath = "/activity.log";
+  SdWriteString(LogPath , state);
   return true;
 }
 
@@ -32,6 +34,8 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
   {
     data[len] = 0;
     String message = (char *)data;
+    String LogPath = "/activity.log";
+    SdWriteString(LogPath , message);
     DynamicJsonDocument doc(1024);
     deserializeJson(doc, message);
    handleifelse(doc);
@@ -81,13 +85,11 @@ void setup()
   listFiles();
   MyInitialization::initWeb(server);
   DynamicJsonDocument doc(2024) ;
+
   
 }
 void loop()
 {
-  // Check for new WebSocket messages
-  ws.cleanupClients();
-  delay(1000); // Delay before sending the next command
-
-
+  
+  
 }

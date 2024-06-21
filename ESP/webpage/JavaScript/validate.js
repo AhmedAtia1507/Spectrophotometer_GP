@@ -1,4 +1,45 @@
 
+<<<<<<< HEAD
+=======
+function showMessaget(message, option1Text,ContainerID) {
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  // Create buttons for the options
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+   option1Button.onclick = function() {
+      // Logic for option 1
+
+      var inputs = document.querySelectorAll('.numbers2');
+      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
+      var max = Math.max(...values);
+      var min = Math.min(...values);
+      var start = max +100;
+      var end = min - 100;
+      addPoint1(start, end, 1);
+  };
+    // Append message and options to the container
+    messageContainer.appendChild(messageDiv);
+    messageContainer.appendChild(option1Button);
+}
+function toggleLoginContainer(id="chartScan"){
+  var login = document.getElementById(id);
+  if(!login.style.display || login.style.display === "none"){
+    login.style.display="block"; 
+  }
+  else{
+    login.style.display="none";
+  }
+}
+
+>>>>>>> 33b6f01192939a8332cfb415323a0ff70282c0b3
 
 /**========================================================================
  *                           Navbar
@@ -657,6 +698,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
+<<<<<<< HEAD
       if (functions==1) {
         addPoint1(max, min, 1);
       }
@@ -672,6 +714,11 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
         {
           addPoint4(max, min, 1);
         }
+=======
+      var start = max +100;
+      var end = min - 100;
+      addPoint1(start, end, 1);
+>>>>>>> 33b6f01192939a8332cfb415323a0ff70282c0b3
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
