@@ -1,4 +1,5 @@
 #include "MyInitialization.h"
+#include "MySDFunctions.h"
 
 void MyInitialization::initAP()
 {
@@ -47,7 +48,7 @@ String getContentType(String filename)
 QueueHandle_t fileRequestQueue;
 std::map<int, AsyncWebServerRequest *> requestMap;
 int requestIdCounter = 0;                // Unique ID counter
-const uint32_t idleTimeoutMs = 3000;    // Idle timeout in milliseconds
+const uint32_t idleTimeoutMs = 5000;    // Idle timeout in milliseconds
 TaskHandle_t serveFileTaskHandle = NULL; // Global task handle
 SemaphoreHandle_t fileSemaphore;
 
@@ -165,11 +166,60 @@ void MyInitialization::sdInit()
     Serial.println("Card Mount Failed");
     return;
   }
-  uint64_t cardSize = SD.cardSize() / (1024 * 1024);
+
+    uint64_t cardSize = SD.cardSize() / (1024 * 1024);
   Serial.printf("SD Card Size: %lluMB\n", cardSize);
   Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
   Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
 }
+
+
+void handleFileUpload(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final){
+    if(filename.startsWith("/readings")){
+    String bath = "/ReadingsDB.txt";
+    SdWriteString(bath, filename); // save the name of the file into database
+    }
+    else{
+    String bath = "/presetsDB.txt";
+    SdWriteString(bath, filename); // save the name of the file into database  
+    }
+    if(!index){
+        Serial.printf("UploadStart: %s\n", filename.c_str());
+        if (SD.exists(filename)) {
+            SD.remove(filename);
+        }
+        File file = SD.open(filename, FILE_WRITE);
+        if (!file) {
+            Serial.println("Failed to open file for writing");
+            return;
+        }
+        file.close();
+    }
+
+    File file = SD.open(filename, FILE_APPEND);
+    if (file) {
+        if (file.write(data, len) != len) {
+            Serial.println("Write failed");
+        }
+        file.close();
+    } else {
+        Serial.println("Failed to open file for appending");
+    }
+    if (final) {
+        Serial.printf("UploadEnd: %s, %u B\n", filename.c_str(), index + len);
+        request->send(200, "text/plain", "File Uploaded!");
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 void MyInitialization::initWeb(AsyncWebServer &server)
 {
@@ -191,6 +241,28 @@ void MyInitialization::initWeb(AsyncWebServer &server)
     }
     request->send(file, "/webpage/Home.html", "text/html");
     file.close(); });
+
+  
+  
+  server.on("/savetosd", HTTP_POST, [](AsyncWebServerRequest *request){
+        request->send(200);
+    }, handleFileUpload);
+  
+  
+  server.on("/download", HTTP_GET, [](AsyncWebServerRequest *request){
+        if (request->hasParam("filename")) {
+            String filename = request->getParam("filename")->value();
+            String filepath = filename;
+            if (SD.exists(filepath)) {
+                request->send(SD, filepath, "text/csv");
+            } else {
+                request->send(404, "text/plain", "File not found");
+            }
+        } else {
+            request->send(400, "text/plain", "Bad Request");
+        }
+    });
+
 
   server.onNotFound([](AsyncWebServerRequest *request)
                     { serveStaticFile(request); });

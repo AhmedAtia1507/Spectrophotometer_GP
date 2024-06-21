@@ -1,3 +1,4 @@
+/* Global Styles */
 body {
   background-color: white;
   margin-bottom: 5%;
@@ -12,6 +13,7 @@ body {
   width: 100%;
 }
 
+/* Form Styles */
 .fsetup1 {
   width: 70%;
   max-width: 30000px;
@@ -50,6 +52,7 @@ legend {
   border: 0;
 }
 
+/* Dropdown Styles */
 .dropdown-button {
   width: 190px;
   height: 35px;
@@ -96,6 +99,7 @@ legend {
   display: block;
 }
 
+/* Label and Input Styles */
 .labels, .label1 {
   font-size: 20px;
   color: black;
@@ -139,6 +143,7 @@ legend {
   font-family: 'Times new roman', Courier, monospace;
 }
 
+/* Button Styles */
 .button1, .button12, .button13, .button14, .button11 {
   width: 80px;
   height: 40px;
@@ -167,19 +172,17 @@ legend {
   font-weight: 600;
 }
 
-.dropdown-button:hover,
+/* Button Hover Effect */
 .button1:hover,
 .button12:hover,
 .button13:hover,
 .button14:hover,
-.button11:hover {
+.button11:hover,
+.button2:hover {
   background-color: lightgray;
 }
 
-main {
-  margin-bottom: 100px;
-}
-
+/* Message Container Styles */
 .messageContainerf, .messageContainert, .messageContainerfilter {
   width: 80%;
   max-width: 500px;
@@ -207,10 +210,10 @@ main {
   color: green;
 }
 
+/* Option Button Styles */
 .optionButton, .optionButtont {
   width: 100px;
   height: 52px;
- 
   background-color: white;
   color: black;
   border-radius: 5px;
@@ -228,6 +231,7 @@ main {
   margin: 5% 0 0 39%;
 }
 
+/* Tab Content Styles */
 .tabcontent .Scanin {
   padding: 10px;
   margin: 5px 15%;
@@ -245,8 +249,9 @@ main {
   transform: scale(1.05);
 }
 
-#chartdiv{
-  display:none;
+/* Chart Styles */
+#chartdiv {
+  display: none;
   padding: 10px;
   border: 2px solid black;
   position: fixed;
@@ -256,12 +261,9 @@ main {
   background-color: white;
   width: 1200px;
   height: 80vh;
-
-
 }
 
-
-
+/* Additional Styles */
 .button3 {
   width: 90px;
   height: 40px;
@@ -293,30 +295,9 @@ main {
   border-radius: 5px;
 }
 
-/* Ensure the buttons stay on the same line and the layout is responsive */
-.optionButtonContainer {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 5%;
-}
-
-.messageButtonContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 2%;
-}
-
-.messageButtonContainer .optionButton, .messageButtonContainer .optionButtont {
-  margin: 0 2%;
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .optionButtonContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .messageButtonContainer {
+  .optionButtonContainer, .messageButtonContainer {
     flex-direction: column;
     align-items: center;
   }
@@ -326,14 +307,32 @@ main {
     width: 70%;
   }
 
-  .table, .messageContainerf, .messageContainert, .messageContainerfilter {
-    margin-left: 10%;
-    margin-right: 10%;
+  .messageButtonContainer .optionButton, .messageButtonContainer .optionButtont {
+    margin: 0 2%;
   }
 
   .button1, .button12, .button13, .button14, .button11, .button2, .button3 {
     width: 70%;
     font-size: 16px;
   }
-}
 
+  /* Button Hover Effect */
+  .button1:hover,
+  .button12:hover,
+  .button13:hover,
+  .button14:hover,
+  .button11:hover,
+  .button2:hover,
+  .optionButton:hover,
+  .optionButtont:hover,
+  .messageButtonContainer .optionButton:hover,
+  .messageButtonContainer .optionButtont:hover {
+    background-color: lightgray;
+  }
+
+  /* Additional Styles */
+  .table, .messageContainerf, .messageContainert, .messageContainerfilter {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}

@@ -36,13 +36,20 @@ void sendCMDTask(void *parameter)
   // Send the command to the STM32 via UART if UART is connected
   Serial2.println(input);
   Serial.println(input);
-  
+
   int startTime = millis();
-  while (Serial2.available() && millis() - startTime < 2000)
-{
-response = Serial2.readStringUntil('\n');
-Serial.println("Response received: " + response);
-}
+  while (Serial2.available() && millis() - startTime < 10000)
+  {
+    response = Serial2.readStringUntil('\n');
+    Serial.println("Response received: " + response);
+    if (response != ".")
+    {
+      break;
+    }
+    else{
+      vTaskDelay(pdMS_TO_TICKS(10));
+    }
+  }
   // Store the response in the task parameters
   (*doc)["response"] = response;
 
@@ -59,18 +66,19 @@ String sendCMD(const String &input)
 
   // Create the task to send the command
   xTaskCreatePinnedToCore(
-      sendCMDTask,    // Task function
-      "sendCMDTask",  // Task name
-      4096,           // Stack size (bytes)
-      (void *)doc,    // Parameter to pass to the task
-      1,              // Task priority
-      &cmdTask,       // Task handle
-      1               // Core (0 or 1, depending on your setup)
+      sendCMDTask,   // Task function
+      "sendCMDTask", // Task name
+      8192,          // Stack size (bytes)
+      (void *)doc,   // Parameter to pass to the task
+      1,             // Task priority
+      &cmdTask,      // Task handle
+      1              // Core (0 or 1, depending on your setup)
   );
 
   // Wait for the task to complete
-  while (eTaskGetState(cmdTask) != eDeleted) {
-    vTaskDelay(pdMS_TO_TICKS(1)); // Delay to yield to the task
+  while (eTaskGetState(cmdTask) != eDeleted)
+  {
+    vTaskDelay(pdMS_TO_TICKS(10)); // Delay to yield to the task
   }
 
   // Get the response and clean up
@@ -158,37 +166,6 @@ void handleLampControl(const String &lampType, bool turnOn)
   delay(80);
   handleLampStatus(lampType);
 }
-
-// void handleShowPresets(const char *directory)
-// {
-//   getFilesJson(directory);
-//   //   String jsonString;
-//   //  serializeJson(result, jsonString);
-//   // notifyClients(jsonString);
-// }
-
-void handleLoadPreset(const DynamicJsonDocument &doc)
-{
-  String selectthis = doc["loadthis"].as<String>();
-  String path = "";
-  DynamicJsonDocument preset(1024);
-  if (doc["Dictionary"] == "readings")
-  {
-    // path = "/readings/" + selectthis + ".csv";
-    ReadFromDBTask(doc);
-  }
-
-  else if (doc["Dictionary"] == "presets")
-  {
-    path = "/presets/" + selectthis + ".txt";
-    String jsonString;
-    preset = readFromDatabase(path.c_str());
-    preset["loaded"] = "loaded";
-    serializeJson(preset, jsonString);
-    notifyClients(jsonString);
-  }
-}
-
 void handleSupplyStatus()
 {
   String stutus = sendCMD("get-voltages");
@@ -362,30 +339,34 @@ void handleScanTask(void *pvParameters)
   String stopInput = doc["stopInput"].as<String>();
   String stepInput = doc["stepInput"].as<String>();
   String lampmode = doc["lampmode"].as<String>();
-  
-  float current = (stopInput.toInt() - startInput.toInt()) / stepInput.toInt();
+
+  float current = (stopInput.toFloat() - startInput.toFloat()) / stepInput.toFloat();
   int j = 1; // represent the current iteration
   bool scanning = true;
   DynamicJsonDocument scanData(256);
 
   if (command == "scan")
   {
-    String scancmd = command + " "+lampmode+" "+ startInput + " " + stopInput + " " + stepInput;
+    String scancmd = command + " " + lampmode + " " + startInput + " " + stopInput + " " + stepInput;
     Serial.println(scancmd);
     Serial2.println(scancmd);
-
+    int NumberOfReadings = (stopInput.toFloat() - startInput.toFloat()) / stepInput.toFloat()  + 1;
+    Serial.println("no of readings: "+String(NumberOfReadings)+"\n");
+    vTaskDelay(pdMS_TO_TICKS(10000));
+    
     // float x[]={250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300};
     // float y[]={0.79345, 0.75808, 0.72395, 0.69756, 0.67347, 0.65129, 0.62944, 0.60936, 0.59192, 0.58464, 0.56991, 0.556, 0.53878, 0.50347, 0.48214, 0.46173, 0.44379, 0.42682, 0.41183, 0.39886, 0.38637, 0.37066, 0.3595, 0.35018, 0.34142, 0.33042, 0.32363, 0.32548, 0.40237, 0.39305, 0.28955, 0.26148, 0.24206, 0.23069, 0.22278, 0.22248, 0.28155, 0.32932, 0.24429, 0.25164, 0.22734, 0.1903, 0.18143, 0.17317, 0.1626, 0.15239, 0.14342, 0.13418, 0.12678, 0.11987};
 
     // for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt())
-    for (int i = stopInput.toInt(); i >= startInput.toInt(); i -= stepInput.toInt())
+    for (NumberOfReadings ; NumberOfReadings > 0 ; NumberOfReadings--)
     {
-      vTaskDelay(pdMS_TO_TICKS(100));
-        if (StopScan) {
-            StopScan = false;
-            // Break out of the loop to stop the task
-            break;
-        }
+      vTaskDelay(pdMS_TO_TICKS(50));
+      if (StopScan)
+      {
+        StopScan = false;
+        // Break out of the loop to stop the task
+        break;
+      }
 
       int startTime = millis();
       while (Serial2.available() == 0 && millis() - startTime < 2000)
@@ -393,35 +374,43 @@ void handleScanTask(void *pvParameters)
         delay(1);
       }
       // String response = Serial2.readStringUntil('\n');
-    // Generate random numbers in the range 1 to 1000
-    int num1 = rand() % 1000 + 1;
-    int num2 = rand() % 1000 + 1;
-    int num3 = rand() % 1000 + 1;
-      
-       // Create the response string
-    String response = "23/3||1:30 ";
-    response += String(num1) + " " + String(num2) + " " + String(num3);
-    Serial.println(response); // debug
+      // Generate random numbers in the range 1 to 1000
+      float num1 = rand() % 1000 + 1;
+      float num2 = rand() % 1000 + 1;
+      float num3 = rand() % 1000 + 1;
+
+      // Create the response string
+      String response = "23/3||1:30 ";
+      response += String(num1) + " " + String(num2) + " " + String(num3);
+      Serial.println(response); // debug
 
       // Split the response into components
-      int space1 = response.indexOf(' ');
-      int space2 = response.indexOf(' ', space1 + 1);
-      int space3 = response.indexOf(' ', space2 + 1);
+      float space1 = response.indexOf(' ');
+      float space2 = response.indexOf(' ', space1 + 1);
+      float space3 = response.indexOf(' ', space2 + 1);
 
       String Time = response.substring(0, space1);
-//      String wavelength = response.substring(space1 + 1, space2);
-      String wavelength= String(i);
+      String wavelength = response.substring(space1 + 1, space2);
+      //String wavelength = String(i);
       String reference = response.substring(space2 + 1, space3);
       String sample = response.substring(space3 + 1);
       if (scanning)
       {
-        float ratio= 0 ;
-        if(j-1 != 0){        // first iteration make ratio = 0
-        ratio = 100 / current * (j-1);
+        float ratio = 0;
+        if (j - 1 != 0)
+        { // first iteration make ratio = 0
+          ratio = 100 / current * (j - 1);
+          Serial.println(ratio);
+        
+        }
+        if (NumberOfReadings==1){
+          ratio = 100;
+          Serial.println(ratio);
         }
         scanData["current"] = ratio; // to help display the % progress
+        
       }
-   
+
       scanData["currentTime"] = Time;
       scanData["wavelength"] = wavelength;
       scanData["intensityReference"] = reference.toFloat();
@@ -429,8 +418,8 @@ void handleScanTask(void *pvParameters)
       scanData["scanning"] = scanning;
 
       j++;
-      
-      if (startInput==stopInput)
+
+      if (startInput == stopInput)
       {
         scanData["current"] = 100; // to help display the % progress
       }
@@ -508,28 +497,14 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     handleLampControl("vi", false);
   }
-  else if (doc.containsKey("savepreset"))
-  {
-    String filename = doc["name"].as<String>() + " === " + doc["time"].as<String>() + ".txt";
-    String bath = "/presetsDB.txt";
-    writeToDatabase("/presets/", doc);
-    SdWriteString(bath, filename); // save the name of the file into database
-  }
+  
   else if (doc.containsKey("deletepresets"))
   {
-    SD.remove("/presets/" + doc["name"].as<String>() + ".txt"); // delete the file itself
-    String LineToDelete = doc["name"].as<String>() + ".txt";
+    SD.remove( doc["name"].as<String>()); // delete the file itself
+    String LineToDelete = doc["name"].as<String>();
     deleteLineFromFile("/presetsDB.txt", LineToDelete); // delete its name from the DB
   }
-  else if (doc.containsKey("showpresets"))
-  {
-    // handleShowPresets("/presets");                              //old version
-    getFilesJson("/presets"); // like list dictionary function and send it to web
-  }
-  else if (doc.containsKey("loadthis"))
-  {
-    handleLoadPreset(doc);
-  }
+
   else if (doc.containsKey("supplystutus"))
   {
     handleSupplyStatus();
@@ -578,27 +553,11 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     handelreaddetecor();
   }
-  else if (doc.containsKey("isFirst"))
-  {
-    Serial.print("saved");
-    // writeToDatabase("/readings/", doc); //old version
-    WriteAsCsv(doc, 8);
-    String filename = doc["SampleID"].as<String>() + " === " + doc["time"].as<String>() + ".csv";
-    String bath = "/readingsDB.txt";
-    if (doc["isFirst"].as<String>() == "true")
-    {
-      SdWriteString(bath, filename); // save the name of the file into database
-    }
-  }
-  else if (doc.containsKey("showreadings"))
-  {
-    // handleShowPresets("/readings");       //old version
-    getFilesJson("/readings");
-  }
+  
   else if (doc.containsKey("deletereadings"))
   {
-    SD.remove("/readings/" + doc["name"].as<String>() + ".csv");
-    String LineToDelete = doc["name"].as<String>() + ".csv";
+    SD.remove(doc["name"].as<String>());
+    String LineToDelete = doc["name"].as<String>();
     deleteLineFromFile("/ReadingsDB.txt", LineToDelete);
   }
   else if (doc.containsKey("DirectCommand"))
@@ -614,10 +573,10 @@ void handleifelse(const DynamicJsonDocument &doc)
   else if (doc["command"] == "ScanStop")
   {
     Serial.println("command is ScanStop");
-    StopScan=true;
-    String response= sendCMD("scan-stop");
+    StopScan = true;
+    String response = sendCMD("scan-stop");
   }
-  
+
   else if (doc["command"] == "StateBar")
   {
     handleSB(doc);
