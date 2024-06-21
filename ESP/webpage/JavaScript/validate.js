@@ -1,40 +1,4 @@
 
-function showMessaget(message, option1Text,ContainerID) {
-  var messageContainer = document.getElementById(ContainerID);
-  messageContainer.style.display = 'block';
-  // Store in session storage
-  sessionStorage.setItem('message', message);
-  sessionStorage.setItem('option1Text', option1Text);
-  // Create a div for the message text
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-  // Create buttons for the options
-  var option1Button = document.createElement('button');
-  option1Button.textContent = option1Text;
-  option1Button.className = 'optionButtont'; // Apply custom CSS class
-   option1Button.onclick = function() {
-      // Logic for option 1
-
-      var inputs = document.querySelectorAll('.numbers2');
-      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
-      var max = Math.max(...values);
-      var min = Math.min(...values);
-      addPoint1(max, min, 1);
-  };
-    // Append message and options to the container
-    messageContainer.appendChild(messageDiv);
-    messageContainer.appendChild(option1Button);
-}
-function toggleLoginContainer(id="chartScan"){
-  var login = document.getElementById(id);
-  if(!login.style.display || login.style.display === "none"){
-    login.style.display="block"; 
-  }
-  else{
-    login.style.display="none";
-  }
-}
-
 
 /**========================================================================
  *                           Navbar
@@ -191,7 +155,7 @@ function compareValues() {
     if (document.getElementById('messageContainer1')) {
       document.getElementById('messageContainer1').textContent = '';
     }
-    showMessage("Please choose a sample from the dropdown menu before proceeding.", "ok", "messageContainer1");
+    showMessage("Please choose a sample from the dropdown menu before proceeding.", "cancel", "messageContainer1");
     return; // Exit the function if no valid option is selected
   }
 
@@ -218,13 +182,13 @@ function compareValues() {
     if (messageContainer2) {
       messageContainer2.textContent = '';
     }
-    showMessaget("Test passes!", "Show curve", "messageContainer2");
+    showMessaget("Test passes!", "Show curve", "messageContainer2","1");
   } else {
     messageContainer2.style.display = 'none';
     if (messageContainer1) {
       messageContainer1.textContent = '';
     }
-    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1");
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1","1");
   }
   // Show the table with the results
   document.getElementById('tableContainer').style.display = 'block';
@@ -277,8 +241,16 @@ document.addEventListener("DOMContentLoaded", function() {
       messageContainer31.textContent = '';
     }
     if (numfilters === 0 || isNaN(numfilters)) {
+      if (messageContainer12) {
+        messageContainer12.textContent = '';
+        messageContainer31.textContent = '';
+      }
       showMessage("Please Enter the number of filters first", "ok", "messageContainer12");
     } else {
+      if (messageContainer22) {
+        messageContainer22.textContent = '';
+        messageContainer31.textContent = '';
+      }
       generateInputs1();
       showMessage3("Start placing filters", "Done", "messageContainer31", numfilters);
     }
@@ -343,13 +315,13 @@ function CompareValues1() {
     if (messageContainer22) {
       messageContainer22.textContent = '';
     }
-    showMessaget("Test passes!", "Show curve", "messageContainer22"); // Updated ID
+    showMessaget("Test passes!", "Show curve", "messageContainer22","2"); // Updated ID
   } else {
     messageContainer22.style.display = 'none';
     if (messageContainer12) {
       messageContainer12.textContent = '';
     }
-    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer12");
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer12","2");
   }
 
   // Show the table with the results
@@ -363,48 +335,80 @@ function CompareValues1() {
 
 */
 
-var formElements3 = document.querySelectorAll(' .numbers13, .button13, .error3 '); // Select all relevant elements
-  var checkbox3 = document.querySelector('.checkboxes3'); // Get the checkbox element
+var formElements3 = document.querySelectorAll('.button13, .error3'); // Select all relevant elements
+var checkbox3 = document.querySelector('.checkboxes3'); // Get the checkbox element
 
-  checkbox3.addEventListener('change', function() {
-    for (var element of formElements3) {
-      element.disabled = !this.checked; // Toggle disabled based on checkbox state
-    }
-  });
-  
-
-  function compareWithzero(userInputValues, errorLimit) {
-    for (var i = 0; i < userInputValues.length; i++) {
-      var difference = userInputValues[i] - predefinedValues[i];
-      if (Math.abs(difference) > errorLimit) {
-        return false;
-      }
-    }
-    return true;
+checkbox3.addEventListener('change', function() {
+  for (var element of formElements3) {
+    element.disabled = !this.checked; // Toggle disabled based on checkbox state
   }
+});
 
-  function CompareValues2() {
-    var errorLimit = parseInt(document.querySelector('.error3').value);
-    var userInputValues = [];
-  
-    var passesTest3 = compareWithzero(userInputValues, errorLimit);
-    var messageContainer1 = document.getElementById('messageContainer13'); // Updated ID
-    var messageContainer2 = document.getElementById('messageContainer23'); // Updated ID
-  
-    if (passesTest3) {
-      messageContainer1.style.display = 'none';
-      if (messageContainer2) {
-        messageContainer2.textContent = '';
-      }
-      showMessaget("Test passes!", "Show curve", "messageContainer23"); // Updated ID
-    } else {
-      messageContainer2.style.display = 'none';
-      if (messageContainer1) {
-        messageContainer1.textContent = '';
-      }
-      showMessage("Test fails. Do you want to continue the test?", "Cancel", "messageContainer12"); // Updated ID
+// Attach event listener to button13 inside DOMContentLoaded
+document.getElementById('button13').addEventListener('click', function() {
+  console.log("clicked");
+  addPoint3(70, 150, 10);
+});
+
+function addPoint3(start, end, step) {
+  let xData = [30, 40, 50, 60, 70];
+  let yData = [0.02234, 0.02244, 0.02247, 0.0225, 0.02263];
+  let absorptionValue = [30, 40, 50, 60, 100];
+  let color = 'cadetblue';
+  let curveName = 'Absrbtion Curve';
+
+  openChartInNewTab(xData, yData, color, curveName); // Open initial chart
+  CompareValues2(absorptionValue);
+
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: start,
+    stopInput: end,
+    stepInput: step
+  };
+
+  websocket.send(JSON.stringify(message)); // websocket sent
+
+  websocket.onmessage = function(event) { // WebSocket onmessage event
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const wavelength = data.wavelength;
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    const absorptionValue = Math.log10(intensityReference / intensitySample);
+
+    // Assuming xData and yData are being updated based on WebSocket response
+    xData.push(wavelength);
+    yData.push(absorptionValue);
+    openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
+    CompareValues2(absorptionValue);
+  };
+}
+
+function CompareValues2(absorptionValue) {
+  var errorLimit = parseFloat(document.querySelector('.error3').value);
+
+  var passesTest3 = absorptionValue.every(value => Math.abs(value) <= errorLimit);
+
+  console.log('Passes Test:', passesTest3);
+
+  var messageContainer13 = document.getElementById('messageContainer13'); // Updated ID
+  var messageContainer23 = document.getElementById('messageContainer23'); // Updated ID
+
+  if (passesTest3) {
+    messageContainer13.style.display = 'none';
+    if (messageContainer23) {
+      messageContainer23.textContent = '';
     }
+    showMessaget("Test passes!", "Show curve", "messageContainer23","3"); // Updated ID
+  } else {
+    messageContainer23.style.display = 'none';
+    if (messageContainer13) {
+      messageContainer13.textContent = '';
+    }
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer13","3");
   }
+}
 
   
 
@@ -424,36 +428,140 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     }
   });
 
+  // Attach event listener to button22 inside DOMContentLoaded
+  document.getElementById('button14').addEventListener('click', function() {
+    console.log = ("clicked");
+    addPoint4(70,150,10);
+  });
+
+  function addPoint4(start, end, step) {
+    let xData = [30, 40, 50, 60, 70];
+    let yData = [0.02234, 0.02244, 0.02247, 0.0225, 0.02263];
+    let absorptionValue = [30, 40, 50, 60, 100];
+    let color = 'cadetblue';
+    let curveName = 'Absrbtion Curve';
   
+    openChartInNewTab(xData, yData, color, curveName); // Open initial chart
+    CompareValues3(absorptionValue, xData, yData);
     
+    const message = { // message for websocket
+      command: 'Scan',
+      startInput: start,
+      stopInput: end,
+      stepInput: step
+    };
     
+    websocket.send(JSON.stringify(message)); // websocket sent
+    
+    websocket.onmessage = function(event) { // WebSocket onmessage event
+      const data = JSON.parse(event.data);
+      console.log(event.data); // for test
+      const currentTime = data.currentTime;
+      const intensityReference = data.intensityReference;
+      const intensitySample = data.intensitySample;
+      const absorptionValue = Math.log10(intensityReference / intensitySample);
+      
+      // Assuming xData and yData are being updated based on WebSocket response
+      xData.push(currentTime);
+      yData.push(absorptionValue);
+      openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
+      CompareValues3(absorptionValue);
+    };
+  }
+
+  function CompareValues3(absorptionValue) {
+    var errorLimit = parseInt(document.querySelector('.error4').value);
+    var userInputValues = [];
+    var inputs = document.querySelectorAll('.numbers14'); // Update class name if necessary
+    inputs.forEach(function(input) {
+      var inputValue = parseFloat(input.value);
+      userInputValues.push(inputValue);
+    });
+  
+    var passesTest4 = compare(userInputValues, errorLimit, absorptionValue);
+    var messageContainer14 = document.getElementById('messageContainer14'); // Updated ID
+    var messageContainer24 = document.getElementById('messageContainer24'); // Updated ID
+  
+    if (passesTest4) {
+      messageContainer14.style.display = 'none';
+      if (messageContainer24) {
+        messageContainer24.textContent = '';
+      }
+      showMessaget("Test passes!", "Show curve", "messageContainer24","4"); // Updated ID
+    } else {
+      messageContainer24.style.display = 'none';
+      if (messageContainer14) {
+        messageContainer14.textContent = '';
+      }
+      showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer14","4");
+    }
+  }
 
 
+
     
-function showMessage(message,option1Text,ContainerID) {
-  // respond of data entered
+
+/*
+
+**********************************************COMMON FUNCTIONS***********************************************
+
+*/
+
+
+function compare(userInputValues, errorLimit, absorptionValue) {
+  for (var i = 0; i < userInputValues.length; i++) {
+    var difference = userInputValues[i] - absorptionValue[i];
+    if (Math.abs(difference) > errorLimit) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
+
+
+
+function showMessage(message, option1Text, ContainerID) {
   var messageContainer = document.getElementById(ContainerID);
   messageContainer.style.display = 'block';
+
+  // Clear previous message content if any
+  messageContainer.innerHTML = '';
 
   // Store in session storage
   sessionStorage.setItem('message', message);
   sessionStorage.setItem('option1Text', option1Text);
+
   // Create a div for the message text
   var messageDiv = document.createElement('div');
   messageDiv.textContent = message;
-  // Create buttons for the options
+  
+  // Apply custom styles based on the option1Text
+  if (option1Text === 'ok') {
+    messageDiv.style.color = 'green';
+  } else if (option1Text === 'cancel') {
+    messageDiv.style.color = 'red';
+  }
+
+  // Create a button for the option
   var option1Button = document.createElement('button');
   option1Button.textContent = option1Text;
-  option1Button.className = 'optionButtont'; // Apply custom CSS class
+  option1Button.className = 'optionButton'; // Apply custom CSS class
+
   option1Button.onclick = function() {
-      // Logic for option 1
-      console.log("Option 1 clicked");
+    if (option1Text === 'ok') {
       messageContainer.style.display = 'none';
-      messageContainer.textContent = '';// Redirect if user chooses not to continue 
+      messageContainer.textContent = ''; // Clear message content
+    } else if (option1Text === 'cancel') {
+      window.open("temp.html", "_blank");
+    }
   };
-    // Append message and options to the container
-    messageContainer.appendChild(messageDiv);
-    messageContainer.appendChild(option1Button);
+
+  // Append message and option button to the container
+  messageContainer.appendChild(messageDiv);
+  messageContainer.appendChild(option1Button);
 }
 
 
@@ -523,7 +631,7 @@ function showMessage3(message, option1Text, containerId, numFilters) {
 
 
 
-function showMessagef(message, option1Text, option2Text,ContainerID) {
+function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
   var messageContainer = document.getElementById(ContainerID);
   messageContainer.style.display = 'block';
   // Store in session storage
@@ -537,8 +645,7 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
   option1Button.textContent = option1Text;
   option1Button.className = 'optionButton'; // Apply custom CSS class
   option1Button.onclick = function() {
-      // Logic for option 1
-      console.log("Option 1 clicked");
+
       window.open("temp.html", "_blank");
     };
   var option2Button = document.createElement('button');
@@ -550,12 +657,66 @@ function showMessagef(message, option1Text, option2Text,ContainerID) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
-      addPoint1(max, min, 1);
+      if (functions==1) {
+        addPoint1(max, min, 1);
+      }
+      else if (functions==2)
+        {
+          addPoint2(max, min, 1);
+        }
+      else if (functions==3)
+        {
+          addPoint3(max, min, 1);
+        }
+      else if (functions==4)
+        {
+          addPoint4(max, min, 1);
+        }
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
   messageContainer.appendChild(option1Button);
   messageContainer.appendChild(option2Button);
+}
+
+
+function showMessaget(message, option1Text,ContainerID,functions) {
+  var messageContainer = document.getElementById(ContainerID);
+  messageContainer.style.display = 'block';
+  // Store in session storage
+  sessionStorage.setItem('message', message);
+  sessionStorage.setItem('option1Text', option1Text);
+  // Create a div for the message text
+  var messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  // Create buttons for the options
+  var option1Button = document.createElement('button');
+  option1Button.textContent = option1Text;
+  option1Button.className = 'optionButtont'; // Apply custom CSS class
+   option1Button.onclick = function() {
+      var inputs = document.querySelectorAll('.numbers2');
+      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
+      var max = Math.max(...values);
+      var min = Math.min(...values);
+      if (functions==1) {
+        addPoint1(max, min, 1);
+      }
+      else if (functions==2)
+        {
+          addPoint2(max, min, 1);
+        }
+      else if (functions==3)
+        {
+          addPoint3(max, min, 1);
+        }
+      else if (functions==4)
+        {
+          addPoint4(max, min, 1);
+        }
+  };
+    // Append message and options to the container
+    messageContainer.appendChild(messageDiv);
+    messageContainer.appendChild(option1Button);
 }
 
 
@@ -643,6 +804,51 @@ function compareWithPredefinedValues(userInputValues, predefinedValues, errorLim
   }
   return true;
 }
+
+
+
+
+
+function compare(userInputValues, errorLimit, absorptionValue) {
+  for (var i = 0; i < userInputValues.length; i++) {
+    var difference = userInputValues[i] - absorptionValue[i];
+    if (Math.abs(difference) > errorLimit) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+function addPoint1(start, end, step) {
+  let xData = [];
+    for (let value = start; value >= end; value -= step) {
+      xData.push(value);
+    }
+  let yData = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253, 0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
+  let color = 'cadetblue';
+  let curveName = 'Absrbtion Curve';
+ 
+ // toggleLoginContainer(id="chartdiv");
+  openChartInNewTab(xData, yData, color, curveName);
+
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: start,
+    stopInput: end,
+    stepInput: step
+  };
+  websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    const data = JSON.parse(event.data);
+    console.log(event.data); // for test
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    absorptionValue = Math.log10(intensityReference / intensitySample);
+  };
+
+}
+
 
 
 
@@ -787,33 +993,7 @@ function removeAllCurves() {
 }
 
 
-function addPoint1(start, end, step) {
-  let xData = [];
-    for (let value = start; value >= end; value -= step) {
-      xData.push(value);
-    }
-  let yData = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253, 0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
-  let color = 'cadetblue';
-  let curveName = 'Absrbtion Curve';
-  toggleLoginContainer(id="chartdiv");
-  openChartInNewTab(xData, yData, color, curveName);
 
-  const message = { // message for websocket
-    command: 'Scan',
-    startInput: start,
-    stopInput: end,
-    stepInput: step
-  };
-  websocket.send(JSON.stringify(message)); // websocket sent
-  websocket.onmessage = function (event) { // WebSocket onmessage event
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const intensityReference = data.intensityReference;
-    const intensitySample = data.intensitySample;
-    absorptionValue = Math.log10(intensityReference / intensitySample);
-  };
-
-}
 
 
 
