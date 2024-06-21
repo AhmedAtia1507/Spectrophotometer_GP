@@ -71,36 +71,34 @@
   <!---------------------------- END OF Navbar ---------------------------->
   <main>
     <section>
-        <div id="FLC" class="tabcontent">
-
-            <div class="row" style="height: 70vh;">
-              <fieldset class="fchart">
-                <legend>Chart</legend>
-                <canvas id="myChart" style="height: 95%;width: 95%;"></canvas>
-              </fieldset>
-          
-              <fieldset class="fsetup" >
-           
-                  <h3 style="text-align: center;"> Lambert Abs = K C </h3>
-          
-                  <input class="Scanin" type="text" id="WLine" placeholder="Enter Wavelength" />
-                  <input class="Scanin" type="text" id="concentration" placeholder="Enter concentration" />
-          
-                
-                  <div class="TwoBtn" style="margin-bottom: 40px;">
-                    <button onclick="addPoint()">Add Point</button>
-                    <button onclick="clearAll()">Clear All</button>
-                  </div>
-          
-                  <div id="messageBox">
-                    <!-- Messages will be displayed here -->
-                  </div>
-          
-            </fieldset>
+      <div class="container-fit">
+        <div class="first-div">
+          <canvas id="myChart" style="height: 800;width: 800;"></canvas>
+        </div>
+        <div class="second-div">
+          <h3 style="text-align: center;"> Lambert Abs = K C </h3>
+          <input class="Scanin" type="text" id="WLine" placeholder="Enter Wavelength" />
+          <input class="Scanin" type="text" id="concentration" placeholder="Enter concentration" />
+          <div class="TwoBtn" style="margin-bottom: 40px;">
+            <button onclick="addPoint()">Add Point</button>
+            <button onclick="clearAll()">Clear All</button>
           </div>
-              </section>
+          <div id="messageBox">
+            <!-- Messages will be displayed here -->
+          </div>
+
+        </div>
+      </div>
+
+   
+       
+
+
+
+
+      </section>
           
-              <div class="login-container" id="login">
+              <!-- <div class="login-container" id="login">
                 <div class="login-form-box">
                     <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('login')"></i>
                     <h2>Log-in Form</h2>
@@ -116,8 +114,7 @@
                     <div class="wrong-pass">
                         <label id="wrongpass" for="wrongpass"></label>
                     </div>
-                </div>
-            </div>
+                </div> -->
             
               <!---------------------------- end OF Login ---------------------------->
         </main>
