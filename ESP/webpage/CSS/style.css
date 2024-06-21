@@ -1346,7 +1346,7 @@ select, input[type="color"], button {
   height: 30px;
 }
 @media screen and (max-width: 768px){
-  .container{
+  .container,.container-fit{
     display: flex;
     flex-direction: column;
   }
@@ -1354,6 +1354,7 @@ select, input[type="color"], button {
     display: flex;
     flex-direction: column;
   }
+
 }
 .container-table{
   display: flex;
