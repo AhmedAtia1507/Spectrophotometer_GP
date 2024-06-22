@@ -79,45 +79,89 @@
       <!-- Scan Tab  -->
       <div id="ScanVsWL" class="tabcontent" style="display: block;">
        
+        <div>
+          <span style="font-size: 28px; font-weight: 650;">Setup</span> 
+          <button id="savepreset" onclick="savepreset()" title="Save Current Method"> 
+              <i class="fa-solid fa-floppy-disk"></i> 
+          </button>
+          <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> 
+              <i class="fa-solid fa-upload"></i>
+          </button>
+          <button id="toggleButton">
+              <i class="fas fa-plus" style="padding: 1px;"></i>
+          </button>
+        </div>
+        <div id="fieldsetContent" class="hidden" style="background-color: lightblue;">
+          <div style="margin: 10px 10px;">
+              <label>Scan with 
+                  <select name="" id="indecatorPage">
+                      <option value="Wavelength">Wavelength</option>
+                      <option value="Time">Time</option>
+                      <option value="Filter">Filter</option>
+                  </select>
+              </label>
+              <button id="chartType">
+                  <i class="fas fa-arrow-right" style="font-size: 12px;"></i>
+              </button>
+          </div>
+          <div class="setupInput"  style="margin-bottom: 10px;">
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="start">Start:</label>
+                  <input type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
+              </div>
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="stop">Stop:</label>
+                  <input type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
+              </div>
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="step">Step:</label>
+                  <input type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
+              </div>
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="initTime">Integration Time:</label>
+                  <input type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
+              </div>
+          </div>
+          <div class="setupInput" >
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="start">Filter</label>
+                  <input type="number" id="filter" name="filter" placeholder="Pick filter" title="which filter">
+              </div>
+              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+                  <label for="stop">specific Wavelength</label>
+                  <input type="number" id="specificWL" name="stop" placeholder="Nabil" title="wavelength stop value">
+              </div>
+          </div>
+      
+          <div class="buttonsAndSelectors" style="text-align: center;">
+              <div class="selectors" style="display: inline-block; text-align: left;">
+                  <strong>Lamps</strong>
+                  <select name="lamps condition" id="LampsOFF">
+                      <option value="both">Both On</option>
+                      <option value="uv">UV only</option>
+                      <option value="vi">VI only</option>
+                  </select>
+                  <strong>Mode</strong>
+                  <select id="mySelect" name="mode">
+                      <option value="absorption">Absorption</option>
+                      <option value="transmission">Transmission</option>
+                      <option value="Intensity">Intensity</option>
+                  </select>
+              </div>
+              <div class="setupButtons" style="display: inline-block;">
+                  <button id="SampleNumBTN" title="Start Auto zero">Auto Zero</button>
+                  <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom" style="font-size: 30px;"></i></button>
+              </div>
+          </div>
+      </div>
+      
+        <!-- <fieldset class="fsetup" >  
 
-        <fieldset >  
-          <legend>Setup 
-            <button id="savepreset" onclick="savepreset()" title="Save Current Method"> <i class="fa-solid fa-floppy-disk"></i> </button>
-            <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> <i class="fa-solid fa-upload"></i></button>
-          </legend>
           
-          <div class="fsetup" >
-            <label>Scan with <select name="" id="indecatorPage">
-              <!-- <option value="Wavelength">Wavelength</option> -->
-              <option value="Time">Time</option>
-              <option value="Filter">Filter</option>
-            </select></label>
-  
-            <input  id="SampleNum" class="SampleNum" placeholder="NO. of Samples" title="number of samples">
-            <input  type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
-            <input  type="number" id="stop" name="stop" placeholder="WL Stop" title="wavelength stop value">
-            <input  type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
-            <input  type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
-                  
-            
-            </div>
-              <div class="buttonsAndSelectors">
-              <div class="selectors">
-                <strong>Lamps</strong>
-                <select name="lamps condition" id="LampsOFF">
-                  <option value="both">Both On</option>
-                  <option value="uv">UV only</option>
-                  <option value="vi">VI only</option>
-                </select>
-  
+            <div class="setupcontainer">         
               
-              
-                <strong>Mode</strong>
-                <select id="mySelect" name="mode" >
-                  <option value="absorption"> Absorption</option>
-                  <option value="transmission"> Transmission</option>
-                  <option value="Intensity"> Intensity</option>
-                </select>
+              <div>
+                
                 
               </div>
               <div class="setupButtons">
@@ -125,9 +169,11 @@
                 <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom"></i></button>
                 <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button>
             </div>
-          </div>
+
+  
+          
           </fieldset>
-        
+         -->
           
           <div class="container">
             <div class="first-div">

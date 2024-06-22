@@ -1,3 +1,25 @@
+document.getElementById('toggleButton').addEventListener('click', function() {
+  var content = document.getElementById('fieldsetContent');
+  var icon = this.querySelector('i');
+
+  if (content.classList.contains('hidden')) {
+      content.classList.remove('hidden');
+      content.style.height = content.scrollHeight + "px";
+      icon.className = 'fas fa-minus';
+  } else {
+      content.style.height = content.scrollHeight + "px";
+      setTimeout(() => {
+          content.style.height = 0;
+      }, 10);
+      icon.className = 'fas fa-plus';
+      content.addEventListener('transitionend', function() {
+          if (content.style.height === '0px') {
+              content.classList.add('hidden');
+          }
+      }, { once: true });
+  }
+});
+
 
 /**========================================================================
  *                           Navbar
@@ -146,12 +168,7 @@ document.getElementById('sBarBtn').addEventListener('click', function () {
 // Initial chart setup
 let PageIndecator;
 
-  let indicatorElement = document.getElementById('indecatorPage');
-  if (indicatorElement) {
-    // PageIndecator = indicatorElement.textContent;
-    PageIndecator = indicatorElement.value;
-    console.log(PageIndecator); 
-  }
+
 
 
 
@@ -164,25 +181,39 @@ function toggleVisibility() {
 let isScanning = false;
 var intensityData = [];
 var wavelengthData = [];
-let chartScan, chartScanTime, chartScanFilter;
-
+let chartScan;
+let firstInit =0;
 let chartData;
-if (PageIndecator==='Wavelength') {
-  const ctxScan = document.getElementById('chartScan').getContext('2d');
-  createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
+
+document.getElementById('chartType').addEventListener('click', function () {
+  let indicatorElement = document.getElementById('indecatorPage');
+  if (firstInit) {
+    chartScan.destroy();
+    chartScan = null;
   }
-  else if (PageIndecator==='Time') {
-  const ctxScan = document.getElementById('chartScan').getContext('2d');
-  createChart(ctxScan, 0, 1100, 'Time (s)', 'chartScanTime');
-  
+  if (indicatorElement) {
+    // PageIndecator = indicatorElement.textContent;
+    PageIndecator = indicatorElement.value;
+    console.log(PageIndecator); 
   }
-  else if (PageIndecator==='Filter') {
-  const ctxScan = document.getElementById('chartScan').getContext('2d');
-  createChart(ctxScan, 0, 50, 'Filter (units)', 'chartScanFilter');
-  }
-  else {
-  alert('error in page indecator');
-  }
+  if (PageIndecator==='Wavelength') {
+    const ctxScan = document.getElementById('chartScan').getContext('2d');
+    createChart(ctxScan, 190, 1100, 'Wavelength (nm)', 'chartScan');
+    }
+    else if (PageIndecator==='Time') {
+    const ctxScan = document.getElementById('chartScan').getContext('2d');
+    createChart(ctxScan, 0, 1100, 'Time (s)', 'chartScanTime');
+    
+    }
+    else if (PageIndecator==='Filter') {
+    const ctxScan = document.getElementById('chartScan').getContext('2d');
+    createChart(ctxScan, 0, 50, 'Filter (units)', 'chartScanFilter');
+    }
+    firstInit =1;
+
+});
+
+
 function createChart(ctx, xMin, xMax, xLabel, chartType) {
   const chartConfig = {
     type: 'line',
@@ -1273,7 +1304,7 @@ let xtest = [700, 699, 698, 697, 696, 695, 694, 693, 692, 691, 690, 689, 688, 68
 let ytest = [0.02234, 0.02244, 0.02247, 0.0225, 0.02263, 0.02253, 0.02244, 0.0226, 0.02237, 0.02265, 0.02274, 0.02255, 0.02267, 0.02261, 0.02275, 0.02288, 0.0227, 0.02303, 0.02294, 0.02304, 0.02313, 0.02327, 0.02347, 0.02343, 0.02344, 0.0238, 0.02398, 0.02453, 0.02492, 0.02623, 0.02783, 0.03071, 0.03561, 0.04003, 0.04439, 0.04769, 0.0513, 0.05325, 0.05321, 0.05159, 0.0496, 0.04809, 0.04671, 0.0453, 0.04582, 0.0478, 0.05092, 0.05624, 0.06206, 0.06895, 0.07599, 0.0784, 0.0761, 0.07425, 0.07339, 0.07221, 0.07159, 0.07205, 0.07575, 0.08285, 0.09243, 0.10083, 0.10491, 0.10434, 0.10021, 0.09375, 0.08347, 0.07018, 0.05825, 0.04889, 0.04257, 0.03817, 0.03515, 0.03327, 0.03156, 0.03022, 0.02928, 0.02843, 0.02766, 0.02734, 0.02677, 0.02645, 0.02593, 0.02577, 0.02554, 0.02531, 0.02499, 0.02512, 0.02501, 0.02502, 0.02495, 0.02487, 0.02491, 0.02478, 0.02474, 0.0246, 0.02459, 0.02465, 0.02468, 0.02447, 0.02458, 0.02462, 0.02444, 0.02467, 0.02465, 0.02453, 0.02456, 0.02434, 0.02422, 0.02416, 0.02411, 0.02404, 0.02443, 0.02433, 0.02462, 0.02449, 0.02469, 0.02506, 0.02544, 0.02562, 0.0258, 0.0264, 0.02652, 0.02689, 0.02722, 0.02761, 0.02779, 0.02785, 0.02834, 0.02857, 0.02848, 0.02872, 0.02872, 0.02919, 0.02888, 0.02897, 0.02937, 0.0294, 0.0294, 0.02949, 0.02944, 0.0295, 0.03008, 0.03064, 0.0324, 0.03581, 0.04131, 0.04587, 0.04853, 0.05166, 0.05632, 0.06351, 0.07405, 0.07908, 0.07995, 0.07867, 0.07831, 0.08163, 0.09221, 0.10707, 0.12825, 0.16216, 0.19453, 0.20988, 0.21171, 0.18648, 0.14277, 0.1036, 0.0757, 0.06007, 0.0502, 0.04474, 0.04053, 0.03814, 0.03615, 0.0346, 0.03343, 0.03253, 0.03177, 0.03132, 0.03083, 0.03043, 0.03066, 0.03012, 0.03042, 0.03038, 0.03015, 0.03036, 0.03006, 0.0303, 0.03097, 0.03068, 0.03072, 0.03007, 0.03003, 0.02999, 0.03013, 0.0297, 0.02968, 0.02979, 0.02976, 0.03008, 0.03076, 0.03145, 0.03316, 0.03575, 0.03863, 0.04314, 0.05021, 0.05607, 0.06269, 0.07103, 0.07353, 0.06963, 0.06919, 0.07468, 0.07744, 0.06806, 0.06032, 0.05305, 0.04654, 0.04341, 0.04568, 0.05466, 0.0671, 0.07488, 0.07921, 0.0766, 0.07283, 0.06931, 0.06514, 0.06935, 0.08389, 0.10123, 0.12107, 0.17581, 0.28013, 0.38436, 0.45968, 0.60599, 0.6733, 0.55068, 0.35602, 0.28656, 0.34277, 0.45544, 0.57377, 0.55374, 0.44017, 0.35037, 0.36305, 0.53452, 0.87108, 1.19864, 1.52639, 1.4128, 0.7816, 0.3186, 0.16443, 0.11064, 0.08583, 0.07091, 0.06015, 0.05236, 0.04784, 0.04494, 0.04394, 0.04396, 0.04283, 0.04145, 0.04203, 0.04491, 0.05047, 0.0597, 0.07054, 0.07513, 0.06943, 0.05927, 0.06482, 0.08834, 0.12146, 0.14571, 0.13558, 0.09944, 0.07767, 0.07555, 0.07272, 0.062, 0.05048, 0.0432, 0.03989, 0.03789, 0.03695, 0.03618, 0.03581, 0.03596, 0.03581, 0.03598, 0.03604, 0.03622, 0.03568, 0.03592, 0.03618, 0.03629, 0.0357, 0.03622, 0.03705, 0.03954, 0.04242, 0.0448, 0.04262, 0.04203, 0.0479, 0.05951, 0.06634, 0.05958, 0.0483, 0.05176, 0.06, 0.05639, 0.04352, 0.04146, 0.03931, 0.03937, 0.03869, 0.0382, 0.03923, 0.04076, 0.04403, 0.05415, 0.06622, 0.07438, 0.07695, 0.08271, 0.10044, 0.13299, 0.15769, 0.20891, 0.32465, 0.60804, 0.36616, 0.17272, 0.11024, 0.07852, 0.06575, 0.06036, 0.06124, 0.0619, 0.06393, 0.06189, 0.0639, 0.0728, 0.07918, 0.0734, 0.06985, 0.07072, 0.06979, 0.066, 0.06633, 0.06497, 0.06424, 0.06363, 0.06827, 0.06802, 0.07111, 0.08246, 0.1133, 0.0875, 0.07205, 0.06591, 0.05975, 0.05833, 0.05745, 0.05843, 0.05888, 0.06009, 0.06181, 0.06291, 0.06351, 0.06459, 0.06504, 0.06673, 0.06823, 0.0694, 0.07159, 0.07312, 0.0751, 0.07729, 0.07949, 0.08153, 0.08402, 0.08668, 0.08999, 0.09309, 0.0956, 0.09871, 0.1023, 0.10615, 0.11008, 0.11487, 0.11987, 0.12678, 0.13418, 0.14342, 0.15239, 0.1626, 0.17317, 0.18143, 0.1903, 0.22734, 0.25164, 0.24429, 0.32932, 0.28155, 0.22248, 0.22278, 0.23069, 0.24206, 0.26148, 0.28955, 0.39305, 0.40237, 0.32548, 0.32363, 0.33042, 0.34142, 0.35018, 0.3595, 0.37066, 0.38637, 0.39886, 0.41183, 0.42682, 0.44379, 0.46173, 0.48214, 0.50347, 0.53878, 0.556, 0.56991, 0.58464, 0.59192, 0.60936, 0.62944, 0.65129, 0.67347, 0.69756, 0.72395, 0.75808, 0.79345, 0.80799];
 
 
-addCurve(xtest, ytest, 'red', 'Name 1', false);
+// addCurve(xtest, ytest, 'red', 'Name 1', false);
 
 // xtest.reverse();
 // ytest.reverse();

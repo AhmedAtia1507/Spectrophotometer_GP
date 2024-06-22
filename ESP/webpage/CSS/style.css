@@ -293,7 +293,8 @@ nav li:first-child {
   position: relative;
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  height: 250px;
+  grid-template-columns: 40% 30% 30%;
   gap: 4px;
   justify-content: center;
   align-items: center;
@@ -1139,6 +1140,13 @@ body.dark-mode {
   height: 65vh; /* Full height for demonstration */
   margin-bottom: 200px;
 }
+.setupcontainer {
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
+  width: 80%;
+  height: 0; /* Full height for demonstration */ 
+  margin-bottom: 200px;
+}
 
 .first-div {
   /* background-color: lightblue; */
@@ -1291,4 +1299,40 @@ select, input[type="color"], button {
 .visible {
   display: block;
 }
+.hidden {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
 
+#fieldsetContent {
+  height: auto;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+#clearStorage,#SampleNumBTN{
+  background-color:lightcoral;
+  color: white;
+  border: none;
+  padding: 5px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+#SampleNumBTN{
+  background-color: blueviolet;
+
+}
+
+.setupInput input{
+  padding: 4px;
+  border: solid 1px black;
+  border-radius: 0%;
+  height: 30px;
+}
