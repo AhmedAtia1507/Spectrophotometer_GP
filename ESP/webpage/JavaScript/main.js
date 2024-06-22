@@ -1305,7 +1305,7 @@ let yValues = [];
 let i = 0;
 
 // setInterval(function () {
-n  //   xValues[i]=xtest[i];
+//   xValues[i]=xtest[i];
 //   yValues[i]=ytest[i];
 //   addCurve(xValues, yValues, 'red', 'Name 1',false);
 //   i++;
