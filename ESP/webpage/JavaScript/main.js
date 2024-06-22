@@ -360,6 +360,7 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
     chartScan.data.datasets[existingCurveIndex].backgroundColor = fillCurve ? 'rgba(255, 0, 0, 0.3)' : undefined;
     chartScan.data.datasets[existingCurveIndex].showLine = drawMode !== 'points'; // Don't connect points if drawing separate points
   } else { // If the curve does't exist, add it
+
     var curveData = drawMode === 'curve' ?
       xData.map((x, index) => ({ x: x, y: yData[index] })) : // Draw curve
       xData.map((x, index) => ({ x: x, y: yData[index], showLine: false })); // Draw separate points
@@ -372,6 +373,7 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
       pointRadius: drawMode === 'points' ? 5 : 0, // Set point radius if drawing points
       lineTension: drawMode === 'points' ? 0 : 0.4, // Set line tension if drawing points
       showLine: drawMode !== 'points' // Don't connect points if drawing separate points
+
     };
 
     if (fillCurve) {
@@ -380,15 +382,16 @@ function addCurve(xData, yData, color, curveName, fillCurve = false, drawMode = 
     }
 
     chartScan.data.datasets.push(dataset);
+    // add to select 
+    const selectElement = document.getElementById('chart-select');
+    const option = document.createElement('option');
+    option.value = curveName;
+    option.text = curveName;
+    selectElement.appendChild(option);
+
   }
 
   chartScan.update(); // Update the chart
-  // add to select 
-  const selectElement = document.getElementById('chart-select');
-  const option = document.createElement('option');
-  option.value = curveName;
-  option.text = curveName;
-  selectElement.appendChild(option);
 
 }
 
@@ -1216,18 +1219,7 @@ function DoAutoZero (){
 
 
 
-document.getElementById('SampleNumBTN').addEventListener('click', function () {
-  var num = document.getElementById('SampleNum').value; // Enclosed 'SampleNum' in quotes
 
-  if (num > 0) {
-    constructtable(num);
-    document.getElementById('myTable').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  else {
-    alert('please insert the number of samples')
-  }
-});
 // remove all rows
 document.getElementById('deleteBTN').addEventListener('click', function () {
   colorindex = 0;

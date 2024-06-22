@@ -1147,21 +1147,30 @@ body.dark-mode {
   height: 0; /* Full height for demonstration */ 
   margin-bottom: 200px;
 }
+.container-fit {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  width: 100%;
+  height: 80vh; /* Full height for demonstration */
+  margin-bottom: 200px;
+}
 
 .first-div {
-  /* background-color: lightblue; */
+  background-color: lightblue;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .second-div {
-  /* background-color: lightcoral; */
+  background-color: lightcoral;
   display: flex;
   flex-direction: column;
   padding: 50px;
   gap: 10px;
 }
+
+  
 .second-div button{
   background-color: lightblue;
 }
@@ -1335,4 +1344,31 @@ select, input[type="color"], button {
   border: solid 1px black;
   border-radius: 0%;
   height: 30px;
+}
+@media screen and (max-width: 768px){
+  .container,.container-fit{
+    display: flex;
+    flex-direction: column;
+  }
+  .setupcontainer{
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+.container-table{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+}
+@media screen and (max-width: 768px){
+  .container-table{
+    display: flex;
+    flex-direction: column;
+    margin-top: 400px;
+  }
+  
 }
