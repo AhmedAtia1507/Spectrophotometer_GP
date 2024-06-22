@@ -373,16 +373,16 @@ void handleScanTask(void *pvParameters)
       {
         delay(1);
       }
-      // String response = Serial2.readStringUntil('\n');
+       String response = Serial2.readStringUntil('\n');
       // Generate random numbers in the range 1 to 1000
-      float num1 = rand() % 1000 + 1;
-      float num2 = rand() % 1000 + 1;
-      float num3 = rand() % 1000 + 1;
+      // float num1 = rand() % 1000 + 1;
+      // float num2 = rand() % 1000 + 1;
+      // float num3 = rand() % 1000 + 1;
 
-      // Create the response string
-      String response = "23/3||1:30 ";
-      response += String(num1) + " " + String(num2) + " " + String(num3);
-      Serial.println(response); // debug
+      // // Create the response string
+      // String response = "23/3||1:30 ";
+      // response += String(num1) + " " + String(num2) + " " + String(num3);
+      // Serial.println(response); // debug
 
       // Split the response into components
       float space1 = response.indexOf(' ');
