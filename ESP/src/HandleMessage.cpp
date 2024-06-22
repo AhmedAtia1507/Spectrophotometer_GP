@@ -340,8 +340,10 @@ void handleScanTask(void *pvParameters)
   String stepInput = doc["stepInput"].as<String>();
   String lampmode = doc["lampmode"].as<String>();
   String Time;
+  String buffur;
   float current = (stopInput.toFloat() - startInput.toFloat()) / stepInput.toFloat();
   int j = 1; // represent the current iteration
+  int Buffersize = 10;
   bool scanning = true;
   DynamicJsonDocument scanData(256);
 
@@ -357,7 +359,7 @@ void handleScanTask(void *pvParameters)
       { 
         
         Serial.println("while looop");
-        vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelay(pdMS_TO_TICKS(20));
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
@@ -365,7 +367,7 @@ void handleScanTask(void *pvParameters)
        if(response == "Init-Finished" ){
       while (Serial2.available() == 0)
       {
-        vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelay(pdMS_TO_TICKS(20));
       }
         Time =Serial2.readStringUntil('\n');
         Serial2.flush();
@@ -380,6 +382,7 @@ void handleScanTask(void *pvParameters)
     for (NumberOfReadings ; NumberOfReadings > 0 ; NumberOfReadings--)
     {
       vTaskDelay(pdMS_TO_TICKS(5));
+      
       if (StopScan)
       {
         StopScan = false;
@@ -394,6 +397,7 @@ void handleScanTask(void *pvParameters)
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
+       
       // Generate random numbers in the range 1 to 1000
       // float num1 = rand() % 1000 + 1;
       // float num2 = rand() % 1000 + 1;
@@ -446,14 +450,24 @@ void handleScanTask(void *pvParameters)
       {
         scanData["current"] = 100; // to help display the % progress
       }
-      
+      Buffersize--;
       String jsonString;
       serializeJson(scanData, jsonString);
-      notifyClients(jsonString);
+      buffur+=jsonString+"\n";
+      if(Buffersize==0){
+        Buffersize = 10; //to reset the buffer size
+        notifyClients(buffur);
+        buffur = "";
+      }
       Serial.println("Scan data sent");
     }
   }
   }
+  if(Buffersize>0){
+        Buffersize = 10; //to reset the buffer size
+        notifyClients(buffur);
+        buffur = "";
+      }
   Serial.println("last");
 
   vTaskDelete(NULL); // delete the task when done

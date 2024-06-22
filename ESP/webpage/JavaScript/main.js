@@ -740,10 +740,14 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   // Set up the WebSocket onmessage event
   websocket.onmessage = function (event) {
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    processScanData(data);
-
+    let buffer = event.data.split('\n');
+    buffer.forEach(dataBuffer=>{
+      const data = JSON.parse(dataBuffer);
+      console.log(data); // for test
+      processScanData(data);
+  
+    })
+    
     // Continue scanning for the next wavelength after a delay
     setTimeout(() => {
       continueScanning(data.wavelength + stepInput);
