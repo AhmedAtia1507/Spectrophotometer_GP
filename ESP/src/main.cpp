@@ -78,7 +78,7 @@ void initWebSocket()
 void setup()
 {
   Serial.begin(115200);
-  Serial2.begin(500000);
+  Serial2.begin(115200);
   MyInitialization::initAP();
   initWebSocket();
   MyInitialization::sdInit();

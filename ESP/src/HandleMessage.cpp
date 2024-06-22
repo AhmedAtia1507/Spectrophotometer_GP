@@ -352,19 +352,24 @@ void handleScanTask(void *pvParameters)
     Serial2.println(scancmd);
     int NumberOfReadings = (stopInput.toFloat() - startInput.toFloat()) / stepInput.toFloat()  + 1;
     Serial.println("no of readings: "+String(NumberOfReadings)+"\n");
-    
+    //Serial2.flush();
       while (Serial2.available() == 0)
-      {
-        vTaskDelay(pdMS_TO_TICKS(100));
+      { 
+        
+        Serial.println("while looop");
+        vTaskDelay(pdMS_TO_TICKS(1));
       }
        String response = Serial2.readStringUntil('\n');
+       Serial.println(response);
+
        if(response == "Init-Finished" ){
       while (Serial2.available() == 0)
       {
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(1));
       }
         Time =Serial2.readStringUntil('\n');
-       }
+        Serial2.flush();
+       
     
     // vTaskDelay(pdMS_TO_TICKS(10000));
     
@@ -374,7 +379,7 @@ void handleScanTask(void *pvParameters)
     // for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt())
     for (NumberOfReadings ; NumberOfReadings > 0 ; NumberOfReadings--)
     {
-      vTaskDelay(pdMS_TO_TICKS(50));
+      vTaskDelay(pdMS_TO_TICKS(5));
       if (StopScan)
       {
         StopScan = false;
@@ -388,6 +393,7 @@ void handleScanTask(void *pvParameters)
         delay(1);
       }
        String response = Serial2.readStringUntil('\n');
+       Serial.println(response);
       // Generate random numbers in the range 1 to 1000
       // float num1 = rand() % 1000 + 1;
       // float num2 = rand() % 1000 + 1;
@@ -404,9 +410,12 @@ void handleScanTask(void *pvParameters)
 
       // String wavelength = response.substring(0, space1);
      String wavelength = response.substring(0, space1);
+     Serial.println(wavelength);
       //String wavelength = String(i);
       String reference = response.substring(space1 + 1, space2);
+   //  Serial.println(reference);
       String sample = response.substring(space2+ 1);
+     Serial.println(sample);
       if (scanning)
       {
         float ratio = 0;
@@ -418,14 +427,15 @@ void handleScanTask(void *pvParameters)
         }
         if (NumberOfReadings==1){
           ratio = 100;
-          Serial.println(ratio);
+          //Serial.println(ratio);
         }
         scanData["current"] = ratio; // to help display the % progress
         
       }
 
       scanData["currentTime"] = Time;
-      scanData["wavelength"] = wavelength;
+      Serial.print(Time);
+      scanData["wavelength"] = wavelength.toFloat();
       scanData["intensityReference"] = reference.toFloat();
       scanData["intensitySample"] = sample.toFloat();
       scanData["scanning"] = scanning;
@@ -442,6 +452,7 @@ void handleScanTask(void *pvParameters)
       notifyClients(jsonString);
       Serial.println("Scan data sent");
     }
+  }
   }
   Serial.println("last");
 

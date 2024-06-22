@@ -607,7 +607,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   function processScanData(data) {
     const currentTime = data.currentTime;
-    const wavelength = parseFloat(data.wavelength);
+    const wavelength = data.wavelength;
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
@@ -688,10 +688,10 @@ function scan(index, SampleID, SampleDecribe, btn) {
       changeState(index, progress, btn);
       displayCMD(res, 'green', index);
       if (modeInput == "absorption") {
-        addCurve(x, AbsorptionAdjusted, colorSelectArr[index], SampleID);
+        addCurve(x, y, colorSelectArr[index], SampleID);
       }
       else {
-        addCurve(x, TransmissionAdjusted, colorSelectArr[index], SampleID);
+        addCurve(x, y, colorSelectArr[index], SampleID);
       }
       StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
     }
