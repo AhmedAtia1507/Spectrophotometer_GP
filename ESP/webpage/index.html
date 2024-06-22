@@ -121,6 +121,7 @@
                 
               </div>
               <div class="setupButtons">
+                <button onclick="DoAutoZero()" title="click to perform auto zero calibration for this range"><i class="fa-brands fa-creative-commons-zero"></i></button>
                 <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom"></i></button>
                 <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button>
             </div>
@@ -187,7 +188,7 @@
       <br>
     
       <button onclick="toggleLoginContainer('NextSample'),scan('autozero','autozero','autozero')"  title="click to perform the auto zero calibration step"><i class="fa-regular fa-thumbs-up"></i></button> 
-      <button onclick="toggleLoginContainer('NextSample')"  title="cancel if you don't want calibration"> <i class="fa-regular fa-thumbs-down"></i></button> 
+      <button onclick="toggleLoginContainer('NextSample') , clearautozero()"  title="cancel if you don't want calibration"> <i class="fa-regular fa-thumbs-down"></i></button> 
     
   </div>
 
@@ -273,18 +274,14 @@
 
 
         <div id="presets" class="presets" >
-         <div class="blurred-list">
-
           <ul class="blurred-list" id="presetlist">            
             <i class="close-icon fas fa-times-circle" onclick="toggleLoginContainer('presets')"></i>
             <br>
             <input type="text" id="search" placeholder="search &#128269;" />
-          </div>
-
+              <br><br>
             <div id="nopresets">
             </div>
           </ul>
-        
       </div>
   
         <div class="presetname" id="presetname">
