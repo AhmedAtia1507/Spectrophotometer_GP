@@ -184,8 +184,12 @@ var wavelengthData = [];
 let chartScan;
 let firstInit =0;
 let chartData;
-
 document.getElementById('chartType').addEventListener('click', function () {
+ 
+let Numberofsamples =document.getElementById('numberofsamples').value;
+document.getElementById('deleteBTN').click();
+constructtable(Numberofsamples);
+
   let indicatorElement = document.getElementById('indecatorPage');
   if (firstInit) {
     chartScan.destroy();
@@ -464,6 +468,7 @@ function deleteSelectedCurve() {
 
 // funcation to remove all curves in chart js
 function removeAllCurves() {
+ 
   chartScan.data.datasets = [];
   chartScan.update();
 }
@@ -1211,6 +1216,7 @@ function readADC() {
 /**------------------------------------------------------------------------
  *                           SCAN II TABLE
  *------------------------------------------------------------------------**/
+
 function constructtable(num) {
   var table = document.getElementById("myTable");
 
@@ -1267,7 +1273,6 @@ document.getElementById('deleteBTN').addEventListener('click', function () {
   colorindex = 0;
   var table = document.getElementById("myTable");
   var mb = document.getElementById("CMDMB");
-  removeAllCurves();
   mb.textContent = '';
   var rowCount = table.rows.length;
   for (var i = rowCount - 1; i > 0; i--) {
@@ -1277,6 +1282,8 @@ document.getElementById('deleteBTN').addEventListener('click', function () {
   for (var i = headerCells.length - 1; i > 5; i--) {
     table.rows[0].deleteCell(i);
   }
+   removeAllCurves();
+
 });
 
 
