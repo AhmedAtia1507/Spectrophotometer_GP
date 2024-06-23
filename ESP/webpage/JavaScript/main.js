@@ -587,10 +587,10 @@ function enableInputs() {
 
 
 
-
+let x = []; // wavelength
+let y = []; // intensity
+  
 function scan(index, SampleID, SampleDecribe, btn) {
-  let x = []; // wavelength
-  let y = []; // intensity
   let absorbtionAry = [];
   let transmissionAry = [];
   let temp = document.getElementById('DateTime').textContent;
@@ -632,14 +632,16 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
     // Extract globalXref, globalAbsorptionref, globalTransmissionref for addCurve function auto_zero
     const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
-    if (storedData.length > 0) {
+    if (storedData.length > 0 && AutoZeroFlag == true) {
       globalXref = storedData.map(item => item.x);
       globalAbsorptionref = storedData.map(item => item.absorption);
       globalTransmissionref = storedData.map(item => item.transmission);
+
     }
 
 
     if (index == 'autozero') {
+      document.getElementById('autozerotoggle').innerHTML = '<i class="fa-solid fa-toggle-on"></i>';
       const newData = {
         x: wavelength,
         absorption: absorption,
@@ -679,9 +681,10 @@ function scan(index, SampleID, SampleDecribe, btn) {
       let AbsorptionAdjusted = absorbtionAry.map((y) => y);
       let TransmissionAdjusted = transmissionAry.map((y) => y);
       console.log(globalAbsorptionref.length);
-      if(globalAbsorptionref.length>0){
+      if(globalAbsorptionref.length>0&& AutoZeroFlag ==true){
          AbsorptionAdjusted = absorbtionAry.map((y, index) => y - globalAbsorptionref[index]);
          TransmissionAdjusted = transmissionAry.map((y, index) => y - globalTransmissionref[index]);
+         addCurve(x, AbsorptionAdjusted, colorSelectArr[index+1], SampleID);
       }
      
       const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + AbsorptionAdjusted[AbsorptionAdjusted.length-1] + " ||Transmission: " + TransmissionAdjusted[TransmissionAdjusted.length-1];
@@ -693,7 +696,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
       else {
         addCurve(x, y, colorSelectArr[index], SampleID);
       }
-      StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
+      StoreData(SampleID,  x, y);
     }
 
     // Play sound when function is done
@@ -1210,15 +1213,23 @@ function constructtable(num) {
   }
 }
 let AutoZeroResponse;
+let AutoZeroFlag = false;
 function DoAutoZero (){
-  AutoZeroResponse = AutoZero(); //check the range if there is auto zero for it
-  console.log(AutoZeroResponse);
-
-  if (AutoZeroResponse == "not equal and we need to perform zero method" || AutoZeroResponse == "No Auto zero data for this range do you want to perform auto zero ?" || AutoZeroResponse == "not equal and we need to perform zero method twice") {
-    toggleLoginContainer('NextSample');
-    document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+  let toggle = document.getElementById('autozerotoggle');
+  if (toggle.innerHTML == '<i class="fa-solid fa-toggle-off"></i>'){
+    AutoZeroFlag = true ;
+    AutoZeroResponse = AutoZero(); //check the range if there is auto zero for it
+    console.log(AutoZeroResponse);
+  
+    if (AutoZeroResponse == "not equal and we need to perform zero method" || AutoZeroResponse == "No Auto zero data for this range do you want to perform auto zero ?" || AutoZeroResponse == "not equal and we need to perform zero method twice") {
+      toggleLoginContainer('NextSample');
+      document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+    }
   }
-
+  else{
+    AutoZeroFlag = false;
+  }
+  
 }
 
 
@@ -1324,27 +1335,21 @@ let i = 0;
 //   }
 // }
 
-// StoreData2("Name 1", xtest, ytest);
 
-
-function StoreData(SampleID, time, SampleDecribe, modeInput, xData, yData, wavelength, absorption, transmission, scanning) {
+function StoreData(SampleID, xData, yData ) {
   if (!(SampleID in data)) {
     // get the begining time
     data[SampleID] = { x: xData, y: yData };
 
-    //savetosd(SampleID, true, time, SampleDecribe, modeInput, wavelength, absorption, transmission);
   }
 
   else {
     // Update existing data
     data[SampleID].x = xData;
     data[SampleID].y = yData;
-  //  savetosd(SampleID, false, time, SampleDecribe, modeInput, wavelength, absorption, transmission);
-
+  
   }
-  if (scanning === false) {
-
-  }
+ 
 }
 
 //var result1 = trap(xValues.slice(140, 180 + 1), yValues.slice(140, 180 + 1));
