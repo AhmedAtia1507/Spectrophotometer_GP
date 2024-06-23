@@ -288,57 +288,33 @@ nav li:first-child {
 *========================================================================**/
 /* Base styles for the fieldset */
 .fsetup {
-  padding: 12px;
+  padding: 2px;
   height: fit-content;
   position: relative;
   display: grid;
   width: 100%;
-  height: 250px;
-  grid-template-columns: 40% 30% 30%;
+  grid-template-columns: repeat(3, 1fr);
   gap: 4px;
   justify-content: center;
   align-items: center;
   align-content: center;
 }
 
-.fsetup input{
+.fsetup input,select{
   width: 100%;
-  padding: 4px;
+  padding: 2px;
   border: solid 1px black;
   border-radius: 0%;
   height: 30px;
 }
 
-.buttonsAndSelectors strong{
-  padding: 0%;
-  height: 30px;
-  margin-left: 10px;
 
-}
-.buttonsAndSelectors select{
-  display: inline-block;
-  height: 30px;
-  padding: 3px;
-  margin: 0 10px;
-  border: solid 1px black;
-  border-radius: 0%;
-}
 
-.buttonsAndSelectors{
-  display: flex;
-  justify-content: space-between; /* Ensure the setupButtons div is at the end */
-  align-items: center; /* Vertically center the items */
-  width: 100%;
-  padding-bottom: 10px;
-}
-
-.selectors{
-  flex: 1; /* Fixed at 80% width */
-  
-}
 .setupButtons{
   padding-right: 10px;
-  justify-content: flex-end;
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
 }
 
 /* Style for disabled buttons */
@@ -353,8 +329,9 @@ button[disabled],input[disabled] {
   color: white;
   border: none;
   padding: 3px;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  margin: 3px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
@@ -364,6 +341,20 @@ button[disabled],input[disabled] {
   background-color: #194e80;
 }
 
+.setupButtons #chartType{
+  background-color: rgb(56, 227, 29);
+}
+
+.setupButtons #chartType:hover{
+  background-color: #263b26;
+}
+.setupButtons #numberofsamples{
+height: 40px;
+width: 135px;
+padding: 3px;
+margin: 3PX;
+  
+}
 
 legend{
   font-size: 26px;
@@ -1319,7 +1310,7 @@ select, input[type="color"], button {
   overflow: hidden;
   transition: height 0.3s ease;
 }
-#clearStorage,#SampleNumBTN{
+#SampleNumBTN{
   background-color:lightcoral;
   color: white;
   border: none;

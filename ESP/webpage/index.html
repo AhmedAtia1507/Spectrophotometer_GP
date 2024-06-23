@@ -81,30 +81,39 @@
        
         <div>
           <span style="font-size: 28px; font-weight: 650;">Setup</span> 
-          <button id="savepreset" onclick="savepreset()" title="Save Current Method"> 
-              <i class="fa-solid fa-floppy-disk"></i> 
-          </button>
-          <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> 
-              <i class="fa-solid fa-upload"></i>
-          </button>
           <button id="toggleButton">
               <i class="fas fa-plus" style="padding: 1px;"></i>
           </button>
         </div>
-        <div id="fieldsetContent" class="hidden" style="background-color: lightblue;">
-          <div style="margin: 10px 10px;">
-              <label>Scan with 
+        <div id="fieldsetContent" class="hidden" >
+          <div class="fsetup">
+            <div style="display: inline-block; text-align: left;padding-left: 10px;">
+            <label>Scan with: </label>
                   <select name="" id="indecatorPage">
                       <option value="Wavelength">Wavelength</option>
                       <option value="Time">Time</option>
                       <option value="Filter">Filter</option>
                   </select>
-              </label>
-              <button id="chartType">
-                  <i class="fas fa-arrow-right" style="font-size: 12px;"></i>
-              </button>
+                </div> 
+                <div style="display: inline-block; text-align: left;padding-left: 10px;">
+              <label>Lamps:</label>
+              <select name="lamps condition" id="LampsOFF">
+                  <option value="both">Both On</option>
+                  <option value="uv">UV only</option>
+                  <option value="vi">VI only</option>
+              </select>
+            </div>
+            <div style="display: inline-block; text-align: left;padding-left: 10px;">
+              <label>Mode:</label>
+              <select id="mySelect" name="mode">
+                  <option value="absorption">Absorption</option>
+                  <option value="transmission">Transmission</option>
+                  <option value="Intensity">Intensity</option>
+              </select>
+            </div>
+              
           </div>
-          <div class="setupInput"  style="margin-bottom: 10px;">
+          <div class="fsetup"  style="margin-bottom: 10px;">
               <div style="display: inline-block; text-align: left;padding-left: 10px;">
                   <label for="start">Start:</label>
                   <input type="number" id="start" name="start" placeholder="WL Start" title="wavelength start value">
@@ -117,13 +126,14 @@
                   <label for="step">Step:</label>
                   <input type="number" id="step" name="step" placeholder="WL Step" title="wavelength step">
               </div>
-              <div style="display: inline-block; text-align: left;padding-left: 10px;">
-                  <label for="initTime">Integration Time:</label>
-                  <input type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
-              </div>
+              
           </div>
-          <div class="setupInput" >
-              <div style="display: inline-block; text-align: left;padding-left: 10px;">
+          <div class="fsetup" >
+            <div style="display: inline-block; text-align: left;padding-left: 10px;">
+              <label for="initTime">Integration Time:</label>
+              <input type="number" id="initTime" name="initTime" placeholder="Integration Time" title="readings Integration time">
+          </div>  
+            <div style="display: inline-block; text-align: left;padding-left: 10px;">
                   <label for="start">Filter</label>
                   <input type="number" id="filter" name="filter" placeholder="Pick filter" title="which filter">
               </div>
@@ -133,27 +143,30 @@
               </div>
           </div>
       
-          <div class="buttonsAndSelectors" style="text-align: center;">
-              <div class="selectors" style="display: inline-block; text-align: left;">
-                  <strong>Lamps</strong>
-                  <select name="lamps condition" id="LampsOFF">
-                      <option value="both">Both On</option>
-                      <option value="uv">UV only</option>
-                      <option value="vi">VI only</option>
-                  </select>
-                  <strong>Mode</strong>
-                  <select id="mySelect" name="mode">
-                      <option value="absorption">Absorption</option>
-                      <option value="transmission">Transmission</option>
-                      <option value="Intensity">Intensity</option>
-                  </select>
-              </div>
-              <div class="setupButtons" style="display: inline-block;">
+              <div class="setupButtons" >
+                <button id="savepreset" onclick="savepreset()" title="Save Current Method"> 
+                  <i class="fa-solid fa-floppy-disk"></i> 
+              </button>
+              <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> 
+                  <i class="fa-solid fa-upload"></i>
+              </button>
                 <button id="autozerotoggle" onclick="DoAutoZero()" title="click to perform auto zero calibration for this range"><i class="fa-solid fa-toggle-off"></i></button>
-                <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom"></i></button>
+                <button id="clearStorage" style="color: red !important;" title="delete all Auto-Zero data"><i class="fa-regular fa-trash-can"></i></button>
                 <!-- <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button> -->
              </div>
+          <div class="setupButtons">
+         <div>
+          <input placeholder="number of samples" type="number" id="numberofsamples">
+         </div>
+         <div>
+          <button id="chartType">
+            <i class="fas fa-arrow-right" ></i>
+        </button>
+     
+         </div> 
+         
           </div>
+          <br>
       </div>
       
         <!-- <fieldset class="fsetup" >  
