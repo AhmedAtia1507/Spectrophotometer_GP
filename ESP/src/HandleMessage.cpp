@@ -324,6 +324,108 @@ void handleDirectCommand(const DynamicJsonDocument &doc)
   serializeJson(object, jsonString);
   notifyClients(jsonString);
 }
+/**------------------------------------------------------------------------
+ *                           SCAN TIME TASK
+ *------------------------------------------------------------------------**/
+TaskHandle_t scanTimeTask;
+// TASK
+void handleScanTimeTask(void *pvParameters)
+{
+  DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
+
+  String command = doc["command"].as<String>();
+  String timeInterval = doc["timeInterval"].as<String>();
+  String specificWL = doc["specificWL"].as<String>();
+  String Time;
+  String buffur;
+  int j = 1; // represent the current iteration
+  int Buffersize = 10;
+  bool scanning = true;
+  DynamicJsonDocument scanData(256);
+
+  if (command == "scan-time")
+  {
+    String scancmd = command + " " + specificWL + " " + timeInterval;
+    Serial.println(scancmd);
+    Serial2.println(scancmd);
+    //Serial2.flush();
+      while (Serial2.available() == 0)
+      { 
+        
+        Serial.println("while looop");
+        vTaskDelay(pdMS_TO_TICKS(20));
+      }
+       String response = Serial2.readStringUntil('\n');
+       Serial.println(response);
+
+       if(response == "Init-Finished" ){
+      while (Serial2.available() == 0)
+      {
+        vTaskDelay(pdMS_TO_TICKS(20));
+      }
+        Time =Serial2.readStringUntil('\n');
+        Serial2.flush();
+while(!StopScan){
+  
+
+      int startTime = millis();
+      while (Serial2.available() == 0 && millis() - startTime < 2000)
+      {
+        delay(1);
+      }
+       String response = Serial2.readStringUntil('\n');
+       Serial.println(response);
+
+      // Split the response into components
+      float space1 = response.indexOf(' ');
+      // float space2 = response.indexOf(' ', space1 + 1);
+
+     String reference = response.substring(0, space1);
+     String sample = response.substring(space1 + 1);
+
+
+      scanData["currentTime"] = Time;
+      Serial.print(Time);
+      scanData["timeInterval"] = timeInterval.toFloat();
+      scanData["intensityReference"] = reference.toFloat();
+      scanData["intensitySample"] = sample.toFloat();
+
+      Buffersize--;
+      String jsonString;
+      serializeJson(scanData, jsonString);
+      buffur+=jsonString+"\n";
+      if(Buffersize==0){
+        Buffersize = 10; //to reset the buffer size
+        notifyClients(buffur);
+        buffur = "";
+      }
+      Serial.println("Scan data sent");
+    }
+  }
+  }
+  if(Buffersize>0){
+        Buffersize = 10; //to reset the buffer size
+        notifyClients(buffur);
+        buffur = "";
+      }
+  Serial.println("last");
+
+  vTaskDelete(NULL); // delete the task when done
+}
+
+void handleScanTime(const DynamicJsonDocument &doc)
+{
+  DynamicJsonDocument *docCopy = new DynamicJsonDocument(doc.capacity());
+  *docCopy = doc;
+  xTaskCreatePinnedToCore(
+      handleScanTimeTask,  // Task function
+      "ScanTimeTask",      // Task name
+      8192,            // Stack size (bytes)
+      (void *)docCopy, // Parameter to pass to the task
+      1,               // Task priority
+      &scanTimeTask,       // Task handle
+      0);              // Core (0 or 1, depending on your setup)
+}
 
 /**------------------------------------------------------------------------
  *                           SCAN TASK
@@ -607,6 +709,11 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     Serial.println("command is scan");
     handleScan(doc);
+  }
+  else if (doc["command"] == "scan-time")
+  {
+    Serial.println("command is scan-time");
+    handleScanTime(doc);
   }
   else if (doc["command"] == "ScanStop")
   {

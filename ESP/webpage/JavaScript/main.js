@@ -334,8 +334,8 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
     infoDiv.innerHTML = `X: ${xValue.toFixed(2)}, Y: ${yValue.toFixed(2)}`;
 
     // Position the div near the mouse pointer
-    infoDiv.style.left = `${event.clientX + 10}px`; // Adding 10px offset to the right
-    infoDiv.style.top = `${event.clientY + 10}px`; // Adding 10px offset to the bottom
+    infoDiv.style.left = `${event.clientX + 0}px`; // Adding 10px offset to the right
+    infoDiv.style.top = `${event.clientY + 0}px`; // Adding 10px offset to the bottom
   });
 
   // Hide the div when the mouse leaves the canvas
@@ -610,26 +610,45 @@ function scan(index, SampleID, SampleDecribe, btn) {
   const stepInput = parseFloat(document.getElementById('step').value);
   const modeInput = document.getElementById('mySelect').value;
   const lampmode = document.getElementById('LampsOFF').value;
+  const timeInterval = parseFloat(document.getElementById('initTime').value);
+  const specificWL = parseFloat(document.getElementById('specificWL').value);
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
   runSpectrophotometer();             //play animation
 
 
   function processScanData(data) {
     const currentTime = data.currentTime;
-    const wavelength = data.wavelength;
+
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference / intensitySample);
-    let scanning = data.scanning; //check if the scan end or not
-    const progress = data.current; //represent the progress to display the current progress
-    const rangeKey = `range_${stepInput}`; // to store the ref data on local storage
+    if (PageIndecator === "Wavelength") {
+      const wavelength = data.wavelength;
+      let scanning = data.scanning; //check if the scan end or not
+      const progress = data.current; //represent the progress to display the current progress
+      const rangeKey = `range_${stepInput}`; // to store the ref data on local storage
+      x.push(wavelength);  
+    }
+    else if (PageIndecator === "Time") {
+      const now = new Date();
+    
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      x.push(`${hours}:${minutes}:${seconds}`);
+    }
+
+
 
 
     // Update the chart data
-    x.push(wavelength);
+    
+    
     absorbtionAry.push(absorption);
     transmissionAry.push(transmission);
+
+
 
     if (modeInput == "absorption") {
       y.push(absorption);
@@ -735,20 +754,36 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   function continueScanning(wavelength) {
     if (isFirstTime) {
-      const message = {
-        command: 'scan',
-        startInput: startInput,
-        stopInput: stopInput,
-        stepInput: stepInput,
-        lampmode: lampmode,
-        timeStamp: new Date().toISOString(),
-        // modeInput: modeInput
-      };
+      if (PageIndecator === "Wavelength") {
+        const message = {
+          command: 'scan',
+          startInput: startInput,
+          stopInput: stopInput,
+          stepInput: stepInput,
+          lampmode: lampmode,
+          timeStamp: new Date().toISOString()
+          // modeInput: modeInput
+        };
+      }
+
+      else if (PageIndecator === "Time") {
+        const message = {
+          command: 'scan-time',
+          timeInterval: timeInterval,
+          specificWL: specificWL,
+          timeStamp: new Date().toISOString()
+          // modeInput: modeInput
+        };
+      }
+
       websocket.send(JSON.stringify(message));
       isFirstTime = false;
     }
     else if (wavelength <= stopInput && isScanning) {
       // Continue scanning
+    }
+    else if(isScanning){
+      // continue scanning
     }
     else {
       // Scanning is complete
