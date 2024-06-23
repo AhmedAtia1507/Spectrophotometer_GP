@@ -149,7 +149,7 @@
                   </select>
               </div>
               <div class="setupButtons" style="display: inline-block;">
-                <button onclick="DoAutoZero()" title="click to perform auto zero calibration for this range"><i class="fa-brands fa-creative-commons-zero"></i></button>
+                <button id="autozerotoggle" onclick="DoAutoZero()" title="click to perform auto zero calibration for this range"><i class="fa-solid fa-toggle-off"></i></button>
                 <button id="clearStorage" title="delete all Auto-Zero data"><i class="fa-solid fa-broom"></i></button>
                 <!-- <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button> -->
              </div>
@@ -246,7 +246,7 @@
   <fieldset class="ftable">
     <legend>Scan Table</legend>
     <div id="commandTable" class="commandTable" >
-      <table>
+      <table id="CMDTABLE">
         <tr>
           <th>Funcation</th>
           <th>Command</th>

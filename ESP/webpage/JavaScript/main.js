@@ -587,12 +587,16 @@ function enableInputs() {
 
 
 
-
+  
 function scan(index, SampleID, SampleDecribe, btn) {
   let x = []; // wavelength
   let y = []; // intensity
+  
   let absorbtionAry = [];
   let transmissionAry = [];
+  let AbsorptionAdjusted = [] ;
+  let TransmissionAdjusted = [] ;
+ 
   let temp = document.getElementById('DateTime').textContent;
   var time = temp.replaceAll(":", " ");  //because file name can't contain :
   var time = time.replaceAll(",", " ");  //because file name can't contain ,
@@ -607,7 +611,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   function processScanData(data) {
     const currentTime = data.currentTime;
-    const wavelength = parseFloat(data.wavelength);
+    const wavelength = data.wavelength;
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
@@ -632,14 +636,16 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
     // Extract globalXref, globalAbsorptionref, globalTransmissionref for addCurve function auto_zero
     const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
-    if (storedData.length > 0) {
+    if (storedData.length > 0 && AutoZeroFlag == true) {
       globalXref = storedData.map(item => item.x);
       globalAbsorptionref = storedData.map(item => item.absorption);
       globalTransmissionref = storedData.map(item => item.transmission);
+
     }
 
 
     if (index == 'autozero') {
+      document.getElementById('autozerotoggle').innerHTML = '<i class="fa-solid fa-toggle-on"></i>';
       const newData = {
         x: wavelength,
         absorption: absorption,
@@ -676,24 +682,34 @@ function scan(index, SampleID, SampleDecribe, btn) {
     }
 
     if (index !== 'autozero') {
-      let AbsorptionAdjusted = absorbtionAry.map((y) => y);
-      let TransmissionAdjusted = transmissionAry.map((y) => y);
-      console.log(globalAbsorptionref.length);
-      if(globalAbsorptionref.length>0){
-         AbsorptionAdjusted = absorbtionAry.map((y, index) => y - globalAbsorptionref[index]);
-         TransmissionAdjusted = transmissionAry.map((y, index) => y - globalTransmissionref[index]);
+      //console.log(globalAbsorptionref.length);
+      if(globalAbsorptionref.length>0&& AutoZeroFlag ==true){
+        const index = absorbtionAry.length - 1; // Index for the new value in y
+        const correspondingX = globalAbsorptionref[index % absorbtionAry.length]; // Get the corresponding x value, considering wrap-around using modulo
+        const correspondingXt = globalTransmissionref[index % transmissionAry.length]; // Get the corresponding x value, considering wrap-around using modulo
+        
+        // Calculate the new z value
+        const zValue = absorbtionAry[absorbtionAry.length-1] - correspondingX;
+        const zValueT = transmissionAry[transmissionAry.length-1] - correspondingXt;
+        
+        // Push the new z value to z
+        AbsorptionAdjusted.push(zValue);
+        TransmissionAdjusted.push(zValueT);
+        //  AbsorptionAdjusted = absorbtionAry.map((y, index) => y - globalAbsorptionref[index]);
+        //  TransmissionAdjusted = transmissionAry.map((y, index) => y - globalTransmissionref[index]);
+         addCurve(x, AbsorptionAdjusted, colorSelectArr[index+1], 'Autozeroed');
       }
      
-      const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + AbsorptionAdjusted[AbsorptionAdjusted.length-1] + " ||Transmission: " + TransmissionAdjusted[TransmissionAdjusted.length-1];
+      const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
       changeState(index, progress, btn);
       displayCMD(res, 'green', index);
       if (modeInput == "absorption") {
-        addCurve(x, AbsorptionAdjusted, colorSelectArr[index], SampleID);
+        addCurve(x, y, colorSelectArr[index], SampleID);
       }
       else {
-        addCurve(x, TransmissionAdjusted, colorSelectArr[index], SampleID);
+        addCurve(x, y, colorSelectArr[index], SampleID);
       }
-      StoreData(SampleID, time, SampleDecribe, modeInput, x, y, wavelength, absorption, transmission, scanning);
+      StoreData(SampleID,  x, y);
     }
 
     // Play sound when function is done
@@ -740,10 +756,25 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   // Set up the WebSocket onmessage event
   websocket.onmessage = function (event) {
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    processScanData(data);
+    let buffer = event.data.split('\n');
+   // Process each part of the buffer
+   buffer.forEach(dataBuffer => {
+    // Trim any extraneous whitespace and ensure it's not empty
+    if (dataBuffer.trim()) {
+        try {
+            // Parse the JSON string
+            const data = JSON.parse(dataBuffer);
+            
+            // For testing purposes, log the parsed data
+            console.log(data);
 
+            // Process the JSON data
+            processScanData(data);
+        } catch (error) {
+            console.error('Failed to parse JSON:', error);
+        }
+    }
+}); 
     // Continue scanning for the next wavelength after a delay
     setTimeout(() => {
       continueScanning(data.wavelength + stepInput);
@@ -1206,15 +1237,26 @@ function constructtable(num) {
   }
 }
 let AutoZeroResponse;
+let AutoZeroFlag = false;
 function DoAutoZero (){
-  AutoZeroResponse = AutoZero(); //check the range if there is auto zero for it
-  console.log(AutoZeroResponse);
-
-  if (AutoZeroResponse == "not equal and we need to perform zero method" || AutoZeroResponse == "No Auto zero data for this range do you want to perform auto zero ?" || AutoZeroResponse == "not equal and we need to perform zero method twice") {
-    toggleLoginContainer('NextSample');
-    document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+  let toggle = document.getElementById('autozerotoggle');
+  if (toggle.innerHTML == '<i class="fa-solid fa-toggle-off"></i>'){
+    AutoZeroFlag = true ;
+    AutoZeroResponse = AutoZero(); //check the range if there is auto zero for it
+    console.log(AutoZeroResponse);
+  
+    if (AutoZeroResponse == "not equal and we need to perform zero method" || AutoZeroResponse == "No Auto zero data for this range do you want to perform auto zero ?" || AutoZeroResponse == "not equal and we need to perform zero method twice") {
+      toggleLoginContainer('NextSample');
+      document.getElementById('AutoZeroMessage').textContent = AutoZeroResponse;
+    }
+    else{
+      document.getElementById('autozerotoggle').innerHTML = '<i class="fa-solid fa-toggle-on"></i>';
+    }
   }
-
+  else{
+    AutoZeroFlag = false;
+  }
+  
 }
 
 
@@ -1310,37 +1352,33 @@ let i = 0;
 //   addCurve(xValues, yValues, 'red', 'Name 1',false);
 //   i++;
 // }, 100);
-// function StoreData2(SampleID, xData, yData) {
-//   if (!(SampleID in data)) {
-//     data[SampleID] = { x: xData, y: yData };
-//   } else {
-//     // Update existing data
-//     data[SampleID].x = xData;
-//     data[SampleID].y = yData;
-//   }
-// }
+function StoreData2(SampleID, xData, yData) {
+  if (!(SampleID in data)) {
+    data[SampleID] = { x: xData, y: yData };
+  } else {
+    // Update existing data
+    data[SampleID].x = xData;
+    data[SampleID].y = yData;
+  }
+}
 
-// StoreData2("Name 1", xtest, ytest);
+StoreData2('Name 1',xtest,ytest);
 
 
-function StoreData(SampleID, time, SampleDecribe, modeInput, xData, yData, wavelength, absorption, transmission, scanning) {
+function StoreData(SampleID, xData, yData ) {
   if (!(SampleID in data)) {
     // get the begining time
     data[SampleID] = { x: xData, y: yData };
 
-    //savetosd(SampleID, true, time, SampleDecribe, modeInput, wavelength, absorption, transmission);
   }
 
   else {
     // Update existing data
     data[SampleID].x = xData;
     data[SampleID].y = yData;
-  //  savetosd(SampleID, false, time, SampleDecribe, modeInput, wavelength, absorption, transmission);
-
+  
   }
-  if (scanning === false) {
-
-  }
+ 
 }
 
 //var result1 = trap(xValues.slice(140, 180 + 1), yValues.slice(140, 180 + 1));
@@ -1369,19 +1407,23 @@ function findPeaks(arr) {
  *------------------------------------------------------------------------**/
 
 var cmdInput = document.querySelector('.cmd');
-var table = document.querySelector('table');
+var table = document.getElementById('myTable');
 
 cmdInput.addEventListener('keyup', function (event) {
   if (event.key === 'Enter') {
     const inputValue = this.value.trim();
     displayCMD(inputValue, 'black', "CMD: ");
     if (inputValue !== '') {
+      
       // Regular expression to match the command with its parameter
       const match = inputValue.match(/(\w)(\d+)/);
 
       if (match) {
         const cmdName = match[1].toUpperCase(); // Extract the command name, 'T' in this case
+        console.log(cmdName);
         const cmdParam = parseInt(match[2]); // Extract the parameter as an integer
+        console.log(cmdParam);
+
         const rows = table.querySelectorAll('tr'); // Declare rows variable here
         switch (cmdName) {
           case 'T': // Done
@@ -1395,11 +1437,14 @@ cmdInput.addEventListener('keyup', function (event) {
 
           case 'A':
             rows.forEach(function (row, index) {
+            
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {
                 const rowIndex = index;
                 var SampleID = table.rows[rowIndex].cells[2].textContent;
+                console.log("blah");
                 const result = trap(data[SampleID].x, data[SampleID].y);
+                console.log(result);
                 cells[5].textContent = result;
                 displayCMD(result, 'green', rowIndex);
               }
@@ -1408,7 +1453,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'AA':
+          case 'B':
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5) {
@@ -1423,7 +1468,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'AS':
+          case 'S':
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {

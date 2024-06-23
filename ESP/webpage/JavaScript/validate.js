@@ -1,44 +1,4 @@
 
-
-function showMessaget(message, option1Text,ContainerID) {
-  var messageContainer = document.getElementById(ContainerID);
-  messageContainer.style.display = 'block';
-  // Store in session storage
-  sessionStorage.setItem('message', message);
-  sessionStorage.setItem('option1Text', option1Text);
-  // Create a div for the message text
-  var messageDiv = document.createElement('div');
-  messageDiv.textContent = message;
-  // Create buttons for the options
-  var option1Button = document.createElement('button');
-  option1Button.textContent = option1Text;
-  option1Button.className = 'optionButtont'; // Apply custom CSS class
-   option1Button.onclick = function() {
-      // Logic for option 1
-
-      var inputs = document.querySelectorAll('.numbers2');
-      var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
-      var max = Math.max(...values);
-      var min = Math.min(...values);
-      var start = max +100;
-      var end = min - 100;
-      addPoint1(start, end, 1);
-  };
-    // Append message and options to the container
-    messageContainer.appendChild(messageDiv);
-    messageContainer.appendChild(option1Button);
-}
-function toggleLoginContainer(id="chartScan"){
-  var login = document.getElementById(id);
-  if(!login.style.display || login.style.display === "none"){
-    login.style.display="block"; 
-  }
-  else{
-    login.style.display="none";
-  }
-}
-
-
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -311,7 +271,7 @@ function generateInputs1() {
   // Generate new inputs
   for (var i = 0; i < numfilterslengths; i++) {
     var label1 = document.createElement('label');
-    label1.textContent = 'Filters ' + (i + 1) + ' absorpation value: ';
+    label1.textContent = 'Filters ' + (i + 1) + ' Wavelength: ';
     label1.className = 'label1';
     filtersContainer.appendChild(label1);
   
@@ -697,12 +657,23 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
       var max = Math.max(...values);
       var min = Math.min(...values);
 
+      var start = max +100;
+      var end = min - 100;
+
+      var inputs2 = document.querySelectorAll('.numbers3');
+      var values2 = Array.from(inputs2).map(input2 => parseFloat(input2.value)).filter(value => !isNaN(value));
+      var max2 = Math.max(...values2);
+      var min2 = Math.min(...values2);
+      
+      var start2 = max2 +100;
+      var end2 = min2 - 100;
+
       if (functions==1) {
-        addPoint1(max, min, 1);
+        addPoint1(start, end, 1);
       }
       else if (functions==2)
         {
-          addPoint2(max, min, 1);
+          addPoint1(start2, end2, 1);
         }
       else if (functions==3)
         {
@@ -712,10 +683,6 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
         {
           addPoint4(max, min, 1);
         }
-
-      var start = max +100;
-      var end = min - 100;
-      addPoint1(start, end, 1);
     };
   // Append message and options to the container
   messageContainer.appendChild(messageDiv);
@@ -742,12 +709,24 @@ function showMessaget(message, option1Text,ContainerID,functions) {
       var values = Array.from(inputs).map(input => parseFloat(input.value)).filter(value => !isNaN(value));
       var max = Math.max(...values);
       var min = Math.min(...values);
+      
+      var start = max +100;
+      var end = min - 100;
+
+      var inputs2 = document.querySelectorAll('.numbers3');
+      var values2 = Array.from(inputs2).map(input2 => parseFloat(input2.value)).filter(value => !isNaN(value));
+      var max2 = Math.max(...values2);
+      var min2 = Math.min(...values2);
+      
+      var start2 = max2 +100;
+      var end2 = min2 - 100;
+
       if (functions==1) {
-        addPoint1(max, min, 1);
+        addPoint1(start, end, 1);
       }
       else if (functions==2)
         {
-          addPoint2(max, min, 1);
+          addPoint1(start2, end2, 1);
         }
       else if (functions==3)
         {
@@ -1035,9 +1014,3 @@ function removeAllCurves() {
   chartScan.data.datasets = [];
   chartScan.update();
 }
-
-
-
-
-
-
