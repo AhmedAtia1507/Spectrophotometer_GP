@@ -1482,7 +1482,7 @@ cmdInput.addEventListener('keyup', function (event) {
             break;
 
 
-          case 'A':
+          case 'A': // area under curve for one 
             rows.forEach(function (row, index) {
             
               const cells = row.querySelectorAll('td');
@@ -1492,7 +1492,7 @@ cmdInput.addEventListener('keyup', function (event) {
                 console.log("blah");
                 const result = trap(data[SampleID].x, data[SampleID].y);
                 console.log(result);
-                cells[5].textContent = result;
+                cells[5].textContent = -1* result.toFixed(3);
                 displayCMD(result, 'green', rowIndex);
               }
             });
@@ -1500,7 +1500,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'B':
+          case 'B': //area for all
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5) {
@@ -1515,7 +1515,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'S':
+          case 'S': // specific range for area
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {
@@ -1538,7 +1538,7 @@ cmdInput.addEventListener('keyup', function (event) {
             this.value = '';
             break;
 
-          case 'P':
+          case 'P': // find peaks
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {
