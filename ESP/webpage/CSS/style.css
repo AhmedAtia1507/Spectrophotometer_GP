@@ -1147,14 +1147,14 @@ body.dark-mode {
 }
 
 .first-div {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .second-div {
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
   display: flex;
   flex-direction: column;
   padding: 50px;
