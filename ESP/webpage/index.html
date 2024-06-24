@@ -130,7 +130,7 @@
           </div>
       
               <div id="methodsButton" class="setupButtons" >
-                <label style="font-size: 20px;" for="button">methods: 
+                <label style="font-size: 20px;" for="button">Methods: 
                 <button id="savepreset" onclick="savepreset()" title="Save Current Method"> 
                   <i class="fa-solid fa-floppy-disk"></i> 
               </button>
@@ -144,7 +144,7 @@
               </label>
                 <!-- <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button> -->
              </div>
-          <div class="setupButtons">
+          <div style="margin-bottom: 20px;" class="setupButtons">
          <div>
           <input placeholder="number of samples" type="number" id="numberofsamples">
          </div>
@@ -156,9 +156,9 @@
          </div> 
          
           </div>
-          <br>
+         
       </div>
-      
+      <br>
         <!-- <fieldset class="fsetup" >  
 
           
@@ -240,7 +240,7 @@
       <br>
     
       <button onclick="toggleLoginContainer('NextSample'),scan('autozero','autozero','autozero')"  title="click to perform the auto zero calibration step"><i class="fa-regular fa-thumbs-up"></i></button> 
-      <button onclick="toggleLoginContainer('NextSample') , clearautozero()"  title="cancel if you don't want calibration"> <i class="fa-regular fa-thumbs-down"></i></button> 
+      <button onclick="toggleLoginContainer('NextSample') ,disableAutoZero(), clearautozero()"  title="cancel if you don't want calibration"> <i class="fa-regular fa-thumbs-down"></i></button> 
     
   </div>
 
