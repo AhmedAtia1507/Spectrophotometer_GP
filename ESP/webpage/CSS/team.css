@@ -7,7 +7,7 @@
 .teamTitle1 {
     font-size: 3rem;
     color: white;
-    margin-top: 5%;
+    margin-top: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
 .teamMembers{
@@ -16,14 +16,14 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    width: 90%;
-    margin: 5%;
+    width: 98%;
+    margin: 10px;
 }
 .teamMember{
     width: 300px;
     height: 300px;
     background-color: white;
-    margin: 1%;
+    margin: 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

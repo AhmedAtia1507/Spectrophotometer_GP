@@ -15,62 +15,47 @@
 </head>
 
 <body>
-  <!---------------------------- Start of Nabber ---------------------------->
-  <nav>
-    <ul class="sidebar">
-      <li onclick="hideSidebar()">
-        <a href="#"><i class="fas fa-close"></i></a>
-      </li>
-      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a onclick="toggleLoginContainer('login')"> <i class="fas fa-gear"></i>Direct Control</a></li>
-      <li><a href="team.html"><i class="fas fa-users"></i>
-          <p>Team</p>
-        </a></li>
-      <li><a href="temp.html">temp</a></li>
-      <li><a href="validate.html"><i class="fa-solid fa-list-check"></i>
-          <p>Validate</p>
-        </a></li>
-        
-        
-    </ul>
-    <ul>
-      <li class="logo">
-        <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-            width="24">
-            <path
-              d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
-          </svg>
-          <span>SpectroPhotometer</span>
-          <span style="font-size: 18px; font-weight: 600;" id="WifiStutus"></span>
-        </a>
-        
-        
-
-
-      </li>
-     
-      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i>
-          <p>Home</p>
-        </a></li>
-      <li class="hideOnMobile"><a onclick="toggleLoginContainer('login')"><i class="fas fa-gear"></i>
-          <p>Direct Control</p>
-        </a></li>
-      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
-      <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i>
-          <p>validate</p>
-        </a></li>
-      <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i>
-          <p>Team</p>
-        </a></li>
-      <li class="menu-button" onclick="showSidebar()">
-        <a href="#"><i class="fas fa-bars"></i></a>
-      </li>
-      <!-- <li class="hideOnMobile"><button style="background-color: transparent !important ;border: none;" onclick="toggleDarkMode()"><i class="fa-solid fa-circle-half-stroke"></i></button></li> -->
-     
-    </ul>
-  </nav>
-  <!---------------------------- END OF Navbar ---------------------------->
-  <main>
+ <!---------------------------- Start of Nabber ---------------------------->
+ <nav>
+  <ul class="sidebar">
+    <li onclick="hideSidebar()">
+      <a href="#"><i class="fas fa-close"></i></a>
+    </li>
+    <li><a href="Home.html"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="index.html"><i class="fas fa-qrcode"> </i>
+      Scan</a></li>
+    <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
+    <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+    <li><a href="fit-line.html"><i class="fas fa-chart-line"></i> Fit Line </a>
+    </li>
+    <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
+    
+  </ul>
+  <ul>
+    <li class="logo">
+      <a href="#"><svg class="iconLogo" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+          width="24">
+          <path
+            d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
+        </svg>
+        <span>SpectroPhotometer</span></a>
+    </li>
+    <div id="WifiStutus" class="hideOnMobile"></div>
+   
+    <li class="hideOnMobile"><a href="Home.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+    <li class="hideOnMobile"><a href="index.html"><i class="fas fa-qrcode"> </i> <p>Scan</p> </a></li>
+    <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
+    <li class="hideOnMobile"><a href="fit-line.html"></i>             <i class="fas fa-chart-line"></i>
+      Fit Line </a></li>
+    <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
+    <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
+    <li class="menu-button" onclick="showSidebar()">
+      <a href="#"><i class="fas fa-bars"></i></a>
+    </li>
+  </ul>
+</nav>
+<!---------------------------- END OF Navbar ---------------------------->
+<main>
     <section>
       <!-- Common content -->
       <!-- Tab button  -->
@@ -80,12 +65,13 @@
       <div id="ScanVsWL" class="tabcontent" style="display: block;">
        
         <div>
-          <span style="font-size: 28px; font-weight: 650;">Setup</span> 
+          <span style="font-size: 28px; font-weight: 650;">Setup</span>
+          <i class="fa-solid fa-gear"></i> 
           <button id="toggleButton">
               <i class="fas fa-plus" style="padding: 1px;"></i>
           </button>
         </div>
-        <div id="fieldsetContent" class="hidden" >
+        <div id="fieldsetContent" style="border-bottom: 1px solid black;" class="hidden" >
           <div class="fsetup">
             <div style="display: inline-block; text-align: left;padding-left: 10px;">
             <label>Scan with: </label>
@@ -143,15 +129,19 @@
               </div>
           </div>
       
-              <div class="setupButtons" >
+              <div id="methodsButton" class="setupButtons" >
+                <label style="font-size: 20px;" for="button">methods: 
                 <button id="savepreset" onclick="savepreset()" title="Save Current Method"> 
                   <i class="fa-solid fa-floppy-disk"></i> 
               </button>
-              <button id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> 
+              <button style="margin-right: 20px;" id="loadpreset" onclick="showItems('presets')" title="Load Method from sd"> 
                   <i class="fa-solid fa-upload"></i>
               </button>
+            </label>
+            <label style="font-size: 20px;" for="button"> Auto-Zero:
                 <button id="autozerotoggle" onclick="DoAutoZero()" title="click to perform auto zero calibration for this range"><i class="fa-solid fa-toggle-off"></i></button>
                 <button id="clearStorage" style="color: red !important;" title="delete all Auto-Zero data"><i class="fa-regular fa-trash-can"></i></button>
+              </label>
                 <!-- <button id="SampleNumBTN" title="add columns to table to start Scanning"><i class="fa-solid fa-square-plus"></i></button> -->
              </div>
           <div class="setupButtons">
@@ -159,8 +149,8 @@
           <input placeholder="number of samples" type="number" id="numberofsamples">
          </div>
          <div>
-          <button id="chartType">
-            <i class="fas fa-arrow-right" ></i>
+          <button  id="chartType">
+            <span style="font-size: 20px;">Update <i class="fas fa-arrow-right" ></i></span>
         </button>
      
          </div> 
@@ -189,13 +179,14 @@
           </fieldset>
          -->
           
-          <div class="container">
+          <div id="chartandsettings" class="container" >
             <div class="first-div">
               <fieldset class="fchart" >
                 <legend>Chart <i class="fa-solid fa-chart-line"></i></legend>
    
                   <canvas id="chartScan"></canvas>  
-                
+                  <!-- <button id="fullscreenButton" class="fullscreen-btn">Fullscreen</button> -->
+ 
                 </fieldset>
             </div>
             <div class="second-div">
@@ -208,12 +199,13 @@
               </select>
   
               <label for="color-picker">Change color:</label>
-              <input type="color" id="color-picker" name="color-picker">
+              <input style="width: 100%;" type="color" id="color-picker" name="color-picker">
               <button id="change-color-btn" onclick="changeColor()"><i class="fas fa-paint-brush"></i> Change Color</button>
               <button id="show-hide-btn" onclick="hideSelectedCurve()"><i class="fas fa-eye"></i> Show/Hide</button>
               <button id="delete-btn" onclick="deleteSelectedCurve()"><i class="fas fa-trash"></i> Delete</button>
             </div>
         </div>
+        
          <!-- Hidden audio element -->
     <audio id="completion-sound" src="CSS/sound/foot.mp3" style="display: none;"></audio>
     <audio id="Stop-sound" src="CSS/sound/stop.mp3" style="display: none;"></audio>
@@ -257,7 +249,7 @@
 
 <div class="container-table" style="grid-template-columns: 100%">
   <fieldset class="ftable">
-    <legend>Scan Table</legend>
+    <legend>Scan Table <i class="fa-solid fa-table"></i></legend>
     <div id="commandTable" class="commandTable" >
       <table id="CMDTABLE">
         <tr>
