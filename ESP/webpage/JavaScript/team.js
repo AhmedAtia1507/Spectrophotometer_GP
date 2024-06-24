@@ -91,27 +91,25 @@ function formatWithLeadingZero(number) {
 
     setTimeout(showfoot, 1000); //autohide foot in 1sec
 
-    document.getElementById('hidefoot').addEventListener('click', showfoot)
-    
+    document.getElementById('hidefoot').addEventListener('click', showfoot);
     
     function showfoot() {
       var but = document.getElementById('hidefoot');
       var foot = document.getElementById('hidethis');
-      if (but.innerHTML === 'hide') {
-        but.innerHTML = 'show';
-      }
-      else {
-        but.innerHTML = 'hide';
-      }
+      var footer = document.getElementById('sticky');
+    
       foot.classList.toggle('inactive');
-    }
     
-    
-    function validateInput(input, max) {
-      if (parseInt(input.value) > max) {
-        input.value = max;
+      if (foot.classList.contains('inactive')) {
+        but.innerHTML = '<i class="fas fa-arrow-up-short-wide"></i>';
+        footer.style.backgroundColor = 'transparent';
+      } else {
+        but.innerHTML = '<i class="fas fa-arrow-down-short-wide"></i>';
+        footer.style.backgroundColor = '#2d2e33';
       }
     }
+        
+    
 
     
 /*============================ Login ============================*/

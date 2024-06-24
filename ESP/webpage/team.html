@@ -17,10 +17,13 @@
       <li onclick="hideSidebar()">
         <a href="#"><i class="fas fa-close"></i></a>
       </li>
-      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="Home.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html"><i class="fas fa-qrcode"> </i>
+        Scan</a></li>
       <li><a onclick="toggleLoginContainer()"> <i class="fas fa-gear"></i>Direct Control</a></li>
       <li><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
-      <li><a href="temp.html">temp</a></li>
+      <li><a href="fit-line.html"><i class="fas fa-chart-line"></i> Fit Line </a>
+      </li>
       <li><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>Validate</p></a></li>
       
     </ul>
@@ -31,13 +34,14 @@
             <path
               d="M200-120q-51 0-72.5-45.5T138-250l222-270v-240h-40q-17 0-28.5-11.5T280-800q0-17 11.5-28.5T320-840h320q17 0 28.5 11.5T680-800q0 17-11.5 28.5T640-760h-40v240l222 270q32 39 10.5 84.5T760-120H200Zm80-120h400L544-400H416L280-240Zm-80 40h560L520-492v-268h-80v268L200-200Zm280-280Z" />
           </svg>
-          <span>SpectroPhotometer</span>
-          <span style="font-size: 18px;font-weight: 600;" id="WifiStutus"></span>
-        </a>
+          <span>SpectroPhotometer</span></a>
       </li>
-      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <div id="WifiStutus" class="hideOnMobile"></div>
+      <li class="hideOnMobile"><a href="Home.html"><i class="fas fa-home"></i> <p>Home</p> </a></li>
+      <li class="hideOnMobile"><a href="index.html"><i class="fas fa-qrcode"> </i> <p>Scan</p> </a></li>
       <li class="hideOnMobile"><a onclick="toggleLoginContainer()"><i class="fas fa-gear"></i> <p>Direct Control</p> </a></li>
-      <li class="hideOnMobile"><a href="temp.html"></i>temp</a></li>
+      <li class="hideOnMobile"><a href="fit-line.html"></i>             <i class="fas fa-chart-line"></i>
+        Fit Line </a></li>
       <li class="hideOnMobile"><a href="validate.html"><i class="fa-solid fa-list-check"></i><p>validate</p></a></li>
       <li class="hideOnMobile"><a href="team.html"><i class="fas fa-users"></i><p>Team</p></a></li>
       <li class="menu-button" onclick="showSidebar()">
@@ -50,84 +54,93 @@
 <div class="teamContainer">
 
       <h1 class="teamTitle1">Our Team</h1>
-
     <div class="teamMembers">
       <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
+        <img src="images/team/ayman.jpg" alt="" srcset="">
+        <h2> Menna Ayman </h2>
+        <p>Engineer</p>
+        <div class="link">
+          <a href="https://www.linkedin.com/in/menna-ayman-24395a247" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      <div class="teamMember">
+        <img src="images/team/Lotfy.jpg" alt="" srcset="">
+        <h2> Menna Lotfy</h2>
+        <p>Engineer</p>
+        <div class="link">
+          <a href="https://www.linkedin.com/in/mennalotfy1111" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      <div class="teamMember">
+        <img src="images/team/Amal.jpg" alt="" srcset="">
+        <h2> Amal Mohamed </h2>
+        <p>Engineer</p>
+        <div class="link">
+          <a href="https://www.linkedin.com/in/amal-mohamed2001" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      <div class="teamMember">
+        <img src="images/team/Donia.jpg" alt="" srcset="">
+        <h2> Donia Saeed</h2>
+        <p>Engineer</p>
+        <div class="link">
+          <a href="https://www.linkedin.com/in/donia-saeed-kamal-35551a233
+          " target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="teamMember" title="webpage designing
+      esp32 code developer
+      help in Pcb designing
+      ">
+        <img src="images/team/nabil.jpg" alt="" srcset="">
         <h2> Nabil Youssef </h2>
-        <p>Slave</p>
+        <p>Engineer</p>
         <div class="link">
           <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
             <i class="fa-brands fa-linkedin"></i>
           </a>
         </div>
       </div>
-      <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
+      <div title="webpage designing
+        esp32 code developer
+        help in designing the vi Lamp supply
+        SD card features
+        " class="teamMember">
+        <img src="images/team/mina.jpg" alt="" srcset="">
+        <h2> Mina Isaac </h2>
+        <p>Engineer</p>
         <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
+          <a href="https://www.linkedin.com/in/mina-isaac-6a98b427a/" target="_blank">
             <i class="fa-brands fa-linkedin"></i>
           </a>
         </div>
       </div>
       <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
+        <img src="images/team/Ahmed.jpg" alt="" srcset="">
+        <h2> Ahmed Atia</h2>
+        <p>Engineer</p>
         <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
-      <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
-        <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
-      <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
-        <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
-      <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
-        <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
-      <div class="teamMember">
-        <img src="images/team/team-1.jpg" alt="" srcset="">
-        <h2> Nabil Youssef </h2>
-        <p>Slave</p>
-        <div class="link">
-          <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
+          <a href="https://www.linkedin.com/in/ahmed-atia-said-b8aa38135/" target="_blank">
             <i class="fa-brands fa-linkedin"></i>
           </a>
         </div>
       </div>
         <div class="teamMember">
-          <img src="images/team/team-1.jpg" alt="" srcset="">
-          <h2> Nabil Youssef </h2>
-          <p>Slave</p>
+          <img src="images/team/mohanad.jpg" alt="" srcset="">
+          <h2> Mohanad Mohamed </h2>
+          <p>Engineer</p>
           <div class="link">
-            <a href="https://www.linkedin.com/in/nabil-youssef-557884219/" target="_blank">
+            <a href="
+            https://www.linkedin.com/in/mohanad-mohamed-7860aa203/" target="_blank">
               <i class="fa-brands fa-linkedin"></i>
             </a>
           </div>
@@ -160,33 +173,30 @@
   </div>
 
  
-    <!---------------------------- START OF Footer ---------------------------->
-    <footer class="sticky" id="sticky">
-      <button class="foot_btn" id="hidefoot">hide</button>
-      <div class="footer-col" id="hidethis">
+   <!---------------------------- START OF Footer ---------------------------->
+  <footer class="sticky" id="sticky">
+    <button class="foot_btn" id="hidefoot"><i class="fas fa-arrow-down-short-wide"></i></button>
+    <div class="footer-col" id="hidethis">
         <h4>States</h4>
         <ul>
-          <li>
-            <label for="">UV Lamp Status: <span id="UVstateBar">"loading"</span></label>
-          </li>
-          <li>
-            <label for="">Visible Lamp Status:
-              <span id="VIstateBar">"loading"</span></label>
-          </li>
-          <li>
-            <label for="">Current Wavelength: <span id="WLstateBar">"loading"</span>
-            </label>
-          </li>
-          <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
-          <li>
-            <label for="" class="DateTime" style="position: absolute; right: 0; margin-right: 30px">
-              <span id="DateTime"></span></label>
-          </li>
+            <li>
+                <label for="">UV Lamp :<span id="UVstateBar">"loading"</span></label>
+            </li>
+            <li>
+                <label for="">Visible Lamp: <span id="VIstateBar">"loading"</span></label>
+            </li>
+            <li>
+                <label for="">Current W.L <span id="WLstateBar">"loading"</span></label>
+            </li>
+            <li><button class="foot_btn" id="sBarBtn">Update!</button></li>
+            <li>
+                <label for="" class="DateTime" id="DateTime"></label>
+            </li>
         </ul>
+    </div>
+</footer>
+  <!---------------------------- END OF Footer ---------------------------->
 
-      </div>
-    </footer>
-    <!---------------------------- END OF Footer ---------------------------->
 
   <script src="JavaScript/team.js"></script>
 </body>
