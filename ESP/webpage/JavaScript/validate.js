@@ -1,4 +1,5 @@
-
+//180 sec 
+//all wavelengths
 /**========================================================================
  *                           Navbar
  *========================================================================**/
@@ -350,8 +351,8 @@ document.getElementById('button13').addEventListener('click', function() {
 });
 
 function addPoint3(start, end, step) {
-  let xData = [30, 40, 50, 60, 70];
-  let yData = [0.02234, 0.02244, 0.02247, 0.0225, 0.02263];
+  let xData = [190,230,270,310,350,390,430,470,510,550,590,630,670,710,750,790,830,870,910,950,990,1100];
+  let yData = [0,0,0,0.3,0,0,0.5,0,0,0,0,0,0.1,0,0,0.07,0,0,0,0.2,0,0];
   let absorptionValue = [30, 40, 50, 60, 100];
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
@@ -434,8 +435,8 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
   });
 
   function addPoint4(start, end, step) {
-    let xData = [30, 40, 50, 60, 70];
-    let yData = [0.02234, 0.02244, 0.02247, 0.0225, 0.02263];
+    let xData = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+    let yData = [5,5,5,5.1,5,5,5.1,5,5,5,5.3,5,5,5,5,5,5.05,5,5,5,5.15,5];
     let absorptionValue = [30, 40, 50, 60, 100];
     let color = 'cadetblue';
     let curveName = 'Absrbtion Curve';
@@ -669,11 +670,11 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
       var end2 = min2 - 100;
 
       if (functions==1) {
-        addPoint1(start, end, 1);
+        addPoint1(start, end, 20);
       }
       else if (functions==2)
         {
-          addPoint1(start2, end2, 1);
+          addPoint1(start2, end2, 20);
         }
       else if (functions==3)
         {
@@ -726,7 +727,7 @@ function showMessaget(message, option1Text,ContainerID,functions) {
       }
       else if (functions==2)
         {
-          addPoint1(start2, end2, 1);
+          addPoint1(start2, end2, 20);
         }
       else if (functions==3)
         {
@@ -848,7 +849,7 @@ function addPoint1(start, end, step) {
     for (let value = start; value >= end; value -= step) {
       xData.push(value);
     }
-  let yData = [0.02234,0.02244,0.02247,0.0225,0.02263,0.02253, 0.02244,0.0226,0.02237,0.02265,0.02274,0.02255,0.02267];
+  let yData = [0.02244,0.02247,1.3,1.7,2.7,2.97,3,2.8,2,1.3,0.02267,0.02267,0.02267,0.02267,0.5,1,1.7,2,1.9,1.6,1.2,0.02267,0.02267];
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
  
@@ -863,13 +864,30 @@ function addPoint1(start, end, step) {
   };
   websocket.send(JSON.stringify(message)); // websocket sent
   websocket.onmessage = function (event) { // WebSocket onmessage event
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const intensityReference = data.intensityReference;
-    const intensitySample = data.intensitySample;
-    absorptionValue = Math.log10(intensityReference / intensitySample);
-  };
+    let buffer = event.data.split('\n');
+    //process each part of the buffer
+    buffer.foreach(dataBuffer => {
+      // Trim any extraneous whitespace and ensure it’s not empty
+      if(dataBuffer.trim()){
+        try {
+          //parse the json string
+          const data = JSON.parse(dataBuffer);
 
+          // For testing purposes, log the parsed data
+          console.log(data);
+
+          // Process the json data
+          const intensityReference = data.intensityReference;
+          const intensitySample = data.intensitySample;
+          absorptionValue = Math.log10(intensityReference / intensitySample);
+          yData.push(absorptionValue);
+        } catch (error){
+          console.error('Failed to parse JSON:', error);
+        }
+      }
+    });
+  };
+  openChartInNewTab(xData, yData, color, curveName);
 }
 
 
