@@ -360,39 +360,39 @@ function addPoint3(start, end, step) {
   openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
   CompareValues2(absorptionValue);
 
-  const message = { // message for websocket
-    command: 'Scan',
-    startInput: start,
-    stopInput: end,
-    stepInput: step
-  };
-  websocket.send(JSON.stringify(message)); // websocket sent
-  websocket.onmessage = function (event) { // WebSocket onmessage event
-    let buffer = event.data.split('\n');
-    //process each part of the buffer
-    buffer.foreach(dataBuffer => {
-      // Trim any extraneous whitespace and ensure it’s not empty
-      if(dataBuffer.trim()){
-        try {
-          //parse the json string
-          const data = JSON.parse(dataBuffer);
+  // const message = { // message for websocket
+  //   command: 'Scan',
+  //   startInput: start,
+  //   stopInput: end,
+  //   stepInput: step
+  // };
+  // websocket.send(JSON.stringify(message)); // websocket sent
+  // websocket.onmessage = function (event) { // WebSocket onmessage event
+  //   let buffer = event.data.split('\n');
+  //   //process each part of the buffer
+  //   buffer.foreach(dataBuffer => {
+  //     // Trim any extraneous whitespace and ensure it’s not empty
+  //     if(dataBuffer.trim()){
+  //       try {
+  //         //parse the json string
+  //         const data = JSON.parse(dataBuffer);
 
-          // For testing purposes, log the parsed data
-          console.log(data);
+  //         // For testing purposes, log the parsed data
+  //         console.log(data);
 
-          // Process the json data
-          const wavelength = data.wavelength;
-          const intensityReference = data.intensityReference;
-          const intensitySample = data.intensitySample;
-          absorptionValue = Math.log10(intensityReference / intensitySample);
-          xData.push(wavelength);
-          yData.push(absorptionValue);
-        } catch (error){
-          console.error('Failed to parse JSON:', error);
-        }
-      }
-    });
-  };
+  //         // Process the json data
+  //         const wavelength = data.wavelength;
+  //         const intensityReference = data.intensityReference;
+  //         const intensitySample = data.intensitySample;
+  //         absorptionValue = Math.log10(intensityReference / intensitySample);
+  //         xData.push(wavelength);
+  //         yData.push(absorptionValue);
+  //       } catch (error){
+  //         console.error('Failed to parse JSON:', error);
+  //       }
+  //     }
+  //   });
+  // };
   openChartInNewTab1(xData, yData, color, curveName);
   CompareValues2(absorptionValue);
 }
@@ -459,38 +459,38 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
     CompareValues3(absorptionValue, xData, yData);
     
-    const message = { // message for websocket
-      command: 'Scan',
-      startInput: start,
-      stopInput: end,
-      stepInput: step
-    };
-    websocket.send(JSON.stringify(message)); // websocket sent
-    websocket.onmessage = function (event) { // WebSocket onmessage event
-      let buffer = event.data.split('\n');
-      //process each part of the buffer
-      buffer.foreach(dataBuffer => {
-        // Trim any extraneous whitespace and ensure it’s not empty
-        if(dataBuffer.trim()){
-          try {
-            //parse the json string
-            const data = JSON.parse(dataBuffer);
+    // const message = { // message for websocket
+    //   command: 'Scan',
+    //   startInput: start,
+    //   stopInput: end,
+    //   stepInput: step
+    // };
+    // websocket.send(JSON.stringify(message)); // websocket sent
+    // websocket.onmessage = function (event) { // WebSocket onmessage event
+    //   let buffer = event.data.split('\n');
+    //   //process each part of the buffer
+    //   buffer.foreach(dataBuffer => {
+    //     // Trim any extraneous whitespace and ensure it’s not empty
+    //     if(dataBuffer.trim()){
+    //       try {
+    //         //parse the json string
+    //         const data = JSON.parse(dataBuffer);
   
-            // For testing purposes, log the parsed data
-            console.log(data);
+    //         // For testing purposes, log the parsed data
+    //         console.log(data);
   
-            // Process the json data
-            const wavelength = data.wavelength;
-            const intensityReference = data.intensityReference;
-            const intensitySample = data.intensitySample;
-            absorptionValue = Math.log10(intensityReference / intensitySample);
-            yData.push(absorptionValue);
-          } catch (error){
-            console.error('Failed to parse JSON:', error);
-          }
-        }
-      });
-    };
+    //         // Process the json data
+    //         const wavelength = data.wavelength;
+    //         const intensityReference = data.intensityReference;
+    //         const intensitySample = data.intensitySample;
+    //         absorptionValue = Math.log10(intensityReference / intensitySample);
+    //         yData.push(absorptionValue);
+    //       } catch (error){
+    //         console.error('Failed to parse JSON:', error);
+    //       }
+    //     }
+    //   });
+    // };
     openChartInNewTab1(xData, yData, color, curveName);
       CompareValues3(absorptionValue);
 }
