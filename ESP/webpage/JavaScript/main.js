@@ -185,11 +185,13 @@ let chartScan;
 let firstInit =0;
 let chartData;
 document.getElementById('chartType').addEventListener('click', function () {
- 
+  if (!validateInputs()) return;
+  
 let Numberofsamples =document.getElementById('numberofsamples').value;
 document.getElementById('deleteBTN').click();
 constructtable(Numberofsamples);
-
+document.getElementById('myTable').scrollIntoView({ behavior: 'smooth' });
+  
   let indicatorElement = document.getElementById('indecatorPage');
   if (firstInit) {
     chartScan.destroy();
@@ -481,14 +483,15 @@ function validateInputs() {
   // parsefloat < conv from string to float
   const startInput = parseFloat(document.getElementById('start').value);
   const stopInput = parseFloat(document.getElementById('stop').value);
+  const stepInput = parseFloat(document.getElementById('step').value);
 
-  if (isNaN(startInput) || isNaN(stopInput) || startInput < 100 || stopInput > 1200) {
-    alert('Start and Stop values must be between 100 and 1200');
+  if (isNaN(startInput) || isNaN(stopInput) || startInput < 190 || stopInput > 1200) {
+    alert('Start and Stop values must be between 190 and 1200');
     return false;
   }
 
-  if (!isValidDecimalDigits(startInput, 5) || !isValidDecimalDigits(stopInput, 5)) {
-    alert('Number of digits after the decimal point must not exceed 5');
+  if (!isValidDecimalDigits(startInput, 1) || !isValidDecimalDigits(stopInput, 1) ||!isValidDecimalDigits(stepInput, 1) ) {
+    alert('Number of digits after the decimal point must not exceed 1');
     return false;
   }
 
@@ -501,7 +504,7 @@ function validateInputs() {
 }
 
 function startScan(btn) {
-  document.getElementById('chartScan').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('chartandsettings').scrollIntoView({ behavior: 'smooth' });
   var row = btn.parentNode.parentNode; // Get the parent row of the button
   var index = row.rowIndex;  // Get the row index
   var SampleID = row.cells[2].innerHTML;
@@ -618,17 +621,17 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   function processScanData(data) {
     const currentTime = data.currentTime;
-
+    let scanning, progress ; 
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference / intensitySample);
     if (PageIndecator === "Wavelength") {
       const wavelength = data.wavelength;
-      let scanning = data.scanning; //check if the scan end or not
-      const progress = data.current; //represent the progress to display the current progress
-      const rangeKey = `range_${stepInput}`; // to store the ref data on local storage
+      scanning = data.scanning; //check if the scan end or not
+      progress = data.current; //represent the progress to display the current progress
       x.push(wavelength);  
+      changeState(index, progress, btn);
     }
     else if (PageIndecator === "Time") {
       const now = new Date();
@@ -659,15 +662,13 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
 
     // Extract globalXref, globalAbsorptionref, globalTransmissionref for addCurve function auto_zero
+    const rangeKey = `range_${stepInput}`; // to store the ref data on local storage
     const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
     if (storedData.length > 0 && AutoZeroFlag == true) {
       globalXref = storedData.map(item => item.x);
       globalAbsorptionref = storedData.map(item => item.absorption);
       globalTransmissionref = storedData.map(item => item.transmission);
-
     }
-
-
     if (index == 'autozero') {
       document.getElementById('autozerotoggle').innerHTML = '<i class="fa-solid fa-toggle-on"></i>';
       const newData = {
@@ -676,8 +677,6 @@ function scan(index, SampleID, SampleDecribe, btn) {
         transmission: transmission,
       }
 
-      // Retrieve existing data from local storage
-      const storedData = JSON.parse(localStorage.getItem(rangeKey)) || [];
       // Append new data to the existing data
       storedData.push(newData);
       // Sort the array in descending order based on the x value
@@ -725,7 +724,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
       }
      
       const res = currentTime + ": " + "|| Wavelength: " + wavelength + " ||Absorption: " + absorption + " ||Transmission: " + transmission;
-      changeState(index, progress, btn);
+      
       displayCMD(res, 'green', index);
       if (modeInput == "absorption") {
         addCurve(x, y, colorSelectArr[index], SampleID);
@@ -754,7 +753,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
 
   function continueScanning(wavelength) {
     if (isFirstTime) {
-      if (PageIndecator === "Wavelength") {
+      if (PageIndecator === "Wavelength" ||index == 'autozero') {
         const message = {
           command: 'scan',
           startInput: startInput,
@@ -764,6 +763,8 @@ function scan(index, SampleID, SampleDecribe, btn) {
           timeStamp: new Date().toISOString()
           // modeInput: modeInput
         };
+        websocket.send(JSON.stringify(message));
+   
       }
 
       else if (PageIndecator === "Time") {
@@ -774,9 +775,10 @@ function scan(index, SampleID, SampleDecribe, btn) {
           timeStamp: new Date().toISOString()
           // modeInput: modeInput
         };
+        websocket.send(JSON.stringify(message));
+   
       }
 
-      websocket.send(JSON.stringify(message));
       isFirstTime = false;
     }
     else if (wavelength <= stopInput && isScanning) {
@@ -1280,6 +1282,8 @@ function constructtable(num) {
 let AutoZeroResponse;
 let AutoZeroFlag = false;
 function DoAutoZero (){
+  if (!validateInputs()) return;
+  
   let toggle = document.getElementById('autozerotoggle');
   if (toggle.innerHTML == '<i class="fa-solid fa-toggle-off"></i>'){
     AutoZeroFlag = true ;
@@ -1295,6 +1299,7 @@ function DoAutoZero (){
     }
   }
   else{
+    toggle.innerHTML = '<i class="fa-solid fa-toggle-off"></i>'
     AutoZeroFlag = false;
   }
   
@@ -1477,7 +1482,7 @@ cmdInput.addEventListener('keyup', function (event) {
             break;
 
 
-          case 'A':
+          case 'A': // area under curve for one 
             rows.forEach(function (row, index) {
             
               const cells = row.querySelectorAll('td');
@@ -1487,7 +1492,7 @@ cmdInput.addEventListener('keyup', function (event) {
                 console.log("blah");
                 const result = trap(data[SampleID].x, data[SampleID].y);
                 console.log(result);
-                cells[5].textContent = result;
+                cells[5].textContent = -1* result.toFixed(3);
                 displayCMD(result, 'green', rowIndex);
               }
             });
@@ -1495,7 +1500,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'B':
+          case 'B': //area for all
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5) {
@@ -1510,7 +1515,7 @@ cmdInput.addEventListener('keyup', function (event) {
             // Clear the input field after processing the command
             this.value = '';
             break;
-          case 'S':
+          case 'S': // specific range for area
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {
@@ -1533,7 +1538,7 @@ cmdInput.addEventListener('keyup', function (event) {
             this.value = '';
             break;
 
-          case 'P':
+          case 'P': // find peaks
             rows.forEach(function (row, index) {
               const cells = row.querySelectorAll('td');
               if (cells.length >= 5 && index == cmdParam) {
@@ -1740,3 +1745,31 @@ function clearautozero(){
   globalTransmissionref = [];
   globalXref = [];
 }
+
+
+
+// document.getElementById('fullscreenButton').addEventListener('click', function() {
+//   const chartContainer = document.getElementById('chartScan');
+// console.log(chartContainer);
+//   if (!document.fullscreenElement) {
+//     if (chartContainer.requestFullscreen) {
+//       chartContainer.requestFullscreen();
+//     } else if (chartContainer.mozRequestFullScreen) { // Firefox
+//       chartContainer.mozRequestFullScreen();
+//     } else if (chartContainer.webkitRequestFullscreen) { // Chrome, Safari and Opera
+//       chartContainer.webkitRequestFullscreen();
+//     } else if (chartContainer.msRequestFullscreen) { // IE/Edge
+//       chartContainer.msRequestFullscreen();
+//     }
+//   } else {
+//     if (document.exitFullscreen) {
+//       document.exitFullscreen();
+//     } else if (document.mozCancelFullScreen) { // Firefox
+//       document.mozCancelFullScreen();
+//     } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+//       document.webkitExitFullscreen();
+//     } else if (document.msExitFullscreen) { // IE/Edge
+//       document.msExitFullscreen();
+//     }
+//   }
+// });

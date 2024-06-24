@@ -37,13 +37,6 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
 }
-/* Media query for mobile devices */
-@media only screen and (max-width: 600px) {
-  * {
-    font-size: 10px !important; /* Decrease the base font size */
-  }
-
-}
 
   
 
@@ -317,6 +310,15 @@ nav li:first-child {
   justify-content: center;
 }
 
+@media screen and (max-width: 435px) {
+  #methodsButton{
+flex-direction: column;
+}
+  
+ }
+
+
+
 /* Style for disabled buttons */
 button[disabled],input[disabled] {
   opacity: 0.6; /* Adjust opacity for disabled state */
@@ -324,7 +326,7 @@ button[disabled],input[disabled] {
 }
 
 /* Style for buttons */
-.setupButtons button,legend button,table button,#NextSample button {
+.setupButtons button,legend button,table button,#NextSample button, #toggleButton {
   background-color: #094a8f;
   color: white;
   border: none;
@@ -343,16 +345,19 @@ button[disabled],input[disabled] {
 
 .setupButtons #chartType{
   background-color: rgb(56, 227, 29);
+  width: 120px;
+  border: #000 solid 1px;
 }
-
 .setupButtons #chartType:hover{
   background-color: #263b26;
 }
 .setupButtons #numberofsamples{
 height: 40px;
-width: 135px;
+border-radius: 5px;
 padding: 3px;
 margin: 3PX;
+width: 130px;
+
   
 }
 
@@ -1147,17 +1152,24 @@ body.dark-mode {
 }
 
 .first-div {
+<<<<<<< HEAD
   /* background-color: lightblue; */
+=======
+>>>>>>> 8b0fec77fa19be0cb7dc85493ef7fdba98b47161
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .second-div {
+<<<<<<< HEAD
   /* background-color: lightcoral; */
+=======
+>>>>>>> 8b0fec77fa19be0cb7dc85493ef7fdba98b47161
   display: flex;
   flex-direction: column;
   padding: 50px;
+  padding-bottom: 10px !important;
   gap: 10px;
 }
 

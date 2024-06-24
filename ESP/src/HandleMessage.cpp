@@ -426,7 +426,80 @@ void handleScanTime(const DynamicJsonDocument &doc)
       &scanTimeTask,       // Task handle
       0);              // Core (0 or 1, depending on your setup)
 }
+/**------------------------------------------------------------------------
+ *                           FIT LINE TASK
+ *------------------------------------------------------------------------**/
+TaskHandle_t fitLineTask;
+// TASK
+void handlefitLineTask(void *pvParameters)
+{
+  DynamicJsonDocument doc = *((DynamicJsonDocument *)pvParameters);
 
+  String command = doc["command"].as<String>();
+  String startInput = doc["startInput"].as<String>();
+  String stopInput = doc["stopInput"].as<String>();
+  String stepInput = doc["stepInput"].as<String>();
+ DynamicJsonDocument scanData(256);
+    String scancmd = command + " " + startInput ;
+    Serial.println(scancmd);
+    Serial2.println(scancmd);
+
+      while (Serial2.available() == 0)
+      { 
+        Serial.println("while looop");
+        vTaskDelay(pdMS_TO_TICKS(20));
+      }
+       String response = Serial2.readStringUntil('\n');
+       Serial.println(response);
+
+       if(response == "Init-Finished" ){
+      while (Serial2.available() == 0)
+      {
+        vTaskDelay(pdMS_TO_TICKS(20));
+      }
+       
+      String response = Serial2.readStringUntil('\n');
+      Serial2.flush();
+      Serial.println(response);
+    
+   
+      
+      float space1 = response.indexOf(' ');
+
+      // String wavelength = response.substring(0, space1);
+     String reference = response.substring(0, space1);
+      //String wavelength = String(i);
+      String sample = response.substring(space1 + 1);
+
+
+
+  
+      scanData["intensityReference"] = reference.toFloat();
+      scanData["intensitySample"] = sample.toFloat();
+       String jsonString;
+      serializeJson(scanData, jsonString);
+              notifyClients(jsonString);
+
+    }
+  
+  Serial.println("last");
+
+  vTaskDelete(NULL); // delete the task when done
+}
+
+void handlefitLine(const DynamicJsonDocument &doc)
+{
+  DynamicJsonDocument *docCopy = new DynamicJsonDocument(doc.capacity());
+  *docCopy = doc;
+  xTaskCreatePinnedToCore(
+      handlefitLineTask,  // Task function
+      "fitLineTask",      // Task name
+      8192,            // Stack size (bytes)
+      (void *)docCopy, // Parameter to pass to the task
+      1,               // Task priority
+      &fitLineTask,       // Task handle
+      0);              // Core (0 or 1, depending on your setup)
+}
 /**------------------------------------------------------------------------
  *                           SCAN TASK
  *------------------------------------------------------------------------**/
@@ -714,6 +787,13 @@ void handleifelse(const DynamicJsonDocument &doc)
   {
     Serial.println("command is scan-time");
     handleScanTime(doc);
+  }
+  else if (doc["command"] == "fitLine")
+  {
+    Serial.println("fitLine");
+    handleScan(doc);
+
+
   }
   else if (doc["command"] == "ScanStop")
   {
