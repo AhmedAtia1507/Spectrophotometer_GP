@@ -357,7 +357,7 @@ function addPoint3(start, end, step) {
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
 
-  openChartInNewTab(xData, yData, color, curveName); // Open initial chart
+  openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
   CompareValues2(absorptionValue);
 
   const message = { // message for websocket
@@ -366,23 +366,35 @@ function addPoint3(start, end, step) {
     stopInput: end,
     stepInput: step
   };
-
   websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    let buffer = event.data.split('\n');
+    //process each part of the buffer
+    buffer.foreach(dataBuffer => {
+      // Trim any extraneous whitespace and ensure it’s not empty
+      if(dataBuffer.trim()){
+        try {
+          //parse the json string
+          const data = JSON.parse(dataBuffer);
 
-  websocket.onmessage = function(event) { // WebSocket onmessage event
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const wavelength = data.wavelength;
-    const intensityReference = data.intensityReference;
-    const intensitySample = data.intensitySample;
-    const absorptionValue = Math.log10(intensityReference / intensitySample);
+          // For testing purposes, log the parsed data
+          console.log(data);
 
-    // Assuming xData and yData are being updated based on WebSocket response
-    xData.push(wavelength);
-    yData.push(absorptionValue);
-    openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
-    CompareValues2(absorptionValue);
+          // Process the json data
+          const wavelength = data.wavelength;
+          const intensityReference = data.intensityReference;
+          const intensitySample = data.intensitySample;
+          absorptionValue = Math.log10(intensityReference / intensitySample);
+          xData.push(wavelength);
+          yData.push(absorptionValue);
+        } catch (error){
+          console.error('Failed to parse JSON:', error);
+        }
+      }
+    });
   };
+  openChartInNewTab1(xData, yData, color, curveName);
+  CompareValues2(absorptionValue);
 }
 
 function CompareValues2(absorptionValue) {
@@ -435,13 +447,16 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
   });
 
   function addPoint4(start, end, step) {
-    let xData = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+    let xData = [];
+    for (let value = 910; value >= 0; value -= step) {
+      xData.push(value);
+    }
     let yData = [5,5,5,5.1,5,5,5.1,5,5,5,5.3,5,5,5,5,5,5.05,5,5,5,5.15,5];
     let absorptionValue = [30, 40, 50, 60, 100];
     let color = 'cadetblue';
     let curveName = 'Absrbtion Curve';
   
-    openChartInNewTab(xData, yData, color, curveName); // Open initial chart
+    openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
     CompareValues3(absorptionValue, xData, yData);
     
     const message = { // message for websocket
@@ -450,25 +465,35 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
       stopInput: end,
       stepInput: step
     };
-    
     websocket.send(JSON.stringify(message)); // websocket sent
-    
-    websocket.onmessage = function(event) { // WebSocket onmessage event
-      const data = JSON.parse(event.data);
-      console.log(event.data); // for test
-      const currentTime = data.currentTime;
-      const intensityReference = data.intensityReference;
-      const intensitySample = data.intensitySample;
-      const absorptionValue = Math.log10(intensityReference / intensitySample);
-      
-      // Assuming xData and yData are being updated based on WebSocket response
-      xData.push(currentTime);
-      yData.push(absorptionValue);
-      openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
-      CompareValues3(absorptionValue);
+    websocket.onmessage = function (event) { // WebSocket onmessage event
+      let buffer = event.data.split('\n');
+      //process each part of the buffer
+      buffer.foreach(dataBuffer => {
+        // Trim any extraneous whitespace and ensure it’s not empty
+        if(dataBuffer.trim()){
+          try {
+            //parse the json string
+            const data = JSON.parse(dataBuffer);
+  
+            // For testing purposes, log the parsed data
+            console.log(data);
+  
+            // Process the json data
+            const wavelength = data.wavelength;
+            const intensityReference = data.intensityReference;
+            const intensitySample = data.intensitySample;
+            absorptionValue = Math.log10(intensityReference / intensitySample);
+            yData.push(absorptionValue);
+          } catch (error){
+            console.error('Failed to parse JSON:', error);
+          }
+        }
+      });
     };
-  }
-
+    openChartInNewTab1(xData, yData, color, curveName);
+      CompareValues3(absorptionValue);
+}
   function CompareValues3(absorptionValue) {
     var errorLimit = parseInt(document.querySelector('.error4').value);
     var userInputValues = [];
@@ -670,19 +695,19 @@ function showMessagef(message, option1Text, option2Text,ContainerID,functions) {
       var end2 = min2 - 100;
 
       if (functions==1) {
-        addPoint1(start, end, 20);
+        addPoint1(start, end, 1);
       }
       else if (functions==2)
         {
-          addPoint1(start2, end2, 20);
+          addPoint1(start2, end2, 1);
         }
       else if (functions==3)
         {
-          addPoint3(max, min, 1);
+          addPoint3(190, 1100, 10);
         }
       else if (functions==4)
         {
-          addPoint4(max, min, 1);
+          addPoint4(190, 1100, 10);
         }
     };
   // Append message and options to the container
@@ -727,7 +752,7 @@ function showMessaget(message, option1Text,ContainerID,functions) {
       }
       else if (functions==2)
         {
-          addPoint1(start2, end2, 20);
+          addPoint1(start2, end2, 1);
         }
       else if (functions==3)
         {
@@ -849,7 +874,8 @@ function addPoint1(start, end, step) {
     for (let value = start; value >= end; value -= step) {
       xData.push(value);
     }
-  let yData = [0.02244,0.02247,1.3,1.7,2.7,2.97,3,2.8,2,1.3,0.02267,0.02267,0.02267,0.02267,0.5,1,1.7,2,1.9,1.6,1.2,0.02267,0.02267];
+    let yData = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  //let yData = [0.02244,0.02247,1.3,1.7,2.7,2.97,3,2.8,2,1.3,0.02267,0.02267,0.02267,0.02267,0.5,1,1.7,2,1.9,1.6,1.2,0.02267,0.02267];
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
  
@@ -877,9 +903,11 @@ function addPoint1(start, end, step) {
           console.log(data);
 
           // Process the json data
+          const wavelength = data.wavelength;
           const intensityReference = data.intensityReference;
           const intensitySample = data.intensitySample;
           absorptionValue = Math.log10(intensityReference / intensitySample);
+          xData.push(wavelength);
           yData.push(absorptionValue);
         } catch (error){
           console.error('Failed to parse JSON:', error);
@@ -1024,6 +1052,81 @@ function openChartInNewTab(xData, yData, color, curveName) {
     alert('Failed to open new window. Please allow pop-ups for this website.');
   }
 }
+
+function openChartInNewTab1(xData, yData, color, curveName) {
+  // Create a new window
+  const newWindow = window.open('', '_blank');
+
+  // Check if the new window opened successfully
+  if (newWindow) {
+    // Write the HTML structure for the new window
+    newWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chart</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+          }
+          canvas {
+            width: 90%;
+            max-width: 800px;
+            height: 50%;
+          }
+        </style>
+      </head>
+      <body>
+        <canvas id="chartCanvas"></canvas>
+        <script>
+          // Function to add the curve
+          function addCurve(xData, yData, color, curveName) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            const chart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: xData,
+                datasets: [{
+                  label: curveName,
+                  data: yData,
+                  borderColor: color,
+                  fill: false
+                }]
+              },
+              options: {
+                scales: {
+                  x: {
+                    type: 'linear',
+                    position: 'bottom'
+                  },
+                  y: {
+                    min: -10,
+                    max: 10
+                  }
+                },
+                animation: false // Disable animations
+              }
+            });
+          }
+
+          // Call the function to add the curve
+          addCurve(${JSON.stringify(xData)}, ${JSON.stringify(yData)}, "${color}", "${curveName}");
+        </script>
+      </body>
+      </html>
+    `);
+  } else {
+    alert('Failed to open new window. Please allow pop-ups for this website.');
+  }
+}
+
 
 
 
