@@ -351,10 +351,8 @@ document.getElementById('button13').addEventListener('click', function() {
 });
 
 function addPoint3(start, end, step) {
- // let xData = [190,230,270,310,350,390,430,470,510,550,590,630,670,710,750,790,830,870,910,950,990,1100];
-  //let yData = [0,0,0,0.3,0,0,0.5,0,0,0,0,0,0.1,0,0,0.07,0,0,0,0.2,0,0];
-  let xData = [];
-  let yData = [];
+  let xData = [190,230,270,310,350,390,430,470,510,550,590,630,670,710,750,790,830,870,910,950,990,1100];
+  let yData = [0,0,0,0.3,0,0,0.5,0,0,0,0,0,0.1,0,0,0.07,0,0,0,0.2,0,0];
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
 
@@ -386,6 +384,8 @@ function addPoint3(start, end, step) {
           const intensityReference = data.intensityReference;
           const intensitySample = data.intensitySample;
           absorptionValue = Math.log10(intensityReference / intensitySample);
+          xData.length = 0;
+          yData.length = 0;
           xData.push(wavelength);
           yData.push(absorptionValue);
         } catch (error){
@@ -452,8 +452,7 @@ var formElements4 = document.querySelectorAll(' .numbers14, .numbers24, .button1
     for (let value = 180; value >= 0; value -= 0.5) {
       xData.push(value);
     }
-    let yData = [];
-   // let yData = [5,5,5,5,5,5,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.92,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5.15,5,5,5,5,4.94,5,5,5.1,5,5,5,5.2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.96,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5,,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.2,5,5,5,5,5,5.5,5,5,5,5,5,5,5,5,5,4.82,5,5.2,5,5,5,,5];
+    let yData = [5,5,5,5,5,5,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.92,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5.15,5,5,5,5,4.94,5,5,5.1,5,5,5,5.2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.96,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5,,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.2,5,5,5,5,5,5.5,5,5,5,5,5,5,5,5,5,4.82,5,5.2,5,5,5,,5];
     let absorptionValue = [30, 40, 50, 60, 100];
     let color = 'cadetblue';
     let curveName = 'Absrbtion Curve';
@@ -486,6 +485,7 @@ var formElements4 = document.querySelectorAll(' .numbers14, .numbers24, .button1
             const intensityReference = data.intensityReference;
             const intensitySample = data.intensitySample;
             absorptionValue = Math.log10(intensityReference / intensitySample);
+            yData.length = 0;
             yData.push(absorptionValue);
           } catch (error){
             console.error('Failed to parse JSON:', error);
@@ -909,6 +909,8 @@ function addPoint1(start, end, step) {
           const intensityReference = data.intensityReference;
           const intensitySample = data.intensitySample;
           absorptionValue = Math.log10(intensityReference / intensitySample);
+          xData.length = 0;
+          yData.length = 0;
           xData.push(wavelength);
           yData.push(absorptionValue);
         } catch (error){
