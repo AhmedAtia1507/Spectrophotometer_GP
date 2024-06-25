@@ -618,7 +618,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
   runSpectrophotometer();             //play animation
 
-
+let time=0;
   function processScanData(data) {
     const currentTime = data.currentTime;
     let scanning, progress ; 
@@ -634,12 +634,9 @@ function scan(index, SampleID, SampleDecribe, btn) {
       changeState(index, progress, btn);
     }
     else if (PageIndecator === "Time") {
-      const now = new Date();
-    
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      x.push(`${hours}:${minutes}:${seconds}`);
+
+      x.push(time);
+      time += 1;
     }
 
 
