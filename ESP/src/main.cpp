@@ -21,8 +21,6 @@ AsyncWebSocket ws("/ws");  // Create a WebSocket object
 bool notifyClients(String state)
 {
   ws.textAll(state); // send data to the connected webpage
-  String LogPath = "/activity.log";
-  SdWriteString(LogPath , state);
   return true;
 }
 

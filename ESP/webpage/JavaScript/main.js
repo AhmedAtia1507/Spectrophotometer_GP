@@ -1745,7 +1745,22 @@ function clearautozero(){
   globalTransmissionref = [];
   globalXref = [];
 }
+// Get all input fields
+const startInput = document.getElementById('start');
+const stopInput = document.getElementById('stop');
+const stepInput = document.getElementById('step');
 
+// Add change event listeners
+startInput.addEventListener('change', disableAutoZero);
+stopInput.addEventListener('change', disableAutoZero);
+stepInput.addEventListener('change', disableAutoZero);
+
+
+function disableAutoZero(){
+  toggle.innerHTML = '<i class="fa-solid fa-toggle-off"></i>'
+  AutoZeroFlag = false;
+  clearautozero();
+}
 
 
 // document.getElementById('fullscreenButton').addEventListener('click', function() {
