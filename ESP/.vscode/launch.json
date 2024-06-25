@@ -12,9 +12,15 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
+<<<<<<< HEAD
             "executable": "c:/Users/Restart/Desktop/rep 3/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
             "projectEnvName": "esp32doit-devkit-v1",
             "toolchainBinDir": "C:/Users/Restart/.platformio/packages/toolchain-xtensa-esp32/bin",
+=======
+            "executable": "F:/ASU/ECE-senior- 2/GP/github/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
+            "projectEnvName": "esp32doit-devkit-v1",
+            "toolchainBinDir": "C:/Users/Administrator/.platformio/packages/toolchain-xtensa-esp32/bin",
+>>>>>>> a798f611dbc0721a4f74ae64e894f1547f094b0e
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
                 "type": "PlatformIO",
@@ -25,18 +31,30 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
+<<<<<<< HEAD
             "executable": "c:/Users/Restart/Desktop/rep 3/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
             "projectEnvName": "esp32doit-devkit-v1",
             "toolchainBinDir": "C:/Users/Restart/.platformio/packages/toolchain-xtensa-esp32/bin",
+=======
+            "executable": "F:/ASU/ECE-senior- 2/GP/github/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
+            "projectEnvName": "esp32doit-devkit-v1",
+            "toolchainBinDir": "C:/Users/Administrator/.platformio/packages/toolchain-xtensa-esp32/bin",
+>>>>>>> a798f611dbc0721a4f74ae64e894f1547f094b0e
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
+<<<<<<< HEAD
             "executable": "c:/Users/Restart/Desktop/rep 3/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
             "projectEnvName": "esp32doit-devkit-v1",
             "toolchainBinDir": "C:/Users/Restart/.platformio/packages/toolchain-xtensa-esp32/bin",
+=======
+            "executable": "F:/ASU/ECE-senior- 2/GP/github/Spectrophotometer_GP/ESP/.pio/build/esp32doit-devkit-v1/firmware.elf",
+            "projectEnvName": "esp32doit-devkit-v1",
+            "toolchainBinDir": "C:/Users/Administrator/.platformio/packages/toolchain-xtensa-esp32/bin",
+>>>>>>> a798f611dbc0721a4f74ae64e894f1547f094b0e
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"
         }
