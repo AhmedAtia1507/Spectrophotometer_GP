@@ -1491,9 +1491,9 @@ cmdInput.addEventListener('keyup', function (event) {
                 var SampleID = table.rows[rowIndex].cells[2].textContent;
                 console.log("blah");
                 const result = trap(data[SampleID].x, data[SampleID].y);
-                console.log(result);
+                console.log(-1* result.toFixed(3));
                 cells[5].textContent = -1* result.toFixed(3);
-                displayCMD(result, 'green', rowIndex);
+                displayCMD(-1* result.toFixed(3), 'green', rowIndex);
               }
             });
 
@@ -1527,8 +1527,8 @@ cmdInput.addEventListener('keyup', function (event) {
                 var sIndex = data[SampleID].x.indexOf(sRange);
                 var eIndex = data[SampleID].x.indexOf(eRange);
                 const result = trap(data[SampleID].x.slice(sIndex, eIndex + 1), data[SampleID].y.slice(sIndex, eIndex + 1));
-                cells[5].textContent = result;
-                displayCMD(result, 'green', rowIndex);
+                cells[5].textContent = -1* result.toFixed(3);
+                displayCMD(-1* result.toFixed(3), 'green', rowIndex);
                 var curveName = SampleID + " " + sRange + " : " + eRange;
                 addCurve(data[SampleID].x.slice(sIndex, eIndex + 1), data[SampleID].y.slice(sIndex, eIndex + 1), 'green', curveName, true);
               }
