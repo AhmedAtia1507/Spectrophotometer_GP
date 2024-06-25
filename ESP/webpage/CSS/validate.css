@@ -119,6 +119,18 @@ legend {
   font-family: 'Times new roman', Courier, monospace;
 }
 
+.numbers24 {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  color: black;
+  margin: 1% 1% 0.3% 1%; /* Adjusted left margin to 0 */
+  padding-left: 0.1%;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  font-family: 'Times new roman', Courier, monospace;
+}
+
 .numbers2, .numbers3 {
   width: 70px;
   height: 30px;

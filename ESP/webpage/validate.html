@@ -64,9 +64,9 @@
 
   <select class="dropdown-button" name="Sample" id="Sampleselector"disabled>
     <option value="" disabled selected>Select the Sample</option>
-    <option value="Holmium oxide1">Holmium oxide</option>
-    <option value="Holmium oxide2">Holmium oxide</option>
-    <option value="Holmium oxide3">Holmium oxide</option>
+    <option value="Holmium oxide">Holmium oxide</option>
+    <option value="Holmium perchlorate">Holmium oxide</option>
+    <option value="Didymium glass">Holmium oxide</option>
   </select>
 
   <br>
@@ -134,15 +134,20 @@
 
 <fieldset class="fsetup1">
   <legend><input class="checkboxes4" type="checkbox"> Photometric noise </legend>
+  <label class="labels"> Enter the Wavelength value </label>
+  <input class="numbers24" type="number" id="mynumber2" placeholder="0" disabled>
   <label class="labels"> Enter the Absorbation value </label>
-  <input class="numbers14" type="number" id="mynumber2"placeholder="0"disabled>
-  <label class="labels"> Enter the error limit </label>
-  <input class="error4" type="number" id="mynumber3" placeholder=" &plusmn;1" disabled>
-  <input class="button14" type="button" id="button14" value="Submit"disabled>
-  <div class="messageContainerf" id="messageContainer14" ></div>
-  <div class="messageContainert" id="messageContainer24" ></div>
-
+  <input class="numbers14" type="number" id="mynumber2" placeholder="0" disabled>
+  
+  <div>
+    <label class="labels"> Enter the error limit </label>
+    <input class="error4" type="number" id="mynumber3" placeholder=" &plusmn;1" disabled>
+  </div>
+  <input class="button14" type="button" id="button14" value="Submit" disabled>
+  <div class="messageContainerf" id="messageContainer14"></div>
+  <div class="messageContainert" id="messageContainer24"></div>
 </fieldset>
+
 
 
 

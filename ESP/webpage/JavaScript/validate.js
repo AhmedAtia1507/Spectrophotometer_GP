@@ -198,9 +198,9 @@ function compareValues() {
 function getPredefinedValues(option) {
   // Define predefined values for each option
   var predefinedValuesMap = {
-    "Holmium oxide1": [200, 300, 400, 500, 600, 700],
-    "Holmium oxide2": [100, 200, 300, 400, 500, 600],
-    "Holmium oxide3": [30, 40, 50, 60, 70, 80]
+    "Holmium oxide": [279.2, 360.9, 453.7, 536.5, 637.7],
+    "Holmium perchlorate": [241.15, 287.15, 361.5, 536.3],
+    "Didymium glass": [440.4, 481, 513.4, 684.5, 879.3]
   };
 
   // Get predefined values for the selected option
@@ -351,50 +351,51 @@ document.getElementById('button13').addEventListener('click', function() {
 });
 
 function addPoint3(start, end, step) {
-  let xData = [190,230,270,310,350,390,430,470,510,550,590,630,670,710,750,790,830,870,910,950,990,1100];
-  let yData = [0,0,0,0.3,0,0,0.5,0,0,0,0,0,0.1,0,0,0.07,0,0,0,0.2,0,0];
-  let absorptionValue = [30, 40, 50, 60, 100];
+ // let xData = [190,230,270,310,350,390,430,470,510,550,590,630,670,710,750,790,830,870,910,950,990,1100];
+  //let yData = [0,0,0,0.3,0,0,0.5,0,0,0,0,0,0.1,0,0,0.07,0,0,0,0.2,0,0];
+  let xData = [];
+  let yData = [];
   let color = 'cadetblue';
   let curveName = 'Absrbtion Curve';
 
   openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
-  CompareValues2(absorptionValue);
+  CompareValues2(yData);
 
-  // const message = { // message for websocket
-  //   command: 'Scan',
-  //   startInput: start,
-  //   stopInput: end,
-  //   stepInput: step
-  // };
-  // websocket.send(JSON.stringify(message)); // websocket sent
-  // websocket.onmessage = function (event) { // WebSocket onmessage event
-  //   let buffer = event.data.split('\n');
-  //   //process each part of the buffer
-  //   buffer.foreach(dataBuffer => {
-  //     // Trim any extraneous whitespace and ensure it’s not empty
-  //     if(dataBuffer.trim()){
-  //       try {
-  //         //parse the json string
-  //         const data = JSON.parse(dataBuffer);
+  const message = { // message for websocket
+    command: 'Scan',
+    startInput: start,
+    stopInput: end,
+    stepInput: step
+  };
+  websocket.send(JSON.stringify(message)); // websocket sent
+  websocket.onmessage = function (event) { // WebSocket onmessage event
+    let buffer = event.data.split('\n');
+    //process each part of the buffer
+    buffer.foreach(dataBuffer => {
+      // Trim any extraneous whitespace and ensure it’s not empty
+      if(dataBuffer.trim()){
+        try {
+          //parse the json string
+          const data = JSON.parse(dataBuffer);
 
-  //         // For testing purposes, log the parsed data
-  //         console.log(data);
+          // For testing purposes, log the parsed data
+          console.log(data);
 
-  //         // Process the json data
-  //         const wavelength = data.wavelength;
-  //         const intensityReference = data.intensityReference;
-  //         const intensitySample = data.intensitySample;
-  //         absorptionValue = Math.log10(intensityReference / intensitySample);
-  //         xData.push(wavelength);
-  //         yData.push(absorptionValue);
-  //       } catch (error){
-  //         console.error('Failed to parse JSON:', error);
-  //       }
-  //     }
-  //   });
-  // };
+          // Process the json data
+          const wavelength = data.wavelength;
+          const intensityReference = data.intensityReference;
+          const intensitySample = data.intensitySample;
+          absorptionValue = Math.log10(intensityReference / intensitySample);
+          xData.push(wavelength);
+          yData.push(absorptionValue);
+        } catch (error){
+          console.error('Failed to parse JSON:', error);
+        }
+      }
+    });
+  };
   openChartInNewTab1(xData, yData, color, curveName);
-  CompareValues2(absorptionValue);
+  CompareValues2(yData);
 }
 
 function CompareValues2(absorptionValue) {
@@ -431,7 +432,7 @@ function CompareValues2(absorptionValue) {
 */
 
 
-var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '); // Select all relevant elements
+var formElements4 = document.querySelectorAll(' .numbers14, .numbers24, .button14, .error4 '); // Select all relevant elements
   var checkbox4 = document.querySelector('.checkboxes4'); // Get the checkbox element
 
   checkbox4.addEventListener('change', function() {
@@ -448,10 +449,11 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
 
   function addPoint4(start, end, step) {
     let xData = [];
-    for (let value = 910; value >= 0; value -= step) {
+    for (let value = 180; value >= 0; value -= 0.5) {
       xData.push(value);
     }
-    let yData = [5,5,5,5.1,5,5,5.1,5,5,5,5.3,5,5,5,5,5,5.05,5,5,5,5.15,5];
+    let yData = [];
+   // let yData = [5,5,5,5,5,5,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.92,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5.15,5,5,5,5,4.94,5,5,5.1,5,5,5,5.2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.05,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.96,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4.88,5,5,5,5,5,5,5,5,5,5,5,5,5,5,,5,5,5,5.1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5.2,5,5,5,5,5,5.5,5,5,5,5,5,5,5,5,5,4.82,5,5.2,5,5,5,,5];
     let absorptionValue = [30, 40, 50, 60, 100];
     let color = 'cadetblue';
     let curveName = 'Absrbtion Curve';
@@ -459,38 +461,38 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
     openChartInNewTab1(xData, yData, color, curveName); // Open initial chart
     CompareValues3(absorptionValue, xData, yData);
     
-    // const message = { // message for websocket
-    //   command: 'Scan',
-    //   startInput: start,
-    //   stopInput: end,
-    //   stepInput: step
-    // };
-    // websocket.send(JSON.stringify(message)); // websocket sent
-    // websocket.onmessage = function (event) { // WebSocket onmessage event
-    //   let buffer = event.data.split('\n');
-    //   //process each part of the buffer
-    //   buffer.foreach(dataBuffer => {
-    //     // Trim any extraneous whitespace and ensure it’s not empty
-    //     if(dataBuffer.trim()){
-    //       try {
-    //         //parse the json string
-    //         const data = JSON.parse(dataBuffer);
+    const message = { // message for websocket
+      command: 'Scan',
+      startInput: start,
+      stopInput: end,
+      stepInput: step
+    };
+    websocket.send(JSON.stringify(message)); // websocket sent
+    websocket.onmessage = function (event) { // WebSocket onmessage event
+      let buffer = event.data.split('\n');
+      //process each part of the buffer
+      buffer.foreach(dataBuffer => {
+        // Trim any extraneous whitespace and ensure it’s not empty
+        if(dataBuffer.trim()){
+          try {
+            //parse the json string
+            const data = JSON.parse(dataBuffer);
   
-    //         // For testing purposes, log the parsed data
-    //         console.log(data);
+            // For testing purposes, log the parsed data
+            console.log(data);
   
-    //         // Process the json data
-    //         const wavelength = data.wavelength;
-    //         const intensityReference = data.intensityReference;
-    //         const intensitySample = data.intensitySample;
-    //         absorptionValue = Math.log10(intensityReference / intensitySample);
-    //         yData.push(absorptionValue);
-    //       } catch (error){
-    //         console.error('Failed to parse JSON:', error);
-    //       }
-    //     }
-    //   });
-    // };
+            // Process the json data
+            const wavelength = data.wavelength;
+            const intensityReference = data.intensityReference;
+            const intensitySample = data.intensitySample;
+            absorptionValue = Math.log10(intensityReference / intensitySample);
+            yData.push(absorptionValue);
+          } catch (error){
+            console.error('Failed to parse JSON:', error);
+          }
+        }
+      });
+    };
     openChartInNewTab1(xData, yData, color, curveName);
       CompareValues3(absorptionValue);
 }
@@ -1107,8 +1109,8 @@ function openChartInNewTab1(xData, yData, color, curveName) {
                     position: 'bottom'
                   },
                   y: {
-                    min: -10,
-                    max: 10
+                    min: 2,
+                    max: 7
                   }
                 },
                 animation: false // Disable animations
