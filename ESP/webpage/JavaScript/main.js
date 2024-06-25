@@ -325,12 +325,12 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
     const mouseY = event.clientY - canvasPosition.top;
 
     const xValue = chartType === 'chartScan' ? chartScan.scales['x'].getValueForPixel(mouseX) :
-      chartType === 'chartScanTime' ? chartScanTime.scales['x'].getValueForPixel(mouseX) :
-        chartScanFilter.scales['x'].getValueForPixel(mouseX);
+      chartType === 'chartScanTime' ? chartScan.scales['x'].getValueForPixel(mouseX) :
+        chartScan.scales['x'].getValueForPixel(mouseX);
 
     const yValue = chartType === 'chartScan' ? chartScan.scales['y'].getValueForPixel(mouseY) :
-      chartType === 'chartScanTime' ? chartScanTime.scales['y'].getValueForPixel(mouseY) :
-        chartScanFilter.scales['y'].getValueForPixel(mouseY);
+      chartType === 'chartScanTime' ? chartScan.scales['y'].getValueForPixel(mouseY) :
+        chartScan.scales['y'].getValueForPixel(mouseY);
 
     // Update the content of the div with x and y values
     infoDiv.innerHTML = `X: ${xValue.toFixed(2)}, Y: ${yValue.toFixed(2)}`;
@@ -618,7 +618,7 @@ function scan(index, SampleID, SampleDecribe, btn) {
   var colorSelectArr = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray', 'black'];    // change color according to index
   runSpectrophotometer();             //play animation
 
-let time=0;
+let timer=0;
   function processScanData(data) {
     const currentTime = data.currentTime;
     let scanning, progress ; 
@@ -626,8 +626,9 @@ let time=0;
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference / intensitySample);
+    let wavelength;
     if (PageIndecator === "Wavelength") {
-      const wavelength = data.wavelength;
+      wavelength = data.wavelength;
       scanning = data.scanning; //check if the scan end or not
       progress = data.current; //represent the progress to display the current progress
       x.push(wavelength);  
@@ -635,8 +636,8 @@ let time=0;
     }
     else if (PageIndecator === "Time") {
 
-      x.push(time);
-      time += 1;
+      x.push(timer);
+      timer += 1;
     }
 
 

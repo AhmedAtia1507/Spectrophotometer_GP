@@ -530,7 +530,8 @@ function addPoint3(start, end, step) {
     command: 'Scan',
     startInput: start,
     stopInput: end,
-    stepInput: step
+    stepInput: step,
+    lampmode:'both'
   };
   websocket.send(JSON.stringify(message)); // websocket sent
   websocket.onmessage = function (event) { // WebSocket onmessage event
@@ -631,7 +632,8 @@ var formElements4 = document.querySelectorAll(' .numbers14, .numbers24, .button1
       command: 'Scan',
       startInput: start,
       stopInput: end,
-      stepInput: step
+      stepInput: step,
+      lampmode:'both',
     };
     websocket.send(JSON.stringify(message)); // websocket sent
     websocket.onmessage = function (event) { // WebSocket onmessage event
@@ -1055,7 +1057,8 @@ function addPoint1(start, end, step) {
     command: 'Scan',
     startInput: start,
     stopInput: end,
-    stepInput: step
+    stepInput: step,
+    lampmode:'both'
   };
   websocket.send(JSON.stringify(message)); // websocket sent
   websocket.onmessage = function (event) { // WebSocket onmessage event
