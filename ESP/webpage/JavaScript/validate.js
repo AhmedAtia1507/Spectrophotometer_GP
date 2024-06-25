@@ -95,6 +95,13 @@ function showfoot() {
 */
 
 
+
+/*
+
+****************************WAvelength Accuracy********************************
+
+*/
+
 document.addEventListener("DOMContentLoaded", function() {
   var submitButton1 = document.querySelector('.button1');
   submitButton1.addEventListener('click', function() {
@@ -102,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('tableContainer').style.display = 'none';
   });
 
-  function generateInputs() {
+
+function generateInputs() {
     var numWavelengths = parseInt(document.querySelector('.numbers1').value);
     var wavelengthsContainer = document.querySelector('.wavelengths-container');
 
@@ -119,11 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var input = document.createElement('input');
       input.type = 'number';
       input.className = 'numbers2'; // Add class for identification
-      input.placeholder = '   0';
-      // Set disabled state based on checkbox (optional)
-      if (!checkbox.checked) {
-        input.disabled = true;
-      }
+      input.placeholder = '0';
       wavelengthsContainer.appendChild(input);
 
       var label2 = document.createElement('label');
@@ -133,47 +137,49 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton'); // Select all relevant elements
-  var checkbox = document.querySelector('.checkboxes1'); // Get the checkbox element
 
-  checkbox.addEventListener('change', function() {
+
+  var formElements = document.querySelectorAll('.dropdown-button, .numbers1, .button1, .error, #submitButton');
+  var checkbox = document.querySelector('.checkboxes1');
+
+checkbox.addEventListener('change', function() {
     for (var element of formElements) {
-      element.disabled = !this.checked; // Toggle disabled based on checkbox state
+      element.disabled = !this.checked;
     }
   });
 
-  document.getElementById('submitButton').addEventListener('click', compareValues);
-  var submitButton2 = document.querySelector('.button11'); // Targeting the new submit button
-  submitButton2.addEventListener('click', compareValues);
+ 
+
+  var submitButton2 = document.querySelector('.button11');
+  submitButton2.addEventListener('click', function() {
+    var userInputValues = getUserInputValues();
+    var start = Math.min(...userInputValues) - 10;
+    var end = Math.max(...userInputValues) + 10;
+    addPoint1(start, end, 1);
+  });
 });
 
-function compareValues() {
-  var dropdown = document.getElementById('Sampleselector');
-  var selectedOption = dropdown.options[dropdown.selectedIndex].value;
-  // Check if a valid option is selected
-  if (selectedOption === "" || selectedOption === "disabled") {
-    if (document.getElementById('messageContainer1')) {
-      document.getElementById('messageContainer1').textContent = '';
-    }
-    showMessage("Please choose a sample from the dropdown menu before proceeding.", "cancel", "messageContainer1");
-    return; // Exit the function if no valid option is selected
-  }
-
-  // Get predefined values based on selected option
-  var predefinedValues = getPredefinedValues(selectedOption);
-
-  // Get user input values for wavelengths (assuming class 'wavelength-input')
+function getUserInputValues() {
   var userInputValues = [];
-  var inputs = document.querySelectorAll('.numbers2'); // Update class name if necessary
+  var inputs = document.querySelectorAll('.numbers2');
   inputs.forEach(function(input) {
     var inputValue = parseFloat(input.value);
     userInputValues.push(inputValue);
   });
+  return userInputValues;
+}
 
-  var errorLimit = parseInt(document.querySelector('.error').value);
-  // Compare user input values with predefined values
-  var passesTest = compareWithPredefinedValues(userInputValues, predefinedValues, errorLimit);
-  // Display the comparison result
+
+var userInputValues = getUserInputValues();
+var xData = [ 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+var errorLimit = parseInt(document.querySelector('.error').value);
+var yData = [ 1, 2, 3, 1, 0, 1, 2, 1, 3, 0];
+
+
+function compareValues(x,y) {
+
+  var passesTest = compareWithPredefinedValues1(userInputValues, errorLimit,x, y);
+
   var messageContainer1 = document.getElementById('messageContainer1');
   var messageContainer2 = document.getElementById('messageContainer2');
 
@@ -182,31 +188,192 @@ function compareValues() {
     if (messageContainer2) {
       messageContainer2.textContent = '';
     }
-    showMessaget("Test passes!", "Show curve", "messageContainer2","1");
+    showMessaget("Test passes!", "Show curve", "messageContainer2", "1");
   } else {
     messageContainer2.style.display = 'none';
     if (messageContainer1) {
       messageContainer1.textContent = '';
     }
-    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1","1");
+    showMessagef("Test fails. Do you want to continue the test?", "cancel", "Show curve", "messageContainer1", "1");
   }
-  // Show the table with the results
+
   document.getElementById('tableContainer').style.display = 'block';
-  generateTable(predefinedValues, 'numbers1', 'numbers2', 'error', 'tableContainer');
+  generateTable1( userInputValues, errorLimit, 'tableContainer',xData, yData);
 }
 
-function getPredefinedValues(option) {
-  // Define predefined values for each option
-  var predefinedValuesMap = {
-    "Holmium oxide": [279.2, 360.9, 453.7, 536.5, 637.7],
-    "Holmium perchlorate": [241.15, 287.15, 361.5, 536.3],
-    "Didymium glass": [440.4, 481, 513.4, 684.5, 879.3]
+
+function compareWithPredefinedValues1(userInputValues, errorLimit,xData, yData) {
+  var count = [];
+  for (var i = 0; i < userInputValues.length; i++) {
+    var userValue = userInputValues[i];
+    var scanned_wl = findClosestPeak(userValue,xData, yData); // Find the closest peak wavelength
+    var distance = Math.abs(scanned_wl - userValue);
+    if (distance <= errorLimit) {
+      count.push(1);
+    } else {
+      count.push(0);
+    }
+  }
+
+  // Check if all values in count are 1
+  return count.every(val => val === 1);
+}
+
+
+
+function generateTable1(userInputValues, errorLimit, tableId,xData, yData) {
+  var tableContainer = document.getElementById(tableId);
+
+  tableContainer.innerHTML = '';
+
+  var table = document.createElement('table');
+
+  // Create table header
+  var headerRow = table.insertRow();
+  ['Entered Wavelength', 'Scanned Wavelength', 'Error', 'Status'].forEach(function(headerName) {
+    var headerCell = headerRow.insertCell();
+    headerCell.textContent = headerName;
+    headerCell.style.fontWeight = '600';
+  });
+
+  var error, status;
+  
+  for (var i = 0; i < userInputValues.length; i++) {
+    var userValue = userInputValues[i];
+    var scanned_wl = findClosestPeak(userValue,xData, yData); // Find the closest peak
+    var distance = Math.abs(scanned_wl - userValue);
+
+    if (distance <= errorLimit) {
+      error = distance;
+      status = 'Done';
+    } else {
+      error = distance;
+      status = 'Failed';
+    }
+
+    // Create a new row in the table
+    var row = table.insertRow();
+    // Add cell for entered wavelength
+    var cell1 = row.insertCell();
+    cell1.textContent = userValue;
+    // Add cell for scanned wavelength or 'N/A' if no peak is found
+    var cell2 = row.insertCell();
+    cell2.textContent = scanned_wl !== null ? scanned_wl : 'N/A';
+    // Add cell for error
+    var cell3 = row.insertCell();
+    cell3.textContent = error;
+    // Add cell for status
+    var cell4 = row.insertCell();
+    cell4.textContent = status;
+    cell4.style.color = status === 'Done' ? 'green' : 'red';
+  }
+
+  tableContainer.appendChild(table);
+}
+
+
+// Function to find peaks in an array
+function findPeaks(arr) {
+    var peaks = [];
+    // var numPeaks = 5; 
+    for (var i = 1; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+        peaks.push(arr[i]);
+      }
+    }
+
+    peaks.sort((a, b) => b - a); // Sort peaks in descending order
+//return peaks[0];
+    // Return the specified number of highest peaks
+  return peaks.slice(0, 5);
+}
+
+
+function findClosestPeak(userValue, xData, yData) {
+  var closestPeak ;
+  var minDifference = Infinity;
+  const result = findPeaks(yData);
+  var index = yData.indexOf(result);
+  var peakX = [];
+
+  for (var i = 0; i <index.length; i++) { 
+     peakX[i] = xData[index[i]];
+  }
+
+  for (var i = 0; i <5; i++) { 
+    var peakWavelength =peakX[i];
+    var difference = Math.abs(peakWavelength - userValue);
+      // Update closest peak if this peak is closer to the user-entered wavelength
+      if (difference < minDifference) {
+        minDifference = difference;
+        closestPeak = peakWavelength;
+      }
+    }
+
+  return closestPeak;
+} 
+
+
+
+
+function addPoint1(start, end, step) {
+  // let xData = [];
+  // for (let value = start; value <= end; value += step) {
+  //   xData.push(value);
+  // }
+  // let yData = generateYData(xData); // Generate yData based on xData
+
+  let color = 'cadetblue';
+  let curveName = 'Absorption Curve';
+
+let x = []
+let y = []
+  const message = {
+    command: 'scan',
+    startInput: start,
+    stopInput: end,
+    stepInput: step,
+    lampmode:'both',
   };
+  websocket.send(JSON.stringify(message));
+  websocket.onmessage = function (event) {
+    let buffer = event.data.split('\n');
+    buffer.forEach(dataBuffer => {
+      if (dataBuffer.trim()) {
+        try {
+          const data = JSON.parse(dataBuffer);
+          console.log(data);
+          processScanData(data)
 
-  // Get predefined values for the selected option
-  return predefinedValuesMap[option] || [];
+        } catch (error) {
+          console.error("Error parsing data buffer: ", error);
+        }
+      }
+    });
+  };
+  function processScanData(data){
+    const currentTime = data.currentTime;
+    let scanning, progress ; 
+    const intensityReference = data.intensityReference;
+    const intensitySample = data.intensitySample;
+    const transmission = Math.log10(intensitySample / intensityReference);
+    const absorption = Math.log10(intensityReference / intensitySample);
+    const wavelength = data.wavelength;
+    scanning = data.scanning; //check if the scan end or not
+    progress = data.current; //represent the progress to display the current progress
+    x.push(wavelength); 
+    y.push(absorption);
+    if(progress==100){
+      compareValues(x,y);
+      openChartInNewTab(x, y, color, curveName);
+      
+    }
+ 
+  }
+  
+
+
 }
-
 
 /*
 
@@ -758,7 +925,7 @@ function showMessaget(message, option1Text,ContainerID,functions) {
         }
       else if (functions==3)
         {
-          addPoint3(max, min, 1);
+          addPoint3(max, min, 10);
         }
       else if (functions==4)
         {
