@@ -133,11 +133,14 @@ function addPoint() {
   var absorptionValue;
   var concentrationValue = parseFloat(document.getElementById("concentration").value);
   var WLine = document.getElementById("WLine").value; // get wavelength
-  const message = { // message for websocket
-    command: 'fitLine',
+  const message = {
+    command: 'scan',
     startInput: WLine,
     stopInput: WLine,
-    stepInput: 0
+    stepInput: 0,
+    lampmode: lampmode,
+    timeStamp: new Date().toISOString()
+    // modeInput: modeInput
   };
   websocket.send(JSON.stringify(message)); // websocket sent
   websocket.onmessage = function (event) { // WebSocket onmessage event
@@ -149,9 +152,6 @@ function addPoint() {
     const intensitySample = data.intensitySample;
     absorptionValue = Math.log10(intensityReference / intensitySample);
     
-  };
-
-
   if (!isNaN(absorptionValue) && !isNaN(concentrationValue)) {
     absorptionData.push(absorptionValue);
     concentrationData.push(concentrationValue);
@@ -161,6 +161,9 @@ function addPoint() {
   } else {
     alert("Please enter valid numerical values for absorption and concentration.");
   }
+  };
+
+
 }
 
 
