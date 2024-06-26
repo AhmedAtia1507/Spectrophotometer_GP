@@ -34,22 +34,17 @@ void sendCMDTask(void *parameter)
   String response = "";
 
   // Send the command to the STM32 via UART if UART is connected
+  Serial2.flush();
   Serial2.println(input);
   Serial.println(input);
-
   int startTime = millis();
-  while (Serial2.available() && millis() - startTime < 10000)
+  while (Serial2.available() && millis() - startTime < 30000)
   {
-    response = Serial2.readStringUntil('\n');
-    Serial.println("Response received: " + response);
-    if (response != ".")
-    {
-      break;
-    }
-    else{
-      vTaskDelay(pdMS_TO_TICKS(10));
-    }
+    vTaskDelay(pdMS_TO_TICKS(1));
   }
+  response = Serial2.readStringUntil('\n');
+  Serial.println("Response received: " + response);
+    
   // Store the response in the task parameters
   (*doc)["response"] = response;
 
@@ -72,7 +67,7 @@ String sendCMD(const String &input)
       (void *)doc,   // Parameter to pass to the task
       1,             // Task priority
       &cmdTask,      // Task handle
-      1              // Core (0 or 1, depending on your setup)
+      0              // Core (0 or 1, depending on your setup)
   );
 
   // Wait for the task to complete
@@ -246,7 +241,6 @@ void handleGoHome(const DynamicJsonDocument &doc)
   String motortype = doc["type"].as<String>(); // like set-lamp-moter-home
   String command = motortype;
   String response = sendCMD(command);
-  delay(80);
   String wavelength = sendCMD("get-current-wav");
   // String response = "0";
   // String wavelength = "878";
@@ -265,7 +259,6 @@ void handleSavestep(const DynamicJsonDocument &doc)
   String correctstep = doc["savethis"].as<String>();
   String correctwave = doc["wavelength"].as<String>();
   String response = sendCMD(correctstep);
-  delay(80);
   String wavelength = sendCMD(correctwave);
   // String response = "saved";
   // String wavelength = "878";
@@ -285,7 +278,6 @@ void handlemovestep(const DynamicJsonDocument &doc)
   String jsonString;
   serializeJson(object, jsonString);
   notifyClients(jsonString);
-  delay(80);
   sendsteps();
 }
 void handelreaddetecor()
@@ -307,7 +299,6 @@ void handlenewgain(const DynamicJsonDocument &doc)
   // String response = "applied";
   if (response == "applied")
   {
-    delay(80);
     handelreaddetecor();
   }
   // else{handlenewgain(doc);}
@@ -345,15 +336,16 @@ void handleScanTimeTask(void *pvParameters)
 
   if (command == "scan-time")
   {
-    String scancmd = command + " " + specificWL + " " + timeInterval;
+    String scancmd = "Scan-time " + specificWL + " " + timeInterval;
     Serial.println(scancmd);
     Serial2.println(scancmd);
     //Serial2.flush();
       while (Serial2.available() == 0)
       { 
         
-        Serial.println("while looop");
-        vTaskDelay(pdMS_TO_TICKS(20));
+        vTaskDelay(pdMS_TO_TICKS(1));
+        if(StopScan==true){ StopScan=false; break;}
+    
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
@@ -361,7 +353,7 @@ void handleScanTimeTask(void *pvParameters)
        if(response == "Init-Finished" ){
       while (Serial2.available() == 0)
       {
-        vTaskDelay(pdMS_TO_TICKS(20));
+        vTaskDelay(pdMS_TO_TICKS(1));
       }
         Time =Serial2.readStringUntil('\n');
         Serial2.flush();
@@ -371,7 +363,7 @@ while(!StopScan){
       int startTime = millis();
       while (Serial2.available() == 0 && millis() - startTime < 2000)
       {
-        delay(1);
+       vTaskDelay(pdMS_TO_TICKS(1));
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
@@ -385,7 +377,6 @@ while(!StopScan){
 
 
       scanData["currentTime"] = Time;
-      Serial.print(Time);
       scanData["timeInterval"] = timeInterval.toFloat();
       scanData["intensityReference"] = reference.toFloat();
       scanData["intensitySample"] = sample.toFloat();
@@ -409,6 +400,7 @@ while(!StopScan){
         buffur = "";
       }
   Serial.println("last");
+  StopScan = false;
 
   vTaskDelete(NULL); // delete the task when done
 }
@@ -444,10 +436,13 @@ void handlefitLineTask(void *pvParameters)
     Serial.println(scancmd);
     Serial2.println(scancmd);
 
-      while (Serial2.available() == 0)
+      while (Serial2.available() == 0 )
       { 
         Serial.println("while looop");
         vTaskDelay(pdMS_TO_TICKS(20));
+            if(StopScan==true){ StopScan=false; break;}
+    
+       
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
@@ -456,6 +451,7 @@ void handlefitLineTask(void *pvParameters)
       while (Serial2.available() == 0)
       {
         vTaskDelay(pdMS_TO_TICKS(20));
+        
       }
        
       String response = Serial2.readStringUntil('\n');
@@ -525,16 +521,15 @@ void handleScanTask(void *pvParameters)
   if (command == "scan")
   {
     String scancmd = command + " " + lampmode + " " + startInput + " " + stopInput + " " + stepInput;
-    Serial.println(scancmd);
-    Serial2.println(scancmd);
     int NumberOfReadings = (stopInput.toFloat() - startInput.toFloat()) / stepInput.toFloat()  + 1;
     Serial.println("no of readings: "+String(NumberOfReadings)+"\n");
+    
+    Serial.println(scancmd);
+    Serial2.println(scancmd);
     //Serial2.flush();
       while (Serial2.available() == 0)
-      { 
-        
-        Serial.println("while looop");
-        vTaskDelay(pdMS_TO_TICKS(20));
+      {     
+      if(StopScan==true){ StopScan=false; break;}
       }
        String response = Serial2.readStringUntil('\n');
        Serial.println(response);
@@ -542,18 +537,13 @@ void handleScanTask(void *pvParameters)
        if(response == "Init-Finished" ){
       while (Serial2.available() == 0)
       {
-        vTaskDelay(pdMS_TO_TICKS(20));
+    
+        vTaskDelay(pdMS_TO_TICKS(1));
+        if(StopScan==true){ StopScan=false; break;}
+    
       }
         Time =Serial2.readStringUntil('\n');
         Serial2.flush();
-       
-    
-    // vTaskDelay(pdMS_TO_TICKS(10000));
-    
-    // float x[]={250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300};
-    // float y[]={0.79345, 0.75808, 0.72395, 0.69756, 0.67347, 0.65129, 0.62944, 0.60936, 0.59192, 0.58464, 0.56991, 0.556, 0.53878, 0.50347, 0.48214, 0.46173, 0.44379, 0.42682, 0.41183, 0.39886, 0.38637, 0.37066, 0.3595, 0.35018, 0.34142, 0.33042, 0.32363, 0.32548, 0.40237, 0.39305, 0.28955, 0.26148, 0.24206, 0.23069, 0.22278, 0.22248, 0.28155, 0.32932, 0.24429, 0.25164, 0.22734, 0.1903, 0.18143, 0.17317, 0.1626, 0.15239, 0.14342, 0.13418, 0.12678, 0.11987};
-
-    // for (int i = startInput.toInt(); i <= stopInput.toInt(); i += stepInput.toInt())
     for (NumberOfReadings ; NumberOfReadings > 0 ; NumberOfReadings--)
     {
       vTaskDelay(pdMS_TO_TICKS(5));

@@ -325,12 +325,12 @@ function createChart(ctx, xMin, xMax, xLabel, chartType) {
     const mouseY = event.clientY - canvasPosition.top;
 
     const xValue = chartType === 'chartScan' ? chartScan.scales['x'].getValueForPixel(mouseX) :
-      chartType === 'chartScanTime' ? chartScanTime.scales['x'].getValueForPixel(mouseX) :
-        chartScanFilter.scales['x'].getValueForPixel(mouseX);
+      chartType === 'chartScanTime' ? chartScan.scales['x'].getValueForPixel(mouseX) :
+        chartScan.scales['x'].getValueForPixel(mouseX);
 
     const yValue = chartType === 'chartScan' ? chartScan.scales['y'].getValueForPixel(mouseY) :
-      chartType === 'chartScanTime' ? chartScanTime.scales['y'].getValueForPixel(mouseY) :
-        chartScanFilter.scales['y'].getValueForPixel(mouseY);
+      chartType === 'chartScanTime' ? chartScan.scales['y'].getValueForPixel(mouseY) :
+        chartScan.scales['y'].getValueForPixel(mouseY);
 
     // Update the content of the div with x and y values
     infoDiv.innerHTML = `X: ${xValue.toFixed(2)}, Y: ${yValue.toFixed(2)}`;
@@ -626,8 +626,9 @@ function scan(index, SampleID, SampleDecribe, btn) {
     const intensitySample = data.intensitySample;
     const transmission = Math.log10(intensitySample / intensityReference);
     const absorption = Math.log10(intensityReference / intensitySample);
+    let wavelength;
     if (PageIndecator === "Wavelength") {
-      const wavelength = data.wavelength;
+      wavelength = data.wavelength;
       scanning = data.scanning; //check if the scan end or not
       progress = data.current; //represent the progress to display the current progress
       x.push(wavelength);  
@@ -635,7 +636,6 @@ function scan(index, SampleID, SampleDecribe, btn) {
     }
     else if (PageIndecator === "Time") {
       const now = new Date();
-    
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');

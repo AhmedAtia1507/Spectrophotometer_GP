@@ -364,15 +364,26 @@ function addPoint3(start, end, step) {
     command: 'Scan',
     startInput: start,
     stopInput: end,
-    stepInput: step
+    stepInput: step,
+    lampmode:'both'
   };
 
   websocket.send(JSON.stringify(message)); // websocket sent
 
   websocket.onmessage = function(event) { // WebSocket onmessage event
-    const data = JSON.parse(event.data);
-    console.log(event.data); // for test
-    const wavelength = data.wavelength;
+    
+    let buffer = event.data.split('\n');
+    // Process each part of the buffer
+    buffer.forEach(dataBuffer => {
+     // Trim any extraneous whitespace and ensure it's not empty
+     if (dataBuffer.trim()) {
+         try {
+             // Parse the JSON string
+             const data = JSON.parse(dataBuffer);
+             
+             // For testing purposes, log the parsed data
+             console.log(data);
+             const wavelength = data.wavelength;
     const intensityReference = data.intensityReference;
     const intensitySample = data.intensitySample;
     const absorptionValue = Math.log10(intensityReference / intensitySample);
@@ -382,6 +393,14 @@ function addPoint3(start, end, step) {
     yData.push(absorptionValue);
     openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
     CompareValues2(absorptionValue);
+ 
+          
+         } catch (error) {
+             console.error('Failed to parse JSON:', error);
+         }
+     }
+ });    
+    
   };
 }
 
@@ -448,24 +467,41 @@ var formElements4 = document.querySelectorAll(' .numbers14, .button14, .error4 '
       command: 'Scan',
       startInput: start,
       stopInput: end,
-      stepInput: step
+      stepInput: step,
+      lampmode:'both',
     };
     
     websocket.send(JSON.stringify(message)); // websocket sent
     
     websocket.onmessage = function(event) { // WebSocket onmessage event
-      const data = JSON.parse(event.data);
-      console.log(event.data); // for test
-      const currentTime = data.currentTime;
-      const intensityReference = data.intensityReference;
-      const intensitySample = data.intensitySample;
-      const absorptionValue = Math.log10(intensityReference / intensitySample);
-      
-      // Assuming xData and yData are being updated based on WebSocket response
-      xData.push(currentTime);
-      yData.push(absorptionValue);
-      openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
-      CompareValues3(absorptionValue);
+      let buffer = event.data.split('\n');
+      // Process each part of the buffer
+      buffer.forEach(dataBuffer => {
+       // Trim any extraneous whitespace and ensure it's not empty
+       if (dataBuffer.trim()) {
+           try {
+               // Parse the JSON string
+               const data = JSON.parse(dataBuffer);
+               
+               // For testing purposes, log the parsed data
+               console.log(data);
+               const currentTime = data.currentTime;
+               const intensityReference = data.intensityReference;
+               const intensitySample = data.intensitySample;
+               const absorptionValue = Math.log10(intensityReference / intensitySample);
+               
+               // Assuming xData and yData are being updated based on WebSocket response
+               xData.push(currentTime);
+               yData.push(absorptionValue);
+               openChartInNewTab(xData, yData, color, curveName); // Update chart with new data
+               CompareValues3(absorptionValue);
+            
+   
+              } catch (error) {
+               console.error('Failed to parse JSON:', error);
+           }
+       }
+   });
     };
   }
 
@@ -860,7 +896,8 @@ function addPoint1(start, end, step) {
     command: 'Scan',
     startInput: start,
     stopInput: end,
-    stepInput: step
+    stepInput: step,
+    lampmode:'both'
   };
   websocket.send(JSON.stringify(message)); // websocket sent
   websocket.onmessage = function (event) { // WebSocket onmessage event
