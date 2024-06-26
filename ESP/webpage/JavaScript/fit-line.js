@@ -133,14 +133,9 @@ function addPoint() {
   var absorptionValue;
   var concentrationValue = parseFloat(document.getElementById("concentration").value);
   var WLine = document.getElementById("WLine").value; // get wavelength
-<<<<<<< HEAD
   const message = { // message for websocket
     command: 'scan',
     lampmode:'both',
-=======
-  const message = {
-    command: 'scan',
->>>>>>> b6a894a98c26899024944fae3bbafefbc107374b
     startInput: WLine,
     stopInput: WLine,
     stepInput: 0,
