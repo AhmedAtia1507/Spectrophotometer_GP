@@ -1,3 +1,0 @@
-../Src/MCAL/RCC/RCC_Program.c:31:16:MRCC_InitClock	4	static
-../Src/MCAL/RCC/RCC_Program.c:145:16:MRCC_EnablePeripheralClock	24	static
-../Src/MCAL/RCC/RCC_Program.c:187:16:MRCC_DisablePeripheralClock	24	static

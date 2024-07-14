@@ -1,9 +1,0 @@
-../Src/MCAL/GPTMR/GPTMR_Program.c:30:16:MGPTMR_GetPreloadValue	2
-../Src/MCAL/GPTMR/GPTMR_Program.c:61:16:MGPTMR_Init	1
-../Src/MCAL/GPTMR/GPTMR_Program.c:196:16:MGPTMR_StartTimer	1
-../Src/MCAL/GPTMR/GPTMR_Program.c:211:16:MGPTMR_StopTimer	1
-../Src/MCAL/GPTMR/GPTMR_Program.c:226:16:MGPTMR_SetTimerPeriod	2
-../Src/MCAL/GPTMR/GPTMR_Program.c:254:16:MGPTMR_SetTimerUpdateCallbackFunc	2
-../Src/MCAL/GPTMR/GPTMR_Program.c:268:6:TIM2_IRQHandler	2
-../Src/MCAL/GPTMR/GPTMR_Program.c:281:6:TIM3_IRQHandler	2
-../Src/MCAL/GPTMR/GPTMR_Program.c:294:6:TIM4_IRQHandler	2

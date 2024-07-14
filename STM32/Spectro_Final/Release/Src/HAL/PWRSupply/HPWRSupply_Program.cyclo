@@ -1,0 +1,4 @@
+../Src/HAL/PWRSupply/HPWRSupply_Program.c:38:6:HPWRSupply_GetSenseValue	4
+../Src/HAL/PWRSupply/HPWRSupply_Program.c:81:16:HPWRSupply_InitSupplies	2
+../Src/HAL/PWRSupply/HPWRSupply_Program.c:213:16:HPWRSupply_CheckSupplyStatus	7
+../Src/HAL/PWRSupply/HPWRSupply_Program.c:119:16:HPWRSupply_SetSupplyMode	11

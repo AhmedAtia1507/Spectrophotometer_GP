@@ -1,6 +1,0 @@
-../Src/MCAL/ADC/ADC_Program.c:20:16:MADC_Init	3
-../Src/MCAL/ADC/ADC_Program.c:65:16:MADC_StartConversion	1
-../Src/MCAL/ADC/ADC_Program.c:79:16:MADC_RxConvertedDataAsynchronous	2
-../Src/MCAL/ADC/ADC_Program.c:93:16:MADC_Conversion	3
-../Src/MCAL/ADC/ADC_Program.c:115:16:MADC_SetConversionCompleteCallback	2
-../Src/MCAL/ADC/ADC_Program.c:130:6:ADC1_2_IRQHandler	5

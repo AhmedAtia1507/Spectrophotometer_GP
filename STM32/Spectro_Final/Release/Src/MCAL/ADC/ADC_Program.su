@@ -1,0 +1,6 @@
+../Src/MCAL/ADC/ADC_Program.c:38:16:MADC_Init	0	static
+../Src/MCAL/ADC/ADC_Program.c:125:16:MADC_StartConversion	0	static
+../Src/MCAL/ADC/ADC_Program.c:154:16:MADC_RxConvertedDataAsynchronous	0	static
+../Src/MCAL/ADC/ADC_Program.c:179:16:MADC_Conversion	0	static
+../Src/MCAL/ADC/ADC_Program.c:223:16:MADC_SetConversionCompleteCallback	0	static
+../Src/MCAL/ADC/ADC_Program.c:242:6:ADC1_2_IRQHandler	0	static

@@ -1,0 +1,12 @@
+../Src/MCAL/UART/UART_Program.c:47:16:MUART_Init	32	static
+../Src/MCAL/UART/UART_Program.c:177:16:MUART_TxChar	24	static
+../Src/MCAL/UART/UART_Program.c:224:16:MUART_TxCharAsynchronous	24	static
+../Src/MCAL/UART/UART_Program.c:261:16:MUART_RxChar	24	static
+../Src/MCAL/UART/UART_Program.c:317:16:MUART_RxCharAsynchronous	24	static
+../Src/MCAL/UART/UART_Program.c:368:16:MUART_TxString	24	static
+../Src/MCAL/UART/UART_Program.c:400:16:MUART_SetTxCompleteCallback	24	static
+../Src/MCAL/UART/UART_Program.c:427:16:MUART_SetRxCompleteCallback	24	static
+../Src/MCAL/UART/UART_Program.c:455:16:MUART_SendIntegerValue	48	static
+../Src/MCAL/UART/UART_Program.c:506:6:USART1_IRQHandler	8	static
+../Src/MCAL/UART/UART_Program.c:524:6:USART2_IRQHandler	8	static
+../Src/MCAL/UART/UART_Program.c:543:6:USART3_IRQHandler	8	static

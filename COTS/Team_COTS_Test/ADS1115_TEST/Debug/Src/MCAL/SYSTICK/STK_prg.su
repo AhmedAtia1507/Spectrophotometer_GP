@@ -1,9 +1,0 @@
-../Src/MCAL/SYSTICK/STK_prg.c:15:6:MSTK_vInit	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:43:6:MSTK_vStartTimer	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:48:6:MSTK_vStopTimer	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:53:7:MSTK_vSetBusyWait	16	static
-../Src/MCAL/SYSTICK/STK_prg.c:62:6:MSTK_vSetInterval_Single	16	static
-../Src/MCAL/SYSTICK/STK_prg.c:72:6:MSTK_vSetInterval_Periodic	16	static
-../Src/MCAL/SYSTICK/STK_prg.c:82:8:MSTK_uint32GetElapsedTime	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:87:8:MSTK_uint32GetRemainingTime	4	static
-../Src/MCAL/SYSTICK/STK_prg.c:92:6:SysTick_Handler	8	static

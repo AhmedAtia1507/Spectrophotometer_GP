@@ -1,3 +1,0 @@
-../Src/HAL/I2C_EEPROM/I2C_Slave_EEPROM.c:10:6:eeprom_init	1
-../Src/HAL/I2C_EEPROM/I2C_Slave_EEPROM.c:33:15:eeprom_write_Nbytes	2
-../Src/HAL/I2C_EEPROM/I2C_Slave_EEPROM.c:52:15:eeprom_read_byte	1

@@ -1,7 +1,0 @@
-../Src/MCAL/RTC/RTC_Program.c:25:16:MRTC_CalculateSeconds	4
-../Src/MCAL/RTC/RTC_Program.c:52:16:MRTC_CalculateDateTime	4
-../Src/MCAL/RTC/RTC_Program.c:94:16:MRTC_Init	5
-../Src/MCAL/RTC/RTC_Program.c:159:16:MRTC_SetDateAndTime	6
-../Src/MCAL/RTC/RTC_Program.c:202:16:MRTC_GetDateAndTime	3
-../Src/MCAL/RTC/RTC_Program.c:226:16:MRTC_SetSecondIntCallbackFunc	2
-../Src/MCAL/RTC/RTC_Program.c:242:6:RTC_IRQHandler	2

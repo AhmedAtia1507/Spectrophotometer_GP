@@ -1,0 +1,11 @@
+../Src/MCAL/STK/STK_Program.c:35:16:STK_uint8CalculateReloadValue	0	static
+../Src/MCAL/STK/STK_Program.c:84:16:STK_uint8CalculateReloadValueUs	0	static
+../Src/MCAL/STK/STK_Program.c:132:16:MSTK_uint8Init	0	static
+../Src/MCAL/STK/STK_Program.c:175:16:MSTK_uint8SetTimerDuration	0	static
+../Src/MCAL/STK/STK_Program.c:206:16:MSTK_uint8StartTimer	0	static
+../Src/MCAL/STK/STK_Program.c:220:16:MSTK_uint8PauseTimer	0	static
+../Src/MCAL/STK/STK_Program.c:234:16:MSTK_uint8StopTimer	0	static
+../Src/MCAL/STK/STK_Program.c:250:16:MSTK_uint8Delay	0	static
+../Src/MCAL/STK/STK_Program.c:311:16:MSTK_uint8DelayUs	0	static
+../Src/MCAL/STK/STK_Program.c:372:16:MSTK_uint8SetCallbackFunction	0	static
+../Src/MCAL/STK/STK_Program.c:387:6:SysTick_Handler	0	static

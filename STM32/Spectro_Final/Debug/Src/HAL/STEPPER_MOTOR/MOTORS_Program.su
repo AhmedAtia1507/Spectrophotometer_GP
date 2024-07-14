@@ -1,0 +1,15 @@
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:68:16:HMOTORS_Init	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:135:16:HMOTOR_Step	24	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:211:16:HMOTOR_MoveLampMotor	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:261:16:HMOTOR_MoveFilterMotor	24	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:296:16:HMOTOR_GetWLSelectCalibration	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:311:16:HMOTOR_MoveWLSelectMotor	24	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:372:16:HMOTOR_GoHome	32	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:496:16:HMOTOR_GetCurrentMotorSteps	24	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:519:16:HMOTOR_GetCurrentWL	24	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:544:16:HMOTOR_StepNoDelay	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:605:16:HMOTOR_GetStepsPerNm	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:618:16:HMOTOR_MoveMotors	16	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:676:6:HMOTOR_FilterHomeIndicator	4	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:680:6:HMOTOR_WLHomeIndicator	4	static
+../Src/HAL/STEPPER_MOTOR/MOTORS_Program.c:684:6:HMOTOR4_HomeIndicator	4	static

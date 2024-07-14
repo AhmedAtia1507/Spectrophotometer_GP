@@ -1,2 +1,0 @@
-../Src/APP/SpectroStatus/SpectroStatus_Program.c:25:16:SpectroStatus_GetCurrentStatus	0	static
-../Src/APP/SpectroStatus/SpectroStatus_Program.c:46:16:SpectroStatus_SetNewStatus	0	static

@@ -1,3 +1,0 @@
-../Src/HAL/SPWRVolt/SPWRVolt_Program.c:26:6:SPWRVolt_GetConversionValue	24	static
-../Src/HAL/SPWRVolt/SPWRVolt_Program.c:48:16:SPWRVolt_Init	16	static
-../Src/HAL/SPWRVolt/SPWRVolt_Program.c:84:16:SPWRVolt_GetVoltage	0	static

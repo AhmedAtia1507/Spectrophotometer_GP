@@ -1,6 +1,0 @@
-../Src/MCAL/SPI/SPI_Program.c:44:6:MCAL_SPI_Init	24	static
-../Src/MCAL/SPI/SPI_Program.c:135:6:MCAL_SPI_DeInit	0	static
-../Src/MCAL/SPI/SPI_Program.c:155:7:MCAL_SPI_TX_RX	0	static
-../Src/MCAL/SPI/SPI_Program.c:165:6:MCAL_SPI_SendData	8	static
-../Src/MCAL/SPI/SPI_Program.c:193:6:MCAL_SPI_ReceiveData	8	static
-../Src/MCAL/SPI/SPI_Program.c:251:6:MCAL_SPI_GPIO_Set_Pins	8	static

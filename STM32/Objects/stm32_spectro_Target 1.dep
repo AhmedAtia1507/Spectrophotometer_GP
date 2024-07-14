@@ -1,345 +1,0 @@
-Dependencies for Project 'stm32_spectro', Target 'Target 1': (DO NOT MODIFY !)
-CompilerVersion: 6210000::V6.21::ARMCLANG
-F (.\MCAL\ADC\ADC_Config.h)(0x65F7FE97)()
-F (.\MCAL\ADC\ADC_Interface.h)(0x65CA1301)()
-F (.\MCAL\ADC\ADC_Private.h)(0x65CA12FD)()
-F (.\MCAL\ADC\ADC_Program.c)(0x65EF06CC)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/adc_program.o -MD)
-I (MCAL\ADC\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\ADC\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\ADC\..\..\LIB\STD_TYPES\Platform_Types.h?CAL\ADC\ADC_Private.h)(0x00000000)
-I (MCAL\ADC\ADC_Interface.hYCAL\ADC\ADC_Config.h)(0x00000000)
-F (.\MCAL\AFIO\AFIO_Config.h)(0x65CA12F4)()
-F (.\MCAL\AFIO\AFIO_Interface.h)(0x65CA12E9)()
-F (.\MCAL\AFIO\AFIO_Private.h)(0x65CA12E1)()
-F (.\MCAL\AFIO\AFIO_Program.c)(0x65EF073C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/afio_program.o -MD)
-I (MCAL\AFIO\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\AFIO\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\AFIO\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\AFIO\AFIO_Private.hTCAL\AFIO\AFIO_Interface.h)(0x00000000)
-I (MCAL\AFIO\AFIO_Config.h)(0x65CA12F4)
-F (.\MCAL\EXTI\EXTI_Config.h)(0x65CA12D3)()
-F (.\MCAL\EXTI\EXTI_Interface.h)(0x65CA12CC)()
-F (.\MCAL\EXTI\EXTI_Private.h)(0x65CA12C5)()
-F (.\MCAL\EXTI\EXTI_Program.c)(0x65EF073B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/exti_program.o -MD)
-I (MCAL\EXTI\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\EXTI\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\EXTI\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\EXTI\EXTI_Private.hTCAL\EXTI\EXTI_Interface.h)(0x00000000)
-I (MCAL\EXTI\EXTI_Config.h)(0x65CA12D3)
-F (.\MCAL\GPIO\GPIO_Config.h)(0x64F4AE92)()
-F (.\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)()
-F (.\MCAL\GPIO\GPIO_Private.h)(0x655A0D52)()
-F (.\MCAL\GPIO\GPIO_Program.c)(0x65EF0733)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/gpio_program.o -MD)
-I (MCAL\GPIO\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\GPIO\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\GPIO\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\GPIO\GPIO_Private.hTCAL\GPIO\GPIO_Interface.h)(0x00000000)
-I (MCAL\GPIO\GPIO_Config.h)(0x64F4AE92)
-F (.\MCAL\GPTMR\GPTMR_Config.h)(0x65DC56A4)()
-F (.\MCAL\GPTMR\GPTMR_Interface.h)(0x65CA1340)()
-F (.\MCAL\GPTMR\GPTMR_Private.h)(0x65CA133C)()
-F (.\MCAL\GPTMR\GPTMR_Program.c)(0x65EF0733)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/gptmr_program.o -MD)
-I (MCAL\GPTMR\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\GPTMR\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\GPTMR\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\GPTMR\GPTMR_Private.hYCAL\GPTMR\GPTMR_Interface.h)(0x00000000)
-I (MCAL\GPTMR\GPTMR_Config.h)(0x65DC56A4)
-F (.\MCAL\NVIC\NVIC_Config.h)(0x65021228)()
-F (.\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)()
-F (.\MCAL\NVIC\NVIC_Private.h)(0x655A142C)()
-F (.\MCAL\NVIC\NVIC_Program.c)(0x65EF0732)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/nvic_program.o -MD)
-I (MCAL\NVIC\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\NVIC\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\NVIC\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\NVIC\NVIC_Private.hTCAL\NVIC\NVIC_Interface.h)(0x00000000)
-I (MCAL\NVIC\NVIC_Config.h)(0x65021228)
-F (.\MCAL\RCC\RCC_Config.h)(0x655A0A7C)()
-F (.\MCAL\RCC\RCC_Interface.h)(0x655A098A)()
-F (.\MCAL\RCC\RCC_Private.h)(0x657794BD)()
-F (.\MCAL\RCC\RCC_Program.c)(0x65EF0731)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/rcc_program.o -MD)
-I (MCAL\RCC\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\RCC\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\RCC\..\..\LIB\STD_TYPES\Platform_Types.haCAL\RCC\RCC_Private.h)(0x00000000)
-I (MCAL\RCC\RCC_Config.hDCAL\RCC\RCC_Interface.h)(0x00000000)
-F (.\MCAL\RTC\RTC_Config.h)(0x65D4FF8F)()
-F (.\MCAL\RTC\RTC_Interface.h)(0x65AD2A16)()
-F (.\MCAL\RTC\RTC_Private.h)(0x65AD275F)()
-F (.\MCAL\RTC\RTC_Program.c)(0x65EF0730)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/rtc_program.o -MD)
-I (MCAL\RTC\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\RTC\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\RTC\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\RTC\RTC_Interface.hYCAL\RTC\RTC_Config.h)(0x00000000)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\time.h)(0x656A0472)
-F (.\MCAL\SCB\SCB_Config.h)(0x65CA127A)()
-F (.\MCAL\SCB\SCB_Interface.h)(0x65CA1271)()
-F (.\MCAL\SCB\SCB_Private.h)(0x65CA126A)()
-F (.\MCAL\SCB\SCB_Program.c)(0x65EF072F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/scb_program.o -MD)
-I (MCAL\SCB\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\SCB\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\SCB\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\SCB\SCB_Interface.hYCAL\SCB\SCB_Config.h)(0x00000000)
-F (.\MCAL\STK\STK_Config.h)(0x65E8A0E4)()
-F (.\MCAL\STK\STK_Interface.h)(0x65665090)()
-F (.\MCAL\STK\STK_Private.h)(0x65665090)()
-F (.\MCAL\STK\STK_Program.c)(0x65EF072E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/stk_program.o -MD)
-I (MCAL\STK\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\STK\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\STK\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\STK\STK_Interface.hYCAL\STK\STK_Config.h)(0x00000000)
-F (.\MCAL\UART\UART_Config.h)(0x65E5C478)()
-F (.\MCAL\UART\UART_Interface.h)(0x65CA1387)()
-F (.\MCAL\UART\UART_Private.h)(0x65EF0773)()
-F (.\MCAL\UART\UART_Program.c)(0x65EF0991)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/uart_program.o -MD)
-I (MCAL\UART\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (MCAL\UART\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\UART\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\UART\UART_Private.hTCAL\UART\UART_Interface.h)(0x00000000)
-I (MCAL\UART\UART_Config.h)(0x65E5C478)
-F (.\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)()
-F (.\LIB\STD_TYPES\Compiler.h)(0x653D7F13)()
-F (.\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)()
-F (.\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)()
-F (.\HAL\ESP32\ESP32_Config.h)(0x66376B1F)()
-F (.\HAL\ESP32\ESP32_Interface.h)(0x662FCD31)()
-F (.\HAL\ESP32\ESP32_Private.h)(0x6568EFA3)()
-F (.\HAL\ESP32\ESP32_Program.c)(0x66369E60)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/esp32_program.o -MD)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\string.h)(0x656A0472)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h)(0x656A0472)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\stdio.h)(0x6634E773)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\math.h)(0x6634EC7A)
-I (HAL\ESP32\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (HAL\ESP32\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\ESP32\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\ESP32\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\ESP32\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\ESP32\..\..\MCAL\UART\UART_Interface.h)(0x65CA1387)
-I (HAL\ESP32\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (HAL\ESP32\..\..\MCAL\RTC\RTC_Interface.h.AL\ESP32\ESP32_Interface.h)(0x00000000)
-I (HAL\ESP32\ESP32_Private.hRAL\ESP32\ESP32_Config.h)(0x00000000)
-F (.\HAL\SPWRVolt\SPWRVolt_Config.h)(0x65DF4B1C)()
-F (.\HAL\SPWRVolt\SPWRVolt_Interface.h)(0x65DF0413)()
-F (.\HAL\SPWRVolt\SPWRVolt_Program.c)(0x661A9B66)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/spwrvolt_program.o -MD)
-I (HAL\SPWRVolt\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (HAL\SPWRVolt\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\SPWRVolt\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\SPWRVolt\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\SPWRVolt\..\..\MCAL\GPTMR\GPTMR_Interface.h)(0x65CA1340)
-I (HAL\SPWRVolt\..\..\MCAL\ADC\ADC_Interface.h)(0x65CA1301)
-I (HAL\SPWRVolt\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\SPWRVolt\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (HAL\SPWRVolt\SPWRVolt_Interface.h_AL\SPWRVolt\SPWRVolt_Config.h)(0x00000000)
-F (.\HAL\STEPPER_MOTOR\MOTORS_Config.h)(0x66036541)()
-F (.\HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x66365657)()
-F (.\HAL\STEPPER_MOTOR\MOTORS_Private.h)(0x6634F46A)()
-F (.\HAL\STEPPER_MOTOR\MOTORS_Program.c)(0x66365644)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/motors_program.o -MD)
-I (HAL\STEPPER_MOTOR\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (HAL\STEPPER_MOTOR\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\STEPPER_MOTOR\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\STK\STK_Interface.h)(0x65665090)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\EXTI\EXTI_Interface.h)(0x65CA12CC)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (HAL\STEPPER_MOTOR\..\..\MCAL\AFIO\AFIO_Interface.h)(0x65CA12E9)
-I (HAL\STEPPER_MOTOR\..\EEPROM\I2C_Slave_EEPROM.h)(0x6628D99E)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\I2C_Config.h)(0x662E3FDD)
-I (HAL\STEPPER_MOTOR\..\EEPROM\..\..\MCAL\I2C\I2C_private.h)(0x662ACC51)
-I (HAL\STEPPER_MOTOR\MOTORS_Config.h\AL\STEPPER_MOTOR\MOTORS_Private.h)(0x00000000)
-I (HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x66365657)
-F (.\APP\SCommands\SCommands_Config.h)(0x65D4C05D)()
-F (.\APP\SCommands\SCommands_Interface.h)(0x65D396D3)()
-F (.\APP\SCommands\SCommands_Program.c)(0x6634F4CB)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/scommands_program.o -MD)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\string.h)(0x656A0472)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\stdlib.h)(0x656A0472)
-I (APP\SCommands\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SCommands\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (APP\SCommands\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SCommands\..\..\MCAL\RTC\RTC_Interface.h)(0x65AD2A16)
-I (APP\SCommands\..\..\MCAL\UART\UART_Interface.h)(0x65CA1387)
-I (APP\SCommands\..\..\MCAL\STK\STK_Interface.h)(0x65665090)
-I (APP\SCommands\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (APP\SCommands\..\..\MCAL\SCB\SCB_Interface.h)(0x65CA1271)
-I (APP\SCommands\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SCommands\..\..\HAL\ESP32\ESP32_Interface.h)(0x662FCD31)
-I (APP\SCommands\..\..\HAL\SPWRVolt\SPWRVolt_Interface.h)(0x65DF0413)
-I (APP\SCommands\..\..\HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x66365657)
-I (APP\SCommands\..\..\HAL\EEPROM\I2C_Slave_EEPROM.h)(0x6628D99E)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_Config.h)(0x662E3FDD)
-I (APP\SCommands\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_private.h)(0x662ACC51)
-I (APP\SCommands\..\..\HAL\PWRSupply\HPWRSupply_Interface.h)(0x65F80238)
-I (APP\SCommands\..\..\HAL\MCP4151\MCP4151.h)(0x66291E24)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Interface.h)(0x6628D444)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Config.h)(0x6628D444)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Private.h)(0x6628D444)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SCommands\..\..\HAL\MCP4151\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SCommands\..\SpectroStatus\SpectroStatus_Interface.h)(0x66215929)
-I (APP\SCommands\..\Signal_Conditioning\signal_conditioning.h)(0x6629194D)
-I (APP\SCommands\..\Signal_Conditioning\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SCommands\SCommands_Config.hnPP\SCommands\SCommands_Interface.h)(0x00000000)
-I (APP\SCommands\SCommands_Private.h)(0x662CAD13)
-F (.\main.c)(0x66377A4C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/main.o -MD)
-I (RTE\_Target_1\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (RTE\_Target_1\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (RTE\_Target_1\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (RTE\_Target_1\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (RTE\_Target_1\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (RTE\_Target_1\..\..\MCAL\UART\UART_Interface.h)(0x65CA1387)
-I (RTE\_Target_1\..\..\MCAL\STK\STK_Interface.h)(0x65665090)
-I (RTE\_Target_1\..\..\MCAL\RTC\RTC_Interface.h)(0x65AD2A16)
-I (RTE\_Target_1\..\..\HAL\ESP32\ESP32_Interface.h)(0x662FCD31)
-I (RTE\_Target_1\..\..\HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x66365657)
-I (RTE\_Target_1\..\..\HAL\ADS1115\ADC.h)(0x6628D444)
-I (RTE\_Target_1\..\..\APP\SCommands\SCommands_Interface.h)(0x65D396D3)
-I (RTE\_Target_1\..\..\APP\SPECTRO\SPECTRO_Interface.h)(0x66368172)
-I (RTE\_Target_1\..\..\APP\Signal_Conditioning\signal_conditioning.h)(0x6629194D)
-I (RTE\_Target_1\..\..\APP\Signal_Conditioning\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SpectroStatus\SpectroStatus_Interface.h)(0x66215929)
-F (.\MCAL\I2C\I2C_Config.h)(0x662E3FDD)()
-F (.\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)()
-F (.\MCAL\I2C\I2C_private.h)(0x662ACC51)()
-F (.\MCAL\I2C\I2C_Program.c)(0x66352EE4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/i2c_program.o -MD)
-I (MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (MCAL\I2C\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h.CAL\I2C\I2C_Config.h)(0x00000000)
-I (MCAL\I2C\I2C_private.hCCAL\I2C\..\..\MCAL\STK\STK_Interface.h)(0x00000000)
-I (MCAL\I2C\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (MCAL\I2C\..\..\MCAL\RCC\RCC_Private.h)(0x657794BD)
-F (.\MCAL\SPI\SPI_Config.h)(0x6628D444)()
-F (.\MCAL\SPI\SPI_Interface.h)(0x6628D444)()
-F (.\MCAL\SPI\SPI_Private.h)(0x6628D444)()
-F (.\MCAL\SPI\SPI_Program.c)(0x6628D444)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/spi_program.o -MD)
-I (MCAL\SPI\SPI_Config.hcCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x00000000)
-I (MCAL\SPI\..\..\LIB\STD_TYPES\Platform_Types.hYCAL\SPI\SPI_Private.h)(0x00000000)
-I (MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-F (.\APP\SCommands\SCommands_Private.h)(0x662CAD13)()
-F (.\HAL\PWRSupply\HPWRSupply_Config.h)(0x65F6CBD6)()
-F (.\HAL\PWRSupply\HPWRSupply_Interface.h)(0x65F80238)()
-F (.\HAL\PWRSupply\HPWRSupply_Private.h)(0x65F6CC4C)()
-F (.\HAL\PWRSupply\HPWRSupply_Program.c)(0x66365936)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/hpwrsupply_program.o -MD)
-I (HAL\PWRSupply\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (HAL\PWRSupply\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\PWRSupply\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\PWRSupply\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\PWRSupply\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\PWRSupply\..\..\MCAL\ADC\ADC_Interface.h)(0x65CA1301)
-I (HAL\PWRSupply\..\..\MCAL\GPTMR\GPTMR_Interface.h)(0x65CA1340)
-I (HAL\PWRSupply\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (HAL\PWRSupply\..\..\MCAL\STK\STK_Interface.h)(0x65665090)
-I (HAL\PWRSupply\HPWRSupply_Interface.heAL\PWRSupply\HPWRSupply_Config.h)(0x00000000)
-I (HAL\PWRSupply\HPWRSupply_Private.h)(0x65F6CC4C)
-F (.\APP\SpectroStatus\SpectroStatus_Interface.h)(0x66215929)()
-F (.\APP\SpectroStatus\SpectroStatus_Program.c)(0x6621599C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/spectrostatus_program.o -MD)
-I (APP\SpectroStatus\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (APP\SpectroStatus\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SpectroStatus\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (APP\SpectroStatus\SpectroStatus_Interface.h)(0x66215929)
-F (.\HAL\ADS1115\ADC.c)(0x6634FE91)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/adc.o -MD)
-I (HAL\ADS1115\..\..\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)
-I (HAL\ADS1115\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\ADS1115\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\ADS1115\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\ADS1115\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\ADS1115\..\..\MCAL\I2C\I2C_Config.h)(0x662E3FDD)
-I (HAL\ADS1115\..\..\MCAL\I2C\I2C_private.hCAL\ADS1115\ADC.h)(0x00000000)
-F (.\HAL\ADS1115\ADC.h)(0x6628D444)()
-F (.\HAL\EEPROM\I2C_Slave_EEPROM.c)(0x662E495E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/i2c_slave_eeprom.o -MD)
-I (HAL\EEPROM\I2C_Slave_EEPROM.h)(0x6628D99E)
-I (HAL\EEPROM\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\EEPROM\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\EEPROM\..\..\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)
-I (HAL\EEPROM\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\EEPROM\..\..\MCAL\I2C\I2C_Config.h)(0x662E3FDD)
-I (HAL\EEPROM\..\..\MCAL\I2C\I2C_private.h)(0x662ACC51)
-F (.\HAL\EEPROM\I2C_Slave_EEPROM.h)(0x6628D99E)()
-F (.\APP\SPECTRO\SPECTRO_Interface.h)(0x66368172)()
-F (.\APP\SPECTRO\SPECTRO_Program.c)(0x66369D5D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/spectro_program.o -MD)
-I (APP\SPECTRO\..\..\LIB\BIT_MATH\BIT_MATH.h)(0x64EF4FD8)
-I (APP\SPECTRO\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SPECTRO\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (APP\SPECTRO\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SPECTRO\..\..\MCAL\RTC\RTC_Interface.h)(0x65AD2A16)
-I (APP\SPECTRO\..\..\MCAL\UART\UART_Interface.h)(0x65CA1387)
-I (APP\SPECTRO\..\..\MCAL\STK\STK_Interface.h)(0x65665090)
-I (APP\SPECTRO\..\..\MCAL\NVIC\NVIC_Interface.h)(0x655A136B)
-I (APP\SPECTRO\..\..\MCAL\SCB\SCB_Interface.h)(0x65CA1271)
-I (APP\SPECTRO\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SPECTRO\..\..\HAL\ESP32\ESP32_Interface.h)(0x662FCD31)
-I (APP\SPECTRO\..\..\HAL\SPWRVolt\SPWRVolt_Interface.h)(0x65DF0413)
-I (APP\SPECTRO\..\..\HAL\STEPPER_MOTOR\MOTORS_Interface.h)(0x66365657)
-I (APP\SPECTRO\..\..\HAL\EEPROM\I2C_Slave_EEPROM.h)(0x6628D99E)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_Interface.h)(0x662E3FB1)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_Config.h)(0x662E3FDD)
-I (APP\SPECTRO\..\..\HAL\EEPROM\..\..\MCAL\I2C\I2C_private.h)(0x662ACC51)
-I (APP\SPECTRO\..\..\HAL\PWRSupply\HPWRSupply_Interface.h)(0x65F80238)
-I (APP\SPECTRO\..\..\HAL\ADS1115\ADC.h)(0x6628D444)
-I (APP\SPECTRO\..\..\HAL\MCP4151\MCP4151.h)(0x66291E24)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Interface.h)(0x6628D444)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Config.h)(0x6628D444)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Private.h)(0x6628D444)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SPECTRO\..\..\HAL\MCP4151\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\SPECTRO\..\..\APP\SCommands\SCommands_Interface.h)(0x65D396D3)
-I (APP\SPECTRO\..\..\APP\SPECTRO\SPECTRO_Interface.h)(0x66368172)
-I (APP\SPECTRO\..\..\APP\SpectroStatus\SpectroStatus_Interface.h)(0x66215929)
-I (APP\SPECTRO\..\..\APP\Signal_Conditioning\signal_conditioning.h)(0x6629194D)
-I (APP\SPECTRO\..\..\APP\Signal_Conditioning\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-F (.\APP\Signal_Conditioning\signal_conditioning.c)(0x6635263D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/signal_conditioning.o -MD)
-I (APP\Signal_Conditioning\signal_conditioning.h)(0x6629194D)
-I (APP\Signal_Conditioning\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\Signal_Conditioning\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\MCP4151.h)(0x66291E24)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Interface.h)(0x6628D444)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Config.h)(0x6628D444)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\SPI_Private.h)(0x6628D444)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\Signal_Conditioning\..\..\HAL\MCP4151\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (APP\Signal_Conditioning\..\..\HAL\ADS1115\ADC.h)(0x6628D444)
-F (.\APP\Signal_Conditioning\signal_conditioning.h)(0x6629194D)()
-F (.\HAL\MCP4151\MCP4151.c)(0x66291F2E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/mcp4151.o -MD)
-I (HAL\MCP4151\..\..\MCAL\SPI\SPI_Interface.h)(0x6628D444)
-I (HAL\MCP4151\..\..\MCAL\SPI\SPI_Config.h)(0x6628D444)
-I (HAL\MCP4151\..\..\MCAL\SPI\..\..\LIB\STD_TYPES\Std_Types.h)(0x65CA131A)
-I (HAL\MCP4151\..\..\MCAL\SPI\..\..\LIB\STD_TYPES\Platform_Types.h)(0x661AA2C3)
-I (HAL\MCP4151\..\..\MCAL\SPI\SPI_Private.h)(0x6628D444)
-I (HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\RCC\RCC_Interface.h)(0x655A098A)
-I (HAL\MCP4151\..\..\MCAL\SPI\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (HAL\MCP4151\..\..\MCAL\GPIO\GPIO_Interface.h)(0x65B25C90)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\math.h)(0x6634EC7A)
-F (.\HAL\MCP4151\MCP4151.h)(0x66291E24)()
-F (RTE/Device/STM32F103C8/RTE_Device.h)(0x65DB021E)()
-F (RTE/Device/STM32F103C8/startup_stm32f10x_md.s)(0x66377008)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 539" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32F10X_MD SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_stm32f10x_md.o)
-F (RTE/Device/STM32F103C8/system_stm32f10x.c)(0x65DB021E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Users/Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include-IC:/Users/Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/system_stm32f10x.o -MD)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h)(0x65DB021E)
-I (RTE\_Target_1\RTE_Components.h)(0x65EF02F4)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\Core\Include\core_cm3.h)(0x65DB02CE)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\stdint.h)(0x656A0472)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_version.h)(0x65DB02CE)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\Core\Include\cmsis_compiler.h)(0x65DB02CE)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\ARM\CMSIS\6.0.0\CMSIS\Core\Include\m-profile\cmsis_armclang_m.h)(0x65DB02CE)
-I (D:\KEIL_v5\ARM\ARMCLANG\include\arm_acle.h)(0x656A0470)
-I (C:\Users\Ahmed\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h)(0x65DB021E)

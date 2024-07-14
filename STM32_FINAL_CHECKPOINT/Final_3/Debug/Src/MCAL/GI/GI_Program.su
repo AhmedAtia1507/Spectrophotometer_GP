@@ -1,2 +1,0 @@
-../Src/MCAL/GI/GI_Program.c:17:6:GI_EnableGlobalInterrupt	4	static,ignoring_inline_asm
-../Src/MCAL/GI/GI_Program.c:25:6:GI_DisableGlobalInterrupt	4	static,ignoring_inline_asm

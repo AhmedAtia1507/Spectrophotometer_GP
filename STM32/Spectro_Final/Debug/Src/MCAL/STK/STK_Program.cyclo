@@ -1,0 +1,11 @@
+../Src/MCAL/STK/STK_Program.c:35:16:STK_uint8CalculateReloadValue	3
+../Src/MCAL/STK/STK_Program.c:84:16:STK_uint8CalculateReloadValueUs	3
+../Src/MCAL/STK/STK_Program.c:132:16:MSTK_uint8Init	1
+../Src/MCAL/STK/STK_Program.c:175:16:MSTK_uint8SetTimerDuration	2
+../Src/MCAL/STK/STK_Program.c:206:16:MSTK_uint8StartTimer	1
+../Src/MCAL/STK/STK_Program.c:220:16:MSTK_uint8PauseTimer	1
+../Src/MCAL/STK/STK_Program.c:234:16:MSTK_uint8StopTimer	1
+../Src/MCAL/STK/STK_Program.c:250:16:MSTK_uint8Delay	3
+../Src/MCAL/STK/STK_Program.c:311:16:MSTK_uint8DelayUs	3
+../Src/MCAL/STK/STK_Program.c:372:16:MSTK_uint8SetCallbackFunction	2
+../Src/MCAL/STK/STK_Program.c:387:6:SysTick_Handler	2

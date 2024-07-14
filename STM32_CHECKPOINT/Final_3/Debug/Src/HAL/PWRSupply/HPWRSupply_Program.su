@@ -1,4 +1,0 @@
-../Src/HAL/PWRSupply/HPWRSupply_Program.c:30:6:HPWRSupply_GetSenseValue	16	static
-../Src/HAL/PWRSupply/HPWRSupply_Program.c:73:16:HPWRSupply_InitSupplies	16	static
-../Src/HAL/PWRSupply/HPWRSupply_Program.c:113:16:HPWRSupply_SetSupplyMode	24	static
-../Src/HAL/PWRSupply/HPWRSupply_Program.c:195:16:HPWRSupply_CheckSupplyStatus	32	static
