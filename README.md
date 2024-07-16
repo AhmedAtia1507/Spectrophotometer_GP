@@ -4,14 +4,14 @@ This repository contains the complete codebase for the UV/Vis Spectrophotometer 
 This Project is sponsored by MIAC Company and under the supervision of Dr.Diaa Khalil and Eng. Bassem Ali "Representing MIAC Company".
 
 ## Project Group
-1. [Ahmed Atia Said Abdelwahed](https://www.linkedin.com/in/ahmed-atia-said-b8aa38135)
-2. [Mennat Allah Lotfy Ahmed](https://www.linkedin.com/in/mennalotfy1111)
-3. [Donia Saeed Kamal Saeed Ramadan](https://www.linkedin.com/in/donia-saeed-kamal-35551a233/)
-4. [Mohanad Mohamed Abdelmonem](https://www.linkedin.com/in/mohanad-mohamed-7860aa203/)
-5. [Nabil Youssef Basta Boules](https://www.linkedin.com/in/nabil-youssef-557884219/)
-6. [Mina Isaac Sabet Isaac](https://www.linkedin.com/in/mina-isaac-6a98b427a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
-7. [Mennat Allah Ayman AbuKhalil](https://www.linkedin.com/in/menna-ayman-24395a247/)
-8. [Amal Mohamed Mohamed Hussein](https://www.linkedin.com/in/amal-mohamed2001/)
+1. **[Ahmed Atia Said Abdelwahed](https://www.linkedin.com/in/ahmed-atia-said-b8aa38135) (Leader)**
+2. **[Mennat Allah Lotfy Ahmed](https://www.linkedin.com/in/mennalotfy1111)**
+3. **[Donia Saeed Kamal Saeed Ramadan](https://www.linkedin.com/in/donia-saeed-kamal-35551a233/)**
+4. **[Mohanad Mohamed Abdelmonem](https://www.linkedin.com/in/mohanad-mohamed-7860aa203/)**
+5. **[Nabil Youssef Basta Boules](https://www.linkedin.com/in/nabil-youssef-557884219/)**
+6. **[Mina Isaac Sabet Isaac](https://www.linkedin.com/in/mina-isaac-6a98b427a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)**
+7. **[Mennat Allah Ayman AbuKhalil](https://www.linkedin.com/in/menna-ayman-24395a247/)**
+8. **[Amal Mohamed Mohamed Hussein](https://www.linkedin.com/in/amal-mohamed2001/)**
    
 ![WhatsApp Image 2024-07-14 at 14 20 57_0917e774](https://github.com/user-attachments/assets/29a35b51-4273-48f2-98f3-667f21a76b22)
 
@@ -49,4 +49,12 @@ The ESP32 serves as a bridge between the spectrophotometer and external devices 
 ### 5. MATLAB GUI Interface (Optional)
 A MATLAB GUI serves as an alternative control interface, allowing direct interaction with the spectrophotometer.
 
-**For more information, please refer to our ![project thesis]
+**For more information, please refer to our [project thesis](https://drive.google.com/file/d/1yj6nXh1pSs6PSxrzmrbiwlRizSY4MRTs/view?usp=sharing)**
+
+## Prerequisites
+- In order to compile and flash code on STM32F103C8T6, you need to install [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html#tools-software)
+- For ESP32, PlatformIO must be installed in your VS Code.
+
+## Acknowledgements
+- **Dr. Diaa ELDin Khalil** representing Faculty of Engineering, Ain Shams University, ECE Department.
+- **[Eng. Bassem Ali](https://www.linkedin.com/in/bassem-aly-67308513a/)** representing MIAC company and the sponsor for project.
